@@ -19,10 +19,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(object), typeof(CustomModel1))]
         [TestCase(typeof(object), typeof(CustomModel2))]
-        [TestCase(typeof(Resource), typeof(ResourceModel1Data))]
-        [TestCase(typeof(Resource), typeof(ResourceModel2))]
-        [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel1Data))]
-        [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel2))]
+        [TestCase(typeof(ResourceData), typeof(ResourceModel1Data))]
+        [TestCase(typeof(ResourceData), typeof(ResourceModel2))]
+        [TestCase(typeof(TrackedResourceData), typeof(TrackedResourceModel1Data))]
+        [TestCase(typeof(TrackedResourceData), typeof(TrackedResourceModel2))]
         [TestCase(typeof(object), typeof(NonResourceModel1))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {

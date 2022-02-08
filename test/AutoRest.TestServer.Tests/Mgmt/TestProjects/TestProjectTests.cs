@@ -106,7 +106,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var responseType = typeof(Response<>).MakeGenericType(resource);
                 VerifyMethodReturnType(resource, responseType, "Get");
                 var resourceData = GetResourceDataByResource(resource);
-                if (typeof(TrackedResource).IsAssignableFrom(resourceData))
+                if (typeof(TrackedResourceData).IsAssignableFrom(resourceData))
                 {
                     VerifyMethodReturnType(resource, responseType, "AddTag");
                     VerifyMethodReturnType(resource, responseType, "SetTags");
@@ -281,9 +281,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        //TODO: when the base avail locations goes into arm core we will need to change these back to GetAvailableLocations
-        [TestCase("ListAvailableLocations")]
-        [TestCase("ListAvailableLocationsAsync")]
+        [TestCase("GetAvailableLocations")]
+        [TestCase("GetAvailableLocationsAsync")]
         public void ValidateListAvailableLocationsMethodExists(string methodName)
         {
             foreach (var type in FindAllResources())
@@ -508,7 +507,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private bool IsInheritFromTrackedResource(Type type)
         {
-            return type.BaseType.Name == typeof(TrackedResource).Name;
+            return type.BaseType.Name == typeof(TrackedResourceData).Name;
         }
 
         protected Type FindResourceGroupExtensions()
