@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
         protected BuildContext<MgmtOutputLibrary> Context { get; }
-        protected bool ShowRequestPathAndOperationId { get; }
 
         internal static readonly Parameter CancellationTokenParameter = new Parameter(
             "cancellationToken",
@@ -64,7 +63,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             This = provider;
             FileName = This.Type.Name;
             IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
-            ShowRequestPathAndOperationId = Context.Configuration.MgmtConfiguration.MgmtDebug.ShowRequestPath;
         }
 
         public virtual void Write()
@@ -457,9 +455,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CodeWriter.CodeWriterScope WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line();
-            // write the extra information about the request path, operation id, etc
-            if (ShowRequestPathAndOperationId)
-                WriteRequestPathAndOperationId(clientOperation);
             var returnDescription = clientOperation.ReturnsDescription is not null ? clientOperation.ReturnsDescription(isAsync) : null;
             return WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync);
         }

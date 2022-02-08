@@ -17,14 +17,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             private const string MgmtDebugOptionsFormat = "mgmt-debug.{0}";
 
-            public bool ShowRequestPath { get; }
             public bool SuppressListException { get; }
 
             public MgmtDebugConfiguration(
-                JsonElement? showRequestPath = default,
                 JsonElement? suppressListException = default)
             {
-                ShowRequestPath = showRequestPath == null || !IsValidJsonElement(showRequestPath) ? false : Convert.ToBoolean(showRequestPath.ToString());
                 SuppressListException = suppressListException == null || !IsValidJsonElement(suppressListException) ? false : Convert.ToBoolean(suppressListException.ToString());
             }
 
@@ -33,30 +30,26 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (root.ValueKind != JsonValueKind.Object)
                     return new MgmtDebugConfiguration();
 
-                root.TryGetProperty(nameof(ShowRequestPath), out var showRequestPath);
                 root.TryGetProperty(nameof(SuppressListException), out var suppressListException);
 
                 return new MgmtDebugConfiguration(
-                    showRequestPath: showRequestPath,
-                    suppressListException: suppressListException);
+                    suppressListException: suppressListException
+                );
             }
 
             internal static MgmtDebugConfiguration GetConfiguration(IPluginCommunication autoRest)
             {
                 return new MgmtDebugConfiguration(
-                    showRequestPath: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "show-request-path")).GetAwaiter().GetResult(),
                     suppressListException: autoRest.GetValue<JsonElement?>(string.Format(MgmtDebugOptionsFormat, "suppress-list-exception")).GetAwaiter().GetResult());
             }
 
             public void Write(Utf8JsonWriter writer, string settingName)
             {
-                if (!ShowRequestPath && !SuppressListException)
+                if (!SuppressListException)
                     return;
 
                 writer.WriteStartObject(settingName);
 
-                if (ShowRequestPath)
-                    writer.WriteBoolean(nameof(ShowRequestPath), ShowRequestPath);
                 if (SuppressListException)
                     writer.WriteBoolean(nameof(SuppressListException), SuppressListException);
 
