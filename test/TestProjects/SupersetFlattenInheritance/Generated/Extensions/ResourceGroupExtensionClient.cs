@@ -90,9 +90,10 @@ namespace SupersetFlattenInheritance
             return new TrackedResourceModel1Collection(Client, Id);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
+        /// Operation Id: CustomModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel1> GetCustomModel1sAsync(CancellationToken cancellationToken = default)
@@ -115,9 +116,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
+        /// Operation Id: CustomModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel1> GetCustomModel1s(CancellationToken cancellationToken = default)
@@ -140,9 +142,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Put
+        /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -162,9 +165,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Put
+        /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -184,9 +188,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Get
+        /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<CustomModel1>> GetCustomModel1Async(string customModel1SName, CancellationToken cancellationToken = default)
@@ -205,9 +210,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Get
+        /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel1> GetCustomModel1(string customModel1SName, CancellationToken cancellationToken = default)
@@ -226,9 +232,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
+        /// Operation Id: CustomModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel2> GetCustomModel2sAsync(CancellationToken cancellationToken = default)
@@ -251,9 +258,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
+        /// Operation Id: CustomModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel2> GetCustomModel2s(CancellationToken cancellationToken = default)
@@ -276,9 +284,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Put
+        /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -298,9 +307,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Put
+        /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -320,9 +330,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Get
+        /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<CustomModel2>> GetCustomModel2Async(string customModel2SName, CancellationToken cancellationToken = default)
@@ -341,9 +352,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Get
+        /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CustomModel2> GetCustomModel2(string customModel2SName, CancellationToken cancellationToken = default)
@@ -362,9 +374,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
+        /// Operation Id: SubResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(CancellationToken cancellationToken = default)
@@ -387,9 +400,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
+        /// Operation Id: SubResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubResourceModel1> GetSubResourceModel1s(CancellationToken cancellationToken = default)
@@ -412,9 +426,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Put
+        /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -434,9 +449,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Put
+        /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -456,9 +472,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Get
+        /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubResourceModel1>> GetSubResourceModel1Async(string subResourceModel1SName, CancellationToken cancellationToken = default)
@@ -477,9 +494,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Get
+        /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubResourceModel1> GetSubResourceModel1(string subResourceModel1SName, CancellationToken cancellationToken = default)
@@ -498,9 +516,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
+        /// Operation Id: SubResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(CancellationToken cancellationToken = default)
@@ -523,9 +542,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
+        /// Operation Id: SubResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubResourceModel2> GetSubResourceModel2s(CancellationToken cancellationToken = default)
@@ -548,9 +568,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Put
+        /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -570,9 +591,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Put
+        /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -592,9 +614,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Get
+        /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubResourceModel2>> GetSubResourceModel2Async(string subResourceModel2SName, CancellationToken cancellationToken = default)
@@ -613,9 +636,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Get
+        /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubResourceModel2> GetSubResourceModel2(string subResourceModel2SName, CancellationToken cancellationToken = default)
@@ -634,9 +658,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
+        /// Operation Id: WritableSubResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(CancellationToken cancellationToken = default)
@@ -659,9 +684,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
+        /// Operation Id: WritableSubResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(CancellationToken cancellationToken = default)
@@ -684,9 +710,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Put
+        /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -706,9 +733,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Put
+        /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -728,9 +756,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Get
+        /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
@@ -749,9 +778,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Get
+        /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<WritableSubResourceModel1> GetWritableSubResourceModel1(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
@@ -770,9 +800,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
+        /// Operation Id: WritableSubResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(CancellationToken cancellationToken = default)
@@ -795,9 +826,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
+        /// Operation Id: WritableSubResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(CancellationToken cancellationToken = default)
@@ -820,9 +852,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Put
+        /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -842,9 +875,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Put
+        /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -864,9 +898,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Get
+        /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
@@ -885,9 +920,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Get
+        /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<WritableSubResourceModel2> GetWritableSubResourceModel2(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
@@ -906,9 +942,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
+        /// Operation Id: ResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceModel2> GetResourceModel2sAsync(CancellationToken cancellationToken = default)
@@ -931,9 +968,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
+        /// Operation Id: ResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceModel2> GetResourceModel2s(CancellationToken cancellationToken = default)
@@ -956,9 +994,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -978,9 +1017,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1000,9 +1040,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ResourceModel2>> GetResourceModel2Async(string resourceModel2SName, CancellationToken cancellationToken = default)
@@ -1021,9 +1062,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceModel2> GetResourceModel2(string resourceModel2SName, CancellationToken cancellationToken = default)
@@ -1042,9 +1084,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
+        /// Operation Id: TrackedResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(CancellationToken cancellationToken = default)
@@ -1067,9 +1110,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
+        /// Operation Id: TrackedResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(CancellationToken cancellationToken = default)
@@ -1092,9 +1136,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Put
+        /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1114,9 +1159,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Put
+        /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1136,9 +1182,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Get
+        /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
@@ -1157,9 +1204,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Get
+        /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<TrackedResourceModel2> GetTrackedResourceModel2(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
@@ -1178,9 +1226,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Put
+        /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1200,9 +1249,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Put
+        /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1222,9 +1272,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Get
+        /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<NonResourceModel1>> GetNonResourceModel1Async(string nonResourceModel1SName, CancellationToken cancellationToken = default)
@@ -1243,9 +1294,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Get
+        /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<NonResourceModel1> GetNonResourceModel1(string nonResourceModel1SName, CancellationToken cancellationToken = default)

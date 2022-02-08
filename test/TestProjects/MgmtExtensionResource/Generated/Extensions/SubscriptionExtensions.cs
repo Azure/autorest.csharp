@@ -43,10 +43,11 @@ namespace MgmtExtensionResource
             return GetExtensionClient(subscription).GetSubscriptionPolicyDefinitions();
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: CheckDnsNameAvailability
-        /// <summary> Checks whether a domain name in the cloudapp.azure.com zone is available for use. </summary>
+        /// <summary>
+        /// Checks whether a domain name in the cloudapp.azure.com zone is available for use.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability
+        /// Operation Id: CheckDnsNameAvailability
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
@@ -64,10 +65,11 @@ namespace MgmtExtensionResource
             return await GetExtensionClient(subscription).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: CheckDnsNameAvailability
-        /// <summary> Checks whether a domain name in the cloudapp.azure.com zone is available for use. </summary>
+        /// <summary>
+        /// Checks whether a domain name in the cloudapp.azure.com zone is available for use.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability
+        /// Operation Id: CheckDnsNameAvailability
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
@@ -85,10 +87,11 @@ namespace MgmtExtensionResource
             return GetExtensionClient(subscription).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: OrphanedPost_ValidateSomething
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
+        /// Operation Id: OrphanedPost_ValidateSomething
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="validateSomethingOptions"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -103,10 +106,11 @@ namespace MgmtExtensionResource
             return await GetExtensionClient(subscription).ValidateSomethingOrphanedPostAsync(validateSomethingOptions, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: OrphanedPost_ValidateSomething
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething
+        /// Operation Id: OrphanedPost_ValidateSomething
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="validateSomethingOptions"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

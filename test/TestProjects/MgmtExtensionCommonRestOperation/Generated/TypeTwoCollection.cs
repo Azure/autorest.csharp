@@ -52,10 +52,11 @@ namespace MgmtExtensionCommonRestOperation
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_CreateOrUpdateTypeTwo
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_CreateOrUpdateTypeTwo
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="typeTwo"> Information to validate. </param>
@@ -87,10 +88,11 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_CreateOrUpdateTypeTwo
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_CreateOrUpdateTypeTwo
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="typeTwo"> Information to validate. </param>
@@ -122,10 +124,11 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_GetTypeTwo
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_GetTypeTwo
+        /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is empty. </exception>
@@ -150,10 +153,11 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_GetTypeTwo
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_GetTypeTwo
+        /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is empty. </exception>
@@ -178,10 +182,11 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_ListTypeTwos
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos
+        /// Operation Id: Common_ListTypeTwos
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeTwo> GetAllAsync(CancellationToken cancellationToken = default)
@@ -204,10 +209,11 @@ namespace MgmtExtensionCommonRestOperation
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_ListTypeTwos
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos
+        /// Operation Id: Common_ListTypeTwos
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeTwo> GetAll(CancellationToken cancellationToken = default)
@@ -230,10 +236,11 @@ namespace MgmtExtensionCommonRestOperation
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_GetTypeTwo
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_GetTypeTwo
+        /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is empty. </exception>
@@ -256,10 +263,11 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_GetTypeTwo
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_GetTypeTwo
+        /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is empty. </exception>
@@ -282,10 +290,11 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_GetTypeTwo
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_GetTypeTwo
+        /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is empty. </exception>
@@ -310,10 +319,11 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Common_GetTypeTwo
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_GetTypeTwo
+        /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is empty. </exception>

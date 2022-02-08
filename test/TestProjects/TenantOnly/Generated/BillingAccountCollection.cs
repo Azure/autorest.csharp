@@ -52,10 +52,11 @@ namespace TenantOnly
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_Create
-        /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
+        /// <summary>
+        /// Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// Operation Id: BillingAccounts_Create
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -87,10 +88,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_Create
-        /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
+        /// <summary>
+        /// Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// Operation Id: BillingAccounts_Create
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -122,10 +124,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_Get
-        /// <summary> Gets a billing account by its ID. </summary>
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// Operation Id: BillingAccounts_Get
+        /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -151,10 +154,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_Get
-        /// <summary> Gets a billing account by its ID. </summary>
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// Operation Id: BillingAccounts_Get
+        /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -180,10 +184,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_List
-        /// <summary> Gets a billing account by its ID. </summary>
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts
+        /// Operation Id: BillingAccounts_List
+        /// </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BillingAccount" /> that may take multiple service requests to iterate over. </returns>
@@ -207,10 +212,11 @@ namespace TenantOnly
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_List
-        /// <summary> Gets a billing account by its ID. </summary>
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts
+        /// Operation Id: BillingAccounts_List
+        /// </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BillingAccount" /> that may take multiple service requests to iterate over. </returns>
@@ -234,10 +240,11 @@ namespace TenantOnly
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// Operation Id: BillingAccounts_Get
+        /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -261,10 +268,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// Operation Id: BillingAccounts_Get
+        /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -288,10 +296,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// Operation Id: BillingAccounts_Get
+        /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -317,10 +326,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// ContextualPath: /
-        /// OperationId: BillingAccounts_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
+        /// Operation Id: BillingAccounts_Get
+        /// </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

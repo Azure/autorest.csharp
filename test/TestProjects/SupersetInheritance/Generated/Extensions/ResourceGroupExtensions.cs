@@ -59,9 +59,10 @@ namespace SupersetInheritance
             return GetExtensionClient(resourceGroup).GetSupersetModel7s();
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
+        /// Operation Id: SupersetModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
@@ -79,9 +80,10 @@ namespace SupersetInheritance
             return await GetExtensionClient(resourceGroup).PutSupersetModel2Async(supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
+        /// Operation Id: SupersetModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
@@ -99,9 +101,10 @@ namespace SupersetInheritance
             return GetExtensionClient(resourceGroup).PutSupersetModel2(supersetModel2SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
+        /// Operation Id: SupersetModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -114,9 +117,10 @@ namespace SupersetInheritance
             return await GetExtensionClient(resourceGroup).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
+        /// Operation Id: SupersetModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -129,9 +133,10 @@ namespace SupersetInheritance
             return GetExtensionClient(resourceGroup).GetSupersetModel2(supersetModel2SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel3s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
+        /// Operation Id: SupersetModel3s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
@@ -149,9 +154,10 @@ namespace SupersetInheritance
             return await GetExtensionClient(resourceGroup).PutSupersetModel3Async(supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel3s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
+        /// Operation Id: SupersetModel3s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
@@ -169,9 +175,10 @@ namespace SupersetInheritance
             return GetExtensionClient(resourceGroup).PutSupersetModel3(supersetModel3SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel3s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
+        /// Operation Id: SupersetModel3s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -184,9 +191,10 @@ namespace SupersetInheritance
             return await GetExtensionClient(resourceGroup).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel3s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
+        /// Operation Id: SupersetModel3s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

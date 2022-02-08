@@ -83,10 +83,11 @@ namespace MgmtExtensionResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// OperationId: PolicyDefinitions_Get
-        /// <summary> This operation retrieves the policy definition in the given subscription with the given name. </summary>
+        /// <summary>
+        /// This operation retrieves the policy definition in the given subscription with the given name.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubscriptionPolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -106,10 +107,11 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// OperationId: PolicyDefinitions_Get
-        /// <summary> This operation retrieves the policy definition in the given subscription with the given name. </summary>
+        /// <summary>
+        /// This operation retrieves the policy definition in the given subscription with the given name.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubscriptionPolicyDefinition> Get(CancellationToken cancellationToken = default)
         {
@@ -129,10 +131,11 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// OperationId: PolicyDefinitions_Delete
-        /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <summary>
+        /// This operation deletes the policy definition in the given subscription with the given name.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<SubscriptionPolicyDefinitionDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -154,10 +157,11 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// OperationId: PolicyDefinitions_Delete
-        /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <summary>
+        /// This operation deletes the policy definition in the given subscription with the given name.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual SubscriptionPolicyDefinitionDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)

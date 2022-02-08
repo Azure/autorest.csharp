@@ -52,6 +52,10 @@ namespace NoTypeReplacement
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Put
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
@@ -83,6 +87,10 @@ namespace NoTypeReplacement
             }
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Put
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
@@ -114,6 +122,10 @@ namespace NoTypeReplacement
             }
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Get
+        /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is empty. </exception>
@@ -138,6 +150,10 @@ namespace NoTypeReplacement
             }
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Get
+        /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is empty. </exception>
@@ -162,6 +178,10 @@ namespace NoTypeReplacement
             }
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s
+        /// Operation Id: NoTypeReplacementModel3s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="NoTypeReplacementModel3" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NoTypeReplacementModel3> GetAllAsync(CancellationToken cancellationToken = default)
@@ -184,6 +204,10 @@ namespace NoTypeReplacement
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s
+        /// Operation Id: NoTypeReplacementModel3s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="NoTypeReplacementModel3" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NoTypeReplacementModel3> GetAll(CancellationToken cancellationToken = default)
@@ -206,7 +230,11 @@ namespace NoTypeReplacement
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Get
+        /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is empty. </exception>
@@ -229,7 +257,11 @@ namespace NoTypeReplacement
             }
         }
 
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Get
+        /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is empty. </exception>
@@ -252,7 +284,11 @@ namespace NoTypeReplacement
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Get
+        /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is empty. </exception>
@@ -277,7 +313,11 @@ namespace NoTypeReplacement
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Get
+        /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is empty. </exception>

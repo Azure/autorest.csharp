@@ -52,10 +52,11 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Subscription.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_CreateOrUpdate
-        /// <summary> Create or update. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -87,10 +88,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_CreateOrUpdate
-        /// <summary> Create or update. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -122,10 +124,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
@@ -150,10 +153,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
@@ -178,10 +182,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs
+        /// Operation Id: SubParentWithNonResChWithLocs_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SubParentWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubParentWithNonResChWithLoc> GetAllAsync(CancellationToken cancellationToken = default)
@@ -219,10 +224,11 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs
+        /// Operation Id: SubParentWithNonResChWithLocs_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SubParentWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubParentWithNonResChWithLoc> GetAll(CancellationToken cancellationToken = default)
@@ -260,10 +266,11 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
@@ -286,10 +293,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
@@ -312,10 +320,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
@@ -340,10 +349,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: SubParentWithNonResChWithLocs_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>

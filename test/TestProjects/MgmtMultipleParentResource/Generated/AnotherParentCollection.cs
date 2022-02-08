@@ -52,10 +52,11 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_CreateOrUpdate
-        /// <summary> The operation to create or update the run command. </summary>
+        /// <summary>
+        /// The operation to create or update the run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
@@ -87,10 +88,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_CreateOrUpdate
-        /// <summary> The operation to create or update the run command. </summary>
+        /// <summary>
+        /// The operation to create or update the run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
@@ -122,10 +124,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_Get
-        /// <summary> The operation to get the run command. </summary>
+        /// <summary>
+        /// The operation to get the run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_Get
+        /// </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -151,10 +154,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_Get
-        /// <summary> The operation to get the run command. </summary>
+        /// <summary>
+        /// The operation to get the run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_Get
+        /// </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -180,10 +184,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_List
-        /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
+        /// <summary>
+        /// The operation to get all run commands of a Virtual Machine.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents
+        /// Operation Id: AnotherParents_List
+        /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="AnotherParent" /> that may take multiple service requests to iterate over. </returns>
@@ -222,10 +227,11 @@ namespace MgmtMultipleParentResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_List
-        /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
+        /// <summary>
+        /// The operation to get all run commands of a Virtual Machine.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents
+        /// Operation Id: AnotherParents_List
+        /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="AnotherParent" /> that may take multiple service requests to iterate over. </returns>
@@ -264,10 +270,11 @@ namespace MgmtMultipleParentResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_Get
+        /// </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -291,10 +298,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_Get
+        /// </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -318,10 +326,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_Get
+        /// </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -347,10 +356,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AnotherParents_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_Get
+        /// </summary>
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

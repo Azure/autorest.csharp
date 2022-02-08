@@ -51,10 +51,11 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, TenantTest.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_CreateOrUpdate
-        /// <summary> Create or update. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -86,10 +87,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_CreateOrUpdate
-        /// <summary> Create or update. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -121,10 +123,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_Get
+        /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is empty. </exception>
@@ -149,10 +152,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_Get
+        /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is empty. </exception>
@@ -177,10 +181,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes
+        /// Operation Id: TenantParentWithNonResChes_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TenantParentWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TenantParentWithNonResCh> GetAllAsync(CancellationToken cancellationToken = default)
@@ -218,10 +223,11 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes
+        /// Operation Id: TenantParentWithNonResChes_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TenantParentWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TenantParentWithNonResCh> GetAll(CancellationToken cancellationToken = default)
@@ -259,10 +265,11 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_Get
+        /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is empty. </exception>
@@ -285,10 +292,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_Get
+        /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is empty. </exception>
@@ -311,10 +319,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_Get
+        /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is empty. </exception>
@@ -339,10 +348,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithNonResChes_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_Get
+        /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is empty. </exception>

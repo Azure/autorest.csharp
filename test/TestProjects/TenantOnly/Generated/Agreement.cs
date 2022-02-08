@@ -82,10 +82,11 @@ namespace TenantOnly
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// OperationId: Agreements_Get
-        /// <summary> Gets an agreement by ID. </summary>
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Agreement>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
@@ -106,10 +107,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// OperationId: Agreements_Get
-        /// <summary> Gets an agreement by ID. </summary>
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Agreement> Get(string expand = null, CancellationToken cancellationToken = default)

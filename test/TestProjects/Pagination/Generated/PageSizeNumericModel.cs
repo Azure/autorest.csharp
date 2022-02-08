@@ -82,6 +82,10 @@ namespace Pagination
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeNumericModel/{name}
+        /// Operation Id: PageSizeNumericModels_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<PageSizeNumericModel>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -101,6 +105,10 @@ namespace Pagination
             }
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeNumericModel/{name}
+        /// Operation Id: PageSizeNumericModels_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PageSizeNumericModel> Get(CancellationToken cancellationToken = default)
         {

@@ -52,10 +52,11 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Create
-        /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
+        /// <summary>
+        /// Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Create
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -87,10 +88,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Create
-        /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
+        /// <summary>
+        /// Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Create
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -122,10 +124,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Get
-        /// <summary> Gets a billing account by its ID. </summary>
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -151,10 +154,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Get
-        /// <summary> Gets a billing account by its ID. </summary>
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -180,10 +184,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests
-        /// ContextualPath: /
-        /// OperationId: TenantTests_List
-        /// <summary> Lists all fakes in a resource group. </summary>
+        /// <summary>
+        /// Lists all fakes in a resource group.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests
+        /// Operation Id: TenantTests_List
+        /// </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TenantTest" /> that may take multiple service requests to iterate over. </returns>
@@ -222,10 +227,11 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests
-        /// ContextualPath: /
-        /// OperationId: TenantTests_List
-        /// <summary> Lists all fakes in a resource group. </summary>
+        /// <summary>
+        /// Lists all fakes in a resource group.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests
+        /// Operation Id: TenantTests_List
+        /// </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TenantTest" /> that may take multiple service requests to iterate over. </returns>
@@ -264,10 +270,11 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -291,10 +298,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -318,10 +326,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -347,10 +356,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
