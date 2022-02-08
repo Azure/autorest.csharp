@@ -768,7 +768,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"<{operation.ReturnType.Arguments[0]}>");
             }
             _writer.Append($"(");
-            if (operation.IsFakeLro)
+            if (operation.IsFakeLongRunningOperation)
             {
                 if (operation.MgmtReturnType is not null)
                 {

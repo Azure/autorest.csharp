@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsLongRunningOperation => _isLongRunning.HasValue ? _isLongRunning.Value : Operation.IsLongRunning;
 
-        public bool IsFakeLro => IsLongRunningOperation && !Operation.IsLongRunning;
+        public bool IsFakeLongRunningOperation => IsLongRunningOperation && !Operation.IsLongRunning;
 
         public Parameter[] OverrideParameters { get; } = new Parameter[] { };
 

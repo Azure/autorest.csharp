@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public CSharpType? MgmtReturnType => _operations.First().MgmtReturnType;
 
-        public bool IsFakeLro => _operations.First().IsFakeLro;
+        public bool IsFakeLro => _operations.First().IsFakeLongRunningOperation;
 
         public Schema? FinalResponseSchema => _operations.First().FinalResponseSchema;
 
