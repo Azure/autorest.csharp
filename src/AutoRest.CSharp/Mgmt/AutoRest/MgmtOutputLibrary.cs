@@ -99,50 +99,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             DecorateOperationSets();
         }
 
-        private IEnumerable<OperationSource>? _operationSources;
-        public IEnumerable<OperationSource> OperationSources => _operationSources ??= EnsureOperationSources();
+        public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
 
-        private IEnumerable<OperationSource> EnsureOperationSources()
-        {
-            Dictionary<CSharpType, (Resource? Resource, Schema FinalSchema)> uniqueTypes = new Dictionary<CSharpType, (Resource? Resource, Schema FinalSchema)>();
+        public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-            foreach (var resource in ArmResources)
-            {
-                AddOperationSourceFromType(resource, uniqueTypes);
-            }
-
-            foreach (var collection in ResourceCollections)
-            {
-                AddOperationSourceFromType(collection, uniqueTypes);
-            }
-
-            AddOperationSourceFromType(ResourceGroupExtensions, uniqueTypes);
-            AddOperationSourceFromType(SubscriptionExtensions, uniqueTypes);
-            AddOperationSourceFromType(ManagementGroupExtensions, uniqueTypes);
-            AddOperationSourceFromType(TenantExtensions, uniqueTypes);
-
-            List<OperationSource> operationSources = new List<OperationSource>();
-            foreach (var kv in uniqueTypes)
-            {
-                operationSources.Add(new OperationSource(
-                    kv.Key,
-                    kv.Value.Resource,
-                    kv.Value.FinalSchema));
-            }
-            return operationSources;
-        }
-
-        private void AddOperationSourceFromType(MgmtTypeProvider provider, Dictionary<CSharpType, (Resource? Resource, Schema FinalSchema)> uniqueTypes)
-        {
-            foreach (var operation in provider.AllOperations)
-            {
-                if (operation.IsLongRunningOperation && operation.MgmtReturnType is not null)
-                {
-                    if (!uniqueTypes.ContainsKey(operation.MgmtReturnType))
-                        uniqueTypes.Add(operation.MgmtReturnType, (operation.Resource, operation.FinalResponseSchema!));
-                }
-            }
-        }
 
         private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
         {
@@ -370,6 +330,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private IEnumerable<Resource>? _armResources;
         public IEnumerable<Resource> ArmResources => _armResources ??= EnsureRequestPathToResourcesMap().Values.Select(bag => bag.Resource).Distinct();
+
+        private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
+        public Dictionary<CSharpType, Resource> CsharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= EnsureRequestPathToResourcesMap().Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();

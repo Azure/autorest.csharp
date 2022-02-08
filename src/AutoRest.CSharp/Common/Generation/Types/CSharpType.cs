@@ -93,7 +93,14 @@ namespace AutoRest.CSharp.Generation.Types
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_implementation, _type, Arguments);
+            if (Arguments.Length == 1)
+            {
+                return HashCode.Combine(_implementation, _type, Arguments[0]);
+            }
+            else
+            {
+                return HashCode.Combine(_implementation, _type, Arguments);
+            }
         }
 
         public CSharpType WithNullable(bool isNullable) =>

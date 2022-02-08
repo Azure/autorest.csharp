@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         protected const string BaseUriProperty = "BaseUri";
         protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
-        private string OperationPrefix { get; }
+        private string LibraryArmOperation { get; }
         protected bool IsArmCore { get; }
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FileName = This.Type.Name;
             IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
             ShowRequestPathAndOperationId = Context.Configuration.MgmtConfiguration.MgmtDebug.ShowRequestPath;
-            OperationPrefix = context.DefaultNamespace.Split('.').Last();
+            LibraryArmOperation = $"{context.DefaultNamespace.Split('.').Last()}ArmOperation";
         }
 
         public virtual void Write()
@@ -765,7 +765,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var operation = new {OperationPrefix}{operation.ReturnType.Name}");
+            _writer.Append($"var operation = new {LibraryArmOperation}");
             if (operation.ReturnType.Arguments.Length > 0)
             {
                 _writer.Append($"<{operation.ReturnType.Arguments[0]}>");
@@ -784,10 +784,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                if (operation.MgmtReturnType is not null)
+                if (operation.OperationSource is not null)
                 {
-                    _writer.Append($"new {operation.MgmtReturnType.Name}Source(");
-                    if (operation.Resource is not null)
+                    _writer.Append($"new {operation.OperationSource.TypeName}(");
+                    if (Context.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
                         _writer.Append($"{ArmClientReference}");
                     _writer.Append($"), ");
                 }

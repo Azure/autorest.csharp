@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -13,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 
@@ -23,12 +25,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private readonly BuildContext<MgmtOutputLibrary> _context;
         private readonly OperationSource _opSource;
         private readonly CodeWriter _writer;
+        private readonly bool _isReturningResource;
+        private readonly IReadOnlyDictionary<string, string>? _operationIdMappings;
 
         public OperationSourceWriter(OperationSource opSource, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = new CodeWriter();
             _context = context;
             _opSource = opSource;
+            _isReturningResource = context.Library.CsharpTypeToResource.ContainsKey(_opSource.ReturnType);
+            if (_opSource.Resource is not null && context.Configuration.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.Type.Name, out var mappings))
+                _operationIdMappings = mappings;
         }
 
         public void Write()
@@ -37,17 +44,78 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 using (_writer.Scope($"internal class {_opSource.TypeName} : {_opSource.Interface}"))
                 {
-                    if (_opSource.Resource is not null)
+                    if (_isReturningResource)
                     {
                         _writer.WriteFieldDeclaration(_opSource.ArmClientField);
+
+                        if (_operationIdMappings is not null)
+                        {
+                            using (_writer.Scope($"private readonly {typeof(Dictionary<string, string>)} _idMappings = new {typeof(Dictionary<string, string>)}()", start: "\t\t{", end: "\t\t};"))
+                            {
+                                _writer.Line($"\t\t\t{{ \"subscriptionId\", \"Microsoft.Resources/subscriptions\" }},");
+                                _writer.Line($"\t\t\t{{ \"resourceGroupName\", \"Microsoft.Resources/resourceGroups\" }},");
+                                foreach (var mapping in _operationIdMappings)
+                                {
+                                    _writer.Line($"\t\t\t{{ \"{mapping.Key}\", \"{mapping.Value}\" }},");
+                                }
+                            }
+                        }
+
                         _writer.Line();
                         using (_writer.WriteMethodDeclaration(_opSource.ArmClientCtor))
                         {
                             _writer.Line($"{_opSource.ArmClientField.Name} = {MgmtTypeProvider.ArmClientParameter.Name};");
                         }
-                        _writer.Line();
                     }
+
+                    _writer.Line();
                     WriteCreateResult("response");
+
+                    if (_operationIdMappings is not null)
+                    {
+                        var resource = _opSource.Resource!;
+                        var resourceType = resource.Type;
+                        var dataType = resource.ResourceData.Type;
+                        _writer.Line();
+                        using (_writer.Scope($"private {dataType} ScrubId({dataType} data)"))
+                        {
+                            _writer.Line($"if (data.Id.ResourceType == {resourceType}.ResourceType)");
+                            _writer.Line($"return data;");
+                            _writer.Line();
+                            _writer.Append($"var newId = {resourceType}.CreateResourceIdentifier(");
+                            var createIdMethods = resource.CreateResourceIdentifierMethodSignature();
+                            if (createIdMethods.Count != 1)
+                                throw new InvalidOperationException($"In order to write mappings we need to have exactly 1 CreateResourceIdentifierMethodSignature.  We found {createIdMethods.Count} for {resource.Type.Name}.");
+                            var createIdMethod = createIdMethods.Values.First();
+                            foreach (var param in createIdMethod.Parameters)
+                            {
+                                _writer.Line();
+                                _writer.Append($"\tGetName(\"{param.Name}\", data.Id),");
+                            }
+                            _writer.RemoveTrailingComma();
+                            _writer.Line($");");
+                            _writer.Line();
+                            _writer.Line($"return new {dataType}(");
+                            _writer.Line($"\tnewId,");
+                            _writer.Line($"\tnewId.Name,");
+                            _writer.Append($"\tnewId.ResourceType,");
+                            foreach (var param in resource.ResourceData.SerializationConstructor.Signature.Parameters.Skip(3))
+                            {
+                                _writer.Line();
+                                _writer.Append($"\tdata.{param.Name.FirstCharToUpperCase()},");
+                            }
+                            _writer.RemoveTrailingComma();
+                            _writer.Line($");");
+                        }
+
+                        _writer.Line();
+                        using (_writer.Scope($"private string GetName(string param, {typeof(ResourceIdentifier)} id)"))
+                        {
+                            _writer.Line($"while (id.ResourceType != _idMappings[param])");
+                            _writer.Line($"id = id.Parent;");
+                            _writer.Line($"return id.Name;");
+                        }
+                    }
                 }
             }
         }
@@ -55,13 +123,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public void WriteCreateResult(string responseVariable)
         {
             Action<CodeWriter, CodeWriterDelegate> valueCallback = (w, v) => w.Line($"return {v};");
-            if (_opSource.Resource is not null && _opSource.Resource.Type.Equals(_opSource.ReturnType))
+            if (_isReturningResource)
             {
                 valueCallback = (w, v) =>
                 {
                     var data = new CodeWriterDeclaration("data");
-                    w.Line($"var {data:D} = {v};");
-                    if (_opSource.Resource.ResourceData.ShouldSetResourceIdentifier)
+                    FormattableString dataString = _operationIdMappings is null ? (FormattableString)$"var {data:D} = {v};" : (FormattableString)$"var {data:D} = ScrubId({v});";
+                    w.Line(dataString);
+                    if (_opSource.Resource!.ResourceData.ShouldSetResourceIdentifier)
                     {
                         w.Line($"{data}.Id = {_opSource.ArmClientField.Name}.Id;");
                     }

@@ -53,6 +53,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string? Description => _description ??= Method.Description;
         public IEnumerable<Parameter> Parameters => Method.Parameters;
 
+        public OperationSource? OperationSource { get; }
+
         private Func<bool, FormattableString>? _returnsDescription;
         public Func<bool, FormattableString>? ReturnsDescription => IsPagingOperation ? _returnsDescription ??= EnsureReturnsDescription() : null;
 
@@ -118,6 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Resource = GetResourceMatch(restClient, method, requestPath);
             FinalStateVia = Method.Operation.IsLongRunning? Method.Operation.LongRunningFinalStateVia : null;
             OriginalReturnType = Method.Operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
+            OperationSource = GetOperationSource();
         }
 
         public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, BuildContext<MgmtOutputLibrary> context, params Parameter[] overrideParameters)
@@ -133,6 +136,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Resource = other.Resource;
             FinalStateVia = other.FinalStateVia;
             OriginalReturnType = other.OriginalReturnType;
+            OperationSource = other.OperationSource;
 
             //modify some of the values
             Name = nameOverride;
@@ -141,13 +145,36 @@ namespace AutoRest.CSharp.Mgmt.Models
             OverrideParameters = overrideParameters;
         }
 
+        private OperationSource? GetOperationSource()
+        {
+            if (!IsLongRunningOperation)
+                return null;
+
+            if (MgmtReturnType is null)
+                return null;
+
+            if (!_context.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
+            {
+                operationSource = new OperationSource(MgmtReturnType, Resource, FinalResponseSchema!);
+                _context.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
+            }
+            return operationSource;
+        }
+
         private CSharpType? GetFinalResponse()
         {
             var finalSchema = Method.Operation.LongRunningFinalResponse.ResponseSchema;
             if (finalSchema is null)
                 return null;
 
-            return _context.Library.FindTypeForSchema(finalSchema);
+            try
+            {
+                return finalSchema.Type == AllSchemaTypes.Object ? _context.Library.FindTypeForSchema(finalSchema) : new TypeFactory(_context.Library).CreateType(finalSchema, false);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Final response for {RestClient.OperationGroup.Key}.{Method.Name} was not found it was of type {finalSchema.Name}", ex);
+            }
         }
 
         internal enum ResourceMatchType
