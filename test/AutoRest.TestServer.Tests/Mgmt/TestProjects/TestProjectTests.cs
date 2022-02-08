@@ -265,23 +265,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        //TODO: when the base avail locations goes into arm core we will need to change these back to GetAvailableLocations
-        [TestCase("ListAvailableLocations")]
-        [TestCase("ListAvailableLocationsAsync")]
-        public void ValidateListAvailableLocationsMethodExists(string methodName)
-        {
-            foreach (var type in FindAllResources())
-            {
-                if (IsSingletonOperation(type))
-                {
-                    continue;
-                }
-
-                var method = type.GetMethod(methodName);
-                Assert.NotNull(method, $"{type.Name} does not implement the method.");
-            }
-        }
-
         [TestCase("Get")]
         [TestCase("GetAsync")]
         public void ValidateGetMethodExists(string methodName)
