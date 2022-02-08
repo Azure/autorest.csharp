@@ -103,6 +103,8 @@ namespace AutoRest.CSharp.Generation.Types
             }
         }
 
+        public bool IsGenericType => Arguments is not null && Arguments.Length > 0;
+
         public CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, isNullable, Arguments)

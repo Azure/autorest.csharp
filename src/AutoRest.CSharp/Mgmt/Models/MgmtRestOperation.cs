@@ -153,6 +153,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (MgmtReturnType is null)
                 return null;
 
+            if (IsFakeLongRunningOperation)
+                return null;
+
             if (!_context.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
                 operationSource = new OperationSource(MgmtReturnType, Resource, FinalResponseSchema!);
