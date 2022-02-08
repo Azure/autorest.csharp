@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the BlobService data model. </summary>
-    public partial class BlobServiceData : Resource
+    public partial class BlobServiceData : ResourceData
     {
         /// <summary> Initializes a new instance of BlobServiceData. </summary>
         public BlobServiceData()

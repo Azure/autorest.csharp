@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> A private link resource. </summary>
     [TypeReferenceType]
-    public partial class PrivateLinkResourceData : ResourceManager.Models.Resource
+    public partial class PrivateLinkResourceData : ResourceData
     {
         /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
         [InitializationConstructor]

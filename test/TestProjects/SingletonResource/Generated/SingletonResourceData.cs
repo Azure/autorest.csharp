@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace SingletonResource
 {
     /// <summary> A class representing the SingletonResource data model. </summary>
-    public partial class SingletonResourceData : Resource
+    public partial class SingletonResourceData : ResourceData
     {
         /// <summary> Initializes a new instance of SingletonResourceData. </summary>
         public SingletonResourceData()

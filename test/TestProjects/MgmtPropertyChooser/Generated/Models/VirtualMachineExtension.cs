@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtPropertyChooser.Models
 {
     /// <summary> Describes a Virtual Machine Extension. </summary>
-    public partial class VirtualMachineExtension : TrackedResource
+    public partial class VirtualMachineExtension : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
         /// <param name="location"> The location. </param>

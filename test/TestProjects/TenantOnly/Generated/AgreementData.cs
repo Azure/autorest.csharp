@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace TenantOnly
 {
     /// <summary> A class representing the Agreement data model. </summary>
-    public partial class AgreementData : Resource
+    public partial class AgreementData : ResourceData
     {
         /// <summary> Initializes a new instance of AgreementData. </summary>
         internal AgreementData()

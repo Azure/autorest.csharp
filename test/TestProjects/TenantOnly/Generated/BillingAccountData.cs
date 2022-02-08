@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace TenantOnly
 {
     /// <summary> A class representing the BillingAccount data model. </summary>
-    public partial class BillingAccountData : TrackedResource
+    public partial class BillingAccountData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
         /// <param name="location"> The location. </param>
