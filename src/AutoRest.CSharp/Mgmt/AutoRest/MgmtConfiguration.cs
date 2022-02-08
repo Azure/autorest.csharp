@@ -268,7 +268,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(RequestPathToScopeResourceTypes), out var requestPathToScopeResourceTypes);
             root.TryGetProperty(nameof(OperationPositions), out var operationPositions);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
-            root.TryGetProperty(nameof(RenameRules), out var acroynmsDictionary);
+            root.TryGetProperty(nameof(RenameRules), out var renameRules);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
 
@@ -309,7 +309,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 operationPositions: operationPositions,
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 overrideOperationName: operationIdToName,
-                renameRules: acroynmsDictionary,
+                renameRules: renameRules,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
                 resourceModelRequiresType: resourceModelRequiresType,
