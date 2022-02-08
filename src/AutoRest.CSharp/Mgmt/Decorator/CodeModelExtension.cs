@@ -144,26 +144,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (_regex == null)
                 return name; // this means we do not have any replacement rules
-            name = name.FirstCharToUpperCase();
-            var spans = name.AsSpan();
+            var strToMatch = name.FirstCharToUpperCase();
             var builder = new StringBuilder();
-            var match = _regex.Match(name);
-            int index = 0;
+            var match = _regex.Match(strToMatch);
             while (match.Success)
             {
-                var groups = match.Groups;
                 // in our regular expression, the content we want to find is in the second group
-                var matchGroup = groups[2];
+                var matchGroup = match.Groups[2];
                 var replaceValue = RenameRules[matchGroup.Value];
-                // append everything between the index from previous match (or 0 if none) and the index of this match
-                builder.Append(name.Substring(index, matchGroup.Index - index));
+                // append everything between the beginning and the index of this match
+                builder.Append(strToMatch.Substring(0, matchGroup.Index));
                 // append the replaced value
                 builder.Append(replaceValue);
-                match = match.NextMatch();
-                index = matchGroup.Index + matchGroup.Length;
+                // move to whatever is left unmatched
+                strToMatch = strToMatch.Substring(matchGroup.Index + matchGroup.Length);
+                match = _regex.Match(strToMatch);
             }
-            if (index < name.Length) // replace whatever is at the end of the string to the result
-                builder.Append(name.Substring(index, name.Length - index));
+            if (strToMatch.Length > 0)
+                builder.Append(strToMatch);
 
             return builder.ToString();
         }
