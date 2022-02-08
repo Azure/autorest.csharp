@@ -82,7 +82,18 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string Name => _operations.First().Name;
 
         // TODO -- we need a better way to get the description of this
-        public string? Description => _operations.First().Description;
+        private string? _description;
+        public string Description => _description ??= BuildDescription();
+
+        private string BuildDescription()
+        {
+            var requestPaths = $"Request Path: {string.Join(", ", _operations.Select(operation => operation.RequestPath.SerializedPath))}";
+            var operationIds = $"Operation Id: {string.Join(", ", _operations.Select(operation => operation.OperationId))}";
+            var descriptionOfOperation = _operations.First().Description;
+            if (descriptionOfOperation != null)
+                return $"{descriptionOfOperation}\n{requestPaths}\n{operationIds}";
+            return $"{requestPaths}\n{operationIds}";
+        }
 
         // TODO -- we need a better way to get this
         public IEnumerable<Parameter> Parameters => _operations.First().Parameters;
