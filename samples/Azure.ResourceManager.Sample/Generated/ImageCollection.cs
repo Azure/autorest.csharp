@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -62,7 +61,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ImageCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<Image>> CreateOrUpdateAsync(bool waitForCompletion, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _imageRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ImageCreateOrUpdateOperation(Client, _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response);
+                var operation = new SampleArmOperation<Image>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ImageCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Image> CreateOrUpdate(bool waitForCompletion, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
             if (parameters == null)
@@ -110,7 +109,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _imageRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken);
-                var operation = new ImageCreateOrUpdateOperation(Client, _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response);
+                var operation = new SampleArmOperation<Image>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

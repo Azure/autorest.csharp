@@ -17,7 +17,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -61,7 +60,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantParentWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithNonResChName, TenantParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<TenantParentWithNonResCh>> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithNonResChName, TenantParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
             if (parameters == null)
@@ -74,7 +73,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentWithNonResChRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantParentWithNonResChCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResCh>(Response.FromValue(new TenantParentWithNonResCh(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -96,7 +95,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantParentWithNonResChCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentWithNonResChName, TenantParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TenantParentWithNonResCh> CreateOrUpdate(bool waitForCompletion, string tenantParentWithNonResChName, TenantParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithNonResChName, nameof(tenantParentWithNonResChName));
             if (parameters == null)
@@ -109,7 +108,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentWithNonResChRestClient.CreateOrUpdate(Id.Name, tenantParentWithNonResChName, parameters, cancellationToken);
-                var operation = new TenantParentWithNonResChCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResCh>(Response.FromValue(new TenantParentWithNonResCh(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

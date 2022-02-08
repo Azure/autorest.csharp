@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -62,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResGrpParentWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentWithNonResChName, ResGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ResGrpParentWithNonResCh>> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentWithNonResChName, ResGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentWithNonResChRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResGrpParentWithNonResChCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithNonResCh>(Response.FromValue(new ResGrpParentWithNonResCh(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResGrpParentWithNonResChCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resGrpParentWithNonResChName, ResGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ResGrpParentWithNonResCh> CreateOrUpdate(bool waitForCompletion, string resGrpParentWithNonResChName, ResGrpParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithNonResChName, nameof(resGrpParentWithNonResChName));
             if (parameters == null)
@@ -110,7 +109,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentWithNonResChRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithNonResChName, parameters, cancellationToken);
-                var operation = new ResGrpParentWithNonResChCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<ResGrpParentWithNonResCh>(Response.FromValue(new ResGrpParentWithNonResCh(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

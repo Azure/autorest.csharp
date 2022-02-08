@@ -179,7 +179,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                         requestPath,
                         contextualPath,
                         operationName,
-                        operation.GetReturnTypeAsLongRunningOperation(GetResource(), operationName, _context),
                         _context,
                         isLongRunning,
                         throwIfNull);
@@ -406,7 +405,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                         requestPath,
                         contextualPath,
                         methodName,
-                        operation.GetReturnTypeAsLongRunningOperation(GetResource(), methodName, _context),
                         _context);
 
                     if (result.TryGetValue(key, out var list))

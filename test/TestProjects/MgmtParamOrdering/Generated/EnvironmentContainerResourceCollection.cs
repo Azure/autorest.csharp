@@ -17,7 +17,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
@@ -61,7 +60,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<EnvironmentContainerResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<EnvironmentContainerResource>> CreateOrUpdateAsync(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (body == null)
@@ -74,7 +73,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _environmentContainerResourceEnvironmentContainersRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
-                var operation = new EnvironmentContainerResourceCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtParamOrderingArmOperation<EnvironmentContainerResource>(Response.FromValue(new EnvironmentContainerResource(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -96,7 +95,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual EnvironmentContainerResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<EnvironmentContainerResource> CreateOrUpdate(bool waitForCompletion, string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             if (body == null)
@@ -109,7 +108,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = _environmentContainerResourceEnvironmentContainersRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
-                var operation = new EnvironmentContainerResourceCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtParamOrderingArmOperation<EnvironmentContainerResource>(Response.FromValue(new EnvironmentContainerResource(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

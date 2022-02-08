@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
@@ -139,7 +138,7 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public async virtual Task<ImmutabilityPolicyDeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ImmutabilityPolicy>> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (ifMatch == null)
             {
@@ -151,7 +150,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _immutabilityPolicyBlobContainersRestClient.DeleteImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new ImmutabilityPolicyDeleteOperation(response);
+                var operation = new StorageArmOperation<ImmutabilityPolicy>(Response.FromValue(new ImmutabilityPolicy(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -171,7 +170,7 @@ namespace Azure.Management.Storage
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual ImmutabilityPolicyDeleteOperation Delete(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ImmutabilityPolicy> Delete(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (ifMatch == null)
             {
@@ -183,7 +182,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _immutabilityPolicyBlobContainersRestClient.DeleteImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, ifMatch, cancellationToken);
-                var operation = new ImmutabilityPolicyDeleteOperation(response);
+                var operation = new StorageArmOperation<ImmutabilityPolicy>(Response.FromValue(new ImmutabilityPolicy(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -203,14 +202,14 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ImmutabilityPolicyCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ImmutabilityPolicy>> CreateOrUpdateAsync(bool waitForCompletion, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _immutabilityPolicyBlobContainersRestClient.CreateOrUpdateImmutabilityPolicyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(Client, response);
+                var operation = new StorageArmOperation<ImmutabilityPolicy>(Response.FromValue(new ImmutabilityPolicy(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -230,14 +229,14 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ImmutabilityPolicyCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ImmutabilityPolicy> CreateOrUpdate(bool waitForCompletion, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _immutabilityPolicyBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicy.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _immutabilityPolicyBlobContainersRestClient.CreateOrUpdateImmutabilityPolicy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Parent.Name, Id.Parent.Name, parameters, ifMatch, cancellationToken);
-                var operation = new ImmutabilityPolicyCreateOrUpdateOperation(Client, response);
+                var operation = new StorageArmOperation<ImmutabilityPolicy>(Response.FromValue(new ImmutabilityPolicy(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

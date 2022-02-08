@@ -136,14 +136,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<RecordSetCaaDeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaa.Delete");
             scope.Start();
             try
             {
                 var response = await _recordSetCaaRecordSetsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "CAA".ToRecordType(), Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new RecordSetCaaDeleteOperation(response);
+                var operation = new MgmtExpandResourceTypesArmOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -162,14 +162,14 @@ namespace MgmtExpandResourceTypes
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always delete the current record set. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual RecordSetCaaDeleteOperation Delete(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(bool waitForCompletion, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaa.Delete");
             scope.Start();
             try
             {
                 var response = _recordSetCaaRecordSetsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "CAA".ToRecordType(), Id.Name, ifMatch, cancellationToken);
-                var operation = new RecordSetCaaDeleteOperation(response);
+                var operation = new MgmtExpandResourceTypesArmOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;

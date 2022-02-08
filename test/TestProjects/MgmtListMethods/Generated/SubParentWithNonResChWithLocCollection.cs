@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -62,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SubParentWithNonResChWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<SubParentWithNonResChWithLoc>> CreateOrUpdateAsync(bool waitForCompletion, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _subParentWithNonResChWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentWithNonResChWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubParentWithNonResChWithLocCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<SubParentWithNonResChWithLoc>(Response.FromValue(new SubParentWithNonResChWithLoc(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SubParentWithNonResChWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SubParentWithNonResChWithLoc> CreateOrUpdate(bool waitForCompletion, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
             if (parameters == null)
@@ -110,7 +109,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _subParentWithNonResChWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, subParentWithNonResChWithLocName, parameters, cancellationToken);
-                var operation = new SubParentWithNonResChWithLocCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<SubParentWithNonResChWithLoc>(Response.FromValue(new SubParentWithNonResChWithLoc(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
