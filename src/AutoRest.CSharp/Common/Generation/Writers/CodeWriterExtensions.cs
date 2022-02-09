@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (field.WriteAsProperty)
             {
-                writer.LineRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
+                writer.AppendRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
             }
 
             if (field.DefaultValue != null)
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return writer.AppendRaw(" = ").Append(field.DefaultValue).Line($";");
             }
 
-            return field.WriteAsProperty ? writer : writer.Line($";");
+            return field.WriteAsProperty ? writer.Line() : writer.Line($";");
         }
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)

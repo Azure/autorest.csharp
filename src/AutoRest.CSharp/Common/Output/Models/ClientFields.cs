@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         case AzureKeySecurityScheme azureKeySecurityScheme:
                             AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
-                            _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(true), "_" + KnownParameters.KeyAuth.Name);
+                            _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
                             fields.Add(AuthorizationHeaderConstant);
                             fields.Add(_keyAuthField);
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models
                             break;
                         case AADTokenSecurityScheme aadTokenSecurityScheme:
                             ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
-                            _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(true), "_" + KnownParameters.TokenAuth.Name);
+                            _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
 
                             fields.Add(ScopesConstant);
                             fields.Add(_tokenAuthField);
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 "credential" when _keyAuthField != null && parameterType.EqualsIgnoreNullable(_keyAuthField.Type) => _keyAuthField,
                 "credential" when _tokenAuthField != null && parameterType.EqualsIgnoreNullable(_tokenAuthField.Type) => _tokenAuthField,
-                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? parameterType.EqualsIgnoreNullable(field.Type) ? field : null : null
+                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? parameterType.Equals(field.Type) ? field : null : null
             };
 
         public FieldDeclaration? GetFieldByParameter(Parameter parameter)
