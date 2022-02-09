@@ -13,7 +13,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineScaleSetRollingUpgrade data model. </summary>
-    public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResource
+    public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeData. </summary>
         /// <param name="location"> The location. </param>

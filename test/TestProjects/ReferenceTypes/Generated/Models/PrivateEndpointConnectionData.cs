@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The Private Endpoint Connection resource. </summary>
     [TypeReferenceType]
-    public partial class PrivateEndpointConnectionData : ResourceManager.Models.Resource
+    public partial class PrivateEndpointConnectionData : ResourceData
     {
         /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
         [InitializationConstructor]

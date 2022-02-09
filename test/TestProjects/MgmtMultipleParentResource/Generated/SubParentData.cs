@@ -13,7 +13,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing the SubParent data model. </summary>
-    public partial class SubParentData : TrackedResource
+    public partial class SubParentData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of SubParentData. </summary>
         /// <param name="location"> The location. </param>

@@ -13,7 +13,7 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing the PolicyDefinition data model. </summary>
-    public partial class PolicyDefinitionData : Resource
+    public partial class PolicyDefinitionData : ResourceData
     {
         /// <summary> Initializes a new instance of PolicyDefinitionData. </summary>
         public PolicyDefinitionData()

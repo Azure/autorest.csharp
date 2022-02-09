@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> This model is x-ms-azure-resource, has flatten properties, and reference type properties are split in flatten properties and its own properties. </summary>
-    public partial class AzureResourceFlattenModel2 : TrackedResource
+    public partial class AzureResourceFlattenModel2 : TrackedResourceData
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel2. </summary>
         /// <param name="location"> The location. </param>

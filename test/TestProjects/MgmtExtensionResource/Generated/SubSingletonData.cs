@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing the SubSingleton data model. </summary>
-    public partial class SubSingletonData : Resource
+    public partial class SubSingletonData : ResourceData
     {
         /// <summary> Initializes a new instance of SubSingletonData. </summary>
         internal SubSingletonData()

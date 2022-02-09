@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the TrackedResourceModel1 data model. </summary>
-    public partial class TrackedResourceModel1Data : TrackedResource
+    public partial class TrackedResourceModel1Data : TrackedResourceData
     {
         /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
         /// <param name="location"> The location. </param>
