@@ -16,8 +16,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
-        private static readonly ConcurrentDictionary<string, string> _cache = new ConcurrentDictionary<string, string>();
-
         public static void UpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)
@@ -79,57 +77,58 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (renameRules.Count == 0)
                 return;
             _regex = BuildRegex(renameRules);
+            var wordCache = new ConcurrentDictionary<string, string>();
             foreach (var schema in allSchemas)
             {
-                TransformSchema(schema, renameRules);
+                TransformSchema(schema, renameRules, wordCache);
             }
         }
 
-        private static void TransformSchema(Schema schema, IReadOnlyDictionary<string, string> renameRules)
+        private static void TransformSchema(Schema schema, IReadOnlyDictionary<string, string> renameRules, ConcurrentDictionary<string, string> wordCache)
         {
             switch (schema)
             {
                 case ChoiceSchema:
                 case SealedChoiceSchema:
-                    TransformBasicSchema(schema, renameRules);
+                    TransformBasicSchema(schema, renameRules, wordCache);
                     break;
                 case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
-                    TransformObjectSchema(objSchema, renameRules);
+                    TransformObjectSchema(objSchema, renameRules, wordCache);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown schema type {schema.GetType()}");
             }
         }
 
-        private static void TransformBasicSchema(Schema schema, IReadOnlyDictionary<string, string> renameRules)
+        private static void TransformBasicSchema(Schema schema, IReadOnlyDictionary<string, string> renameRules, ConcurrentDictionary<string, string> wordCache)
         {
-            TransformLanguage(schema.Language, renameRules);
+            TransformLanguage(schema.Language, renameRules, wordCache);
         }
 
-        private static void TransformLanguage(Languages languages, IReadOnlyDictionary<string, string> renameRules)
+        private static void TransformLanguage(Languages languages, IReadOnlyDictionary<string, string> renameRules, ConcurrentDictionary<string, string> wordCache)
         {
             var originalName = languages.Default.Name;
-            if (_cache.TryGetValue(originalName, out var result))
+            if (wordCache.TryGetValue(originalName, out var result))
             {
                 languages.Default.Name = result;
                 return;
             }
             result = originalName.EnsureNameCase(renameRules);
             languages.Default.Name = result;
-            _cache.TryAdd(originalName, result);
+            wordCache.TryAdd(originalName, result);
         }
 
-        private static void TransformObjectSchema(ObjectSchema objSchema, IReadOnlyDictionary<string, string> renameRules)
+        private static void TransformObjectSchema(ObjectSchema objSchema, IReadOnlyDictionary<string, string> renameRules, ConcurrentDictionary<string, string> wordCache)
         {
             // transform the name of this schema
-            TransformBasicSchema(objSchema, renameRules);
+            TransformBasicSchema(objSchema, renameRules, wordCache);
             foreach (var property in objSchema.Properties)
             {
-                TransformLanguage(property.Language, renameRules);
+                TransformLanguage(property.Language, renameRules, wordCache);
             }
         }
 
-        internal static string EnsureNameCase(this string name, IReadOnlyDictionary<string, string> renameRules)
+        public static string EnsureNameCase(this string name, IReadOnlyDictionary<string, string> renameRules)
         {
             if (_regex == null)
             {
