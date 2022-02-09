@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the ExactMatchModel5 data model. </summary>
-    public partial class ExactMatchModel5Data : TrackedResource
+    public partial class ExactMatchModel5Data : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
         /// <param name="location"> The location. </param>

@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the SubParentWithNonResCh data model. </summary>
-    public partial class SubParentWithNonResChData : TrackedResource
+    public partial class SubParentWithNonResChData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of SubParentWithNonResChData. </summary>
         /// <param name="location"> The location. </param>

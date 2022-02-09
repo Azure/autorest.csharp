@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the ExactMatchModel1 data model. </summary>
-    public partial class ExactMatchModel1Data : Resource
+    public partial class ExactMatchModel1Data : ResourceData
     {
         /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
         public ExactMatchModel1Data()

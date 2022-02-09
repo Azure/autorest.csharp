@@ -13,7 +13,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing the Workspace data model. </summary>
-    public partial class WorkspaceData : TrackedResource
+    public partial class WorkspaceData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of WorkspaceData. </summary>
         /// <param name="location"> The location. </param>

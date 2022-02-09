@@ -12,7 +12,7 @@ using ResourceRename.Models;
 namespace ResourceRename
 {
     /// <summary> A class representing the SshPublicKeyInfo data model. </summary>
-    public partial class SshPublicKeyInfoData : Resource
+    public partial class SshPublicKeyInfoData : ResourceData
     {
         /// <summary> Initializes a new instance of SshPublicKeyInfoData. </summary>
         public SshPublicKeyInfoData()

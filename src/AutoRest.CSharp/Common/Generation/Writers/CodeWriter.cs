@@ -288,11 +288,14 @@ namespace AutoRest.CSharp.Generation.Writers
             string? mappedName = type.IsFrameworkType ? GetKeywordMapping(type.FrameworkType) : null;
             if (mappedName == null)
             {
-                UseNamespace(type.Namespace);
+                if (type.Name != "T")
+                {
+                    UseNamespace(type.Namespace);
 
-                AppendRaw("global::");
-                AppendRaw(type.Namespace);
-                AppendRaw(".");
+                    AppendRaw("global::");
+                    AppendRaw(type.Namespace);
+                    AppendRaw(".");
+                }
                 AppendRaw(type.Name);
             }
             else

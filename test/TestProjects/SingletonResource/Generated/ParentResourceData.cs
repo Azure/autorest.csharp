@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace SingletonResource
 {
     /// <summary> A class representing the ParentResource data model. </summary>
-    public partial class ParentResourceData : TrackedResource
+    public partial class ParentResourceData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ParentResourceData. </summary>
         /// <param name="location"> The location. </param>

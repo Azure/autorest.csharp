@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the ResGrpParentWithAncestorWithNonResCh data model. </summary>
-    public partial class ResGrpParentWithAncestorWithNonResChData : TrackedResource
+    public partial class ResGrpParentWithAncestorWithNonResChData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ResGrpParentWithAncestorWithNonResChData. </summary>
         /// <param name="location"> The location. </param>

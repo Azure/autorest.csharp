@@ -11,7 +11,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtListMethods.Models
 {
     /// <summary> The descendant. </summary>
-    internal partial class DescendantInfo : Resource
+    internal partial class DescendantInfo : ResourceData
     {
         /// <summary> Initializes a new instance of DescendantInfo. </summary>
         internal DescendantInfo()

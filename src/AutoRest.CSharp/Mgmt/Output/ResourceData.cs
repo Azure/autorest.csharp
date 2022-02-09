@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             foreach (var obj in EnumerateHierarchy())
             {
-                if (obj.Type.Name == nameof(TrackedResource) && obj.Type.Namespace == typeof(TrackedResource).Namespace)
+                if (obj.Type.Name == nameof(TrackedResourceData) && obj.Type.Namespace == typeof(TrackedResourceData).Namespace)
                     return true;
             }
             return false;
