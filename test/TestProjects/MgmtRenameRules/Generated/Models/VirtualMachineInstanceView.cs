@@ -17,7 +17,6 @@ namespace MgmtRenameRules.Models
         internal VirtualMachineInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
-            Extensions = new ChangeTrackingList<VirtualMachineExtensionInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
@@ -32,13 +31,12 @@ namespace MgmtRenameRules.Models
         /// <param name="vmAgent"> The VM Agent running on the virtual machine. </param>
         /// <param name="maintenanceRedeployStatus"> The Maintenance Operation status on the virtual machine. </param>
         /// <param name="disks"> The virtual machine disk information. </param>
-        /// <param name="extensions"> The extensions information. </param>
         /// <param name="vmHealth"> The health status for the VM. </param>
         /// <param name="bootDiagnostics"> Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor. </param>
         /// <param name="assignedHost"> Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. </param>
         /// <param name="statuses"> The resource status information. </param>
         /// <param name="patchStatus"> The status of virtual machine patch operations. </param>
-        internal VirtualMachineInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string computerName, string oSName, string oSVersion, HyperVGenerationType? hyperVGeneration, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, IReadOnlyList<VirtualMachineExtensionInstanceView> extensions, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, string assignedHost, IReadOnlyList<InstanceViewStatus> statuses, VirtualMachinePatchStatus patchStatus)
+        internal VirtualMachineInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string computerName, string oSName, string oSVersion, HyperVGenerationType? hyperVGeneration, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, string assignedHost, IReadOnlyList<InstanceViewStatus> statuses, VirtualMachinePatchStatus patchStatus)
         {
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;
@@ -50,7 +48,6 @@ namespace MgmtRenameRules.Models
             VmAgent = vmAgent;
             MaintenanceRedeployStatus = maintenanceRedeployStatus;
             Disks = disks;
-            Extensions = extensions;
             VmHealth = vmHealth;
             BootDiagnostics = bootDiagnostics;
             AssignedHost = assignedHost;
@@ -78,8 +75,6 @@ namespace MgmtRenameRules.Models
         public MaintenanceRedeployStatus MaintenanceRedeployStatus { get; }
         /// <summary> The virtual machine disk information. </summary>
         public IReadOnlyList<DiskInstanceView> Disks { get; }
-        /// <summary> The extensions information. </summary>
-        public IReadOnlyList<VirtualMachineExtensionInstanceView> Extensions { get; }
         /// <summary> The health status for the VM. </summary>
         public VirtualMachineHealthStatus VmHealth { get; }
         /// <summary> Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor. </summary>

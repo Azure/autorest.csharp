@@ -21,7 +21,6 @@ namespace MgmtRenameRules.Models
             Optional<VirtualMachineAgentInstanceView> vmAgent = default;
             Optional<MaintenanceRedeployStatus> maintenanceRedeployStatus = default;
             Optional<IReadOnlyList<DiskInstanceView>> disks = default;
-            Optional<IReadOnlyList<VirtualMachineExtensionInstanceView>> extensions = default;
             Optional<VirtualMachineHealthStatus> vmHealth = default;
             Optional<BootDiagnosticsInstanceView> bootDiagnostics = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
@@ -89,21 +88,6 @@ namespace MgmtRenameRules.Models
                     disks = array;
                     continue;
                 }
-                if (property.NameEquals("extensions"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    List<VirtualMachineExtensionInstanceView> array = new List<VirtualMachineExtensionInstanceView>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(VirtualMachineExtensionInstanceView.DeserializeVirtualMachineExtensionInstanceView(item));
-                    }
-                    extensions = array;
-                    continue;
-                }
                 if (property.NameEquals("vmHealth"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -150,7 +134,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), Optional.ToList(extensions), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value);
+            return new VirtualMachineScaleSetVmInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value);
         }
     }
 }

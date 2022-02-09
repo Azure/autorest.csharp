@@ -9,26 +9,14 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
-using MgmtRenameRules.Models;
 
-namespace MgmtRenameRules
+namespace MgmtRenameRules.Models
 {
-    public partial class DedicatedHostGroupData : IUtf8JsonSerializable
+    public partial class VirtualMachineExtensionImage : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Zones))
-            {
-                writer.WritePropertyName("zones");
-                writer.WriteStartArray();
-                foreach (var item in Zones)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
-            }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
             foreach (var item in Tags)
@@ -41,50 +29,50 @@ namespace MgmtRenameRules
             writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(PlatformFaultDomainCount))
+            if (Optional.IsDefined(OperatingSystem))
             {
-                writer.WritePropertyName("platformFaultDomainCount");
-                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+                writer.WritePropertyName("operatingSystem");
+                writer.WriteStringValue(OperatingSystem);
             }
-            if (Optional.IsDefined(SupportAutomaticPlacement))
+            if (Optional.IsDefined(ComputeRole))
             {
-                writer.WritePropertyName("supportAutomaticPlacement");
-                writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
+                writer.WritePropertyName("computeRole");
+                writer.WriteStringValue(ComputeRole);
+            }
+            if (Optional.IsDefined(HandlerSchema))
+            {
+                writer.WritePropertyName("handlerSchema");
+                writer.WriteStringValue(HandlerSchema);
+            }
+            if (Optional.IsDefined(VmScaleSetEnabled))
+            {
+                writer.WritePropertyName("vmScaleSetEnabled");
+                writer.WriteBooleanValue(VmScaleSetEnabled.Value);
+            }
+            if (Optional.IsDefined(SupportsMultipleExtensions))
+            {
+                writer.WritePropertyName("supportsMultipleExtensions");
+                writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static DedicatedHostGroupData DeserializeDedicatedHostGroupData(JsonElement element)
+        internal static VirtualMachineExtensionImage DeserializeVirtualMachineExtensionImage(JsonElement element)
         {
-            Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             SystemData systemData = default;
-            Optional<int> platformFaultDomainCount = default;
-            Optional<IReadOnlyList<Azure.ResourceManager.Resources.Models.SubResource>> hosts = default;
-            Optional<DedicatedHostGroupInstanceView> instanceView = default;
-            Optional<bool> supportAutomaticPlacement = default;
+            Optional<string> operatingSystem = default;
+            Optional<string> computeRole = default;
+            Optional<string> handlerSchema = default;
+            Optional<bool> vmScaleSetEnabled = default;
+            Optional<bool> supportsMultipleExtensions = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("zones"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetString());
-                    }
-                    zones = array;
-                    continue;
-                }
                 if (property.NameEquals("tags"))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -129,56 +117,46 @@ namespace MgmtRenameRules
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("platformFaultDomainCount"))
+                        if (property0.NameEquals("operatingSystem"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            platformFaultDomainCount = property0.Value.GetInt32();
+                            operatingSystem = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("hosts"))
+                        if (property0.NameEquals("computeRole"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            List<Azure.ResourceManager.Resources.Models.SubResource> array = new List<Azure.ResourceManager.Resources.Models.SubResource>();
-                            foreach (var item in property0.Value.EnumerateArray())
-                            {
-                                array.Add(JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(item.ToString()));
-                            }
-                            hosts = array;
+                            computeRole = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("instanceView"))
+                        if (property0.NameEquals("handlerSchema"))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            instanceView = DedicatedHostGroupInstanceView.DeserializeDedicatedHostGroupInstanceView(property0.Value);
+                            handlerSchema = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("supportAutomaticPlacement"))
+                        if (property0.NameEquals("vmScaleSetEnabled"))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            supportAutomaticPlacement = property0.Value.GetBoolean();
+                            vmScaleSetEnabled = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("supportsMultipleExtensions"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            supportsMultipleExtensions = property0.Value.GetBoolean();
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new DedicatedHostGroupData(id, name, type, systemData, tags, location, Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement));
+            return new VirtualMachineExtensionImage(id, name, type, systemData, tags, location, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions));
         }
     }
 }

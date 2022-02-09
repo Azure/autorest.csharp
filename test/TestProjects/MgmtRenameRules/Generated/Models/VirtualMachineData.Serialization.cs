@@ -143,7 +143,6 @@ namespace MgmtRenameRules
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
             Optional<Models.Plan> plan = default;
-            Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
@@ -182,21 +181,6 @@ namespace MgmtRenameRules
                         continue;
                     }
                     plan = Models.Plan.DeserializePlan(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("resources"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    List<VirtualMachineExtensionData> array = new List<VirtualMachineExtensionData>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(item));
-                    }
-                    resources = array;
                     continue;
                 }
                 if (property.NameEquals("identity"))
@@ -452,7 +436,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData, tags, location, plan.Value, Optional.ToList(resources), identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData, tags, location, plan.Value, identity, Optional.ToList(zones), hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, availabilitySet, virtualMachineScaleSet, proximityPlacementGroup, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, host, hostGroup, provisioningState.Value, instanceView.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

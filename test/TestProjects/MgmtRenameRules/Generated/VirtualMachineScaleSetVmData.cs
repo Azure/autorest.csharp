@@ -20,7 +20,6 @@ namespace MgmtRenameRules
         /// <param name="location"> The location. </param>
         public VirtualMachineScaleSetVmData(AzureLocation location) : base(location)
         {
-            Resources = new ChangeTrackingList<VirtualMachineExtensionData>();
             Zones = new ChangeTrackingList<string>();
         }
 
@@ -34,7 +33,6 @@ namespace MgmtRenameRules
         /// <param name="instanceId"> The virtual machine instance ID. </param>
         /// <param name="sku"> The virtual machine SKU. </param>
         /// <param name="plan"> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </param>
-        /// <param name="resources"> The virtual machine child extension resources. </param>
         /// <param name="zones"> The virtual machine zones. </param>
         /// <param name="latestModelApplied"> Specifies whether the latest model has been applied to the virtual machine. </param>
         /// <param name="vmId"> Azure VM unique ID. </param>
@@ -52,12 +50,11 @@ namespace MgmtRenameRules
         /// <param name="licenseType"> Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15. </param>
         /// <param name="modelDefinitionApplied"> Specifies whether the model applied to the virtual machine is the model of the virtual machine scale set or the customized model for the virtual machine. </param>
         /// <param name="protectionPolicy"> Specifies the protection policy of the virtual machine. </param>
-        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, Models.Sku sku, Models.Plan plan, IReadOnlyList<VirtualMachineExtensionData> resources, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile oSProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy) : base(id, name, type, systemData, tags, location)
+        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, Models.Sku sku, Models.Plan plan, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile oSProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy) : base(id, name, type, systemData, tags, location)
         {
             InstanceId = instanceId;
             Sku = sku;
             Plan = plan;
-            Resources = resources;
             Zones = zones;
             LatestModelApplied = latestModelApplied;
             VmId = vmId;
@@ -83,8 +80,6 @@ namespace MgmtRenameRules
         public Models.Sku Sku { get; }
         /// <summary> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </summary>
         public Models.Plan Plan { get; set; }
-        /// <summary> The virtual machine child extension resources. </summary>
-        public IReadOnlyList<VirtualMachineExtensionData> Resources { get; }
         /// <summary> The virtual machine zones. </summary>
         public IReadOnlyList<string> Zones { get; }
         /// <summary> Specifies whether the latest model has been applied to the virtual machine. </summary>

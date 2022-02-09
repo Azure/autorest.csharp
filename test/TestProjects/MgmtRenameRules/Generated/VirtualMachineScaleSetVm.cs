@@ -84,13 +84,6 @@ namespace MgmtRenameRules
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSetVirtualMachineExtensions in the VirtualMachineScaleSetVirtualMachineExtension. </summary>
-        /// <returns> An object representing collection of VirtualMachineScaleSetVirtualMachineExtensions and their operations over a VirtualMachineScaleSetVirtualMachineExtension. </returns>
-        public virtual VirtualMachineScaleSetVirtualMachineExtensionCollection GetVirtualMachineScaleSetVirtualMachineExtensions()
-        {
-            return new VirtualMachineScaleSetVirtualMachineExtensionCollection(Client, Id);
-        }
-
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
         /// OperationId: VirtualMachineScaleSetVMs_Get

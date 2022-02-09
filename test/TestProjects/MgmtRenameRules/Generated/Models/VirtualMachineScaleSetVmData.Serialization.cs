@@ -100,7 +100,6 @@ namespace MgmtRenameRules
             Optional<string> instanceId = default;
             Optional<Models.Sku> sku = default;
             Optional<Models.Plan> plan = default;
-            Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
             Optional<IReadOnlyList<string>> zones = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
@@ -149,21 +148,6 @@ namespace MgmtRenameRules
                         continue;
                     }
                     plan = Models.Plan.DeserializePlan(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("resources"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    List<VirtualMachineExtensionData> array = new List<VirtualMachineExtensionData>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(item));
-                    }
-                    resources = array;
                     continue;
                 }
                 if (property.NameEquals("zones"))
@@ -369,7 +353,7 @@ namespace MgmtRenameRules
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVmData(id, name, type, systemData, tags, location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
+            return new VirtualMachineScaleSetVmData(id, name, type, systemData, tags, location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
         }
     }
 }

@@ -21,38 +21,6 @@ namespace MgmtRenameRules
             );
         }
 
-        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
-        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
-        {
-            return GetExtensionClient(resourceGroup).GetAvailabilitySets();
-        }
-
-        /// <summary> Gets a collection of ProximityPlacementGroups in the ProximityPlacementGroup. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of ProximityPlacementGroups and their operations over a ProximityPlacementGroup. </returns>
-        public static ProximityPlacementGroupCollection GetProximityPlacementGroups(this ResourceGroup resourceGroup)
-        {
-            return GetExtensionClient(resourceGroup).GetProximityPlacementGroups();
-        }
-
-        /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
-        public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroup resourceGroup)
-        {
-            return GetExtensionClient(resourceGroup).GetDedicatedHostGroups();
-        }
-
-        /// <summary> Gets a collection of SshPublicKeys in the SshPublicKey. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SshPublicKeys and their operations over a SshPublicKey. </returns>
-        public static SshPublicKeyCollection GetSshPublicKeys(this ResourceGroup resourceGroup)
-        {
-            return GetExtensionClient(resourceGroup).GetSshPublicKeys();
-        }
-
         /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
