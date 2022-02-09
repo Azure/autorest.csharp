@@ -15,7 +15,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the DedicatedHost data model. </summary>
-    public partial class DedicatedHostData : TrackedResource
+    public partial class DedicatedHostData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
         /// <param name="location"> The location. </param>

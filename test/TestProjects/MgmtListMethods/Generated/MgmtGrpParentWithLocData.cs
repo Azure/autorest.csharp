@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the MgmtGrpParentWithLoc data model. </summary>
-    public partial class MgmtGrpParentWithLocData : TrackedResource
+    public partial class MgmtGrpParentWithLocData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of MgmtGrpParentWithLocData. </summary>
         /// <param name="location"> The location. </param>

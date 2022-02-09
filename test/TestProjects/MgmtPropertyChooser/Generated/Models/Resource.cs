@@ -13,7 +13,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtPropertyChooser.Models
 {
     /// <summary> The Resource model definition. </summary>
-    public partial class Resource : Azure.ResourceManager.Models.Resource
+    public partial class Resource : ResourceData
     {
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="location"> Resource location. </param>

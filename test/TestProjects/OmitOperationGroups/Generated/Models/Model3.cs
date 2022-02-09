@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace OmitOperationGroups.Models
 {
     /// <summary> The Model3. </summary>
-    public partial class Model3 : Resource
+    public partial class Model3 : ResourceData
     {
         /// <summary> Initializes a new instance of Model3. </summary>
         public Model3()

@@ -105,7 +105,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 VerifyMethodReturnType(resource, resource, "Get");
                 var resourceData = GetResourceDataByResource(resource);
-                if (typeof(TrackedResource).IsAssignableFrom(resourceData))
+                if (typeof(TrackedResourceData).IsAssignableFrom(resourceData))
                 {
                     VerifyMethodReturnType(resource, resource, "AddTag");
                     VerifyMethodReturnType(resource, resource, "SetTags");
@@ -262,6 +262,22 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 var expectedBaseOperationsType = typeof(ArmResource);
                 Assert.AreEqual(expectedBaseOperationsType, type.BaseType);
+            }
+        }
+
+        [TestCase("GetAvailableLocations")]
+        [TestCase("GetAvailableLocationsAsync")]
+        public void ValidateListAvailableLocationsMethodExists(string methodName)
+        {
+            foreach (var type in FindAllResources())
+            {
+                if (IsSingletonOperation(type))
+                {
+                    continue;
+                }
+
+                var method = type.GetMethod(methodName);
+                Assert.NotNull(method, $"{type.Name} does not implement the method.");
             }
         }
 
@@ -475,7 +491,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private bool IsInheritFromTrackedResource(Type type)
         {
-            return type.BaseType.Name == typeof(TrackedResource).Name;
+            return type.BaseType.Name == typeof(TrackedResourceData).Name;
         }
 
         protected Type FindResourceGroupExtensions()

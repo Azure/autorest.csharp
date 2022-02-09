@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtExtensionCommonRestOperation
 {
     /// <summary> A class representing the TypeOne data model. </summary>
-    public partial class TypeOneData : TrackedResource
+    public partial class TypeOneData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of TypeOneData. </summary>
         /// <param name="location"> The location. </param>

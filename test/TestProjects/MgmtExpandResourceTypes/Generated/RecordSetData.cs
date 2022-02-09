@@ -14,7 +14,7 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing the RecordSet data model. </summary>
-    public partial class RecordSetData : Resource
+    public partial class RecordSetData : ResourceData
     {
         /// <summary> Initializes a new instance of RecordSetData. </summary>
         public RecordSetData()
