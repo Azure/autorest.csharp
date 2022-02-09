@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
@@ -26,12 +27,13 @@ namespace AutoRest.CSharp.Output.Models
         private readonly FieldDeclaration? _tokenAuthField;
         private readonly IReadOnlyList<FieldDeclaration> _fields;
         private readonly IReadOnlyDictionary<string, FieldDeclaration> _parameterNamesToFields;
+        private static readonly FormattableString ClientDiagnosticsDescription = $"The ClientDiagnostics is used to provide tracing support for the client library.";
 
         public IReadOnlyList<FieldDeclaration> CredentialFields { get; }
 
-        public ClientFields(BuildContext<LowLevelOutputLibrary> context, IEnumerable<Parameter> parameters)
+        public ClientFields(IEnumerable<Parameter> parameters, BuildContext? context = null)
         {
-            ClientDiagnosticsProperty = new(Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
+            ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
             PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
 
             var parameterNamesToFields = new Dictionary<string, FieldDeclaration>
@@ -43,28 +45,31 @@ namespace AutoRest.CSharp.Output.Models
             var fields = new List<FieldDeclaration>();
             var credentialFields = new List<FieldDeclaration>();
             var properties = new List<FieldDeclaration>();
-            foreach (var scheme in context.CodeModel.Security.Schemes)
+            if (context != null)
             {
-                switch (scheme)
+                foreach (var scheme in context.CodeModel.Security.Schemes)
                 {
-                    case AzureKeySecurityScheme azureKeySecurityScheme:
-                        AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
-                        _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(true), "_" + KnownParameters.KeyAuth.Name);
+                    switch (scheme)
+                    {
+                        case AzureKeySecurityScheme azureKeySecurityScheme:
+                            AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{azureKeySecurityScheme.HeaderName:L}");
+                            _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(true), "_" + KnownParameters.KeyAuth.Name);
 
-                        fields.Add(AuthorizationHeaderConstant);
-                        fields.Add(_keyAuthField);
-                        credentialFields.Add(_keyAuthField);
-                        parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
-                        break;
-                    case AADTokenSecurityScheme aadTokenSecurityScheme:
-                        ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
-                        _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(true), "_" + KnownParameters.TokenAuth.Name);
+                            fields.Add(AuthorizationHeaderConstant);
+                            fields.Add(_keyAuthField);
+                            credentialFields.Add(_keyAuthField);
+                            parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
+                            break;
+                        case AADTokenSecurityScheme aadTokenSecurityScheme:
+                            ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {aadTokenSecurityScheme.Scopes.GetLiteralsFormattable()} }}");
+                            _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(true), "_" + KnownParameters.TokenAuth.Name);
 
-                        fields.Add(ScopesConstant);
-                        fields.Add(_tokenAuthField);
-                        credentialFields.Add(_tokenAuthField);
-                        parameterNamesToFields[KnownParameters.TokenAuth.Name] = _tokenAuthField;
-                        break;
+                            fields.Add(ScopesConstant);
+                            fields.Add(_tokenAuthField);
+                            credentialFields.Add(_tokenAuthField);
+                            parameterNamesToFields[KnownParameters.TokenAuth.Name] = _tokenAuthField;
+                            break;
+                    }
                 }
             }
 
@@ -99,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 "credential" when _keyAuthField != null && parameterType.EqualsIgnoreNullable(_keyAuthField.Type) => _keyAuthField,
                 "credential" when _tokenAuthField != null && parameterType.EqualsIgnoreNullable(_tokenAuthField.Type) => _tokenAuthField,
-                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? field : null
+                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? parameterType.EqualsIgnoreNullable(field.Type) ? field : null : null
             };
 
         public FieldDeclaration? GetFieldByParameter(Parameter parameter)

@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (field.WriteAsProperty)
             {
-                writer.AppendRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
+                writer.LineRaw(modifiers.HasFlag(FieldModifiers.ReadOnly) ? "{ get; }" : "{ get; set; }");
             }
 
             if (field.DefaultValue != null)
