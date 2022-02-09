@@ -60,20 +60,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static Regex? _regex;
 
-        internal static void ApplyRenameRules(IReadOnlyDictionary<string, string> renameRules)
+        private static Regex BuildRegex(IReadOnlyDictionary<string, string> renameRules)
         {
-            foreach ((var key, var value) in renameRules)
-            {
-                RenameRules.Add(key, value);
-            }
-            BuildRegex();
-        }
-
-        private static void BuildRegex()
-        {
-            if (RenameRules.Count == 0)
-                return;
-            var regexRawString = string.Join("|", RenameRules.Keys);
+            var regexRawString = string.Join("|", renameRules.Keys);
             // we are building the regex that matches
             // 1. it starts with a lower case letter or a digit which is considered as the end of its previous word
             //    or it is at the beginning of this string
@@ -82,40 +71,42 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // 3. it should followed by a upper case letter which is considered as the beginning of next word
             //    or it is the end of this string
             //    or we hit a word separator including \W, _, ., @, -, spaces
-            _regex = new Regex(@$"([\W|_|\.|@|-|\s|\$\da-z]|^)({regexRawString})([\W|_|\.|@|-|\s|\$A-Z]|$)");
+            return new Regex(@$"([\W|_|\.|@|-|\s|\$\da-z]|^)({regexRawString})([\W|_|\.|@|-|\s|\$A-Z]|$)");
         }
 
         public static void UpdateAcronyms(this IEnumerable<Schema> allSchemas, IReadOnlyDictionary<string, string> renameRules)
         {
-            ApplyRenameRules(renameRules);
+            if (renameRules.Count == 0)
+                return;
+            _regex = BuildRegex(renameRules);
             foreach (var schema in allSchemas)
             {
-                TransformSchema(schema);
+                TransformSchema(schema, renameRules);
             }
         }
 
-        private static void TransformSchema(Schema schema)
+        private static void TransformSchema(Schema schema, IReadOnlyDictionary<string, string> renameRules)
         {
             switch (schema)
             {
                 case ChoiceSchema:
                 case SealedChoiceSchema:
-                    TransformBasicSchema(schema);
+                    TransformBasicSchema(schema, renameRules);
                     break;
                 case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
-                    TransformObjectSchema(objSchema);
+                    TransformObjectSchema(objSchema, renameRules);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown schema type {schema.GetType()}");
             }
         }
 
-        private static void TransformBasicSchema(Schema schema)
+        private static void TransformBasicSchema(Schema schema, IReadOnlyDictionary<string, string> renameRules)
         {
-            TransformLanguage(schema.Language);
+            TransformLanguage(schema.Language, renameRules);
         }
 
-        private static void TransformLanguage(Languages languages)
+        private static void TransformLanguage(Languages languages, IReadOnlyDictionary<string, string> renameRules)
         {
             var originalName = languages.Default.Name;
             if (_cache.TryGetValue(originalName, out var result))
@@ -123,35 +114,35 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 languages.Default.Name = result;
                 return;
             }
-            result = originalName.EnsureNameCase();
+            result = originalName.EnsureNameCase(renameRules);
             languages.Default.Name = result;
             _cache.TryAdd(originalName, result);
         }
 
-        private static void TransformObjectSchema(ObjectSchema objSchema)
+        private static void TransformObjectSchema(ObjectSchema objSchema, IReadOnlyDictionary<string, string> renameRules)
         {
             // transform the name of this schema
-            TransformBasicSchema(objSchema);
+            TransformBasicSchema(objSchema, renameRules);
             foreach (var property in objSchema.Properties)
             {
-                TransformLanguage(property.Language);
+                TransformLanguage(property.Language, renameRules);
             }
         }
 
-        private static IDictionary<string, string> RenameRules = new Dictionary<string, string>();
-
-        internal static string EnsureNameCase(this string name)
+        internal static string EnsureNameCase(this string name, IReadOnlyDictionary<string, string> renameRules)
         {
             if (_regex == null)
-                return name; // this means we do not have any replacement rules
-            var strToMatch = name.FirstCharToUpperCase();
+            {
+                _regex = BuildRegex(renameRules);
+            }
             var builder = new StringBuilder();
+            var strToMatch = name.FirstCharToUpperCase();
             var match = _regex.Match(strToMatch);
             while (match.Success)
             {
                 // in our regular expression, the content we want to find is in the second group
                 var matchGroup = match.Groups[2];
-                var replaceValue = RenameRules[matchGroup.Value];
+                var replaceValue = renameRules[matchGroup.Value];
                 // append everything between the beginning and the index of this match
                 builder.Append(strToMatch.Substring(0, matchGroup.Index));
                 // append the replaced value

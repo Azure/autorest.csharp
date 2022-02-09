@@ -9,10 +9,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
 {
     internal class CodeModelExtensionTests
     {
+        private Dictionary<string, string> renameRules;
+
         [OneTimeSetUp]
-        public static void ApplyRenameRules()
+        public void ApplyRenameRules()
         {
-            var renameRules = new Dictionary<string, string>
+            renameRules = new Dictionary<string, string>
             {
                 { "Os", "OS" },
                 { "DNS", "Dns" },
@@ -25,7 +27,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 { "WANs", "Wans" },
                 { "VM", "Vm" },
             };
-            CodeModelExtension.ApplyRenameRules(renameRules);
         }
 
         [TestCase("OsType", "OSType")]
@@ -54,7 +55,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase("SomethingVPNIP", "SomethingVpnIP")]
         public void EnsureNameCaseTest(string name, string expected)
         {
-            var result = name.EnsureNameCase();
+            var result = name.EnsureNameCase(renameRules);
             Assert.AreEqual(expected, result);
         }
     }
