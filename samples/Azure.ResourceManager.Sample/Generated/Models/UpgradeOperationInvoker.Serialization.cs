@@ -13,17 +13,17 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this UpgradeOperationInvoker value) => value switch
         {
-            UpgradeOperationInvoker.Unknown => "Unknown",
-            UpgradeOperationInvoker.User => "User",
             UpgradeOperationInvoker.Platform => "Platform",
+            UpgradeOperationInvoker.User => "User",
+            UpgradeOperationInvoker.Unknown => "Unknown",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UpgradeOperationInvoker value.")
         };
 
         public static UpgradeOperationInvoker ToUpgradeOperationInvoker(this string value)
         {
-            if (string.Equals(value, "Unknown", StringComparison.InvariantCultureIgnoreCase)) return UpgradeOperationInvoker.Unknown;
-            if (string.Equals(value, "User", StringComparison.InvariantCultureIgnoreCase)) return UpgradeOperationInvoker.User;
             if (string.Equals(value, "Platform", StringComparison.InvariantCultureIgnoreCase)) return UpgradeOperationInvoker.Platform;
+            if (string.Equals(value, "User", StringComparison.InvariantCultureIgnoreCase)) return UpgradeOperationInvoker.User;
+            if (string.Equals(value, "Unknown", StringComparison.InvariantCultureIgnoreCase)) return UpgradeOperationInvoker.Unknown;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UpgradeOperationInvoker value.");
         }
     }

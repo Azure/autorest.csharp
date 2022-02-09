@@ -88,6 +88,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Groups);
 
             UpdateFrameworkTypes(_allSchemas);
+            UpdateSealChoiceTypes(_allSchemas);
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -103,6 +104,23 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
+        private void UpdateSealChoiceTypes(IEnumerable<Schema> allSchemas)
+        {
+            foreach (var schema in allSchemas)
+            {
+                if (schema is not SealedChoiceSchema choiceSchema)
+                    continue;
+
+                // rearrange the sequence in the choices
+                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices);
+            }
+        }
+
+        private ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues)
+        {
+            // only an experiment
+            return originalValues.Reverse().ToList();
+        }
 
         private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
         {

@@ -13,15 +13,15 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this RollingUpgradeActionType value) => value switch
         {
-            RollingUpgradeActionType.Start => "Start",
             RollingUpgradeActionType.Cancel => "Cancel",
+            RollingUpgradeActionType.Start => "Start",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown RollingUpgradeActionType value.")
         };
 
         public static RollingUpgradeActionType ToRollingUpgradeActionType(this string value)
         {
-            if (string.Equals(value, "Start", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeActionType.Start;
             if (string.Equals(value, "Cancel", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeActionType.Cancel;
+            if (string.Equals(value, "Start", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeActionType.Start;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown RollingUpgradeActionType value.");
         }
     }

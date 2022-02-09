@@ -10,11 +10,11 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Invoker of the Upgrade Operation. </summary>
     public enum UpgradeOperationInvoker
     {
-        /// <summary> Unknown. </summary>
-        Unknown,
+        /// <summary> Platform. </summary>
+        Platform,
         /// <summary> User. </summary>
         User,
-        /// <summary> Platform. </summary>
-        Platform
+        /// <summary> Unknown. </summary>
+        Unknown
     }
 }

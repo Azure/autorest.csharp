@@ -13,17 +13,17 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this StatusLevelTypes value) => value switch
         {
-            StatusLevelTypes.Info => "Info",
-            StatusLevelTypes.Warning => "Warning",
             StatusLevelTypes.Error => "Error",
+            StatusLevelTypes.Warning => "Warning",
+            StatusLevelTypes.Info => "Info",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StatusLevelTypes value.")
         };
 
         public static StatusLevelTypes ToStatusLevelTypes(this string value)
         {
-            if (string.Equals(value, "Info", StringComparison.InvariantCultureIgnoreCase)) return StatusLevelTypes.Info;
-            if (string.Equals(value, "Warning", StringComparison.InvariantCultureIgnoreCase)) return StatusLevelTypes.Warning;
             if (string.Equals(value, "Error", StringComparison.InvariantCultureIgnoreCase)) return StatusLevelTypes.Error;
+            if (string.Equals(value, "Warning", StringComparison.InvariantCultureIgnoreCase)) return StatusLevelTypes.Warning;
+            if (string.Equals(value, "Info", StringComparison.InvariantCultureIgnoreCase)) return StatusLevelTypes.Info;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StatusLevelTypes value.");
         }
     }

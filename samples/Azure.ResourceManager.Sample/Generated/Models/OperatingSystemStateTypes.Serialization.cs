@@ -13,15 +13,15 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this OperatingSystemStateTypes value) => value switch
         {
-            OperatingSystemStateTypes.Generalized => "Generalized",
             OperatingSystemStateTypes.Specialized => "Specialized",
+            OperatingSystemStateTypes.Generalized => "Generalized",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown OperatingSystemStateTypes value.")
         };
 
         public static OperatingSystemStateTypes ToOperatingSystemStateTypes(this string value)
         {
-            if (string.Equals(value, "Generalized", StringComparison.InvariantCultureIgnoreCase)) return OperatingSystemStateTypes.Generalized;
             if (string.Equals(value, "Specialized", StringComparison.InvariantCultureIgnoreCase)) return OperatingSystemStateTypes.Specialized;
+            if (string.Equals(value, "Generalized", StringComparison.InvariantCultureIgnoreCase)) return OperatingSystemStateTypes.Generalized;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown OperatingSystemStateTypes value.");
         }
     }

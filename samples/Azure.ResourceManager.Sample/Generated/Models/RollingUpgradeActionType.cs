@@ -10,9 +10,9 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The last action performed on the rolling upgrade. </summary>
     public enum RollingUpgradeActionType
     {
-        /// <summary> Start. </summary>
-        Start,
         /// <summary> Cancel. </summary>
-        Cancel
+        Cancel,
+        /// <summary> Start. </summary>
+        Start
     }
 }

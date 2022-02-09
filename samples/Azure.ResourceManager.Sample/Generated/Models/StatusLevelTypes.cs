@@ -10,11 +10,11 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The level code. </summary>
     public enum StatusLevelTypes
     {
-        /// <summary> Info. </summary>
-        Info,
+        /// <summary> Error. </summary>
+        Error,
         /// <summary> Warning. </summary>
         Warning,
-        /// <summary> Error. </summary>
-        Error
+        /// <summary> Info. </summary>
+        Info
     }
 }

@@ -13,17 +13,17 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this UpgradeMode value) => value switch
         {
-            UpgradeMode.Automatic => "Automatic",
-            UpgradeMode.Manual => "Manual",
             UpgradeMode.Rolling => "Rolling",
+            UpgradeMode.Manual => "Manual",
+            UpgradeMode.Automatic => "Automatic",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UpgradeMode value.")
         };
 
         public static UpgradeMode ToUpgradeMode(this string value)
         {
-            if (string.Equals(value, "Automatic", StringComparison.InvariantCultureIgnoreCase)) return UpgradeMode.Automatic;
-            if (string.Equals(value, "Manual", StringComparison.InvariantCultureIgnoreCase)) return UpgradeMode.Manual;
             if (string.Equals(value, "Rolling", StringComparison.InvariantCultureIgnoreCase)) return UpgradeMode.Rolling;
+            if (string.Equals(value, "Manual", StringComparison.InvariantCultureIgnoreCase)) return UpgradeMode.Manual;
+            if (string.Equals(value, "Automatic", StringComparison.InvariantCultureIgnoreCase)) return UpgradeMode.Automatic;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UpgradeMode value.");
         }
     }

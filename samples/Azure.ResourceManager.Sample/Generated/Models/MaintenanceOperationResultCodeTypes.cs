@@ -10,13 +10,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The Last Maintenance Operation Result Code. </summary>
     public enum MaintenanceOperationResultCodeTypes
     {
-        /// <summary> None. </summary>
-        None,
-        /// <summary> RetryLater. </summary>
-        RetryLater,
+        /// <summary> MaintenanceCompleted. </summary>
+        MaintenanceCompleted,
         /// <summary> MaintenanceAborted. </summary>
         MaintenanceAborted,
-        /// <summary> MaintenanceCompleted. </summary>
-        MaintenanceCompleted
+        /// <summary> RetryLater. </summary>
+        RetryLater,
+        /// <summary> None. </summary>
+        None
     }
 }

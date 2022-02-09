@@ -13,19 +13,19 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this IntervalInMins value) => value switch
         {
-            IntervalInMins.ThreeMins => "ThreeMins",
-            IntervalInMins.FiveMins => "FiveMins",
-            IntervalInMins.ThirtyMins => "ThirtyMins",
             IntervalInMins.SixtyMins => "SixtyMins",
+            IntervalInMins.ThirtyMins => "ThirtyMins",
+            IntervalInMins.FiveMins => "FiveMins",
+            IntervalInMins.ThreeMins => "ThreeMins",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown IntervalInMins value.")
         };
 
         public static IntervalInMins ToIntervalInMins(this string value)
         {
-            if (string.Equals(value, "ThreeMins", StringComparison.InvariantCultureIgnoreCase)) return IntervalInMins.ThreeMins;
-            if (string.Equals(value, "FiveMins", StringComparison.InvariantCultureIgnoreCase)) return IntervalInMins.FiveMins;
-            if (string.Equals(value, "ThirtyMins", StringComparison.InvariantCultureIgnoreCase)) return IntervalInMins.ThirtyMins;
             if (string.Equals(value, "SixtyMins", StringComparison.InvariantCultureIgnoreCase)) return IntervalInMins.SixtyMins;
+            if (string.Equals(value, "ThirtyMins", StringComparison.InvariantCultureIgnoreCase)) return IntervalInMins.ThirtyMins;
+            if (string.Equals(value, "FiveMins", StringComparison.InvariantCultureIgnoreCase)) return IntervalInMins.FiveMins;
+            if (string.Equals(value, "ThreeMins", StringComparison.InvariantCultureIgnoreCase)) return IntervalInMins.ThreeMins;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown IntervalInMins value.");
         }
     }

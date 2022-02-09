@@ -13,15 +13,15 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this SettingNames value) => value switch
         {
-            SettingNames.AutoLogon => "AutoLogon",
             SettingNames.FirstLogonCommands => "FirstLogonCommands",
+            SettingNames.AutoLogon => "AutoLogon",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SettingNames value.")
         };
 
         public static SettingNames ToSettingNames(this string value)
         {
-            if (string.Equals(value, "AutoLogon", StringComparison.InvariantCultureIgnoreCase)) return SettingNames.AutoLogon;
             if (string.Equals(value, "FirstLogonCommands", StringComparison.InvariantCultureIgnoreCase)) return SettingNames.FirstLogonCommands;
+            if (string.Equals(value, "AutoLogon", StringComparison.InvariantCultureIgnoreCase)) return SettingNames.AutoLogon;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SettingNames value.");
         }
     }

@@ -13,17 +13,17 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this DedicatedHostLicenseTypes value) => value switch
         {
-            DedicatedHostLicenseTypes.None => "None",
-            DedicatedHostLicenseTypes.WindowsServerHybrid => "Windows_Server_Hybrid",
             DedicatedHostLicenseTypes.WindowsServerPerpetual => "Windows_Server_Perpetual",
+            DedicatedHostLicenseTypes.WindowsServerHybrid => "Windows_Server_Hybrid",
+            DedicatedHostLicenseTypes.None => "None",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown DedicatedHostLicenseTypes value.")
         };
 
         public static DedicatedHostLicenseTypes ToDedicatedHostLicenseTypes(this string value)
         {
-            if (string.Equals(value, "None", StringComparison.InvariantCultureIgnoreCase)) return DedicatedHostLicenseTypes.None;
-            if (string.Equals(value, "Windows_Server_Hybrid", StringComparison.InvariantCultureIgnoreCase)) return DedicatedHostLicenseTypes.WindowsServerHybrid;
             if (string.Equals(value, "Windows_Server_Perpetual", StringComparison.InvariantCultureIgnoreCase)) return DedicatedHostLicenseTypes.WindowsServerPerpetual;
+            if (string.Equals(value, "Windows_Server_Hybrid", StringComparison.InvariantCultureIgnoreCase)) return DedicatedHostLicenseTypes.WindowsServerHybrid;
+            if (string.Equals(value, "None", StringComparison.InvariantCultureIgnoreCase)) return DedicatedHostLicenseTypes.None;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown DedicatedHostLicenseTypes value.");
         }
     }

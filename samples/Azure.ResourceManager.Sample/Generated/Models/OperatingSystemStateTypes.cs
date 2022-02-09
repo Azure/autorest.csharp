@@ -10,9 +10,9 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The OS State. </summary>
     public enum OperatingSystemStateTypes
     {
-        /// <summary> Generalized image. Needs to be provisioned during deployment time. </summary>
-        Generalized,
         /// <summary> Specialized image. Contains already provisioned OS Disk. </summary>
-        Specialized
+        Specialized,
+        /// <summary> Generalized image. Needs to be provisioned during deployment time. </summary>
+        Generalized
     }
 }
