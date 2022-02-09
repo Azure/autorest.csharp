@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var field = restClient.Fields.GetFieldByParameter(clientParameter);
                     if (field != null)
                     {
-                        writer.WriteVariableAssignmentWithNullCheck($"{field.Declaration.ActualName}", clientParameter);
+                        writer.WriteVariableAssignmentWithNullCheck($"{field.Name}", clientParameter);
                     }
                 }
 
