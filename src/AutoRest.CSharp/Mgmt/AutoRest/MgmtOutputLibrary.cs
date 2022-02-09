@@ -709,7 +709,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            // check the patch operations in all the operationSets that correspond to a resource. If it only updates the tags, we remove it from the operation set and leave a line of log
+            // check the patch operations in all the operationSets that correspond to a resource. If it only updates the tags, we remove it from the operation set
             foreach (var operationSet in _resourceDataSchemaNameToOperationSets.Values.SelectMany(v => v))
             {
                 // get the Patch operation from this OperationSet

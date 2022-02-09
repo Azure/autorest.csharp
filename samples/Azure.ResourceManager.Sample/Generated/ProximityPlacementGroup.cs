@@ -15,7 +15,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -174,62 +173,6 @@ namespace Azure.ResourceManager.Sample
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Update
-        /// <summary> Update a proximity placement group. </summary>
-        /// <param name="parameters"> Parameters supplied to the Update Proximity Placement Group operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<ProximityPlacementGroup>> UpdateAsync(ProximityPlacementGroupUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroup.Update");
-            scope.Start();
-            try
-            {
-                var response = await _proximityPlacementGroupRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Update
-        /// <summary> Update a proximity placement group. </summary>
-        /// <param name="parameters"> Parameters supplied to the Update Proximity Placement Group operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ProximityPlacementGroup> Update(ProximityPlacementGroupUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroup.Update");
-            scope.Start();
-            try
-            {
-                var response = _proximityPlacementGroupRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
