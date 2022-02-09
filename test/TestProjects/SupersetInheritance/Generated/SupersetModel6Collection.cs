@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using SupersetInheritance.Models;
 
 namespace SupersetInheritance
 {
@@ -61,7 +60,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel6CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel6SName, SupersetModel6Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<SupersetModel6>> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel6SName, SupersetModel6Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel6SName, nameof(supersetModel6SName));
             if (parameters == null)
@@ -74,7 +73,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _supersetModel6RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetModel6CreateOrUpdateOperation(Client, response);
+                var operation = new SupersetInheritanceArmOperation<SupersetModel6>(Response.FromValue(new SupersetModel6(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,7 +94,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel6CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string supersetModel6SName, SupersetModel6Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SupersetModel6> CreateOrUpdate(bool waitForCompletion, string supersetModel6SName, SupersetModel6Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel6SName, nameof(supersetModel6SName));
             if (parameters == null)
@@ -108,7 +107,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _supersetModel6RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel6SName, parameters, cancellationToken);
-                var operation = new SupersetModel6CreateOrUpdateOperation(Client, response);
+                var operation = new SupersetInheritanceArmOperation<SupersetModel6>(Response.FromValue(new SupersetModel6(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
