@@ -14,7 +14,7 @@ using MgmtRenameRules.Models;
 namespace MgmtRenameRules
 {
     /// <summary> A class representing the VirtualMachineScaleSetVm data model. </summary>
-    public partial class VirtualMachineScaleSetVmData : TrackedResource
+    public partial class VirtualMachineScaleSetVmData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVmData. </summary>
         /// <param name="location"> The location. </param>
