@@ -138,14 +138,14 @@ namespace MgmtNonStringPathVariable
         /// <summary> Delete an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FakeDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("Fake.Delete");
             scope.Start();
             try
             {
                 var response = await _fakeRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeDeleteOperation(response);
+                var operation = new MgmtNonStringPathVariableArmOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -163,14 +163,14 @@ namespace MgmtNonStringPathVariable
         /// <summary> Delete an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FakeDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("Fake.Delete");
             scope.Start();
             try
             {
                 var response = _fakeRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new FakeDeleteOperation(response);
+                var operation = new MgmtNonStringPathVariableArmOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -190,7 +190,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="options"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public async virtual Task<FakeUpdateOperation> UpdateAsync(bool waitForCompletion, FakeUpdateOptions options, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<Fake>> UpdateAsync(bool waitForCompletion, FakeUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (options == null)
             {
@@ -202,7 +202,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = await _fakeRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response);
+                var operation = new MgmtNonStringPathVariableArmOperation<Fake>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -222,7 +222,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="options"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public virtual FakeUpdateOperation Update(bool waitForCompletion, FakeUpdateOptions options, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Fake> Update(bool waitForCompletion, FakeUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (options == null)
             {
@@ -234,7 +234,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = _fakeRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken);
-                var operation = new FakeUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response);
+                var operation = new MgmtNonStringPathVariableArmOperation<Fake>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
