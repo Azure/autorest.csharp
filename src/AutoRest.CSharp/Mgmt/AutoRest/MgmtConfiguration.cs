@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 var hasIgnoreReason = root.TryGetProperty(nameof(IgnoreReason), out var ignoreReason);
 
-                return new TestModelerConfiguration(ignoreReason: hasIgnoreReason ? ignoreReason: null);
+                return new TestModelerConfiguration(ignoreReason: hasIgnoreReason ? ignoreReason : null);
             }
 
             internal static TestModelerConfiguration? GetConfiguration(IPluginCommunication autoRest)
@@ -119,7 +119,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? resourceModelRequiresType = default,
             JsonElement? resourceModelRequiresName = default,
             JsonElement? singletonRequiresKeyword = default,
-            TestModelerConfiguration? testmodeler = default)
+            TestModelerConfiguration? testmodeler = default,
+            JsonElement? operationIdMappings = default)
         {
             RequestPathToParent = !IsValidJsonElement(requestPathToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToParent.ToString());
             RequestPathToResourceName = !IsValidJsonElement(requestPathToResourceName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToResourceName.ToString());
@@ -157,6 +158,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
             DoesSingletonRequiresKeyword = !IsValidJsonElement(singletonRequiresKeyword) ? false : Convert.ToBoolean(singletonRequiresKeyword.ToString());
             TestModeler = testmodeler;
+            OperationIdMappings = !IsValidJsonElement(operationIdMappings)
+                ? new Dictionary<string, IReadOnlyDictionary<string, string>>()
+                : JsonSerializer.Deserialize<Dictionary<string, IReadOnlyDictionary<string, string>>>(operationIdMappings.ToString());
         }
 
         public MgmtDebugConfiguration MgmtDebug { get; }
@@ -185,6 +189,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyList<string> RequestPathIsNonResource { get; }
         public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
         public IReadOnlyList<string> ListException { get; }
+        public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
 
         public bool IsArmCore { get; }
         public TestModelerConfiguration? TestModeler { get; }
@@ -210,7 +215,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
                 resourceModelRequiresName: autoRest.GetValue<JsonElement?>("resource-model-requires-name").GetAwaiter().GetResult(),
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
-                testmodeler: TestModelerConfiguration.GetConfiguration(autoRest));
+                testmodeler: TestModelerConfiguration.GetConfiguration(autoRest),
+                operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -241,6 +247,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 TestModeler.Write(writer, nameof(TestModeler));
             }
+            WriteNonEmptySettings(writer, nameof(OperationIdMappings), OperationIdMappings);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -281,6 +288,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(DoesResourceModelRequireName), out var resourceModelRequiresName);
             root.TryGetProperty(nameof(DoesSingletonRequiresKeyword), out var singletonRequiresKeyword);
             root.TryGetProperty(nameof(TestModeler), out var testModelerRoot);
+            root.TryGetProperty(nameof(OperationIdMappings), out var operationIdMappings);
 
             return new MgmtConfiguration(
                 operationGroupsToOmit: operationGroupList,
@@ -301,7 +309,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 resourceModelRequiresType: resourceModelRequiresType,
                 resourceModelRequiresName: resourceModelRequiresName,
                 singletonRequiresKeyword: singletonRequiresKeyword,
-                testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot));
+                testmodeler: TestModelerConfiguration.LoadConfiguration(testModelerRoot),
+                operationIdMappings: operationIdMappings);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)
@@ -363,6 +372,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
 
                 writer.WriteEndArray();
+            }
+        }
+
+        private static void WriteNonEmptySettings(
+            Utf8JsonWriter writer,
+            string settingName,
+            IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> settings)
+        {
+            if (settings.Count() > 0)
+            {
+                writer.WriteStartObject(settingName);
+                foreach (var keyval in settings)
+                {
+                    WriteNonEmptySettings(writer, keyval.Key, keyval.Value);
+                }
+
+                writer.WriteEndObject();
             }
         }
     }

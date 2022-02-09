@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
@@ -62,7 +61,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="encryptionScopeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public async virtual Task<EncryptionScopeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<EncryptionScope>> CreateOrUpdateAsync(bool waitForCompletion, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
             if (encryptionScope == null)
@@ -75,7 +74,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _encryptionScopeRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
-                var operation = new EncryptionScopeCreateOrUpdateOperation(Client, response);
+                var operation = new StorageArmOperation<EncryptionScope>(Response.FromValue(new EncryptionScope(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -98,7 +97,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="encryptionScopeName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public virtual EncryptionScopeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<EncryptionScope> CreateOrUpdate(bool waitForCompletion, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(encryptionScopeName, nameof(encryptionScopeName));
             if (encryptionScope == null)
@@ -111,7 +110,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _encryptionScopeRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken);
-                var operation = new EncryptionScopeCreateOrUpdateOperation(Client, response);
+                var operation = new StorageArmOperation<EncryptionScope>(Response.FromValue(new EncryptionScope(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

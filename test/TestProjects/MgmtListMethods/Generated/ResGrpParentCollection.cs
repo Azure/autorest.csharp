@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -63,7 +62,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResGrpParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ResGrpParent>> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
             if (parameters == null)
@@ -76,7 +75,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _resGrpParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResGrpParentCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<ResGrpParent>(Response.FromValue(new ResGrpParent(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -99,7 +98,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResGrpParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ResGrpParent> CreateOrUpdate(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
             if (parameters == null)
@@ -112,7 +111,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _resGrpParentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken);
-                var operation = new ResGrpParentCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<ResGrpParent>(Response.FromValue(new ResGrpParent(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

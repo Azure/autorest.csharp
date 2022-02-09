@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using SingletonResource.Models;
 
 namespace SingletonResource
 {
@@ -140,7 +139,7 @@ namespace SingletonResource
         /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SingletonResourceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<SingletonResource>> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -152,7 +151,7 @@ namespace SingletonResource
             try
             {
                 var response = await _singletonResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonResourceCreateOrUpdateOperation(Client, response);
+                var operation = new SingletonResourceArmOperation<SingletonResource>(Response.FromValue(new SingletonResource(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -173,7 +172,7 @@ namespace SingletonResource
         /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual SingletonResourceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SingletonResource> CreateOrUpdate(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -185,7 +184,7 @@ namespace SingletonResource
             try
             {
                 var response = _singletonResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
-                var operation = new SingletonResourceCreateOrUpdateOperation(Client, response);
+                var operation = new SingletonResourceArmOperation<SingletonResource>(Response.FromValue(new SingletonResource(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -99,6 +99,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             DecorateOperationSets();
         }
 
+        public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
+
+        public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
+
+
         private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in _allSchemas)
@@ -326,52 +331,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<Resource>? _armResources;
         public IEnumerable<Resource> ArmResources => _armResources ??= EnsureRequestPathToResourcesMap().Values.Select(bag => bag.Resource).Distinct();
 
+        private Dictionary<CSharpType, Resource>? _csharpTypeToResource;
+        public Dictionary<CSharpType, Resource> CsharpTypeToResource => _csharpTypeToResource ??= ArmResources.ToDictionary(resource => resource.Type, resource => resource);
+
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= EnsureRequestPathToResourcesMap().Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();
-
-        public IEnumerable<MgmtLongRunningOperation> LongRunningOperations
-        {
-            get
-            {
-                // TODO -- refactor so that in the future we no longer need to iterate everything to ensure they are initialized
-                // force initialization on resources, collections, etc
-                foreach (var resource in ArmResources)
-                {
-                    _ = resource.ClientOperations;
-                }
-                foreach (var collection in ResourceCollections)
-                {
-                    _ = collection.ClientOperations;
-                }
-                _ = ResourceGroupExtensions.ClientOperations;
-                _ = SubscriptionExtensions.ClientOperations;
-                _ = ManagementGroupExtensions.ClientOperations;
-                _ = TenantExtensions.ClientOperations;
-                return _mgmtLongRunningOperations.Values;
-            }
-        }
-
-        public IEnumerable<NonLongRunningOperation> NonLongRunningOperations
-        {
-            get
-            {
-                // TODO -- refactor so that in the future we no longer need to iterate everything to ensure they are initialized
-                // force initialization on resources, collections, etc
-                foreach (var resource in ArmResources)
-                {
-                    _ = resource.ClientOperations;
-                }
-                foreach (var collection in ResourceCollections)
-                {
-                    _ = collection.ClientOperations;
-                }
-                _ = ResourceGroupExtensions.ClientOperations;
-                _ = SubscriptionExtensions.ClientOperations;
-                _ = ManagementGroupExtensions.ClientOperations;
-                _ = TenantExtensions.ClientOperations;
-                return _mgmtNonLongRunningOperations.Values;
-            }
-        }
 
         private Dictionary<Schema, TypeProvider>? _models;
 
@@ -498,10 +462,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             return EnsureRestClients().TryGetValue(requestPath, out restClients);
         }
-
-        internal MgmtLongRunningOperation GetLongRunningOperation(CSharpType type) => _mgmtLongRunningOperations[type.Name];
-
-        internal NonLongRunningOperation GetNonLongRunningOperation(CSharpType type) => _mgmtNonLongRunningOperations[type.Name];
 
         private Dictionary<string, HashSet<MgmtRestClient>> EnsureRestClients()
         {
@@ -658,30 +618,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _rawRequestPathToResourceData;
-        }
-
-        private Dictionary<string, MgmtLongRunningOperation> _mgmtLongRunningOperations = new();
-
-        public MgmtLongRunningOperation AddLongRunningOperation(Operation operation, Resource? resource, string lroName)
-        {
-            if (_mgmtLongRunningOperations.TryGetValue(lroName, out var longRunningOperation))
-                return longRunningOperation;
-
-            longRunningOperation = new MgmtLongRunningOperation(operation, operation.FindLongRunningOperationInfo(_context), resource, lroName, _context);
-            _mgmtLongRunningOperations.Add(lroName, longRunningOperation);
-            return longRunningOperation;
-        }
-
-        private Dictionary<string, NonLongRunningOperation> _mgmtNonLongRunningOperations = new();
-
-        public NonLongRunningOperation AddNonLongRunningOperation(Operation operation, Resource? resource, string nonLroName)
-        {
-            if (_mgmtNonLongRunningOperations.TryGetValue(nonLroName, out var nonLongRunningOperation))
-                return nonLongRunningOperation;
-
-            nonLongRunningOperation = new NonLongRunningOperation(operation, operation.FindLongRunningOperationInfo(_context), resource, nonLroName, _context);
-            _mgmtNonLongRunningOperations.Add(nonLroName, nonLongRunningOperation);
-            return nonLongRunningOperation;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)

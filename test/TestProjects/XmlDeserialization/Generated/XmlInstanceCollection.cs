@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using XmlDeserialization.Models;
 
 namespace XmlDeserialization
 {
@@ -64,7 +63,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<XmlInstanceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<XmlInstance>> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             if (parameters == null)
@@ -77,7 +76,7 @@ namespace XmlDeserialization
             try
             {
                 var response = await _xmlInstanceXmlDeserializationRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new XmlInstanceCreateOrUpdateOperation(Client, response);
+                var operation = new XmlDeserializationArmOperation<XmlInstance>(Response.FromValue(new XmlInstance(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -101,7 +100,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual XmlInstanceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<XmlInstance> CreateOrUpdate(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             if (parameters == null)
@@ -114,7 +113,7 @@ namespace XmlDeserialization
             try
             {
                 var response = _xmlInstanceXmlDeserializationRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken);
-                var operation = new XmlInstanceCreateOrUpdateOperation(Client, response);
+                var operation = new XmlDeserializationArmOperation<XmlInstance>(Response.FromValue(new XmlInstance(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

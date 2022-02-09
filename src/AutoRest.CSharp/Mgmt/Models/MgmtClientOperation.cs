@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -118,6 +120,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         public CSharpType? OriginalReturnType => _operations.First().OriginalReturnType;
 
         public CSharpType? ListItemType => _operations.First().ListItemType;
+
+        public CSharpType? MgmtReturnType => _operations.First().MgmtReturnType;
+
+        public bool IsFakeLongRunningOperation => _operations.First().IsFakeLongRunningOperation;
+
+        public Schema? FinalResponseSchema => _operations.First().FinalResponseSchema;
 
         private IReadOnlyDictionary<RequestPath, MgmtRestOperation> EnsureOperationMappings()
         {

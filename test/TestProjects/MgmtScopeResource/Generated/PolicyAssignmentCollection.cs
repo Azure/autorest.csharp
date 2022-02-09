@@ -18,7 +18,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
-using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
@@ -54,7 +53,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyAssignmentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<PolicyAssignment>> CreateOrUpdateAsync(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
             if (parameters == null)
@@ -67,7 +66,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _policyAssignmentRestClient.CreateAsync(Id, policyAssignmentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PolicyAssignmentCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtScopeResourceArmOperation<PolicyAssignment>(Response.FromValue(new PolicyAssignment(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -90,7 +89,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyAssignmentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<PolicyAssignment> CreateOrUpdate(bool waitForCompletion, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
             if (parameters == null)
@@ -103,7 +102,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _policyAssignmentRestClient.Create(Id, policyAssignmentName, parameters, cancellationToken);
-                var operation = new PolicyAssignmentCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtScopeResourceArmOperation<PolicyAssignment>(Response.FromValue(new PolicyAssignment(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

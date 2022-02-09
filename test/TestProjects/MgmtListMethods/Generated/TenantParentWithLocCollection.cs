@@ -17,7 +17,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -62,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantParentWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<TenantParentWithLoc>> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentWithLocRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantParentWithLocCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<TenantParentWithLoc>(Response.FromValue(new TenantParentWithLoc(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -98,7 +97,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantParentWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TenantParentWithLoc> CreateOrUpdate(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
             if (parameters == null)
@@ -111,7 +110,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentWithLocRestClient.CreateOrUpdate(Id.Name, tenantParentWithLocName, parameters, cancellationToken);
-                var operation = new TenantParentWithLocCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<TenantParentWithLoc>(Response.FromValue(new TenantParentWithLoc(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

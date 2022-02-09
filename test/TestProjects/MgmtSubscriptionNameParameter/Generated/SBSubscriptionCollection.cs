@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtSubscriptionNameParameter.Models;
 
 namespace MgmtSubscriptionNameParameter
 {
@@ -63,7 +62,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SBSubscriptionCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<SBSubscription>> CreateOrUpdateAsync(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
             if (parameters == null)
@@ -76,7 +75,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = await _sBSubscriptionSubscriptionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SBSubscriptionCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscription>(Response.FromValue(new SBSubscription(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -99,7 +98,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SBSubscriptionCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SBSubscription> CreateOrUpdate(bool waitForCompletion, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
             if (parameters == null)
@@ -112,7 +111,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = _sBSubscriptionSubscriptionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken);
-                var operation = new SBSubscriptionCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscription>(Response.FromValue(new SBSubscription(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

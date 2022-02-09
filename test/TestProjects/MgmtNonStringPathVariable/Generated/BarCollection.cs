@@ -15,7 +15,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtNonStringPathVariable.Models;
 
 namespace MgmtNonStringPathVariable
 {
@@ -59,7 +58,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public async virtual Task<BarCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, int barName, BarData body, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<Bar>> CreateOrUpdateAsync(bool waitForCompletion, int barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
@@ -71,7 +70,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new BarCreateOrUpdateOperation(Client, _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new MgmtNonStringPathVariableArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -93,7 +92,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual BarCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, int barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Bar> CreateOrUpdate(bool waitForCompletion, int barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
@@ -105,7 +104,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
-                var operation = new BarCreateOrUpdateOperation(Client, _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new MgmtNonStringPathVariableArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

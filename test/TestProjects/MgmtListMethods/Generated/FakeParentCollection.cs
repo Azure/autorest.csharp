@@ -17,7 +17,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -62,7 +61,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<FakeParent>> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeParentCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<FakeParent>(Response.FromValue(new FakeParent(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -98,7 +97,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakeParent> CreateOrUpdate(bool waitForCompletion, string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentName, nameof(fakeParentName));
             if (parameters == null)
@@ -111,7 +110,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeParentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentName, parameters, cancellationToken);
-                var operation = new FakeParentCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<FakeParent>(Response.FromValue(new FakeParent(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

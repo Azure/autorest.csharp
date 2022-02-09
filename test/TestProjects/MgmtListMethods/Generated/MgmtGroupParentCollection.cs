@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -63,7 +62,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<MgmtGroupParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<MgmtGroupParent>> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
             if (parameters == null)
@@ -76,7 +75,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _mgmtGroupParentRestClient.CreateOrUpdateAsync(Id.Name, mgmtGroupParentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtGroupParentCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<MgmtGroupParent>(Response.FromValue(new MgmtGroupParent(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -99,7 +98,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual MgmtGroupParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<MgmtGroupParent> CreateOrUpdate(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
             if (parameters == null)
@@ -112,7 +111,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _mgmtGroupParentRestClient.CreateOrUpdate(Id.Name, mgmtGroupParentName, parameters, cancellationToken);
-                var operation = new MgmtGroupParentCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtListMethodsArmOperation<MgmtGroupParent>(Response.FromValue(new MgmtGroupParent(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

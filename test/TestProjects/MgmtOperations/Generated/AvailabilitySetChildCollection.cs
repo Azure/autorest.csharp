@@ -17,7 +17,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
@@ -62,7 +61,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetChildCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<AvailabilitySetChild>> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new AvailabilitySetChildCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtOperationsArmOperation<AvailabilitySetChild>(Response.FromValue(new AvailabilitySetChild(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -98,7 +97,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetChildCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<AvailabilitySetChild> CreateOrUpdate(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
             if (parameters == null)
@@ -111,7 +110,7 @@ namespace MgmtOperations
             try
             {
                 var response = _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken);
-                var operation = new AvailabilitySetChildCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtOperationsArmOperation<AvailabilitySetChild>(Response.FromValue(new AvailabilitySetChild(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

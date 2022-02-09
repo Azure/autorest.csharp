@@ -98,7 +98,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetRequestPath(_context),
                         ContextualPath,
                         operationName,
-                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context),
                         _context),
                     _context,
                     extensionParamToUse);

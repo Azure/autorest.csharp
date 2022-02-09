@@ -141,14 +141,14 @@ namespace MgmtLRO
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FakeDeleteOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("Fake.Delete");
             scope.Start();
             try
             {
                 var response = await _fakeRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeDeleteOperation(response);
+                var operation = new MgmtLROArmOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -167,14 +167,14 @@ namespace MgmtLRO
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FakeDeleteOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("Fake.Delete");
             scope.Start();
             try
             {
                 var response = _fakeRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new FakeDeleteOperation(response);
+                var operation = new MgmtLROArmOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -195,7 +195,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeUpdateOperation> UpdateAsync(bool waitForCompletion, FakeUpdate parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<Fake>> UpdateAsync(bool waitForCompletion, FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -207,7 +207,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _fakeRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtLROArmOperation<Fake>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -228,7 +228,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual FakeUpdateOperation Update(bool waitForCompletion, FakeUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Fake> Update(bool waitForCompletion, FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -240,7 +240,7 @@ namespace MgmtLRO
             try
             {
                 var response = _fakeRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new FakeUpdateOperation(Client, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtLROArmOperation<Fake>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -259,14 +259,14 @@ namespace MgmtLRO
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FakeDoSomethingLROOperation> DoSomethingLROAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<FakePostResult>> DoSomethingLROAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("Fake.DoSomethingLRO");
             scope.Start();
             try
             {
                 var response = await _fakeRestClient.DoSomethingLROAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeDoSomethingLROOperation(_fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateDoSomethingLRORequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtLROArmOperation<FakePostResult>(new FakePostResultOperationSource(), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateDoSomethingLRORequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -285,14 +285,14 @@ namespace MgmtLRO
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FakeDoSomethingLROOperation DoSomethingLRO(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakePostResult> DoSomethingLRO(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("Fake.DoSomethingLRO");
             scope.Start();
             try
             {
                 var response = _fakeRestClient.DoSomethingLRO(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new FakeDoSomethingLROOperation(_fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateDoSomethingLRORequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtLROArmOperation<FakePostResult>(new FakePostResultOperationSource(), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateDoSomethingLRORequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
