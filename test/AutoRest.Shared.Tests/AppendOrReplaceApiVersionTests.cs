@@ -43,6 +43,18 @@ namespace Azure.Core.Tests
         [TestCase("https://xyz.com?API-VERSION=2021-10-01",
                   "https://abc.com?api-version=2021-11-01",
                   "https://xyz.com?API-VERSION=2021-10-01&api-version=2021-11-01")]
+        [TestCase("https://xyz.com?x=1",
+                  "https://abc.com?api-version",
+                  "https://xyz.com?x=1")]
+        [TestCase("https://xyz.com?x=1",
+                  "https://abc.com?api-version&x=1",
+                  "https://xyz.com?x=1")]
+        [TestCase("https://xyz.com?api-version",
+                  "https://abc.com?api-version=2021-11-01",
+                  "https://xyz.com?api-version=2021-11-01")]
+        [TestCase("https://xyz.com?api-version&x=1",
+                  "https://abc.com?api-version=2021-11-01",
+                  "https://xyz.com?api-version=2021-11-01&x=1")]
         public void TestAppendOrReplaceApiVersion(string uriToProcess, string startRequestUriStr, string expectedUri)
         {
             Uri startRequestUri = new Uri(startRequestUriStr);

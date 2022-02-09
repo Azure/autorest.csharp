@@ -124,7 +124,7 @@ namespace Azure.Core
 
         internal static string AppendOrReplaceApiVersion(string uri, string? apiVersion)
         {
-            if (apiVersion != null)
+            if (!string.IsNullOrEmpty(apiVersion))
             {
                 var uriSpan = uri.AsSpan();
                 var apiVersionParamSpan = ApiVersionParam.AsSpan();
@@ -136,18 +136,25 @@ namespace Azure.Core
                 }
                 else
                 {
-                    var lengthToEqualSignAfterApiVersionParam = apiVersionIndex + ApiVersionParam.Length + 1;
-                    ReadOnlySpan<char> remaining = uriSpan.Slice(lengthToEqualSignAfterApiVersionParam);
+                    var lengthToEndOfApiVersionParam = apiVersionIndex + ApiVersionParam.Length;
+                    ReadOnlySpan<char> remaining = uriSpan.Slice(lengthToEndOfApiVersionParam);
+                    bool apiVersionHasEqualSign = false;
+                    if (remaining.IndexOf('=') == 0)
+                    {
+                        remaining = remaining.Slice(1);
+                        lengthToEndOfApiVersionParam += 1;
+                        apiVersionHasEqualSign = true;
+                    }
                     var indexOfFirstSignAfterApiVersion = remaining.IndexOf('&');
-                    ReadOnlySpan<char> uriBeforeApiVersion = uriSpan.Slice(0, lengthToEqualSignAfterApiVersionParam);
+                    ReadOnlySpan<char> uriBeforeApiVersion = uriSpan.Slice(0, lengthToEndOfApiVersionParam);
                     if (indexOfFirstSignAfterApiVersion == -1)
                     {
-                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersion);
+                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersionHasEqualSign ? string.Empty : "=", apiVersion);
                     }
                     else
                     {
-                        ReadOnlySpan<char> uriAfterApiVersion = uriSpan.Slice(indexOfFirstSignAfterApiVersion + lengthToEqualSignAfterApiVersionParam);
-                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersion, uriAfterApiVersion.ToString());
+                        ReadOnlySpan<char> uriAfterApiVersion = uriSpan.Slice(indexOfFirstSignAfterApiVersion + lengthToEndOfApiVersionParam);
+                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersionHasEqualSign ? string.Empty : "=", apiVersion, uriAfterApiVersion.ToString());
                     }
                 }
             }
@@ -163,8 +170,17 @@ namespace Azure.Core
             {
                 return false;
             }
-            startIndex += ApiVersionParam.Length + 1;
+            startIndex += ApiVersionParam.Length;
             ReadOnlySpan<char> remaining = uriSpan.Slice(startIndex);
+            if (remaining.IndexOf('=') == 0)
+            {
+                remaining = remaining.Slice(1);
+                startIndex += 1;
+            }
+            else
+            {
+                return false;
+            }
             int endIndex = remaining.IndexOf('&');
             int length = endIndex == -1 ? uriSpan.Length - startIndex : endIndex;
             apiVersion = uriSpan.Slice(startIndex, length);
