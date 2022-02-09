@@ -11,22 +11,29 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 
-namespace MgmtRenameRules.Models
+namespace MgmtRenameRules
 {
-    /// <summary> The operation to delete the extension. </summary>
-    public partial class VirtualMachineScaleSetExtensionDeleteOperation : Operation
+#pragma warning disable SA1649 // File name should match first type name
+    internal class MgmtRenameRulesArmOperation : ArmOperation
+#pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly OperationInternals _operation;
+        private readonly OperationOrResponseInternals _operation;
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionDeleteOperation for mocking. </summary>
-        protected VirtualMachineScaleSetExtensionDeleteOperation()
+        /// <summary> Initializes a new instance of MgmtRenameRulesArmOperation for mocking. </summary>
+        protected MgmtRenameRulesArmOperation()
         {
         }
 
-        internal VirtualMachineScaleSetExtensionDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal MgmtRenameRulesArmOperation(Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetExtensionDeleteOperation");
+            _operation = new OperationOrResponseInternals(response);
+        }
+
+        internal MgmtRenameRulesArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        {
+            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtRenameRulesArmOperation");
         }
 
         /// <inheritdoc />

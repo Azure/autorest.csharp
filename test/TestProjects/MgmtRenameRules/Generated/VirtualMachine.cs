@@ -144,14 +144,14 @@ namespace MgmtRenameRules
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineDeleteOperation> DeleteAsync(bool waitForCompletion, bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Delete");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineDeleteOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -170,14 +170,14 @@ namespace MgmtRenameRules
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineDeleteOperation Delete(bool waitForCompletion, bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(bool waitForCompletion, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Delete");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
-                var operation = new VirtualMachineDeleteOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, forceDeletion).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -197,7 +197,7 @@ namespace MgmtRenameRules
         /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<VirtualMachineUpdateOperation> UpdateAsync(bool waitForCompletion, VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<VirtualMachine>> UpdateAsync(bool waitForCompletion, VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -209,7 +209,7 @@ namespace MgmtRenameRules
             try
             {
                 var response = await _virtualMachineRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineUpdateOperation(Client, _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachine>(new VirtualMachineOperationSource(Client), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -229,7 +229,7 @@ namespace MgmtRenameRules
         /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual VirtualMachineUpdateOperation Update(bool waitForCompletion, VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<VirtualMachine> Update(bool waitForCompletion, VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -241,7 +241,7 @@ namespace MgmtRenameRules
             try
             {
                 var response = _virtualMachineRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new VirtualMachineUpdateOperation(Client, _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachine>(new VirtualMachineOperationSource(Client), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -261,7 +261,7 @@ namespace MgmtRenameRules
         /// <param name="parameters"> Parameters supplied to the Capture Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<VirtualMachineCaptureOperation> CaptureAsync(bool waitForCompletion, VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<VirtualMachineCaptureResult>> CaptureAsync(bool waitForCompletion, VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -273,7 +273,7 @@ namespace MgmtRenameRules
             try
             {
                 var response = await _virtualMachineRestClient.CaptureAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineCaptureOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCaptureRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachineCaptureResult>(new VirtualMachineCaptureResultOperationSource(), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCaptureRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -293,7 +293,7 @@ namespace MgmtRenameRules
         /// <param name="parameters"> Parameters supplied to the Capture Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual VirtualMachineCaptureOperation Capture(bool waitForCompletion, VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<VirtualMachineCaptureResult> Capture(bool waitForCompletion, VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -305,7 +305,7 @@ namespace MgmtRenameRules
             try
             {
                 var response = _virtualMachineRestClient.Capture(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new VirtualMachineCaptureOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCaptureRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachineCaptureResult>(new VirtualMachineCaptureResultOperationSource(), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateCaptureRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -365,14 +365,14 @@ namespace MgmtRenameRules
         /// <summary> Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineConvertToManagedDisksOperation> ConvertToManagedDisksAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> ConvertToManagedDisksAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.ConvertToManagedDisks");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.ConvertToManagedDisksAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineConvertToManagedDisksOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateConvertToManagedDisksRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateConvertToManagedDisksRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -390,14 +390,14 @@ namespace MgmtRenameRules
         /// <summary> Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineConvertToManagedDisksOperation ConvertToManagedDisks(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation ConvertToManagedDisks(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.ConvertToManagedDisks");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.ConvertToManagedDisks(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineConvertToManagedDisksOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateConvertToManagedDisksRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateConvertToManagedDisksRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -415,14 +415,14 @@ namespace MgmtRenameRules
         /// <summary> Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineDeallocateOperation> DeallocateAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> DeallocateAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Deallocate");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.DeallocateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineDeallocateOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -440,14 +440,14 @@ namespace MgmtRenameRules
         /// <summary> Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineDeallocateOperation Deallocate(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Deallocate(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Deallocate");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.Deallocate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineDeallocateOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -560,14 +560,14 @@ namespace MgmtRenameRules
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachinePowerOffOperation> PowerOffAsync(bool waitForCompletion, bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> PowerOffAsync(bool waitForCompletion, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.PowerOff");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.PowerOffAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachinePowerOffOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -586,14 +586,14 @@ namespace MgmtRenameRules
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachinePowerOffOperation PowerOff(bool waitForCompletion, bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation PowerOff(bool waitForCompletion, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.PowerOff");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.PowerOff(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown, cancellationToken);
-                var operation = new VirtualMachinePowerOffOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, skipShutdown).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -611,14 +611,14 @@ namespace MgmtRenameRules
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineReapplyOperation> ReapplyAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> ReapplyAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Reapply");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.ReapplyAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineReapplyOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReapplyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReapplyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -636,14 +636,14 @@ namespace MgmtRenameRules
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineReapplyOperation Reapply(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Reapply(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Reapply");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.Reapply(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineReapplyOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReapplyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReapplyRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -661,14 +661,14 @@ namespace MgmtRenameRules
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineRestartOperation> RestartAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> RestartAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Restart");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.RestartAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineRestartOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -686,14 +686,14 @@ namespace MgmtRenameRules
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineRestartOperation Restart(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Restart(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Restart");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.Restart(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineRestartOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -711,14 +711,14 @@ namespace MgmtRenameRules
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineStartOperation> StartAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> StartAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Start");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.StartAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineStartOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -736,14 +736,14 @@ namespace MgmtRenameRules
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineStartOperation Start(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Start(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Start");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.Start(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineStartOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -761,14 +761,14 @@ namespace MgmtRenameRules
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineRedeployOperation> RedeployAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> RedeployAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Redeploy");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.RedeployAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineRedeployOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -786,14 +786,14 @@ namespace MgmtRenameRules
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineRedeployOperation Redeploy(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Redeploy(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Redeploy");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.Redeploy(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineRedeployOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -812,14 +812,14 @@ namespace MgmtRenameRules
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineReimageOperation> ReimageAsync(bool waitForCompletion, VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> ReimageAsync(bool waitForCompletion, VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Reimage");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.ReimageAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineReimageOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -838,14 +838,14 @@ namespace MgmtRenameRules
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineReimageOperation Reimage(bool waitForCompletion, VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Reimage(bool waitForCompletion, VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.Reimage");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.Reimage(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new VirtualMachineReimageOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -907,14 +907,14 @@ namespace MgmtRenameRules
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachinePerformMaintenanceOperation> PerformMaintenanceAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> PerformMaintenanceAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.PerformMaintenance");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.PerformMaintenanceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachinePerformMaintenanceOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -932,14 +932,14 @@ namespace MgmtRenameRules
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachinePerformMaintenanceOperation PerformMaintenance(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation PerformMaintenance(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.PerformMaintenance");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.PerformMaintenance(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachinePerformMaintenanceOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -999,14 +999,14 @@ namespace MgmtRenameRules
         /// <summary> Assess patches on the VM. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineAssessPatchesOperation> AssessPatchesAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<VirtualMachineAssessPatchesResult>> AssessPatchesAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.AssessPatches");
             scope.Start();
             try
             {
                 var response = await _virtualMachineRestClient.AssessPatchesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineAssessPatchesOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateAssessPatchesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachineAssessPatchesResult>(new VirtualMachineAssessPatchesResultOperationSource(), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateAssessPatchesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -1024,14 +1024,14 @@ namespace MgmtRenameRules
         /// <summary> Assess patches on the VM. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineAssessPatchesOperation AssessPatches(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<VirtualMachineAssessPatchesResult> AssessPatches(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineClientDiagnostics.CreateScope("VirtualMachine.AssessPatches");
             scope.Start();
             try
             {
                 var response = _virtualMachineRestClient.AssessPatches(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineAssessPatchesOperation(_virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateAssessPatchesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachineAssessPatchesResult>(new VirtualMachineAssessPatchesResultOperationSource(), _virtualMachineClientDiagnostics, Pipeline, _virtualMachineRestClient.CreateAssessPatchesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

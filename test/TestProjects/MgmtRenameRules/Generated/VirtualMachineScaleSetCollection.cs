@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtRenameRules.Models;
 
 namespace MgmtRenameRules
 {
@@ -62,7 +61,7 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<VirtualMachineScaleSetCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<VirtualMachineScaleSet>> CreateOrUpdateAsync(bool waitForCompletion, string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
             if (parameters == null)
@@ -75,7 +74,7 @@ namespace MgmtRenameRules
             try
             {
                 var response = await _virtualMachineScaleSetRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(Client, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachineScaleSet>(new VirtualMachineScaleSetOperationSource(Client), _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual VirtualMachineScaleSetCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<VirtualMachineScaleSet> CreateOrUpdate(bool waitForCompletion, string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(vmScaleSetName, nameof(vmScaleSetName));
             if (parameters == null)
@@ -110,7 +109,7 @@ namespace MgmtRenameRules
             try
             {
                 var response = _virtualMachineScaleSetRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken);
-                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(Client, _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters).Request, response);
+                var operation = new MgmtRenameRulesArmOperation<VirtualMachineScaleSet>(new VirtualMachineScaleSetOperationSource(Client), _virtualMachineScaleSetClientDiagnostics, Pipeline, _virtualMachineScaleSetRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, vmScaleSetName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
