@@ -14,7 +14,7 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing the Zone data model. </summary>
-    public partial class ZoneData : TrackedResource
+    public partial class ZoneData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ZoneData. </summary>
         /// <param name="location"> The location. </param>

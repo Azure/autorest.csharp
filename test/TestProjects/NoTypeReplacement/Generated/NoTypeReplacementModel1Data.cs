@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace NoTypeReplacement
 {
     /// <summary> A class representing the NoTypeReplacementModel1 data model. </summary>
-    public partial class NoTypeReplacementModel1Data : Resource
+    public partial class NoTypeReplacementModel1Data : ResourceData
     {
         /// <summary> Initializes a new instance of NoTypeReplacementModel1Data. </summary>
         public NoTypeReplacementModel1Data()

@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtExtensionCommonRestOperation.Models;
 
 namespace MgmtExtensionCommonRestOperation
 {
@@ -62,7 +61,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
-        public async virtual Task<TypeTwoCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<TypeTwo>> CreateOrUpdateAsync(bool waitForCompletion, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
             if (typeTwo == null)
@@ -75,7 +74,7 @@ namespace MgmtExtensionCommonRestOperation
             try
             {
                 var response = await _typeTwoCommonRestClient.CreateOrUpdateTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken).ConfigureAwait(false);
-                var operation = new TypeTwoCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeTwo>(Response.FromValue(new TypeTwo(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,7 +96,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
-        public virtual TypeTwoCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TypeTwo> CreateOrUpdate(bool waitForCompletion, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
             if (typeTwo == null)
@@ -110,7 +109,7 @@ namespace MgmtExtensionCommonRestOperation
             try
             {
                 var response = _typeTwoCommonRestClient.CreateOrUpdateTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, typeTwo, cancellationToken);
-                var operation = new TypeTwoCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeTwo>(Response.FromValue(new TypeTwo(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

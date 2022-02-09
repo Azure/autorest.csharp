@@ -13,7 +13,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtOperations.Models
 {
     /// <summary> Response for GetConnectionSharedKey API service call. </summary>
-    public partial class ConnectionSharedKey : TrackedResource
+    public partial class ConnectionSharedKey : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ConnectionSharedKey. </summary>
         /// <param name="location"> The location. </param>

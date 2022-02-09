@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteWaitForCompletionVariants(writer, operation);
                     writer.Line();
 
-                    WriteCreateResult(writer, operation, responseVariable, pagingResponse, interfaceType);
+                    writer.WriteCreateResult(operation, responseVariable, pagingResponse, interfaceType);
 
                     if (pagingResponse != null)
                     {
@@ -191,69 +191,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationInheritDoc();
             writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(pollingInterval, cancellationToken);");
             writer.Line();
-        }
-
-        protected virtual void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, CSharpType? interfaceType)
-        {
-            if (operation.ResultType != null)
-            {
-                using (writer.Scope($"{operation.ResultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
-                {
-                    WriteCreateResultImpl(false, writer, operation, responseVariable, pagingResponse);
-                }
-                writer.Line();
-
-                using (writer.Scope($"async {new CSharpType(typeof(ValueTask<>), operation.ResultType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
-                {
-                    WriteCreateResultImpl(true, writer, operation, responseVariable, pagingResponse);
-                }
-            }
-        }
-
-        protected void WriteCreateResultImpl(bool async, CodeWriter writer, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, Action<CodeWriter, CodeWriterDelegate>? valueCallback = null)
-        {
-            // default value callback, just write a return statement
-            valueCallback ??= (w, v) => w.Line($"return {v};");
-
-            if (operation.ResultSerialization != null)
-            {
-                if (pagingResponse != null)
-                {
-                    var itemPropertyName = pagingResponse.ItemProperty.Declaration.Name;
-                    var nextLinkPropertyName = pagingResponse.NextLinkProperty?.Declaration.Name;
-
-                    writer.Line($"{pagingResponse.ResponseType} firstPageResult;");
-                    writer.WriteDeserializationForMethods(
-                        operation.ResultSerialization,
-                        async: async,
-                        (w, v) => w.Line($"firstPageResult = {v};"),
-                        responseVariable);
-
-                    writer.Line($"{pagingResponse.PageType} firstPage = {typeof(Page)}.FromValues(firstPageResult.{itemPropertyName}, firstPageResult.{nextLinkPropertyName}, {responseVariable});");
-                    writer.Line();
-
-                    valueCallback(writer, w => w.Append($"{typeof(PageableHelpers)}.CreateAsyncEnumerable(_ => Task.FromResult(firstPage), (nextLink, _) => GetNextPage(nextLink, cancellationToken))"));
-                }
-                else
-                {
-                    writer.WriteDeserializationForMethods(
-                        operation.ResultSerialization,
-                        async: async,
-                        valueCallback,
-                        responseVariable);
-                }
-            }
-            else
-            {
-                if (async)
-                {
-                    valueCallback(writer, w => w.Append($"await new {typeof(ValueTask<Response>)}({responseVariable}).ConfigureAwait(false)"));
-                }
-                else
-                {
-                    valueCallback(writer, w => w.Append($"{responseVariable}"));
-                }
-            }
         }
     }
 }

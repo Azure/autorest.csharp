@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace SingletonResource
 {
     /// <summary> A class representing the Car data model. </summary>
-    public partial class CarData : Resource
+    public partial class CarData : ResourceData
     {
         /// <summary> Initializes a new instance of CarData. </summary>
         public CarData()
