@@ -710,6 +710,23 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // check the patch operations in all the operationSets that correspond to a resource. If it only updates the tags, we remove it from the operation set and leave a line of log
+            foreach (var operationSet in _resourceDataSchemaNameToOperationSets.Values.SelectMany(v => v))
+            {
+                // get the Patch operation from this OperationSet
+                var operation = operationSet.FindOperation(HttpMethod.Patch);
+                if (operation is null)
+                    continue;
+
+                var bodySchema = operation.GetBodyParameter()?.Schema;
+                if (bodySchema is null)
+                    continue;
+
+                if (bodySchema.IsTagsOnly())
+                {
+                    // remove this operation from this operation set
+                    operationSet.Remove(operation);
+                }
+            }
         }
 
         private void CategorizeOperationGroups()

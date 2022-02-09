@@ -56,5 +56,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // we found nothing! just whatever on the first slot
             return operationSet.First();
         }
+
+        public static Operation? FindOperation(this OperationSet operationSet, HttpMethod method)
+        {
+            return operationSet.FirstOrDefault(operation => operation.GetHttpMethod() == method);
+        }
     }
 }

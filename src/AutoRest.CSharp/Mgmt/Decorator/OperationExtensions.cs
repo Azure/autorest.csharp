@@ -203,6 +203,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return operation.GetHttpRequest()!.Method;
         }
 
+        public static RequestParameter? GetBodyParameter(this Operation operation)
+        {
+            var serviceRequest = operation.GetServiceRequest();
+            return serviceRequest?.Parameters.FirstOrDefault(parameter => parameter.In == ParameterLocation.Body);
+        }
+
+        public static ServiceRequest? GetServiceRequest(this Operation operation)
+        {
+            return operation.Requests.FirstOrDefault();
+        }
+
         public static ServiceResponse? GetServiceResponse(this Operation operation, StatusCodes code = StatusCodes._200)
         {
             return operation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(code));

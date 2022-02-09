@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             // before we are finding any operations, we need to ensure this operation set has a GET request.
-            if (FindOperation(set, HttpMethod.Get) is null)
+            if (set.FindOperation(HttpMethod.Get) is null)
                 return false;
 
             // try put operation to get the resource name
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             resourceName = null;
 
-            var operation = FindOperation(set, method);
+            var operation = set.FindOperation(method);
             if (operation is null)
                 return false;
             // find the response with code 200
@@ -108,61 +108,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             // we need to verify this schema has ID, type and name so that this is a resource model
-            if (!CheckSchemaIsResourceModel(schema, config))
+            if (!schema.IsResourceModel(config))
                 return false;
 
             resourceName = schema.Name;
             return true;
-        }
-
-        private static Operation? FindOperation(this OperationSet set, HttpMethod method)
-        {
-            foreach (var operation in set)
-            {
-                var request = operation.GetHttpRequest();
-                if (request?.Method == method)
-                    return operation;
-            }
-
-            return null;
-        }
-
-        private static bool CheckSchemaIsResourceModel(Schema schema, MgmtConfiguration config)
-        {
-            if (schema is not ObjectSchema objSchema)
-                return false;
-
-            // union all the property on myself and all the properties from my parents
-            var allProperties = objSchema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties)
-                .Concat(objSchema.Properties);
-            bool idPropertyFound = false;
-            bool typePropertyFound = !config.DoesResourceModelRequireType;
-            bool namePropertyFound = !config.DoesResourceModelRequireName;
-
-            foreach (var property in allProperties)
-            {
-                // check if this property is flattened from lower level, we should only consider first level properties in this model
-                // therefore if flattenedNames is not empty, this property is flattened, we skip this property
-                if (property.FlattenedNames.Any())
-                    continue;
-                switch (property.SerializedName)
-                {
-                    case "id":
-                        if (property.Schema.Type == AllSchemaTypes.String)
-                            idPropertyFound = true;
-                        continue;
-                    case "type":
-                        if (property.Schema.Type == AllSchemaTypes.String)
-                            typePropertyFound = true;
-                        continue;
-                    case "name":
-                        if (property.Schema.Type == AllSchemaTypes.String)
-                            namePropertyFound = true;
-                        continue;
-                }
-            }
-
-            return idPropertyFound && typePropertyFound && namePropertyFound;
         }
     }
 }
