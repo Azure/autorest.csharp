@@ -104,9 +104,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-        private void UpdatePatchParameterNames()
+        private Dictionary<string, Schema> UpdatePatchParameterNames()
         {
             Dictionary<Schema, Dictionary<HttpMethod, int>> usageCounts = new Dictionary<Schema, Dictionary<HttpMethod, int>>();
+            Dictionary<string, Schema> updatedModels = new Dictionary<string, Schema>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
@@ -165,13 +166,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         var operationSet = _rawRequestPathToOperationSets[requestPath];
                         var resourceDataModelName = _resourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
                         var resourceData = _resourceModels.FirstOrDefault(kv => kv.Key.Name == resourceDataModelName.Key);
-                        var resourceDataName = resourceData.Value.Declaration.Name;
-
+                        var resourceDataName = resourceData.Value is not null ? resourceData.Value.Declaration.Name : operationGroup.Key.LastWordToSingular();
+                        updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
                         bodyParam.Schema.Language.Default.Name = $"{resourceDataName.Substring(0, resourceDataName.Length - 4)}UpdateOptions";
                         bodyParam.Language.Default.Name = "options";
                     }
                 }
             }
+            return updatedModels;
         }
 
         private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
@@ -229,21 +231,23 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     _resourceModels.Add(schema, model);
                     _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
                 }
-            }
-
-            //this is where we update
-            UpdatePatchParameterNames();
-
-            // next construct the rest of the models
-            foreach (var schema in _allSchemas)
-            {
-                if (!_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
+                else
                 {
                     var model = BuildModel(schema);
                     _models.Add(schema, model);
                     _nameToTypeProvider.Add(schema.Name, model);
                 }
+            }
 
+            //this is where we update
+            var updatedModels = UpdatePatchParameterNames();
+            foreach (var (oldName, schema) in updatedModels)
+            {
+                _models.Remove(schema);
+                _nameToTypeProvider.Remove(oldName);
+                var model = BuildModel(schema);
+                _models.Add(schema, model);
+                _nameToTypeProvider.Add(schema.Name, model);
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
