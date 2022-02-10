@@ -18,8 +18,5 @@
     "VM": "Vm",
     "VMs": "Vms",
     "VMScaleSet": "VmScaleSet"
-  },
-  "MgmtDebug": {
-    "ShowRequestPath": true
   }
 }

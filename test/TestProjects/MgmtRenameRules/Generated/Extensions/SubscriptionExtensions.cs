@@ -28,10 +28,11 @@ namespace MgmtRenameRules
             );
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachines_ListByLocation
-        /// <summary> Gets all the virtual machines under the specified subscription for the specified location. </summary>
+        /// <summary>
+        /// Gets all the virtual machines under the specified subscription for the specified location.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines
+        /// Operation Id: VirtualMachines_ListByLocation
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -45,10 +46,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).GetVirtualMachinesByLocationAsync(location, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachines_ListByLocation
-        /// <summary> Gets all the virtual machines under the specified subscription for the specified location. </summary>
+        /// <summary>
+        /// Gets all the virtual machines under the specified subscription for the specified location.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines
+        /// Operation Id: VirtualMachines_ListByLocation
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -62,10 +64,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).GetVirtualMachinesByLocation(location, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachines_ListAll
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <summary>
+        /// Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
+        /// Operation Id: VirtualMachines_ListAll
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -75,10 +78,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).GetVirtualMachinesAsync(statusOnly, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachines_ListAll
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <summary>
+        /// Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
+        /// Operation Id: VirtualMachines_ListAll
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -88,10 +92,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).GetVirtualMachines(statusOnly, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/images
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Images_List
-        /// <summary> Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images. </summary>
+        /// <summary>
+        /// Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/images
+        /// Operation Id: Images_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
@@ -100,10 +105,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).GetImagesAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/images
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Images_List
-        /// <summary> Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images. </summary>
+        /// <summary>
+        /// Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/images
+        /// Operation Id: Images_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
@@ -112,10 +118,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).GetImages(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineScaleSets_ListAll
-        /// <summary> Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets. </summary>
+        /// <summary>
+        /// Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets
+        /// Operation Id: VirtualMachineScaleSets_ListAll
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSet" /> that may take multiple service requests to iterate over. </returns>
@@ -124,10 +131,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).GetVirtualMachineScaleSetsAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineScaleSets_ListAll
-        /// <summary> Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets. </summary>
+        /// <summary>
+        /// Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets
+        /// Operation Id: VirtualMachineScaleSets_ListAll
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSet" /> that may take multiple service requests to iterate over. </returns>
@@ -136,10 +144,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).GetVirtualMachineScaleSets(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: LogAnalytics_ExportRequestRateByInterval
-        /// <summary> Export logs that show Api requests made by this subscription in the given time window to show throttling activities. </summary>
+        /// <summary>
+        /// Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval
+        /// Operation Id: LogAnalytics_ExportRequestRateByInterval
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -158,10 +167,11 @@ namespace MgmtRenameRules
             return await GetExtensionClient(subscription).ExportRequestRateByIntervalLogAnalyticAsync(waitForCompletion, location, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: LogAnalytics_ExportRequestRateByInterval
-        /// <summary> Export logs that show Api requests made by this subscription in the given time window to show throttling activities. </summary>
+        /// <summary>
+        /// Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval
+        /// Operation Id: LogAnalytics_ExportRequestRateByInterval
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -180,10 +190,11 @@ namespace MgmtRenameRules
             return GetExtensionClient(subscription).ExportRequestRateByIntervalLogAnalytic(waitForCompletion, location, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: LogAnalytics_ExportThrottledRequests
-        /// <summary> Export logs that show total throttled Api requests for this subscription in the given time window. </summary>
+        /// <summary>
+        /// Export logs that show total throttled Api requests for this subscription in the given time window.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests
+        /// Operation Id: LogAnalytics_ExportThrottledRequests
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -202,10 +213,11 @@ namespace MgmtRenameRules
             return await GetExtensionClient(subscription).ExportThrottledRequestsLogAnalyticAsync(waitForCompletion, location, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: LogAnalytics_ExportThrottledRequests
-        /// <summary> Export logs that show total throttled Api requests for this subscription in the given time window. </summary>
+        /// <summary>
+        /// Export logs that show total throttled Api requests for this subscription in the given time window.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests
+        /// Operation Id: LogAnalytics_ExportThrottledRequests
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
