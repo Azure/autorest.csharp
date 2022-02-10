@@ -11,6 +11,4 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/MgmtSubscriptionNameParameter.json
 namespace: MgmtSubscriptionNameParameter
-mgmt-debug:
-  show-request-path: true
 ```

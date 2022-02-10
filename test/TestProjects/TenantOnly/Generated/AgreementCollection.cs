@@ -50,10 +50,11 @@ namespace TenantOnly
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, BillingAccount.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: Agreements_Get
-        /// <summary> Gets an agreement by ID. </summary>
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -79,10 +80,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: Agreements_Get
-        /// <summary> Gets an agreement by ID. </summary>
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -108,10 +110,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: Agreements_List
-        /// <summary> Gets an agreement by ID. </summary>
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements
+        /// Operation Id: Agreements_List
+        /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Agreement" /> that may take multiple service requests to iterate over. </returns>
@@ -135,10 +138,11 @@ namespace TenantOnly
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: Agreements_List
-        /// <summary> Gets an agreement by ID. </summary>
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements
+        /// Operation Id: Agreements_List
+        /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Agreement" /> that may take multiple service requests to iterate over. </returns>
@@ -162,10 +166,11 @@ namespace TenantOnly
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: Agreements_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -189,10 +194,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: Agreements_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -216,10 +222,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: Agreements_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -245,10 +252,11 @@ namespace TenantOnly
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
-        /// ContextualPath: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
-        /// OperationId: Agreements_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

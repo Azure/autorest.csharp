@@ -11,6 +11,4 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/SingletonResource.json
 namespace: SingletonResource
-mgmt-debug:
-  show-request-path: true
 ```

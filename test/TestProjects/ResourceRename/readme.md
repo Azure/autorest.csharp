@@ -16,8 +16,6 @@ payload-flattening-threshold: 2
 modelerfour:
   lenient-model-deduplication: true
 
-mgmt-debug:
-  show-request-path: true
 directive:
   - rename-model:
       from: SshPublicKeyResource
