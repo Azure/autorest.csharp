@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             // otherwise we need to expand them (the resource type is not a constant)
             // first we get all the segment that is not a constant
             var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
-            foreach (var segment in resourceType.Where(segment => segment.IsReference))
+            foreach (var segment in resourceType.Where(segment => segment.IsReference && !segment.Reference.Type.IsFrameworkType))
             {
                 var type = segment.Reference.Type.Implementation;
                 switch (type)

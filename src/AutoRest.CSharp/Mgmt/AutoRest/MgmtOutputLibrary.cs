@@ -164,10 +164,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         RequestPath requestPath = GetRequestPath(operationGroup, operation);
                         var operationSet = _rawRequestPathToOperationSets[requestPath];
                         var resourceDataModelName = _resourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
-                        var resourceData = _resourceModels.FirstOrDefault(kv => kv.Key.Name == resourceDataModelName.Key);
-                        var resourceDataName = resourceData.Value is not null ? resourceData.Value.Declaration.Name : operationGroup.Key.LastWordToSingular();
+                        var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                         updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                        bodyParam.Schema.Language.Default.Name = $"{resourceDataName.Substring(0, resourceDataName.Length - 4)}UpdateOptions";
+                        bodyParam.Schema.Language.Default.Name = $"{name}UpdateOptions";
                         bodyParam.Language.Default.Name = "options";
                     }
                 }
@@ -586,7 +585,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     foreach (var resourcePath in resourcePaths)
                     {
                         var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);
-                        var resource = new Resource(resourceOperations, EnsureResourceDefaultName(resourceDataSchemaName, resourceOperations.Keys.First(), resourcePath), resourceType, resourceData, _context);
+                        var resource = new Resource(resourceOperations, GetResourceName(resourceDataSchemaName, resourceOperations.Keys.First(), resourcePath), resourceType, resourceData, _context);
                         var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource, _context);
                         resource.ResourceCollection = collection;
 
@@ -608,7 +607,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
-        private string EnsureResourceDefaultName(string candidateName, OperationSet operationSet, RequestPath requestPath)
+        private string GetResourceName(string candidateName, OperationSet operationSet, RequestPath requestPath)
         {
             // read configuration to see if we could get a configuration for this resource
             var resourceType = requestPath.GetResourceType(_mgmtConfiguration);
@@ -626,7 +625,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return rqPath.Count % 2 == 0 && rqPath.GetResourceType(_mgmtConfiguration).Equals(resourceType);
             });
 
-            var isById = operationSet.IsById(_context);
+            var isById = requestPath.IsById;
             int countOfSameResourceDataName = resourcesWithSameName.Count();
             int countOfSameResourceTypeName = resourcesWithSameType.Count();
             if (!isById)
