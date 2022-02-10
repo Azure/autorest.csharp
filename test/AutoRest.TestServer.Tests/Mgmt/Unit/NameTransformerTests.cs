@@ -2,17 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.Unit
 {
-    internal class CodeModelExtensionTests
+    internal class NameTransformerTests
     {
         private Dictionary<string, string> renameRules;
 
         [OneTimeSetUp]
-        public void ApplyRenameRules()
+        public void SetRenameRules()
         {
             renameRules = new Dictionary<string, string>
             {
@@ -55,7 +55,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase("SomethingVPNIP", "SomethingVpnIP")]
         public void EnsureNameCaseTest(string name, string expected)
         {
-            var result = name.EnsureNameCase(renameRules);
+            var transformer = new NameTransformer(renameRules);
+            var result = transformer.EnsureNameCase(name);
             Assert.AreEqual(expected, result);
         }
     }
