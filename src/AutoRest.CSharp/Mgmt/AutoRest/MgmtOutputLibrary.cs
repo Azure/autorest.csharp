@@ -36,11 +36,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private Dictionary<string, HashSet<MgmtRestClient>>? _rawRequestPathToRestClient;
 
-        /// <summary>
-        /// This is a map from raw request path to the corresponding <see cref="ResourceData"/>
-        /// This must be initialized before other maps
-        /// </summary>
-        private IDictionary<string, ResourceData>? _rawRequestPathToResourceData;
+        private readonly CachedDictionary<string, ResourceData> _rawRequestPathToResourceData;
+        private readonly CachedDictionary<string, HashSet<OperationSet>> _resourceDataSchemaNameToOperationSets;
 
         /// <summary>
         /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResouColl"/>
@@ -52,7 +49,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// considering of the extension resources, one resource name might correspond to multiple operation sets
         /// This must be initialized before other maps
         /// </summary>
-        private Dictionary<string, HashSet<OperationSet>> _resourceDataSchemaNameToOperationSets;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
@@ -80,7 +76,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _codeModel = codeModel;
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
-            _resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
@@ -97,8 +92,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // Categorize the operation group with their operation paths
             CategorizeOperationGroups();
 
-            // Decorate the operation sets to see if it corresponds to a resource
-            DecorateOperationSets();
+            _resourceDataSchemaNameToOperationSets = new CachedDictionary<string, HashSet<OperationSet>>(DecorateOperationSets);
+            _rawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRawRequestPathToResourceData);
         }
 
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
@@ -106,7 +101,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<string, Schema> UpdatePatchParameterNames()
         {
-            Dictionary<Schema, Dictionary<HttpMethod, int>> usageCounts = new Dictionary<Schema, Dictionary<HttpMethod, int>>();
+            Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
             Dictionary<string, Schema> updatedModels = new Dictionary<string, Schema>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
@@ -118,22 +113,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (httpRequest is null)
                             continue;
 
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body);
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
                         if (bodyParam is null)
                             continue;
 
-                        if (!usageCounts.TryGetValue(bodyParam.Schema, out var counts))
-                        {
-                            counts = new Dictionary<HttpMethod, int>();
-                            usageCounts.Add(bodyParam.Schema, counts);
-                        }
+                        IncrementCount(usageCounts, bodyParam);
+                    }
+                    foreach (var response in operation.Responses)
+                    {
+                        var responseSchema = response.ResponseSchema;
+                        if (responseSchema is null)
+                            continue;
 
-                        if (!counts.TryGetValue(httpRequest.Method, out var count))
-                        {
-                            counts.Add(httpRequest.Method, 0);
-                        }
-
-                        counts[httpRequest.Method]++;
+                        IncrementCount(usageCounts, responseSchema);
                     }
                 }
             }
@@ -155,10 +147,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (bodyParam is null)
                             continue;
 
-                        if (!usageCounts.TryGetValue(bodyParam.Schema, out var counts))
+                        if (!usageCounts.TryGetValue(bodyParam.Schema, out var count))
                             continue;
 
-                        if (counts.Count != 1 || !counts.TryGetValue(httpRequest.Method, out var count) || count != 1)
+                        if (count != 1)
                             continue;
 
                         RequestPath requestPath = GetRequestPath(operationGroup, operation);
@@ -176,6 +168,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
             return updatedModels;
+        }
+
+        private static void IncrementCount(Dictionary<Schema, int> usageCounts, Schema schema)
+        {
+            if (usageCounts.ContainsKey(schema))
+            {
+                usageCounts[schema]++;
+            }
+            else
+            {
+                usageCounts.Add(schema, 1);
+            }
         }
 
         private RequestPath GetRequestPath(OperationGroup operationGroup, Operation operation)
@@ -419,7 +423,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private IEnumerable<ResourceData>? _resourceDatas;
-        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= EnsureRequestPathToResourceData().Values.Distinct();
+        public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= _rawRequestPathToResourceData.Values.Distinct();
 
         private IEnumerable<MgmtRestClient>? _restClients;
         public IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients().Values.SelectMany(v => v).Distinct();
@@ -495,7 +499,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public bool TryGetResourceData(string requestPath, [MaybeNullWhen(false)] out ResourceData resourceData)
         {
-            return EnsureRequestPathToResourceData().TryGetValue(requestPath, out resourceData);
+            return _rawRequestPathToResourceData.TryGetValue(requestPath, out resourceData);
         }
 
         public bool TryGetArmResource(RequestPath requestPath, [MaybeNullWhen(false)] out Resource resource)
@@ -735,14 +739,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _childOperations;
         }
 
-        private IDictionary<string, ResourceData> EnsureRequestPathToResourceData()
+        private Dictionary<string, ResourceData> EnsureRawRequestPathToResourceData()
         {
-            if (_rawRequestPathToResourceData != null)
-            {
-                return _rawRequestPathToResourceData;
-            }
-
-            _rawRequestPathToResourceData = new Dictionary<string, ResourceData>();
+            var rawRequestPathToResourceData = new Dictionary<string, ResourceData>();
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
@@ -752,15 +751,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var resourceData = (ResourceData)entry.Value;
                     foreach (var operationSet in operationSets)
                     {
-                        if (!_rawRequestPathToResourceData.ContainsKey(operationSet.RequestPath))
+                        if (!rawRequestPathToResourceData.ContainsKey(operationSet.RequestPath))
                         {
-                            _rawRequestPathToResourceData.Add(operationSet.RequestPath, resourceData);
+                            rawRequestPathToResourceData.Add(operationSet.RequestPath, resourceData);
                         }
                     }
                 }
             }
 
-            return _rawRequestPathToResourceData;
+            return rawRequestPathToResourceData;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)
@@ -835,22 +834,24 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void DecorateOperationSets()
+        private Dictionary<string, HashSet<OperationSet>> DecorateOperationSets()
         {
+            var resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             foreach (var operationSet in _rawRequestPathToOperationSets.Values)
             {
                 if (operationSet.TryGetResourceDataSchemaName(_mgmtConfiguration, out var resourceDataSchemaName))
                 {
                     // if this operation set corresponds to a SDK resource, we add it to the map
                     HashSet<OperationSet>? result;
-                    if (!_resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchemaName, out result))
+                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchemaName, out result))
                     {
                         result = new HashSet<OperationSet>();
-                        _resourceDataSchemaNameToOperationSets.Add(resourceDataSchemaName, result);
+                        resourceDataSchemaNameToOperationSets.Add(resourceDataSchemaName, result);
                     }
                     result.Add(operationSet);
                 }
             }
+            return resourceDataSchemaNameToOperationSets;
         }
 
         private void CategorizeOperationGroups()
