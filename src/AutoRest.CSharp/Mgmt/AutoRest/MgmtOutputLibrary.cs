@@ -14,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -90,9 +91,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             //this is where we change property types to use csharp standards like BlobUri of type string becomes BlobUri of type Uri
             UpdateFrameworkTypes(_allSchemas);
 
-            //this is where we update
-            UpdateParameterNames();
-
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
 
@@ -106,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-        private void UpdateParameterNames()
+        private void UpdatePatchParameterNames()
         {
             Dictionary<Schema, Dictionary<HttpMethod, int>> usageCounts = new Dictionary<Schema, Dictionary<HttpMethod, int>>();
             foreach (var operationGroup in _codeModel.OperationGroups)
@@ -162,7 +160,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (counts.Count != 1 || !counts.TryGetValue(httpRequest.Method, out var count) || count != 1)
                             continue;
 
-                        bodyParam.Schema.Language.Default.Name = $"{operationGroup.Key.LastWordToSingular()}UpdateOptions";
+                        var pathSegments = RestClientBuilder.BuildRequestPathSegments(operation, request, httpRequest, new MgmtRestClientBuilder(operationGroup, _context));
+                        var requestPath = RequestPath.FromPathSegments(pathSegments, operation.GetHttpPath());
+                        var operationSet = _rawRequestPathToOperationSets[requestPath];
+                        var resourceDataModelName = _resourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
+                        var resourceData = _resourceModels.FirstOrDefault(kv => kv.Key.Name == resourceDataModelName.Key);
+                        var resourceDataName = resourceData.Value.Declaration.Name;
+
+                        bodyParam.Schema.Language.Default.Name = $"{resourceDataName.Substring(0, resourceDataName.Length - 4)}UpdateOptions";
                         bodyParam.Language.Default.Name = "options";
                     }
                 }
@@ -215,7 +220,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _models = new Dictionary<Schema, TypeProvider>();
             _resourceModels = new Dictionary<Schema, TypeProvider>();
 
-            // first, construct models and resource data models
+            // first, construct resource data models
             foreach (var schema in _allSchemas)
             {
                 if (_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
@@ -224,7 +229,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     _resourceModels.Add(schema, model);
                     _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
                 }
-                else
+            }
+
+            //this is where we update
+            UpdatePatchParameterNames();
+
+            // next construct the rest of the models
+            foreach (var schema in _allSchemas)
+            {
+                if (!_resourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
                 {
                     var model = BuildModel(schema);
                     _models.Add(schema, model);

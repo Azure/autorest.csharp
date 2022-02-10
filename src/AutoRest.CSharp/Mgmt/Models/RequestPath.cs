@@ -79,13 +79,23 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="method"></param>
         public RequestPath(RestClientMethod method)
+            : this(method.Request.PathSegments, method.Operation.GetHttpPath())
+        {
+        }
+
+        public static RequestPath FromPathSegments(PathSegment[] pathSegments, string httpPath)
+        {
+            return new RequestPath(pathSegments, httpPath);
+        }
+
+        private RequestPath(PathSegment[] pathSegments, string httpPath)
         {
             int index = 0;
-            var segments = method.Request.PathSegments
+            var segments = pathSegments
                 .SelectMany(pathSegment => ParsePathSegment(pathSegment, ref index))
                 .ToList();
             _segments = CheckByIdPath(segments);
-            SerializedPath = method.Operation.GetHttpPath();
+            SerializedPath = httpPath;
         }
 
         private static IReadOnlyList<Segment> CheckByIdPath(IReadOnlyList<Segment> segments)
