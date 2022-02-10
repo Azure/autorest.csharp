@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtListMethods
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -20,16 +20,58 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            Client.TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocs in the ResGrpParentWithAncestorWithNonResChWithLoc. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocs and their operations over a ResGrpParentWithAncestorWithNonResChWithLoc. </returns>
+        public virtual ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs()
+        {
+            return new ResGrpParentWithAncestorWithNonResChWithLocCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChes in the ResGrpParentWithAncestorWithNonResCh. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChes and their operations over a ResGrpParentWithAncestorWithNonResCh. </returns>
+        public virtual ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes()
+        {
+            return new ResGrpParentWithAncestorWithNonResChCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocs in the ResGrpParentWithAncestorWithLoc. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocs and their operations over a ResGrpParentWithAncestorWithLoc. </returns>
+        public virtual ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs()
+        {
+            return new ResGrpParentWithAncestorWithLocCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithAncestors in the ResGrpParentWithAncestor. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithAncestors and their operations over a ResGrpParentWithAncestor. </returns>
+        public virtual ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors()
+        {
+            return new ResGrpParentWithAncestorCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParentWithNonResChes in the ResGrpParentWithNonResCh. </summary>
+        /// <returns> An object representing collection of ResGrpParentWithNonResChes and their operations over a ResGrpParentWithNonResCh. </returns>
+        public virtual ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes()
+        {
+            return new ResGrpParentWithNonResChCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of ResGrpParents in the ResGrpParent. </summary>
+        /// <returns> An object representing collection of ResGrpParents and their operations over a ResGrpParent. </returns>
+        public virtual ResGrpParentCollection GetResGrpParents()
+        {
+            return new ResGrpParentCollection(Client, Id);
         }
     }
 }

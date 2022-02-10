@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -33,11 +33,12 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="TenantTestCollection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal TenantTestCollection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal TenantTestCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _tenantTestClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantTest.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(TenantTest.ResourceType, out string tenantTestApiVersion);
+            Client.TryGetApiVersion(TenantTest.ResourceType, out string tenantTestApiVersion);
             _tenantTestRestClient = new TenantTestsRestOperations(_tenantTestClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantTestApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -50,8 +51,6 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
         /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
         /// ContextualPath: /
         /// OperationId: TenantTests_Create
@@ -62,42 +61,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantTestCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = _tenantTestRestClient.Create(tenantTestName, parameters, cancellationToken);
-                var operation = new TenantTestCreateOrUpdateOperation(ArmClient, _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// ContextualPath: /
-        /// OperationId: TenantTests_Create
-        /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantTestCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<TenantTest>> CreateOrUpdateAsync(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             if (parameters == null)
@@ -110,7 +74,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantTestRestClient.CreateAsync(tenantTestName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantTestCreateOrUpdateOperation(ArmClient, _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new MgmtListMethodsArmOperation<TenantTest>(new TenantTestOperationSource(Client), _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -124,25 +88,31 @@ namespace MgmtListMethods
 
         /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
         /// ContextualPath: /
-        /// OperationId: TenantTests_Get
-        /// <summary> Gets a billing account by its ID. </summary>
+        /// OperationId: TenantTests_Create
+        /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public virtual Response<TenantTest> Get(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<TenantTest> CreateOrUpdate(bool waitForCompletion, string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.Get");
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _tenantTestRestClient.Get(tenantTestName, expand, cancellationToken);
-                if (response.Value == null)
-                    throw _tenantTestClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
+                var response = _tenantTestRestClient.Create(tenantTestName, parameters, cancellationToken);
+                var operation = new MgmtListMethodsArmOperation<TenantTest>(new TenantTestOperationSource(Client), _tenantTestClientDiagnostics, Pipeline, _tenantTestRestClient.CreateCreateRequest(tenantTestName, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -171,7 +141,7 @@ namespace MgmtListMethods
                 var response = await _tenantTestRestClient.GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _tenantTestClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,146 +150,33 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public virtual Response<TenantTest> GetIfExists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
-
-            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = _tenantTestRestClient.Get(tenantTestName, expand, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<TenantTest>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public async virtual Task<Response<TenantTest>> GetIfExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
-
-            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _tenantTestRestClient.GetAsync(tenantTestName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<TenantTest>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantTest(ArmClient, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public virtual Response<bool> Exists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
-
-            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.Exists");
-            scope.Start();
-            try
-            {
-                var response = GetIfExists(tenantTestName, expand, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
-
-            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.Exists");
-            scope.Start();
-            try
-            {
-                var response = await GetIfExistsAsync(tenantTestName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
         /// ContextualPath: /
-        /// OperationId: TenantTests_List
-        /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
+        /// OperationId: TenantTests_Get
+        /// <summary> Gets a billing account by its ID. </summary>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TenantTest" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<TenantTest> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public virtual Response<TenantTest> Get(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<TenantTest> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.Get");
+            scope.Start();
+            try
             {
-                using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantTestRestClient.List(optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = _tenantTestRestClient.Get(tenantTestName, expand, cancellationToken);
+                if (response.Value == null)
+                    throw _tenantTestClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
             }
-            Page<TenantTest> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantTestRestClient.ListNextPage(nextLink, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// RequestPath: /providers/Microsoft.Tenant/tenantTests
@@ -338,7 +195,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantTestRestClient.ListAsync(optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -353,7 +210,7 @@ namespace MgmtListMethods
                 try
                 {
                     var response = await _tenantTestRestClient.ListNextPageAsync(nextLink, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -362,6 +219,160 @@ namespace MgmtListMethods
                 }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests
+        /// ContextualPath: /
+        /// OperationId: TenantTests_List
+        /// <summary> Lists all fakes in a resource group. </summary>
+        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="TenantTest" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<TenantTest> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
+        {
+            Page<TenantTest> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _tenantTestRestClient.List(optionalParam, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<TenantTest> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _tenantTestRestClient.ListNextPage(nextLink, optionalParam, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantTest(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// ContextualPath: /
+        /// OperationId: TenantTests_Get
+        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public async virtual Task<Response<bool>> ExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.Exists");
+            scope.Start();
+            try
+            {
+                var response = await GetIfExistsAsync(tenantTestName, expand: expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// ContextualPath: /
+        /// OperationId: TenantTests_Get
+        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public virtual Response<bool> Exists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.Exists");
+            scope.Start();
+            try
+            {
+                var response = GetIfExists(tenantTestName, expand: expand, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// ContextualPath: /
+        /// OperationId: TenantTests_Get
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public async virtual Task<Response<TenantTest>> GetIfExistsAsync(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _tenantTestRestClient.GetAsync(tenantTestName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<TenantTest>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// ContextualPath: /
+        /// OperationId: TenantTests_Get
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public virtual Response<TenantTest> GetIfExists(string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
+
+            using var scope = _tenantTestClientDiagnostics.CreateScope("TenantTestCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _tenantTestRestClient.Get(tenantTestName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<TenantTest>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantTest(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         IEnumerator<TenantTest> IEnumerable<TenantTest>.GetEnumerator()

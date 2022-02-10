@@ -65,15 +65,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static readonly ConcurrentDictionary<Operation, string> _operationIdCache = new ConcurrentDictionary<Operation, string>();
 
-        private static readonly ConcurrentDictionary<Operation, RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
+        private static readonly ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath>();
 
-        public static RequestPath GetRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath GetRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context, ResourceTypeSegment? hint = null)
         {
-            if (_operationToRequestPathCache.TryGetValue(operation, out var requestPath))
+            if (_operationToRequestPathCache.TryGetValue((operation, hint), out var requestPath))
                 return requestPath;
 
             requestPath = new RequestPath(context.Library.GetRestClientMethod(operation));
-            _operationToRequestPathCache.TryAdd(operation, requestPath);
+            if (hint.HasValue)
+                requestPath = requestPath.ApplyHint(hint.Value);
+
+            _operationToRequestPathCache.TryAdd((operation, hint), requestPath);
             return requestPath;
         }
 
@@ -218,41 +221,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return responseBodyType == resourceData.Type.Name;
         }
 
-        private static ConcurrentDictionary<Operation, Resource?> _operationToResourceCache = new ConcurrentDictionary<Operation, Resource?>();
-        internal static Resource? GetResourceFromResourceType(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        private static ConcurrentDictionary<Operation, IEnumerable<Resource>> _operationToResourceCache = new ConcurrentDictionary<Operation, IEnumerable<Resource>>();
+        internal static IEnumerable<Resource> GetResourceFromResourceType(this Operation operation, BuildContext<MgmtOutputLibrary> context)
         {
-            if (_operationToResourceCache.TryGetValue(operation, out Resource? cacheResult))
+            if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
                 return cacheResult;
 
             var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
             var candidates = context.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
 
-            int candidateCount = candidates.Count();
-
-            Func<Resource?, Resource?> setAndReturn = (result) =>
-            {
-                _operationToResourceCache.TryAdd(operation, result);
-                return result;
-            };
-
-            if (candidateCount == 0)
-                return setAndReturn(null);
-
-            if (candidateCount == 1)
-                return setAndReturn(candidates.First());
-
-            foreach (var candidate in candidates)
-            {
-                if (candidate.IsInOperationMap(operation))
-                    return setAndReturn(candidate);
-            }
-
-            var parentCanddidate = candidates.First().Parent(context).FirstOrDefault();
-
-            if (parentCanddidate is not null && parentCanddidate is Resource)
-                return setAndReturn(parentCanddidate as Resource);
-
-            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
+            return candidates;
         }
     }
 }

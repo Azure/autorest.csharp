@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtHierarchicalNonResource
@@ -12,24 +13,26 @@ namespace MgmtHierarchicalNonResource
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region SharedGallery
-        /// <summary> Gets an object representing a SharedGalleryCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="location"> Resource location. </param>
-        /// <returns> Returns a <see cref="SharedGalleryCollection" /> object. </returns>
-        public static SharedGalleryCollection GetSharedGalleries(this Subscription subscription, string location)
-        {
-            return new SharedGalleryCollection(subscription, location);
-        }
-        #endregion
-
         private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
         {
-            return subscription.GetCachedClient((armClient) =>
+            return subscription.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(armClient, subscription.Id);
+                return new SubscriptionExtensionClient(client, subscription.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of SharedGalleries in the SharedGallery. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> An object representing collection of SharedGalleries and their operations over a SharedGallery. </returns>
+        public static SharedGalleryCollection GetSharedGalleries(this Subscription subscription, string location)
+        {
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+
+            return GetExtensionClient(subscription).GetSharedGalleries(location);
         }
     }
 }

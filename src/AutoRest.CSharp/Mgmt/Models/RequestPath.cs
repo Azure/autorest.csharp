@@ -13,6 +13,8 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -78,8 +80,9 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <param name="method"></param>
         public RequestPath(RestClientMethod method)
         {
+            int index = 0;
             var segments = method.Request.PathSegments
-                .SelectMany(pathSegment => ParsePathSegment(pathSegment))
+                .SelectMany(pathSegment => ParsePathSegment(pathSegment, ref index))
                 .ToList();
             _segments = CheckByIdPath(segments);
             SerializedPath = method.Operation.GetHttpPath();
@@ -198,6 +201,44 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new RequestPath(this._segments.Concat(other._segments));
         }
 
+        public RequestPath ApplyHint(ResourceTypeSegment hint)
+        {
+            if (hint.Count == 0)
+                return this;
+            int hintIndex = 0;
+            List<Segment> newPath = new List<Segment>();
+            int thisIndex = 0;
+            for (; thisIndex < _segments.Count; thisIndex++)
+            {
+                var segment = this[thisIndex];
+                if (segment.IsExpandable)
+                {
+                    newPath.Add(hint[hintIndex]);
+                    hintIndex++;
+                }
+                else
+                {
+                    if (segment.Equals(hint[hintIndex]))
+                    {
+                        hintIndex++;
+                    }
+                    newPath.Add(segment);
+                }
+                if (hintIndex >= hint.Count)
+                {
+                    thisIndex++;
+                    break;
+                }
+            }
+
+            //copy remaining items in this
+            for (; thisIndex < _segments.Count; thisIndex++)
+            {
+                newPath.Add(_segments[thisIndex]);
+            }
+            return new RequestPath(newPath);
+        }
+
         public IEnumerable<RequestPath> Expand(MgmtConfiguration config)
         {
             // we first get the resource type
@@ -216,7 +257,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 switch (type)
                 {
                     case EnumType enumType:
-                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict)));
+                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict, enumType.Type)));
                         break;
                     default:
                         throw new InvalidOperationException($"The resource type {this} contains variables in it, but it is not an enum type, therefore we cannot expand it. Please double check and/or override it in `request-path-to-resource-type` section.");
@@ -257,12 +298,16 @@ namespace AutoRest.CSharp.Mgmt.Models
             return queue.Select(list => new RequestPath(list));
         }
 
-        private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)
+        private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment, ref int segmentIndex)
         {
             // we explicitly skip the `uri` variable in the path (which should be `endpoint`)
-            if (pathSegment.Value.Type.IsFrameworkType &&
-                pathSegment.Value.Type.FrameworkType == typeof(Uri))
+            CSharpType valueType = pathSegment.Value.Type;
+            if (valueType.IsFrameworkType &&
+                valueType.FrameworkType == typeof(Uri))
+            {
+                segmentIndex++;
                 return Enumerable.Empty<Segment>();
+            }
             if (pathSegment.Value.IsConstant)
             {
                 // in this case, we have a constant in this path segment, which might contains slashes
@@ -274,11 +319,18 @@ namespace AutoRest.CSharp.Mgmt.Models
                 // if this is a string type
                 if (type.IsFrameworkType && type.FrameworkType == typeof(string))
                 {
-                    return ((string)value).Split('/', StringSplitOptions.RemoveEmptyEntries).Select(s => new Segment(s));
+                    var pieces = ((string)value).Split('/', StringSplitOptions.RemoveEmptyEntries);
+                    segmentIndex += pieces.Length;
+                    return pieces.Select(s => new Segment(s));
                 }
             }
+
+            segmentIndex++;
+            //for now we only assume expand variables are in the key slot which will be an odd slot
+            CSharpType? expandableType = (segmentIndex % 2 == 0) && !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
+
             // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-            return new Segment(pathSegment.Value, pathSegment.Escape).AsIEnumerable();
+            return new Segment(pathSegment.Value, pathSegment.Escape, expandableType: expandableType).AsIEnumerable();
         }
 
         public int Count => _segments.Count;

@@ -55,8 +55,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IList<Type> GetReferenceClassCollectionInternal(BuildContext<MgmtOutputLibrary> context)
         {
-            return ExternalTypes.Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
-        }
+            return ExternalTypes.Where(t =>
+                !t.Name.Equals("Resource") && //temp while we have both Resource and ResourceData
+                !t.Name.Equals("TrackedResource") && //temp while we have both TrackedResource and TrackedResourceData
+                t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
+    }
 
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
         {

@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the TenantParent data model. </summary>
-    public partial class TenantParentData : TrackedResource
+    public partial class TenantParentData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of TenantParentData. </summary>
         /// <param name="location"> The location. </param>

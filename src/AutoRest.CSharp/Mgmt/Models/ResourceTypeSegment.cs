@@ -158,8 +158,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (Count != other.Count)
                 return false;
 
-            if (this[Count - 1].IsConstant)
-                return this == other;
+            if (this[Count - 1].IsConstant == other[Count - 1].IsConstant)
+                return this.Equals(other);
 
             return DoAllButLastItemMatch(other); //TODO: limit matching to the enum values
         }
@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             for (int i = 0; i < Count - 1; i++)
             {
-                if (this[i] != other[i])
+                if (!this[i].Equals(other[i]))
                     return false;
             }
             return true;

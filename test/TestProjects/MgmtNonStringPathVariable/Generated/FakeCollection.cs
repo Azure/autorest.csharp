@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 using MgmtNonStringPathVariable.Models;
@@ -33,11 +34,12 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> Initializes a new instance of the <see cref="FakeCollection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal FakeCollection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal FakeCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fakeClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", Fake.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
+            Client.TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
             _fakeRestClient = new FakesRestOperations(_fakeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -50,8 +52,6 @@ namespace MgmtNonStringPathVariable
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Fakes_CreateOrUpdate
@@ -61,40 +61,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual FakeCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken);
-                var operation = new FakeCreateOrUpdateOperation(ArmClient, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Fakes_CreateOrUpdate
-        /// <summary> Create or update an fake. </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<Fake>> CreateOrUpdateAsync(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -106,7 +73,7 @@ namespace MgmtNonStringPathVariable
             try
             {
                 var response = await _fakeRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeCreateOrUpdateOperation(ArmClient, _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response);
+                var operation = new MgmtNonStringPathVariableArmOperation<Fake>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -120,21 +87,29 @@ namespace MgmtNonStringPathVariable
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Fakes_Get
-        /// <summary> Retrieves information about an fake. </summary>
+        /// OperationId: Fakes_CreateOrUpdate
+        /// <summary> Create or update an fake. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fake> Get(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<Fake> CreateOrUpdate(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Get");
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
-                if (response.Value == null)
-                    throw _fakeClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
+                var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters, cancellationToken);
+                var operation = new MgmtNonStringPathVariableArmOperation<Fake>(new FakeOperationSource(Client), _fakeClientDiagnostics, Pipeline, _fakeRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, fakeName, parameters).Request, response, OperationFinalStateVia.Location);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -159,7 +134,7 @@ namespace MgmtNonStringPathVariable
                 var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _fakeClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -168,115 +143,29 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fake> GetIfExists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<Fake>(null, response.GetRawResponse());
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Fake>> GetIfExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<Fake>(null, response.GetRawResponse());
-                return Response.FromValue(new Fake(ArmClient, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<bool> Exists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
-            scope.Start();
-            try
-            {
-                var response = GetIfExists(fakeName, expand, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<bool>> ExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
-            scope.Start();
-            try
-            {
-                var response = await GetIfExistsAsync(fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Fakes_List
-        /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
+        /// OperationId: Fakes_Get
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Fake" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Fake> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> Get(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<Fake> FirstPageFunc(int? pageSizeHint)
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Get");
+            scope.Start();
+            try
             {
-                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _fakeRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
+                if (response.Value == null)
+                    throw _fakeClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes
@@ -295,7 +184,7 @@ namespace MgmtNonStringPathVariable
                 try
                 {
                     var response = await _fakeRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Fake(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -304,6 +193,129 @@ namespace MgmtNonStringPathVariable
                 }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Fakes_List
+        /// <summary> Lists all fakes in a resource group. </summary>
+        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="Fake" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Fake> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
+        {
+            Page<Fake> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _fakeRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, optionalParam, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Fakes_Get
+        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<bool>> ExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
+            scope.Start();
+            try
+            {
+                var response = await GetIfExistsAsync(fakeName, expand: expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Fakes_Get
+        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<bool> Exists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
+            scope.Start();
+            try
+            {
+                var response = GetIfExists(fakeName, expand: expand, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Fakes_Get
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<Fake>> GetIfExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<Fake>(null, response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Fakes_Get
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Fake> GetIfExists(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<Fake>(null, response.GetRawResponse());
+                return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         IEnumerator<Fake> IEnumerable<Fake>.GetEnumerator()

@@ -13,7 +13,7 @@ using MgmtNonStringPathVariable.Models;
 namespace MgmtNonStringPathVariable
 {
     /// <summary> A class representing the Bar data model. </summary>
-    public partial class BarData : TrackedResource
+    public partial class BarData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of BarData. </summary>
         /// <param name="location"> The location. </param>

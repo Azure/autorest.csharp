@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using XmlDeserialization.Models;
 
 namespace XmlDeserialization
 {
@@ -39,21 +37,21 @@ namespace XmlDeserialization
         }
 
         /// <summary> Initializes a new instance of the <see cref = "XmlInstance"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal XmlInstance(ArmClient armClient, XmlInstanceData data) : this(armClient, data.Id)
+        internal XmlInstance(ArmClient client, XmlInstanceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="XmlInstance"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal XmlInstance(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal XmlInstance(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
             _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(_xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -98,7 +96,7 @@ namespace XmlDeserialization
                 var response = await _xmlInstanceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new XmlInstance(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new XmlInstance(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,43 +119,7 @@ namespace XmlDeserialization
                 var response = _xmlInstanceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new XmlInstance(ArmClient, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstance.GetAvailableLocations");
-            scope.Start();
-            try
-            {
-                return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
-        {
-            using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstance.GetAvailableLocations");
-            scope.Start();
-            try
-            {
-                return ListAvailableLocations(ResourceType, cancellationToken);
+                return Response.FromValue(new XmlInstance(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +136,7 @@ namespace XmlDeserialization
         /// <param name="ifMatch"> ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public async virtual Task<XmlInstanceDeleteOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (ifMatch == null)
             {
@@ -186,7 +148,7 @@ namespace XmlDeserialization
             try
             {
                 var response = await _xmlInstanceXmlDeserializationRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new XmlInstanceDeleteOperation(response);
+                var operation = new XmlDeserializationArmOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -206,7 +168,7 @@ namespace XmlDeserialization
         /// <param name="ifMatch"> ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual XmlInstanceDeleteOperation Delete(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (ifMatch == null)
             {
@@ -218,7 +180,7 @@ namespace XmlDeserialization
             try
             {
                 var response = _xmlInstanceXmlDeserializationRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, cancellationToken);
-                var operation = new XmlInstanceDeleteOperation(response);
+                var operation = new XmlDeserializationArmOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;

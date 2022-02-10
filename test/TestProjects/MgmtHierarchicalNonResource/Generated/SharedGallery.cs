@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,21 +42,21 @@ namespace MgmtHierarchicalNonResource
         }
 
         /// <summary> Initializes a new instance of the <see cref = "SharedGallery"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SharedGallery(ArmClient armClient, SharedGalleryData data) : this(armClient, data.Id)
+        internal SharedGallery(ArmClient client, SharedGalleryData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="SharedGallery"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SharedGallery(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SharedGallery(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
+            Client.TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
             _sharedGalleryRestClient = new SharedGalleriesRestOperations(_sharedGalleryClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
             _sharedGalleryImagesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_sharedGalleryImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
@@ -107,7 +106,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw await _sharedGalleryClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -131,43 +130,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw _sharedGalleryClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGallery.GetAvailableLocations");
-            scope.Start();
-            try
-            {
-                return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
-        {
-            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGallery.GetAvailableLocations");
-            scope.Start();
-            try
-            {
-                return ListAvailableLocations(ResourceType, cancellationToken);
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

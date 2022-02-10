@@ -4,45 +4,92 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensions : MgmtTypeProvider
     {
-        protected IEnumerable<Operation> _allOperations;
+        public IEnumerable<Operation> AllRawOperations { get; }
 
-        public MgmtExtensions(IEnumerable<Operation> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context, string defaultName, RequestPath contextualPath)
-            : base(context, resourceName)
+        protected MgmtExtensions(BuildContext<MgmtOutputLibrary> context, MgmtExtensions mgmtExtension)
+            : this(mgmtExtension.AllRawOperations, mgmtExtension.ArmCoreType, context, mgmtExtension.ContextualPath)
+        {
+        }
+
+        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, BuildContext<MgmtOutputLibrary> context, RequestPath contextualPath)
+            : base(context, armCoreType.Name)
         {
             _context = context;
-            _allOperations = allOperations;
-            DefaultName = defaultName;
+            AllRawOperations = allRawOperations;
+            ArmCoreType = armCoreType;
+            DefaultName = context.Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
+            DefaultNamespace = context.Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
+            Description = context.Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
+            ArmCoreNamespace = ArmCoreType.Namespace!;
         }
+
+        protected override ConstructorSignature? EnsureMockingCtor()
+        {
+            return IsArmCore ? null : base.EnsureMockingCtor();
+        }
+
+        public override string BranchIdVariableName => $"{ExtensionParameter.Name}.Id";
+
+        private Parameter? _extensionParameter;
+        public Parameter ExtensionParameter => _extensionParameter ??= EnsureExtensionParameter();
+        private Parameter EnsureExtensionParameter()
+        {
+            return new Parameter(
+                VariableName,
+                $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
+                ArmCoreType,
+                null,
+                false,
+                IsExtensionParameter: true);
+        }
+
+        protected virtual string VariableName => Context.Configuration.MgmtConfiguration.IsArmCore ? "this" : ArmCoreType.Name.ToVariableName();
+
+        public override CSharpType? BaseType => null;
+
+        public override string Description { get; }
+
+        public Type ArmCoreType { get; }
+
+        public string ArmCoreNamespace { get; }
 
         protected override string DefaultName { get; }
 
-        protected virtual RequestPath ContextualPath { get; }
+        protected override string DefaultNamespace { get; }
 
-        protected override string DefaultAccessibility => "public";
+        public virtual RequestPath ContextualPath { get; }
 
         public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
-        public override IEnumerable<MgmtClientOperation> ClientOperations => _clientOperations ??= EnsureClientOperations();
-
-        private IEnumerable<MgmtClientOperation>? _clientOperations;
-        private IEnumerable<MgmtClientOperation> EnsureClientOperations()
+        protected override IEnumerable<FieldDeclaration> EnsureFieldDeclaration()
         {
-            return _allOperations.Select(operation =>
+            yield break;
+        }
+
+        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
+        {
+            var extensionParamToUse = _context.Configuration.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
+            return AllRawOperations.Select(operation =>
             {
                 var operationName = GetOperationName(operation, ResourceName);
-                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together, some of the values are calculated multiple times (here and in writers).
+                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together
+                // some of the values are calculated multiple times (here and in writers).
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -51,10 +98,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation.GetRequestPath(_context),
                         ContextualPath,
                         operationName,
-                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context),
-                        _context));
+                        _context),
+                    _context,
+                    extensionParamToUse);
             });
         }
+
+        public string GetOperationName(Operation operation) => GetOperationName(operation, ResourceName);
 
         protected override string CalculateOperationName(Operation operation, string clientResourceName)
         {
@@ -108,14 +158,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return filteredResources.Single();
 
             return null;
-        }
-
-        private IEnumerable<MgmtRestClient>? _restClients;
-        public override IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
-
-        private IEnumerable<MgmtRestClient> EnsureRestClients()
-        {
-            return ClientOperations.SelectMany(operation => operation.Select(restOperation => restOperation.RestClient)).Distinct();
         }
     }
 }

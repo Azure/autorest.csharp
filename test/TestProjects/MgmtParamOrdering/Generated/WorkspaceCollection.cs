@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
@@ -33,11 +33,12 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Initializes a new instance of the <see cref="WorkspaceCollection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal WorkspaceCollection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal WorkspaceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", Workspace.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(Workspace.ResourceType, out string workspaceApiVersion);
+            Client.TryGetApiVersion(Workspace.ResourceType, out string workspaceApiVersion);
             _workspaceRestClient = new WorkspacesRestOperations(_workspaceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -50,8 +51,6 @@ namespace MgmtParamOrdering
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
         /// OperationId: Workspaces_CreateOrUpdate
@@ -62,42 +61,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual WorkspaceCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = _workspaceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
-                var operation = new WorkspaceCreateOrUpdateOperation(ArmClient, _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Workspaces_CreateOrUpdate
-        /// <summary> Creates or updates a workspace with the specified parameters. </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
-        /// <param name="parameters"> The parameters for creating or updating a machine learning workspace. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<WorkspaceCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<Workspace>> CreateOrUpdateAsync(bool waitForCompletion, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
             if (parameters == null)
@@ -110,7 +74,7 @@ namespace MgmtParamOrdering
             try
             {
                 var response = await _workspaceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new WorkspaceCreateOrUpdateOperation(ArmClient, _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response);
+                var operation = new MgmtParamOrderingArmOperation<Workspace>(new WorkspaceOperationSource(Client), _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -124,24 +88,31 @@ namespace MgmtParamOrdering
 
         /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Workspaces_Get
-        /// <summary> Gets the properties of the specified machine learning workspace. </summary>
+        /// OperationId: Workspaces_CreateOrUpdate
+        /// <summary> Creates or updates a workspace with the specified parameters. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
+        /// <param name="parameters"> The parameters for creating or updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public virtual Response<Workspace> Get(string workspaceName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<Workspace> CreateOrUpdate(bool waitForCompletion, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.Get");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken);
-                if (response.Value == null)
-                    throw _workspaceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Workspace(ArmClient, response.Value), response.GetRawResponse());
+                var response = _workspaceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
+                var operation = new MgmtParamOrderingArmOperation<Workspace>(new WorkspaceOperationSource(Client), _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters).Request, response, OperationFinalStateVia.Location);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -169,7 +140,7 @@ namespace MgmtParamOrdering
                 var response = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _workspaceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Workspace(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -178,23 +149,26 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Workspaces_Get
+        /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public virtual Response<Workspace> GetIfExists(string workspaceName, CancellationToken cancellationToken = default)
+        public virtual Response<Workspace> Get(string workspaceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
 
-            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.Get");
             scope.Start();
             try
             {
-                var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken);
+                var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<Workspace>(null, response.GetRawResponse());
-                return Response.FromValue(new Workspace(ArmClient, response.Value), response.GetRawResponse());
+                    throw _workspaceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -203,55 +177,62 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Workspaces_List
+        /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public async virtual Task<Response<Workspace>> GetIfExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Workspace" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Workspace> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
-
-            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
-            scope.Start();
-            try
+            async Task<Page<Workspace>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<Workspace>(null, response.GetRawResponse());
-                return Response.FromValue(new Workspace(ArmClient, response.Value), response.GetRawResponse());
+                using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _workspaceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Workspaces_List
+        /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
-        public virtual Response<bool> Exists(string workspaceName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Workspace" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Workspace> GetAll(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
-
-            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.Exists");
-            scope.Start();
-            try
+            Page<Workspace> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetIfExists(workspaceName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
+                using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _workspaceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Workspaces_Get
+        /// <summary> Checks to see if the resource exists in azure. </summary>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
@@ -274,56 +255,86 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Workspaces_List
-        /// <summary> Gets the properties of the specified machine learning workspace. </summary>
+        /// OperationId: Workspaces_Get
+        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Workspace" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Workspace> GetAll(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        public virtual Response<bool> Exists(string workspaceName, CancellationToken cancellationToken = default)
         {
-            Page<Workspace> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
+
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.Exists");
+            scope.Start();
+            try
             {
-                using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _workspaceRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(ArmClient, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = GetIfExists(workspaceName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Workspaces_List
-        /// <summary> Gets the properties of the specified machine learning workspace. </summary>
+        /// OperationId: Workspaces_Get
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Workspace" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Workspace> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        public async virtual Task<Response<Workspace>> GetIfExistsAsync(string workspaceName, CancellationToken cancellationToken = default)
         {
-            async Task<Page<Workspace>> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
+
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
+            scope.Start();
+            try
             {
-                using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _workspaceRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Workspace(ArmClient, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<Workspace>(null, response.GetRawResponse());
+                return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
+        /// OperationId: Workspaces_Get
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="workspaceName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="workspaceName"/> is null. </exception>
+        public virtual Response<Workspace> GetIfExists(string workspaceName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(workspaceName, nameof(workspaceName));
+
+            using var scope = _workspaceClientDiagnostics.CreateScope("WorkspaceCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<Workspace>(null, response.GetRawResponse());
+                return Response.FromValue(new Workspace(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         IEnumerator<Workspace> IEnumerable<Workspace>.GetEnumerator()

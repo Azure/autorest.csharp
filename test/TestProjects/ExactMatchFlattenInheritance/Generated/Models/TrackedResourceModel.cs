@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> TrackedResource type. </summary>
-    internal partial class TrackedResourceModel : Resource
+    internal partial class TrackedResourceModel : ResourceData
     {
         /// <summary> Initializes a new instance of TrackedResourceModel. </summary>
         internal TrackedResourceModel()

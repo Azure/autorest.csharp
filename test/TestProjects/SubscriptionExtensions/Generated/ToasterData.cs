@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the Toaster data model. </summary>
-    public partial class ToasterData : TrackedResource
+    public partial class ToasterData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="location"> The location. </param>
