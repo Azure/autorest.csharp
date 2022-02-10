@@ -58,10 +58,11 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Subscription.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_Get
-        /// <summary> Gets a virtual machine extension image. </summary>
+        /// <summary>
+        /// Gets a virtual machine extension image.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -88,10 +89,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_Get
-        /// <summary> Gets a virtual machine extension image. </summary>
+        /// <summary>
+        /// Gets a virtual machine extension image.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -118,10 +120,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_ListTypes
-        /// <summary> Gets a list of virtual machine extension image types. </summary>
+        /// <summary>
+        /// Gets a list of virtual machine extension image types.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
+        /// Operation Id: VirtualMachineExtensionImages_ListTypes
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(CancellationToken cancellationToken = default)
@@ -144,10 +147,11 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_ListTypes
-        /// <summary> Gets a list of virtual machine extension image types. </summary>
+        /// <summary>
+        /// Gets a list of virtual machine extension image types.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
+        /// Operation Id: VirtualMachineExtensionImages_ListTypes
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineExtensionImage> GetAll(CancellationToken cancellationToken = default)
@@ -170,10 +174,11 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_ListVersions
-        /// <summary> Gets a list of virtual machine extension image versions. </summary>
+        /// <summary>
+        /// Gets a list of virtual machine extension image versions.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
+        /// Operation Id: VirtualMachineExtensionImages_ListVersions
+        /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
@@ -204,10 +209,11 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_ListVersions
-        /// <summary> Gets a list of virtual machine extension image versions. </summary>
+        /// <summary>
+        /// Gets a list of virtual machine extension image versions.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
+        /// Operation Id: VirtualMachineExtensionImages_ListVersions
+        /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
@@ -238,10 +244,11 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -266,10 +273,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -294,10 +302,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -324,10 +333,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: VirtualMachineExtensionImages_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// </summary>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

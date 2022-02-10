@@ -19,8 +19,5 @@
   },
   "OverrideOperationName": {
     "ListOrderAtResourceGroupLevel": "GetAll"
-  },
-  "MgmtDebug": {
-    "ShowRequestPath": true
   }
 }

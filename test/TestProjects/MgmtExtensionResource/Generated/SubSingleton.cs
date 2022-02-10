@@ -82,10 +82,11 @@ namespace MgmtExtensionResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default
-        /// OperationId: SubSingletons_Get
-        /// <summary> Singleton that belongs to a subscription. </summary>
+        /// <summary>
+        /// Singleton that belongs to a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default
+        /// Operation Id: SubSingletons_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -105,10 +106,11 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default
-        /// OperationId: SubSingletons_Get
-        /// <summary> Singleton that belongs to a subscription. </summary>
+        /// <summary>
+        /// Singleton that belongs to a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default
+        /// Operation Id: SubSingletons_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubSingleton> Get(CancellationToken cancellationToken = default)
         {
@@ -128,10 +130,11 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default/execute
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default
-        /// OperationId: SubSingletons_Execute
-        /// <summary> Singleton that belongs to a subscription. </summary>
+        /// <summary>
+        /// Singleton that belongs to a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default/execute
+        /// Operation Id: SubSingletons_Execute
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response> ExecuteAsync(CancellationToken cancellationToken = default)
         {
@@ -149,10 +152,11 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default/execute
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default
-        /// OperationId: SubSingletons_Execute
-        /// <summary> Singleton that belongs to a subscription. </summary>
+        /// <summary>
+        /// Singleton that belongs to a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default/execute
+        /// Operation Id: SubSingletons_Execute
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Execute(CancellationToken cancellationToken = default)
         {
