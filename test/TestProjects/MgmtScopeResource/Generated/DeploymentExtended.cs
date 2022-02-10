@@ -345,8 +345,14 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Returns changes that will be made by the deployment if executed at the scope of the resource group.
-        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf, /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf, /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf, /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIf, Deployments_WhatIfAtManagementGroupScope, Deployments_WhatIfAtSubscriptionScope, Deployments_WhatIfAtTenantScope
+        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// Operation Id: Deployments_WhatIf
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// Operation Id: Deployments_WhatIfAtManagementGroupScope
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// Operation Id: Deployments_WhatIfAtSubscriptionScope
+        /// Request Path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// Operation Id: Deployments_WhatIfAtTenantScope
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters to validate. </param>
@@ -409,8 +415,14 @@ namespace MgmtScopeResource
 
         /// <summary>
         /// Returns changes that will be made by the deployment if executed at the scope of the resource group.
-        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf, /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf, /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf, /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-        /// Operation Id: Deployments_WhatIf, Deployments_WhatIfAtManagementGroupScope, Deployments_WhatIfAtSubscriptionScope, Deployments_WhatIfAtTenantScope
+        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// Operation Id: Deployments_WhatIf
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// Operation Id: Deployments_WhatIfAtManagementGroupScope
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// Operation Id: Deployments_WhatIfAtSubscriptionScope
+        /// Request Path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+        /// Operation Id: Deployments_WhatIfAtTenantScope
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters to validate. </param>

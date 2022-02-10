@@ -89,12 +89,11 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private string BuildDescription()
         {
-            var requestPaths = $"Request Path: {string.Join(", ", _operations.Select(operation => operation.RequestPath.SerializedPath))}";
-            var operationIds = $"Operation Id: {string.Join(", ", _operations.Select(operation => operation.OperationId))}";
+            var pathInformation = string.Join('\n', _operations.Select(operation => $"Request Path: {operation.RequestPath.SerializedPath}\nOperation Id: {operation.OperationId}"));
             var descriptionOfOperation = _operations.First().Description;
             if (descriptionOfOperation != null)
-                return $"{descriptionOfOperation}\n{requestPaths}\n{operationIds}";
-            return $"{requestPaths}\n{operationIds}";
+                return $"{descriptionOfOperation}\n{pathInformation}";
+            return $"{pathInformation}";
         }
 
         // TODO -- we need a better way to get this
