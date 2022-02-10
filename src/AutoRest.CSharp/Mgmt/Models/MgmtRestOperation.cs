@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsFakeLongRunningOperation => IsLongRunningOperation && !Operation.IsLongRunning;
 
-        public Parameter[] OverrideParameters { get; } = new Parameter[] { };
+        public Parameter[] OverrideParameters { get; } = Array.Empty<Parameter>();
 
         public OperationFinalStateVia? FinalStateVia { get; }
 

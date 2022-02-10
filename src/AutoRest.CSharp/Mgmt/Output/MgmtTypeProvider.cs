@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public IEnumerable<CSharpType> EnumerableInterfaces => _enumerableInterfaces ??= EnsureGetInterfaces();
         protected virtual IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            return new CSharpType[] { };
+            return Array.Empty<CSharpType>();
         }
 
         public IEnumerable<CSharpType> GetImplementsList()
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: "protected",
-                Parameters: new Parameter[0]);
+                Parameters: Array.Empty<Parameter>());
         }
 
         private ConstructorSignature? _armClientCtor;
