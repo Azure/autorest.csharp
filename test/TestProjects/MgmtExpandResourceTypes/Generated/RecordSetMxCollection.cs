@@ -21,7 +21,7 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
+    /// <summary> A class representing collection of RecordSetMx and their operations over its parent. </summary>
     public partial class RecordSetMxCollection : ArmCollection, IEnumerable<RecordSetMx>, IAsyncEnumerable<RecordSetMx>
     {
         private readonly ClientDiagnostics _recordSetMxRecordSetsClientDiagnostics;

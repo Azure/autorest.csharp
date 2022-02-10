@@ -20,7 +20,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing collection of ChildBody and their operations over its parent. </summary>
+    /// <summary> A class representing collection of TheParentSubParentChild and their operations over its parent. </summary>
     public partial class TheParentSubParentChildCollection : ArmCollection, IEnumerable<TheParentSubParentChild>, IAsyncEnumerable<TheParentSubParentChild>
     {
         private readonly ClientDiagnostics _theParentSubParentChildChildrenClientDiagnostics;
