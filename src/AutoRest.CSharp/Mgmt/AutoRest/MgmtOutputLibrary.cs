@@ -164,10 +164,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         RequestPath requestPath = GetRequestPath(operationGroup, operation);
                         var operationSet = _rawRequestPathToOperationSets[requestPath];
                         var resourceDataModelName = _resourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
-                        var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
-                        updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                        bodyParam.Schema.Language.Default.Name = $"{name}UpdateOptions";
-                        bodyParam.Language.Default.Name = "options";
+                        var name = bodyParam.Schema.Language.Default.Name;
+                        if (resourceDataModelName.Key is not null)
+                        {
+                            name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
+                            updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
+                            bodyParam.Schema.Language.Default.Name = $"{name}UpdateOptions";
+                            bodyParam.Language.Default.Name = "options";
+                        }
                     }
                 }
             }
