@@ -110,12 +110,10 @@ namespace AutoRest.CSharp.Output.Models
 
         public static PathSegment[] BuildRequestPathSegments(Operation operation, ServiceRequest serviceRequest, HttpRequest httpRequest, RestClientBuilder restClientBuilder)
         {
-            var accessibility = operation.Accessibility ?? "public";
-            var requestParameters = operation.Parameters
-                .Concat(serviceRequest.Parameters)
-                .Where(rp => !IsIgnoredHeaderParameter(rp));
-
-            var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters, restClientBuilder);
+            var allParameters = restClientBuilder.GetOperationAllParameters(operation, serviceRequest.Parameters);
+            var methodParameters = restClientBuilder.BuildMethodParameters(allParameters);
+            var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, restClientBuilder.CreateReference(kvp.Key, kvp.Value)));
+            var buildContext = new RequestMethodBuildContext(methodParameters, references);
             BuildRequestParameters(httpRequest, buildContext, out var queryParams, out var headerParams, out var uriParams, out var pathParams);
             return uriParams.Concat(pathParams).ToArray();
         }

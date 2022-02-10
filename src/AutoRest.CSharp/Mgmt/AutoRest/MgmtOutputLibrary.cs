@@ -161,8 +161,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (counts.Count != 1 || !counts.TryGetValue(httpRequest.Method, out var count) || count != 1)
                             continue;
 
-                        var pathSegments = RestClientBuilder.BuildRequestPathSegments(operation, request, httpRequest, new MgmtRestClientBuilder(operationGroup, _context));
-                        var requestPath = RequestPath.FromPathSegments(pathSegments, operation.GetHttpPath());
+                        RequestPath requestPath = GetRequestPath(operationGroup, operation);
                         var operationSet = _rawRequestPathToOperationSets[requestPath];
                         var resourceDataModelName = _resourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
                         var resourceData = _resourceModels.FirstOrDefault(kv => kv.Key.Name == resourceDataModelName.Key);
@@ -174,6 +173,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
             return updatedModels;
+        }
+
+        private RequestPath GetRequestPath(OperationGroup operationGroup, Operation operation)
+        {
+            foreach (var request in operation.Requests)
+            {
+                var httpRequest = request.Protocol.Http as HttpRequest;
+                if (httpRequest is null)
+                    continue;
+
+                var pathSegments = RestClientBuilder.BuildRequestPathSegments(operation, request, httpRequest, new MgmtRestClientBuilder(operationGroup, _context));
+                return RequestPath.FromPathSegments(pathSegments, operation.GetHttpPath());
+            }
+            throw new InvalidOperationException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
         }
 
         private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
@@ -377,12 +390,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtExtensionClient? _managementGroupExtensionClient;
         private MgmtExtensionClient? _subscriptionExtensionClient;
         private MgmtExtensionClient? _resourceGroupExtensionClient;
-        private MgmtExtensionClient? _armResourceExtensionClient;
         public MgmtExtensionClient SubscriptionExtensionsClient => _subscriptionExtensionClient ??= EnsureExtensionsClient(SubscriptionExtensions);
         public MgmtExtensionClient ResourceGroupExtensionsClient => _resourceGroupExtensionClient ??= EnsureExtensionsClient(ResourceGroupExtensions);
         public MgmtExtensionClient TenantExtensionsClient => _tenantExtensionClient ??= EnsureExtensionsClient(TenantExtensions);
         public MgmtExtensionClient ManagementGroupExtensionsClient => _managementGroupExtensionClient ??= EnsureExtensionsClient(ManagementGroupExtensions);
-        public MgmtExtensionClient ArmResourceExtensionsClient => _armResourceExtensionClient ??= EnsureExtensionsClient(ArmResourceExtensions);
 
         private MgmtExtensionClient EnsureExtensionsClient(MgmtExtensions publicExtension) =>
             new MgmtExtensionClient(_context, publicExtension);
@@ -471,8 +482,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return models;
         }
 
-        public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
-
         public ResourceData GetResourceData(string requestPath)
         {
             if (TryGetResourceData(requestPath, out var resourceData))
@@ -481,19 +490,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             throw new InvalidOperationException($"Request path {requestPath} does not correspond to a ResourceData");
         }
 
-        public bool TryGetMethodForMergedOperation(string operationFullName, [MaybeNullWhen(false)] out string methodName) => _mergedOperations.TryGetValue(operationFullName, out methodName);
-
         public bool TryGetResourceData(string requestPath, [MaybeNullWhen(false)] out ResourceData resourceData)
         {
             return EnsureRequestPathToResourceData().TryGetValue(requestPath, out resourceData);
-        }
-
-        public Resource GetArmResource(RequestPath requestPath)
-        {
-            if (TryGetArmResource(requestPath, out var resource))
-                return resource;
-
-            throw new InvalidOperationException($"Cannot get Resource corresponding to {requestPath}");
         }
 
         public bool TryGetArmResource(RequestPath requestPath, [MaybeNullWhen(false)] out Resource resource)
@@ -506,14 +505,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return false;
-        }
-
-        public ResourceCollection? GetResourceCollection(RequestPath requestPath)
-        {
-            if (TryGetResourceCollection(requestPath, out var collection))
-                return collection;
-
-            throw new InvalidOperationException($"Cannot get ResourceCollection corresponding to {requestPath}");
         }
 
         public bool TryGetResourceCollection(RequestPath requestPath, out ResourceCollection? collection)
@@ -575,7 +566,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             _requestPathToResources = new Dictionary<RequestPath, ResourceObjectAssociation>();
 
-            foreach ((var resourceName, var operationSets) in _resourceDataSchemaNameToOperationSets)
+            foreach ((var resourceDataSchemaName, var operationSets) in _resourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach (var resourceOperations in resourceOperationsList)
@@ -595,7 +586,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     foreach (var resourcePath in resourcePaths)
                     {
                         var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);
-                        var resource = new Resource(resourceOperations, resourceName, resourceType, resourceData, _context);
+                        var resource = new Resource(resourceOperations, EnsureResourceDefaultName(resourceDataSchemaName, resourceOperations.Keys.First(), resourcePath), resourceType, resourceData, _context);
                         var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource, _context);
                         resource.ResourceCollection = collection;
 
@@ -605,6 +596,73 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _requestPathToResources;
+        }
+
+        private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
+        {
+            if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
+                return name;
+            if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{resourceType}", out name))
+                return name;
+
+            return null;
+        }
+
+        private string EnsureResourceDefaultName(string candidateName, OperationSet operationSet, RequestPath requestPath)
+        {
+            // read configuration to see if we could get a configuration for this resource
+            var resourceType = requestPath.GetResourceType(_mgmtConfiguration);
+            var defaultNameFromConfig = GetDefaultNameFromConfiguration(operationSet, resourceType);
+            if (defaultNameFromConfig != null)
+                return defaultNameFromConfig;
+
+            var resourcesWithSameName = _resourceDataSchemaNameToOperationSets[candidateName];
+            var resourcesWithSameType = OperationSets.SelectMany(opSet =>
+            {
+                var operation = opSet.Operations.First();
+                return GetRequestPath(opSet[operation], operation).Expand(_mgmtConfiguration);
+            }).Where(rqPath =>
+            {
+                return rqPath.Count % 2 == 0 && rqPath.GetResourceType(_mgmtConfiguration).Equals(resourceType);
+            });
+
+            var isById = operationSet.IsById(_context);
+            int countOfSameResourceDataName = resourcesWithSameName.Count();
+            int countOfSameResourceTypeName = resourcesWithSameType.Count();
+            if (!isById)
+            {
+                // this is a regular resource and the name is unique
+                if (countOfSameResourceDataName == 1)
+                    return candidateName;
+
+                // if countOfSameResourceDataName > 1, we need to have the resource types as the resource type name
+                // if we have the unique resource type, we just use the resource type to construct our resource type name
+                var types = resourceType.Types;
+                var name = string.Join("", types.Select(segment => segment.ConstantValue.LastWordToSingular().FirstCharToUpperCase()));
+                if (countOfSameResourceTypeName == 1)
+                    return name;
+
+                var parentOperationSet = requestPath.GetScopePath().GetResourceType(_mgmtConfiguration).Last().ConstantValue;
+                // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
+                // first we try to add the parent name as prefix
+                if (!resourcesWithSameType.All(rqPath => rqPath.Equals(requestPath)))
+                    return $"{parentOperationSet.FirstCharToUpperCase().ToSingular()}{name}";
+
+                // if we get here, parent prefix is not enough, we try the resource name if it is a constant
+                if (requestPath.Last().IsConstant)
+                    return $"{requestPath.Last().ConstantValue}{name}";
+
+                // if we get here, we have tried all approaches to get a solid resource type name, throw an exception
+                throw new InvalidOperationException($"Cannot determine a resource class name for resource with the request path(s): {requestPath}, please assign a valid resource name in `request-path-to-resource-name` section");
+            }
+            // if this resource is based on a "ById" operation
+            // if we only have one resource class with this name - we have no choice but use this "ById" resource
+            if (countOfSameResourceDataName == 1)
+                return candidateName;
+
+            // otherwise we need to add a "ById" suffix to make this resource to have a different name
+            // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
+            return $"{candidateName}ById";
         }
 
         private struct RequestPathCollectionEqualityComparer : IEqualityComparer<IEnumerable<RequestPath>>
