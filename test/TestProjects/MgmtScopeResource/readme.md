@@ -14,8 +14,6 @@ input-file:
   - $(this-folder)/Links.json
 namespace: MgmtScopeResource
 
-mgmt-debug:
-  show-request-path: true
 list-exception:
   - /{linkId}
 request-path-to-resource-data:
