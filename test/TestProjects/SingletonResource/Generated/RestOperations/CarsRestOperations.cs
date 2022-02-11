@@ -153,7 +153,7 @@ namespace SingletonResource
         /// <param name="carName"> The String to use. </param>
         /// <param name="parameters"> The Car to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="carName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<CarData>> PutAsync(string subscriptionId, string resourceGroupName, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -194,7 +194,7 @@ namespace SingletonResource
         /// <param name="carName"> The String to use. </param>
         /// <param name="parameters"> The Car to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="carName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<CarData> Put(string subscriptionId, string resourceGroupName, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -254,7 +254,7 @@ namespace SingletonResource
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="carName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is null. </exception>
         public async Task<Response<CarData>> GetAsync(string subscriptionId, string resourceGroupName, string carName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -292,7 +292,7 @@ namespace SingletonResource
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="carName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is null. </exception>
         public Response<CarData> Get(string subscriptionId, string resourceGroupName, string carName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

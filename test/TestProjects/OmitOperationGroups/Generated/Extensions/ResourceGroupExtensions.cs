@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -67,15 +66,12 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
         public async static Task<Response<Model5>> CreateOrUpdateModel5Async(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             return await GetExtensionClient(resourceGroup).CreateOrUpdateModel5Async(model5SName, parameters, cancellationToken).ConfigureAwait(false);
         }
@@ -88,15 +84,12 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<Model5> CreateOrUpdateModel5(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             return GetExtensionClient(resourceGroup).CreateOrUpdateModel5(model5SName, parameters, cancellationToken);
         }
@@ -108,8 +101,8 @@ namespace OmitOperationGroups
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public async static Task<Response<Model5>> GetModel5Async(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
@@ -124,8 +117,8 @@ namespace OmitOperationGroups
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
+        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public static Response<Model5> GetModel5(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));

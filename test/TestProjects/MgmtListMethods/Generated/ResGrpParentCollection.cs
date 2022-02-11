@@ -60,15 +60,12 @@ namespace MgmtListMethods
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ArmOperation<ResGrpParent>> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
             scope.Start();
@@ -96,15 +93,12 @@ namespace MgmtListMethods
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ArmOperation<ResGrpParent> CreateOrUpdate(bool waitForCompletion, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
             scope.Start();
@@ -130,7 +124,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public async virtual Task<Response<ResGrpParent>> GetAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
@@ -159,7 +153,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public virtual Response<ResGrpParent> Get(string resGrpParentName, CancellationToken cancellationToken = default)
         {
@@ -242,7 +236,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
@@ -269,7 +263,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public virtual Response<bool> Exists(string resGrpParentName, CancellationToken cancellationToken = default)
         {
@@ -296,7 +290,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public async virtual Task<Response<ResGrpParent>> GetIfExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
@@ -325,7 +319,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
         public virtual Response<ResGrpParent> GetIfExists(string resGrpParentName, CancellationToken cancellationToken = default)
         {

@@ -41,7 +41,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="clientParameter"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, or <paramref name="clientParameter"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="clientParameter"/> is null. </exception>
         internal Client4(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string clientParameter, Uri endpoint = null)
         {
             Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
@@ -59,13 +59,10 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual async Task<Response> PatchAsync(string filter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(filter, nameof(filter));
-
             using var scope = ClientDiagnostics.CreateScope("Client4.Patch");
             scope.Start();
             try
@@ -83,13 +80,10 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual Response Patch(string filter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(filter, nameof(filter));
-
             using var scope = ClientDiagnostics.CreateScope("Client4.Patch");
             scope.Start();
             try
@@ -112,7 +106,10 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/client4", false);
-            uri.AppendQuery("filter", filter, true);
+            if (filter != null)
+            {
+                uri.AppendQuery("filter", filter, true);
+            }
             uri.AppendQuery("clientParameter", ClientParameter, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

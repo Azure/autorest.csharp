@@ -495,8 +495,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
-                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, ValidateNotNull: false);
+                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, Validate: false);
         public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
-                        Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
+                        Type: ResourceData.Type, DefaultValue: null, Validate: false);
     }
 }

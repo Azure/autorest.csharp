@@ -196,10 +196,7 @@ namespace MgmtRenameRules
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         public async virtual Task<ArmOperation<VirtualMachineScaleSetExtension>> UpdateAsync(bool waitForCompletion, VirtualMachineScaleSetExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
-            if (extensionParameters == null)
-            {
-                throw new ArgumentNullException(nameof(extensionParameters));
-            }
+            Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
 
             using var scope = _virtualMachineScaleSetExtensionClientDiagnostics.CreateScope("VirtualMachineScaleSetExtension.Update");
             scope.Start();
@@ -229,10 +226,7 @@ namespace MgmtRenameRules
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
         public virtual ArmOperation<VirtualMachineScaleSetExtension> Update(bool waitForCompletion, VirtualMachineScaleSetExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
-            if (extensionParameters == null)
-            {
-                throw new ArgumentNullException(nameof(extensionParameters));
-            }
+            Argument.AssertNotNull(extensionParameters, nameof(extensionParameters));
 
             using var scope = _virtualMachineScaleSetExtensionClientDiagnostics.CreateScope("VirtualMachineScaleSetExtension.Update");
             scope.Start();

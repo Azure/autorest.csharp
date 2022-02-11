@@ -194,10 +194,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySet>> UpdateAsync(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.Update");
             scope.Start();
@@ -223,10 +220,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<AvailabilitySet> Update(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.Update");
             scope.Start();
@@ -253,14 +247,8 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySet>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.AddTag");
             scope.Start();
@@ -290,14 +278,8 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<AvailabilitySet> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.AddTag");
             scope.Start();
@@ -326,10 +308,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySet>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.SetTags");
             scope.Start();
@@ -359,10 +338,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<AvailabilitySet> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.SetTags");
             scope.Start();
@@ -392,10 +368,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySet>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.RemoveTag");
             scope.Start();
@@ -424,10 +397,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<AvailabilitySet> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.RemoveTag");
             scope.Start();

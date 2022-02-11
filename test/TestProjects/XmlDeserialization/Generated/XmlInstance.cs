@@ -141,10 +141,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstance.Delete");
             scope.Start();
@@ -174,10 +171,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual ArmOperation Delete(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstance.Delete");
             scope.Start();

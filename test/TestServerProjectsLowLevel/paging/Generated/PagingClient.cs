@@ -1058,7 +1058,8 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1079,8 +1080,7 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1101,7 +1101,8 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1122,8 +1123,7 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1144,7 +1144,8 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1165,8 +1166,7 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1187,7 +1187,8 @@ namespace paging_LowLevel
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1208,8 +1209,7 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string tenant, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1231,7 +1231,8 @@ namespace paging_LowLevel
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1252,9 +1253,8 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> NextFragmentAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextFragment");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1274,7 +1274,8 @@ namespace paging_LowLevel
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1295,9 +1296,8 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> NextFragment(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextFragment");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1317,7 +1317,8 @@ namespace paging_LowLevel
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1338,9 +1339,8 @@ namespace paging_LowLevel
         public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextFragmentWithGrouping");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1360,7 +1360,8 @@ namespace paging_LowLevel
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="nextLink"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1381,9 +1382,8 @@ namespace paging_LowLevel
         public virtual Pageable<BinaryData> NextFragmentWithGrouping(string tenant, string nextLink, string apiVersion, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextFragmentWithGrouping");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1833,7 +1833,10 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
-            uri.AppendQuery("api_version", apiVersion, true);
+            if (apiVersion != null)
+            {
+                uri.AppendQuery("api_version", apiVersion, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -1849,7 +1852,10 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(tenant, true);
-            uri.AppendQuery("api_version", apiVersion, true);
+            if (apiVersion != null)
+            {
+                uri.AppendQuery("api_version", apiVersion, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -1893,7 +1899,10 @@ namespace paging_LowLevel
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
             uri.AppendRawNextLink(nextLink, false);
-            uri.AppendQuery("api_version", apiVersion, true);
+            if (apiVersion != null)
+            {
+                uri.AppendQuery("api_version", apiVersion, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -1911,7 +1920,10 @@ namespace paging_LowLevel
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
             uri.AppendRawNextLink(nextLink, false);
-            uri.AppendQuery("api_version", apiVersion, true);
+            if (apiVersion != null)
+            {
+                uri.AppendQuery("api_version", apiVersion, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

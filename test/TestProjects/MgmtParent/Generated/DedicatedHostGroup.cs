@@ -201,10 +201,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> UpdateAsync(DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroup.Update");
             scope.Start();
@@ -230,10 +227,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<DedicatedHostGroup> Update(DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroup.Update");
             scope.Start();
@@ -260,14 +254,8 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroup.AddTag");
             scope.Start();
@@ -297,14 +285,8 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<DedicatedHostGroup> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroup.AddTag");
             scope.Start();
@@ -333,10 +315,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroup.SetTags");
             scope.Start();
@@ -366,10 +345,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<DedicatedHostGroup> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroup.SetTags");
             scope.Start();
@@ -399,10 +375,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public async virtual Task<Response<DedicatedHostGroup>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroup.RemoveTag");
             scope.Start();
@@ -431,10 +404,7 @@ namespace MgmtParent
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<DedicatedHostGroup> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _dedicatedHostGroupClientDiagnostics.CreateScope("DedicatedHostGroup.RemoveTag");
             scope.Start();

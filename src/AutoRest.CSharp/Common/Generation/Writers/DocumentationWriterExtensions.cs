@@ -68,36 +68,39 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteDocumentationLines($"<returns>", $"</returns>", text);
         }
 
-        public static CodeWriter WriteXmlDocumentationRequiredParametersException(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        public static CodeWriter WriteXmlDocumentationRequiredParametersException(this CodeWriter writer, IEnumerable<Parameter> parameters)
         {
-            if (parameters.TryGetRequiredParameters(out var requiredParameters))
+            return writer.WriteXmlDocumentationParametersExceptions(typeof(ArgumentNullException), parameters.Where(CodeWriterExtensions.HasNullCheck).ToArray(), " is null.");
+        }
+
+        public static CodeWriter WriteXmlDocumentationNonEmptyParametersException(this CodeWriter writer, IEnumerable<Parameter> parameters)
+        {
+            return writer.WriteXmlDocumentationParametersExceptions(typeof(ArgumentException), parameters.Where(CodeWriterExtensions.HasEmptyCheck).ToArray(), " is an empty string, and was expected to be non-empty.");
+        }
+
+        private static CodeWriter WriteXmlDocumentationParametersExceptions(this CodeWriter writer, Type exceptionType, IReadOnlyCollection<Parameter> parameters, string reason)
+        {
+            if (parameters.Count == 0)
             {
-                static string FormatParameters(IReadOnlyCollection<Parameter> parameters)
-                {
-                    var sb = new StringBuilder();
-
-                    var i = 0;
-                    for (; i < parameters.Count - 1; ++i)
-                    {
-                        sb.Append($"<paramref name=\"{{{i}}}\"/>, ");
-                    }
-
-                    sb.Append($"or <paramref name=\"{{{i}}}\"/> is null.");
-                    return sb.ToString();
-                }
-
-                var delimitedParameters = requiredParameters.Count switch
-                {
-                    1 => "<paramref name=\"{0}\"/> is null.",
-                    2 => "<paramref name=\"{0}\"/> or <paramref name=\"{1}\"/> is null.",
-                    _ => FormatParameters(requiredParameters),
-                };
-
-                var description = FormattableStringFactory.Create(delimitedParameters, requiredParameters.Select(p => (object)p.Name).ToArray());
-                return writer.WriteXmlDocumentationException(typeof(ArgumentNullException), description);
+                return writer;
             }
 
-            return writer;
+            var formatBuilder = new StringBuilder();
+            for (var i = 0; i < parameters.Count - 2; ++i)
+            {
+                formatBuilder.Append("<paramref name=\"{").Append(i).Append("}\"/>, ");
+            }
+
+            if (parameters.Count > 1)
+            {
+                formatBuilder.Append("<paramref name=\"{").Append(parameters.Count - 2).Append("}\"/> or ");
+            }
+
+            formatBuilder.Append("<paramref name=\"{").Append(parameters.Count - 1).Append("}\"/>");
+            formatBuilder.Append(reason);
+
+            var description = FormattableStringFactory.Create(formatBuilder.ToString(), parameters.Select(p => (object)p.Name).ToArray());
+            return writer.WriteXmlDocumentationException(exceptionType, description);
         }
 
         public static CodeWriter WriteDocumentationLines(this CodeWriter writer, FormattableString startTag, FormattableString endTag, FormattableString? text)
