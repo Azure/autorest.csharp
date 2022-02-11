@@ -79,6 +79,8 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("_propertyName", true, "PropertyName")]
         [TestCase("_property_name", false, "propertyName")]
         [TestCase("_property_name", true, "PropertyName")]
+        [TestCase("OSProfile", true, "OSProfile")]
+        [TestCase("OSProfile", false, "osProfile")]
         public void ValidateToCleanName(string name, bool camelCase, string expected)
         {
             var result = name.ToCleanName(camelCase);
