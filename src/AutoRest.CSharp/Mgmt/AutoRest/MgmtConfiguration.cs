@@ -105,6 +105,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             IReadOnlyList<string> requestPathIsNonResource,
             IReadOnlyList<string> noPropertyTypeReplacement,
             IReadOnlyList<string> listException,
+            IReadOnlyList<string> promptedEnumValues,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -153,6 +154,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             RequestPathIsNonResource = requestPathIsNonResource;
             NoPropertyTypeReplacement = noPropertyTypeReplacement;
             ListException = listException;
+            PromptedEnumValues = promptedEnumValues;
             IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
             DoesResourceModelRequireType = !IsValidJsonElement(resourceModelRequiresType) ? true : Convert.ToBoolean(resourceModelRequiresType.ToString());
             DoesResourceModelRequireName = !IsValidJsonElement(resourceModelRequiresName) ? true : Convert.ToBoolean(resourceModelRequiresName.ToString());
@@ -189,6 +191,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyList<string> RequestPathIsNonResource { get; }
         public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
         public IReadOnlyList<string> ListException { get; }
+        public IReadOnlyList<string> PromptedEnumValues { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
 
         public bool IsArmCore { get; }
@@ -201,6 +204,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathIsNonResource: autoRest.GetValue<string[]?>("request-path-is-non-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 noPropertyTypeReplacement: autoRest.GetValue<string[]?>("no-property-type-replacement").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 listException: autoRest.GetValue<string[]?>("list-exception").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                promptedEnumValues: autoRest.GetValue<string[]?>("prompted-enum-values").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -248,6 +252,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 TestModeler.Write(writer, nameof(TestModeler));
             }
             WriteNonEmptySettings(writer, nameof(OperationIdMappings), OperationIdMappings);
+            WriteNonEmptySettings(writer, nameof(PromptedEnumValues), PromptedEnumValues);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -265,22 +270,27 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
+            root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValues);
 
             var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var requestPathIsNonResourceList = requestPathIsNonResource.ValueKind == JsonValueKind.Array
                 ? requestPathIsNonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var noPropertyTypeReplacementList = noPropertyTypeReplacment.ValueKind == JsonValueKind.Array
                 ? noPropertyTypeReplacment.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var listExceptionList = listException.ValueKind == JsonValueKind.Array
                 ? listException.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
+
+            var promptedEnumValuesList = promptedEnumValues.ValueKind == JsonValueKind.Array
+                ? promptedEnumValues.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : Array.Empty<string>();
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -295,6 +305,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 requestPathIsNonResource: requestPathIsNonResourceList,
                 noPropertyTypeReplacement: noPropertyTypeReplacementList,
                 listException: listExceptionList,
+                promptedEnumValues: promptedEnumValuesList,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,

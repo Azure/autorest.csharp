@@ -118,17 +118,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues)
         {
-            var filters = new List<Func<ChoiceValue, bool>>
-            {
-                v => v.CSharpName() == "None",
-                v => v.CSharpName().StartsWith("No"),
-                v => v.CSharpName().StartsWith("Not"),
-            };
             IEnumerable<ChoiceValue> whateverLeft = originalValues;
             var result = new List<ChoiceValue>();
-            foreach (var filter in filters)
+
+            var words = "None".AsIEnumerable().Concat(_mgmtConfiguration.PromptedEnumValues);
+
+            foreach (var word in words)
             {
-                var filtered = whateverLeft.Where(filter);
+                var filtered = whateverLeft.Where(GetFilter(word));
                 whateverLeft = whateverLeft.Except(filtered);
                 result.AddRange(filtered);
             }
@@ -136,6 +133,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             result.AddRange(whateverLeft);
 
             return result;
+        }
+
+        private Func<ChoiceValue, bool> GetFilter(string word)
+        {
+            return v => v.CSharpName().Equals(word);
         }
 
         private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
