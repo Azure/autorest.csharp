@@ -13,3 +13,15 @@ data-plane: true
 security: AzureKey
 security-header-name: Ocp-Apim-Subscription-Key
 ```
+
+# Model endpoint parameter as a url, not a string.
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $["x-ms-parameterized-host"].parameters[?(@["x-ms-parameter-location"]=='client'&&@.in=='path')]
+    transform: >
+      if ($.format === undefined) {
+        $.format = "url";
+      }
+```
