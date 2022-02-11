@@ -51,10 +51,11 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ManagementGroup.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_CreateOrUpdate
-        /// <summary> Create or update. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -86,10 +87,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_CreateOrUpdate
-        /// <summary> Create or update. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
@@ -121,10 +123,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is empty. </exception>
@@ -149,10 +152,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is empty. </exception>
@@ -177,10 +181,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
+        /// Operation Id: MgmtGroupParents_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="MgmtGroupParent" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<MgmtGroupParent> GetAllAsync(CancellationToken cancellationToken = default)
@@ -218,10 +223,11 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
+        /// Operation Id: MgmtGroupParents_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="MgmtGroupParent" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<MgmtGroupParent> GetAll(CancellationToken cancellationToken = default)
@@ -259,10 +265,11 @@ namespace MgmtListMethods
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is empty. </exception>
@@ -285,10 +292,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is empty. </exception>
@@ -311,10 +319,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is empty. </exception>
@@ -339,10 +348,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is empty. </exception>

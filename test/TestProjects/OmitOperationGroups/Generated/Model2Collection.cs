@@ -51,9 +51,10 @@ namespace OmitOperationGroups
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_CreateOrUpdate
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
@@ -85,9 +86,10 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_CreateOrUpdate
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
@@ -119,9 +121,10 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_Get
+        /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
@@ -146,9 +149,10 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_Get
+        /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
@@ -173,9 +177,10 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s
+        /// Operation Id: Model2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Model2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Model2> GetAllAsync(CancellationToken cancellationToken = default)
@@ -198,9 +203,10 @@ namespace OmitOperationGroups
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s
+        /// Operation Id: Model2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Model2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Model2> GetAll(CancellationToken cancellationToken = default)
@@ -223,10 +229,11 @@ namespace OmitOperationGroups
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_Get
+        /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
@@ -249,10 +256,11 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_Get
+        /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
@@ -275,10 +283,11 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_Get
+        /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>
@@ -303,10 +312,11 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model2s_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_Get
+        /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is empty. </exception>

@@ -17,9 +17,11 @@ namespace header
 {
     internal partial class HeaderRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of HeaderRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -27,8 +29,8 @@ namespace header
         /// <param name="endpoint"> server parameter. </param>
         public HeaderRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -38,7 +40,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/existingkey", false);
             request.Uri = uri;
             request.Headers.Add("User-Agent", userAgent);
@@ -64,7 +66,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -86,7 +88,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -96,7 +98,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/existingkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -115,7 +117,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -131,7 +133,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -141,7 +143,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/protectedkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -166,7 +168,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -188,7 +190,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -198,7 +200,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/protectedkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -217,7 +219,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -233,7 +235,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -243,7 +245,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/integer", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -271,7 +273,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -294,7 +296,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -304,7 +306,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/integer", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -331,7 +333,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -354,7 +356,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -364,7 +366,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/long", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -392,7 +394,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -415,7 +417,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -425,7 +427,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/long", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -452,7 +454,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -475,7 +477,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -485,7 +487,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/float", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -513,7 +515,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -536,7 +538,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -546,7 +548,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/float", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -573,7 +575,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -596,7 +598,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -606,7 +608,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/double", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -634,7 +636,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -657,7 +659,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -667,7 +669,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/double", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -694,7 +696,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -717,7 +719,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -727,7 +729,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/bool", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -755,7 +757,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -778,7 +780,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -788,7 +790,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/bool", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -815,7 +817,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -838,7 +840,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -848,7 +850,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/string", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -879,7 +881,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -902,7 +904,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -912,7 +914,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/string", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -939,7 +941,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -962,7 +964,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -972,7 +974,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/date", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1000,7 +1002,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1023,7 +1025,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1033,7 +1035,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/date", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1060,7 +1062,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1083,7 +1085,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1093,7 +1095,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/datetime", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1121,7 +1123,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1144,7 +1146,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1154,7 +1156,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/datetime", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1181,7 +1183,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1204,7 +1206,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1214,7 +1216,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1245,7 +1247,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1268,7 +1270,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1278,7 +1280,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1305,7 +1307,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1328,7 +1330,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1338,7 +1340,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/duration", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1366,7 +1368,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1389,7 +1391,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1399,7 +1401,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/duration", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1426,7 +1428,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1449,7 +1451,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1459,7 +1461,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/byte", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1491,7 +1493,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1518,7 +1520,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1528,7 +1530,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/byte", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1555,7 +1557,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1578,7 +1580,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1588,7 +1590,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/enum", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1619,7 +1621,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1642,7 +1644,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1652,7 +1654,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/enum", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -1679,7 +1681,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1702,7 +1704,7 @@ namespace header
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1712,7 +1714,7 @@ namespace header
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1730,7 +1732,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1745,7 +1747,7 @@ namespace header
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

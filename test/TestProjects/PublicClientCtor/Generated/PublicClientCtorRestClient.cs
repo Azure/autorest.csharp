@@ -17,12 +17,14 @@ namespace PublicClientCtor
 {
     internal partial class PublicClientCtorRestClient
     {
-        private Uri endpoint;
-        private string param1;
-        private string param2;
-        private string apiVersion;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
+        private readonly string _param1;
+        private readonly string _param2;
+        private readonly string _apiVersion;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of PublicClientCtorRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -34,11 +36,11 @@ namespace PublicClientCtor
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public PublicClientCtorRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
         {
-            this.endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
-            this.param1 = param1;
-            this.param2 = param2;
-            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            _clientDiagnostics = clientDiagnostics;
+            _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            _param1 = param1;
+            _param2 = param2;
+            _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -48,18 +50,18 @@ namespace PublicClientCtor
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRaw("/publicclientctor/1.0.0", false);
             uri.AppendPath("/op", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (param1 != null)
+            if (_param1 != null)
             {
-                request.Headers.Add("Param1", param1);
+                request.Headers.Add("Param1", _param1);
             }
-            if (param2 != null)
+            if (_param2 != null)
             {
-                request.Headers.Add("Param2", param2);
+                request.Headers.Add("Param2", _param2);
             }
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
@@ -85,7 +87,7 @@ namespace PublicClientCtor
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -106,7 +108,7 @@ namespace PublicClientCtor
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

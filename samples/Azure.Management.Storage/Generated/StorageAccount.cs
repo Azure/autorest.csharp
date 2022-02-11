@@ -137,10 +137,11 @@ namespace Azure.Management.Storage
             return new EncryptionScopeCollection(Client, Id);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_GetProperties
-        /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
+        /// <summary>
+        /// Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_GetProperties
+        /// </summary>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<StorageAccount>> GetAsync(StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
@@ -161,10 +162,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_GetProperties
-        /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
+        /// <summary>
+        /// Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_GetProperties
+        /// </summary>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageAccount> Get(StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
@@ -185,10 +187,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_Delete
-        /// <summary> Deletes a storage account in Microsoft Azure. </summary>
+        /// <summary>
+        /// Deletes a storage account in Microsoft Azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -210,10 +213,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_Delete
-        /// <summary> Deletes a storage account in Microsoft Azure. </summary>
+        /// <summary>
+        /// Deletes a storage account in Microsoft Azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -235,10 +239,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_Update
-        /// <summary> The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation. </summary>
+        /// <summary>
+        /// The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_Update
+        /// </summary>
         /// <param name="parameters"> The parameters to provide for the updated account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
@@ -263,10 +268,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_Update
-        /// <summary> The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation. </summary>
+        /// <summary>
+        /// The update operation can be used to update the SKU, encryption, access tier, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account; the replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value can be set. The update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change the storage account keys, use the regenerate keys operation. The location and name of the storage account cannot be changed after creation.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_Update
+        /// </summary>
         /// <param name="parameters"> The parameters to provide for the updated account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
@@ -291,10 +297,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_ListKeys
-        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
+        /// <summary>
+        /// Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
+        /// Operation Id: StorageAccounts_ListKeys
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<StorageAccountListKeysResult>> GetKeysAsync(CancellationToken cancellationToken = default)
         {
@@ -312,10 +319,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_ListKeys
-        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
+        /// <summary>
+        /// Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys
+        /// Operation Id: StorageAccounts_ListKeys
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<StorageAccountListKeysResult> GetKeys(CancellationToken cancellationToken = default)
         {
@@ -333,10 +341,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_RegenerateKey
-        /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
+        /// <summary>
+        /// Regenerates one of the access keys or Kerberos keys for the specified storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
+        /// Operation Id: StorageAccounts_RegenerateKey
+        /// </summary>
         /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="regenerateKey"/> is null. </exception>
@@ -361,10 +370,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_RegenerateKey
-        /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
+        /// <summary>
+        /// Regenerates one of the access keys or Kerberos keys for the specified storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey
+        /// Operation Id: StorageAccounts_RegenerateKey
+        /// </summary>
         /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="regenerateKey"/> is null. </exception>
@@ -389,10 +399,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_ListAccountSAS
-        /// <summary> List SAS credentials of a storage account. </summary>
+        /// <summary>
+        /// List SAS credentials of a storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas
+        /// Operation Id: StorageAccounts_ListAccountSAS
+        /// </summary>
         /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
@@ -417,10 +428,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_ListAccountSAS
-        /// <summary> List SAS credentials of a storage account. </summary>
+        /// <summary>
+        /// List SAS credentials of a storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListAccountSas
+        /// Operation Id: StorageAccounts_ListAccountSAS
+        /// </summary>
         /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
@@ -445,10 +457,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListServiceSas
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_ListServiceSAS
-        /// <summary> List service SAS credentials of a specific resource. </summary>
+        /// <summary>
+        /// List service SAS credentials of a specific resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListServiceSas
+        /// Operation Id: StorageAccounts_ListServiceSAS
+        /// </summary>
         /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
@@ -473,10 +486,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListServiceSas
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_ListServiceSAS
-        /// <summary> List service SAS credentials of a specific resource. </summary>
+        /// <summary>
+        /// List service SAS credentials of a specific resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/ListServiceSas
+        /// Operation Id: StorageAccounts_ListServiceSAS
+        /// </summary>
         /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
@@ -501,10 +515,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_Failover
-        /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
+        /// <summary>
+        /// Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover
+        /// Operation Id: StorageAccounts_Failover
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ArmOperation> FailoverAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -526,10 +541,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_Failover
-        /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
+        /// <summary>
+        /// Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/failover
+        /// Operation Id: StorageAccounts_Failover
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Failover(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -551,10 +567,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_HierarchicalNamespaceMigration
-        /// <summary> Live Migration of storage account to enable Hns. </summary>
+        /// <summary>
+        /// Live Migration of storage account to enable Hns
+        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration
+        /// Operation Id: StorageAccounts_HierarchicalNamespaceMigration
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="requestType"> Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request &apos;HnsOnValidationRequest&apos; or a hydration request &apos;HnsOnHydrationRequest&apos;. The validation request will validate the migration whereas the hydration request will migrate the account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -583,10 +600,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_HierarchicalNamespaceMigration
-        /// <summary> Live Migration of storage account to enable Hns. </summary>
+        /// <summary>
+        /// Live Migration of storage account to enable Hns
+        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/hnsonmigration
+        /// Operation Id: StorageAccounts_HierarchicalNamespaceMigration
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="requestType"> Required. Hierarchical namespace migration type can either be a hierarchical namespace validation request &apos;HnsOnValidationRequest&apos; or a hydration request &apos;HnsOnHydrationRequest&apos;. The validation request will validate the migration whereas the hydration request will migrate the account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -615,10 +633,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_AbortHierarchicalNamespaceMigration
-        /// <summary> Abort live Migration of storage account to enable Hns. </summary>
+        /// <summary>
+        /// Abort live Migration of storage account to enable Hns
+        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration
+        /// Operation Id: StorageAccounts_AbortHierarchicalNamespaceMigration
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ArmOperation> AbortHierarchicalNamespaceMigrationAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -640,10 +659,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_AbortHierarchicalNamespaceMigration
-        /// <summary> Abort live Migration of storage account to enable Hns. </summary>
+        /// <summary>
+        /// Abort live Migration of storage account to enable Hns
+        /// Request Path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/aborthnsonmigration
+        /// Operation Id: StorageAccounts_AbortHierarchicalNamespaceMigration
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation AbortHierarchicalNamespaceMigration(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -665,10 +685,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_RestoreBlobRanges
-        /// <summary> Restore blobs in the specified blob ranges. </summary>
+        /// <summary>
+        /// Restore blobs in the specified blob ranges
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges
+        /// Operation Id: StorageAccounts_RestoreBlobRanges
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -697,10 +718,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_RestoreBlobRanges
-        /// <summary> Restore blobs in the specified blob ranges. </summary>
+        /// <summary>
+        /// Restore blobs in the specified blob ranges
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/restoreBlobRanges
+        /// Operation Id: StorageAccounts_RestoreBlobRanges
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -729,10 +751,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/revokeUserDelegationKeys
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_RevokeUserDelegationKeys
-        /// <summary> Revoke user delegation keys. </summary>
+        /// <summary>
+        /// Revoke user delegation keys.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/revokeUserDelegationKeys
+        /// Operation Id: StorageAccounts_RevokeUserDelegationKeys
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response> RevokeUserDelegationKeysAsync(CancellationToken cancellationToken = default)
         {
@@ -750,10 +773,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/revokeUserDelegationKeys
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_RevokeUserDelegationKeys
-        /// <summary> Revoke user delegation keys. </summary>
+        /// <summary>
+        /// Revoke user delegation keys.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/revokeUserDelegationKeys
+        /// Operation Id: StorageAccounts_RevokeUserDelegationKeys
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response RevokeUserDelegationKeys(CancellationToken cancellationToken = default)
         {
@@ -771,10 +795,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: PrivateLinkResources_ListByStorageAccount
-        /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
+        /// <summary>
+        /// Gets the private link resources that need to be created for a storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources
+        /// Operation Id: PrivateLinkResources_ListByStorageAccount
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PrivateLinkResource> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
@@ -797,10 +822,11 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: PrivateLinkResources_ListByStorageAccount
-        /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
+        /// <summary>
+        /// Gets the private link resources that need to be created for a storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources
+        /// Operation Id: PrivateLinkResources_ListByStorageAccount
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PrivateLinkResource> GetPrivateLinkResources(CancellationToken cancellationToken = default)
@@ -823,10 +849,11 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_GetProperties
-        /// <summary> Add a tag to the current resource. </summary>
+        /// <summary>
+        /// Add a tag to the current resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_GetProperties
+        /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -859,10 +886,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_GetProperties
-        /// <summary> Add a tag to the current resource. </summary>
+        /// <summary>
+        /// Add a tag to the current resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_GetProperties
+        /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -895,10 +923,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_GetProperties
-        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <summary>
+        /// Replace the tags on the resource with the given set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_GetProperties
+        /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
@@ -927,10 +956,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_GetProperties
-        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <summary>
+        /// Replace the tags on the resource with the given set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_GetProperties
+        /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
@@ -959,10 +989,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_GetProperties
-        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <summary>
+        /// Removes a tag by key from the resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_GetProperties
+        /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
@@ -990,10 +1021,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
-        /// OperationId: StorageAccounts_GetProperties
-        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <summary>
+        /// Removes a tag by key from the resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}
+        /// Operation Id: StorageAccounts_GetProperties
+        /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>

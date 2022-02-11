@@ -82,10 +82,11 @@ namespace MgmtSubscriptionNameParameter
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
-        /// OperationId: Subscriptions_Get
-        /// <summary> Returns a subscription description for the specified topic. </summary>
+        /// <summary>
+        /// Returns a subscription description for the specified topic.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
+        /// Operation Id: Subscriptions_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SBSubscription>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -105,10 +106,11 @@ namespace MgmtSubscriptionNameParameter
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
-        /// OperationId: Subscriptions_Get
-        /// <summary> Returns a subscription description for the specified topic. </summary>
+        /// <summary>
+        /// Returns a subscription description for the specified topic.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
+        /// Operation Id: Subscriptions_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SBSubscription> Get(CancellationToken cancellationToken = default)
         {
@@ -128,10 +130,11 @@ namespace MgmtSubscriptionNameParameter
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
-        /// OperationId: Subscriptions_Delete
-        /// <summary> Deletes a subscription from the specified topic. </summary>
+        /// <summary>
+        /// Deletes a subscription from the specified topic.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
+        /// Operation Id: Subscriptions_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -153,10 +156,11 @@ namespace MgmtSubscriptionNameParameter
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
-        /// OperationId: Subscriptions_Delete
-        /// <summary> Deletes a subscription from the specified topic. </summary>
+        /// <summary>
+        /// Deletes a subscription from the specified topic.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
+        /// Operation Id: Subscriptions_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)

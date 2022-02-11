@@ -83,10 +83,11 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Get
-        /// <summary> Retrieves information about a proximity placement group . </summary>
+        /// <summary>
+        /// Retrieves information about a proximity placement group .
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ProximityPlacementGroup>> GetAsync(string includeColocationStatus = null, CancellationToken cancellationToken = default)
@@ -107,10 +108,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Get
-        /// <summary> Retrieves information about a proximity placement group . </summary>
+        /// <summary>
+        /// Retrieves information about a proximity placement group .
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ProximityPlacementGroup> Get(string includeColocationStatus = null, CancellationToken cancellationToken = default)
@@ -131,10 +133,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Delete
-        /// <summary> Delete a proximity placement group. </summary>
+        /// <summary>
+        /// Delete a proximity placement group.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -156,10 +159,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Delete
-        /// <summary> Delete a proximity placement group. </summary>
+        /// <summary>
+        /// Delete a proximity placement group.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -181,10 +185,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Get
-        /// <summary> Add a tag to the current resource. </summary>
+        /// <summary>
+        /// Add a tag to the current resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -217,10 +222,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Get
-        /// <summary> Add a tag to the current resource. </summary>
+        /// <summary>
+        /// Add a tag to the current resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -253,10 +259,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Get
-        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <summary>
+        /// Replace the tags on the resource with the given set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
@@ -285,10 +292,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Get
-        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <summary>
+        /// Replace the tags on the resource with the given set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
@@ -317,10 +325,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Get
-        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <summary>
+        /// Removes a tag by key from the resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
@@ -348,10 +357,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
-        /// OperationId: ProximityPlacementGroups_Get
-        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <summary>
+        /// Removes a tag by key from the resource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>

@@ -51,10 +51,11 @@ namespace MgmtOperations
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_CreateOrUpdate
-        /// <summary> Create or update an UnpatchableResource. </summary>
+        /// <summary>
+        /// Create or update an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="parameters"> Parameters supplied to the Create UnpatchableResource operation. </param>
@@ -86,10 +87,11 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_CreateOrUpdate
-        /// <summary> Create or update an UnpatchableResource. </summary>
+        /// <summary>
+        /// Create or update an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="parameters"> Parameters supplied to the Create UnpatchableResource operation. </param>
@@ -121,10 +123,11 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_Get
-        /// <summary> Retrieves information about an UnpatchableResource. </summary>
+        /// <summary>
+        /// Retrieves information about an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Get
+        /// </summary>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -150,10 +153,11 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_Get
-        /// <summary> Retrieves information about an UnpatchableResource. </summary>
+        /// <summary>
+        /// Retrieves information about an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Get
+        /// </summary>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -179,10 +183,11 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_List
-        /// <summary> Retrieves information about an UnpatchableResource. </summary>
+        /// <summary>
+        /// Retrieves information about an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources
+        /// Operation Id: UnpatchableResources_List
+        /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="UnpatchableResource" /> that may take multiple service requests to iterate over. </returns>
@@ -206,10 +211,11 @@ namespace MgmtOperations
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_List
-        /// <summary> Retrieves information about an UnpatchableResource. </summary>
+        /// <summary>
+        /// Retrieves information about an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources
+        /// Operation Id: UnpatchableResources_List
+        /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="UnpatchableResource" /> that may take multiple service requests to iterate over. </returns>
@@ -233,10 +239,11 @@ namespace MgmtOperations
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Get
+        /// </summary>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -260,10 +267,11 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Get
+        /// </summary>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -287,10 +295,11 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Get
+        /// </summary>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -316,10 +325,11 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: UnpatchableResources_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Get
+        /// </summary>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

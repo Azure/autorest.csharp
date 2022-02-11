@@ -42,10 +42,11 @@ namespace MgmtOperations
             return GetExtensionClient(resourceGroup).GetUnpatchableResources();
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AvailabilitySets_TestLROMethod
-        /// <summary> Update an availability set. </summary>
+        /// <summary>
+        /// Update an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
+        /// Operation Id: AvailabilitySets_TestLROMethod
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
@@ -61,10 +62,11 @@ namespace MgmtOperations
             return await GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySetAsync(waitForCompletion, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AvailabilitySets_TestLROMethod
-        /// <summary> Update an availability set. </summary>
+        /// <summary>
+        /// Update an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
+        /// Operation Id: AvailabilitySets_TestLROMethod
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>

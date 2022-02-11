@@ -82,10 +82,11 @@ namespace ResourceRename
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// OperationId: SshPublicKeys_Get
-        /// <summary> Retrieves information about an SSH public key. </summary>
+        /// <summary>
+        /// Retrieves information about an SSH public key.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
+        /// Operation Id: SshPublicKeys_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SshPublicKeyInfo>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -105,10 +106,11 @@ namespace ResourceRename
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// OperationId: SshPublicKeys_Get
-        /// <summary> Retrieves information about an SSH public key. </summary>
+        /// <summary>
+        /// Retrieves information about an SSH public key.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
+        /// Operation Id: SshPublicKeys_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SshPublicKeyInfo> Get(CancellationToken cancellationToken = default)
         {
@@ -128,10 +130,11 @@ namespace ResourceRename
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// OperationId: SshPublicKeys_Delete
-        /// <summary> Delete an SSH public key. </summary>
+        /// <summary>
+        /// Delete an SSH public key.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
+        /// Operation Id: SshPublicKeys_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
@@ -153,10 +156,11 @@ namespace ResourceRename
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
-        /// OperationId: SshPublicKeys_Delete
-        /// <summary> Delete an SSH public key. </summary>
+        /// <summary>
+        /// Delete an SSH public key.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
+        /// Operation Id: SshPublicKeys_Delete
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)

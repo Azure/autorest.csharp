@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var method in restClient.Methods)
                     {
-                        WriteRequestCreation(writer, method, restClient.Parameters);
+                        WriteRequestCreation(writer, method, restClient.Parameters, restClient.Fields);
                         WriteOperation(writer, method, true);
                         WriteOperation(writer, method, false);
                     }
@@ -43,20 +43,18 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
-        private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
+        private const string ClientDiagnosticsField = "ClientDiagnostics";
         private const string PipelineVariable = "pipeline";
         private const string PipelineField = "_" + PipelineVariable;
 
         private void WriteClientFields(CodeWriter writer, RestClient restClient)
         {
-            foreach (Parameter clientParameter in restClient.Parameters)
+            WriteAdditionalFields(writer);
+            foreach (var field in restClient.Fields)
             {
-                writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
+                writer.WriteFieldDeclaration(field);
             }
 
-            writer.Line($"private {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
-            WriteAdditionalFields(writer);
             writer.Line();
         }
 
@@ -107,7 +105,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 foreach (Parameter clientParameter in restClient.Parameters)
                 {
-                    writer.WriteVariableAssignmentWithNullCheck($"this.{clientParameter.Name}", clientParameter);
+                    var field = restClient.Fields.GetFieldByParameter(clientParameter);
+                    if (field != null)
+                    {
+                        writer.WriteVariableAssignmentWithNullCheck($"{field.Name}", clientParameter);
+                    }
                 }
 
                 writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
@@ -119,9 +121,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, Parameter[] parameters)
+        private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, Parameter[] parameters, ClientFields fields)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", null, null, UseSDKUserAgent(), parameters);
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", fields, null, UseSDKUserAgent(), parameters);
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)

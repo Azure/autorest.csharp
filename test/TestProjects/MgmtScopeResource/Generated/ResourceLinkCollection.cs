@@ -53,10 +53,11 @@ namespace MgmtScopeResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_CreateOrUpdate
-        /// <summary> Creates or updates a resource link between the specified resources. </summary>
+        /// <summary>
+        /// Creates or updates a resource link between the specified resources.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -85,10 +86,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_CreateOrUpdate
-        /// <summary> Creates or updates a resource link between the specified resources. </summary>
+        /// <summary>
+        /// Creates or updates a resource link between the specified resources.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -117,10 +119,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Gets a resource link with the specified ID. </summary>
+        /// <summary>
+        /// Gets a resource link with the specified ID.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ResourceLink>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -140,10 +143,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Gets a resource link with the specified ID. </summary>
+        /// <summary>
+        /// Gets a resource link with the specified ID.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceLink> Get(CancellationToken cancellationToken = default)
         {
@@ -163,10 +167,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Resources/links
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_ListAtSourceScope
-        /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
+        /// <summary>
+        /// Gets a list of resource links at and below the specified source scope.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/links
+        /// Operation Id: ResourceLinks_ListAtSourceScope
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceLink> GetAllAsync(CancellationToken cancellationToken = default)
@@ -204,10 +209,11 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Resources/links
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_ListAtSourceScope
-        /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
+        /// <summary>
+        /// Gets a list of resource links at and below the specified source scope.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/links
+        /// Operation Id: ResourceLinks_ListAtSourceScope
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceLink> GetAll(CancellationToken cancellationToken = default)
@@ -245,10 +251,11 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<bool>> ExistsAsync(CancellationToken cancellationToken = default)
         {
@@ -266,10 +273,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> Exists(CancellationToken cancellationToken = default)
         {
@@ -287,10 +295,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ResourceLink>> GetIfExistsAsync(CancellationToken cancellationToken = default)
         {
@@ -310,10 +319,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceLink> GetIfExists(CancellationToken cancellationToken = default)
         {

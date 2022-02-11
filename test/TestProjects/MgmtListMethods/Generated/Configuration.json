@@ -12,8 +12,5 @@
   "skip-csproj-packagereference": true,
   "OverrideOperationName": {
     "FakeParentWithAncestorWithNonResChWithLocs_ListBySubscription": "GetFakeParentWithAncestorWithNonResourceChWithLoc"
-  },
-  "MgmtDebug": {
-    "ShowRequestPath": true
   }
 }

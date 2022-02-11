@@ -20,7 +20,10 @@ namespace SubClients_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 

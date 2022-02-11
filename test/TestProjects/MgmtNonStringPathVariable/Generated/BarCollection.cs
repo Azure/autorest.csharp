@@ -48,10 +48,11 @@ namespace MgmtNonStringPathVariable
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Bars_Create
-        /// <summary> Retrieves information about an fake. </summary>
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Create
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="barName"> The name of the bar. </param>
         /// <param name="body"> The Bar to use. </param>
@@ -81,10 +82,11 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Bars_Create
-        /// <summary> Retrieves information about an fake. </summary>
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Create
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="barName"> The name of the bar. </param>
         /// <param name="body"> The Bar to use. </param>
@@ -114,10 +116,11 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Bars_Get
-        /// <summary> Retrieves information about an fake. </summary>
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Get
+        /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Bar>> GetAsync(int barName, CancellationToken cancellationToken = default)
@@ -138,10 +141,11 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Bars_Get
-        /// <summary> Retrieves information about an fake. </summary>
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Get
+        /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Bar> Get(int barName, CancellationToken cancellationToken = default)
@@ -162,10 +166,11 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Bars_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Get
+        /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<bool>> ExistsAsync(int barName, CancellationToken cancellationToken = default)
@@ -184,10 +189,11 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Bars_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Get
+        /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> Exists(int barName, CancellationToken cancellationToken = default)
@@ -206,10 +212,11 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Bars_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Get
+        /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Bar>> GetIfExistsAsync(int barName, CancellationToken cancellationToken = default)
@@ -230,10 +237,11 @@ namespace MgmtNonStringPathVariable
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Bars_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Get
+        /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Bar> GetIfExists(int barName, CancellationToken cancellationToken = default)

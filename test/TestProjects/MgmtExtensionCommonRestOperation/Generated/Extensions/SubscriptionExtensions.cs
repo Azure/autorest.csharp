@@ -23,10 +23,11 @@ namespace MgmtExtensionCommonRestOperation
             );
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeOnesBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
+        /// Operation Id: Common_ListTypeOnesBySubscription
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
@@ -35,10 +36,11 @@ namespace MgmtExtensionCommonRestOperation
             return GetExtensionClient(subscription).GetTypeOnesAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeOnesBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
+        /// Operation Id: Common_ListTypeOnesBySubscription
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
@@ -47,10 +49,11 @@ namespace MgmtExtensionCommonRestOperation
             return GetExtensionClient(subscription).GetTypeOnes(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeTwosBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
+        /// Operation Id: Common_ListTypeTwosBySubscription
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
@@ -59,10 +62,11 @@ namespace MgmtExtensionCommonRestOperation
             return GetExtensionClient(subscription).GetTypeTwosAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeTwosBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
+        /// Operation Id: Common_ListTypeTwosBySubscription
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
