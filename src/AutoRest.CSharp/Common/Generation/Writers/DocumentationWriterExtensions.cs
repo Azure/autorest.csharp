@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteXmlDocumentationException(this CodeWriter writer, Type exception, FormattableString? description)
         {
-            return writer.WriteDocumentationLines($"<exception cref=\"{exception.FullName}\">", $"</exception>", description);
+            return writer.WriteDocumentationLines($"<exception cref=\"{exception}\">", $"</exception>", description);
         }
 
         public static CodeWriter WriteXmlDocumentationReturns(this CodeWriter writer, FormattableString text)

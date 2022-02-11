@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -37,7 +38,7 @@ namespace MgmtScopeResource
         /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         /// <returns> An object representing collection of ResourceLinks and their operations over a ResourceLink. </returns>
         public static ResourceLinkCollection GetResourceLinks(this Tenant tenant, string scope)
         {
@@ -54,7 +55,7 @@ namespace MgmtScopeResource
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public async static Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, object template, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
@@ -70,7 +71,7 @@ namespace MgmtScopeResource
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this Tenant tenant, object template, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));

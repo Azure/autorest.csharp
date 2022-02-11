@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
@@ -51,7 +52,7 @@ namespace MgmtOperations
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async static Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -68,7 +69,7 @@ namespace MgmtOperations
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));

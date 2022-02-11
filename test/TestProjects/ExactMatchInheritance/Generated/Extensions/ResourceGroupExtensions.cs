@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -50,8 +51,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async static Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroup resourceGroup, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
@@ -68,8 +69,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<ExactMatchModel2> PutExactMatchModel2(this ResourceGroup resourceGroup, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
@@ -110,8 +111,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public async static Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
@@ -128,8 +129,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<ExactMatchModel3> PutExactMatchModel3(this ResourceGroup resourceGroup, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
@@ -145,8 +146,8 @@ namespace ExactMatchInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public async static Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
@@ -161,8 +162,8 @@ namespace ExactMatchInheritance
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public static Response<ExactMatchModel3> GetExactMatchModel3(this ResourceGroup resourceGroup, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
@@ -178,8 +179,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
         public async static Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroup resourceGroup, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
@@ -196,8 +197,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<ExactMatchModel4> PutExactMatchModel4(this ResourceGroup resourceGroup, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));

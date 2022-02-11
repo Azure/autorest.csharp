@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -104,7 +105,7 @@ namespace MgmtKeyvault
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public async static Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(this Subscription subscription, VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(vaultName, nameof(vaultName));
@@ -120,7 +121,7 @@ namespace MgmtKeyvault
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         public static Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(this Subscription subscription, VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(vaultName, nameof(vaultName));

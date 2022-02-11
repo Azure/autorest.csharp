@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using Azure;
 using Azure.Core;
@@ -28,8 +29,8 @@ namespace MgmtParent
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
         /// <returns> An object representing collection of VirtualMachineExtensionImages and their operations over a VirtualMachineExtensionImage. </returns>
         public static VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(this Subscription subscription, string location, string publisherName)
         {

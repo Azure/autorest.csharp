@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -62,7 +63,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async static Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -78,7 +79,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
