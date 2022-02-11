@@ -19,8 +19,10 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -44,7 +46,7 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -70,12 +72,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -104,12 +106,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200Model204NoModelDefaultError200Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -138,12 +140,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -172,12 +174,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200Model204NoModelDefaultError204Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -206,12 +208,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -240,12 +242,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -274,12 +276,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -308,12 +310,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200Model204NoModelDefaultError202None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -342,12 +344,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -376,12 +378,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200Model204NoModelDefaultError400Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -410,12 +412,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -444,12 +446,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200Model201ModelDefaultError200Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -478,12 +480,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -512,12 +514,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200Model201ModelDefaultError201Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -546,12 +548,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -580,12 +582,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200Model201ModelDefaultError400Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -614,12 +616,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -648,12 +650,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -682,12 +684,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -716,12 +718,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -750,12 +752,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -784,12 +786,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -818,12 +820,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -852,12 +854,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -881,12 +883,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get202None204NoneDefaultError202NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -910,12 +912,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get202None204NoneDefaultError202None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -939,12 +941,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get202None204NoneDefaultError204NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -968,12 +970,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get202None204NoneDefaultError204None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -997,12 +999,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get202None204NoneDefaultError400ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1026,12 +1028,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get202None204NoneDefaultError400Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1046,12 +1048,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get202None204NoneDefaultNone202InvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1066,12 +1068,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get202None204NoneDefaultNone202Invalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1086,12 +1088,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get202None204NoneDefaultNone204NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1106,12 +1108,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get202None204NoneDefaultNone204None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1126,12 +1128,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get202None204NoneDefaultNone400NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1146,12 +1148,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get202None204NoneDefaultNone400None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1166,12 +1168,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get202None204NoneDefaultNone400InvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1186,12 +1188,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get202None204NoneDefaultNone400Invalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1214,12 +1216,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultModelA200ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1242,12 +1244,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetDefaultModelA200Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultModelA200ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1270,12 +1272,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultModelA200NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1298,12 +1300,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetDefaultModelA200None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultModelA200NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1326,12 +1328,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetDefaultModelA400ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultModelA400ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1354,12 +1356,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetDefaultModelA400Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultModelA400ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1382,12 +1384,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetDefaultModelA400NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultModelA400NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1410,12 +1412,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetDefaultModelA400None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultModelA400NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1430,12 +1432,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetDefaultNone200InvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultNone200InvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1450,12 +1452,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetDefaultNone200Invalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultNone200InvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1470,12 +1472,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetDefaultNone200NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultNone200NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1490,12 +1492,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetDefaultNone200None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultNone200NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1510,12 +1512,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetDefaultNone400InvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultNone400InvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1530,12 +1532,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetDefaultNone400Invalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultNone400InvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1550,12 +1552,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> GetDefaultNone400NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultNone400NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1570,12 +1572,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response GetDefaultNone400None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetDefaultNone400NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1598,12 +1600,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA200NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA200NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1626,12 +1628,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA200None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA200NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1654,12 +1656,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA200ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA200ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1682,12 +1684,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA200Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA200ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1710,12 +1712,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA200InvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1738,12 +1740,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA200Invalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA200InvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1766,12 +1768,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA400NoneAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA400NoneRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1794,12 +1796,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA400None(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA400NoneRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1822,12 +1824,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA400ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA400ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1850,12 +1852,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA400Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA400ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1878,12 +1880,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA400InvalidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1906,12 +1908,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA400Invalid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA400InvalidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1934,12 +1936,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get200ModelA202ValidAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA202ValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1962,12 +1964,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get200ModelA202Valid(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
+            using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet200ModelA202ValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

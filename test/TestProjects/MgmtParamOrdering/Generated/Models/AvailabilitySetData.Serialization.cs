@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace MgmtParamOrdering
 {
@@ -42,6 +43,7 @@ namespace MgmtParamOrdering
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("bar"))
@@ -79,8 +81,13 @@ namespace MgmtParamOrdering
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new AvailabilitySetData(id, name, type, tags, location, bar.Value);
+            return new AvailabilitySetData(id, name, type, systemData, tags, location, bar.Value);
         }
     }
 }

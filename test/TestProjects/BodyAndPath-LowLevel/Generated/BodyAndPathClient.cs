@@ -20,8 +20,10 @@ namespace BodyAndPath_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -45,7 +47,7 @@ namespace BodyAndPath_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new BodyAndPathClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -63,12 +65,12 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNull(itemName, nameof(itemName));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateRequest(itemName, content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -89,12 +91,12 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNull(itemName, nameof(itemName));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateRequest(itemName, content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -117,12 +119,12 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNull(itemNameStream, nameof(itemNameStream));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -145,12 +147,12 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNull(itemNameStream, nameof(itemNameStream));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -173,12 +175,12 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNull(enumName2, nameof(enumName2));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -201,12 +203,12 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNull(enumName2, nameof(enumName2));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -221,12 +223,12 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBodyAndPathsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -241,12 +243,12 @@ namespace BodyAndPath_LowLevel
         public virtual Response GetBodyAndPaths(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBodyAndPathsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -261,12 +263,12 @@ namespace BodyAndPath_LowLevel
         public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetItemsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -281,12 +283,12 @@ namespace BodyAndPath_LowLevel
         public virtual Response GetItems(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetItemsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -312,12 +314,12 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNull(item4, nameof(item4));
             Argument.AssertNotNull(item1, nameof(item1));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -343,12 +345,12 @@ namespace BodyAndPath_LowLevel
             Argument.AssertNotNull(item4, nameof(item4));
             Argument.AssertNotNull(item1, nameof(item1));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

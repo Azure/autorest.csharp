@@ -21,10 +21,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Tenant = "tenant";
         public const string ManagementGroups = "managementGroups";
         public const string Any = "*";
-        private const string _managementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
-        private const string _resourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
-        private const string _subscriptionScopePrefix = "/subscriptions";
-        private const string _tenantScopePrefix = "/tenants";
 
         private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?>();
@@ -65,15 +61,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // if there is no providers segment, myself should be a scope request path. Just return myself
             if (indexOfProvider >= 0)
             {
-                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(_managementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(RequestPath.ManagementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                     return RequestPath.ManagementGroup;
                 return new RequestPath(requestPath.Take(indexOfProvider));
             }
-            if (requestPath.SerializedPath.StartsWith(_resourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+            if (requestPath.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                 return RequestPath.ResourceGroup;
-            if (requestPath.SerializedPath.StartsWith(_subscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+            if (requestPath.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                 return RequestPath.Subscription;
-            if (requestPath.SerializedPath.Equals(_tenantScopePrefix))
+            if (requestPath.SerializedPath.Equals(RequestPath.TenantScopePrefix))
                 return RequestPath.Tenant;
             return requestPath;
         }

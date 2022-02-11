@@ -4,9 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Azure.Core;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -14,10 +16,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis.Options;
-using System.Diagnostics.CodeAnalysis;
-using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Common.Output.Models;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -65,12 +64,12 @@ namespace AutoRest.CSharp.Generation.Writers
             if (field.WriteAsProperty)
             {
                 writer
-                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public virtual " : "private ");
+                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public " : (modifiers.HasFlag(FieldModifiers.Internal) ? "internal " : "private "));
             }
             else
             {
                 writer
-                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public " : "private ")
+                    .AppendRaw(modifiers.HasFlag(FieldModifiers.Public) ? "public " : (modifiers.HasFlag(FieldModifiers.Internal) ? "internal " : "private "))
                     .AppendRawIf("const ", modifiers.HasFlag(FieldModifiers.Const))
                     .AppendRawIf("static ", modifiers.HasFlag(FieldModifiers.Static))
                     .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly));
@@ -88,44 +87,96 @@ namespace AutoRest.CSharp.Generation.Writers
                 return writer.AppendRaw(" = ").Append(field.DefaultValue).Line($";");
             }
 
-            return field.WriteAsProperty ? writer : writer.Line($";");
+            return field.WriteAsProperty ? writer.Line() : writer.Line($";");
         }
 
-        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method, params string[] disabledWarnings)
+        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+        {
+            WriteDisableWarnings(writer, disabledWarnings);
+
+            writer.Append($"{methodBase.Modifiers} ");
+            if (methodBase is MethodSignature method)
+            {
+                if (method.ReturnType != null)
+                {
+                    writer.Append($"{method.ReturnType} ");
+                }
+                else
+                {
+                    writer.AppendRaw("void ");
+                }
+            }
+
+            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodBase.Name);
+        }
+
+        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, bool isAsync, params string[] disabledWarnings)
+        {
+            WriteDisableWarnings(writer, disabledWarnings);
+
+            writer.Append($"{methodBase.Modifiers} ");
+            if (methodBase is MethodSignature method)
+            {
+                if (isAsync && !method.IsPageable)
+                    writer.Append($"async ");
+
+                var firstParam = method.Parameters.FirstOrDefault();
+                bool isExtensionMethod = firstParam is not null && firstParam.IsExtensionParameter;
+
+                if (method.Modifiers.Contains("public") && !isExtensionMethod)
+                    writer.Append($"virtual ");
+
+                if (isExtensionMethod)
+                    writer.Append($"static ");
+
+                if (method.ReturnType != null)
+                {
+                    var finalType = method.IsPageable ? method.ReturnType.WrapPageable(isAsync) : method.ReturnType.WrapAsync(isAsync);
+                    writer.Append($"{finalType} ");
+                }
+                else
+                {
+                    writer.AppendRaw("void ");
+                }
+            }
+
+            string methodName = isAsync ? $"{methodBase.Name}Async" : methodBase.Name;
+            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodName);
+        }
+
+        private static void WriteDisableWarnings(CodeWriter writer, string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
             {
                 writer.Line($"#pragma warning disable {disabledWarning}");
             }
+        }
 
-            writer
-                .Append($"{method.Modifiers} ")
-                .AppendIf($"{method.ReturnType} ", method.ReturnType != null)
-                .Append($"{method.Name}(");
+        private static CodeWriter.CodeWriterScope WriteMethodDeclarationParameters(CodeWriter writer, MethodSignatureBase methodBase, string[] disabledWarnings, string methodName)
+        {
+            writer.Append($"{methodName}(");
 
-            foreach (var parameter in method.Parameters)
+            foreach (var parameter in methodBase.Parameters)
             {
                 writer.WriteParameter(parameter);
             }
             writer.RemoveTrailingComma();
             writer.Append($")");
 
-            if (method.BaseMethod?.Parameters.Length > 0)
+            if (methodBase is ConstructorSignature { Initializer: { } } constructor)
             {
-                writer.Append($": base(");
-                foreach (var parameter in method.BaseMethod.Parameters)
+                var (isBase, arguments) = constructor.Initializer;
+
+                if (!isBase || arguments.Any())
                 {
-                    if (parameter is ParameterInvocation invocation && invocation.Invocation != null)
+                    writer.AppendRaw(isBase ? ": base(" : ": this(");
+                    foreach (var argument in arguments)
                     {
-                        writer.Append($"{invocation.Invocation}, ");
+                        writer.Append($"{argument}, ");
                     }
-                    else
-                    {
-                        writer.Append($"{parameter.Name:I}, ");
-                    }
+                    writer.RemoveTrailingComma();
+                    writer.Append($")");
                 }
-                writer.RemoveTrailingComma();
-                writer.Append($")");
             }
 
             writer.Line();
@@ -137,12 +188,12 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Scope();
         }
 
-        public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignature method)
+        public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
-            writer.WriteXmlDocumentationSummary($"{method.Description}");
-            writer.WriteXmlDocumentationParameters(method.Parameters);
-            writer.WriteXmlDocumentationRequiredParametersException(method.Parameters);
-            if (method.ReturnDescription != null)
+            writer.WriteXmlDocumentationSummary($"{methodBase.Description}");
+            writer.WriteXmlDocumentationParameters(methodBase.Parameters);
+            writer.WriteXmlDocumentationRequiredParametersException(methodBase.Parameters);
+            if (methodBase is MethodSignature {ReturnDescription: { }} method)
             {
                 writer.WriteXmlDocumentationReturns(method.ReturnDescription);
             }
@@ -163,6 +214,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
+            if (clientParameter.IsExtensionParameter)
+                writer.Append($"this ");
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null && clientParameter.UseDefaultValueInCtorParam)
             {
@@ -305,7 +358,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && !parameter.Type.IsValueType;
 
-        private static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
+        internal static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
 

@@ -19,8 +19,10 @@ namespace header_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -44,7 +46,7 @@ namespace header_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new HeaderClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -69,12 +71,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(userAgent, nameof(userAgent));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamExistingKeyRequest(userAgent, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -102,12 +104,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(userAgent, nameof(userAgent));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamExistingKeyRequest(userAgent, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -131,12 +133,12 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseExistingKeyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseExistingKeyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -160,12 +162,12 @@ namespace header_LowLevel
         public virtual Response ResponseExistingKey(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseExistingKeyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -193,12 +195,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(contentType, nameof(contentType));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamProtectedKeyRequest(contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -226,12 +228,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(contentType, nameof(contentType));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamProtectedKeyRequest(contentType, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -255,12 +257,12 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseProtectedKeyAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseProtectedKeyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -284,12 +286,12 @@ namespace header_LowLevel
         public virtual Response ResponseProtectedKey(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseProtectedKeyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -318,12 +320,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamIntegerRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -352,12 +354,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamIntegerRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -385,12 +387,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseIntegerRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -418,12 +420,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseIntegerRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -452,12 +454,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamLongRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -486,12 +488,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamLongRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -519,12 +521,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseLongRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -552,12 +554,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseLongRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -586,12 +588,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamFloatRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -620,12 +622,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamFloatRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -653,12 +655,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseFloatRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -686,12 +688,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseFloatRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -720,12 +722,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDoubleRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -754,12 +756,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDoubleRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -787,12 +789,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDoubleRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -820,12 +822,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDoubleRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -854,12 +856,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamBoolRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -888,12 +890,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamBoolRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -921,12 +923,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseBoolRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -954,12 +956,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseBoolRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -988,12 +990,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamStringRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1022,12 +1024,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamStringRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1055,12 +1057,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseStringRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1088,12 +1090,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseStringRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1122,12 +1124,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDateRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1156,12 +1158,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDateRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1189,12 +1191,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDateRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1222,12 +1224,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDateRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1256,12 +1258,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDatetimeRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1290,12 +1292,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDatetimeRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1323,12 +1325,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1356,12 +1358,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1390,12 +1392,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1424,12 +1426,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1457,12 +1459,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1490,12 +1492,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1524,12 +1526,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDurationRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1558,12 +1560,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDurationRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1591,12 +1593,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDurationRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1624,12 +1626,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDurationRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1659,12 +1661,12 @@ namespace header_LowLevel
             Argument.AssertNotNull(scenario, nameof(scenario));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamByteRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1694,12 +1696,12 @@ namespace header_LowLevel
             Argument.AssertNotNull(scenario, nameof(scenario));
             Argument.AssertNotNull(value, nameof(value));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamByteRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1727,12 +1729,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseByteRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1760,12 +1762,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseByteRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1794,12 +1796,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamEnumRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1828,12 +1830,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamEnumRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1861,12 +1863,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseEnumRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1894,12 +1896,12 @@ namespace header_LowLevel
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseEnumRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1923,12 +1925,12 @@ namespace header_LowLevel
         public virtual async Task<Response> CustomRequestIdAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCustomRequestIdRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1952,12 +1954,12 @@ namespace header_LowLevel
         public virtual Response CustomRequestId(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCustomRequestIdRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

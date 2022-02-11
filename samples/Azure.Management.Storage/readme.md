@@ -31,9 +31,6 @@ operation-positions:
 override-operation-name:
   DeletedAccounts_List: GetAll
 
-mgmt-debug:
-  show-request-path: true
-
 directive:
   - rename-model:
       from: BlobServiceProperties

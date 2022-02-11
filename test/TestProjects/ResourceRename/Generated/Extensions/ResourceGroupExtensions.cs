@@ -12,14 +12,21 @@ namespace ResourceRename
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region SshPublicKeyInfo
-        /// <summary> Gets an object representing a SshPublicKeyInfoCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of SshPublicKeyInfos in the SshPublicKeyInfo. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SshPublicKeyInfoCollection" /> object. </returns>
+        /// <returns> An object representing collection of SshPublicKeyInfos and their operations over a SshPublicKeyInfo. </returns>
         public static SshPublicKeyInfoCollection GetSshPublicKeyInfos(this ResourceGroup resourceGroup)
         {
-            return new SshPublicKeyInfoCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetSshPublicKeyInfos();
         }
-        #endregion
     }
 }

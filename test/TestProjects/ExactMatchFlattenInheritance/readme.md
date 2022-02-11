@@ -13,8 +13,6 @@ model-namespace: false
 input-file: $(this-folder)/AzureResourceFlattenProperties.json
 namespace: ExactMatchFlattenInheritance
 
-mgmt-debug:
-  show-request-path: true
 # need the following to trigger flattening
 payload-flattening-threshold: 2
 ```

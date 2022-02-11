@@ -19,8 +19,10 @@ namespace SubClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -42,7 +44,7 @@ namespace SubClients_LowLevel
             Argument.AssertNotNull(pipeline, nameof(pipeline));
             endpoint ??= new Uri("http://localhost:3000");
 
-            _clientDiagnostics = clientDiagnostics;
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -57,12 +59,12 @@ namespace SubClients_LowLevel
         {
             Argument.AssertNotNull(subParameter, nameof(subParameter));
 
-            using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
+            using var scope = ClientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetSubParameterRequest(subParameter, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -80,12 +82,12 @@ namespace SubClients_LowLevel
         {
             Argument.AssertNotNull(subParameter, nameof(subParameter));
 
-            using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
+            using var scope = ClientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetSubParameterRequest(subParameter, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

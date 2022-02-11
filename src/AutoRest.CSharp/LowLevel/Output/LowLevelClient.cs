@@ -23,11 +23,11 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultAccessibility => "public";
 
         private readonly bool _hasPublicConstructors;
-        private MethodSignature? _subClientInternalConstructor;
+        private ConstructorSignature? _subClientInternalConstructor;
 
         public string Description { get; }
-        public MethodSignature[] PublicConstructors { get; }
-        public MethodSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
+        public ConstructorSignature[] PublicConstructors { get; }
+        public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
         public IReadOnlyList<LowLevelClient> SubClients;
         public IReadOnlyList<RestClientMethod> RequestMethods;
@@ -53,9 +53,9 @@ namespace AutoRest.CSharp.Output.Models
             ClientOptions = clientOptions;
             _hasPublicConstructors = !IsSubClient;
 
-            Parameters = builder.GetOrderedParameters();
+            Parameters = builder.GetOrderedParametersByRequired();
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
-            Fields = new ClientFields(context, Parameters);
+            Fields = new ClientFields(Parameters, context);
 
             PublicConstructors = BuildPublicConstructors().ToArray();
 
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<MethodSignature> BuildPublicConstructors()
+        private IEnumerable<ConstructorSignature> BuildPublicConstructors()
         {
             if (!_hasPublicConstructors)
             {
@@ -140,20 +140,20 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private MethodSignature BuildPublicConstructor(FieldDeclaration? credentialField, Parameter clientOptionsParameter)
+        private ConstructorSignature BuildPublicConstructor(FieldDeclaration? credentialField, Parameter clientOptionsParameter)
         {
             var constructorParameters = RestClientBuilder.GetConstructorParameters(Parameters, credentialField?.Type).Append(clientOptionsParameter).ToArray();
-            return new MethodSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "public", constructorParameters);
+            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "public", constructorParameters);
         }
 
-        private MethodSignature BuildSubClientInternalConstructor()
+        private ConstructorSignature BuildSubClientInternalConstructor()
         {
             var constructorParameters = new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline, KnownParameters.KeyAuth, KnownParameters.TokenAuth }
                 .Concat(RestClientBuilder.GetConstructorParameters(Parameters, null, includeAPIVersion: true))
                 .Where(p => Fields.GetFieldByParameter(p) != null)
                 .ToArray();
 
-            return new MethodSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "internal", constructorParameters);
+            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "internal", constructorParameters);
         }
     }
 }

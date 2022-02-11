@@ -10,8 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using SupersetFlattenInheritance.Models;
 
@@ -20,1911 +18,887 @@ namespace SupersetFlattenInheritance
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region ResourceModel1
-        /// <summary> Gets an object representing a ResourceModel1Collection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of ResourceModel1s in the ResourceModel1. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourceModel1Collection" /> object. </returns>
+        /// <returns> An object representing collection of ResourceModel1s and their operations over a ResourceModel1. </returns>
         public static ResourceModel1Collection GetResourceModel1s(this ResourceGroup resourceGroup)
         {
-            return new ResourceModel1Collection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetResourceModel1s();
         }
-        #endregion
 
-        #region TrackedResourceModel1
-        /// <summary> Gets an object representing a TrackedResourceModel1Collection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of TrackedResourceModel1s in the TrackedResourceModel1. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel1Collection" /> object. </returns>
+        /// <returns> An object representing collection of TrackedResourceModel1s and their operations over a TrackedResourceModel1. </returns>
         public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroup resourceGroup)
         {
-            return new TrackedResourceModel1Collection(resourceGroup);
-        }
-        #endregion
-
-        private static CustomModel1SRestOperations GetCustomModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new CustomModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
+            return GetExtensionClient(resourceGroup).GetTrackedResourceModel1s();
         }
 
-        private static CustomModel2SRestOperations GetCustomModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new CustomModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        private static SubResourceModel1SRestOperations GetSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new SubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        private static SubResourceModel2SRestOperations GetSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new SubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        private static WritableSubResourceModel1SRestOperations GetWritableSubResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new WritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        private static WritableSubResourceModel2SRestOperations GetWritableSubResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new WritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        private static ResourceModel2SRestOperations GetResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new ResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        private static TrackedResourceModel2SRestOperations GetTrackedResourceModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new TrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_List
-        /// <summary> Lists the CustomModel1s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
+        /// Operation Id: CustomModel1s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel1> GetCustomModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<CustomModel1>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetCustomModel1sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_List
-        /// <summary> Lists the CustomModel1s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
+        /// Operation Id: CustomModel1s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel1> GetCustomModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<CustomModel1> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetCustomModel1s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<CustomModel1>> PutCustomModel1Async(this ResourceGroup resourceGroup, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<CustomModel1>> PutCustomModel1Async(this ResourceGroup resourceGroup, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutCustomModel1");
-                scope.Start();
-                try
-                {
-                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutCustomModel1Async(customModel1SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<CustomModel1> PutCustomModel1(this ResourceGroup resourceGroup, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutCustomModel1");
-                scope.Start();
-                try
-                {
-                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutCustomModel1(customModel1SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
-        public static async Task<Response<CustomModel1>> GetCustomModel1Async(this ResourceGroup resourceGroup, string customModel1SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<CustomModel1>> GetCustomModel1Async(this ResourceGroup resourceGroup, string customModel1SName, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1");
-                scope.Start();
-                try
-                {
-                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetCustomModel1Async(customModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public static Response<CustomModel1> GetCustomModel1(this ResourceGroup resourceGroup, string customModel1SName, CancellationToken cancellationToken = default)
         {
-            if (customModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel1");
-                scope.Start();
-                try
-                {
-                    CustomModel1SRestOperations restOperations = GetCustomModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel1SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetCustomModel1(customModel1SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_List
-        /// <summary> Lists the CustomModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
+        /// Operation Id: CustomModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel2> GetCustomModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<CustomModel2>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetCustomModel2sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_List
-        /// <summary> Lists the CustomModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
+        /// Operation Id: CustomModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel2> GetCustomModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<CustomModel2> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetCustomModel2s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<CustomModel2>> PutCustomModel2Async(this ResourceGroup resourceGroup, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<CustomModel2>> PutCustomModel2Async(this ResourceGroup resourceGroup, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutCustomModel2");
-                scope.Start();
-                try
-                {
-                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutCustomModel2Async(customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<CustomModel2> PutCustomModel2(this ResourceGroup resourceGroup, string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutCustomModel2");
-                scope.Start();
-                try
-                {
-                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutCustomModel2(customModel2SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
-        public static async Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroup resourceGroup, string customModel2SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroup resourceGroup, string customModel2SName, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2");
-                scope.Start();
-                try
-                {
-                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetCustomModel2Async(customModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public static Response<CustomModel2> GetCustomModel2(this ResourceGroup resourceGroup, string customModel2SName, CancellationToken cancellationToken = default)
         {
-            if (customModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(customModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetCustomModel2");
-                scope.Start();
-                try
-                {
-                    CustomModel2SRestOperations restOperations = GetCustomModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, customModel2SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetCustomModel2(customModel2SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_List
-        /// <summary> Lists the SubResourceModel1s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
+        /// Operation Id: SubResourceModel1s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<SubResourceModel1>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetSubResourceModel1sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_List
-        /// <summary> Lists the SubResourceModel1s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
+        /// Operation Id: SubResourceModel1s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel1> GetSubResourceModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<SubResourceModel1> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetSubResourceModel1s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(this ResourceGroup resourceGroup, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<SubResourceModel1>> PutSubResourceModel1Async(this ResourceGroup resourceGroup, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSubResourceModel1");
-                scope.Start();
-                try
-                {
-                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutSubResourceModel1Async(subResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<SubResourceModel1> PutSubResourceModel1(this ResourceGroup resourceGroup, string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSubResourceModel1");
-                scope.Start();
-                try
-                {
-                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutSubResourceModel1(subResourceModel1SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
-        public static async Task<Response<SubResourceModel1>> GetSubResourceModel1Async(this ResourceGroup resourceGroup, string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<SubResourceModel1>> GetSubResourceModel1Async(this ResourceGroup resourceGroup, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1");
-                scope.Start();
-                try
-                {
-                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetSubResourceModel1Async(subResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public static Response<SubResourceModel1> GetSubResourceModel1(this ResourceGroup resourceGroup, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel1");
-                scope.Start();
-                try
-                {
-                    SubResourceModel1SRestOperations restOperations = GetSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel1SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetSubResourceModel1(subResourceModel1SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_List
-        /// <summary> Lists the SubResourceModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
+        /// Operation Id: SubResourceModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<SubResourceModel2>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetSubResourceModel2sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_List
-        /// <summary> Lists the SubResourceModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
+        /// Operation Id: SubResourceModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel2> GetSubResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<SubResourceModel2> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetSubResourceModel2s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(this ResourceGroup resourceGroup, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<SubResourceModel2>> PutSubResourceModel2Async(this ResourceGroup resourceGroup, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSubResourceModel2");
-                scope.Start();
-                try
-                {
-                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutSubResourceModel2Async(subResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<SubResourceModel2> PutSubResourceModel2(this ResourceGroup resourceGroup, string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSubResourceModel2");
-                scope.Start();
-                try
-                {
-                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutSubResourceModel2(subResourceModel2SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
-        public static async Task<Response<SubResourceModel2>> GetSubResourceModel2Async(this ResourceGroup resourceGroup, string subResourceModel2SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<SubResourceModel2>> GetSubResourceModel2Async(this ResourceGroup resourceGroup, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2");
-                scope.Start();
-                try
-                {
-                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetSubResourceModel2Async(subResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public static Response<SubResourceModel2> GetSubResourceModel2(this ResourceGroup resourceGroup, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (subResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(subResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSubResourceModel2");
-                scope.Start();
-                try
-                {
-                    SubResourceModel2SRestOperations restOperations = GetSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, subResourceModel2SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetSubResourceModel2(subResourceModel2SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_List
-        /// <summary> Lists the WritableSubResourceModel1s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
+        /// Operation Id: WritableSubResourceModel1s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<WritableSubResourceModel1>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetWritableSubResourceModel1sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_List
-        /// <summary> Lists the WritableSubResourceModel1s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
+        /// Operation Id: WritableSubResourceModel1s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<WritableSubResourceModel1> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetWritableSubResourceModel1s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutWritableSubResourceModel1");
-                scope.Start();
-                try
-                {
-                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutWritableSubResourceModel1Async(writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<WritableSubResourceModel1> PutWritableSubResourceModel1(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutWritableSubResourceModel1");
-                scope.Start();
-                try
-                {
-                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutWritableSubResourceModel1(writableSubResourceModel1SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
-        public static async Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1");
-                scope.Start();
-                try
-                {
-                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetWritableSubResourceModel1Async(writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public static Response<WritableSubResourceModel1> GetWritableSubResourceModel1(this ResourceGroup resourceGroup, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel1");
-                scope.Start();
-                try
-                {
-                    WritableSubResourceModel1SRestOperations restOperations = GetWritableSubResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel1SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetWritableSubResourceModel1(writableSubResourceModel1SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_List
-        /// <summary> Lists the WritableSubResourceModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
+        /// Operation Id: WritableSubResourceModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<WritableSubResourceModel2>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetWritableSubResourceModel2sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_List
-        /// <summary> Lists the WritableSubResourceModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
+        /// Operation Id: WritableSubResourceModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<WritableSubResourceModel2> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetWritableSubResourceModel2s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutWritableSubResourceModel2");
-                scope.Start();
-                try
-                {
-                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutWritableSubResourceModel2Async(writableSubResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<WritableSubResourceModel2> PutWritableSubResourceModel2(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutWritableSubResourceModel2");
-                scope.Start();
-                try
-                {
-                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutWritableSubResourceModel2(writableSubResourceModel2SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
-        public static async Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2");
-                scope.Start();
-                try
-                {
-                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetWritableSubResourceModel2Async(writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public static Response<WritableSubResourceModel2> GetWritableSubResourceModel2(this ResourceGroup resourceGroup, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (writableSubResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(writableSubResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetWritableSubResourceModel2");
-                scope.Start();
-                try
-                {
-                    WritableSubResourceModel2SRestOperations restOperations = GetWritableSubResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, writableSubResourceModel2SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetWritableSubResourceModel2(writableSubResourceModel2SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_List
-        /// <summary> Lists the ResourceModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
+        /// Operation Id: ResourceModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceModel2> GetResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<ResourceModel2>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetResourceModel2sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_List
-        /// <summary> Lists the ResourceModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
+        /// Operation Id: ResourceModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceModel2> GetResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<ResourceModel2> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetResourceModel2s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ResourceModel2>> PutResourceModel2Async(this ResourceGroup resourceGroup, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<ResourceModel2>> PutResourceModel2Async(this ResourceGroup resourceGroup, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutResourceModel2");
-                scope.Start();
-                try
-                {
-                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutResourceModel2Async(resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<ResourceModel2> PutResourceModel2(this ResourceGroup resourceGroup, string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutResourceModel2");
-                scope.Start();
-                try
-                {
-                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutResourceModel2(resourceModel2SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
-        public static async Task<Response<ResourceModel2>> GetResourceModel2Async(this ResourceGroup resourceGroup, string resourceModel2SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<ResourceModel2>> GetResourceModel2Async(this ResourceGroup resourceGroup, string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2");
-                scope.Start();
-                try
-                {
-                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetResourceModel2Async(resourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public static Response<ResourceModel2> GetResourceModel2(this ResourceGroup resourceGroup, string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (resourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetResourceModel2");
-                scope.Start();
-                try
-                {
-                    ResourceModel2SRestOperations restOperations = GetResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, resourceModel2SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetResourceModel2(resourceModel2SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_List
-        /// <summary> Lists the TrackedResourceModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
+        /// Operation Id: TrackedResourceModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<TrackedResourceModel2>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetTrackedResourceModel2sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_List
-        /// <summary> Lists the TrackedResourceModel2s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
+        /// Operation Id: TrackedResourceModel2s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<TrackedResourceModel2> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetTrackedResourceModel2s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(this ResourceGroup resourceGroup, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(this ResourceGroup resourceGroup, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutTrackedResourceModel2");
-                scope.Start();
-                try
-                {
-                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutTrackedResourceModel2Async(trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<TrackedResourceModel2> PutTrackedResourceModel2(this ResourceGroup resourceGroup, string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutTrackedResourceModel2");
-                scope.Start();
-                try
-                {
-                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutTrackedResourceModel2(trackedResourceModel2SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
-        public static async Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(this ResourceGroup resourceGroup, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(this ResourceGroup resourceGroup, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2");
-                scope.Start();
-                try
-                {
-                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetTrackedResourceModel2Async(trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public static Response<TrackedResourceModel2> GetTrackedResourceModel2(this ResourceGroup resourceGroup, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            if (trackedResourceModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetTrackedResourceModel2");
-                scope.Start();
-                try
-                {
-                    TrackedResourceModel2SRestOperations restOperations = GetTrackedResourceModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, trackedResourceModel2SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetTrackedResourceModel2(trackedResourceModel2SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroup resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroup resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutNonResourceModel1");
-                scope.Start();
-                try
-                {
-                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutNonResourceModel1Async(nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroup resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutNonResourceModel1");
-                scope.Start();
-                try
-                {
-                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutNonResourceModel1(nonResourceModel1SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
-        public static async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(this ResourceGroup resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<NonResourceModel1>> GetNonResourceModel1Async(this ResourceGroup resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetNonResourceModel1");
-                scope.Start();
-                try
-                {
-                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetNonResourceModel1Async(nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public static Response<NonResourceModel1> GetNonResourceModel1(this ResourceGroup resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            if (nonResourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(nonResourceModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetNonResourceModel1");
-                scope.Start();
-                try
-                {
-                    NonResourceModel1SRestOperations restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, nonResourceModel1SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetNonResourceModel1(nonResourceModel1SName, cancellationToken);
         }
     }
 }

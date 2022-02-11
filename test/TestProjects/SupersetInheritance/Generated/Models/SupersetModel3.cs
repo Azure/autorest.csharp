@@ -7,7 +7,7 @@
 
 namespace SupersetInheritance.Models
 {
-    /// <summary> The SupersetModel3. </summary>
+    /// <summary> id is integer, the model is Non-Resource. </summary>
     public partial class SupersetModel3
     {
         /// <summary> Initializes a new instance of SupersetModel3. </summary>

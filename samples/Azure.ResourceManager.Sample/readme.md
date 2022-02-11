@@ -15,8 +15,6 @@ head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
 
-mgmt-debug:
-  show-request-path: true
 directive:
   - rename-model:
       from: SshPublicKey

@@ -13,7 +13,7 @@ using MgmtNonStringPathVariable.Models;
 namespace MgmtNonStringPathVariable
 {
     /// <summary> A class representing the Bar data model. </summary>
-    public partial class BarData : TrackedResource
+    public partial class BarData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of BarData. </summary>
         /// <param name="location"> The location. </param>
@@ -25,10 +25,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal BarData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, BarProperties properties) : base(id, name, type, tags, location)
+        internal BarData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, BarProperties properties) : base(id, name, type, systemData, tags, location)
         {
             Properties = properties;
         }

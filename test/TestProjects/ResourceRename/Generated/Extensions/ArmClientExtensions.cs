@@ -15,13 +15,17 @@ namespace ResourceRename
     {
         #region SshPublicKeyInfo
         /// <summary> Gets an object representing a SshPublicKeyInfo along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="SshPublicKeyInfo" /> object. </returns>
-        public static SshPublicKeyInfo GetSshPublicKeyInfo(this ArmClient armClient, ResourceIdentifier id)
+        public static SshPublicKeyInfo GetSshPublicKeyInfo(this ArmClient client, ResourceIdentifier id)
         {
-            SshPublicKeyInfo.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SshPublicKeyInfo(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                SshPublicKeyInfo.ValidateResourceId(id);
+                return new SshPublicKeyInfo(client, id);
+            }
+            );
         }
         #endregion
     }

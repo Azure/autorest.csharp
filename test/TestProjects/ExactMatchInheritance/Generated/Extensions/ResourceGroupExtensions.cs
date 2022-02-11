@@ -10,8 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using ExactMatchInheritance.Models;
 
@@ -20,407 +18,211 @@ namespace ExactMatchInheritance
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region ExactMatchModel1
-        /// <summary> Gets an object representing a ExactMatchModel1Collection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of ExactMatchModel1s in the ExactMatchModel1. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel1Collection" /> object. </returns>
+        /// <returns> An object representing collection of ExactMatchModel1s and their operations over a ExactMatchModel1. </returns>
         public static ExactMatchModel1Collection GetExactMatchModel1s(this ResourceGroup resourceGroup)
         {
-            return new ExactMatchModel1Collection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetExactMatchModel1s();
         }
-        #endregion
 
-        #region ExactMatchModel5
-        /// <summary> Gets an object representing a ExactMatchModel5Collection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of ExactMatchModel5s in the ExactMatchModel5. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel5Collection" /> object. </returns>
+        /// <returns> An object representing collection of ExactMatchModel5s and their operations over a ExactMatchModel5. </returns>
         public static ExactMatchModel5Collection GetExactMatchModel5s(this ResourceGroup resourceGroup)
         {
-            return new ExactMatchModel5Collection(resourceGroup);
-        }
-        #endregion
-
-        private static ExactMatchModel2SRestOperations GetExactMatchModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new ExactMatchModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
+            return GetExtensionClient(resourceGroup).GetExactMatchModel5s();
         }
 
-        private static ExactMatchModel3SRestOperations GetExactMatchModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new ExactMatchModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        private static ExactMatchModel4SRestOperations GetExactMatchModel4SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel2s/{exactMatchModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel2s/{exactMatchModel2sName}
+        /// Operation Id: ExactMatchModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroup resourceGroup, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroup resourceGroup, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel2");
-                scope.Start();
-                try
-                {
-                    ExactMatchModel2SRestOperations restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutExactMatchModel2Async(exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel2s/{exactMatchModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel2s/{exactMatchModel2sName}
+        /// Operation Id: ExactMatchModel2s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<ExactMatchModel2> PutExactMatchModel2(this ResourceGroup resourceGroup, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel2SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel2");
-                scope.Start();
-                try
-                {
-                    ExactMatchModel2SRestOperations restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel2SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutExactMatchModel2(exactMatchModel2SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel3s_List
-        /// <summary> Lists the ExactMatchModel3s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s
+        /// Operation Id: ExactMatchModel3s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                async Task<Page<ExactMatchModel3>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3s");
-                    scope.Start();
-                    try
-                    {
-                        var response = await restOperations.ListAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetExactMatchModel3sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel3s_List
-        /// <summary> Lists the ExactMatchModel3s for this <see cref="ResourceGroup" />. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s
+        /// Operation Id: ExactMatchModel3s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ExactMatchModel3> GetExactMatchModel3s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                Page<ExactMatchModel3> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3s");
-                    scope.Start();
-                    try
-                    {
-                        var response = restOperations.List(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetExactMatchModel3s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel3s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
+        /// Operation Id: ExactMatchModel3s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel3");
-                scope.Start();
-                try
-                {
-                    ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutExactMatchModel3Async(exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel3s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
+        /// Operation Id: ExactMatchModel3s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<ExactMatchModel3> PutExactMatchModel3(this ResourceGroup resourceGroup, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel3");
-                scope.Start();
-                try
-                {
-                    ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutExactMatchModel3(exactMatchModel3SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel3s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
+        /// Operation Id: ExactMatchModel3s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public async static Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3");
-                scope.Start();
-                try
-                {
-                    ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.GetAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).GetExactMatchModel3Async(exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel3s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
+        /// Operation Id: ExactMatchModel3s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public static Response<ExactMatchModel3> GetExactMatchModel3(this ResourceGroup resourceGroup, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel3SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetExactMatchModel3");
-                scope.Start();
-                try
-                {
-                    ExactMatchModel3SRestOperations restOperations = GetExactMatchModel3SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Get(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel3SName, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).GetExactMatchModel3(exactMatchModel3SName, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel4s/{exactMatchModel4sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel4s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel4s/{exactMatchModel4sName}
+        /// Operation Id: ExactMatchModel4s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroup resourceGroup, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public async static Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroup resourceGroup, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel4SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel4");
-                scope.Start();
-                try
-                {
-                    ExactMatchModel4SRestOperations restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.PutAsync(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).PutExactMatchModel4Async(exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel4s/{exactMatchModel4sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ExactMatchModel4s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel4s/{exactMatchModel4sName}
+        /// Operation Id: ExactMatchModel4s_Put
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
         public static Response<ExactMatchModel4> PutExactMatchModel4(this ResourceGroup resourceGroup, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
-            if (exactMatchModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(exactMatchModel4SName));
-            }
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutExactMatchModel4");
-                scope.Start();
-                try
-                {
-                    ExactMatchModel4SRestOperations restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.Put(resourceGroup.Id.SubscriptionId, resourceGroup.Id.ResourceGroupName, exactMatchModel4SName, parameters, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(resourceGroup).PutExactMatchModel4(exactMatchModel4SName, parameters, cancellationToken);
         }
     }
 }

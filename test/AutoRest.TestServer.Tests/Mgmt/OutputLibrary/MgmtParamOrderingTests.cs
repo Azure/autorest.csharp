@@ -6,6 +6,7 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
+using MgmtParamOrdering;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
@@ -45,6 +46,28 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 .Operations.Single(o => o.CSharpName().Equals(methodName));
 
             Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.In == ParameterLocation.Path).Select(p => p.CSharpName())));
+        }
+
+        [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "parameters", "quick" }, new[] { true, true, false })]
+        [TestCase(typeof(VirtualMachineScaleSetCollection), "Get", false, new[]{ "vmScaleSetName", "expand"}, new[] { true, false })]
+        [TestCase(typeof(VirtualMachineScaleSet), "Update", true, new[]{ "parameters"}, new[] { false })]
+        [TestCase(typeof(VirtualMachineScaleSet), "Delete", true, new[]{ "forceDeletion"}, new[] { true })]
+        [TestCase(typeof(VirtualMachineScaleSet), "Get", false, new[]{ "expand"}, new[] { false })]
+        [TestCase(typeof(VirtualMachineScaleSet), "Deallocate", true, new[]{ "vmInstanceIDs", "expand" }, new[] { false, false })]
+        [TestCase(typeof(VirtualMachineScaleSet), "DeleteInstances", true, new[]{ "vmInstanceIDs", "forceDeletion"}, new[] { true, false })]
+        [TestCase(typeof(VirtualMachineScaleSet), "GetInstanceView", false, new[]{ "filter", "expand" }, new[] { true, false })]
+        public void ValidateOperationMethodParameterList(Type type, string methodName, bool isLro, string[] parameterNames, bool[] isRequiredParameters)
+        {
+            var parameters = type.GetMethod(methodName).GetParameters();
+            Assert.That(parameters, Has.Length.EqualTo(parameterNames.Length + (isLro ? 2 : 1))); // need to exclude "waitForCompletion" and "cancellationToken"
+
+            var customParameters = parameters.SkipLast(1);// skip "cancellationToken"
+            if (isLro)
+            {
+                customParameters = customParameters.Skip(1);// skip "waitForCompletion"
+            }
+            Assert.AreEqual(parameterNames, customParameters.Select(p => p.Name).ToArray());
+            Assert.AreEqual(isRequiredParameters, customParameters.Select(p => !p.HasDefaultValue).ToArray());
         }
     }
 }

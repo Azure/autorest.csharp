@@ -65,15 +65,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static readonly ConcurrentDictionary<Operation, string> _operationIdCache = new ConcurrentDictionary<Operation, string>();
 
-        private static readonly ConcurrentDictionary<Operation, RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
+        private static readonly ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath>();
 
-        public static RequestPath GetRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath GetRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context, ResourceTypeSegment? hint = null)
         {
-            if (_operationToRequestPathCache.TryGetValue(operation, out var requestPath))
+            if (_operationToRequestPathCache.TryGetValue((operation, hint), out var requestPath))
                 return requestPath;
 
             requestPath = new RequestPath(context.Library.GetRestClientMethod(operation));
-            _operationToRequestPathCache.TryAdd(operation, requestPath);
+            if (hint.HasValue)
+                requestPath = requestPath.ApplyHint(hint.Value);
+
+            _operationToRequestPathCache.TryAdd((operation, hint), requestPath);
             return requestPath;
         }
 
@@ -143,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     continue;
                 // In the case that the full path of requestPath and resourceRequestPath are both scopes (trimmed path is empty), comparing the scope part is enough.
                 // We should not compare the remaining paths as both will be empty path and Tenant.IsAncestorOf(Tenant) always returns false.
-                else if ( trimmedRequestPath.Count != 0 || trimmedResourceRequestPath.Count != 0)
+                else if (trimmedRequestPath.Count != 0 || trimmedResourceRequestPath.Count != 0)
                 {
                     if (!trimmedRequestPath.IsAncestorOf(trimmedResourceRequestPath))
                         continue;
@@ -216,6 +219,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (!operationSet.IsResource(context.Configuration.MgmtConfiguration))
                 return false;
             return responseBodyType == resourceData.Type.Name;
+        }
+
+        private static ConcurrentDictionary<Operation, IEnumerable<Resource>> _operationToResourceCache = new ConcurrentDictionary<Operation, IEnumerable<Resource>>();
+        internal static IEnumerable<Resource> GetResourceFromResourceType(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
+                return cacheResult;
+
+            var resourceType = operation.GetRequestPath(context).GetResourceType(context.Configuration.MgmtConfiguration);
+            var candidates = context.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
+
+            return candidates;
         }
     }
 }

@@ -15,13 +15,17 @@ namespace OmitOperationGroups
     {
         #region Model2
         /// <summary> Gets an object representing a Model2 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Model2" /> object. </returns>
-        public static Model2 GetModel2(this ArmClient armClient, ResourceIdentifier id)
+        public static Model2 GetModel2(this ArmClient client, ResourceIdentifier id)
         {
-            Model2.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Model2(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                Model2.ValidateResourceId(id);
+                return new Model2(client, id);
+            }
+            );
         }
         #endregion
     }

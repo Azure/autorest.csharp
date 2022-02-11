@@ -48,7 +48,7 @@ namespace MgmtKeyvault.Models
         /// <param name="networkAcls"> Rules governing the accessibility of the key vault from specific network locations. </param>
         /// <param name="provisioningState"> Provisioning state of the vault. </param>
         /// <param name="privateEndpointConnections"> List of private endpoint connections associated with the key vault. </param>
-        internal VaultProperties(Guid tenantId, Sku sku, IList<AccessPolicyEntry> accessPolicies, string vaultUri, string hsmPoolResourceId, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections)
+        internal VaultProperties(Guid tenantId, Sku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections)
         {
             TenantId = tenantId;
             Sku = sku;
@@ -75,7 +75,7 @@ namespace MgmtKeyvault.Models
         /// <summary> An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault&apos;s tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required. </summary>
         public IList<AccessPolicyEntry> AccessPolicies { get; }
         /// <summary> The URI of the vault for performing operations on keys and secrets. </summary>
-        public string VaultUri { get; set; }
+        public Uri VaultUri { get; set; }
         /// <summary> The resource id of HSM Pool. </summary>
         public string HsmPoolResourceId { get; }
         /// <summary> Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. </summary>

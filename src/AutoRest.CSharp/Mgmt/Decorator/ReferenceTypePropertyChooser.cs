@@ -62,22 +62,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
                     List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
 
-                    if (replacementType == typeof(ResourceIdentity))
-                    {
-                        List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
-                        foreach (var parentProperty in replacementTypeProperties)
-                        {
-                            if (parentProperty.PropertyType.IsClass && parentProperty.PropertyType != typeof(string))
-                            {
-                                flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
-                            }
-                            else
-                            {
-                                flattenedReplacementTypeProperties.Add(parentProperty);
-                            }
-                        }
-                        replacementTypeProperties = flattenedReplacementTypeProperties;
-                    }
                     if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
                     {
                         result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);

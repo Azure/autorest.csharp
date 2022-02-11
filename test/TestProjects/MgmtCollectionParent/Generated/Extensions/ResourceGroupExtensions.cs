@@ -12,14 +12,21 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region OrderResource
-        /// <summary> Gets an object representing a OrderResourceCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of OrderResources in the OrderResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="OrderResourceCollection" /> object. </returns>
+        /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public static OrderResourceCollection GetOrderResources(this ResourceGroup resourceGroup)
         {
-            return new OrderResourceCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetOrderResources();
         }
-        #endregion
     }
 }

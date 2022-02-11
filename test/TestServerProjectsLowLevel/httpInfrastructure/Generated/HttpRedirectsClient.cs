@@ -19,8 +19,10 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -44,7 +46,7 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -65,12 +67,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head300Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead300Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -94,12 +96,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head300(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head300");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead300Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -123,12 +125,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get300Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet300Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -152,12 +154,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get300(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get300");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet300Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -181,12 +183,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head301Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead301Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -210,12 +212,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head301(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head301");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead301Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -239,12 +241,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get301Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet301Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -268,12 +270,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get301(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get301");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet301Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -298,12 +300,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Put301Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut301Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -328,12 +330,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Put301(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut301Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -357,12 +359,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head302Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead302Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -386,12 +388,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head302(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head302");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead302Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -415,12 +417,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get302Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet302Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -444,12 +446,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get302(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get302");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet302Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -474,12 +476,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Patch302Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch302Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -504,12 +506,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Patch302(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch302Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -534,12 +536,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Post303Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost303Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -564,12 +566,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Post303(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost303Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -593,12 +595,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head307Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead307Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -622,12 +624,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head307(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Head307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead307Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -651,12 +653,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get307Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet307Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -680,12 +682,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get307(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Get307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet307Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -709,12 +711,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Options307Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOptions307Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -738,12 +740,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Options307(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Options307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOptions307Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -768,12 +770,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Put307Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut307Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -798,12 +800,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Put307(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut307Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -828,12 +830,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Patch307Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch307Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -858,12 +860,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Patch307(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch307Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -888,12 +890,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Post307Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost307Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -918,12 +920,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Post307(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost307Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -948,12 +950,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Delete307Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete307Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -978,12 +980,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Delete307(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
+            using var scope = ClientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete307Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

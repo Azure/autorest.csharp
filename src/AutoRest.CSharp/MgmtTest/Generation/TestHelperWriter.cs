@@ -4,8 +4,6 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -26,7 +24,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteMockExtension()
         {
-
             using (_writer.Namespace(TestNamespace))
             {
                 _writer.WriteXmlDocumentationSummary($"Test Extension for {_context.DefaultNamespace}");

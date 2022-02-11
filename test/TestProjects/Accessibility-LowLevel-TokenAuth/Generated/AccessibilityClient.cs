@@ -19,8 +19,10 @@ namespace Accessibility_LowLevel_TokenAuth
         private static readonly string[] AuthorizationScopes = new string[] { "https://test.azure.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -44,7 +46,7 @@ namespace Accessibility_LowLevel_TokenAuth
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AccessibilityClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -56,12 +58,12 @@ namespace Accessibility_LowLevel_TokenAuth
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOperationRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -76,12 +78,12 @@ namespace Accessibility_LowLevel_TokenAuth
         public virtual Response Operation(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOperationRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -96,12 +98,12 @@ namespace Accessibility_LowLevel_TokenAuth
         internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOperationInternalRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -116,12 +118,12 @@ namespace Accessibility_LowLevel_TokenAuth
         internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
+            using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOperationInternalRequest(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

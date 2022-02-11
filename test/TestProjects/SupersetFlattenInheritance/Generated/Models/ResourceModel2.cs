@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace SupersetFlattenInheritance.Models
 {
     /// <summary> Resource with flatten properties (contains id). Since the id comes from flattened properties, this should not be counted as a resource. </summary>
-    public partial class ResourceModel2 : Resource
+    public partial class ResourceModel2 : ResourceData
     {
         /// <summary> Initializes a new instance of ResourceModel2. </summary>
         public ResourceModel2()
@@ -22,8 +22,9 @@ namespace SupersetFlattenInheritance.Models
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        internal ResourceModel2(ResourceIdentifier id, string name, ResourceType type, string foo) : base(id, name, type)
+        internal ResourceModel2(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string foo) : base(id, name, type, systemData)
         {
             Foo = foo;
         }

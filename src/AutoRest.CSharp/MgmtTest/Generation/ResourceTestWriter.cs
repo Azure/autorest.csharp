@@ -9,13 +9,11 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager;
 using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
@@ -25,15 +23,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ResourceTestWriter : MgmtBaseTestWriter
     {
-        protected Resource _resource;
-        protected string TestNamespace => _resource.Type.Namespace + ".Tests.Mock";
-        protected override string TypeNameOfThis => _resource.Type.Name + "MockTests";
+        private IEnumerable<MgmtClientOperation> _allOperation;
+        protected string TestNamespace => This.Type.Namespace + ".Tests.Mock";
+        private string TypeNameOfThis => This.Type.Name + "MockTests";
 
         protected string TestBaseName => $"MockTestBase";
+        private Resource This { get; }
 
-        public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context): base(writer, resource, context)
+        public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
         {
-            _resource = resource;
+            This = resource;
+            _allOperation = resource.AllOperations;
         }
 
         public void WriteCollectionTest()
@@ -42,13 +42,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             using (_writer.Namespace(TestNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"Test for {_resource.ResourceName}");
+                _writer.WriteXmlDocumentationSummary($"Test for {This.ResourceName}");
                 _writer.Append($"public partial class {TypeNameOfThis:D} : ");
                 _writer.Line($"{TestBaseName}");
                 using (_writer.Scope())
                 {
                     WriteTesterCtors();
-                    WriteMethodTestIfExist(_resource);
+                    WriteMethodTestIfExist(This);
 
                     foreach (var childResource in This.ChildResources)
                     {
@@ -62,21 +62,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected override void WriteUsings(CodeWriter writer)
+        private void WriteUsings(CodeWriter writer)
         {
-            base.WriteUsings(writer);
             writer.UseNamespace("System");
             writer.UseNamespace("System.Threading.Tasks");
             writer.UseNamespace("System.Net");
             writer.UseNamespace("System.Collections.Generic");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
-            writer.UseNamespace("Azure.ResourceManager.Resources");
-            writer.UseNamespace("Azure.ResourceManager.Resources.Models");
-            writer.UseNamespace($"{Context.DefaultNamespace}.Models");
         }
 
-        protected void WriteMethodTestIfExist(Resource resource) {
+        protected void WriteMethodTestIfExist(Resource resource)
+        {
             if (resource.GetOperation != null)
             {
                 _writer.Line();
@@ -110,25 +107,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public string WriteGetResource(Resource resource, string requestPath, ExampleModel exampleModel)
+        public FormattableString WriteGetResource(Resource resource, FormattableString resourceIdentifierParams, ExampleModel exampleModel)
         {
-            var resourceVariableName = useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            _writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(requestPath):L}));");
-            return resourceVariableName;
-        }
-
-        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
-        {
-            if (!IsResourceDataType(type, operation, out _))
-                return null;
-
-            return _resource;
-        }
-
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
-        {
-            data = _resource.ResourceData;
-            return data.Type.Equals(type);
+            var resourceVariableName = new CodeWriterDeclaration(resource.Type.Name.FirstCharToLowerCase());
+            var idVar = new CodeWriterDeclaration($"{resource.Type.Name.FirstCharToLowerCase()}Id");
+            _writer.Line($"var {idVar:D} = {resource.Type}.CreateResourceIdentifier({resourceIdentifierParams});");
+            _writer.Line($"var {resourceVariableName:D} = GetArmClient().Get{resource.Type.Name}({idVar});");
+            return $"{resourceVariableName}";
         }
 
         protected void WriteMethodTest(Resource resource, MgmtClientOperation clientOperation, bool async, bool isLroOperation)
@@ -136,7 +121,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
 
-            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
@@ -147,25 +131,23 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                 foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
-                    var realRequestPath = ParseRequestPath(resource, operation.RequestPath.SerializedPath, exampleModel);
-                    if (realRequestPath is null)
+                    if (resource.RequestPaths is null || resource.RequestPaths.Count() == 0)
                     {
                         continue;
                     }
+
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == _resource ? "" : resource.Type.Name)}{testMethodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {(resource == This ? "" : resource.Type.Name)}{methodName}{testCaseSuffix}()");
 
                     using (_writer.Scope())
                     {
                         _writer.LineRaw($"// Example: {exampleModel.Name}");
-                        clearVariableNames();
-                        var resourceVariableName = WriteGetResource(resource, realRequestPath, exampleModel);
-
-                        List<string> paramNames = WriteOperationParameters(methodParameters, Enumerable.Empty<Parameter> (), exampleModel);
-
+                        var resourceIdentifierParams = ComposeResourceIdentifierParams(resource.RequestPaths.First(), exampleModel);
+                        var resourceVariableName = WriteGetResource(resource, resourceIdentifierParams, exampleModel);
+                        List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
                         _writer.Line();
-                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", paramNames);
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"{resourceVariableName}.{testMethodName}", parameterValues.Select(pv => pv.Value));
                     }
                     _writer.Line();
                     exampleIdx++;

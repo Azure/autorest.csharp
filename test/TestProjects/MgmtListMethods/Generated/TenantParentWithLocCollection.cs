@@ -15,16 +15,16 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantParentWithLoc and their operations over its parent. </summary>
     public partial class TenantParentWithLocCollection : ArmCollection, IEnumerable<TenantParentWithLoc>, IAsyncEnumerable<TenantParentWithLoc>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly TenantParentWithLocsRestOperations _tenantParentWithLocsRestClient;
+        private readonly ClientDiagnostics _tenantParentWithLocClientDiagnostics;
+        private readonly TenantParentWithLocsRestOperations _tenantParentWithLocRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithLocCollection"/> class for mocking. </summary>
         protected TenantParentWithLocCollection()
@@ -32,12 +32,13 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithLocCollection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal TenantParentWithLocCollection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal TenantParentWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(TenantParentWithLoc.ResourceType, out string apiVersion);
-            _tenantParentWithLocsRestClient = new TenantParentWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _tenantParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantParentWithLoc.ResourceType.Namespace, DiagnosticOptions);
+            Client.TryGetApiVersion(TenantParentWithLoc.ResourceType, out string tenantParentWithLocApiVersion);
+            _tenantParentWithLocRestClient = new TenantParentWithLocsRestOperations(_tenantParentWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -49,71 +50,31 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, TenantTest.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithLocs_CreateOrUpdate
-        /// <summary> Create or update. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantParentWithLocCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<TenantParentWithLoc>> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.CreateOrUpdate");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _tenantParentWithLocsRestClient.CreateOrUpdate(Id.Name, tenantParentWithLocName, parameters, cancellationToken);
-                var operation = new TenantParentWithLocCreateOrUpdateOperation(this, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithLocs_CreateOrUpdate
-        /// <summary> Create or update. </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="tenantParentWithLocName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantParentWithLocCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
-        {
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = await _tenantParentWithLocsRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantParentWithLocCreateOrUpdateOperation(this, response);
+                var response = await _tenantParentWithLocRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithLocName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtListMethodsArmOperation<TenantParentWithLoc>(Response.FromValue(new TenantParentWithLoc(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -125,28 +86,34 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithLocs_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_CreateOrUpdate
+        /// </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="tenantParentWithLocName"> Name. </param>
+        /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public virtual Response<TenantParentWithLoc> Get(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<TenantParentWithLoc> CreateOrUpdate(bool waitForCompletion, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (tenantParentWithLocName == null)
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
+            if (parameters == null)
             {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
+                throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.Get");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _tenantParentWithLocsRestClient.Get(Id.Name, tenantParentWithLocName, cancellationToken);
-                if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithLoc(this, response.Value), response.GetRawResponse());
+                var response = _tenantParentWithLocRestClient.CreateOrUpdate(Id.Name, tenantParentWithLocName, parameters, cancellationToken);
+                var operation = new MgmtListMethodsArmOperation<TenantParentWithLoc>(Response.FromValue(new TenantParentWithLoc(Client, response), response.GetRawResponse()));
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -155,28 +122,27 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithLocs_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_Get
+        /// </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<TenantParentWithLoc>> GetAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.Get");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = await _tenantParentWithLocsRestClient.GetAsync(Id.Name, tenantParentWithLocName, cancellationToken).ConfigureAwait(false);
+                var response = await _tenantParentWithLocRestClient.GetAsync(Id.Name, tenantParentWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new TenantParentWithLoc(this, response.Value), response.GetRawResponse());
+                    throw await _tenantParentWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new TenantParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -185,25 +151,27 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_Get
+        /// </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public virtual Response<TenantParentWithLoc> GetIfExists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        public virtual Response<TenantParentWithLoc> Get(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.GetIfExists");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.Get");
             scope.Start();
             try
             {
-                var response = _tenantParentWithLocsRestClient.Get(Id.Name, tenantParentWithLocName, cancellationToken: cancellationToken);
+                var response = _tenantParentWithLocRestClient.Get(Id.Name, tenantParentWithLocName, cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<TenantParentWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithLoc(this, response.Value), response.GetRawResponse());
+                    throw _tenantParentWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -212,70 +180,104 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="tenantParentWithLocName"> Name. </param>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs
+        /// Operation Id: TenantParentWithLocs_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public async virtual Task<Response<TenantParentWithLoc>> GetIfExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="TenantParentWithLoc" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<TenantParentWithLoc> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            if (tenantParentWithLocName == null)
+            async Task<Page<TenantParentWithLoc>> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
+                using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _tenantParentWithLocRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.GetIfExists");
-            scope.Start();
-            try
+            async Task<Page<TenantParentWithLoc>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await _tenantParentWithLocsRestClient.GetAsync(Id.Name, tenantParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<TenantParentWithLoc>(null, response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithLoc(this, response.Value), response.GetRawResponse());
+                using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _tenantParentWithLocRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="tenantParentWithLocName"> Name. </param>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs
+        /// Operation Id: TenantParentWithLocs_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public virtual Response<bool> Exists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="TenantParentWithLoc" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<TenantParentWithLoc> GetAll(CancellationToken cancellationToken = default)
         {
-            if (tenantParentWithLocName == null)
+            Page<TenantParentWithLoc> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
+                using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _tenantParentWithLocRestClient.List(Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.Exists");
-            scope.Start();
-            try
+            Page<TenantParentWithLoc> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetIfExists(tenantParentWithLocName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
+                using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _tenantParentWithLocRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_Get
+        /// </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            if (tenantParentWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.Exists");
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.Exists");
             scope.Start();
             try
             {
@@ -289,86 +291,89 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithLocs_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_Get
+        /// </summary>
+        /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TenantParentWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<TenantParentWithLoc> GetAll(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
+        public virtual Response<bool> Exists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            Page<TenantParentWithLoc> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
+
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.Exists");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantParentWithLocsRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(this, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = GetIfExists(tenantParentWithLocName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
-            Page<TenantParentWithLoc> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _tenantParentWithLocsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(this, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs
-        /// ContextualPath: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
-        /// OperationId: TenantParentWithLocs_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_Get
+        /// </summary>
+        /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TenantParentWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<TenantParentWithLoc> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
+        public async virtual Task<Response<TenantParentWithLoc>> GetIfExistsAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
-            async Task<Page<TenantParentWithLoc>> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
+
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetIfExists");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _tenantParentWithLocsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(this, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = await _tenantParentWithLocRestClient.GetAsync(Id.Name, tenantParentWithLocName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<TenantParentWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithLoc(Client, response.Value), response.GetRawResponse());
             }
-            async Task<Page<TenantParentWithLoc>> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("TenantParentWithLocCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _tenantParentWithLocsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TenantParentWithLoc(this, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_Get
+        /// </summary>
+        /// <param name="tenantParentWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
+        public virtual Response<TenantParentWithLoc> GetIfExists(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
+
+            using var scope = _tenantParentWithLocClientDiagnostics.CreateScope("TenantParentWithLocCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _tenantParentWithLocRestClient.Get(Id.Name, tenantParentWithLocName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<TenantParentWithLoc>(null, response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithLoc(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         IEnumerator<TenantParentWithLoc> IEnumerable<TenantParentWithLoc>.GetEnumerator()
@@ -385,8 +390,5 @@ namespace MgmtListMethods
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, TenantParentWithLoc, TenantParentWithLocData> Construct() { }
     }
 }

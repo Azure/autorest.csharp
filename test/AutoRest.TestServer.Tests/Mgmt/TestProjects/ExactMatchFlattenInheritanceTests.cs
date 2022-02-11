@@ -17,11 +17,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel1Data))]
-        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel2))]
-        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel3))]
+        [TestCase(typeof(TrackedResourceData), typeof(AzureResourceFlattenModel1Data))]
+        [TestCase(typeof(TrackedResourceData), typeof(AzureResourceFlattenModel2))]
+        [TestCase(typeof(TrackedResourceData), typeof(AzureResourceFlattenModel3))]
         [TestCase(typeof(object), typeof(AzureResourceFlattenModel4))]
-        [TestCase(typeof(Resource), typeof(AzureResourceFlattenModel5))]
+        [TestCase(typeof(ResourceData), typeof(AzureResourceFlattenModel5))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);
