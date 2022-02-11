@@ -13,19 +13,19 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this RollingUpgradeStatusCode value) => value switch
         {
-            RollingUpgradeStatusCode.Faulted => "Faulted",
-            RollingUpgradeStatusCode.Completed => "Completed",
-            RollingUpgradeStatusCode.Cancelled => "Cancelled",
             RollingUpgradeStatusCode.RollingForward => "RollingForward",
+            RollingUpgradeStatusCode.Cancelled => "Cancelled",
+            RollingUpgradeStatusCode.Completed => "Completed",
+            RollingUpgradeStatusCode.Faulted => "Faulted",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown RollingUpgradeStatusCode value.")
         };
 
         public static RollingUpgradeStatusCode ToRollingUpgradeStatusCode(this string value)
         {
-            if (string.Equals(value, "Faulted", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeStatusCode.Faulted;
-            if (string.Equals(value, "Completed", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeStatusCode.Completed;
-            if (string.Equals(value, "Cancelled", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeStatusCode.Cancelled;
             if (string.Equals(value, "RollingForward", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeStatusCode.RollingForward;
+            if (string.Equals(value, "Cancelled", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeStatusCode.Cancelled;
+            if (string.Equals(value, "Completed", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeStatusCode.Completed;
+            if (string.Equals(value, "Faulted", StringComparison.InvariantCultureIgnoreCase)) return RollingUpgradeStatusCode.Faulted;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown RollingUpgradeStatusCode value.");
         }
     }

@@ -13,17 +13,17 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this CachingTypes value) => value switch
         {
-            CachingTypes.ReadWrite => "ReadWrite",
-            CachingTypes.ReadOnly => "ReadOnly",
             CachingTypes.None => "None",
+            CachingTypes.ReadOnly => "ReadOnly",
+            CachingTypes.ReadWrite => "ReadWrite",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CachingTypes value.")
         };
 
         public static CachingTypes ToCachingTypes(this string value)
         {
-            if (string.Equals(value, "ReadWrite", StringComparison.InvariantCultureIgnoreCase)) return CachingTypes.ReadWrite;
-            if (string.Equals(value, "ReadOnly", StringComparison.InvariantCultureIgnoreCase)) return CachingTypes.ReadOnly;
             if (string.Equals(value, "None", StringComparison.InvariantCultureIgnoreCase)) return CachingTypes.None;
+            if (string.Equals(value, "ReadOnly", StringComparison.InvariantCultureIgnoreCase)) return CachingTypes.ReadOnly;
+            if (string.Equals(value, "ReadWrite", StringComparison.InvariantCultureIgnoreCase)) return CachingTypes.ReadWrite;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CachingTypes value.");
         }
     }

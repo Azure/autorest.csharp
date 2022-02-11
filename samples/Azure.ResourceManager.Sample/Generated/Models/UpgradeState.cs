@@ -10,13 +10,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> Code indicating the current status of the upgrade. </summary>
     public enum UpgradeState
     {
-        /// <summary> Faulted. </summary>
-        Faulted,
-        /// <summary> Completed. </summary>
-        Completed,
+        /// <summary> RollingForward. </summary>
+        RollingForward,
         /// <summary> Cancelled. </summary>
         Cancelled,
-        /// <summary> RollingForward. </summary>
-        RollingForward
+        /// <summary> Completed. </summary>
+        Completed,
+        /// <summary> Faulted. </summary>
+        Faulted
     }
 }

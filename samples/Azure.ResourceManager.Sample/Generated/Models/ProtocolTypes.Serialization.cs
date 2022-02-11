@@ -13,15 +13,15 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this ProtocolTypes value) => value switch
         {
-            ProtocolTypes.Https => "Https",
             ProtocolTypes.Http => "Http",
+            ProtocolTypes.Https => "Https",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ProtocolTypes value.")
         };
 
         public static ProtocolTypes ToProtocolTypes(this string value)
         {
-            if (string.Equals(value, "Https", StringComparison.InvariantCultureIgnoreCase)) return ProtocolTypes.Https;
             if (string.Equals(value, "Http", StringComparison.InvariantCultureIgnoreCase)) return ProtocolTypes.Http;
+            if (string.Equals(value, "Https", StringComparison.InvariantCultureIgnoreCase)) return ProtocolTypes.Https;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ProtocolTypes value.");
         }
     }

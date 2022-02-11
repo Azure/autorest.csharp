@@ -13,19 +13,19 @@ namespace Azure.ResourceManager.Sample.Models
     {
         public static string ToSerialString(this MaintenanceOperationResultCodeTypes value) => value switch
         {
-            MaintenanceOperationResultCodeTypes.MaintenanceCompleted => "MaintenanceCompleted",
-            MaintenanceOperationResultCodeTypes.MaintenanceAborted => "MaintenanceAborted",
-            MaintenanceOperationResultCodeTypes.RetryLater => "RetryLater",
             MaintenanceOperationResultCodeTypes.None => "None",
+            MaintenanceOperationResultCodeTypes.RetryLater => "RetryLater",
+            MaintenanceOperationResultCodeTypes.MaintenanceAborted => "MaintenanceAborted",
+            MaintenanceOperationResultCodeTypes.MaintenanceCompleted => "MaintenanceCompleted",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MaintenanceOperationResultCodeTypes value.")
         };
 
         public static MaintenanceOperationResultCodeTypes ToMaintenanceOperationResultCodeTypes(this string value)
         {
-            if (string.Equals(value, "MaintenanceCompleted", StringComparison.InvariantCultureIgnoreCase)) return MaintenanceOperationResultCodeTypes.MaintenanceCompleted;
-            if (string.Equals(value, "MaintenanceAborted", StringComparison.InvariantCultureIgnoreCase)) return MaintenanceOperationResultCodeTypes.MaintenanceAborted;
-            if (string.Equals(value, "RetryLater", StringComparison.InvariantCultureIgnoreCase)) return MaintenanceOperationResultCodeTypes.RetryLater;
             if (string.Equals(value, "None", StringComparison.InvariantCultureIgnoreCase)) return MaintenanceOperationResultCodeTypes.None;
+            if (string.Equals(value, "RetryLater", StringComparison.InvariantCultureIgnoreCase)) return MaintenanceOperationResultCodeTypes.RetryLater;
+            if (string.Equals(value, "MaintenanceAborted", StringComparison.InvariantCultureIgnoreCase)) return MaintenanceOperationResultCodeTypes.MaintenanceAborted;
+            if (string.Equals(value, "MaintenanceCompleted", StringComparison.InvariantCultureIgnoreCase)) return MaintenanceOperationResultCodeTypes.MaintenanceCompleted;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown MaintenanceOperationResultCodeTypes value.");
         }
     }

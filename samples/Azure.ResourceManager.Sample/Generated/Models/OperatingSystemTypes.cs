@@ -10,9 +10,9 @@ namespace Azure.ResourceManager.Sample.Models
     /// <summary> The operating system of the osDiskImage. </summary>
     public enum OperatingSystemTypes
     {
-        /// <summary> Linux. </summary>
-        Linux,
         /// <summary> Windows. </summary>
-        Windows
+        Windows,
+        /// <summary> Linux. </summary>
+        Linux
     }
 }
