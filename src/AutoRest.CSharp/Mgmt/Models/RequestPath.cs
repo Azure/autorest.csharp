@@ -98,6 +98,23 @@ namespace AutoRest.CSharp.Mgmt.Models
             SerializedPath = httpPath;
         }
 
+        private bool? _isExpandable = null;
+        public bool IsExpandable => _isExpandable ??= GetIsExpandable();
+
+        private bool GetIsExpandable()
+        {
+            for (int i = 0; i < _segments.Count; i++)
+            {
+                var segment = _segments[i];
+                if (i % 2 == 0 &&
+                    segment.IsReference &&
+                    !segment.Reference.Type.IsFrameworkType &&
+                    segment.Reference.Type.Implementation is EnumType)
+                    return true;
+            }
+            return false;
+        }
+
         private static IReadOnlyList<Segment> CheckByIdPath(IReadOnlyList<Segment> segments)
         {
             // if this is a byId request path, we need to make it strict, since it might be accidentally to be any scope request path's parent

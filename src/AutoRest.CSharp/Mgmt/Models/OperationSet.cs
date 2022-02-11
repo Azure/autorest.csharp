@@ -7,7 +7,11 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -92,6 +96,32 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             return null;
         }
+
+        public RequestPath GetRequestPath(BuildContext<MgmtOutputLibrary> context, ResourceTypeSegment? hint = null)
+        {
+            var rqPath = GetRequestPath(context);
+            if (hint.HasValue)
+                rqPath = rqPath.ApplyHint(hint.Value);
+            return rqPath;
+        }
+
+        public RequestPath GetRequestPath(BuildContext<MgmtOutputLibrary> context)
+        {
+            var operation = Operations.First();
+            var operationGroup = this[operation];
+            foreach (var request in operation.Requests)
+            {
+                var httpRequest = request.Protocol.Http as HttpRequest;
+                if (httpRequest is null)
+                    continue;
+
+                var pathSegments = RestClientBuilder.BuildRequestPathSegments(operation, request, httpRequest, new MgmtRestClientBuilder(operationGroup, context));
+                return Models.RequestPath.FromPathSegments(pathSegments, operation.GetHttpPath());
+            }
+            throw new InvalidOperationException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
+        }
+
+        public bool IsById(BuildContext<MgmtOutputLibrary> context) => GetRequestPath(context).IsById;
 
         public override string? ToString()
         {

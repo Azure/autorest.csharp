@@ -148,13 +148,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return result;
             }
 
-            result = GetParent(requestPath, context);
+            result = requestPath.GetParent(context);
             _requestPathToParentCache.TryAdd(requestPath, result);
 
             return result;
         }
 
-        private static RequestPath GetParent(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath GetParent(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
         {
             // find a parent resource in the resource list
             // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // We will never want this
             var scope = requestPath.GetScopePath();
             var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
-                .Concat(new List<RequestPath>{RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup}) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
+                .Concat(new List<RequestPath> { RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup }) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
                 .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);
             if (candidates.Any())
             {

@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO.Pipes;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -159,6 +161,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         var name = bodyParam.Schema.Language.Default.Name;
                         if (resourceDataModelName.Key is not null)
                         {
+                            //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
+                            //types use the same model they should have a common name, but since this case doesn't exist yet
+                            //we don't know for sure
+                            if (requestPath.IsExpandable)
+                                throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
                             bodyParam.Schema.Language.Default.Name = $"{name}UpdateOptions";
@@ -624,14 +631,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return defaultNameFromConfig;
 
             var resourcesWithSameName = _resourceDataSchemaNameToOperationSets[candidateName];
-            var resourcesWithSameType = OperationSets.SelectMany(opSet =>
-            {
-                var operation = opSet.Operations.First();
-                return GetRequestPath(opSet[operation], operation).Expand(_mgmtConfiguration);
-            }).Where(rqPath =>
-            {
-                return rqPath.Count % 2 == 0 && rqPath.GetResourceType(_mgmtConfiguration).Equals(resourceType);
-            });
+            var resourcesWithSameType = ResourceOperationSets
+                .SelectMany(opSet => opSet.GetRequestPath(_context).Expand(_mgmtConfiguration))
+                .Where(rqPath => rqPath.GetResourceType(_mgmtConfiguration).Equals(resourceType))
+                .ToArray();
 
             var isById = requestPath.IsById;
             int countOfSameResourceDataName = resourcesWithSameName.Count();
@@ -649,15 +652,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 if (countOfSameResourceTypeName == 1)
                     return name;
 
-                var parentOperationSet = requestPath.GetScopePath().GetResourceType(_mgmtConfiguration).Last().ConstantValue;
+                string parentPrefix = GetParentPrefix(requestPath);
                 // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
                 // first we try to add the parent name as prefix
-                if (!resourcesWithSameType.All(rqPath => rqPath.Equals(requestPath)))
-                    return $"{parentOperationSet.FirstCharToUpperCase().ToSingular()}{name}";
+                if (!DoMultipleResourcesShareMyPrefixes(requestPath, parentPrefix, resourcesWithSameType))
+                    return $"{parentPrefix}{name}";
 
                 // if we get here, parent prefix is not enough, we try the resource name if it is a constant
                 if (requestPath.Last().IsConstant)
-                    return $"{requestPath.Last().ConstantValue}{name}";
+                    return $"{requestPath.Last().ConstantValue.FirstCharToUpperCase()}{name}";
 
                 // if we get here, we have tried all approaches to get a solid resource type name, throw an exception
                 throw new InvalidOperationException($"Cannot determine a resource class name for resource with the request path(s): {requestPath}, please assign a valid resource name in `request-path-to-resource-name` section");
@@ -670,6 +673,52 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // otherwise we need to add a "ById" suffix to make this resource to have a different name
             // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
             return $"{candidateName}ById";
+        }
+
+        private string GetParentPrefix(RequestPath pathToWalk)
+        {
+            while (pathToWalk.Count > 2)
+            {
+                pathToWalk = pathToWalk.GetParent(_context);
+                if (_rawRequestPathToResourceData.TryGetValue(pathToWalk.ToString()!, out var parentData))
+                {
+                    return parentData.Declaration.Name.Substring(0, parentData.Declaration.Name.Length - 4);
+                }
+                else
+                {
+                    var prefix = GetCoreParentName(pathToWalk);
+                    if (prefix is not null)
+                        return prefix;
+                }
+            }
+            return string.Empty;
+        }
+
+        private string? GetCoreParentName(RequestPath requestPath)
+        {
+            var resourceType = requestPath.GetResourceType(_mgmtConfiguration);
+            if (resourceType.Equals(ResourceTypeSegment.ManagementGroup))
+                return nameof(ResourceTypeSegment.ManagementGroup);
+            if (resourceType.Equals(ResourceTypeSegment.ResourceGroup))
+                return nameof(ResourceTypeSegment.ResourceGroup);
+            if (resourceType.Equals(ResourceTypeSegment.Subscription))
+                return nameof(ResourceTypeSegment.Subscription);
+            if (resourceType.Equals(ResourceTypeSegment.Tenant))
+                return nameof(ResourceTypeSegment.Tenant);
+            return null;
+        }
+
+        private bool DoMultipleResourcesShareMyPrefixes(RequestPath requestPath, string parentPrefix, RequestPath[] resourcesWithSameType)
+        {
+            foreach (var resourcePath in resourcesWithSameType)
+            {
+                if (resourcePath.Equals(requestPath))
+                    continue; //skip myself
+
+                if (GetParentPrefix(resourcePath).Equals(parentPrefix, StringComparison.Ordinal))
+                    return true;
+            }
+            return false;
         }
 
         private struct RequestPathCollectionEqualityComparer : IEqualityComparer<IEnumerable<RequestPath>>
