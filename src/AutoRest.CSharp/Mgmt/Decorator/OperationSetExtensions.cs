@@ -21,22 +21,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static readonly ConcurrentDictionary<OperationSet, bool> _byIdCache = new ConcurrentDictionary<OperationSet, bool>();
 
-        public static RequestPath GetRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context, ResourceTypeSegment? hint = null)
+        public static RequestPath GetRequestPath(this OperationSet operationSet, ResourceTypeSegment? hint = null)
         {
             if (_cache.TryGetValue((operationSet, hint), out var requestPath))
                 return requestPath;
 
-            requestPath = GetOperation(operationSet).GetRequestPath(context, hint);
+            requestPath = GetOperation(operationSet).GetRequestPath(hint);
             _cache.TryAdd((operationSet, hint), requestPath);
             return requestPath;
         }
 
-        public static bool IsById(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        public static bool IsById(this OperationSet operationSet)
         {
             if (_byIdCache.TryGetValue(operationSet, out var result))
                 return result;
 
-            result = operationSet.GetRequestPath(context).IsById;
+            result = operationSet.GetRequestPath().IsById;
             _byIdCache.TryAdd(operationSet, result);
             return result;
         }

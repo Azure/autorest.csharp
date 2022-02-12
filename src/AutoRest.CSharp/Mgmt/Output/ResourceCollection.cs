@@ -24,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource, BuildContext<MgmtOutputLibrary> context)
-            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, context, CollectionPosition)
+        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource)
+            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
         {
             Resource = resource;
         }
@@ -96,13 +96,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (op is null || opSet is null)
                 return result;
 
-            RestClientMethod method = _context.Library.GetRestClientMethod(op);
+            RestClientMethod method = MgmtContext.Library.GetRestClientMethod(op);
             // calculate the ResourceType from the RequestPath of this resource
             var resourceTypeSegments = ResourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
             // iterate over all the reference segments in the diff of this GetAll operation
             var candidatesOfParameters = new List<Parameter>(method.Parameters);
 
-            var opRequestPath = op.GetRequestPath(_context, ResourceType);
+            var opRequestPath = op.GetRequestPath(ResourceType);
             foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(opSet, opRequestPath)))
             {
                 var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
@@ -130,8 +130,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             // if this resource was listed in list-exception section, we suppress the exception here
             // or if the debug flag `--mgmt-debug.suppress-list-exception` is on, we suppress the exception here
-            var suppressListException = RequestPaths.Any(path => _context.Configuration.MgmtConfiguration.ListException.Contains(path))
-                || _context.Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
+            var suppressListException = RequestPaths.Any(path => MgmtContext.MgmtConfiguration.ListException.Contains(path))
+                || MgmtContext.MgmtConfiguration.MgmtDebug.SuppressListException;
             var getAllOperation = ClientOperations.Where(operation => operation.Name == "GetAll").OrderBy(operation => ReferenceSegments(operation).Count()).FirstOrDefault();
             if (!suppressListException && getAllOperation == null)
                 throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method");
@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns></returns>
         protected override RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            var contextualPath = operationSet.ParentRequestPath(_context);
+            var contextualPath = operationSet.ParentRequestPath();
             // we need to replace the scope in this contextual path with the actual scope in the operation
             var scope = contextualPath.GetScopePath();
             if (!scope.IsParameterizedScope())
@@ -227,17 +227,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getMgmtRestOperation,
                         "Exists",
                         typeof(bool),
-                        $"Checks to see if the resource exists in azure.",
-                        _context),
-                    _context));
+                        $"Checks to see if the resource exists in azure.")));
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         getMgmtRestOperation,
                         "GetIfExists",
                         getMgmtRestOperation.MgmtReturnType,
-                        $"Tries to get details for this resource from the service.",
-                        _context),
-                    _context));
+                        $"Tries to get details for this resource from the service.")));
             }
 
             return result;
@@ -245,7 +241,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
-            return branch.GetResourceType(_context.Configuration.MgmtConfiguration);
+            return branch.GetResourceType();
         }
 
         protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
@@ -281,9 +277,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<ResourceTypeSegment> GetResourceTypes(RequestPath requestPath, RequestPath contextualPath)
         {
-            var type = contextualPath.GetResourceType(_context.Configuration.MgmtConfiguration);
+            var type = contextualPath.GetResourceType();
             if (type == ResourceTypeSegment.Scope)
-                return requestPath.GetParameterizedScopeResourceTypes(_context.Configuration.MgmtConfiguration)!;
+                return requestPath.GetParameterizedScopeResourceTypes(MgmtContext.MgmtConfiguration)!;
 
             return type.AsIEnumerable();
         }

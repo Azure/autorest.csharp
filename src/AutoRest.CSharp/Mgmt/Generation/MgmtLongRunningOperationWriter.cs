@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal class MgmtLongRunningOperationWriter
     {
         private readonly CodeWriter _writer;
-        private readonly BuildContext<MgmtOutputLibrary> _context;
         private readonly string _name;
         private readonly string _genericString;
         private readonly bool _isGeneric;
@@ -32,12 +31,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public string Filename { get; }
 
-        public MgmtLongRunningOperationWriter(BuildContext<MgmtOutputLibrary> context, bool isGeneric)
+        public MgmtLongRunningOperationWriter(bool isGeneric)
         {
             _writer = new CodeWriter();
-            _context = context;
             _isGeneric = isGeneric;
-            _name = $"{context.DefaultNamespace.Split('.').Last()}ArmOperation";
+            _name = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
             _genericString = isGeneric ? "<T>" : string.Empty;
             Filename = isGeneric ? $"LongRunningOperation/{_name}OfT.cs" : $"LongRunningOperation/{_name}.cs";
             _waitMethod = isGeneric ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
@@ -50,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void Write()
         {
-            using (_writer.Namespace(_context.DefaultNamespace))
+            using (_writer.Namespace(MgmtContext.Context.DefaultNamespace))
             {
                 _writer.Line($"#pragma warning disable SA1649 // File name should match first type name");
                 _writer.Line($"internal class {_name}{_genericString} : {_operationType}");

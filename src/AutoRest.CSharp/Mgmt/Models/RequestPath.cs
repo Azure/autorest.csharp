@@ -239,10 +239,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new RequestPath(newPath);
         }
 
-        public IEnumerable<RequestPath> Expand(MgmtConfiguration config)
+        public IEnumerable<RequestPath> Expand()
         {
             // we first get the resource type
-            var resourceType = this.GetResourceType(config);
+            var resourceType = this.GetResourceType();
 
             // if this resource type is a constant, we do not need to expand it
             if (resourceType.IsConstant)

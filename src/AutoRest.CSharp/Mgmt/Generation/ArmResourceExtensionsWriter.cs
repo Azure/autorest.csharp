@@ -19,8 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private MgmtExtensions This { get; }
 
-        public ArmResourceExtensionsWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
-            : base(extensions, context)
+        public ArmResourceExtensionsWriter(MgmtExtensions extensions)
+            : base(extensions)
         {
             This = extensions;
         }

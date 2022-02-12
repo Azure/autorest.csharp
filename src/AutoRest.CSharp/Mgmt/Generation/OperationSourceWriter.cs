@@ -22,25 +22,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class OperationSourceWriter
     {
-        private readonly BuildContext<MgmtOutputLibrary> _context;
         private readonly OperationSource _opSource;
         private readonly CodeWriter _writer;
         private readonly bool _isReturningResource;
         private readonly IReadOnlyDictionary<string, string>? _operationIdMappings;
 
-        public OperationSourceWriter(OperationSource opSource, BuildContext<MgmtOutputLibrary> context)
+        public OperationSourceWriter(OperationSource opSource)
         {
             _writer = new CodeWriter();
-            _context = context;
             _opSource = opSource;
-            _isReturningResource = context.Library.CsharpTypeToResource.ContainsKey(_opSource.ReturnType);
-            if (_opSource.Resource is not null && context.Configuration.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.Type.Name, out var mappings))
+            _isReturningResource = MgmtContext.Library.CsharpTypeToResource.ContainsKey(_opSource.ReturnType);
+            if (_opSource.Resource is not null && MgmtContext.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.Type.Name, out var mappings))
                 _operationIdMappings = mappings;
         }
 
         public void Write()
         {
-            using (_writer.Namespace($"{_context.DefaultNamespace}"))
+            using (_writer.Namespace($"{MgmtContext.Context.DefaultNamespace}"))
             {
                 using (_writer.Scope($"internal class {_opSource.TypeName} : {_opSource.Interface}"))
                 {

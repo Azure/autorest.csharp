@@ -2,6 +2,8 @@
 // Licensed under the MIT License
 
 using System.Linq;
+using System.Threading.Tasks;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using NUnit.Framework;
 
@@ -19,11 +21,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("ResourceLink", "TenantExtensions")]
         public void TestScopeResource(string resourceName, string parentName)
         {
-            (_, var context) = Generate("MgmtScopeResource").Result;
-
-            var resource = context.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
+            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.NotNull(resource);
-            var parents = resource.Parent(context);
+            var parents = resource.Parent();
             Assert.IsTrue(parents.Any(p => p.Type.Name == parentName));
         }
     }

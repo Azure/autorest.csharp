@@ -33,7 +33,6 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal record MgmtRestOperation
     {
         private bool? _isLongRunning;
-        private BuildContext<MgmtOutputLibrary> _context;
 
         /// <summary>
         /// The underlying <see cref="Operation"/> object.
@@ -73,7 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public bool IsPagingOperation => Operation.Language.Default.Paging != null || IsListOperation;
 
         private bool? _isListOperation;
-        private bool IsListOperation => _isListOperation ??= _context.Library.GetRestClientMethod(Operation).IsListMethod(out var _);
+        private bool IsListOperation => _isListOperation ??= MgmtContext.Library.GetRestClientMethod(Operation).IsListMethod(out var _);
         public CSharpType? OriginalReturnType { get; }
 
         /// <summary>
@@ -107,9 +106,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public Schema? FinalResponseSchema => Method.Operation.IsLongRunning ? Method.Operation.LongRunningFinalResponse.ResponseSchema : null;
 
-        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, BuildContext<MgmtOutputLibrary> context, bool? isLongRunning = null, bool throwIfNull = false)
+        public MgmtRestOperation(RestClientMethod method, MgmtRestClient restClient, RequestPath requestPath, RequestPath contextualPath, string methodName, bool? isLongRunning = null, bool throwIfNull = false)
         {
-            _context = context;
             _isLongRunning = isLongRunning;
             ThrowIfNull = throwIfNull;
             Method = method;
@@ -123,10 +121,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             OperationSource = GetOperationSource();
         }
 
-        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, BuildContext<MgmtOutputLibrary> context, params Parameter[] overrideParameters)
+        public MgmtRestOperation(MgmtRestOperation other, string nameOverride, CSharpType? overrideReturnType, string overrideDescription, params Parameter[] overrideParameters)
         {
             //copy values from other method
-            _context = context;
             _isLongRunning = other.IsLongRunningOperation;
             ThrowIfNull = other.ThrowIfNull;
             Method = other.Method;
@@ -156,11 +153,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (IsFakeLongRunningOperation)
                 return null;
 
-            if (!_context.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
+            if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
-                _context.Library.CsharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned);
+                MgmtContext.Library.CsharpTypeToResource.TryGetValue(MgmtReturnType, out var resourceBeingReturned);
                 operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
-                _context.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
+                MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }
             return operationSource;
         }
@@ -173,7 +170,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             try
             {
-                return finalSchema.Type == AllSchemaTypes.Object ? _context.Library.FindTypeForSchema(finalSchema) : new TypeFactory(_context.Library).CreateType(finalSchema, false);
+                return finalSchema.Type == AllSchemaTypes.Object ? MgmtContext.Library.FindTypeForSchema(finalSchema) : new TypeFactory(MgmtContext.Library).CreateType(finalSchema, false);
             }
             catch (Exception ex)
             {
@@ -237,7 +234,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (matchTypeMatches.Count == 1)
                 return first;
 
-            var parent = first.Parent(_context).First();
+            var parent = first.Parent().First();
             if (parent is not null && AllMatchesSameParent(matchTypeMatches, parent, out bool areAllSingleton) && areAllSingleton)
                 return parent as Resource;
 
@@ -251,7 +248,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var resource in matches)
             {
                 areAllSingleton &= resource.IsSingleton;
-                var current = resource.Parent(_context).FirstOrDefault();
+                var current = resource.Parent().FirstOrDefault();
                 if (current is null)
                     return false;
                 if (!current.Equals(parent))
@@ -347,7 +344,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private CSharpType? GetMgmtReturnType(CSharpType? originalType)
         {
-            _context.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
+            MgmtContext.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
 
             if (pagingMethod is not null)
             {
@@ -363,7 +360,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))
                 return Resource.Type;
 
-            var foundResource = _context.Library.ArmResources.FirstOrDefault(resource => resource.ResourceData.Type.Equals(originalType));
+            var foundResource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.ResourceData.Type.Equals(originalType));
             if (foundResource is not null)
                 return foundResource.Type;
 
@@ -373,12 +370,12 @@ namespace AutoRest.CSharp.Mgmt.Models
         private bool IsResourceDataType(CSharpType? type, [MaybeNullWhen(false)] out ResourceData data)
         {
             data = null;
-            if (_context.Configuration.MgmtConfiguration.IsArmCore)
+            if (MgmtContext.MgmtConfiguration.IsArmCore)
             {
                 if (type == null || type.IsFrameworkType)
                     return false;
 
-                if (_context.Library.TryGetTypeProvider(type.Name, out var provider))
+                if (MgmtContext.Library.TryGetTypeProvider(type.Name, out var provider))
                 {
                     data = provider as ResourceData;
                     return data != null;
@@ -387,7 +384,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
             else
             {
-                data = _context.Library.ResourceData.FirstOrDefault(d => d.Type.Equals(type));
+                data = MgmtContext.Library.ResourceData.FirstOrDefault(d => d.Type.Equals(type));
                 return data != null;
             }
         }
@@ -397,13 +394,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (Method.ReturnType is null)
                 return null;
 
-            var restClientMethod = _context.Library.GetRestClientMethod(Operation);
+            var restClientMethod = MgmtContext.Library.GetRestClientMethod(Operation);
             return restClientMethod.IsListMethod(out var item) ? item : null;
         }
 
         private PagingMethodWrapper EnsurePagingMethodWrapper()
         {
-            _context.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
+            MgmtContext.Library.PagingMethods.TryGetValue(Method, out var pagingMethod);
             return pagingMethod is null ? new PagingMethodWrapper(Method) : new PagingMethodWrapper(pagingMethod);
         }
 
