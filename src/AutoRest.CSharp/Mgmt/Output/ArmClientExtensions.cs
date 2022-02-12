@@ -13,12 +13,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ArmClientExtensions : MgmtExtensions
     {
-        public ArmClientExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context)
-            : base(allOperations, typeof(ArmClient), context, RequestPath.Tenant)
+        public ArmClientExtensions(IEnumerable<Operation> allOperations)
+            : base(allOperations, typeof(ArmClient), RequestPath.Tenant)
         {
         }
 
-        public override bool IsEmpty => !_context.Library.ArmResources.Any();
+        public override bool IsEmpty => !MgmtContext.Library.ArmResources.Any();
 
         protected override string VariableName => Context.Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
     }

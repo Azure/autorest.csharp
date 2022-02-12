@@ -24,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private MgmtExtensions This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public MgmtExtensionWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
-            : base(new CodeWriter(), extensions, context)
+        public MgmtExtensionWriter(MgmtExtensions extensions)
+            : base(new CodeWriter(), extensions)
         {
             This = extensions;
         }

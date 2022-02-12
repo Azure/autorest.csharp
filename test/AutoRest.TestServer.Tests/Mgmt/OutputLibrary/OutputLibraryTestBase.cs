@@ -20,7 +20,6 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
-    [Parallelizable(ParallelScope.All)]
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;
@@ -32,16 +31,17 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             _subFolder = subFolder;
         }
 
-        internal static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject, string subFolder = null)
+        [OneTimeSetUp]
+        public async Task Generate()
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (subFolder is null)
+            if (_subFolder is null)
             {
-                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, "Generated");
+                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, "Generated");
             }
             else
             {
-                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, subFolder, "Generated");
+                basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, _subFolder, "Generated");
             }
 
             var configuration = StandaloneGeneratorRunner.LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
@@ -50,9 +50,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
-            var context = new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel);
-            _ = context.Library; // gen lib
-            return (model, context);
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel));
         }
 
         [Test]
@@ -63,16 +61,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 return;
             }
 
-            (_, var context) = Generate(_projectName, _subFolder).Result;
-            var library = context.Library;
-            foreach (var mgmtObject in library.Models.OfType<MgmtObjectType>())
+            foreach (var mgmtObject in MgmtContext.Library.Models.OfType<MgmtObjectType>())
             {
-                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject, context) == null)
+                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject) == null)
                 {
                     ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema, mgmtObject.Type.Name);
                 }
             }
-            foreach (var resourceData in library.ResourceData)
+            foreach (var resourceData in MgmtContext.Library.ResourceData)
             {
                 ValidateModelRequiredCtorParams(resourceData.ObjectSchema, resourceData.Type.Name);
             }
@@ -127,21 +123,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateResourceDataCount()
         {
-            (_, var context) = Generate(_projectName, _subFolder).Result;
+            var count = MgmtContext.Library.ResourceSchemaMap.Count;
 
-            var count = context.Library.ResourceSchemaMap.Count;
-
-            Assert.AreEqual(count, context.Library.ResourceData.Count(), "Did not find the expected resourceData count");
+            Assert.AreEqual(count, MgmtContext.Library.ResourceData.Count(), "Did not find the expected resourceData count");
         }
 
         [TestCase("Delete")]
         [TestCase("DeleteAsync")]
         public void ValidateDeleteMethodAsLRO(string methodName)
         {
-            var result = Generate(_projectName, _subFolder).Result;
-            var context = result.Context;
-
-            foreach (var resource in context.Library.ArmResources)
+            foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
@@ -169,9 +160,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("GetAsync")]
         public void ValidateGetOverloadMethod(string methodName)
         {
-            (_, var context) = Generate(_projectName, _subFolder).Result;
-
-            foreach (var resource in context.Library.ArmResources)
+            foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
@@ -190,15 +179,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateEnumerable()
         {
-            (_, var context) = Generate(_projectName, _subFolder).Result;
-
-            foreach (var collection in context.Library.ResourceCollections)
+            foreach (var collection in MgmtContext.Library.ResourceCollections)
             {
                 // skip this if this collection is in the list-exception configuration
-                if (collection.RequestPaths.Any(path => context.Configuration.MgmtConfiguration.ListException.Contains(path)))
+                if (collection.RequestPaths.Any(path => MgmtContext.MgmtConfiguration.ListException.Contains(path)))
                     continue;
                 var name = $"{_projectName}.{collection.Type.Name}";
                 var generatedCollectionType = Assembly.GetExecutingAssembly().GetType(name);
+                Assert.NotNull(generatedCollectionType, $"Type ({name}) was not found.");
 
                 Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable"), $"{generatedCollectionType.Name} did not implement IEnumerable");
                 Assert.NotNull(generatedCollectionType.GetInterface("IEnumerable`1"), $"{generatedCollectionType.Name} did not implement IEnumerable<T>");

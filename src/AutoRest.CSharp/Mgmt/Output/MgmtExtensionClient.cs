@@ -18,8 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class MgmtExtensionClient : MgmtTypeProvider
     {
         private string _defaultName;
-        public MgmtExtensionClient(BuildContext<MgmtOutputLibrary> context, MgmtExtensions publicExtension)
-            : base(context, publicExtension.ResourceName)
+        public MgmtExtensionClient(MgmtExtensions publicExtension)
+            : base(publicExtension.ResourceName)
         {
             Extension = publicExtension;
             _defaultName = $"{ResourceName}ExtensionClient";
@@ -46,13 +46,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
-                        _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
-                        operation.GetRequestPath(_context),
+                        MgmtContext.Library.GetRestClientMethod(operation),
+                        MgmtContext.Library.GetRestClient(operation),
+                        operation.GetRequestPath(),
                         Extension.ContextualPath,
-                        operationName,
-                        _context),
-                    _context);
+                        operationName));
             });
         }
 

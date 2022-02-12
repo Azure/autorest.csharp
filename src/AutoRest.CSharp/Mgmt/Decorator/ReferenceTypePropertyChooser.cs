@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(schema, out result);
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace)
         {
             if (_valueCache.TryGetValue(typeToReplace.ObjectSchema, out var result))
                 return result;

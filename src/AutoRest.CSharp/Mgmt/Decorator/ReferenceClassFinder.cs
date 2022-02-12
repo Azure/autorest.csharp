@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src
         /// </summary>
         internal static IList<Type> ExternalTypes => _externalTypes ??= GetExternalTypes();
-        internal static IList<Type> GetReferenceClassCollection(BuildContext<MgmtOutputLibrary> context) => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal(context));
+        internal static IList<Type> GetReferenceClassCollection() => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
 
         private static IList<Type> GetExternalTypes()
         {
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return assembly.GetTypes().ToList();
         }
 
-        private static IList<Type> GetReferenceClassCollectionInternal(BuildContext<MgmtOutputLibrary> context)
+        private static IList<Type> GetReferenceClassCollectionInternal()
         {
             return ExternalTypes.Where(t =>
                 !t.Name.Equals("Resource") && //temp while we have both Resource and ResourceData
