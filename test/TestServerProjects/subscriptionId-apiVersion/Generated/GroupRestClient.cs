@@ -18,11 +18,13 @@ namespace subscriptionId_apiVersion
 {
     internal partial class GroupRestClient
     {
-        private string subscriptionId;
-        private Uri endpoint;
-        private string apiVersion;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _subscriptionId;
+        private readonly Uri _endpoint;
+        private readonly string _apiVersion;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of GroupRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -33,10 +35,10 @@ namespace subscriptionId_apiVersion
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
         public GroupRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2014-04-01-preview")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            _clientDiagnostics = clientDiagnostics;
+            _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -46,12 +48,12 @@ namespace subscriptionId_apiVersion
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourcegroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -80,7 +82,7 @@ namespace subscriptionId_apiVersion
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -107,7 +109,7 @@ namespace subscriptionId_apiVersion
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

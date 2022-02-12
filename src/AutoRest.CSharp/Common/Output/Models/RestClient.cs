@@ -39,6 +39,7 @@ namespace AutoRest.CSharp.Output.Models
             _nextPageRequestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
 
             Parameters = Builder.GetOrderedParametersByRequired();
+            Fields = new ClientFields(Parameters);
 
             ClientPrefix = clientPrefix;
             DefaultName = clientPrefix + defaultClientSuffix;
@@ -51,6 +52,7 @@ namespace AutoRest.CSharp.Output.Models
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "internal";
+        public ClientFields Fields { get; }
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
         {
