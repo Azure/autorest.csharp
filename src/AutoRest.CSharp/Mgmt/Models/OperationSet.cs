@@ -99,13 +99,15 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public RequestPath GetRequestPath(ResourceTypeSegment? hint = null)
         {
-            var rqPath = GetRequestPath();
+            var rqPath = NonHintRequestPath;
             if (hint.HasValue)
                 rqPath = rqPath.ApplyHint(hint.Value);
             return rqPath;
         }
 
-        public RequestPath GetRequestPath()
+        private RequestPath? _nonHintRequestPath;
+        public RequestPath NonHintRequestPath => _nonHintRequestPath ??= GetNonHintRequestPath();
+        private RequestPath GetNonHintRequestPath()
         {
             var operation = Operations.First();
             var operationGroup = this[operation];
@@ -121,7 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             throw new InvalidOperationException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
         }
 
-        public bool IsById => GetRequestPath().IsById;
+        public bool IsById => NonHintRequestPath.IsById;
 
         public override string? ToString()
         {

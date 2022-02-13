@@ -769,11 +769,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public override CSharpType FindTypeForSchema(Schema schema)
         {
             TypeProvider? result;
-            if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
+            if (!AllSchemaMap.IsPopulated)
+            {
+                result = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceModel(schema) : BuildModel(schema);
+            }
+            else if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
             {
                 throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
             }
-
             return result.Type;
         }
 

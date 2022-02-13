@@ -111,31 +111,12 @@ namespace AutoRest.CSharp.Output.Models
 
         public static PathSegment[] BuildRequestPathSegments(Operation operation, ServiceRequest serviceRequest, HttpRequest httpRequest, RestClientBuilder restClientBuilder)
         {
-            var parameters = operation.Parameters
-                .Concat(serviceRequest.Parameters)
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
-                .ToArray();
-
-            var allParameters = parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, MgmtContext.Library.CreateUninitializedType(requestParameter.Schema, requestParameter.IsNullable)));
+            var allParameters = restClientBuilder.GetOperationAllParameters(operation, operation.Parameters);
             var methodParameters = restClientBuilder.BuildMethodParameters(allParameters);
             var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, restClientBuilder.CreateReference(kvp.Key, kvp.Value)));
             var buildContext = new RequestMethodBuildContext(methodParameters, references);
             BuildRequestParameters(httpRequest, buildContext, out var queryParams, out var headerParams, out var uriParams, out var pathParams);
             return uriParams.Concat(pathParams).ToArray();
-        }
-
-        private static Parameter BuildParameter(RequestParameter requestParameter, CSharpType parameterType)
-        {
-            return new Parameter(
-                requestParameter.CSharpName(),
-                CreateDescription(requestParameter, parameterType),
-                TypeFactory.GetInputType(parameterType),
-                null,
-                requestParameter.IsRequired,
-                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                IsResourceIdentifier: requestParameter.IsResourceParameter,
-                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                RequestLocation: GetRequestLocation(requestParameter));
         }
 
         /// <summary>
@@ -179,7 +160,13 @@ namespace AutoRest.CSharp.Output.Models
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
                 .ToArray();
 
-            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
+            var result = new Dictionary<RequestParameter, Parameter>();
+            foreach (var parameter in parameters)
+            {
+                if (!result.ContainsKey(parameter))
+                    result.Add(parameter, BuildParameter(parameter));
+            }
+            return result;
         }
 
         private Response[] BuildResponses(Operation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
