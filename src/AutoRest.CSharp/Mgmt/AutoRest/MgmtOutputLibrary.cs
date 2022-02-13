@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
             Dictionary<string, Schema> updatedModels = new Dictionary<string, Schema>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
@@ -169,8 +169,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             continue;
 
                         RequestPath requestPath = GetRequestPath(operationGroup, operation);
-                        var operationSet = _rawRequestPathToOperationSets[requestPath];
-                        var resourceDataModelName = _resourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
+                        var operationSet = RawRequestPathToOperationSets[requestPath];
+                        var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
                         var name = bodyParam.Schema.Language.Default.Name;
                         if (resourceDataModelName.Key is not null)
                         {
@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 if (httpRequest is null)
                     continue;
 
-                var pathSegments = RestClientBuilder.BuildRequestPathSegments(operation, request, httpRequest, new MgmtRestClientBuilder(operationGroup, _context));
+                var pathSegments = RestClientBuilder.BuildRequestPathSegments(operation, request, httpRequest, new MgmtRestClientBuilder(operationGroup));
                 return RequestPath.FromPathSegments(pathSegments, operation.GetHttpPath());
             }
             throw new InvalidOperationException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
@@ -259,34 +259,24 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<Schema, TypeProvider> InitializeModels()
         {
-            //_models = new Dictionary<Schema, TypeProvider>();
             var resourceModels = new Dictionary<Schema, TypeProvider>();
 
             // first, construct resource data models
             foreach (var schema in _allSchemas)
             {
-                if (ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
-                {
-                    var model = BuildResourceModel(schema);
-                    resourceModels.Add(schema, model);
-                    _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
-                }
-                else
-                {
-                    var model = BuildModel(schema);
-                    resourceModels.Add(schema, model);
-                    _nameToTypeProvider.Add(schema.Name, model);
-                }
+                var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceModel(schema) : BuildModel(schema);
+                resourceModels.Add(schema, model);
+                _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
             }
 
             //this is where we update
             var updatedModels = UpdatePatchParameterNames();
             foreach (var (oldName, schema) in updatedModels)
             {
-                _models.Remove(schema);
+                resourceModels.Remove(schema);
                 _nameToTypeProvider.Remove(oldName);
                 var model = BuildModel(schema);
-                _models.Add(schema, model);
+                resourceModels.Add(schema, model);
                 _nameToTypeProvider.Add(schema.Name, model);
             }
 
@@ -568,7 +558,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var resourcePaths = originalResourcePaths.Select(path => path.Expand()).Distinct(new RequestPathCollectionEqualityComparer()).Single();
                     foreach (var resourcePath in resourcePaths)
                     {
-                        var resourceType = resourcePath.GetResourceType(_mgmtConfiguration);
+                        var resourceType = resourcePath.GetResourceType();
                         var resource = new Resource(resourceOperations, GetResourceName(resourceDataSchemaName, resourceOperations.Keys.First(), resourcePath), resourceType, resourceData);
                         var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource);
                         resource.ResourceCollection = collection;
@@ -583,9 +573,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
         {
-            if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
+            if (MgmtContext.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
                 return name;
-            if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{resourceType}", out name))
+            if (MgmtContext.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{resourceType}", out name))
                 return name;
 
             return null;
@@ -594,15 +584,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private string GetResourceName(string candidateName, OperationSet operationSet, RequestPath requestPath)
         {
             // read configuration to see if we could get a configuration for this resource
-            var resourceType = requestPath.GetResourceType(_mgmtConfiguration);
+            var resourceType = requestPath.GetResourceType();
             var defaultNameFromConfig = GetDefaultNameFromConfiguration(operationSet, resourceType);
             if (defaultNameFromConfig != null)
                 return defaultNameFromConfig;
 
-            var resourcesWithSameName = _resourceDataSchemaNameToOperationSets[candidateName];
+            var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
             var resourcesWithSameType = ResourceOperationSets
-                .SelectMany(opSet => opSet.GetRequestPath(_context).Expand(_mgmtConfiguration))
-                .Where(rqPath => rqPath.GetResourceType(_mgmtConfiguration).Equals(resourceType))
+                .SelectMany(opSet => opSet.GetRequestPath().Expand())
+                .Where(rqPath => rqPath.GetResourceType().Equals(resourceType))
                 .ToArray();
 
             var isById = requestPath.IsById;
@@ -648,8 +638,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             while (pathToWalk.Count > 2)
             {
-                pathToWalk = pathToWalk.GetParent(_context);
-                if (_rawRequestPathToResourceData.TryGetValue(pathToWalk.ToString()!, out var parentData))
+                pathToWalk = pathToWalk.GetParent();
+                if (RawRequestPathToResourceData.TryGetValue(pathToWalk.ToString()!, out var parentData))
                 {
                     return parentData.Declaration.Name.Substring(0, parentData.Declaration.Name.Length - 4);
                 }
@@ -665,7 +655,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private string? GetCoreParentName(RequestPath requestPath)
         {
-            var resourceType = requestPath.GetResourceType(_mgmtConfiguration);
+            var resourceType = requestPath.GetResourceType();
             if (resourceType.Equals(ResourceTypeSegment.ManagementGroup))
                 return nameof(ResourceTypeSegment.ManagementGroup);
             if (resourceType.Equals(ResourceTypeSegment.ResourceGroup))
@@ -806,6 +796,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<Resource> FindResources(ResourceData resourceData)
         {
             return ArmResources.Where(resource => resource.ResourceData == resourceData);
+        }
+
+        public CSharpType CreateUninitializedType(Schema schema, bool isNullable)
+        {
+            try
+            {
+                return BuildModel(schema).Type;
+            }
+            catch (NotImplementedException)
+            {
+                return MgmtContext.Context.TypeFactory.CreateType(schema, isNullable);
+            }
         }
 
         private TypeProvider BuildModel(Schema schema) => schema switch

@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             _allOperationMap = GetAllOperationsMap(allOperations);
 
-            IsById = OperationSets.Any(operationSet => operationSet.IsById());
+            IsById = OperationSets.Any(operationSet => operationSet.IsById);
 
             Position = position;
         }

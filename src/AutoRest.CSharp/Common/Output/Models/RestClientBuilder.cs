@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -110,12 +111,31 @@ namespace AutoRest.CSharp.Output.Models
 
         public static PathSegment[] BuildRequestPathSegments(Operation operation, ServiceRequest serviceRequest, HttpRequest httpRequest, RestClientBuilder restClientBuilder)
         {
-            var allParameters = restClientBuilder.GetOperationAllParameters(operation, serviceRequest.Parameters);
+            var parameters = operation.Parameters
+                .Concat(serviceRequest.Parameters)
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                .ToArray();
+
+            var allParameters = parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, MgmtContext.Library.CreateUninitializedType(requestParameter.Schema, requestParameter.IsNullable)));
             var methodParameters = restClientBuilder.BuildMethodParameters(allParameters);
             var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, restClientBuilder.CreateReference(kvp.Key, kvp.Value)));
             var buildContext = new RequestMethodBuildContext(methodParameters, references);
             BuildRequestParameters(httpRequest, buildContext, out var queryParams, out var headerParams, out var uriParams, out var pathParams);
             return uriParams.Concat(pathParams).ToArray();
+        }
+
+        private static Parameter BuildParameter(RequestParameter requestParameter, CSharpType parameterType)
+        {
+            return new Parameter(
+                requestParameter.CSharpName(),
+                CreateDescription(requestParameter, parameterType),
+                TypeFactory.GetInputType(parameterType),
+                null,
+                requestParameter.IsRequired,
+                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                IsResourceIdentifier: requestParameter.IsResourceParameter,
+                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+                RequestLocation: GetRequestLocation(requestParameter));
         }
 
         /// <summary>
@@ -632,8 +652,8 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter BuildParameter(RequestParameter requestParameter, Type? frameworkParameterType = null)
         {
             CSharpType type = frameworkParameterType != null
-                ? new CSharpType(frameworkParameterType, requestParameter.IsNullable || !requestParameter.IsRequired)
-                : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
+                    ? new CSharpType(frameworkParameterType, requestParameter.IsNullable || !requestParameter.IsRequired)
+                    : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
 
             var defaultValue = ParseConstant(requestParameter);
 
