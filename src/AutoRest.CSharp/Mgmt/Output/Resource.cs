@@ -126,8 +126,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceDataSchemaName, ResourceTypeSegment resourceType, ResourceData resourceData)
-            : this(allOperations, resourceDataSchemaName, resourceType, resourceData, ResourcePosition)
+        //TODO: make 1-1 mapping of operationset to resource
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
+            : this(allOperations, resourceName, resourceType, resourceData, ResourcePosition)
         { }
 
         private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> GetAllOperationsMap(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations)

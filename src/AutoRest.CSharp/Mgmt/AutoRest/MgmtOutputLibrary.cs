@@ -592,8 +592,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
             var resourcesWithSameType = ResourceOperationSets
                 .SelectMany(opSet => opSet.GetRequestPath().Expand())
-                .Where(rqPath => rqPath.GetResourceType().Equals(resourceType))
-                .ToArray();
+                .Where(rqPath => rqPath.GetResourceType().Equals(resourceType));
 
             var isById = requestPath.IsById;
             int countOfSameResourceDataName = resourcesWithSameName.Count();
@@ -622,7 +621,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     return $"{requestPath.Last().ConstantValue.FirstCharToUpperCase()}{name}";
 
                 // if we get here, we have tried all approaches to get a solid resource type name, throw an exception
-                throw new InvalidOperationException($"Cannot determine a resource class name for resource with the request path(s): {requestPath}, please assign a valid resource name in `request-path-to-resource-name` section");
+                throw new InvalidOperationException($"Cannot determine a resource class name for resource with the request path: {requestPath}, please assign a valid resource name in `request-path-to-resource-name` section");
             }
             // if this resource is based on a "ById" operation
             // if we only have one resource class with this name - we have no choice but use this "ById" resource
@@ -667,7 +666,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
-        private bool DoMultipleResourcesShareMyPrefixes(RequestPath requestPath, string parentPrefix, RequestPath[] resourcesWithSameType)
+        private bool DoMultipleResourcesShareMyPrefixes(RequestPath requestPath, string parentPrefix, IEnumerable<RequestPath> resourcesWithSameType)
         {
             foreach (var resourcePath in resourcesWithSameType)
             {
