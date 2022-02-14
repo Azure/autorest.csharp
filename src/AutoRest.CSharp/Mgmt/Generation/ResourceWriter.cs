@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private Resource This { get; }
 
-        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
+        public ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
             This = resource;
             _customMethods.Add(nameof(WriteAddTagBody), WriteAddTagBody);

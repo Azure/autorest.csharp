@@ -60,5 +60,21 @@ namespace MgmtOperations
             );
         }
         #endregion
+
+        #region UnpatchableResource
+        /// <summary> Gets an object representing a UnpatchableResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>
+        public static UnpatchableResource GetUnpatchableResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetClient(() =>
+            {
+                UnpatchableResource.ValidateResourceId(id);
+                return new UnpatchableResource(client, id);
+            }
+            );
+        }
+        #endregion
     }
 }

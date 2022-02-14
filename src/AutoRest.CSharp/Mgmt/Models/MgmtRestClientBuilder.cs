@@ -7,6 +7,7 @@ using System.IO.MemoryMappedFiles;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -36,8 +37,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
         }
 
-        public MgmtRestClientBuilder(OperationGroup operationGroup, BuildContext context)
-            : base(GetMgmtParametersFromOperations(operationGroup.Operations), context)
+        public MgmtRestClientBuilder(OperationGroup operationGroup)
+            : base(GetMgmtParametersFromOperations(operationGroup.Operations), MgmtContext.Context)
         {
         }
 

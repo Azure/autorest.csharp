@@ -34,6 +34,14 @@ namespace MgmtOperations
             return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
 
+        /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
+        public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetUnpatchableResources();
+        }
+
         /// <summary>
         /// Update an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets

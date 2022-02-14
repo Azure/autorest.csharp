@@ -13,8 +13,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private MgmtExtensions This { get; }
 
-        public ArmClientExtensionsWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
-            : base(extensions, context)
+        public ArmClientExtensionsWriter(MgmtExtensions extensions)
+            : base(extensions)
         {
             This = extensions;
         }
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteClassDeclaration();
                 using (_writer.Scope())
                 {
-                    foreach (var resource in Context.Library.ArmResources)
+                    foreach (var resource in MgmtContext.Library.ArmResources)
                     {
                         _writer.Line($"#region {resource.Type.Name}");
                         WriteGetResourceFromIdMethod(resource);

@@ -39,11 +39,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             false);
 
 
-        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, BuildContext<MgmtOutputLibrary> context)
+        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), context, null);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), null);
             }
 
             return null;
@@ -60,18 +60,16 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, BuildContext<MgmtOutputLibrary> context, Parameter? extensionParameter = null)
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null)
         {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, context, extensionParameter);
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter);
         }
 
         private IReadOnlyList<MgmtRestOperation> _operations;
 
-        private BuildContext<MgmtOutputLibrary> _context;
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, BuildContext<MgmtOutputLibrary> context, Parameter? extensionParameter)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter)
         {
             _operations = operations;
-            _context = context;
             _extensionParameter = extensionParameter;
         }
 
@@ -141,7 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var contextualPath in OperationMappings.Keys)
             {
                 var adjustedPath = Resource is not null ? contextualPath.ApplyHint(Resource.ResourceType) : contextualPath;
-                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(_context, IdVariableName).Concat(contextParams));
+                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariableName).Concat(contextParams));
             }
             return OperationMappings.ToDictionary(
                 pair => pair.Key,

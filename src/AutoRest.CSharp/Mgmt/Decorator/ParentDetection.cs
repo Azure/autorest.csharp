@@ -27,79 +27,79 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="resource"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static IEnumerable<MgmtTypeProvider> Parent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
+        public static IEnumerable<MgmtTypeProvider> Parent(this Resource resource)
         {
             if (_resourceParentCache.TryGetValue(resource, out var parentList))
                 return parentList;
 
-            parentList = resource.GetParent(context);
+            parentList = resource.GetParent();
             _resourceParentCache.TryAdd(resource, parentList);
             return parentList;
         }
 
-        private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource, BuildContext<MgmtOutputLibrary> context)
+        private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
         {
-            return resource.OperationSets.SelectMany(resourceOperationSet => resourceOperationSet.GetParent(context));
+            return resource.OperationSets.SelectMany(resourceOperationSet => resourceOperationSet.GetParent());
         }
 
-        private static IEnumerable<MgmtTypeProvider> GetParent(this OperationSet resourceOperationSet, BuildContext<MgmtOutputLibrary> context)
+        private static IEnumerable<MgmtTypeProvider> GetParent(this OperationSet resourceOperationSet)
         {
-            var parentRequestPath = resourceOperationSet.ParentRequestPath(context);
-            if (context.Library.TryGetArmResource(parentRequestPath, out var parent))
+            var parentRequestPath = resourceOperationSet.ParentRequestPath();
+            if (MgmtContext.Library.TryGetArmResource(parentRequestPath, out var parent))
             {
                 return parent.AsIEnumerable();
             }
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
             if (parentRequestPath.Equals(RequestPath.ManagementGroup))
-                return context.Library.ManagementGroupExtensions.AsIEnumerable();
+                return MgmtContext.Library.ManagementGroupExtensions.AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.ResourceGroup))
-                return context.Library.ResourceGroupExtensions.AsIEnumerable();
+                return MgmtContext.Library.ResourceGroupExtensions.AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.Subscription))
-                return context.Library.SubscriptionExtensions.AsIEnumerable();
+                return MgmtContext.Library.SubscriptionExtensions.AsIEnumerable();
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             var scope = parentRequestPath.GetScopePath();
             // if the scope of this request path is parameterized, we return the scope as its parent
             if (scope.IsParameterizedScope())
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
-                var types = resourceOperationSet.GetRequestPath(context).GetParameterizedScopeResourceTypes(context.Configuration.MgmtConfiguration)!;
-                return FindScopeParents(types, context);
+                var types = resourceOperationSet.GetRequestPath().GetParameterizedScopeResourceTypes()!;
+                return FindScopeParents(types);
             }
-            return context.Library.TenantExtensions.AsIEnumerable();
+            return MgmtContext.Library.TenantExtensions.AsIEnumerable();
         }
 
-        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceTypeSegment[] parameterizedScopeTypes, BuildContext<MgmtOutputLibrary> context)
+        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceTypeSegment[] parameterizedScopeTypes)
         {
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
             {
-                yield return context.Library.ArmResourceExtensions;
+                yield return MgmtContext.Library.ArmResourceExtensions;
                 yield break;
             }
             // try all the possible extensions one by one
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ManagementGroup))
-                yield return context.Library.ManagementGroupExtensions;
+                yield return MgmtContext.Library.ManagementGroupExtensions;
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ResourceGroup))
-                yield return context.Library.ResourceGroupExtensions;
+                yield return MgmtContext.Library.ResourceGroupExtensions;
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Subscription))
-                yield return context.Library.SubscriptionExtensions;
+                yield return MgmtContext.Library.SubscriptionExtensions;
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Tenant))
-                yield return context.Library.TenantExtensions;
+                yield return MgmtContext.Library.TenantExtensions;
             // tenant is not quite a concrete resource, therefore we do not include it here
         }
 
-        public static RequestPath ParentRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath ParentRequestPath(this OperationSet operationSet)
         {
             // escape the calculation if this is configured in the configuration
-            if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))
-                return GetRequestPathFromRawPath(rawPath, context);
+            if (MgmtContext.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))
+                return GetRequestPathFromRawPath(rawPath);
 
-            return operationSet.GetRequestPath(context).ParentRequestPath(context);
+            return operationSet.GetRequestPath().ParentRequestPath();
         }
 
-        private static RequestPath GetRequestPathFromRawPath(string rawPath, BuildContext<MgmtOutputLibrary> context)
+        private static RequestPath GetRequestPathFromRawPath(string rawPath)
         {
-            var parentSet = context.Library.GetOperationSet(rawPath);
-            return parentSet.GetRequestPath(context);
+            var parentSet = MgmtContext.Library.GetOperationSet(rawPath);
+            return parentSet.GetRequestPath();
         }
 
         /// <summary>
@@ -111,50 +111,50 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="operation"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static RequestPath ParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath ParentRequestPath(this Operation operation)
         {
             if (_operationToParentRequestPathCache.TryGetValue(operation, out var result))
                 return result;
 
-            result = operation.GetParentRequestPath(context);
+            result = operation.GetParentRequestPath();
             _operationToParentRequestPathCache.TryAdd(operation, result);
             return result;
         }
 
-        private static RequestPath GetParentRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        private static RequestPath GetParentRequestPath(this Operation operation)
         {
             // escape the calculation if this is configured in the configuration
-            if (context.Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
-                return GetRequestPathFromRawPath(rawPath, context);
+            if (MgmtContext.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
+                return GetRequestPathFromRawPath(rawPath);
 
-            var currentRequestPath = operation.GetRequestPath(context);
-            var currentOperationSet = context.Library.GetOperationSet(currentRequestPath);
+            var currentRequestPath = operation.GetRequestPath();
+            var currentOperationSet = MgmtContext.Library.GetOperationSet(currentRequestPath);
             // if this operation comes from a resource, return itself
-            if (currentOperationSet.IsResource(context.Configuration.MgmtConfiguration))
+            if (currentOperationSet.IsResource())
                 return currentRequestPath;
 
             // if this operation corresponds to a collection operation of a resource, return the path of the resource
-            if (operation.IsResourceCollectionOperation(context, out var operationSetOfResource))
-                return operationSetOfResource.GetRequestPath(context);
+            if (operation.IsResourceCollectionOperation(out var operationSetOfResource))
+                return operationSetOfResource.GetRequestPath();
 
             // if neither of the above, we find a request path that is the longest parent of this, and belongs to a resource
-            return currentRequestPath.ParentRequestPath(context);
+            return currentRequestPath.ParentRequestPath();
         }
 
-        internal static RequestPath ParentRequestPath(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        internal static RequestPath ParentRequestPath(this RequestPath requestPath)
         {
             if (_requestPathToParentCache.TryGetValue(requestPath, out var result))
             {
                 return result;
             }
 
-            result = GetParent(requestPath, context);
+            result = GetParent(requestPath);
             _requestPathToParentCache.TryAdd(requestPath, result);
 
             return result;
         }
 
-        private static RequestPath GetParent(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        private static RequestPath GetParent(this RequestPath requestPath)
         {
             // find a parent resource in the resource list
             // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // NOTE that we are always using fuzzy match in the IsAncestorOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
             // We will never want this
             var scope = requestPath.GetScopePath();
-            var candidates = context.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath(context))
+            var candidates = MgmtContext.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath())
                 .Concat(new List<RequestPath>{RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup}) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
                 .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);
             if (candidates.Any())

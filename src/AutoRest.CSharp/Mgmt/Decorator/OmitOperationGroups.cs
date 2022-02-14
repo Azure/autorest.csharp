@@ -13,22 +13,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OmitOperationGroups
     {
-        public static void RemoveOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
+        public static void RemoveOperationGroups()
         {
-            var omitSet = context.Configuration.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
-            if (codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
+            var omitSet = MgmtContext.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
+            if (MgmtContext.CodeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
             {
                 omitSet.Add("Operations");
             }
             if (omitSet.Count > 0)
             {
-                var omittedOGs = codeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
-                var nonOmittedOGs = codeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
+                var omittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
+                var nonOmittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
 
-                codeModel.OperationGroups = nonOmittedOGs;
+                MgmtContext.CodeModel.OperationGroups = nonOmittedOGs;
                 var schemasToOmit = new HashSet<Schema>();
                 var schemasToKeep = new HashSet<Schema>();
-                foreach (var operationGroup in codeModel.OperationGroups)
+                foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
                 {
                     DetectSchemas(operationGroup, schemasToKeep);
                 }
@@ -40,26 +40,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
                 AddDependantSchemasRecursively(schemasToOmit);
 
-                RemoveSchemas(codeModel, schemasToOmit, schemasToKeep);
+                RemoveSchemas(schemasToOmit, schemasToKeep);
             }
         }
 
-        private static void RemoveSchemas(CodeModel codeModel, HashSet<Schema> schemasToOmit, HashSet<Schema> schemasToKeep)
+        private static void RemoveSchemas(HashSet<Schema> schemasToOmit, HashSet<Schema> schemasToKeep)
         {
             foreach (var schema in schemasToOmit)
             {
                 if (schema is ObjectSchema objSchema && !schemasToKeep.Contains(objSchema))
                 {
-                    codeModel.Schemas.Objects.Remove(objSchema);
+                    MgmtContext.CodeModel.Schemas.Objects.Remove(objSchema);
                     RemoveRelations(objSchema);
                 }
                 else if (schema is ChoiceSchema choiceSchema && !schemasToKeep.Contains(choiceSchema))
                 {
-                    codeModel.Schemas.Choices.Remove(choiceSchema);
+                    MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
                 }
                 else if (schema is SealedChoiceSchema sealChoiceSchema && !schemasToKeep.Contains(sealChoiceSchema))
                 {
-                    codeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
+                    MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
                 }
             }
         }
