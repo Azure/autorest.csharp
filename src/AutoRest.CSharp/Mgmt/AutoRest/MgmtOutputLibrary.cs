@@ -75,19 +75,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
-            UpdateSubscriptionIdForAllResource(codeModel);
             _codeModel = codeModel;
+            _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
+                .Concat(codeModel.Schemas.SealedChoices)
+                .Concat(codeModel.Schemas.Objects)
+                .Concat(codeModel.Schemas.Groups);
+            _allSchemas.UpdateAcronyms(_mgmtConfiguration.RenameRules);
+            codeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             _rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
             _resourceDataSchemaNameToOperationSets = new Dictionary<string, HashSet<OperationSet>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
-            _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
-                .Concat(_codeModel.Schemas.SealedChoices)
-                .Concat(_codeModel.Schemas.Objects)
-                .Concat(_codeModel.Schemas.Groups);
 
-            UpdateFrameworkTypes(_allSchemas);
+            _allSchemas.UpdateFrameworkTypes();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -102,47 +103,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
 
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
-
-
-        private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
-        {
-            foreach (var schema in _allSchemas)
-            {
-                if (schema is not ObjectSchema objSchema)
-                    continue;
-
-                foreach (var property in objSchema.Properties)
-                {
-                    if (property.Language.Default.Name.EndsWith("Uri"))
-                        property.Schema.Type = AllSchemaTypes.Uri;
-                }
-            }
-        }
-
-        private void UpdateSubscriptionIdForAllResource(CodeModel codeModel)
-        {
-            bool setSubParam = false;
-            foreach (var operationGroup in codeModel.OperationGroups)
-            {
-                foreach (var op in operationGroup.Operations)
-                {
-                    foreach (var p in op.Parameters)
-                    {
-                        //updater the first subscriptionId to be 'method'
-                        if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
-                        {
-                            setSubParam = true;
-                            p.Implementation = ImplementationLocation.Method;
-                        }
-                        //updater the first subscriptionId to be 'method'
-                        if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
-                        {
-                            p.Implementation = ImplementationLocation.Client;
-                        }
-                    }
-                }
-            }
-        }
 
         // Initialize ResourceData, Models and resource manager common types
         private void InitializeModels()
