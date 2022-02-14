@@ -24,6 +24,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return schema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties).Concat(schema.Properties);
         }
 
+        private static bool IsTagsProperty(Property property)
+            => property.CSharpName().Equals("Tags")
+                && property.Schema is DictionarySchema dictSchema
+                && dictSchema.ElementType.Type == AllSchemaTypes.String;
+
         public static bool HasTags(this Schema schema)
         {
             if (schema is not ObjectSchema objSchema)
@@ -33,9 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var allProperties = objSchema.GetAllProperties();
 
-            var tagsProperties = allProperties.Where(property => property.CSharpName().Equals("Tags")
-                && property.Schema is DictionarySchema dictSchema
-                && dictSchema.ElementType.Type == AllSchemaTypes.String);
+            var tagsProperties = allProperties.Where(property => IsTagsProperty(property));
 
             return tagsProperties.Any();
         }
@@ -55,10 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var onlyProperty = allProperties.Single();
 
-            if (!onlyProperty.CSharpName().Equals("Tags"))
-                return false;
-
-            return onlyProperty.Schema is DictionarySchema dictSchema && dictSchema.ElementType.Type == AllSchemaTypes.String;
+            return IsTagsProperty(onlyProperty);
         }
 
         public static bool IsResourceModel(this Schema schema)
