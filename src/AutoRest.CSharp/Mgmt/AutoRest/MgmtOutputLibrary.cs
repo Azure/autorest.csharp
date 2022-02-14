@@ -393,7 +393,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
         {
-            bool shouldGenerateChildren = MgmtContext.MgmtConfiguration.IsArmCore ? armCoreType.Namespace != MgmtContext.Context.DefaultNamespace : true;
+            bool shouldGenerateChildren = !MgmtContext.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
             var operations = shouldGenerateChildren ? GetChildOperations(contextualPath) : Enumerable.Empty<Operation>();
             return new MgmtExtensions(operations, armCoreType, contextualPath);
         }
