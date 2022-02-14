@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -44,15 +45,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return onlyProperty.Schema is DictionarySchema dictSchema && dictSchema.ElementType.Type == AllSchemaTypes.String;
         }
 
-        public static bool IsResourceModel(this Schema schema, MgmtConfiguration config)
+        public static bool IsResourceModel(this Schema schema)
         {
             if (schema is not ObjectSchema objSchema)
                 return false;
 
             var allProperties = objSchema.GetAllProperties();
             bool idPropertyFound = false;
-            bool typePropertyFound = !config.DoesResourceModelRequireType;
-            bool namePropertyFound = !config.DoesResourceModelRequireName;
+            bool typePropertyFound = !MgmtContext.MgmtConfiguration.DoesResourceModelRequireType;
+            bool namePropertyFound = !MgmtContext.MgmtConfiguration.DoesResourceModelRequireName;
 
             foreach (var property in allProperties)
             {
