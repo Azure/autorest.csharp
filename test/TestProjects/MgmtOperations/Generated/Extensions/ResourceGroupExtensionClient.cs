@@ -50,6 +50,13 @@ namespace MgmtOperations
             return new AvailabilitySetCollection(Client, Id);
         }
 
+        /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
+        /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
+        public virtual UnpatchableResourceCollection GetUnpatchableResources()
+        {
+            return new UnpatchableResourceCollection(Client, Id);
+        }
+
         /// <summary>
         /// Update an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
