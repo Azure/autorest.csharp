@@ -51,7 +51,7 @@ namespace MgmtExtensionResource
         internal SubSingleton(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subSingletonClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string subSingletonApiVersion);
+            TryGetApiVersion(ResourceType, out string subSingletonApiVersion);
             _subSingletonRestClient = new SubSingletonsRestOperations(_subSingletonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subSingletonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

@@ -53,7 +53,7 @@ namespace MgmtMultipleParentResource
         internal TheParent(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _theParentClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string theParentApiVersion);
+            TryGetApiVersion(ResourceType, out string theParentApiVersion);
             _theParentRestClient = new TheParentsRestOperations(_theParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, theParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

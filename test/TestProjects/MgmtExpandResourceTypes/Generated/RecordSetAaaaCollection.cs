@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetAaaaCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetAaaaRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetAaaa.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(RecordSetAaaa.ResourceType, out string recordSetAaaaRecordSetsApiVersion);
+            TryGetApiVersion(RecordSetAaaa.ResourceType, out string recordSetAaaaRecordSetsApiVersion);
             _recordSetAaaaRecordSetsRestClient = new RecordSetsRestOperations(_recordSetAaaaRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetAaaaRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

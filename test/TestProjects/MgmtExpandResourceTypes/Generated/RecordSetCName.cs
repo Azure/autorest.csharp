@@ -52,7 +52,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetCName(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetCNameRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string recordSetCNameRecordSetsApiVersion);
+            TryGetApiVersion(ResourceType, out string recordSetCNameRecordSetsApiVersion);
             _recordSetCNameRecordSetsRestClient = new RecordSetsRestOperations(_recordSetCNameRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetCNameRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
