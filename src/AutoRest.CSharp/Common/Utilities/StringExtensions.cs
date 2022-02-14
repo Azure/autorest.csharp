@@ -45,6 +45,7 @@ namespace AutoRest.CSharp.Utilities
             }
 
             bool upperCase = false;
+            int firstWordLength = 1;
             for (; i < name.Length; i++)
             {
                 var c = name[i];
@@ -54,10 +55,23 @@ namespace AutoRest.CSharp.Utilities
                     continue;
                 }
 
-                if (nameBuilder.Length == 0)
+                if (nameBuilder.Length == 0 && camelCase)
                 {
-                    c = camelCase ? char.ToUpper(c) : char.ToLower(c);
+                    c = char.ToUpper(c);
                     upperCase = false;
+                }
+                else if (nameBuilder.Length < firstWordLength && !camelCase)
+                {
+                    c = char.ToLower(c);
+                    upperCase = false;
+                    // grow the first word length when this letter follows by two other upper case letters
+                    // this happens in OSProfile, where OS is the first word
+                    if (i + 2 < name.Length && char.IsUpper(name[i + 1]) && char.IsUpper(name[i + 2]))
+                        firstWordLength++;
+                    // grow the first word length when this letter follows by another upper case letter and an end of the string
+                    // this happens when the string only has one word, like OS, DNS
+                    if (i + 2 == name.Length && char.IsUpper(name[i + 1]))
+                        firstWordLength++;
                 }
 
                 if (upperCase)
