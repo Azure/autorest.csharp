@@ -26,5 +26,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var param3 = TypeAsserts.HasParameter(method, "cancellationToken");
             Assert.AreEqual(typeof(CancellationToken), param3.ParameterType);
         }
+
+        [TestCase(true, "AvailabilitySet", "Update")]
+        [TestCase(true, "AvailabilitySet", "UpdateAsync")]
+        [TestCase(false, "UnpatchableResource", "Update")]
+        [TestCase(false, "UnpatchableResource", "UpdateAsync")]
+        public void ValidateMethod(bool exist, string className, string methodName)
+        {
+            var resource = Assembly.GetExecutingAssembly().GetType($"MgmtOperations.{className}");
+            Assert.NotNull(resource, $"Class {className} not found");
+
+            var method = resource.GetMethod(methodName);
+            Assert.AreEqual(exist, method != null, $"Method {methodName} should {(exist ? string.Empty : "not")} exist on class {className}");
+        }
     }
 }

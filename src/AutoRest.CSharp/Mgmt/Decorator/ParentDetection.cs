@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (scope.IsParameterizedScope())
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
-                var types = resourceOperationSet.GetRequestPath().GetParameterizedScopeResourceTypes(MgmtContext.MgmtConfiguration)!;
+                var types = resourceOperationSet.GetRequestPath().GetParameterizedScopeResourceTypes()!;
                 return FindScopeParents(types);
             }
             return MgmtContext.Library.TenantExtensions.AsIEnumerable();

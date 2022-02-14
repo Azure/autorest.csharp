@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary()
         {
             OmitOperationGroups.RemoveOperationGroups();
-            UpdateSubscriptionIdForAllResource();
+            MgmtContext.CodeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
             ResourceDataSchemaNameToOperationSets = new CachedDictionary<string, HashSet<OperationSet>>(DecorateOperationSets);
@@ -103,9 +103,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(MgmtContext.CodeModel.Schemas.SealedChoices)
                 .Concat(MgmtContext.CodeModel.Schemas.Objects)
                 .Concat(MgmtContext.CodeModel.Schemas.Groups);
-
-            //this is where we change property types to use csharp standards like BlobUri of type string becomes BlobUri of type Uri
-            UpdateFrameworkTypes(_allSchemas);
+            _allSchemas.UpdateAcronyms();
+            _allSchemas.UpdateFrameworkTypes();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -866,6 +865,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         resourceDataSchemaNameToOperationSets.Add(resourceDataSchemaName, result);
                     }
                     result.Add(operationSet);
+                }
+            }
+
+            // check the patch operations in all the operationSets that correspond to a resource. If it only updates the tags, we remove it from the operation set
+            foreach (var operationSet in resourceDataSchemaNameToOperationSets.Values.SelectMany(v => v))
+            {
+                // get the Patch operation from this OperationSet
+                var operation = operationSet.FindOperation(HttpMethod.Patch);
+                if (operation is null)
+                    continue;
+
+                var bodySchema = operation.GetBodyParameter()?.Schema;
+                if (bodySchema is null)
+                    continue;
+
+                if (bodySchema.IsTagsOnly())
+                {
+                    // remove this operation from this operation set
+                    operationSet.Remove(operation);
                 }
             }
             return resourceDataSchemaNameToOperationSets;

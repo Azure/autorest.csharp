@@ -279,7 +279,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var type = contextualPath.GetResourceType();
             if (type == ResourceTypeSegment.Scope)
-                return requestPath.GetParameterizedScopeResourceTypes(MgmtContext.MgmtConfiguration)!;
+                return requestPath.GetParameterizedScopeResourceTypes()!;
 
             return type.AsIEnumerable();
         }

@@ -43,8 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// Add a new operation to this <see cref="OperationSet"/>
         /// </summary>
-        /// <param name="operation"></param>
-        /// <param name="operationGroup"></param>
+        /// <param name="operation">The operation to be added</param>
+        /// <param name="operationGroup">The operationGroup this operation belongs</param>
         /// <exception cref="InvalidOperationException">when trying to add an operation with a different path from <see cref="RequestPath"/></exception>
         public void Add(Operation operation, OperationGroup operationGroup)
         {
@@ -53,6 +53,16 @@ namespace AutoRest.CSharp.Mgmt.Models
                 throw new InvalidOperationException($"Cannot add operation with path {path} to OperationSet with path {RequestPath}");
             Operations.Add(operation);
             _operationGroupCache.TryAdd(operation, operationGroup);
+        }
+
+        /// <summary>
+        /// Remove an operation from this <see cref="OperationSet"/>
+        /// </summary>
+        /// <param name="operation">The operation to be removed</param>
+        public void Remove(Operation operation)
+        {
+            Operations.Remove(operation);
+            _operationGroupCache.Remove(operation);
         }
 
         /// <summary>
