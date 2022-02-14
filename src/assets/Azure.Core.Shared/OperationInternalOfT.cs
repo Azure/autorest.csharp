@@ -141,8 +141,11 @@ namespace Azure.Core
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
         /// <exception cref="RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
-        public async ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken) =>
-            await WaitForCompletionAsync(DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+        public async ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken)
+        {
+            var rawResponse = await WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            return Response.FromValue(Value, rawResponse);
+        }
 
         /// <summary>
         /// Periodically calls <see cref="OperationInternalBase.UpdateStatusAsync(CancellationToken)"/> until the long-running operation completes. The interval

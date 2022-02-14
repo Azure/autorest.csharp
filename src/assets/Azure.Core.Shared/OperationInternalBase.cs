@@ -28,6 +28,7 @@ namespace Azure.Core
             _scopeAttributes = scopeAttributes?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             RawResponse = rawResponse;
             DefaultPollingInterval = TimeSpan.FromSeconds(1);
+            PollingStrategy = new ConstantPollingStrategy();
         }
 
         /// <summary>
@@ -57,6 +58,22 @@ namespace Azure.Core
         /// Defaults to 1 second.
         /// </summary>
         public TimeSpan DefaultPollingInterval { get; set; }
+
+        /// <summary>
+        /// Gets or sets the polling strategy of <see cref="OperationInternalBase"/>.
+        /// </summary>
+        public IOperationPollingStrategy PollingStrategy { get; set; }
+
+        protected TimeSpan PollingInterval {
+            get
+            {
+                if (PollingStrategy is ConstantPollingStrategy)
+                {
+                    return DefaultPollingInterval;
+                }
+                return PollingStrategy.PollingInterval;
+            }
+        }
 
         protected RequestFailedException? OperationFailedException { get; private set; }
 
@@ -114,8 +131,21 @@ namespace Azure.Core
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
         /// <exception cref="RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
-        public virtual async ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken) =>
-            await WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+        public virtual async ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken)
+        {
+            while (true)
+            {
+                Response response = await UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
+
+                if (HasCompleted)
+                {
+                    return response;
+                }
+
+                TimeSpan delay = GetServerDelay(response, PollingInterval);
+                await WaitAsync(delay, cancellationToken).ConfigureAwait(false);
+            }
+        }
 
         /// <summary>
         /// Periodically calls <see cref="UpdateStatusAsync(CancellationToken)"/> until the long-running operation completes. The interval

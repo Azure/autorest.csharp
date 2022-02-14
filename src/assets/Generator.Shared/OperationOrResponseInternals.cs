@@ -45,6 +45,24 @@ namespace Azure.Core
             VoidResponse = response;
         }
 
+        public IOperationPollingStrategy? PollingStrategy
+        {
+            get
+            {
+                return Operation?.PollingStrategy;
+            }
+
+            set
+            {
+                if (Operation == null)
+                {
+                    throw new InvalidOperationException("Property 'Operation' is null.");
+                }
+                Argument.AssertNotNull(value, nameof(value));
+                Operation!.PollingStrategy = value!;
+            }
+        }
+
         protected OperationInternalBase? Operation { get; }
 
         protected Response? VoidResponse { get; }

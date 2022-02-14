@@ -29,11 +29,13 @@ namespace ResourceRename
         internal ResourceRenameArmOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
+            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal ResourceRenameArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "ResourceRenameArmOperation");
+            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

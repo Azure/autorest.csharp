@@ -29,11 +29,13 @@ namespace MgmtMultipleParentResource
         internal MgmtMultipleParentResourceArmOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
+            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal MgmtMultipleParentResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtMultipleParentResourceArmOperation");
+            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

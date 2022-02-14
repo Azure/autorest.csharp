@@ -29,11 +29,13 @@ namespace TenantOnly
         internal TenantOnlyArmOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
+            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal TenantOnlyArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "TenantOnlyArmOperation");
+            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

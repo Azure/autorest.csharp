@@ -69,12 +69,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     using (_writer.Scope($"internal {_name}({_responseType} response)"))
                     {
                         _writer.Line($"_operation = new {_operationOrResponseType}(response);");
+                        _writer.Line($"_operation.PollingStrategy = new ExponentialPollingStrategy();");
                     }
                     _writer.Line();
 
                     using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia)"))
                     {
                         _writer.Line($"_operation = new {_operationOrResponseType}({_sourceString}clientDiagnostics, pipeline, request, response, finalStateVia, \"{_name}\");");
+                        _writer.Line($"_operation.PollingStrategy = new ExponentialPollingStrategy();");
                     }
                     _writer.Line();
 
