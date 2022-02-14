@@ -12,12 +12,50 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
+
+        public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
+        {
+            foreach (var schema in allSchemas)
+            {
+                if (schema is not SealedChoiceSchema choiceSchema)
+                    continue;
+
+                // rearrange the sequence in the choices
+                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices);
+            }
+        }
+
+        private static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues)
+        {
+            IEnumerable<ChoiceValue> whateverLeft = originalValues;
+            var result = new List<ChoiceValue>();
+
+            var words = "None".AsIEnumerable().Concat(MgmtContext.MgmtConfiguration.PromptedEnumValues);
+
+            foreach (var word in words)
+            {
+                var filtered = whateverLeft.Where(GetFilter(word));
+                whateverLeft = whateverLeft.Except(filtered);
+                result.AddRange(filtered);
+            }
+
+            result.AddRange(whateverLeft);
+
+            return result;
+        }
+
+        private static Func<ChoiceValue, bool> GetFilter(string word)
+        {
+            return v => v.CSharpName().Equals(word);
+        }
+
         public static void UpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)

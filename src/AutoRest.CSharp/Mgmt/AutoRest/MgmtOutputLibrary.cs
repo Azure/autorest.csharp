@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(MgmtContext.CodeModel.Schemas.Groups);
             _allSchemas.UpdateAcronyms();
             _allSchemas.UpdateFrameworkTypes();
-            UpdateSealChoiceTypes(_allSchemas);
+            _allSchemas.UpdateSealChoiceTypes();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -112,42 +112,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
-        private void UpdateSealChoiceTypes(IEnumerable<Schema> allSchemas)
-        {
-            foreach (var schema in allSchemas)
-            {
-                if (schema is not SealedChoiceSchema choiceSchema)
-                    continue;
-
-                // rearrange the sequence in the choices
-                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices);
-            }
-        }
-
-        private ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues)
-        {
-            IEnumerable<ChoiceValue> whateverLeft = originalValues;
-            var result = new List<ChoiceValue>();
-
-            var words = "None".AsIEnumerable().Concat(_mgmtConfiguration.PromptedEnumValues);
-
-            foreach (var word in words)
-            {
-                var filtered = whateverLeft.Where(GetFilter(word));
-                whateverLeft = whateverLeft.Except(filtered);
-                result.AddRange(filtered);
-            }
-
-            result.AddRange(whateverLeft);
-
-            return result;
-        }
-
-        private Func<ChoiceValue, bool> GetFilter(string word)
-        {
-            return v => v.CSharpName().Equals(word);
-        }
-        
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<Schema, TypeProvider> InitializeModels()
         {
