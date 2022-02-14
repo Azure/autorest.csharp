@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary()
         {
             OmitOperationGroups.RemoveOperationGroups();
-            UpdateSubscriptionIdForAllResource();
+            MgmtContext.CodeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
             ResourceDataSchemaNameToOperationSets = new CachedDictionary<string, HashSet<OperationSet>>(DecorateOperationSets);
@@ -100,8 +100,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(MgmtContext.CodeModel.Schemas.SealedChoices)
                 .Concat(MgmtContext.CodeModel.Schemas.Objects)
                 .Concat(MgmtContext.CodeModel.Schemas.Groups);
-
-            UpdateFrameworkTypes(_allSchemas);
+            _allSchemas.UpdateAcronyms(_mgmtConfiguration.RenameRules);
+            _allSchemas.UpdateFrameworkTypes();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -110,46 +110,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
 
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
-
-        private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
-        {
-            foreach (var schema in _allSchemas)
-            {
-                if (schema is not ObjectSchema objSchema)
-                    continue;
-
-                foreach (var property in objSchema.Properties)
-                {
-                    if (property.Language.Default.Name.EndsWith("Uri"))
-                        property.Schema.Type = AllSchemaTypes.Uri;
-                }
-            }
-        }
-
-        private void UpdateSubscriptionIdForAllResource()
-        {
-            bool setSubParam = false;
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var op in operationGroup.Operations)
-                {
-                    foreach (var p in op.Parameters)
-                    {
-                        //updater the first subscriptionId to be 'method'
-                        if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
-                        {
-                            setSubParam = true;
-                            p.Implementation = ImplementationLocation.Method;
-                        }
-                        //updater the first subscriptionId to be 'method'
-                        if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
-                        {
-                            p.Implementation = ImplementationLocation.Client;
-                        }
-                    }
-                }
-            }
-        }
 
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<Schema, TypeProvider> InitializeModels()
