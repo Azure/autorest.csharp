@@ -133,6 +133,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             throw new InvalidOperationException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
         }
 
+        public Operation? FindOperation(HttpMethod method)
+        {
+            return this.FirstOrDefault(operation => operation.GetHttpMethod() == method);
+        }
+
         public bool IsById => NonHintRequestPath.IsById;
 
         public override string? ToString()
