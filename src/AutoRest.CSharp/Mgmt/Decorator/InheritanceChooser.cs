@@ -27,11 +27,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(schema, out result);
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
             if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
-            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
+            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
                 List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
@@ -45,9 +45,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
-            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
+            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
                 if (IsSuperset(parentType, properties))
                 {

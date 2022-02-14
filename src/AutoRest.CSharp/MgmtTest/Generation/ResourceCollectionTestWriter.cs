@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public List<Tuple<Parameter, MgmtClientOperation?>> collectionInitiateParameters = new List<Tuple<Parameter, MgmtClientOperation?>>();
         public Dictionary<Tuple<Parameter, MgmtClientOperation?>, string> collectionInitiateParametersMap = new Dictionary<Tuple<Parameter, MgmtClientOperation?>, string>();
 
-        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context) : base(writer, resourceCollection, context)
+        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection) : base(writer, resourceCollection)
         {
             This = resourceCollection;
             _getAllOperation = resourceCollection.GetAllOperation;
@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public MgmtTypeProvider? FindParentByRequestPath(string requestPath, ExampleModel exampleModel)
         {
             var mgmtParentResources = new List<MgmtTypeProvider>();
-            foreach (var parent in This.Resource.Parent(Context))
+            foreach (var parent in This.Resource.Parent())
             {
                 if (parent is MgmtExtensions mgmtParent)
                 {
@@ -222,7 +222,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
-                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
+                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
                     return;
                 var testMethodName = CreateMethodName(methodName, async);

@@ -3,7 +3,9 @@
 
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using MgmtParamOrdering;
@@ -20,11 +22,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("DedicatedHost", "DedicatedHostGroup")]
         public void TestParent(string resourceName, string parentName)
         {
-            (_, var context) = Generate("MgmtParamOrdering").Result;
-
-            var resource = context.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
+            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.IsNotNull(resource);
-            var parents = resource.Parent(context);
+            var parents = resource.Parent();
             Assert.IsTrue(parents.Any(r => r.Type.Name == parentName));
         }
 
@@ -39,10 +39,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("AvailabilitySets", "Delete", new[] { "subscriptionId", "resourceGroupName", "availabilitySetName" })]
         public void ValidateOperationParameterList(string operationGroupName, string methodName, string[] parameterList)
         {
-            var result = Generate("MgmtParamOrdering").Result;
-            var model = result.Model;
-
-            var method = model.OperationGroups.Single(p => p.Key.Equals(operationGroupName))
+            var method = MgmtContext.CodeModel.OperationGroups.Single(p => p.Key.Equals(operationGroupName))
                 .Operations.Single(o => o.CSharpName().Equals(methodName));
 
             Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.In == ParameterLocation.Path).Select(p => p.CSharpName())));
