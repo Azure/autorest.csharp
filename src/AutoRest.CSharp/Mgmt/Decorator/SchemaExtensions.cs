@@ -24,6 +24,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return schema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties).Concat(schema.Properties);
         }
 
+        public static bool HasTags(this Schema schema)
+        {
+            if (schema is not ObjectSchema objSchema)
+            {
+                return false;
+            }
+
+            var allProperties = objSchema.GetAllProperties();
+
+            var tagsProperties = allProperties.Where(property => property.CSharpName().Equals("Tags")
+                && property.Schema is DictionarySchema dictSchema
+                && dictSchema.ElementType.Type == AllSchemaTypes.String);
+
+            return tagsProperties.Any();
+        }
+
         public static bool IsTagsOnly(this Schema schema)
         {
             if (schema is not ObjectSchema objSchema)
