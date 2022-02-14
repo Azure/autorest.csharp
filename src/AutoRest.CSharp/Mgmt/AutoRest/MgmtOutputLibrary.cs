@@ -215,46 +215,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             throw new InvalidOperationException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
         }
 
-        private void UpdateFrameworkTypes(IEnumerable<Schema> allSchemas)
-        {
-            foreach (var schema in _allSchemas)
-            {
-                if (schema is not ObjectSchema objSchema)
-                    continue;
-
-                foreach (var property in objSchema.Properties)
-                {
-                    if (property.Language.Default.Name.EndsWith("Uri"))
-                        property.Schema.Type = AllSchemaTypes.Uri;
-                }
-            }
-        }
-
-        private void UpdateSubscriptionIdForAllResource()
-        {
-            bool setSubParam = false;
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var op in operationGroup.Operations)
-                {
-                    foreach (var p in op.Parameters)
-                    {
-                        //updater the first subscriptionId to be 'method'
-                        if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
-                        {
-                            setSubParam = true;
-                            p.Implementation = ImplementationLocation.Method;
-                        }
-                        //updater the first subscriptionId to be 'method'
-                        if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
-                        {
-                            p.Implementation = ImplementationLocation.Client;
-                        }
-                    }
-                }
-            }
-        }
-
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<Schema, TypeProvider> InitializeModels()
         {
@@ -481,18 +441,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (RequestPathToResources.TryGetValue(requestPath, out var bag))
             {
                 resource = bag.Resource;
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool TryGetResourceCollection(RequestPath requestPath, out ResourceCollection? collection)
-        {
-            collection = null;
-            if (RequestPathToResources.TryGetValue(requestPath, out var bag))
-            {
-                collection = bag.ResourceCollection;
                 return true;
             }
 
@@ -797,18 +745,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<Resource> FindResources(ResourceData resourceData)
         {
             return ArmResources.Where(resource => resource.ResourceData == resourceData);
-        }
-
-        public CSharpType CreateUninitializedType(Schema schema, bool isNullable)
-        {
-            try
-            {
-                return BuildModel(schema).Type;
-            }
-            catch (NotImplementedException)
-            {
-                return MgmtContext.Context.TypeFactory.CreateType(schema, isNullable);
-            }
         }
 
         private TypeProvider BuildModel(Schema schema) => schema switch

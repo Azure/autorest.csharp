@@ -639,8 +639,8 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter BuildParameter(RequestParameter requestParameter, Type? frameworkParameterType = null)
         {
             CSharpType type = frameworkParameterType != null
-                    ? new CSharpType(frameworkParameterType, requestParameter.IsNullable || !requestParameter.IsRequired)
-                    : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
+                ? new CSharpType(frameworkParameterType, requestParameter.IsNullable || !requestParameter.IsRequired)
+                : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
 
             var defaultValue = ParseConstant(requestParameter);
 

@@ -109,10 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public RequestPath GetRequestPath(ResourceTypeSegment? hint = null)
         {
-            var rqPath = NonHintRequestPath;
-            if (hint.HasValue)
-                rqPath = rqPath.ApplyHint(hint.Value);
-            return rqPath;
+            return hint.HasValue ? NonHintRequestPath.ApplyHint(hint.Value) : NonHintRequestPath;
         }
 
         private RequestPath? _nonHintRequestPath;
