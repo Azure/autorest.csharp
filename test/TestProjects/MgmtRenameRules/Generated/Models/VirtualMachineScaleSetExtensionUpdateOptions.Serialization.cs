@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class VirtualMachineScaleSetExtensionUpdate : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetExtensionUpdateOptions : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -72,7 +72,7 @@ namespace MgmtRenameRules.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetExtensionUpdate DeserializeVirtualMachineScaleSetExtensionUpdate(JsonElement element)
+        internal static VirtualMachineScaleSetExtensionUpdateOptions DeserializeVirtualMachineScaleSetExtensionUpdateOptions(JsonElement element)
         {
             Optional<string> name = default;
             Optional<string> type = default;
@@ -197,7 +197,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetExtensionUpdate(id.Value, name.Value, type.Value, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, Optional.ToList(provisionAfterExtensions));
+            return new VirtualMachineScaleSetExtensionUpdateOptions(id.Value, name.Value, type.Value, forceUpdateTag.Value, publisher.Value, type0.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value, provisioningState.Value, Optional.ToList(provisionAfterExtensions));
         }
     }
 }

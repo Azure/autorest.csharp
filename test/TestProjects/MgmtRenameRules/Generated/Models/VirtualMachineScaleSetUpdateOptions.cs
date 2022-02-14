@@ -11,10 +11,10 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Describes a Virtual Machine Scale Set. </summary>
-    public partial class VirtualMachineScaleSetUpdate : UpdateResource
+    public partial class VirtualMachineScaleSetUpdateOptions : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdate. </summary>
-        public VirtualMachineScaleSetUpdate()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOptions. </summary>
+        public VirtualMachineScaleSetUpdateOptions()
         {
         }
 

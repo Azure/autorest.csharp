@@ -11,15 +11,15 @@ using Azure.Core;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Describes a Virtual Machine Scale Set Extension. </summary>
-    public partial class VirtualMachineScaleSetExtensionUpdate : SubResourceReadOnly
+    public partial class VirtualMachineScaleSetExtensionUpdateOptions : SubResourceReadOnly
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionUpdate. </summary>
-        public VirtualMachineScaleSetExtensionUpdate()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionUpdateOptions. </summary>
+        public VirtualMachineScaleSetExtensionUpdateOptions()
         {
             ProvisionAfterExtensions = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionUpdate. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionUpdateOptions. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="name"> The name of the extension. </param>
         /// <param name="type"> Resource type. </param>
@@ -33,7 +33,7 @@ namespace MgmtRenameRules.Models
         /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="provisionAfterExtensions"> Collection of extension names after which this extension needs to be provisioned. </param>
-        internal VirtualMachineScaleSetExtensionUpdate(string id, string name, string type, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
+        internal VirtualMachineScaleSetExtensionUpdateOptions(string id, string name, string type, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
         {
             Name = name;
             Type = type;

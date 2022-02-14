@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class VirtualMachineScaleSetUpdate : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetUpdateOptions : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

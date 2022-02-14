@@ -10,10 +10,10 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtRenameRules.Models
 {
     /// <summary> The source user image virtual hard disk. Only tags may be updated. </summary>
-    public partial class ImageUpdate : UpdateResource
+    public partial class ImageUpdateOptions : UpdateResource
     {
-        /// <summary> Initializes a new instance of ImageUpdate. </summary>
-        public ImageUpdate()
+        /// <summary> Initializes a new instance of ImageUpdateOptions. </summary>
+        public ImageUpdateOptions()
         {
         }
 

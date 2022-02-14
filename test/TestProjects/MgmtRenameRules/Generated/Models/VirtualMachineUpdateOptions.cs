@@ -13,10 +13,10 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Describes a Virtual Machine Update. </summary>
-    public partial class VirtualMachineUpdate : UpdateResource
+    public partial class VirtualMachineUpdateOptions : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineUpdate. </summary>
-        public VirtualMachineUpdate()
+        /// <summary> Initializes a new instance of VirtualMachineUpdateOptions. </summary>
+        public VirtualMachineUpdateOptions()
         {
             Zones = new ChangeTrackingList<string>();
         }
