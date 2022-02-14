@@ -12,6 +12,7 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -31,6 +32,55 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         property.Schema.Type = AllSchemaTypes.Uri;
                 }
             }
+        }
+
+        public static void ReorderOperationParameters(this CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var httpRequest = operation.GetHttpRequest();
+                    if (httpRequest != null)
+                    {
+                        var orderedParams = operation.Parameters
+                            .Where(p => p.In == ParameterLocation.Path)
+                            .OrderBy(
+                                p => httpRequest.Path.IndexOf(
+                                    "{" + p.CSharpName() + "}",
+                                    StringComparison.InvariantCultureIgnoreCase));
+                        operation.Parameters = orderedParams.Concat(operation.Parameters
+                                .Where(p => p.In != ParameterLocation.Path)).ToList();
+                    }
+                }
+            }
+        }
+
+        public static void RemoveOperationsListOperations(this CodeModel codeModel)
+        {
+            var operationsToRemove = new Queue<Operation>();
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (IsOperationsListOperation(operation))
+                        operationsToRemove.Enqueue(operation);
+                }
+
+                // remove the operations
+                while (operationsToRemove.Count > 0)
+                {
+                    operationGroup.Operations.Remove(operationsToRemove.Dequeue());
+                }
+            }
+        }
+
+        private static Regex operationsListPathRegex = new Regex(@"^/providers/[A-Za-z0-9]+\.[A-Za-z0-9]+/operations$");
+
+        private static bool IsOperationsListOperation(Operation operation)
+        {
+            var httpPath = operation.GetHttpPath();
+            return operationsListPathRegex.IsMatch(httpPath);
         }
 
         public static void UpdateSubscriptionIdForAllResource(this CodeModel codeModel)

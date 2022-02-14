@@ -78,7 +78,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public MgmtOutputLibrary()
         {
+            MgmtContext.CodeModel.RemoveOperationsListOperations();
             OmitOperationGroups.RemoveOperationGroups();
+            MgmtContext.CodeModel.ReorderOperationParameters();
             MgmtContext.CodeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
@@ -102,9 +104,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(MgmtContext.CodeModel.Schemas.Groups);
             _allSchemas.UpdateAcronyms();
             _allSchemas.UpdateFrameworkTypes();
-
-            // We can only manipulate objects from the code model, not RestClientMethod
-            ReorderOperationParameters();
         }
 
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
@@ -559,29 +558,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new ResourceData(objectSchema),
             _ => throw new NotImplementedException()
         };
-
-        private void ReorderOperationParameters()
-        {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    var httpRequest = operation.Requests.FirstOrDefault()?.Protocol.Http as HttpRequest;
-                    if (httpRequest != null)
-                    {
-                        var orderedParams = operation.Parameters
-                            .Where(p => p.In == ParameterLocation.Path)
-                            .OrderBy(
-                                p => httpRequest.Path.IndexOf(
-                                    "{" + p.CSharpName() + "}",
-                                    StringComparison.InvariantCultureIgnoreCase));
-                        operation.Parameters = orderedParams.Concat(operation.Parameters
-                                .Where(p => p.In != ParameterLocation.Path).ToList())
-                            .ToList();
-                    }
-                }
-            }
-        }
 
         private Dictionary<string, HashSet<OperationSet>> DecorateOperationSets()
         {
