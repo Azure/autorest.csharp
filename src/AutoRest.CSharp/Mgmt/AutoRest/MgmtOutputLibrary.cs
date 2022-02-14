@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(MgmtContext.CodeModel.Schemas.SealedChoices)
                 .Concat(MgmtContext.CodeModel.Schemas.Objects)
                 .Concat(MgmtContext.CodeModel.Schemas.Groups);
-            _allSchemas.UpdateAcronyms(_mgmtConfiguration.RenameRules);
+            _allSchemas.UpdateAcronyms();
             _allSchemas.UpdateFrameworkTypes();
 
             // We can only manipulate objects from the code model, not RestClientMethod
