@@ -6,6 +6,7 @@ using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Models;
@@ -36,12 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public bool IsTaggable => _isTaggable ??= EnsureIsTaggable();
         private bool EnsureIsTaggable()
         {
-            foreach (var obj in EnumerateHierarchy())
-            {
-                if (obj.Type.Name == nameof(TrackedResourceData) && obj.Type.Namespace == typeof(TrackedResourceData).Namespace)
-                    return true;
-            }
-            return false;
+            return ObjectSchema.HasTags();
         }
 
         private CSharpType? typeOfId;
