@@ -609,7 +609,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 if (operation is null)
                     continue;
 
-                var bodySchema = operation.GetBodyParameter()?.Schema;
+                var bodyParameter = operation.GetBodyParameter();
+                if (bodyParameter is null)
+                    continue;
+
+                if (!bodyParameter.IsRequired)
+                    throw new ErrorHelpers.ErrorException($"Patch operation {operation.GetHttpPath()} has optional body parameter, please correct this using directive.");
+
+                var bodySchema = bodyParameter.Schema;
                 if (bodySchema is null)
                     continue;
 
