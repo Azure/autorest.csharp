@@ -42,13 +42,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     foreach (var p in op.Parameters)
                     {
-                        //updater the first subscriptionId to be 'method'
+                        // update the first subscriptionId parameter to be 'method' parameter
                         if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
                         {
                             setSubParam = true;
                             p.Implementation = ImplementationLocation.Method;
                         }
-                        //updater the first subscriptionId to be 'method'
+                        // update the apiVersion parameter to be 'client' method
                         if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
                         {
                             p.Implementation = ImplementationLocation.Client;

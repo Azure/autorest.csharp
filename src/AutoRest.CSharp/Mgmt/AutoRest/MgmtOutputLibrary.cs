@@ -609,12 +609,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 if (operation is null)
                     continue;
 
+                var operationId = operation.OperationId(operationSet[operation]);
+
                 var bodyParameter = operation.GetBodyParameter();
                 if (bodyParameter is null)
                     continue;
 
                 if (!bodyParameter.IsRequired)
-                    throw new ErrorHelpers.ErrorException($"Patch operation {operation.GetHttpPath()} has optional body parameter, please correct this using directive.");
+                    throw new ErrorHelpers.ErrorException($"Patch operation {operation.GetHttpPath()} (operationId: {operationId}) has optional body parameter, please correct this using directive.");
 
                 var bodySchema = bodyParameter.Schema;
                 if (bodySchema is null)
