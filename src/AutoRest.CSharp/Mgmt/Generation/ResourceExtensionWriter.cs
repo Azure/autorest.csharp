@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             using (_writer.Scope($"private string GetApiVersionOrNull({typeof(ResourceType)} resourceType)"))
             {
-                _writer.Line($"{ArmClientReference}.TryGetApiVersion(resourceType, out string apiVersion);");
+                _writer.Line($"TryGetApiVersion(resourceType, out string apiVersion);");
                 _writer.Line($"return apiVersion;");
             }
         }

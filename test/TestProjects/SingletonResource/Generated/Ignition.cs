@@ -51,7 +51,7 @@ namespace SingletonResource
         internal Ignition(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _ignitionClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string ignitionApiVersion);
+            TryGetApiVersion(ResourceType, out string ignitionApiVersion);
             _ignitionRestClient = new IgnitionsRestOperations(_ignitionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

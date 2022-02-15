@@ -52,7 +52,7 @@ namespace TenantOnly
         internal Agreement(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string agreementApiVersion);
+            TryGetApiVersion(ResourceType, out string agreementApiVersion);
             _agreementRestClient = new AgreementsRestOperations(_agreementClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

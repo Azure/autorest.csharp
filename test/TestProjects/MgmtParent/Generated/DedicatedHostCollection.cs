@@ -37,7 +37,7 @@ namespace MgmtParent
         internal DedicatedHostCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _dedicatedHostClientDiagnostics = new ClientDiagnostics("MgmtParent", DedicatedHost.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(DedicatedHost.ResourceType, out string dedicatedHostApiVersion);
+            TryGetApiVersion(DedicatedHost.ResourceType, out string dedicatedHostApiVersion);
             _dedicatedHostRestClient = new DedicatedHostsRestOperations(_dedicatedHostClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
