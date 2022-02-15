@@ -38,7 +38,7 @@ namespace MgmtLRO
         internal BarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _barClientDiagnostics = new ClientDiagnostics("MgmtLRO", Bar.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(Bar.ResourceType, out string barApiVersion);
+            TryGetApiVersion(Bar.ResourceType, out string barApiVersion);
             _barRestClient = new BarsRestOperations(_barClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

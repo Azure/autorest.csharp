@@ -51,7 +51,7 @@ namespace MgmtSubscriptionNameParameter
         internal SBSubscription(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sbSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string sbSubscriptionSubscriptionsApiVersion);
+            TryGetApiVersion(ResourceType, out string sbSubscriptionSubscriptionsApiVersion);
             _sbSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(_sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sbSubscriptionSubscriptionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

@@ -52,7 +52,7 @@ namespace MgmtListMethods
         internal ResGrpParent(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resGrpParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string resGrpParentApiVersion);
+            TryGetApiVersion(ResourceType, out string resGrpParentApiVersion);
             _resGrpParentRestClient = new ResGrpParentsRestOperations(_resGrpParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

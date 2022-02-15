@@ -52,7 +52,7 @@ namespace MgmtExtensionCommonRestOperation
         internal TypeTwo(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string typeTwoCommonApiVersion);
+            TryGetApiVersion(ResourceType, out string typeTwoCommonApiVersion);
             _typeTwoCommonRestClient = new CommonRestOperations(_typeTwoCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
