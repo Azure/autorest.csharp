@@ -52,7 +52,7 @@ namespace MgmtParamOrdering
         internal Workspace(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string workspaceApiVersion);
+            TryGetApiVersion(ResourceType, out string workspaceApiVersion);
             _workspaceRestClient = new WorkspacesRestOperations(_workspaceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

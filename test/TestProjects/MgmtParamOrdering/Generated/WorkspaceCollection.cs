@@ -38,7 +38,7 @@ namespace MgmtParamOrdering
         internal WorkspaceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", Workspace.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(Workspace.ResourceType, out string workspaceApiVersion);
+            TryGetApiVersion(Workspace.ResourceType, out string workspaceApiVersion);
             _workspaceRestClient = new WorkspacesRestOperations(_workspaceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

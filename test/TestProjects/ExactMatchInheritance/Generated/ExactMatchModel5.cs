@@ -52,7 +52,7 @@ namespace ExactMatchInheritance
         internal ExactMatchModel5(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _exactMatchModel5ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string exactMatchModel5ApiVersion);
+            TryGetApiVersion(ResourceType, out string exactMatchModel5ApiVersion);
             _exactMatchModel5RestClient = new ExactMatchModel5SRestOperations(_exactMatchModel5ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel5ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

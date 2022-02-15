@@ -52,7 +52,7 @@ namespace SubscriptionExtensions
         internal Toaster(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string toasterApiVersion);
+            TryGetApiVersion(ResourceType, out string toasterApiVersion);
             _toasterRestClient = new ToastersRestOperations(_toasterClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

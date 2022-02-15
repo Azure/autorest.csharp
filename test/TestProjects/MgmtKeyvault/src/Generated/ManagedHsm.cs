@@ -55,7 +55,7 @@ namespace MgmtKeyvault
         internal ManagedHsm(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _managedHsmClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string managedHsmApiVersion);
+            TryGetApiVersion(ResourceType, out string managedHsmApiVersion);
             _managedHsmRestClient = new ManagedHsmsRestOperations(_managedHsmClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managedHsmApiVersion);
             _mHSMPrivateLinkResourcesClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _mHSMPrivateLinkResourcesRestClient = new MhsmPrivateLinkResourcesRestOperations(_mHSMPrivateLinkResourcesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);

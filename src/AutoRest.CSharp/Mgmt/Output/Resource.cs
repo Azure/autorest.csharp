@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             _allOperationMap = GetAllOperationsMap(allOperations);
 
-            IsById = OperationSets.Any(operationSet => operationSet.IsById());
+            IsById = OperationSets.Any(operationSet => operationSet.IsById);
 
             Position = position;
         }
@@ -126,6 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
+        //TODO: make 1-1 mapping of operationset to resource
         public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
             : this(allOperations, resourceName, resourceType, resourceData, ResourcePosition)
         { }
@@ -140,23 +141,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             return result;
-        }
-
-        public bool IsInOperationMap(Operation operation)
-        {
-            foreach (var opSet in _allOperationMap.Keys)
-            {
-                if (opSet.Contains(operation))
-                    return true;
-            }
-
-            foreach (var opSet in _allOperationMap.Values)
-            {
-                if (opSet.Contains(operation))
-                    return true;
-            }
-
-            return false;
         }
 
         protected bool IsById { get; }
@@ -189,76 +173,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual Resource GetResource() => this;
 
-        private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= EnsureResourceDefaultName();
-
-        private string EnsureResourceDefaultName()
-        {
-            // read configuration to see if we could get a configuration for this resource
-            var defaultNameFromConfig = GetDefaultNameFromConfiguration();
-            if (defaultNameFromConfig != null)
-                return defaultNameFromConfig;
-
-            var resourcesWithSameName = ResourcesWithSameResourceName();
-            var resourcesWithSameType = ResourcesWithSameResourceType();
-            int countOfSameResourceDataName = resourcesWithSameName.Count();
-            int countOfSameResourceTypeName = resourcesWithSameType.Count();
-            if (!IsById)
-            {
-                // this is a regular resource and the name is unique
-                if (countOfSameResourceDataName == 1)
-                    return ResourceName;
-
-                // if countOfSameResourceDataName > 1, we need to have the resource types as the resource type name
-
-                // if we have the unique resource type, we just use the resource type to construct our resource type name
-                var types = ResourceType.Types;
-                var name = string.Join("", types.Select(segment => segment.ConstantValue.LastWordToSingular().FirstCharToUpperCase()));
-                if (countOfSameResourceTypeName == 1)
-                    return name;
-
-                // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
-                // first we try to add the parent name as prefix
-                var prefixes = resourcesWithSameType.Select(resource => ParentPrefix(resource)).Distinct();
-                if (prefixes.Count() == countOfSameResourceTypeName)
-                {
-                    // this means that we have unique parent prefix for each resource with the same type, use the parent as prefix
-                    return ParentPrefix(this) + name;
-                }
-                // if we get here, parent prefix is not enough, we try the resource name if it is a constant
-                var nameSegments = RequestPaths.Select(p => p.Last()).Where(segment => segment.IsConstant).Select(segment => segment.ConstantValue.FirstCharToUpperCase());
-                if (nameSegments.Any())
-                    return name + string.Join("", nameSegments);
-
-                // if we get here, we have tried all approaches to get a solid resource type name, throw an exception
-                throw new InvalidOperationException($"Cannot determine a resource class name for resource with the request path(s): {string.Join(", ", RequestPaths)}, please assign a valid resource name in `request-path-to-resource-name` section");
-            }
-            // if this resource is based on a "ById" operation
-            // if we only have one resource class with this name - we have no choice but use this "ById" resource
-            if (countOfSameResourceDataName == 1)
-                return ResourceName;
-
-            // otherwise we need to add a "ById" suffix to make this resource to have a different name
-            // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
-            return $"{ResourceName}ById";
-        }
-
-        private string? GetDefaultNameFromConfiguration()
-        {
-            foreach (var operationSet in OperationSets)
-            {
-                if (MgmtContext.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
-                    return name;
-                if (MgmtContext.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{ResourceType}", out name))
-                    return name;
-            }
-
-            return null;
-        }
-
-        private IEnumerable<Resource> ResourcesWithSameResourceName() => MgmtContext.Library.ArmResources.Where(resource => resource.ResourceName == ResourceName);
-
-        private IEnumerable<Resource> ResourcesWithSameResourceType() => MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType == ResourceType);
+        //private string? _defaultName;
+        protected override string DefaultName => ResourceName;
 
         public override string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
 
@@ -452,17 +368,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         private MgmtRestClient? _myRestClient;
         public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
 
-        private IEnumerable<MgmtRestClient>? _otherRestClients;
-        public IEnumerable<MgmtRestClient> OtherRestClients => _otherRestClients ??= RestClients.Where(client => client != MyRestClient);
-
         public ResourceTypeSegment ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
         {
             return $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.";
         }
-
-        private string ParentPrefix(Resource resource) => string.Join("", resource.Parent().Select(p => p.ResourceName));
 
         /// <summary>
         /// Returns the different method signature for different base path of this resource

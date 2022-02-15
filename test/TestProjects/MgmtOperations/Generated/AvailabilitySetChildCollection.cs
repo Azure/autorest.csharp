@@ -37,7 +37,7 @@ namespace MgmtOperations
         internal AvailabilitySetChildCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _availabilitySetChildavailabilitySetChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySetChild.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(AvailabilitySetChild.ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
+            TryGetApiVersion(AvailabilitySetChild.ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
             _availabilitySetChildavailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetChildavailabilitySetChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
