@@ -31,8 +31,8 @@ namespace MgmtKeyvault
 
         private readonly ClientDiagnostics _managedHsmClientDiagnostics;
         private readonly ManagedHsmsRestOperations _managedHsmRestClient;
-        private readonly ClientDiagnostics _mHSMPrivateLinkResourcesClientDiagnostics;
-        private readonly MhsmPrivateLinkResourcesRestOperations _mHSMPrivateLinkResourcesRestClient;
+        private readonly ClientDiagnostics _mhsmPrivateLinkResourcesClientDiagnostics;
+        private readonly MhsmPrivateLinkResourcesRestOperations _mhsmPrivateLinkResourcesRestClient;
         private readonly ManagedHsmData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ManagedHsm"/> class for mocking. </summary>
@@ -57,8 +57,8 @@ namespace MgmtKeyvault
             _managedHsmClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
             Client.TryGetApiVersion(ResourceType, out string managedHsmApiVersion);
             _managedHsmRestClient = new ManagedHsmsRestOperations(_managedHsmClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managedHsmApiVersion);
-            _mHSMPrivateLinkResourcesClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-            _mHSMPrivateLinkResourcesRestClient = new MhsmPrivateLinkResourcesRestOperations(_mHSMPrivateLinkResourcesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _mhsmPrivateLinkResourcesClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+            _mhsmPrivateLinkResourcesRestClient = new MhsmPrivateLinkResourcesRestOperations(_mhsmPrivateLinkResourcesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -272,11 +272,11 @@ namespace MgmtKeyvault
         {
             async Task<Page<MhsmPrivateLinkResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _mHSMPrivateLinkResourcesClientDiagnostics.CreateScope("ManagedHsm.GetMHSMPrivateLinkResourcesByMhsmResource");
+                using var scope = _mhsmPrivateLinkResourcesClientDiagnostics.CreateScope("ManagedHsm.GetMHSMPrivateLinkResourcesByMhsmResource");
                 scope.Start();
                 try
                 {
-                    var response = await _mHSMPrivateLinkResourcesRestClient.ListByMhsmResourceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _mhsmPrivateLinkResourcesRestClient.ListByMhsmResourceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -299,11 +299,11 @@ namespace MgmtKeyvault
         {
             Page<MhsmPrivateLinkResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _mHSMPrivateLinkResourcesClientDiagnostics.CreateScope("ManagedHsm.GetMHSMPrivateLinkResourcesByMhsmResource");
+                using var scope = _mhsmPrivateLinkResourcesClientDiagnostics.CreateScope("ManagedHsm.GetMHSMPrivateLinkResourcesByMhsmResource");
                 scope.Start();
                 try
                 {
-                    var response = _mHSMPrivateLinkResourcesRestClient.ListByMhsmResource(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _mhsmPrivateLinkResourcesRestClient.ListByMhsmResource(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                 }
                 catch (Exception e)

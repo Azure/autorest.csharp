@@ -27,8 +27,8 @@ namespace MgmtSubscriptionNameParameter
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _sBSubscriptionSubscriptionsClientDiagnostics;
-        private readonly SubscriptionsRestOperations _sBSubscriptionSubscriptionsRestClient;
+        private readonly ClientDiagnostics _sbSubscriptionSubscriptionsClientDiagnostics;
+        private readonly SubscriptionsRestOperations _sbSubscriptionSubscriptionsRestClient;
         private readonly SBSubscriptionData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SBSubscription"/> class for mocking. </summary>
@@ -50,9 +50,9 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SBSubscription(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sBSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string sBSubscriptionSubscriptionsApiVersion);
-            _sBSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(_sBSubscriptionSubscriptionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sBSubscriptionSubscriptionsApiVersion);
+            _sbSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", ResourceType.Namespace, DiagnosticOptions);
+            Client.TryGetApiVersion(ResourceType, out string sbSubscriptionSubscriptionsApiVersion);
+            _sbSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(_sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sbSubscriptionSubscriptionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -90,13 +90,13 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SBSubscription>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Get");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Get");
             scope.Start();
             try
             {
-                var response = await _sBSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sbSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _sBSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _sbSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -114,13 +114,13 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SBSubscription> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Get");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Get");
             scope.Start();
             try
             {
-                var response = _sBSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _sbSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _sBSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _sbSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -139,11 +139,11 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Delete");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Delete");
             scope.Start();
             try
             {
-                var response = await _sBSubscriptionSubscriptionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sbSubscriptionSubscriptionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtSubscriptionNameParameterArmOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -165,11 +165,11 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Delete");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Delete");
             scope.Start();
             try
             {
-                var response = _sBSubscriptionSubscriptionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _sbSubscriptionSubscriptionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new MgmtSubscriptionNameParameterArmOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
