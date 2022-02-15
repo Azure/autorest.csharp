@@ -36,6 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = MgmtContext.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
+            ChildResources = !MgmtContext.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
         }
 
         protected override ConstructorSignature? EnsureMockingCtor()
@@ -73,6 +74,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultNamespace { get; }
 
         public virtual RequestPath ContextualPath { get; }
+
+        public override IEnumerable<Resource> ChildResources { get; }
 
         public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
