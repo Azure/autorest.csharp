@@ -367,6 +367,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _armClientExtensions;
         }
 
+        private MgmtLongRunningOperation? _lro;
+        public MgmtLongRunningOperation NonGenericLongRunningOperation => _lro ??= new MgmtLongRunningOperation(false);
+
+        private MgmtLongRunningOperation? _genericLro;
+        public MgmtLongRunningOperation GenericLongRunningOperation => _genericLro ??= new MgmtLongRunningOperation(true);
+
         private IEnumerable<ResourceData>? _resourceDatas;
         public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Distinct();
 

@@ -153,12 +153,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"Extensions/{armResourceExtensionsCodeWriter.FileName}.cs", armResourceExtensionsCodeWriter.ToString());
             }
 
-            var lroWriter = new MgmtLongRunningOperationWriter(true);
+            var lroWriter = new MgmtLongRunningOperationWriter(MgmtContext.Library.GenericLongRunningOperation);
             lroWriter.Write();
-            AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
-            lroWriter = new MgmtLongRunningOperationWriter(false);
+            AddGeneratedFile(project, $"LongRunningOperation/{lroWriter.Filename}", lroWriter.ToString());
+            lroWriter = new MgmtLongRunningOperationWriter(MgmtContext.Library.NonGenericLongRunningOperation);
             lroWriter.Write();
-            AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
+            AddGeneratedFile(project, $"LongRunningOperation/{lroWriter.Filename}", lroWriter.ToString());
 
             foreach (var operationSource in MgmtContext.Library.OperationSources)
             {

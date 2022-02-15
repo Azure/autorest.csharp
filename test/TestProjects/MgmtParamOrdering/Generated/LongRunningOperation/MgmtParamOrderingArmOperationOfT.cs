@@ -21,7 +21,7 @@ namespace MgmtParamOrdering
     {
         private readonly OperationOrResponseInternals<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtParamOrderingArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtParamOrderingArmOperation"/> class for mocking. </summary>
         protected MgmtParamOrderingArmOperation()
         {
         }
@@ -31,9 +31,9 @@ namespace MgmtParamOrdering
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal MgmtParamOrderingArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtParamOrderingArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostic, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals<T>(source, clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtParamOrderingArmOperation");
+            _operation = new OperationOrResponseInternals<T>(source, clientDiagnostic, pipeline, request, response, finalStateVia, "MgmtParamOrderingArmOperation");
         }
 
         /// <inheritdoc />
