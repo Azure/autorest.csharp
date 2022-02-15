@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Utilities
     /// </summary>
     /// <typeparam name="K">Key</typeparam>
     /// <typeparam name="V">Value</typeparam>
-    public class CachedDictionary <K, V> : IDictionary<K, V> where K : notnull where V : notnull
+    public class CachedDictionary<K, V> : IDictionary<K, V> where K : notnull where V : notnull
     {
         private Dictionary<K, V>? _values;
         private Func<Dictionary<K, V>> _populateProc;
@@ -25,11 +25,13 @@ namespace AutoRest.CSharp.Utilities
             _populateProc = populateProc;
         }
 
+        public bool IsPopulated => _values != null;
+
         private Dictionary<K, V> EnsureValues()
         {
             if (_values == null)
             {
-                _values = _populateProc ();
+                _values = _populateProc();
             }
             return _values!;
         }
@@ -50,14 +52,14 @@ namespace AutoRest.CSharp.Utilities
         V IDictionary<K, V>.this[K key]
         {
             get => this[key];
-            set => throw new NotSupportedException ("Read Only");
+            set => throw new NotSupportedException("Read Only");
         }
 
-        void IDictionary<K, V>.Add(K key, V value) => throw new NotSupportedException ("Read Only");
-        bool IDictionary<K, V>.Remove(K key) => throw new NotSupportedException ("Read Only");
-        void ICollection<KeyValuePair<K, V>>.Add(KeyValuePair<K, V> item) => throw new NotSupportedException ("Read Only");
-        void ICollection<KeyValuePair<K, V>>.Clear() => throw new NotSupportedException ("Read Only");
-        bool ICollection<KeyValuePair<K, V>>.Remove(KeyValuePair<K, V> item) => throw new NotSupportedException ("Read Only");
+        void IDictionary<K, V>.Add(K key, V value) => throw new NotSupportedException("Read Only");
+        bool IDictionary<K, V>.Remove(K key) => throw new NotSupportedException("Read Only");
+        void ICollection<KeyValuePair<K, V>>.Add(KeyValuePair<K, V> item) => throw new NotSupportedException("Read Only");
+        void ICollection<KeyValuePair<K, V>>.Clear() => throw new NotSupportedException("Read Only");
+        bool ICollection<KeyValuePair<K, V>>.Remove(KeyValuePair<K, V> item) => throw new NotSupportedException("Read Only");
 
         public IEnumerator<KeyValuePair<K, V>> GetEnumerator() => EnsureValues().GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
