@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected Parameter GenericResponseParameter => new Parameter("response", null, ResponseType, null, false);
 
         protected Parameter? SourceParameter => IsGeneric ? new Parameter("source", null, typeof(IOperationSource<>), null, false) : null;
-        protected Parameter ClientDiagnosticParameter => new Parameter("clientDiagnostic", null, typeof(ClientDiagnostics), null, false);
+        protected Parameter ClientDiagnosticParameter => new Parameter("clientDiagnostics", null, typeof(ClientDiagnostics), null, false);
         protected Parameter PipelineParameter => new Parameter("pipeline", null, typeof(HttpPipeline), null, false);
         protected Parameter RequestParameter => new Parameter("request", null, typeof(Request), null, false);
         protected Parameter ResponseParameter => new Parameter("response", null, typeof(Response), null, false);
