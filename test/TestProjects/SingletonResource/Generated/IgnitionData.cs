@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace SingletonResource
 {
     /// <summary> A class representing the Ignition data model. </summary>
-    public partial class IgnitionData : Resource
+    public partial class IgnitionData : ResourceData
     {
         /// <summary> Initializes a new instance of IgnitionData. </summary>
         internal IgnitionData()

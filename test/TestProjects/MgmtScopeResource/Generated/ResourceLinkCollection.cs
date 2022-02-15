@@ -16,7 +16,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
@@ -41,7 +40,7 @@ namespace MgmtScopeResource
         {
             _scope = scope;
             _resourceLinkClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceLink.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceLink.ResourceType, out string resourceLinkApiVersion);
+            TryGetApiVersion(ResourceLink.ResourceType, out string resourceLinkApiVersion);
             _resourceLinkRestClient = new ResourceLinksRestOperations(_resourceLinkClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceLinkApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -54,15 +53,16 @@ namespace MgmtScopeResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Tenant.ResourceType), nameof(id));
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_CreateOrUpdate
-        /// <summary> Creates or updates a resource link between the specified resources. </summary>
+        /// <summary>
+        /// Creates or updates a resource link between the specified resources.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResourceLinkCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, ResourceLinkData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ResourceLink>> CreateOrUpdateAsync(bool waitForCompletion, ResourceLinkData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -74,7 +74,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _resourceLinkRestClient.CreateOrUpdateAsync(_scope, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceLinkCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtScopeResourceArmOperation<ResourceLink>(Response.FromValue(new ResourceLink(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -86,15 +86,16 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_CreateOrUpdate
-        /// <summary> Creates or updates a resource link between the specified resources. </summary>
+        /// <summary>
+        /// Creates or updates a resource link between the specified resources.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ResourceLinkCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, ResourceLinkData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ResourceLink> CreateOrUpdate(bool waitForCompletion, ResourceLinkData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -106,7 +107,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _resourceLinkRestClient.CreateOrUpdate(_scope, parameters, cancellationToken);
-                var operation = new ResourceLinkCreateOrUpdateOperation(Client, response);
+                var operation = new MgmtScopeResourceArmOperation<ResourceLink>(Response.FromValue(new ResourceLink(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -118,10 +119,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Gets a resource link with the specified ID. </summary>
+        /// <summary>
+        /// Gets a resource link with the specified ID.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ResourceLink>> GetAsync(CancellationToken cancellationToken = default)
         {
@@ -141,10 +143,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Gets a resource link with the specified ID. </summary>
+        /// <summary>
+        /// Gets a resource link with the specified ID.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceLink> Get(CancellationToken cancellationToken = default)
         {
@@ -164,10 +167,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Resources/links
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_ListAtSourceScope
-        /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
+        /// <summary>
+        /// Gets a list of resource links at and below the specified source scope.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/links
+        /// Operation Id: ResourceLinks_ListAtSourceScope
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceLink> GetAllAsync(CancellationToken cancellationToken = default)
@@ -205,10 +209,11 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /{scope}/providers/Microsoft.Resources/links
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_ListAtSourceScope
-        /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
+        /// <summary>
+        /// Gets a list of resource links at and below the specified source scope.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/links
+        /// Operation Id: ResourceLinks_ListAtSourceScope
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceLink> GetAll(CancellationToken cancellationToken = default)
@@ -246,10 +251,11 @@ namespace MgmtScopeResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<bool>> ExistsAsync(CancellationToken cancellationToken = default)
         {
@@ -267,10 +273,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Checks to see if the resource exists in azure. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> Exists(CancellationToken cancellationToken = default)
         {
@@ -288,10 +295,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<ResourceLink>> GetIfExistsAsync(CancellationToken cancellationToken = default)
         {
@@ -311,10 +319,11 @@ namespace MgmtScopeResource
             }
         }
 
-        /// RequestPath: /{linkId}
-        /// ContextualPath: /
-        /// OperationId: ResourceLinks_Get
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /{linkId}
+        /// Operation Id: ResourceLinks_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ResourceLink> GetIfExists(CancellationToken cancellationToken = default)
         {

@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtKeyvault.Models
 {
     /// <summary> Parameters for updating the access policy in a vault. </summary>
-    public partial class VaultAccessPolicyParameters : Azure.ResourceManager.Models.Resource
+    public partial class VaultAccessPolicyParameters : ResourceData
     {
         /// <summary> Initializes a new instance of VaultAccessPolicyParameters. </summary>
         /// <param name="properties"> Properties of the access policy. </param>

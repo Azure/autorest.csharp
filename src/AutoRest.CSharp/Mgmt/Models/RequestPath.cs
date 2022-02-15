@@ -79,13 +79,40 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         /// <param name="method"></param>
         public RequestPath(RestClientMethod method)
+            : this(method.Request.PathSegments, method.Operation.GetHttpPath())
+        {
+        }
+
+        public static RequestPath FromPathSegments(PathSegment[] pathSegments, string httpPath)
+        {
+            return new RequestPath(pathSegments, httpPath);
+        }
+
+        private RequestPath(PathSegment[] pathSegments, string httpPath)
         {
             int index = 0;
-            var segments = method.Request.PathSegments
+            var segments = pathSegments
                 .SelectMany(pathSegment => ParsePathSegment(pathSegment, ref index))
                 .ToList();
             _segments = CheckByIdPath(segments);
-            SerializedPath = method.Operation.GetHttpPath();
+            SerializedPath = httpPath;
+        }
+
+        private bool? _isExpandable = null;
+        public bool IsExpandable => _isExpandable ??= GetIsExpandable();
+
+        private bool GetIsExpandable()
+        {
+            for (int i = 0; i < _segments.Count; i++)
+            {
+                var segment = _segments[i];
+                if (i % 2 == 0 &&
+                    segment.IsReference &&
+                    !segment.Reference.Type.IsFrameworkType &&
+                    segment.Reference.Type.Implementation is EnumType)
+                    return true;
+            }
+            return false;
         }
 
         private static IReadOnlyList<Segment> CheckByIdPath(IReadOnlyList<Segment> segments)
@@ -239,10 +266,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new RequestPath(newPath);
         }
 
-        public IEnumerable<RequestPath> Expand(MgmtConfiguration config)
+        public IEnumerable<RequestPath> Expand()
         {
             // we first get the resource type
-            var resourceType = this.GetResourceType(config);
+            var resourceType = this.GetResourceType();
 
             // if this resource type is a constant, we do not need to expand it
             if (resourceType.IsConstant)
@@ -251,7 +278,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             // otherwise we need to expand them (the resource type is not a constant)
             // first we get all the segment that is not a constant
             var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
-            foreach (var segment in resourceType.Where(segment => segment.IsReference))
+            foreach (var segment in resourceType.Where(segment => segment.IsReference && !segment.Reference.Type.IsFrameworkType))
             {
                 var type = segment.Reference.Type.Implementation;
                 switch (type)

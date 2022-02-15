@@ -14,7 +14,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing the EnvironmentContainerResource data model. </summary>
-    public partial class EnvironmentContainerResourceData : TrackedResource
+    public partial class EnvironmentContainerResourceData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
         /// <param name="location"> The location. </param>

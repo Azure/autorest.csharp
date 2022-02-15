@@ -14,7 +14,7 @@ using MgmtKeyvault.Models;
 namespace MgmtKeyvault
 {
     /// <summary> A class representing the Vault data model. </summary>
-    public partial class VaultData : Azure.ResourceManager.Models.Resource
+    public partial class VaultData : ResourceData
     {
         /// <summary> Initializes a new instance of VaultData. </summary>
         /// <param name="properties"> Properties of the vault. </param>

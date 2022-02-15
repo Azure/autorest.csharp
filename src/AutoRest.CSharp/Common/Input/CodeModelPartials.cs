@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Input
         public ServiceResponse? GetResponseByCode(StatusCodes code)
         {
             return Responses.FirstOrDefault(response => response.Protocol.Http is HttpResponse httpResponse &&
-                httpResponse.StatusCodes.Any(c=> c == code));
+                httpResponse.StatusCodes.Any(c => c == code));
 
         }
         public ServiceResponse? GetSuccessfulQueryResponse()
@@ -282,7 +282,8 @@ namespace AutoRest.CSharp.Input
         public TestModel? TestModel { get; set; }
     }
 
-    internal partial class TestDefinitionModel {
+    internal partial class TestDefinitionModel
+    {
 
         [YamlMember(Alias = "useArmTemplate")]
         public Boolean UseArmTemplate;
@@ -309,7 +310,8 @@ namespace AutoRest.CSharp.Input
         public System.Collections.Generic.ICollection<string>? RequiredVariables;
     };
 
-    internal partial class TestStep{
+    internal partial class TestStep
+    {
 
         [YamlMember(Alias = "type")]
         public string Type;
@@ -348,7 +350,8 @@ namespace AutoRest.CSharp.Input
         public System.Collections.Generic.ICollection<string>? OutputVariableNames;
     };
 
-    internal partial class TestScenario {
+    internal partial class TestScenario
+    {
         [YamlMember(Alias = "requiredVariablesDefault")]
         public System.Collections.Generic.Dictionary<string, string> RequiredVariablesDefault;
 

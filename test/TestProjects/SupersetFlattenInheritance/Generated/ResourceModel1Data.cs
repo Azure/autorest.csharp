@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the ResourceModel1 data model. </summary>
-    public partial class ResourceModel1Data : Resource
+    public partial class ResourceModel1Data : ResourceData
     {
         /// <summary> Initializes a new instance of ResourceModel1Data. </summary>
         public ResourceModel1Data()

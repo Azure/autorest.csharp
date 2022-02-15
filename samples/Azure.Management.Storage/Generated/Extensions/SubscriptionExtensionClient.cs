@@ -49,7 +49,7 @@ namespace Azure.Management.Storage
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            Client.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -60,10 +60,11 @@ namespace Azure.Management.Storage
             return new DeletedAccountCollection(Client, Id);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Skus_List
-        /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
+        /// <summary>
+        /// Lists the available SKUs supported by Microsoft.Storage for given subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
+        /// Operation Id: Skus_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SkuInformation> GetSkusAsync(CancellationToken cancellationToken = default)
@@ -86,10 +87,11 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Skus_List
-        /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
+        /// <summary>
+        /// Lists the available SKUs supported by Microsoft.Storage for given subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
+        /// Operation Id: Skus_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SkuInformation> GetSkus(CancellationToken cancellationToken = default)
@@ -112,10 +114,11 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: StorageAccounts_List
-        /// <summary> Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
+        /// <summary>
+        /// Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+        /// Operation Id: StorageAccounts_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<StorageAccount> GetStorageAccountsAsync(CancellationToken cancellationToken = default)
@@ -153,10 +156,11 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: StorageAccounts_List
-        /// <summary> Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
+        /// <summary>
+        /// Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+        /// Operation Id: StorageAccounts_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<StorageAccount> GetStorageAccounts(CancellationToken cancellationToken = default)
@@ -194,10 +198,11 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Usages_ListByLocation
-        /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
+        /// <summary>
+        /// Gets the current usage count and the limit for the resources of the location under the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
+        /// Operation Id: Usages_ListByLocation
+        /// </summary>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
@@ -221,10 +226,11 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Usages_ListByLocation
-        /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
+        /// <summary>
+        /// Gets the current usage count and the limit for the resources of the location under the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
+        /// Operation Id: Usages_ListByLocation
+        /// </summary>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>

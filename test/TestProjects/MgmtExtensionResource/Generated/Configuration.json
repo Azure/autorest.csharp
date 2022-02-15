@@ -12,8 +12,5 @@
   "skip-csproj-packagereference": true,
   "RequestPathToResourceName": {
     "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": "BuiltInPolicyDefinition"
-  },
-  "MgmtDebug": {
-    "ShowRequestPath": true
   }
 }

@@ -33,10 +33,11 @@ namespace Azure.Management.Storage
             return GetExtensionClient(subscription).GetDeletedAccounts();
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Skus_List
-        /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
+        /// <summary>
+        /// Lists the available SKUs supported by Microsoft.Storage for given subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
+        /// Operation Id: Skus_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
@@ -45,10 +46,11 @@ namespace Azure.Management.Storage
             return GetExtensionClient(subscription).GetSkusAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Skus_List
-        /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
+        /// <summary>
+        /// Lists the available SKUs supported by Microsoft.Storage for given subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
+        /// Operation Id: Skus_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
@@ -57,10 +59,11 @@ namespace Azure.Management.Storage
             return GetExtensionClient(subscription).GetSkus(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: StorageAccounts_List
-        /// <summary> Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
+        /// <summary>
+        /// Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+        /// Operation Id: StorageAccounts_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
@@ -69,10 +72,11 @@ namespace Azure.Management.Storage
             return GetExtensionClient(subscription).GetStorageAccountsAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: StorageAccounts_List
-        /// <summary> Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this. </summary>
+        /// <summary>
+        /// Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+        /// Operation Id: StorageAccounts_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
@@ -81,10 +85,11 @@ namespace Azure.Management.Storage
             return GetExtensionClient(subscription).GetStorageAccounts(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Usages_ListByLocation
-        /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
+        /// <summary>
+        /// Gets the current usage count and the limit for the resources of the location under the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
+        /// Operation Id: Usages_ListByLocation
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -98,10 +103,11 @@ namespace Azure.Management.Storage
             return GetExtensionClient(subscription).GetUsagesByLocationAsync(location, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Usages_ListByLocation
-        /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
+        /// <summary>
+        /// Gets the current usage count and the limit for the resources of the location under the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
+        /// Operation Id: Usages_ListByLocation
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

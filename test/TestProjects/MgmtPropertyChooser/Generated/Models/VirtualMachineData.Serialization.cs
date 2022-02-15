@@ -105,7 +105,7 @@ namespace MgmtPropertyChooser
             Optional<IdentityWithNoUserIdentity> identityWithNoUserIdentity = default;
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<IList<string>> zones = default;
-            Optional<IReadOnlyList<Models.Resource>> fakeResources = default;
+            Optional<IReadOnlyList<Resource>> fakeResources = default;
             Optional<SubResource> fakeSubResource = default;
             Optional<WritableSubResource> fakeWritableSubResource = default;
             IDictionary<string, string> tags = default;
@@ -217,10 +217,10 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<Models.Resource> array = new List<Models.Resource>();
+                    List<Resource> array = new List<Resource>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Models.Resource.DeserializeResource(item));
+                        array.Add(Resource.DeserializeResource(item));
                     }
                     fakeResources = array;
                     continue;

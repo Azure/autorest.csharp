@@ -45,14 +45,15 @@ namespace MgmtExpandResourceTypes
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            Client.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Zones_List
-        /// <summary> Lists the DNS zones in all resource groups in a subscription. </summary>
+        /// <summary>
+        /// Lists the DNS zones in all resource groups in a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
+        /// Operation Id: Zones_List
+        /// </summary>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
@@ -91,10 +92,11 @@ namespace MgmtExpandResourceTypes
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Zones_List
-        /// <summary> Lists the DNS zones in all resource groups in a subscription. </summary>
+        /// <summary>
+        /// Lists the DNS zones in all resource groups in a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
+        /// Operation Id: Zones_List
+        /// </summary>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
@@ -133,10 +135,11 @@ namespace MgmtExpandResourceTypes
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: DnsResourceReference_GetByTargetResources
-        /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
+        /// <summary>
+        /// Returns the DNS records specified by the referencing targetResourceIds.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
+        /// Operation Id: DnsResourceReference_GetByTargetResources
+        /// </summary>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
@@ -155,10 +158,11 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: DnsResourceReference_GetByTargetResources
-        /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
+        /// <summary>
+        /// Returns the DNS records specified by the referencing targetResourceIds.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
+        /// Operation Id: DnsResourceReference_GetByTargetResources
+        /// </summary>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)

@@ -10,6 +10,4 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/XmlDeserialization.json
 namespace: Azure.XmlDeserialization
-mgmt-debug:
-  show-request-path: true
 ```

@@ -18,8 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private MgmtExtensionClient This { get; }
 
-        public ResourceExtensionWriter(MgmtExtensionClient extensions, BuildContext<MgmtOutputLibrary> context)
-            : base(new CodeWriter(), extensions, context)
+        public ResourceExtensionWriter(MgmtExtensionClient extensions)
+            : base(new CodeWriter(), extensions)
         {
             This = extensions;
         }
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             using (_writer.Scope($"private string GetApiVersionOrNull({typeof(ResourceType)} resourceType)"))
             {
-                _writer.Line($"{ArmClientReference}.TryGetApiVersion(resourceType, out string apiVersion);");
+                _writer.Line($"TryGetApiVersion(resourceType, out string apiVersion);");
                 _writer.Line($"return apiVersion;");
             }
         }

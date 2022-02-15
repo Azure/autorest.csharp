@@ -12,7 +12,7 @@ using NoTypeReplacement.Models;
 namespace NoTypeReplacement
 {
     /// <summary> A class representing the NoTypeReplacementModel2 data model. </summary>
-    public partial class NoTypeReplacementModel2Data : Resource
+    public partial class NoTypeReplacementModel2Data : ResourceData
     {
         /// <summary> Initializes a new instance of NoTypeReplacementModel2Data. </summary>
         public NoTypeReplacementModel2Data()
