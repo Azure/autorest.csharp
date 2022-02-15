@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
     {
         private readonly OperationOrResponseInternals<T> _operation;
 
-        /// <summary> Initializes a new instance of SampleArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SampleArmOperation"/> class for mocking. </summary>
         protected SampleArmOperation()
         {
         }
@@ -31,9 +31,9 @@ namespace Azure.ResourceManager.Sample
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal SampleArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal SampleArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostic, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals<T>(source, clientDiagnostics, pipeline, request, response, finalStateVia, "SampleArmOperation");
+            _operation = new OperationOrResponseInternals<T>(source, clientDiagnostic, pipeline, request, response, finalStateVia, "SampleArmOperation");
         }
 
         /// <inheritdoc />
