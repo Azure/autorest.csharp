@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(MgmtContext.CodeModel.Schemas.Objects)
                 .Concat(MgmtContext.CodeModel.Schemas.Groups);
             _allSchemas.UpdateAcronyms();
-            _allSchemas.UpdateFrameworkTypes();
+            _allSchemas.VerifyAndUpdateFrameworkTypes();
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();

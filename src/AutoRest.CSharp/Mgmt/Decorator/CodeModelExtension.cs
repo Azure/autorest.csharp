@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
-        public static void UpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
+        public static void VerifyAndUpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)
             {
@@ -29,6 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     if (property.Language.Default.Name.EndsWith("Uri"))
                         property.Schema.Type = AllSchemaTypes.Uri;
+                    if (property.Language.Default.Name.SplitByCamelCase().Last().Equals("Duration") && property.Schema.Type != AllSchemaTypes.Duration)
+                        throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use \"format\": \"duration\" to be generated as TimeSpan type. Either fix service swagger or add the format with directive in autorest.md. If the property does not conform to the duration format, please use x-ms-client-name to rename the property for the client.");
                 }
             }
         }
