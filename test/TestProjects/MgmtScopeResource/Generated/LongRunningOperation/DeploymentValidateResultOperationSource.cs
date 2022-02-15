@@ -18,14 +18,28 @@ namespace MgmtScopeResource
     {
         DeploymentValidateResult IOperationSource<DeploymentValidateResult>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            return DeploymentValidateResult.DeserializeDeploymentValidateResult(document.RootElement);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                return DeploymentValidateResult.DeserializeDeploymentValidateResult(document.RootElement);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<DeploymentValidateResult> IOperationSource<DeploymentValidateResult>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return DeploymentValidateResult.DeserializeDeploymentValidateResult(document.RootElement);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                return DeploymentValidateResult.DeserializeDeploymentValidateResult(document.RootElement);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

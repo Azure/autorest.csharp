@@ -25,16 +25,30 @@ namespace Azure.ResourceManager.Sample
 
         VirtualMachineScaleSetVirtualMachineExtension IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetVirtualMachineExtension(_client, data);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
+                return new VirtualMachineScaleSetVirtualMachineExtension(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<VirtualMachineScaleSetVirtualMachineExtension> IOperationSource<VirtualMachineScaleSetVirtualMachineExtension>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetVirtualMachineExtension(_client, data);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
+                return new VirtualMachineScaleSetVirtualMachineExtension(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

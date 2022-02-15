@@ -25,16 +25,30 @@ namespace Azure.Management.Storage
 
         StorageAccount IOperationSource<StorageAccount>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
-            return new StorageAccount(_client, data);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                var data = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+                return new StorageAccount(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<StorageAccount> IOperationSource<StorageAccount>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
-            return new StorageAccount(_client, data);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                var data = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+                return new StorageAccount(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

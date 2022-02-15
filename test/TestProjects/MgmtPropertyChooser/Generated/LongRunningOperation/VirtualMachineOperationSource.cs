@@ -25,16 +25,30 @@ namespace MgmtPropertyChooser
 
         VirtualMachine IOperationSource<VirtualMachine>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
-            return new VirtualMachine(_client, data);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                var data = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
+                return new VirtualMachine(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<VirtualMachine> IOperationSource<VirtualMachine>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
-            return new VirtualMachine(_client, data);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                var data = VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
+                return new VirtualMachine(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

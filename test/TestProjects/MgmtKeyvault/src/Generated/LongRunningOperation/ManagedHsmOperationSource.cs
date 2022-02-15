@@ -25,16 +25,30 @@ namespace MgmtKeyvault
 
         ManagedHsm IOperationSource<ManagedHsm>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
-            return new ManagedHsm(_client, data);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                var data = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
+                return new ManagedHsm(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<ManagedHsm> IOperationSource<ManagedHsm>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
-            return new ManagedHsm(_client, data);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                var data = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
+                return new ManagedHsm(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

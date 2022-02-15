@@ -18,14 +18,28 @@ namespace MgmtOperations
     {
         TestAvailabilitySet IOperationSource<TestAvailabilitySet>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            return TestAvailabilitySet.DeserializeTestAvailabilitySet(document.RootElement);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                return TestAvailabilitySet.DeserializeTestAvailabilitySet(document.RootElement);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<TestAvailabilitySet> IOperationSource<TestAvailabilitySet>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return TestAvailabilitySet.DeserializeTestAvailabilitySet(document.RootElement);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                return TestAvailabilitySet.DeserializeTestAvailabilitySet(document.RootElement);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

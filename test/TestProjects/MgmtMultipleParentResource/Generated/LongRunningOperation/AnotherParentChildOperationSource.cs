@@ -25,16 +25,30 @@ namespace MgmtMultipleParentResource
 
         AnotherParentChild IOperationSource<AnotherParentChild>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new AnotherParentChild(_client, data);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
+                return new AnotherParentChild(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<AnotherParentChild> IOperationSource<AnotherParentChild>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
-            return new AnotherParentChild(_client, data);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                var data = ChildBodyData.DeserializeChildBodyData(document.RootElement);
+                return new AnotherParentChild(_client, data);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

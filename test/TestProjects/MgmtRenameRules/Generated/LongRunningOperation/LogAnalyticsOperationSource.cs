@@ -18,14 +18,28 @@ namespace MgmtRenameRules
     {
         LogAnalytics IOperationSource<LogAnalytics>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            return LogAnalytics.DeserializeLogAnalytics(document.RootElement);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                return LogAnalytics.DeserializeLogAnalytics(document.RootElement);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<LogAnalytics> IOperationSource<LogAnalytics>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return LogAnalytics.DeserializeLogAnalytics(document.RootElement);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                return LogAnalytics.DeserializeLogAnalytics(document.RootElement);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

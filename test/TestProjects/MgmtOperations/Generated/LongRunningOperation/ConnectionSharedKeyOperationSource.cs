@@ -18,14 +18,28 @@ namespace MgmtOperations
     {
         ConnectionSharedKey IOperationSource<ConnectionSharedKey>.CreateResult(Response response, CancellationToken cancellationToken)
         {
-            using var document = JsonDocument.Parse(response.ContentStream);
-            return ConnectionSharedKey.DeserializeConnectionSharedKey(document.RootElement);
+            try
+            {
+                using var document = JsonDocument.Parse(response.ContentStream);
+                return ConnectionSharedKey.DeserializeConnectionSharedKey(document.RootElement);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
 
         async ValueTask<ConnectionSharedKey> IOperationSource<ConnectionSharedKey>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
-            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return ConnectionSharedKey.DeserializeConnectionSharedKey(document.RootElement);
+            try
+            {
+                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                return ConnectionSharedKey.DeserializeConnectionSharedKey(document.RootElement);
+            }
+            finally
+            {
+                response.ContentStream.Position = 0;
+            }
         }
     }
 }

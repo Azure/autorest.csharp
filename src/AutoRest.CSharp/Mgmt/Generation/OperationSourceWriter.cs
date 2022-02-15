@@ -138,13 +138,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, false, valueCallback, responseVariable);
+                using (_writer.Scope($"try"))
+                {
+                    _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, false, valueCallback, responseVariable);
+                }
+                using (_writer.Scope($"finally"))
+                {
+                    _writer.Line($"{responseVariable:D}.ContentStream.Position = 0;");
+                }
             }
             _writer.Line();
 
             using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, true, valueCallback, responseVariable);
+                using (_writer.Scope($"try"))
+                {
+                    _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, true, valueCallback, responseVariable);
+                }
+                using (_writer.Scope($"finally"))
+                {
+                    _writer.Line($"{responseVariable:D}.ContentStream.Position = 0;");
+                }
             }
         }
 
