@@ -74,15 +74,37 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             switch (schema)
             {
-                case ChoiceSchema:
-                case SealedChoiceSchema:
-                    TransformBasicSchema(schema, transformer, wordCache);
+                case ChoiceSchema choiceSchema:
+                    TransformChoiceSchema(choiceSchema, transformer, wordCache);
+                    break;
+                case SealedChoiceSchema sealedChoiceSchema:
+                    TransformSealedChoiceSchema(sealedChoiceSchema, transformer, wordCache);
                     break;
                 case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
                     TransformObjectSchema(objSchema, transformer, wordCache);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown schema type {schema.GetType()}");
+            }
+        }
+
+        private static void TransformChoiceSchema(ChoiceSchema choiceSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            TransformBasicSchema(choiceSchema, transformer, wordCache);
+            TransformChoices(choiceSchema.Choices, transformer, wordCache);
+        }
+
+        private static void TransformSealedChoiceSchema(SealedChoiceSchema choiceSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            TransformBasicSchema(choiceSchema, transformer, wordCache);
+            TransformChoices(choiceSchema.Choices, transformer, wordCache);
+        }
+
+        private static void TransformChoices(ICollection<ChoiceValue> choiceValues, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            foreach (var choiceValue in choiceValues)
+            {
+                TransformLanguage(choiceValue.Language, transformer, wordCache);
             }
         }
 
