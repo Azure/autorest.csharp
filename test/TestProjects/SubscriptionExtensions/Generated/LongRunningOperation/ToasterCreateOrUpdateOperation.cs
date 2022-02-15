@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using SubscriptionExtensions;
 
 namespace SubscriptionExtensions.Models
@@ -25,9 +25,9 @@ namespace SubscriptionExtensions.Models
         {
         }
 
-        internal ToasterCreateOrUpdateOperation(ArmResource operationsBase, Response<ToasterData> response)
+        internal ToasterCreateOrUpdateOperation(ArmClient armClient, Response<ToasterData> response)
         {
-            _operation = new OperationOrResponseInternals<Toaster>(Response.FromValue(new Toaster(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<Toaster>(Response.FromValue(new Toaster(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

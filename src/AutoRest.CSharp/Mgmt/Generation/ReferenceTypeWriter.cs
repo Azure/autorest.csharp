@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public static ModelWriter GetWriter(TypeProvider typeProvider) => typeProvider switch
         {
             MgmtReferenceType => new ReferenceTypeWriter(),
+            ResourceData data => new ResourceDataWriter(data),
             _ => new ModelWriter()
         };
 
@@ -29,6 +30,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 else if (extensions.MgmtPropertyReferenceType)
                 {
                     writer.Line($"[{ReferenceTypePropertyChooser.PropertyReferenceAttribute}]");
+                }
+                else if (extensions.MgmtTypeReferenceType)
+                {
+                    writer.Line($"[{TypeReferenceTypeChooser.TyepReferenceTypeAttribute}]");
                 }
             }
         }

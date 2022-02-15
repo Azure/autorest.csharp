@@ -7,10 +7,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -19,10 +21,19 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
     {
+        private const string _providerPath = "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}";
+        private const string _featurePath = "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features";
+
+        internal const string ManagementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
+        internal const string ResourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
+        internal const string SubscriptionScopePrefix = "/subscriptions";
+        internal const string TenantScopePrefix = "/tenants";
+
         /// <summary>
         /// This is a placeholder of request path for "any" resources in other RPs
         /// </summary>
         public static readonly RequestPath Any = new(new[] { new Segment("*") });
+
         /// <summary>
         /// The <see cref="RequestPath"/> of a resource group resource
         /// </summary>
@@ -30,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment("subscriptions"),
             new Segment(new Reference("subscriptionId", typeof(string)), true, true),
             new Segment("resourceGroups"),
-            new Segment(new Reference("resourceGroupName", typeof(string)), true, true)
+            new Segment(new Reference("resourceGroupName", typeof(string)), true, false)
         });
 
         /// <summary>
@@ -108,7 +119,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string SerializedPath { get; }
 
         /// <summary>
-        /// Check if this <see cref="RequestPath"/> is the ancestor (aka prefix) of <code other/>
+        /// Check if this <see cref="RequestPath"/> is a prefix path of <code other/>
         /// Note that this.IsAncestorOf(this) will return false which indicates that this method is testing the "proper ancestor" like a proper subset.
         /// </summary>
         /// <param name="other"></param>
@@ -140,12 +151,32 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <exception cref="InvalidOperationException">if this.IsAncestorOf(other) is false</exception>
         public RequestPath TrimAncestorFrom(RequestPath other)
         {
+            if (TryTrimAncestorFrom(other, out var diff))
+                return diff;
+
+            throw new InvalidOperationException($"Request path {this} is not parent of {other}");
+        }
+
+        public bool TryTrimAncestorFrom(RequestPath other, [MaybeNullWhen(false)] out RequestPath diff)
+        {
+            diff = default;
             if (this == other)
-                return RequestPath.Tenant;
-            if (!this.IsAncestorOf(other))
-                throw new InvalidOperationException($"Request path {this} is not parent of {other}");
-            // this is a parent, we can safely just return from the length of this
-            return new RequestPath(other._segments.Skip(this.Count));
+            {
+                diff = RequestPath.Tenant;
+                return true;
+            }
+            if (this.IsAncestorOf(other))
+            {
+                diff = new RequestPath(other._segments.Skip(this.Count));
+                return true;
+            }
+            // Handle the special case of trim provider from feature
+            else if (this.SerializedPath == _providerPath && other.SerializedPath.StartsWith(_featurePath))
+            {
+                diff = new RequestPath(other._segments.Skip(this.Count + 2));
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -156,7 +187,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         public RequestPath TrimScope()
         {
             var scope = this.GetScopePath();
-            if (scope == this)
+            // The scope for /subscriptions is /subscriptions/{subscriptionId}, we identify such case with scope.Count > this.Count.
+            if (scope == this || scope.Count > this.Count)
                 return Tenant; // if myself is a scope path, we return the empty path after the trim.
             return scope.TrimAncestorFrom(this);
         }
@@ -164,6 +196,65 @@ namespace AutoRest.CSharp.Mgmt.Models
         public RequestPath Append(RequestPath other)
         {
             return new RequestPath(this._segments.Concat(other._segments));
+        }
+
+        public IEnumerable<RequestPath> Expand(MgmtConfiguration config)
+        {
+            // we first get the resource type
+            var resourceType = this.GetResourceType(config);
+
+            // if this resource type is a constant, we do not need to expand it
+            if (resourceType.IsConstant)
+                return this.AsIEnumerable();
+
+            // otherwise we need to expand them (the resource type is not a constant)
+            // first we get all the segment that is not a constant
+            var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
+            foreach (var segment in resourceType.Where(segment => segment.IsReference))
+            {
+                var type = segment.Reference.Type.Implementation;
+                switch (type)
+                {
+                    case EnumType enumType:
+                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict)));
+                        break;
+                    default:
+                        throw new InvalidOperationException($"The resource type {this} contains variables in it, but it is not an enum type, therefore we cannot expand it. Please double check and/or override it in `request-path-to-resource-type` section.");
+                }
+            }
+
+            // construct new resource types to make the resource types constant again
+            // here we are traversing the segments in this resource type as a tree:
+            // if the segment is constant, just add it into the result
+            // if the segment is not a constant, we need to add its all possible values (they are all constants) into the result
+            // first we build the levels
+            var levels = this.Select(segment => segment.IsConstant || !possibleValueMap.ContainsKey(segment) ?
+                segment.AsIEnumerable() :
+                possibleValueMap[segment]);
+            // now we traverse the tree to get the result
+            var queue = new Queue<List<Segment>>();
+            foreach (var level in levels)
+            {
+                // initialize
+                if (queue.Count == 0)
+                {
+                    foreach (var _ in level)
+                        queue.Enqueue(new List<Segment>());
+                }
+                // get every element in queue out, and push the new results back
+                int count = queue.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    var list = queue.Dequeue();
+                    foreach (var segment in level)
+                    {
+                        // push the results back with a new element on it
+                        queue.Enqueue(new List<Segment>(list) { segment });
+                    }
+                }
+            }
+
+            return queue.Select(list => new RequestPath(list));
         }
 
         private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)

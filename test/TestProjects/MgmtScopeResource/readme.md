@@ -1,4 +1,4 @@
-# MgmtParent
+# MgmtScopeResource
 
 ## AutoRest Configuration
 
@@ -41,6 +41,10 @@ request-path-to-scope-resource-types:
     - resourceGroups
     - managementGroups
     - tenant
+override-operation-name:
+  ResourceLinks_ListAtSourceScope: GetAll
+operation-positions:
+  /{scope}/providers/Microsoft.Resources/links: collection
 directive:
   - rename-operation:
       from: Deployments_WhatIfAtTenantScope

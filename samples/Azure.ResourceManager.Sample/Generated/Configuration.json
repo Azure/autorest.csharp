@@ -9,9 +9,6 @@
   "azure-arm": true,
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "ListException": [
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}"
-  ],
   "MgmtDebug": {
     "ShowRequestPath": true
   }

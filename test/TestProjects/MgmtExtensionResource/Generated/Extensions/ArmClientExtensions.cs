@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace MgmtExtensionResource
@@ -19,7 +20,8 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubscriptionPolicyDefinition" /> object. </returns>
         public static SubscriptionPolicyDefinition GetSubscriptionPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new SubscriptionPolicyDefinition(clientOptions, credential, uri, pipeline, id));
+            SubscriptionPolicyDefinition.ValidateResourceId(id);
+            return new SubscriptionPolicyDefinition(armClient, id);
         }
         #endregion
 
@@ -30,7 +32,8 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="BuiltInPolicyDefinition" /> object. </returns>
         public static BuiltInPolicyDefinition GetBuiltInPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BuiltInPolicyDefinition(clientOptions, credential, uri, pipeline, id));
+            BuiltInPolicyDefinition.ValidateResourceId(id);
+            return new BuiltInPolicyDefinition(armClient, id);
         }
         #endregion
 
@@ -41,7 +44,8 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="ManagementGroupPolicyDefinition" /> object. </returns>
         public static ManagementGroupPolicyDefinition GetManagementGroupPolicyDefinition(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ManagementGroupPolicyDefinition(clientOptions, credential, uri, pipeline, id));
+            ManagementGroupPolicyDefinition.ValidateResourceId(id);
+            return new ManagementGroupPolicyDefinition(armClient, id);
         }
         #endregion
     }

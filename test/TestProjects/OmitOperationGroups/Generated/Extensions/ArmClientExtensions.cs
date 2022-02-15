@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace OmitOperationGroups
@@ -19,7 +20,8 @@ namespace OmitOperationGroups
         /// <returns> Returns a <see cref="Model2" /> object. </returns>
         public static Model2 GetModel2(this ArmClient armClient, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Model2(clientOptions, credential, uri, pipeline, id));
+            Model2.ValidateResourceId(id);
+            return new Model2(armClient, id);
         }
         #endregion
     }

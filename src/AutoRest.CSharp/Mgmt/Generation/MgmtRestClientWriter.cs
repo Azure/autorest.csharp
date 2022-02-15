@@ -1,11 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoRest.CSharp.Generation.Writers;
-using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -13,7 +10,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private const string UserAgentVariable = "userAgent";
         private const string UserAgentField = "_" + UserAgentVariable;
-        private const string ClientOptionsVariable = "options";
+        private const string ApplicationIdVariable = "applicationId";
 
         protected override void WriteAdditionalFields(CodeWriter writer)
         {
@@ -22,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteAdditionalParameters(CodeWriter writer)
         {
-            writer.Append($"{typeof(ClientOptions)} {ClientOptionsVariable},");
+            writer.Append($"{typeof(string)} {ApplicationIdVariable},");
         }
 
         protected override bool UseUserAgentOverride()
@@ -32,13 +29,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteAdditionalCtorBody(CodeWriter writer)
         {
-            writer.UseNamespace("Azure.ResourceManager.Core");
-            writer.Line($"_userAgent = HttpMessageUtilities.GetUserAgentName(this, options);");
+            writer.Line($"_userAgent = {typeof(HttpMessageUtilities)}.GetUserAgentName(this, {ApplicationIdVariable});");
         }
 
         protected override void WriteAdditionalXmlDocumentationParameters(CodeWriter writer)
         {
-            writer.WriteXmlDocumentationParameter(ClientOptionsVariable, $"The client options used to construct the current client.");
+            writer.WriteXmlDocumentationParameter(ApplicationIdVariable, $"The application id to use for user agent.");
         }
     }
 }

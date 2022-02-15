@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using MgmtMultipleParentResource;
 
 namespace MgmtMultipleParentResource.Models
@@ -22,17 +22,17 @@ namespace MgmtMultipleParentResource.Models
     {
         private readonly OperationInternals<AnotherParent> _operation;
 
-        private readonly ArmResource _operationBase;
+        private readonly ArmClient _armClient;
 
         /// <summary> Initializes a new instance of AnotherParentCreateOrUpdateOperation for mocking. </summary>
         protected AnotherParentCreateOrUpdateOperation()
         {
         }
 
-        internal AnotherParentCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal AnotherParentCreateOrUpdateOperation(ArmClient armClient, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<AnotherParent>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "AnotherParentCreateOrUpdateOperation");
-            _operationBase = operationsBase;
+            _armClient = armClient;
         }
 
         /// <inheritdoc />
@@ -65,13 +65,15 @@ namespace MgmtMultipleParentResource.Models
         AnotherParent IOperationSource<AnotherParent>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return new AnotherParent(_operationBase, AnotherParentData.DeserializeAnotherParentData(document.RootElement));
+            var data = AnotherParentData.DeserializeAnotherParentData(document.RootElement);
+            return new AnotherParent(_armClient, data);
         }
 
         async ValueTask<AnotherParent> IOperationSource<AnotherParent>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return new AnotherParent(_operationBase, AnotherParentData.DeserializeAnotherParentData(document.RootElement));
+            var data = AnotherParentData.DeserializeAnotherParentData(document.RootElement);
+            return new AnotherParent(_armClient, data);
         }
     }
 }

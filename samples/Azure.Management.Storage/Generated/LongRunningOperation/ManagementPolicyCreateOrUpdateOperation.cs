@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace Azure.Management.Storage.Models
 {
@@ -25,9 +25,9 @@ namespace Azure.Management.Storage.Models
         {
         }
 
-        internal ManagementPolicyCreateOrUpdateOperation(ArmResource operationsBase, Response<ManagementPolicyData> response)
+        internal ManagementPolicyCreateOrUpdateOperation(ArmClient armClient, Response<ManagementPolicyData> response)
         {
-            _operation = new OperationOrResponseInternals<ManagementPolicy>(Response.FromValue(new ManagementPolicy(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ManagementPolicy>(Response.FromValue(new ManagementPolicy(armClient, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />

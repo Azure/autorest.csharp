@@ -115,28 +115,37 @@ namespace Azure.Core
             }
         }
 
+        /// <summary>
+        /// This function is used to get the final request uri after the lro has completed.
+        /// </summary>
         private string? GetFinalUri()
         {
+            // Set final uri as null if the response header doesn't contain "Operation-Location" or "Azure-AsyncOperation".
             if (_headerSource is not (HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation))
             {
                 return null;
             }
 
+            // Set final uri as null if original request is a delete method.
             if (_requestMethod == RequestMethod.Delete)
             {
                 return null;
             }
 
-            if (_requestMethod == RequestMethod.Put || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            // Set final uri as original request's uri if one of these requirements are met:
+            // 1.Original request is a put method;
+            // 2.Original request is a management plane patch method. For data plane patch method, the final uri will be determinned by the original response header and "_finalStateVia";
+            // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
+            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && _startRequestUri.Scheme == "https" && _startRequestUri.Host == "management.azure.com" || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
                 return _startRequestUri.AbsoluteUri;
             }
 
+            // Set final uri as last known location header if original response header contains "Location" and FinalStateVia is configured to Location.
             if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
             {
                 return _lastKnownLocation;
             }
-
             return null;
         }
 

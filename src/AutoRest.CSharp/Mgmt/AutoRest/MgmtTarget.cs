@@ -12,6 +12,8 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Management;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -48,6 +50,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var addedFilenames = new HashSet<string>();
             BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
             var serializeWriter = new SerializationWriter();
+            var isArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
 
             foreach (var model in context.Library.Models)
             {
@@ -89,6 +92,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.ResourceData)
             {
+                if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
+                    continue;
+
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
@@ -108,6 +114,64 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
+            if (!isArmCore)
+            {
+                // we will write the ResourceGroupExtensions class even if it does not contain anything
+                var resourceGroupExtensionsCodeWriter = new CodeWriter();
+                new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
+
+                var rgExtensionClientWriter = new CodeWriter();
+                new ResourceExtensionWriter(rgExtensionClientWriter, context.Library.ResourceGroupExtensionsClient, context, typeof(ResourceGroup)).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensionsClient.Type.Name}.cs", rgExtensionClientWriter.ToString());
+
+                // we will write the SubscriptionExtensions class even if it does not contain anything
+                var subscriptionExtensionsCodeWriter = new CodeWriter();
+                new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
+
+                var subExtensionClientWriter = new CodeWriter();
+                new ResourceExtensionWriter(subExtensionClientWriter, context.Library.SubscriptionExtensionsClient, context, typeof(Subscription)).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensionsClient.Type.Name}.cs", subExtensionClientWriter.ToString());
+            }
+
+            if (!context.Library.ManagementGroupExtensions.IsEmpty)
+            {
+                var managementGroupExtensionsCodeWriter = new CodeWriter();
+                new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context, isArmCore).Write();
+                AddGeneratedFile(project, isArmCore ? $"{context.Library.ManagementGroupExtensions.ResourceName}.cs" : $"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
+
+                var extensionClientWriter = new CodeWriter();
+                new ResourceExtensionWriter(extensionClientWriter, context.Library.ManagementGroupExtensionsClient, context, typeof(ManagementGroup)).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.ManagementGroupExtensionsClient.Type.Name}.cs", extensionClientWriter.ToString());
+            }
+
+            if (!context.Library.TenantExtensions.IsEmpty)
+            {
+                var tenantExtensionsCodeWriter = new CodeWriter();
+                new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
+
+                var extensionClientWriter = new CodeWriter();
+                new ResourceExtensionWriter(extensionClientWriter, context.Library.TenantExtensionsClient, context, typeof(Tenant)).Write();
+                AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensionsClient.Type.Name}.cs", extensionClientWriter.ToString());
+            }
+
+            if (!context.Library.ArmClientExtensions.IsEmpty)
+            {
+                var armClientExtensionsCodeWriter = new CodeWriter();
+                new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context.Library.ArmClientExtensions, context, isArmCore).Write();
+                AddGeneratedFile(project, isArmCore ? $"{context.Library.ArmClientExtensions.ResourceName}.cs" : $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
+            }
+
+            if (!context.Library.ArmResourceExtensions.IsEmpty)
+            {
+                var armResourceExtensionsCodeWriter = new CodeWriter();
+                new ArmResourceExtensionsWriter(armResourceExtensionsCodeWriter, context.Library.ArmResourceExtensions, context, isArmCore).Write();
+                AddGeneratedFile(project, isArmCore ? $"{context.Library.ArmResourceExtensions.ResourceName}.cs" : $"Extensions/{context.Library.ArmResourceExtensions.Type.Name}.cs", armResourceExtensionsCodeWriter.ToString());
+            }
+
+            // we must output the LROs and fake LROs as the last step to sure all the LRO and fake LRO object could be initialized.
             foreach (var operation in context.Library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
@@ -124,44 +188,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            // we will write the ResourceGroupExtensions class even if it does not contain anything
-            var resourceGroupExtensionsCodeWriter = new CodeWriter();
-            new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context.Library.ResourceGroupExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.ResourceGroupExtensions.Type.Name}.cs", resourceGroupExtensionsCodeWriter.ToString());
-
-            // we will write the SubscriptionExtensions class even if it does not contain anything
-            var subscriptionExtensionsCodeWriter = new CodeWriter();
-            new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context.Library.SubscriptionExtensions, context).Write();
-            AddGeneratedFile(project, $"Extensions/{context.Library.SubscriptionExtensions.Type.Name}.cs", subscriptionExtensionsCodeWriter.ToString());
-
-            if (!context.Library.ManagementGroupExtensions.IsEmpty)
-            {
-                var managementGroupExtensionsCodeWriter = new CodeWriter();
-                new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context.Library.ManagementGroupExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.ManagementGroupExtensions.Type.Name}.cs", managementGroupExtensionsCodeWriter.ToString());
-            }
-
-            if (!context.Library.TenantExtensions.IsEmpty)
-            {
-                var tenantExtensionsCodeWriter = new CodeWriter();
-                new TenantExtensionsWriter(tenantExtensionsCodeWriter, context.Library.TenantExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.TenantExtensions.Type.Name}.cs", tenantExtensionsCodeWriter.ToString());
-            }
-
-            if (!context.Library.ArmClientExtensions.IsEmpty)
-            {
-                var armClientExtensionsCodeWriter = new CodeWriter();
-                new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context.Library.ArmClientExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.ArmClientExtensions.Type.Name}.cs", armClientExtensionsCodeWriter.ToString());
-            }
-
-            if (!context.Library.ArmResourceExtensions.IsEmpty)
-            {
-                var armResourceExtensionsCodeWriter = new CodeWriter();
-                new ArmResourceExtensionsWriter(armResourceExtensionsCodeWriter, context.Library.ArmResourceExtensions, context).Write();
-                AddGeneratedFile(project, $"Extensions/{context.Library.ArmResourceExtensions.Type.Name}.cs", armResourceExtensionsCodeWriter.ToString());
-            }
-
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
         }
@@ -175,11 +201,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 return true;
             }
+
+            // do not skip generation of reference types in resource manager
+            // some common types (like `PrivateEndpointConnectionData`) will inherit `Resource`
+            // it will cause `Resource` not being generated since `Resource` is `usedAsInheritance`
+            if (model is MgmtReferenceType)
+            {
+                return false;
+            }
+
             if (model is SchemaObjectType objSchema)
             {
                 //TODO: we need to add logic to replace SubResource with ResourceIdentifier where appropriate until then we won't remove these types
                 if (objSchema.ObjectSchema.Name.StartsWith("SubResource"))
                     return false;
+
+                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
+                    return true;
+
                 //skip things that had exact match replacements
                 //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
                 //Since we forced the evaluation of inheritance and property match for all models before, here we can use the fully loaded cache to
