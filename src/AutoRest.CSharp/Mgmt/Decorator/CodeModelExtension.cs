@@ -90,13 +90,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static void TransformChoiceSchema(ChoiceSchema choiceSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
-            TransformBasicSchema(choiceSchema, transformer, wordCache);
+            TransformLanguage(choiceSchema.Language, transformer, wordCache);
             TransformChoices(choiceSchema.Choices, transformer, wordCache);
         }
 
         private static void TransformSealedChoiceSchema(SealedChoiceSchema choiceSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
-            TransformBasicSchema(choiceSchema, transformer, wordCache);
+            TransformLanguage(choiceSchema.Language, transformer, wordCache);
             TransformChoices(choiceSchema.Choices, transformer, wordCache);
         }
 
@@ -106,11 +106,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 TransformLanguage(choiceValue.Language, transformer, wordCache);
             }
-        }
-
-        private static void TransformBasicSchema(Schema schema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
-        {
-            TransformLanguage(schema.Language, transformer, wordCache);
         }
 
         private static void TransformLanguage(Languages languages, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
@@ -129,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void TransformObjectSchema(ObjectSchema objSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
             // transform the name of this schema
-            TransformBasicSchema(objSchema, transformer, wordCache);
+            TransformLanguage(objSchema.Language, transformer, wordCache);
             foreach (var property in objSchema.Properties)
             {
                 TransformLanguage(property.Language, transformer, wordCache);
