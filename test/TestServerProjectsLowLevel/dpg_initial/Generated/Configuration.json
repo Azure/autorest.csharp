@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "llc_initial_LowLevel",
+  "Namespace": "dpg_initial_LowLevel",
   "LibraryName": null,
   "SharedSourceFolders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",

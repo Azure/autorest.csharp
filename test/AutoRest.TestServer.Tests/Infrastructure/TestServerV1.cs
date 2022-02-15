@@ -109,7 +109,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             await CollectCoverage(results, "/report", testName);
             await CollectCoverage(results, "/report/azure", testName);
             await CollectCoverage(results, "/report/optional", testName);
-            await CollectCoverage(results, "/report/llc", testName);
+            await CollectCoverage(results, "/report/dpg", testName);
 
             return results.ToArray();
         }

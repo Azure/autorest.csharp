@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace llc_update1_LowLevel
+namespace dpg_initial_LowLevel
 {
     /// <summary> Client options for ParamsClient. </summary>
     public partial class ParamsClientOptions : ClientOptions
