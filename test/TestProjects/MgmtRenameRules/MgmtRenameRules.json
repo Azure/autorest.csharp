@@ -7943,6 +7943,10 @@
                     "format": "int32",
                     "description": "The number of all available patches excluding critical and security."
                 },
+                "uri": {
+                    "type": "string",
+                    "description": "The managed application artifact blob uri."
+                },
                 "startTime": {
                     "type": "string",
                     "readOnly": true,
