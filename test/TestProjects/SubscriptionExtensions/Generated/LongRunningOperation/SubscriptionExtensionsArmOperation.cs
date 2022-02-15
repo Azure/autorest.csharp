@@ -29,13 +29,11 @@ namespace SubscriptionExtensions
         internal SubscriptionExtensionsArmOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal SubscriptionExtensionsArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "SubscriptionExtensionsArmOperation");
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

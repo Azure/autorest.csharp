@@ -29,13 +29,11 @@ namespace MgmtKeyvault
         internal MgmtKeyvaultArmOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal MgmtKeyvaultArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtKeyvaultArmOperation");
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

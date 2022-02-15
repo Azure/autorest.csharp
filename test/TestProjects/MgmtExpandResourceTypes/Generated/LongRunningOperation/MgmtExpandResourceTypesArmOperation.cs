@@ -29,13 +29,11 @@ namespace MgmtExpandResourceTypes
         internal MgmtExpandResourceTypesArmOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal MgmtExpandResourceTypesArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtExpandResourceTypesArmOperation");
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

@@ -29,13 +29,11 @@ namespace SingletonResource
         internal SingletonResourceArmOperation(Response<T> response)
         {
             _operation = new OperationOrResponseInternals<T>(response);
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal SingletonResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals<T>(source, clientDiagnostics, pipeline, request, response, finalStateVia, "SingletonResourceArmOperation");
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

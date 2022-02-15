@@ -40,7 +40,7 @@ namespace Azure.Core
             _source = source;
             _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
             _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName);
-            _operationInternal.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
+            _operationInternal.PollingStrategy = OperationInternals.DefaultPollingStrategy;
         }
 
         public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)

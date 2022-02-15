@@ -29,13 +29,11 @@ namespace MgmtScopeResource
         internal MgmtScopeResourceArmOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal MgmtScopeResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtScopeResourceArmOperation");
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

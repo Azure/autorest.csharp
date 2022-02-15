@@ -53,7 +53,9 @@ namespace Azure.Core
         public async ValueTask<Response<T>> WaitForCompletionAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return DoesWrapOperation
+                ? await _operation!.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false)
+                : _valueResponse!;
         }
 
         public async ValueTask<Response<T>> WaitForCompletionAsync(

@@ -35,6 +35,7 @@ namespace Azure.Core
         protected OperationOrResponseInternals(OperationInternalBase operationInternal)
         {
             Operation = operationInternal ?? throw new ArgumentNullException(nameof(operationInternal));
+            Operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         public OperationOrResponseInternals(Response response)
@@ -43,24 +44,6 @@ namespace Azure.Core
                 throw new ArgumentNullException(nameof(response));
 
             VoidResponse = response;
-        }
-
-        public IOperationPollingStrategy? PollingStrategy
-        {
-            get
-            {
-                return Operation?.PollingStrategy;
-            }
-
-            set
-            {
-                if (Operation == null)
-                {
-                    throw new InvalidOperationException("Property 'Operation' is null.");
-                }
-                Argument.AssertNotNull(value, nameof(value));
-                Operation!.PollingStrategy = value!;
-            }
         }
 
         protected OperationInternalBase? Operation { get; }
@@ -96,7 +79,9 @@ namespace Azure.Core
         public async ValueTask<Response> WaitForCompletionResponseAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionResponseAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return DoesWrapOperation
+                ? await Operation!.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false)
+                : VoidResponse!;
         }
 
         public async ValueTask<Response> WaitForCompletionResponseAsync(

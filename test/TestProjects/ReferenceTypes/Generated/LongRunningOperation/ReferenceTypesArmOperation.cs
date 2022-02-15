@@ -29,13 +29,11 @@ namespace ReferenceTypes
         internal ReferenceTypesArmOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         internal ReferenceTypesArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "ReferenceTypesArmOperation");
-            _operation.PollingStrategy = new ExponentialPollingStrategy();
         }
 
         /// <inheritdoc />

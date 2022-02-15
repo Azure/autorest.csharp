@@ -21,7 +21,7 @@ namespace Azure.Core
     /// </summary>
     internal class OperationInternals
     {
-        public static TimeSpan DefaultPollingInterval { get; private set; } = TimeSpan.FromSeconds(1);
+        public static IOperationPollingStrategy DefaultPollingStrategy { get; private set; } = new ConstantPollingStrategy();
 
         private readonly OperationInternal _operationInternal;
 
@@ -29,7 +29,7 @@ namespace Azure.Core
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
             _operationInternal = new OperationInternal(clientDiagnostics, nextLinkOperation, originalResponse, scopeName);
-            _operationInternal.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
+            _operationInternal.PollingStrategy = OperationInternals.DefaultPollingStrategy;
         }
 
         public Response GetRawResponse() => _operationInternal.RawResponse;
