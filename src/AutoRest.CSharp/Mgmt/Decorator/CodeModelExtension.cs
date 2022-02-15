@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
-
         public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)
