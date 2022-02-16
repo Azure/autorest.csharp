@@ -103,6 +103,7 @@ $testNamesLowLevel =
     'custom-baseUrl',
     'custom-baseUrl-more-options',
     'custom-baseUrl-paging',
+    'dpg-customization',
     'header',
     'httpInfrastructure',
     'media_types',
