@@ -51,7 +51,7 @@ namespace SupersetInheritance
         internal SupersetModel6(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _supersetModel6ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string supersetModel6ApiVersion);
+            TryGetApiVersion(ResourceType, out string supersetModel6ApiVersion);
             _supersetModel6RestClient = new SupersetModel6SRestOperations(_supersetModel6ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel6ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

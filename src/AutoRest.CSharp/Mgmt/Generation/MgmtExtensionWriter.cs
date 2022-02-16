@@ -100,8 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return base.GetParametersForCollectionEntry(resourceCollection);
 
             List<Parameter> parameters = new List<Parameter>();
-            if (!IsArmCore)
-                parameters.Add(This.ExtensionParameter);
+            parameters.Add(This.ExtensionParameter);
             parameters.AddRange(resourceCollection.ExtraConstructorParameters);
             return parameters.ToArray();
         }
@@ -112,8 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return base.GetParametersForSingletonEntry();
 
             List<Parameter> parameters = new List<Parameter>();
-            if (!IsArmCore)
-                parameters.Add(This.ExtensionParameter);
+            parameters.Add(This.ExtensionParameter);
             return parameters.ToArray();
         }
     }

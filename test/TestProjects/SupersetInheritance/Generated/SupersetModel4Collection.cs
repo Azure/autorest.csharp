@@ -38,7 +38,7 @@ namespace SupersetInheritance
         internal SupersetModel4Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _supersetModel4ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel4.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(SupersetModel4.ResourceType, out string supersetModel4ApiVersion);
+            TryGetApiVersion(SupersetModel4.ResourceType, out string supersetModel4ApiVersion);
             _supersetModel4RestClient = new SupersetModel4SRestOperations(_supersetModel4ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel4ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

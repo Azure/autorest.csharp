@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineScaleSetVMCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineScaleSetVMClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSetVM.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(VirtualMachineScaleSetVM.ResourceType, out string virtualMachineScaleSetVMApiVersion);
+            TryGetApiVersion(VirtualMachineScaleSetVM.ResourceType, out string virtualMachineScaleSetVMApiVersion);
             _virtualMachineScaleSetVMRestClient = new VirtualMachineScaleSetVMsRestOperations(_virtualMachineScaleSetVMClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetVMApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

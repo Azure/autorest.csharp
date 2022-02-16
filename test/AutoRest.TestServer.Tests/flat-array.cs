@@ -3,11 +3,10 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AutoRest.TestServer.Tests.Infrastructure;
-using Azure;
 using FlattenedParameters;
 using NUnit.Framework;
 
@@ -42,7 +41,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public async Task FlatArray_EmptySerialized()
         {
-            var doc = await TestCore (async c => await c.OperationAsync (new string [] {}));
+            var doc = await TestCore (async c => await c.OperationAsync(Enumerable.Empty<string>()));
             JsonElement items = doc.RootElement.GetProperty("items");
             Assert.NotNull(items);
             Assert.AreEqual(0, items.GetArrayLength());
@@ -58,7 +57,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public async Task FlatArray_EmptySerializedNotNullable()
         {
-            var doc = await TestCore (async c => await c.OperationNotNullAsync (new string [] {}));
+            var doc = await TestCore (async c => await c.OperationNotNullAsync(Enumerable.Empty<string>()));
             Assert.IsFalse(doc.RootElement.TryGetProperty ("items", out JsonElement value));
         }
     }

@@ -108,6 +108,12 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
+        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
+        {
+            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            return allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => (CreateReference(kvp.Key, kvp.Value), kvp.Value.SkipUrlEncoding));
+        }
+
         /// <summary>
         /// Build RestClientMethod for mgmt and HLC
         /// </summary>

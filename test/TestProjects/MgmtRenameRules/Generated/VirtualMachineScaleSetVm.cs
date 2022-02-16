@@ -53,7 +53,7 @@ namespace MgmtRenameRules
         internal VirtualMachineScaleSetVm(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string virtualMachineScaleSetVmVirtualMachineScaleSetVMsApiVersion);
+            TryGetApiVersion(ResourceType, out string virtualMachineScaleSetVmVirtualMachineScaleSetVMsApiVersion);
             _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient = new VirtualMachineScaleSetVMsRestOperations(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetVmVirtualMachineScaleSetVMsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

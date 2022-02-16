@@ -20,7 +20,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing collection of ChildBody and their operations over its parent. </summary>
+    /// <summary> A class representing collection of TheParentSubParentChild and their operations over its parent. </summary>
     public partial class TheParentSubParentChildCollection : ArmCollection, IEnumerable<TheParentSubParentChild>, IAsyncEnumerable<TheParentSubParentChild>
     {
         private readonly ClientDiagnostics _theParentSubParentChildChildrenClientDiagnostics;
@@ -37,7 +37,7 @@ namespace MgmtMultipleParentResource
         internal TheParentSubParentChildCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _theParentSubParentChildChildrenClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", TheParentSubParentChild.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(TheParentSubParentChild.ResourceType, out string theParentSubParentChildChildrenApiVersion);
+            TryGetApiVersion(TheParentSubParentChild.ResourceType, out string theParentSubParentChildChildrenApiVersion);
             _theParentSubParentChildChildrenRestClient = new ChildrenRestOperations(_theParentSubParentChildChildrenClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, theParentSubParentChildChildrenApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

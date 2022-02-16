@@ -38,7 +38,7 @@ namespace OmitOperationGroups
         internal Model2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", Model2.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(Model2.ResourceType, out string model2ApiVersion);
+            TryGetApiVersion(Model2.ResourceType, out string model2ApiVersion);
             _model2RestClient = new Model2SRestOperations(_model2ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

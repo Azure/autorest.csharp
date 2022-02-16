@@ -52,7 +52,7 @@ namespace ExactMatchFlattenInheritance
         internal AzureResourceFlattenModel1(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _azureResourceFlattenModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string azureResourceFlattenModel1ApiVersion);
+            TryGetApiVersion(ResourceType, out string azureResourceFlattenModel1ApiVersion);
             _azureResourceFlattenModel1RestClient = new AzureResourceFlattenModel1SRestOperations(_azureResourceFlattenModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, azureResourceFlattenModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

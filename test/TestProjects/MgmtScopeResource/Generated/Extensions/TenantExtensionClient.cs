@@ -40,7 +40,7 @@ namespace MgmtScopeResource
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            Client.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 

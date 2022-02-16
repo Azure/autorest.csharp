@@ -37,7 +37,7 @@ namespace MgmtListMethods
         internal FakeParentWithNonResChCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fakeParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(FakeParentWithNonResCh.ResourceType, out string fakeParentWithNonResChApiVersion);
+            TryGetApiVersion(FakeParentWithNonResCh.ResourceType, out string fakeParentWithNonResChApiVersion);
             _fakeParentWithNonResChRestClient = new FakeParentWithNonResChesRestOperations(_fakeParentWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
