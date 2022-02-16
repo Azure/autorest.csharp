@@ -75,10 +75,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             switch (schema)
             {
                 case ChoiceSchema choiceSchema:
-                    TransformChoiceSchema(choiceSchema, transformer, wordCache);
+                    TransformChoiceSchema(choiceSchema.Language, choiceSchema.Choices, transformer, wordCache);
                     break;
                 case SealedChoiceSchema sealedChoiceSchema:
-                    TransformSealedChoiceSchema(sealedChoiceSchema, transformer, wordCache);
+                    TransformChoiceSchema(sealedChoiceSchema.Language, sealedChoiceSchema.Choices, transformer, wordCache);
                     break;
                 case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
                     TransformObjectSchema(objSchema, transformer, wordCache);
@@ -88,16 +88,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void TransformChoiceSchema(ChoiceSchema choiceSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void TransformChoiceSchema(Languages languages, ICollection<ChoiceValue> choiceValues, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
-            TransformLanguage(choiceSchema.Language, transformer, wordCache);
-            TransformChoices(choiceSchema.Choices, transformer, wordCache);
-        }
-
-        private static void TransformSealedChoiceSchema(SealedChoiceSchema choiceSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
-        {
-            TransformLanguage(choiceSchema.Language, transformer, wordCache);
-            TransformChoices(choiceSchema.Choices, transformer, wordCache);
+            TransformLanguage(languages, transformer, wordCache);
+            TransformChoices(choiceValues, transformer, wordCache);
         }
 
         private static void TransformChoices(ICollection<ChoiceValue> choiceValues, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
