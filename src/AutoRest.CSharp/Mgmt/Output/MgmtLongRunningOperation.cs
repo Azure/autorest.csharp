@@ -30,13 +30,22 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             IsGeneric = isGeneric;
             DefaultName = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
-            BaseType = isGeneric ? typeof(ArmOperation<>) : typeof(ArmOperation);
-            WaitMethod = isGeneric ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
-            OperationType = isGeneric ? typeof(ArmOperation<>) : typeof(ArmOperation);
-            ResponseType = isGeneric ? typeof(Response<>) : typeof(Response);
-            OperationOrResponseType = isGeneric ? typeof(OperationOrResponseInternals<>) : typeof(OperationOrResponseInternals);
-            OperationSourceString = isGeneric ? (FormattableString)$"{typeof(IOperationSource<>)} source, " : (FormattableString)$"";
-            SourceString = isGeneric ? "source, " : string.Empty;
+            if (IsGeneric)
+            {
+                BaseType = typeof(ArmOperation<>);
+                WaitMethod = "WaitForCompletionAsync";
+                OperationType = typeof(ArmOperation<>);
+                ResponseType = typeof(Response<>);
+                OperationOrResponseType = typeof(OperationOrResponseInternals<>);
+            }
+            else
+            {
+                BaseType = typeof(ArmOperation);
+                WaitMethod = "WaitForCompletionResponseAsync";
+                OperationType = typeof(ArmOperation);
+                ResponseType = typeof(Response);
+                OperationOrResponseType = typeof(OperationOrResponseInternals);
+            }
         }
 
         public Type BaseType { get; }
@@ -44,8 +53,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         public Type OperationType { get; }
         public Type ResponseType { get; }
         public Type OperationOrResponseType { get; }
-        public FormattableString OperationSourceString { get; }
-        public string SourceString { get; }
 
         private ConstructorSignature? _mockingCtor;
         public ConstructorSignature? MockingCtor => _mockingCtor ??= EnsureMockingCtor();
