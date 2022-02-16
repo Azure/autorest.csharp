@@ -410,7 +410,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/>, or <paramref name="rowKey"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public async Task<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
@@ -451,7 +451,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/>, or <paramref name="rowKey"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
@@ -535,7 +535,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/>, or <paramref name="rowKey"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public async Task<ResponseWithHeaders<TableInternalUpdateEntityHeaders>> UpdateEntityAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
@@ -572,7 +572,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/>, or <paramref name="rowKey"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public ResponseWithHeaders<TableInternalUpdateEntityHeaders> UpdateEntity(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
@@ -637,7 +637,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/>, or <paramref name="rowKey"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public async Task<ResponseWithHeaders<TableInternalDeleteEntityHeaders>> DeleteEntityAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
@@ -673,7 +673,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/>, or <paramref name="rowKey"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public ResponseWithHeaders<TableInternalDeleteEntityHeaders> DeleteEntity(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)

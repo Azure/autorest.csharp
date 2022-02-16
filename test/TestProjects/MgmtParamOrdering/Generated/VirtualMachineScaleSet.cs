@@ -310,10 +310,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="vmInstanceIDs"/> is null. </exception>
         public async virtual Task<ArmOperation> DeleteInstancesAsync(bool waitForCompletion, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
-            if (vmInstanceIDs == null)
-            {
-                throw new ArgumentNullException(nameof(vmInstanceIDs));
-            }
+            Argument.AssertNotNull(vmInstanceIDs, nameof(vmInstanceIDs));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.DeleteInstances");
             scope.Start();
@@ -344,10 +341,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="vmInstanceIDs"/> is null. </exception>
         public virtual ArmOperation DeleteInstances(bool waitForCompletion, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
-            if (vmInstanceIDs == null)
-            {
-                throw new ArgumentNullException(nameof(vmInstanceIDs));
-            }
+            Argument.AssertNotNull(vmInstanceIDs, nameof(vmInstanceIDs));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.DeleteInstances");
             scope.Start();
@@ -377,10 +371,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineScaleSetInstanceView>> GetInstanceViewAsync(string filter, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Argument.AssertNotNull(filter, nameof(filter));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.GetInstanceView");
             scope.Start();
@@ -407,10 +398,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSetInstanceView> GetInstanceView(string filter, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (filter == null)
-            {
-                throw new ArgumentNullException(nameof(filter));
-            }
+            Argument.AssertNotNull(filter, nameof(filter));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.GetInstanceView");
             scope.Start();
@@ -437,14 +425,8 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineScaleSet>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.AddTag");
             scope.Start();
@@ -474,14 +456,8 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSet> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.AddTag");
             scope.Start();
@@ -510,10 +486,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineScaleSet>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.SetTags");
             scope.Start();
@@ -543,10 +516,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSet> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.SetTags");
             scope.Start();
@@ -576,10 +546,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public async virtual Task<Response<VirtualMachineScaleSet>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.RemoveTag");
             scope.Start();
@@ -608,10 +575,7 @@ namespace MgmtParamOrdering
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<VirtualMachineScaleSet> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _virtualMachineScaleSetClientDiagnostics.CreateScope("VirtualMachineScaleSet.RemoveTag");
             scope.Start();

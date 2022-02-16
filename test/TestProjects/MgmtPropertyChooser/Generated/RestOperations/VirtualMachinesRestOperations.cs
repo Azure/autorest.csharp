@@ -157,7 +157,7 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -195,7 +195,7 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
         public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -257,7 +257,7 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="options"> Parameters supplied to the Update Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/> or <paramref name="options"/> is null. </exception>
         public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -295,7 +295,7 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="options"> Parameters supplied to the Update Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/> or <paramref name="options"/> is null. </exception>
         public Response Update(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -356,7 +356,7 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string vmName, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -391,7 +391,7 @@ namespace MgmtPropertyChooser
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string vmName, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -446,7 +446,7 @@ namespace MgmtPropertyChooser
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
         public async Task<Response<VirtualMachineData>> GetAsync(string subscriptionId, string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -485,7 +485,7 @@ namespace MgmtPropertyChooser
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
         public Response<VirtualMachineData> Get(string subscriptionId, string resourceGroupName, string vmName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
