@@ -10,6 +10,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -108,6 +109,18 @@ namespace AutoRest.CSharp.Mgmt.Output
                     if (match != null)
                     {
                         propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
+                        if (match.Implementation is SystemObjectType systemObjectType
+                            && systemObjectType.SystemType == typeof(ManagedServiceIdentity)
+                            && (typeToReplace.Properties.First(p => p.Declaration.Name == "Type")?.SchemaProperty?.Schema is SealedChoiceSchema sealedChoiceSchema
+                                && sealedChoiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.systemAssignedUserAssignedV3Value)
+                                || typeToReplace.Properties.First(p => p.Declaration.Name == "Type")?.SchemaProperty?.Schema is ChoiceSchema choiceSchema
+                                && choiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.systemAssignedUserAssignedV3Value)))
+                        {
+                            if (objectTypeProperty.SchemaProperty!.Schema.Extensions == null)
+                                objectTypeProperty.SchemaProperty!.Schema.Extensions = new DictionaryOfAny() { { "x-ms-mgmt-modelVersion", "v3" } };
+                            else
+                                objectTypeProperty.SchemaProperty!.Schema.Extensions?.TryAdd("x-ms-mgmt-modelVersion", "v3");
+                        }
                     }
                 }
                 return propertyType;

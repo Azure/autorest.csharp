@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 return new JsonValueSerialization(
                     type,
-                    BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
+                    BuilderHelpers.GetSerializationFormat(schema), type.IsNullable, schema.Extensions?.MgmtModelVersion);
             }
 
             switch (schema)
@@ -104,7 +104,8 @@ namespace AutoRest.CSharp.Output.Builders
                     return new JsonValueSerialization(
                         type,
                         BuilderHelpers.GetSerializationFormat(schema),
-                        type.IsNullable);
+                        type.IsNullable,
+                        schema.Extensions?.MgmtModelVersion);
             }
         }
 
