@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _allSchemas.UpdateAcronyms();
             _allSchemas.UpdateFrameworkTypes();
 
-            ModelForest modelForest = new ModelForest(_allSchemas, _codeModel);
+            SinglePropertyHider.HideModels(_allSchemas);
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();

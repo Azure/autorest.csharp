@@ -26,7 +26,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. &lt;br&gt;&lt;br&gt; This value cannot be larger than 1023 GB. </summary>
         public int? DiskSizeGB { get; set; }
         /// <summary> The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist. </summary>
-        public VirtualHardDisk Image { get; set; }
+        internal VirtualHardDisk Image { get; set; }
+        /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
+        public string ImageUri
+        {
+            get => Image.Uri;
+            set => Image.Uri = value;
+        }
+
         /// <summary> The list of virtual hard disk container uris. </summary>
         public IList<string> VhdContainers { get; }
         /// <summary> The managed disk parameters. </summary>

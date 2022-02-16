@@ -336,6 +336,14 @@
                 }
             }
         },
+        "LayerOneProperties": {
+            "properties": {
+                "uniqueId": {
+                    "type": "string",
+                    "description": "The id of layer one."
+                }
+            }
+        },
         "LayerOneSingle": {
             "properties": {
                 "layerTwo": {
@@ -429,6 +437,34 @@
                     "$ref": "#/definitions/Resource"
                 }
             ]
+        },
+        "TypeThree": {
+            "description": "The TypeThree.",
+            "type": "object",
+            "properties": {
+                "MyType": {
+                    "type": "string",
+                    "description": "The details of the type."
+                },
+                "properties": {
+                    "$ref": "#/definitions/LayerTwoSingle",
+                    "description": "The single value prop."
+                }
+            }
+        },
+        "TypeFour": {
+            "description": "The TypeFour.",
+            "type": "object",
+            "properties": {
+                "MyType": {
+                    "type": "string",
+                    "description": "The details of the type."
+                },
+                "properties": {
+                    "$ref": "#/definitions/LayerOneProperties",
+                    "description": "The single value prop."
+                }
+            }
         },
         "Resource": {
             "description": "The Resource model definition.",

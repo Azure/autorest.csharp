@@ -51,11 +51,25 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The idle timeout of the public IP address. </summary>
         public int? IdleTimeoutInMinutes { get; set; }
         /// <summary> The dns settings to be applied on the publicIP addresses . </summary>
-        public VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings DnsSettings { get; set; }
+        internal VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings DnsSettings { get; set; }
+        /// <summary> The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created. </summary>
+        public string DnsSettingsDomainNameLabel
+        {
+            get => DnsSettings.DomainNameLabel;
+            set => DnsSettings.DomainNameLabel = value;
+        }
+
         /// <summary> The list of IP tags associated with the public IP address. </summary>
         public IList<VirtualMachineScaleSetIpTag> IpTags { get; }
         /// <summary> The PublicIPPrefix from which to allocate publicIP addresses. </summary>
-        public WritableSubResource PublicIPPrefix { get; set; }
+        internal WritableSubResource PublicIPPrefix { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier PublicIPPrefixId
+        {
+            get => PublicIPPrefix.Id;
+            set => PublicIPPrefix.Id = value;
+        }
+
         /// <summary> Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;. </summary>
         public IPVersion? PublicIPAddressVersion { get; set; }
     }

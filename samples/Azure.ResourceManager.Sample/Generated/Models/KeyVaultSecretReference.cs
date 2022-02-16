@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -35,6 +36,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The URL referencing a secret in a Key Vault. </summary>
         public string SecretUrl { get; set; }
         /// <summary> The relative URL of the Key Vault containing the secret. </summary>
-        public WritableSubResource SourceVault { get; set; }
+        internal WritableSubResource SourceVault { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier SourceVaultId
+        {
+            get => SourceVault.Id;
+            set => SourceVault.Id = value;
+        }
     }
 }

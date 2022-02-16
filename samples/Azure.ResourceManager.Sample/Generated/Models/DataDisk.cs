@@ -53,9 +53,23 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The disk name. </summary>
         public string Name { get; set; }
         /// <summary> The virtual hard disk. </summary>
-        public VirtualHardDisk Vhd { get; set; }
+        internal VirtualHardDisk Vhd { get; set; }
+        /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
+        public string VhdUri
+        {
+            get => Vhd.Uri;
+            set => Vhd.Uri = value;
+        }
+
         /// <summary> The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist. </summary>
-        public VirtualHardDisk Image { get; set; }
+        internal VirtualHardDisk Image { get; set; }
+        /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
+        public string ImageUri
+        {
+            get => Image.Uri;
+            set => Image.Uri = value;
+        }
+
         /// <summary> Specifies the caching requirements. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **ReadOnly** &lt;br&gt;&lt;br&gt; **ReadWrite** &lt;br&gt;&lt;br&gt; Default: **None for Standard storage. ReadOnly for Premium storage**. </summary>
         public CachingTypes? Caching { get; set; }
         /// <summary> Specifies whether writeAccelerator should be enabled or disabled on the disk. </summary>

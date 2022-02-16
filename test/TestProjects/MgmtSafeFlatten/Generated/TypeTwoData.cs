@@ -13,7 +13,7 @@ using MgmtSafeFlatten.Models;
 namespace MgmtSafeFlatten
 {
     /// <summary> A class representing the TypeTwo data model. </summary>
-    public partial class TypeTwoData : TrackedResource
+    public partial class TypeTwoData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of TypeTwoData. </summary>
         /// <param name="location"> The location. </param>

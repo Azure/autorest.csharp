@@ -44,14 +44,15 @@ namespace MgmtSafeFlatten
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            Client.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeOnesBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
+        /// Operation Id: Common_ListTypeOnesBySubscription
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeOne> GetTypeOnesAsync(CancellationToken cancellationToken = default)
@@ -74,10 +75,11 @@ namespace MgmtSafeFlatten
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeOnesBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
+        /// Operation Id: Common_ListTypeOnesBySubscription
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeOne> GetTypeOnes(CancellationToken cancellationToken = default)
@@ -100,10 +102,11 @@ namespace MgmtSafeFlatten
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeTwosBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
+        /// Operation Id: Common_ListTypeTwosBySubscription
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeTwo> GetTypeTwosAsync(CancellationToken cancellationToken = default)
@@ -126,10 +129,11 @@ namespace MgmtSafeFlatten
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeTwosBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
+        /// Operation Id: Common_ListTypeTwosBySubscription
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeTwo> GetTypeTwos(CancellationToken cancellationToken = default)

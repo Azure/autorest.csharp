@@ -56,14 +56,34 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Used for establishing the purchase context of any 3rd Party artifact through MarketPlace. </summary>
         public PurchasePlan Plan { get; set; }
         /// <summary> Contains the os disk image information. </summary>
-        public OSDiskImage OsDiskImage { get; set; }
+        internal OSDiskImage OsDiskImage { get; set; }
+        /// <summary> The operating system of the osDiskImage. </summary>
+        public OperatingSystemTypes OsDiskImageOperatingSystem
+        {
+            get => OsDiskImage.OperatingSystem;
+            set => OsDiskImage.OperatingSystem = value;
+        }
+
         /// <summary> Gets the data disk images. </summary>
         public IList<DataDiskImage> DataDiskImages { get; }
         /// <summary> Describes automatic OS upgrade properties on the image. </summary>
-        public AutomaticOSUpgradeProperties AutomaticOSUpgradeProperties { get; set; }
+        internal AutomaticOSUpgradeProperties AutomaticOSUpgradeProperties { get; set; }
+        /// <summary> Specifies whether automatic OS upgrade is supported on the image. </summary>
+        public bool AutomaticOSUpgradePropertiesAutomaticOSUpgradeSupported
+        {
+            get => AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
+            set => AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported = value;
+        }
+
         /// <summary> Specifies the HyperVGeneration Type. </summary>
         public HyperVGenerationTypes? HyperVGeneration { get; set; }
         /// <summary> Specifies disallowed configuration for the VirtualMachine created from the image. </summary>
-        public DisallowedConfiguration Disallowed { get; set; }
+        internal DisallowedConfiguration Disallowed { get; set; }
+        /// <summary> VM disk types which are disallowed. </summary>
+        public VmDiskTypes? DisallowedVmDiskType
+        {
+            get => Disallowed.VmDiskType;
+            set => Disallowed.VmDiskType = value;
+        }
     }
 }

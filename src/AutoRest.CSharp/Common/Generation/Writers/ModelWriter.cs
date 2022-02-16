@@ -90,7 +90,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     var immediateParentProperty = heiarchyStack.Pop();
                     WriteProperty(writer, property, "internal");
 
-                    string myPropertyName = $"{immediateParentProperty.Declaration.Name}{innerProperty.Declaration.Name}";
+                    string immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
+                    string myPropertyName = GetCombinedPropertyName(immediateParentPropertyName, innerProperty.Declaration);
                     string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
                     writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
                     using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type} {myPropertyName:D}"))
@@ -107,6 +108,60 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteProperty(writer, property);
                 }
             }
+        }
+
+        private string GetCombinedPropertyName(string immediateParentPropertyName, MemberDeclarationOptions property)
+        {
+            string parentName = immediateParentPropertyName;
+
+            if (property.Type.Equals(typeof(bool)) || property.Type.Equals(typeof(bool?)))
+                return property.Name;
+
+            if (property.Name.Equals("Id", StringComparison.Ordinal))
+                return $"{parentName}{property.Name}";
+
+            if (immediateParentPropertyName.EndsWith(property.Name, StringComparison.Ordinal))
+                return immediateParentPropertyName;
+
+            if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
+            {
+                var parentWords = immediateParentPropertyName.SplitByCamelCase();
+                var parentWordsHash = new HashSet<string>(parentWords);
+                var nameWords = property.Name.SplitByCamelCase();
+                var lastWord = string.Empty;
+                foreach (var word in nameWords)
+                {
+                    lastWord = word;
+                    if (parentWordsHash.Contains(word))
+                        return property.Name;
+                }
+                //need to depluralize the last word and check
+                if (parentWordsHash.Contains(lastWord.ToSingular(false)))
+                    return property.Name;
+
+                parentName = string.Join("", parentWords.Take(parentWords.Count() - 1));
+            }
+
+            return $"{parentName}{property.Name}";
+        }
+
+        private string GetPropertyName(MemberDeclarationOptions property)
+        {
+            const string properties = "Properties";
+            if (property.Name.Equals(properties, StringComparison.Ordinal))
+            {
+                string typeName = property.Type.Name;
+                int index = typeName.IndexOf(properties);
+                if (index > -1 && index + properties.Length == typeName.Length)
+                    return typeName.Substring(0, index);
+
+                return typeName;
+            }
+            return property.Name;
         }
 
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property, string? overrideAccessibility = null)

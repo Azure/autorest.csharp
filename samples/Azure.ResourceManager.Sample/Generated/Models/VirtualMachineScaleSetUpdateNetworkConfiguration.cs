@@ -47,9 +47,22 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies whether the network interface is accelerated networking-enabled. </summary>
         public bool? EnableAcceleratedNetworking { get; set; }
         /// <summary> The network security group. </summary>
-        public WritableSubResource NetworkSecurityGroup { get; set; }
+        internal WritableSubResource NetworkSecurityGroup { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier NetworkSecurityGroupId
+        {
+            get => NetworkSecurityGroup.Id;
+            set => NetworkSecurityGroup.Id = value;
+        }
+
         /// <summary> The dns settings to be applied on the network interfaces. </summary>
-        public VirtualMachineScaleSetNetworkConfigurationDnsSettings DnsSettings { get; set; }
+        internal VirtualMachineScaleSetNetworkConfigurationDnsSettings DnsSettings { get; set; }
+        /// <summary> List of DNS servers IP addresses. </summary>
+        public IList<string> DnsSettingsDnsServers
+        {
+            get => DnsSettings.DnsServers;
+        }
+
         /// <summary> The virtual machine scale set IP Configuration. </summary>
         public IList<VirtualMachineScaleSetUpdateIPConfiguration> IpConfigurations { get; }
         /// <summary> Whether IP forwarding enabled on this NIC. </summary>

@@ -61,7 +61,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**. </summary>
         public OperatingSystemTypes? OsType { get; set; }
         /// <summary> Specifies information about the unmanaged user image to base the scale set on. </summary>
-        public VirtualHardDisk Image { get; set; }
+        internal VirtualHardDisk Image { get; set; }
+        /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
+        public string ImageUri
+        {
+            get => Image.Uri;
+            set => Image.Uri = value;
+        }
+
         /// <summary> Specifies the container urls that are used to store operating system disks for the scale set. </summary>
         public IList<string> VhdContainers { get; }
         /// <summary> The managed disk parameters. </summary>
