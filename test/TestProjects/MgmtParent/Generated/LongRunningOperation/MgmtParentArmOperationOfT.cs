@@ -21,7 +21,7 @@ namespace MgmtParent
     {
         private readonly OperationOrResponseInternals<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtParentArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtParentArmOperation"/> class for mocking. </summary>
         protected MgmtParentArmOperation()
         {
         }

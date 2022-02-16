@@ -21,7 +21,7 @@ namespace ReferenceTypes
     {
         private readonly OperationOrResponseInternals _operation;
 
-        /// <summary> Initializes a new instance of ReferenceTypesArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ReferenceTypesArmOperation"/> class for mocking. </summary>
         protected ReferenceTypesArmOperation()
         {
         }

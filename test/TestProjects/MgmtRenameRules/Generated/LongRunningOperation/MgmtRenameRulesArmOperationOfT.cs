@@ -21,7 +21,7 @@ namespace MgmtRenameRules
     {
         private readonly OperationOrResponseInternals<T> _operation;
 
-        /// <summary> Initializes a new instance of MgmtRenameRulesArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtRenameRulesArmOperation"/> class for mocking. </summary>
         protected MgmtRenameRulesArmOperation()
         {
         }

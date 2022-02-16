@@ -21,7 +21,7 @@ namespace XmlDeserialization
     {
         private readonly OperationOrResponseInternals<T> _operation;
 
-        /// <summary> Initializes a new instance of XmlDeserializationArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="XmlDeserializationArmOperation"/> class for mocking. </summary>
         protected XmlDeserializationArmOperation()
         {
         }

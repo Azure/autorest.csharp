@@ -21,7 +21,7 @@ namespace MgmtExtensionResource
     {
         private readonly OperationOrResponseInternals _operation;
 
-        /// <summary> Initializes a new instance of MgmtExtensionResourceArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtExtensionResourceArmOperation"/> class for mocking. </summary>
         protected MgmtExtensionResourceArmOperation()
         {
         }

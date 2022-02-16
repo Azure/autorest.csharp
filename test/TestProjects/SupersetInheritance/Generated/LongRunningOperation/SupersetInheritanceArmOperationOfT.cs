@@ -21,7 +21,7 @@ namespace SupersetInheritance
     {
         private readonly OperationOrResponseInternals<T> _operation;
 
-        /// <summary> Initializes a new instance of SupersetInheritanceArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SupersetInheritanceArmOperation"/> class for mocking. </summary>
         protected SupersetInheritanceArmOperation()
         {
         }

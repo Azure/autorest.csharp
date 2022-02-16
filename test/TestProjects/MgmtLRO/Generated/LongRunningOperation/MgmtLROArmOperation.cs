@@ -21,7 +21,7 @@ namespace MgmtLRO
     {
         private readonly OperationOrResponseInternals _operation;
 
-        /// <summary> Initializes a new instance of MgmtLROArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtLROArmOperation"/> class for mocking. </summary>
         protected MgmtLROArmOperation()
         {
         }

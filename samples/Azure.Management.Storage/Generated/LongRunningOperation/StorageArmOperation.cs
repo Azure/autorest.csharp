@@ -31,9 +31,9 @@ namespace Azure.Management.Storage
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal StorageArmOperation(ClientDiagnostics clientDiagnostic, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal StorageArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostic, pipeline, request, response, finalStateVia, "StorageArmOperation");
+            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "StorageArmOperation");
         }
 
         /// <inheritdoc />

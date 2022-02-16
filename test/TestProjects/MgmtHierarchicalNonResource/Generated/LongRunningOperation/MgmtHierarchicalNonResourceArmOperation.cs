@@ -21,7 +21,7 @@ namespace MgmtHierarchicalNonResource
     {
         private readonly OperationOrResponseInternals _operation;
 
-        /// <summary> Initializes a new instance of MgmtHierarchicalNonResourceArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtHierarchicalNonResourceArmOperation"/> class for mocking. </summary>
         protected MgmtHierarchicalNonResourceArmOperation()
         {
         }

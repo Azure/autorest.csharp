@@ -21,7 +21,7 @@ namespace SingletonResource
     {
         private readonly OperationOrResponseInternals _operation;
 
-        /// <summary> Initializes a new instance of SingletonResourceArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SingletonResourceArmOperation"/> class for mocking. </summary>
         protected SingletonResourceArmOperation()
         {
         }

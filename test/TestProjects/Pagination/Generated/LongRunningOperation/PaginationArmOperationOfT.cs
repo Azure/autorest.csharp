@@ -21,7 +21,7 @@ namespace Pagination
     {
         private readonly OperationOrResponseInternals<T> _operation;
 
-        /// <summary> Initializes a new instance of PaginationArmOperation for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PaginationArmOperation"/> class for mocking. </summary>
         protected PaginationArmOperation()
         {
         }
