@@ -44,15 +44,8 @@ namespace ResourceClients_LowLevel
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="groupId"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
-        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint = null)
+        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint)
         {
-            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
-            Argument.AssertNotNull(pipeline, nameof(pipeline));
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            endpoint ??= new Uri("http://localhost:3000");
-
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;

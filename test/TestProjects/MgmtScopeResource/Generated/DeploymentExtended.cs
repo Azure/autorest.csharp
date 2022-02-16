@@ -57,7 +57,7 @@ namespace MgmtScopeResource
         internal DeploymentExtended(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string deploymentExtendedDeploymentsApiVersion);
+            TryGetApiVersion(ResourceType, out string deploymentExtendedDeploymentsApiVersion);
             _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedDeploymentsApiVersion);
             _deploymentOperationsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _deploymentOperationsRestClient = new DeploymentRestOperations(_deploymentOperationsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);

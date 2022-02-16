@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample
         internal Image(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _imageClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string imageApiVersion);
+            TryGetApiVersion(ResourceType, out string imageApiVersion);
             _imageRestClient = new ImagesRestOperations(_imageClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, imageApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -192,19 +192,19 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: Images_Update
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Image operation. </param>
+        /// <param name="options"> Parameters supplied to the Update Image operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<Image>> UpdateAsync(bool waitForCompletion, ImageUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public async virtual Task<ArmOperation<Image>> UpdateAsync(bool waitForCompletion, ImageUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _imageClientDiagnostics.CreateScope("Image.Update");
             scope.Start();
             try
             {
-                var response = await _imageRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<Image>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _imageRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation<Image>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -222,19 +222,19 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: Images_Update
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Image operation. </param>
+        /// <param name="options"> Parameters supplied to the Update Image operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<Image> Update(bool waitForCompletion, ImageUpdate parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual ArmOperation<Image> Update(bool waitForCompletion, ImageUpdateOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(parameters, nameof(parameters));
+            Argument.AssertNotNull(options, nameof(options));
 
             using var scope = _imageClientDiagnostics.CreateScope("Image.Update");
             scope.Start();
             try
             {
-                var response = _imageRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new SampleArmOperation<Image>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _imageRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options, cancellationToken);
+                var operation = new SampleArmOperation<Image>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

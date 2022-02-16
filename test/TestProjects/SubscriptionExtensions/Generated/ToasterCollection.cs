@@ -38,7 +38,7 @@ namespace SubscriptionExtensions
         internal ToasterCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Toaster.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(Toaster.ResourceType, out string toasterApiVersion);
+            TryGetApiVersion(Toaster.ResourceType, out string toasterApiVersion);
             _toasterRestClient = new ToastersRestOperations(_toasterClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

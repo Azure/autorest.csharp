@@ -35,7 +35,7 @@ namespace MgmtKeyvault
         internal DeletedManagedHsmCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedManagedHsmManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedManagedHsm.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(DeletedManagedHsm.ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
+            TryGetApiVersion(DeletedManagedHsm.ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
             _deletedManagedHsmManagedHsmsRestClient = new ManagedHsmsRestOperations(_deletedManagedHsmManagedHsmsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmManagedHsmsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

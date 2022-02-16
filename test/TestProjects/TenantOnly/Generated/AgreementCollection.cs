@@ -37,7 +37,7 @@ namespace TenantOnly
         internal AgreementCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", Agreement.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(Agreement.ResourceType, out string agreementApiVersion);
+            TryGetApiVersion(Agreement.ResourceType, out string agreementApiVersion);
             _agreementRestClient = new AgreementsRestOperations(_agreementClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

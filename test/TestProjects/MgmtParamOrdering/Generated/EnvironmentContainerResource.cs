@@ -52,7 +52,7 @@ namespace MgmtParamOrdering
         internal EnvironmentContainerResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _environmentContainerResourceEnvironmentContainersClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string environmentContainerResourceEnvironmentContainersApiVersion);
+            TryGetApiVersion(ResourceType, out string environmentContainerResourceEnvironmentContainersApiVersion);
             _environmentContainerResourceEnvironmentContainersRestClient = new EnvironmentContainersRestOperations(_environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, environmentContainerResourceEnvironmentContainersApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

@@ -38,7 +38,7 @@ namespace Pagination
         internal PageSizeDoubleModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeDoubleModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeDoubleModel.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(PageSizeDoubleModel.ResourceType, out string pageSizeDoubleModelApiVersion);
+            TryGetApiVersion(PageSizeDoubleModel.ResourceType, out string pageSizeDoubleModelApiVersion);
             _pageSizeDoubleModelRestClient = new PageSizeDoubleModelsRestOperations(_pageSizeDoubleModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDoubleModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

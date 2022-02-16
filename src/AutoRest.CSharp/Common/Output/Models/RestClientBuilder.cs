@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -88,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Concat(serviceRequest.Parameters)
                 .Where(rp => !IsIgnoredHeaderParameter(rp));
 
-            var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters);
+            var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters, this);
             Request request = BuildRequest(httpRequest, buildContext);
 
             var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean;
@@ -106,6 +107,16 @@ namespace AutoRest.CSharp.Output.Models
                 accessibility: accessibility,
                 operation
             );
+        }
+
+        public static PathSegment[] BuildRequestPathSegments(Operation operation, ServiceRequest serviceRequest, HttpRequest httpRequest, RestClientBuilder restClientBuilder)
+        {
+            var allParameters = restClientBuilder.GetOperationAllParameters(operation, operation.Parameters);
+            var methodParameters = restClientBuilder.BuildMethodParameters(allParameters);
+            var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, restClientBuilder.CreateReference(kvp.Key, kvp.Value)));
+            var buildContext = new RequestMethodBuildContext(methodParameters, references);
+            BuildRequestParameters(httpRequest, buildContext, out var queryParams, out var headerParams, out var uriParams, out var pathParams);
+            return uriParams.Concat(pathParams).ToArray();
         }
 
         /// <summary>
@@ -149,7 +160,13 @@ namespace AutoRest.CSharp.Output.Models
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
                 .ToArray();
 
-            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
+            var result = new Dictionary<RequestParameter, Parameter>();
+            foreach (var parameter in parameters)
+            {
+                if (!result.ContainsKey(parameter))
+                    result.Add(parameter, BuildParameter(parameter));
+            }
+            return result;
         }
 
         private Response[] BuildResponses(Operation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
@@ -190,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private RequestMethodBuildContext CreateRequestMethodBuildContext(HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters)
+        private static RequestMethodBuildContext CreateRequestMethodBuildContext(HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, RestClientBuilder restClientBuilder)
         {
             var pathParameters = new Dictionary<string, RequestParameter>();
             var requiredRequestParameters = new List<RequestParameter>();
@@ -238,7 +255,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            var parameters = new RequestMethodParametersBuilder(this);
+            var parameters = new RequestMethodParametersBuilder(restClientBuilder);
             parameters.AddUriOrPathParameters(httpRequest.Uri, pathParameters);
             parameters.AddUriOrPathParameters(httpRequest.Path, pathParameters);
             parameters.AddQueryOrHeaderParameters(requiredRequestParameters);
@@ -252,10 +269,32 @@ namespace AutoRest.CSharp.Output.Models
 
         private Request BuildRequest(HttpRequest httpRequest, RequestMethodBuildContext buildContext)
         {
+            List<QueryParameter> queryParameters;
+            List<RequestHeader> headerParameters;
+            IEnumerable<PathSegment> uriParameters, pathParameters;
+            BuildRequestParameters(httpRequest, buildContext, out queryParameters, out headerParameters, out uriParameters, out pathParameters);
+
+            var body = buildContext.BodyParameter != null
+                ? new RequestContentRequestBody(buildContext.BodyParameter)
+                : httpRequest is HttpWithBodyRequest httpWithBodyRequest
+                    ? BuildRequestBody(buildContext.References, httpWithBodyRequest.KnownMediaType)
+                    : null;
+
+            return new Request(
+                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
+                uriParameters.Concat(pathParameters).ToArray(),
+                queryParameters.ToArray(),
+                headerParameters.ToArray(),
+                body
+            );
+        }
+
+        private static void BuildRequestParameters(HttpRequest httpRequest, RequestMethodBuildContext buildContext, out List<QueryParameter> queryParameters, out List<RequestHeader> headerParameters, out IEnumerable<PathSegment> uriParameters, out IEnumerable<PathSegment> pathParameters)
+        {
             var uriParametersMap = new Dictionary<string, PathSegment>();
             var pathParametersMap = new Dictionary<string, PathSegment>();
-            var queryParameters = new List<QueryParameter>();
-            var headerParameters = new List<RequestHeader>();
+            queryParameters = new List<QueryParameter>();
+            headerParameters = new List<RequestHeader>();
             foreach (var (parameterName, (requestParameter, reference)) in buildContext.References)
             {
                 if (requestParameter == null)
@@ -288,22 +327,8 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            var uriParameters = GetPathSegments(httpRequest.Uri, uriParametersMap, isRaw: true);
-            var pathParameters = GetPathSegments(httpRequest.Path, pathParametersMap, isRaw: false);
-
-            var body = buildContext.BodyParameter != null
-                ? new RequestContentRequestBody(buildContext.BodyParameter)
-                : httpRequest is HttpWithBodyRequest httpWithBodyRequest
-                    ? BuildRequestBody(buildContext.References, httpWithBodyRequest.KnownMediaType)
-                    : null;
-
-            return new Request(
-                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
-                uriParameters.Concat(pathParameters).ToArray(),
-                queryParameters.ToArray(),
-                headerParameters.ToArray(),
-                body
-            );
+            uriParameters = GetPathSegments(httpRequest.Uri, uriParametersMap, isRaw: true);
+            pathParameters = GetPathSegments(httpRequest.Path, pathParametersMap, isRaw: false);
         }
 
         protected virtual Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
@@ -827,12 +852,6 @@ namespace AutoRest.CSharp.Output.Models
                 foreach (var requestParameter in requestParameters)
                 {
                     var parameter = _parent.BuildParameter(requestParameter);
-                    var type = parameter.Type;
-                    parameter = parameter with
-                    {
-                        Type = TypeFactory.IsList(type) || type.IsValueType ? type : type.WithNullable(true),
-                        Validate = false
-                    };
                     AddRequestParameter(GetRequestParameterName(requestParameter), requestParameter, parameter);
                 }
             }

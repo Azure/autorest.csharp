@@ -38,7 +38,7 @@ namespace MgmtListMethods
         internal SubParentWithLocCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _subParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", SubParentWithLoc.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(SubParentWithLoc.ResourceType, out string subParentWithLocApiVersion);
+            TryGetApiVersion(SubParentWithLoc.ResourceType, out string subParentWithLocApiVersion);
             _subParentWithLocRestClient = new SubParentWithLocsRestOperations(_subParentWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

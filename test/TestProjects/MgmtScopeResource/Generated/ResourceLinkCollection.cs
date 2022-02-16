@@ -40,7 +40,7 @@ namespace MgmtScopeResource
         {
             _scope = scope;
             _resourceLinkClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceLink.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceLink.ResourceType, out string resourceLinkApiVersion);
+            TryGetApiVersion(ResourceLink.ResourceType, out string resourceLinkApiVersion);
             _resourceLinkRestClient = new ResourceLinksRestOperations(_resourceLinkClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceLinkApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

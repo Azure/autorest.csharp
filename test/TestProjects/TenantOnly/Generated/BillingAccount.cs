@@ -52,7 +52,7 @@ namespace TenantOnly
         internal BillingAccount(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string billingAccountApiVersion);
+            TryGetApiVersion(ResourceType, out string billingAccountApiVersion);
             _billingAccountRestClient = new BillingAccountsRestOperations(_billingAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

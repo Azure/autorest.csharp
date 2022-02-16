@@ -53,7 +53,7 @@ namespace MgmtListMethods
         internal ResGrpParentWithAncestorWithNonResChWithLoc(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string resGrpParentWithAncestorWithNonResChWithLocApiVersion);
+            TryGetApiVersion(ResourceType, out string resGrpParentWithAncestorWithNonResChWithLocApiVersion);
             _resGrpParentWithAncestorWithNonResChWithLocRestClient = new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(_resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithNonResChWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

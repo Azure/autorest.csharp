@@ -172,10 +172,13 @@ namespace RequestContextAllOptional_LowLevel
         /// <summary> Delete. </summary>
         /// <param name="resourceName"> name. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(resourceName, nameof(resourceName));
+
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
@@ -193,10 +196,13 @@ namespace RequestContextAllOptional_LowLevel
         /// <summary> Delete. </summary>
         /// <param name="resourceName"> name. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(resourceName, nameof(resourceName));
+
             using var scope = ClientDiagnostics.CreateScope("RequestContextAllOptionalClient.DeleteNoRequestBodyResponseBody");
             scope.Start();
             try
@@ -341,10 +347,7 @@ namespace RequestContextAllOptional_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/test1", false);
-            if (resourceName != null)
-            {
-                uri.AppendQuery("resourceName", resourceName, true);
-            }
+            uri.AppendQuery("resourceName", resourceName, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;

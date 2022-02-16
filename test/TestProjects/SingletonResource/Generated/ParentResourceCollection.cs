@@ -38,7 +38,7 @@ namespace SingletonResource
         internal ParentResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ParentResource.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ParentResource.ResourceType, out string parentResourceApiVersion);
+            TryGetApiVersion(ParentResource.ResourceType, out string parentResourceApiVersion);
             _parentResourceRestClient = new ParentResourcesRestOperations(_parentResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, parentResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

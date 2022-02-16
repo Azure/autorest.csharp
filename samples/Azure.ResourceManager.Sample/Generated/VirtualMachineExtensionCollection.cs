@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineExtensionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineExtensionClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtension.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(VirtualMachineExtension.ResourceType, out string virtualMachineExtensionApiVersion);
+            TryGetApiVersion(VirtualMachineExtension.ResourceType, out string virtualMachineExtensionApiVersion);
             _virtualMachineExtensionRestClient = new VirtualMachineExtensionsRestOperations(_virtualMachineExtensionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

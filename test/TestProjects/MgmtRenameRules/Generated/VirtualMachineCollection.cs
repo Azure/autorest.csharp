@@ -38,7 +38,7 @@ namespace MgmtRenameRules
         internal VirtualMachineCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _virtualMachineClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", VirtualMachine.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(VirtualMachine.ResourceType, out string virtualMachineApiVersion);
+            TryGetApiVersion(VirtualMachine.ResourceType, out string virtualMachineApiVersion);
             _virtualMachineRestClient = new VirtualMachinesRestOperations(_virtualMachineClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

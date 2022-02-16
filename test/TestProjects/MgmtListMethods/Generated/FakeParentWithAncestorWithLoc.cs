@@ -52,7 +52,7 @@ namespace MgmtListMethods
         internal FakeParentWithAncestorWithLoc(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fakeParentWithAncestorWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string fakeParentWithAncestorWithLocApiVersion);
+            TryGetApiVersion(ResourceType, out string fakeParentWithAncestorWithLocApiVersion);
             _fakeParentWithAncestorWithLocRestClient = new FakeParentWithAncestorWithLocsRestOperations(_fakeParentWithAncestorWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithAncestorWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

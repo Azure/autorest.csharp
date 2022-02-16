@@ -21,7 +21,7 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
+    /// <summary> A class representing collection of RecordSetSrv and their operations over its parent. </summary>
     public partial class RecordSetSrvCollection : ArmCollection, IEnumerable<RecordSetSrv>, IAsyncEnumerable<RecordSetSrv>
     {
         private readonly ClientDiagnostics _recordSetSrvRecordSetsClientDiagnostics;
@@ -38,7 +38,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetSrvCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetSrvRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetSrv.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(RecordSetSrv.ResourceType, out string recordSetSrvRecordSetsApiVersion);
+            TryGetApiVersion(RecordSetSrv.ResourceType, out string recordSetSrvRecordSetsApiVersion);
             _recordSetSrvRecordSetsRestClient = new RecordSetsRestOperations(_recordSetSrvRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetSrvRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

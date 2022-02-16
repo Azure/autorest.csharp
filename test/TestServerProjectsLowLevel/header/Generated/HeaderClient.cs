@@ -52,6 +52,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -65,6 +66,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(userAgent, nameof(userAgent));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
@@ -82,6 +85,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -95,6 +99,8 @@ namespace header_LowLevel
         public virtual Response ParamExistingKey(string userAgent, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(userAgent, nameof(userAgent));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
@@ -170,6 +176,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -183,6 +190,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(contentType, nameof(contentType));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
@@ -200,6 +209,7 @@ namespace header_LowLevel
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -213,6 +223,8 @@ namespace header_LowLevel
         public virtual Response ParamProtectedKey(string contentType, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(contentType, nameof(contentType));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
@@ -289,6 +301,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -302,6 +315,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
@@ -320,6 +335,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -333,6 +349,8 @@ namespace header_LowLevel
         public virtual Response ParamInteger(string scenario, int value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
@@ -350,6 +368,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -363,6 +382,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
@@ -380,6 +401,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -393,6 +415,8 @@ namespace header_LowLevel
         public virtual Response ResponseInteger(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
@@ -411,6 +435,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -424,6 +449,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
@@ -442,6 +469,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -455,6 +483,8 @@ namespace header_LowLevel
         public virtual Response ParamLong(string scenario, long value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
@@ -472,6 +502,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -485,6 +516,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseLongAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
@@ -502,6 +535,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -515,6 +549,8 @@ namespace header_LowLevel
         public virtual Response ResponseLong(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
@@ -533,6 +569,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -546,6 +583,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
@@ -564,6 +603,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -577,6 +617,8 @@ namespace header_LowLevel
         public virtual Response ParamFloat(string scenario, float value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
@@ -594,6 +636,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -607,6 +650,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
@@ -624,6 +669,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -637,6 +683,8 @@ namespace header_LowLevel
         public virtual Response ResponseFloat(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
@@ -655,6 +703,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -668,6 +717,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
@@ -686,6 +737,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -699,6 +751,8 @@ namespace header_LowLevel
         public virtual Response ParamDouble(string scenario, double value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
@@ -716,6 +770,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -729,6 +784,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
@@ -746,6 +803,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -759,6 +817,8 @@ namespace header_LowLevel
         public virtual Response ResponseDouble(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
@@ -777,6 +837,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -790,6 +851,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
@@ -808,6 +871,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -821,6 +885,8 @@ namespace header_LowLevel
         public virtual Response ParamBool(string scenario, bool value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
@@ -838,6 +904,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -851,6 +918,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
@@ -868,6 +937,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -881,6 +951,8 @@ namespace header_LowLevel
         public virtual Response ResponseBool(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
@@ -899,6 +971,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -912,6 +985,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
@@ -930,6 +1005,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -943,6 +1019,8 @@ namespace header_LowLevel
         public virtual Response ParamString(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
@@ -960,6 +1038,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -973,6 +1052,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseStringAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
@@ -990,6 +1071,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1003,6 +1085,8 @@ namespace header_LowLevel
         public virtual Response ResponseString(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
@@ -1021,6 +1105,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1034,6 +1119,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
@@ -1052,6 +1139,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1065,6 +1153,8 @@ namespace header_LowLevel
         public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
@@ -1082,6 +1172,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1095,6 +1186,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDateAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
@@ -1112,6 +1205,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1125,6 +1219,8 @@ namespace header_LowLevel
         public virtual Response ResponseDate(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
@@ -1143,6 +1239,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1156,6 +1253,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
@@ -1174,6 +1273,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1187,6 +1287,8 @@ namespace header_LowLevel
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
@@ -1204,6 +1306,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1217,6 +1320,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
@@ -1234,6 +1339,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1247,6 +1353,8 @@ namespace header_LowLevel
         public virtual Response ResponseDatetime(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
@@ -1265,6 +1373,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1278,6 +1387,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
@@ -1296,6 +1407,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1309,6 +1421,8 @@ namespace header_LowLevel
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
@@ -1326,6 +1440,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1339,6 +1454,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
@@ -1356,6 +1473,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1369,6 +1487,8 @@ namespace header_LowLevel
         public virtual Response ResponseDatetimeRfc1123(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
@@ -1387,6 +1507,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1400,6 +1521,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
@@ -1418,6 +1541,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1431,6 +1555,8 @@ namespace header_LowLevel
         public virtual Response ParamDuration(string scenario, TimeSpan value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
@@ -1448,6 +1574,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1461,6 +1588,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
@@ -1478,6 +1607,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1491,6 +1621,8 @@ namespace header_LowLevel
         public virtual Response ResponseDuration(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
@@ -1509,6 +1641,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1522,6 +1655,9 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+            Argument.AssertNotNull(value, nameof(value));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
@@ -1540,6 +1676,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1553,6 +1690,9 @@ namespace header_LowLevel
         public virtual Response ParamByte(string scenario, byte[] value, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+            Argument.AssertNotNull(value, nameof(value));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
@@ -1570,6 +1710,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1583,6 +1724,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseByteAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
@@ -1600,6 +1743,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1613,6 +1757,8 @@ namespace header_LowLevel
         public virtual Response ResponseByte(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
@@ -1631,6 +1777,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1644,6 +1791,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
@@ -1662,6 +1811,7 @@ namespace header_LowLevel
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos; . Allowed values: &quot;White&quot; | &quot;black&quot; | &quot;GREY&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1675,6 +1825,8 @@ namespace header_LowLevel
         public virtual Response ParamEnum(string scenario, string value = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
@@ -1692,6 +1844,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1705,6 +1858,8 @@ namespace header_LowLevel
         public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
@@ -1722,6 +1877,7 @@ namespace header_LowLevel
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1735,6 +1891,8 @@ namespace header_LowLevel
         public virtual Response ResponseEnum(string scenario, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
@@ -1816,10 +1974,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/existingkey", false);
             request.Uri = uri;
-            if (userAgent != null)
-            {
-                request.Headers.Add("User-Agent", userAgent);
-            }
+            request.Headers.Add("User-Agent", userAgent);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -1876,10 +2031,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/integer", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -1895,10 +2047,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/integer", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -1913,10 +2062,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/long", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -1932,10 +2078,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/long", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -1950,10 +2093,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/float", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -1969,10 +2109,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/float", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -1987,10 +2124,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/double", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -2006,10 +2140,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/double", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2024,10 +2155,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/bool", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -2043,10 +2171,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/bool", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2061,10 +2186,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/string", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             if (value != null)
             {
                 request.Headers.Add("value", value);
@@ -2083,10 +2205,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/string", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2101,10 +2220,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/date", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "D");
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -2120,10 +2236,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/date", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2138,10 +2251,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/datetime", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "O");
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -2157,10 +2267,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/datetime", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2175,10 +2282,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/datetimerfc1123", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             if (value != null)
             {
                 request.Headers.Add("value", value.Value, "R");
@@ -2197,10 +2301,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/datetimerfc1123", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2215,10 +2316,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/duration", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "P");
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -2234,10 +2332,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/duration", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2252,14 +2347,8 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/byte", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
-            if (value != null)
-            {
-                request.Headers.Add("value", value, "D");
-            }
+            request.Headers.Add("scenario", scenario);
+            request.Headers.Add("value", value, "D");
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2274,10 +2363,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/byte", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
@@ -2292,10 +2378,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/param/prim/enum", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             if (value != null)
             {
                 request.Headers.Add("value", value);
@@ -2314,10 +2397,7 @@ namespace header_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/header/response/prim/enum", false);
             request.Uri = uri;
-            if (scenario != null)
-            {
-                request.Headers.Add("scenario", scenario);
-            }
+            request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;

@@ -38,7 +38,7 @@ namespace MgmtListMethods
         internal FakeCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _fakeClientDiagnostics = new ClientDiagnostics("MgmtListMethods", Fake.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
+            TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
             _fakeRestClient = new FakesRestOperations(_fakeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

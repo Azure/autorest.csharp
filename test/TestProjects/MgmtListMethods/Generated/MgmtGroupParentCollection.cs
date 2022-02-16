@@ -38,7 +38,7 @@ namespace MgmtListMethods
         internal MgmtGroupParentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _mgmtGroupParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGroupParent.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(MgmtGroupParent.ResourceType, out string mgmtGroupParentApiVersion);
+            TryGetApiVersion(MgmtGroupParent.ResourceType, out string mgmtGroupParentApiVersion);
             _mgmtGroupParentRestClient = new MgmtGroupParentsRestOperations(_mgmtGroupParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGroupParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

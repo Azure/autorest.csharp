@@ -21,7 +21,7 @@ using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionResource
 {
-    /// <summary> A class representing collection of PolicyDefinition and their operations over its parent. </summary>
+    /// <summary> A class representing collection of BuiltInPolicyDefinition and their operations over its parent. </summary>
     public partial class BuiltInPolicyDefinitionCollection : ArmCollection, IEnumerable<BuiltInPolicyDefinition>, IAsyncEnumerable<BuiltInPolicyDefinition>
     {
         private readonly ClientDiagnostics _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics;
@@ -38,7 +38,7 @@ namespace MgmtExtensionResource
         internal BuiltInPolicyDefinitionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", BuiltInPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(BuiltInPolicyDefinition.ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
+            TryGetApiVersion(BuiltInPolicyDefinition.ResourceType, out string builtInPolicyDefinitionPolicyDefinitionsApiVersion);
             _builtInPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, builtInPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

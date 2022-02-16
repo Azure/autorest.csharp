@@ -38,7 +38,7 @@ namespace MgmtExtensionCommonRestOperation
         internal TypeOneCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOne.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
+            TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
             _typeOneCommonRestClient = new CommonRestOperations(_typeOneCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

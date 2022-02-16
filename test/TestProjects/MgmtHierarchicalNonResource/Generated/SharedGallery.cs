@@ -56,7 +56,7 @@ namespace MgmtHierarchicalNonResource
         internal SharedGallery(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
+            TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
             _sharedGalleryRestClient = new SharedGalleriesRestOperations(_sharedGalleryClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
             _sharedGalleryImagesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
             _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_sharedGalleryImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);

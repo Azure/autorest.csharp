@@ -52,7 +52,7 @@ namespace MgmtOperations
         internal AvailabilitySetChild(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _availabilitySetChildavailabilitySetChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
+            TryGetApiVersion(ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
             _availabilitySetChildavailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetChildavailabilitySetChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

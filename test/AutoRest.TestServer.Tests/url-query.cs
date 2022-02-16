@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
@@ -106,7 +107,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayCsvNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringCsvNullAsync( null));
 
         [Test]
-        public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringCsvEmptyAsync( new string[0]));
+        public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringCsvEmptyAsync(Enumerable.Empty<string>()));
 
         [Test]
         public Task UrlQueriesArraySsvValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringSsvValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
@@ -121,7 +122,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiNullAsync( null));
 
         [Test]
-        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync( new string[] { }));
+        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync(Enumerable.Empty<string>()));
 
         [Test]
         public Task UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));

@@ -35,7 +35,7 @@ namespace MgmtKeyvault
         internal DeletedVaultCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _deletedVaultVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", DeletedVault.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(DeletedVault.ResourceType, out string deletedVaultVaultsApiVersion);
+            TryGetApiVersion(DeletedVault.ResourceType, out string deletedVaultVaultsApiVersion);
             _deletedVaultVaultsRestClient = new VaultsRestOperations(_deletedVaultVaultsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedVaultVaultsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

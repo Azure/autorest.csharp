@@ -51,7 +51,7 @@ namespace SingletonResource
         internal SingletonResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _singletonResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string singletonResourceApiVersion);
+            TryGetApiVersion(ResourceType, out string singletonResourceApiVersion);
             _singletonResourceRestClient = new SingletonResourcesRestOperations(_singletonResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, singletonResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

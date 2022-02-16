@@ -93,10 +93,13 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(filter, nameof(filter));
+
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
@@ -115,10 +118,13 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`. </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
 #pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context = null)
 #pragma warning restore AZC0002
         {
+            Argument.AssertNotNull(filter, nameof(filter));
+
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "TopLevelClientWithOperationClient.GetAll");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
@@ -181,10 +187,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/client4", false);
-            if (filter != null)
-            {
-                uri.AppendQuery("filter", filter, true);
-            }
+            uri.AppendQuery("filter", filter, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             message.ResponseClassifier = ResponseClassifier200.Instance;
