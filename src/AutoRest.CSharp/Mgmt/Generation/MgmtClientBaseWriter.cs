@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual Parameter[] GetParametersForSingletonEntry()
         {
-            return new Parameter[] { };
+            return Array.Empty<Parameter>();
         }
 
         protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)

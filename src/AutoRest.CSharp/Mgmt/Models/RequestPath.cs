@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The <see cref="RequestPath"/> of tenants
         /// </summary>
-        public static readonly RequestPath Tenant = new(new Segment[] { });
+        public static readonly RequestPath Tenant = new(Enumerable.Empty<Segment>());
 
         /// <summary>
         /// The <see cref="RequestPath"/> of a management group resource
