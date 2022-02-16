@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Utilities
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
         public static bool IsNullOrWhiteSpace(this string? text) => String.IsNullOrWhiteSpace(text);
 
-        private static bool IsWordSeparator(char c) => !SyntaxFacts.IsIdentifierPartCharacter(c) || c == '_';
+        private static bool WantCamelCase(char c) => !SyntaxFacts.IsIdentifierPartCharacter(c) || c == '_';
 
         [return: NotNullIfNotNull("name")]
         public static string ToCleanName(this string name, bool camelCase = true)
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Utilities
             for (; i < name.Length; i++)
             {
                 var c = name[i];
-                if (IsWordSeparator(c))
+                if (WantCamelCase(c))
                 {
                     upperCase = true;
                     continue;
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Utilities
                     upperCase = false;
                     // grow the first word length when this letter follows by two other upper case letters
                     // this happens in OSProfile, where OS is the first word
-                    if (i + 2 < name.Length && char.IsUpper(name[i + 1]) && (char.IsUpper(name[i + 2]) || IsWordSeparator(name[i + 2])))
+                    if (i + 2 < name.Length && char.IsUpper(name[i + 1]) && (char.IsUpper(name[i + 2]) || WantCamelCase(name[i + 2])))
                         firstWordLength++;
                     // grow the first word length when this letter follows by another upper case letter and an end of the string
                     // this happens when the string only has one word, like OS, DNS
