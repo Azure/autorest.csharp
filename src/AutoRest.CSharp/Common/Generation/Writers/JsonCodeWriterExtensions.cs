@@ -218,14 +218,14 @@ namespace AutoRest.CSharp.Generation.Writers
                                 var systemObjectType = objectType as SystemObjectType;
                                 if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
                                 {
-                                    var serializeOptions = string.Empty;
+                                    var optionalSerializeOptions = string.Empty;
                                     if (systemObjectType.SystemType == typeof(ManagedServiceIdentity) && valueSerialization.Version == "v3")
                                     {
                                         writer.UseNamespace("Azure.ResourceManager.Models");
                                         writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
-                                        serializeOptions = ", serializeOptions";
+                                        optionalSerializeOptions = ", serializeOptions";
                                     }
-                                    writer.Append($"JsonSerializer.Serialize(writer, {name}{serializeOptions});");
+                                    writer.Append($"JsonSerializer.Serialize(writer, {name}{optionalSerializeOptions});");
                                 }
                                 else
                                 {
@@ -484,12 +484,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     valueCallback(writer, w => w.Append(dictionaryVariable));
                     return;
                 case JsonValueSerialization valueSerialization:
-                    if (!valueSerialization.Type.IsFrameworkType && valueSerialization.Type.Implementation is SystemObjectType systemObjectType)
+                    if (!valueSerialization.Type.IsFrameworkType && valueSerialization.Type.Implementation is SystemObjectType systemObjectType
+                        && systemObjectType.SystemType == typeof(ManagedServiceIdentity) && valueSerialization.Version == "v3")
                     {
-                        if (systemObjectType.SystemType == typeof(ManagedServiceIdentity) && valueSerialization.Version == "v3")
-                        {
-                            writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
-                        }
+                        writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                     }
                     valueCallback(writer, w => w.DeserializeValue(valueSerialization, element));
                     return;
@@ -626,8 +624,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         var systemObjectType = objectType as SystemObjectType;
                         if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
                         {
-                            var serializeOptions = (systemObjectType.SystemType == typeof(ManagedServiceIdentity) && serialization.Version == "v3") ? ", serializeOptions" : string.Empty;
-                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){serializeOptions})");
+                            var optionalSerializeOptions = (systemObjectType.SystemType == typeof(ManagedServiceIdentity) && serialization.Version == "v3") ? ", serializeOptions" : string.Empty;
+                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){optionalSerializeOptions})");
                         }
                         else if (objectType is MgmtObjectType mgmtObjectType && TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema))
                         {
