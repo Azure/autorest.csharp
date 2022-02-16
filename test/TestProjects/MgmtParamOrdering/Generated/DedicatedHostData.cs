@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing the DedicatedHost data model. </summary>
-    public partial class DedicatedHostData : TrackedResource
+    public partial class DedicatedHostData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
         /// <param name="location"> The location. </param>
@@ -24,10 +24,11 @@ namespace MgmtParamOrdering
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, type, tags, location)
+        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, type, systemData, tags, location)
         {
             Foo = foo;
         }

@@ -6,27 +6,29 @@
 #nullable disable
 
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace MgmtHierarchicalNonResource
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(ResourceGroupExtensionClient).Assembly);
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
+        protected ResourceGroupExtensionClient()
+        {
+        }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
     }

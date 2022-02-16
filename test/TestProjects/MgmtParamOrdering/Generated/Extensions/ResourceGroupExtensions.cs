@@ -12,43 +12,45 @@ namespace MgmtParamOrdering
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region AvailabilitySet
-        /// <summary> Gets an object representing a AvailabilitySetCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetCollection" /> object. </returns>
-        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
-        {
-            return new AvailabilitySetCollection(resourceGroup);
-        }
-        #endregion
-
-        #region DedicatedHostGroup
-        /// <summary> Gets an object representing a DedicatedHostGroupCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DedicatedHostGroupCollection" /> object. </returns>
-        public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroup resourceGroup)
-        {
-            return new DedicatedHostGroupCollection(resourceGroup);
-        }
-        #endregion
-
-        #region Workspace
-        /// <summary> Gets an object representing a WorkspaceCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="WorkspaceCollection" /> object. </returns>
-        public static WorkspaceCollection GetWorkspaces(this ResourceGroup resourceGroup)
-        {
-            return new WorkspaceCollection(resourceGroup);
-        }
-        #endregion
-
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
-            return resourceGroup.GetCachedClient((armClient) =>
+            return resourceGroup.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
+        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetAvailabilitySets();
+        }
+
+        /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
+        public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetDedicatedHostGroups();
+        }
+
+        /// <summary> Gets a collection of Workspaces in the Workspace. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of Workspaces and their operations over a Workspace. </returns>
+        public static WorkspaceCollection GetWorkspaces(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetWorkspaces();
+        }
+
+        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
+        public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSets();
         }
     }
 }

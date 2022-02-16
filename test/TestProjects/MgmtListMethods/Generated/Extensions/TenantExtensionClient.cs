@@ -6,28 +6,37 @@
 #nullable disable
 
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace MgmtListMethods
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Tenant. </summary>
     internal partial class TenantExtensionClient : ArmResource
     {
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(TenantExtensionClient).Assembly);
+        /// <summary> Initializes a new instance of the <see cref="TenantExtensionClient"/> class for mocking. </summary>
+        protected TenantExtensionClient()
+        {
+        }
 
         /// <summary> Initializes a new instance of the <see cref="TenantExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal TenantExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal TenantExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of TenantTests in the TenantTest. </summary>
+        /// <returns> An object representing collection of TenantTests and their operations over a TenantTest. </returns>
+        public virtual TenantTestCollection GetTenantTests()
+        {
+            return new TenantTestCollection(Client, Id);
         }
     }
 }

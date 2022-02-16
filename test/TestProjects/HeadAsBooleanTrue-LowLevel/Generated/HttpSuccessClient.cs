@@ -19,8 +19,10 @@ namespace HeadAsBooleanTrue_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -41,7 +43,7 @@ namespace HeadAsBooleanTrue_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new HttpSuccessClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -53,12 +55,12 @@ namespace HeadAsBooleanTrue_LowLevel
         public virtual async Task<Response<bool>> Head200Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -73,12 +75,12 @@ namespace HeadAsBooleanTrue_LowLevel
         public virtual Response<bool> Head200(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -93,12 +95,12 @@ namespace HeadAsBooleanTrue_LowLevel
         public virtual async Task<Response<bool>> Head204Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -113,12 +115,12 @@ namespace HeadAsBooleanTrue_LowLevel
         public virtual Response<bool> Head204(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -133,12 +135,12 @@ namespace HeadAsBooleanTrue_LowLevel
         public virtual async Task<Response<bool>> Head404Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -153,12 +155,12 @@ namespace HeadAsBooleanTrue_LowLevel
         public virtual Response<bool> Head404(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {

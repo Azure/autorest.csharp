@@ -22,8 +22,10 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -44,7 +46,7 @@ namespace ResourceClients_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new ResourceServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -56,12 +58,12 @@ namespace ResourceClients_LowLevel
         public virtual async Task<Response> GetParametersAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
+            using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetParametersRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -76,12 +78,12 @@ namespace ResourceClients_LowLevel
         public virtual Response GetParameters(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
+            using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetParametersRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -96,12 +98,12 @@ namespace ResourceClients_LowLevel
         public virtual async Task<Response> GetGroupsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
+            using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetGroupsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -116,12 +118,12 @@ namespace ResourceClients_LowLevel
         public virtual Response GetGroups(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
+            using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetGroupsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -136,7 +138,7 @@ namespace ResourceClients_LowLevel
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "ResourceServiceClient.GetAllItems");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "ResourceServiceClient.GetAllItems");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -144,7 +146,7 @@ namespace ResourceClients_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetAllItemsRequest(context)
                         : CreateGetAllItemsNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -157,7 +159,7 @@ namespace ResourceClients_LowLevel
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "ResourceServiceClient.GetAllItems");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "ResourceServiceClient.GetAllItems");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -165,7 +167,7 @@ namespace ResourceClients_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetAllItemsRequest(context)
                         : CreateGetAllItemsNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -179,7 +181,7 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNull(groupId, nameof(groupId));
 
-            return new ResourceGroup(_clientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
+            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
         }
 
         internal HttpMessage CreateGetParametersRequest(RequestContext context)

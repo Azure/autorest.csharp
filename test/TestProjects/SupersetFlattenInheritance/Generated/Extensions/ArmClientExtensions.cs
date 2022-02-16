@@ -15,25 +15,33 @@ namespace SupersetFlattenInheritance
     {
         #region ResourceModel1
         /// <summary> Gets an object representing a ResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ResourceModel1" /> object. </returns>
-        public static ResourceModel1 GetResourceModel1(this ArmClient armClient, ResourceIdentifier id)
+        public static ResourceModel1 GetResourceModel1(this ArmClient client, ResourceIdentifier id)
         {
-            ResourceModel1.ValidateResourceId(id);
-            return new ResourceModel1(armClient, id);
+            return client.GetClient(() =>
+            {
+                ResourceModel1.ValidateResourceId(id);
+                return new ResourceModel1(client, id);
+            }
+            );
         }
         #endregion
 
         #region TrackedResourceModel1
         /// <summary> Gets an object representing a TrackedResourceModel1 along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="TrackedResourceModel1" /> object. </returns>
-        public static TrackedResourceModel1 GetTrackedResourceModel1(this ArmClient armClient, ResourceIdentifier id)
+        public static TrackedResourceModel1 GetTrackedResourceModel1(this ArmClient client, ResourceIdentifier id)
         {
-            TrackedResourceModel1.ValidateResourceId(id);
-            return new TrackedResourceModel1(armClient, id);
+            return client.GetClient(() =>
+            {
+                TrackedResourceModel1.ValidateResourceId(id);
+                return new TrackedResourceModel1(client, id);
+            }
+            );
         }
         #endregion
     }

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace SingletonResource
 {
@@ -42,6 +43,7 @@ namespace SingletonResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
@@ -79,8 +81,13 @@ namespace SingletonResource
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new ParentResourceData(id, name, type, tags, location, @new.Value);
+            return new ParentResourceData(id, name, type, systemData, tags, location, @new.Value);
         }
     }
 }

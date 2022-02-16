@@ -17,33 +17,44 @@ using OmitOperationGroups.Models;
 
 namespace OmitOperationGroups
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         private ClientDiagnostics _model5sClientDiagnostics;
         private Model5SRestOperations _model5sRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(ResourceGroupExtensionClient).Assembly);
-
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
+        protected ResourceGroupExtensionClient()
         {
         }
 
-        private ClientDiagnostics Model5sClientDiagnostics => _model5sClientDiagnostics ??= new ClientDiagnostics("OmitOperationGroups", _defaultRpNamespace, DiagnosticOptions);
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        {
+        }
+
+        private ClientDiagnostics Model5sClientDiagnostics => _model5sClientDiagnostics ??= new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private Model5SRestOperations Model5sRestClient => _model5sRestClient ??= new Model5SRestOperations(Model5sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_List
+        /// <summary> Gets a collection of Model2s in the Model2. </summary>
+        /// <returns> An object representing collection of Model2s and their operations over a Model2. </returns>
+        public virtual Model2Collection GetModel2s()
+        {
+            return new Model2Collection(Client, Id);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
+        /// Operation Id: Model5s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Model5> GetModel5sAsync(CancellationToken cancellationToken = default)
@@ -66,9 +77,10 @@ namespace OmitOperationGroups
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
+        /// Operation Id: Model5s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Model5> GetModel5s(CancellationToken cancellationToken = default)
@@ -91,22 +103,15 @@ namespace OmitOperationGroups
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_CreateOrUpdate
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
+        /// Operation Id: Model5s_CreateOrUpdate
+        /// </summary>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.CreateOrUpdateModel5");
             scope.Start();
             try
@@ -121,22 +126,15 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_CreateOrUpdate
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
+        /// Operation Id: Model5s_CreateOrUpdate
+        /// </summary>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.CreateOrUpdateModel5");
             scope.Start();
             try
@@ -151,17 +149,14 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
+        /// Operation Id: Model5s_Get
+        /// </summary>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public async virtual Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5");
             scope.Start();
             try
@@ -176,17 +171,14 @@ namespace OmitOperationGroups
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
+        /// Operation Id: Model5s_Get
+        /// </summary>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public virtual Response<Model5> GetModel5(string model5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5");
             scope.Start();
             try

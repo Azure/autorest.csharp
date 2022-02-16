@@ -18,15 +18,14 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of ResourceModel1 and their operations over its parent. </summary>
     public partial class ResourceModel1Collection : ArmCollection, IEnumerable<ResourceModel1>, IAsyncEnumerable<ResourceModel1>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly ResourceModel1SRestOperations _resourceModel1sRestClient;
+        private readonly ClientDiagnostics _resourceModel1ClientDiagnostics;
+        private readonly ResourceModel1SRestOperations _resourceModel1RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Collection"/> class for mocking. </summary>
         protected ResourceModel1Collection()
@@ -34,12 +33,13 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Collection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ResourceModel1Collection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal ResourceModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceModel1.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceModel1.ResourceType, out string apiVersion);
-            _resourceModel1sRestClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceModel1.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceModel1.ResourceType, out string resourceModel1ApiVersion);
+            _resourceModel1RestClient = new ResourceModel1SRestOperations(_resourceModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -51,18 +51,17 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Put
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResourceModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<ResourceModel1>> CreateOrUpdateAsync(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
             if (parameters == null)
@@ -70,46 +69,12 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _resourceModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken);
-                var operation = new ResourceModel1CreateOrUpdateOperation(ArmClient, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel1s_Put
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="resourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The ResourceModel1 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResourceModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = await _resourceModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceModel1CreateOrUpdateOperation(ArmClient, response);
+                var response = await _resourceModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SupersetFlattenInheritanceArmOperation<ResourceModel1>(Response.FromValue(new ResourceModel1(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,25 +86,33 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Put
+        /// </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="resourceModel1SName"> The String to use. </param>
+        /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
-        public virtual Response<ResourceModel1> Get(string resourceModel1SName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<ResourceModel1> CreateOrUpdate(bool waitForCompletion, string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Get");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _resourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken);
-                if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                var response = _resourceModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken);
+                var operation = new SupersetFlattenInheritanceArmOperation<ResourceModel1>(Response.FromValue(new ResourceModel1(Client, response), response.GetRawResponse()));
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -148,9 +121,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
@@ -159,14 +133,14 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Get");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = await _resourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken).ConfigureAwait(false);
+                var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                    throw await _resourceModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -175,23 +149,26 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
-        public virtual Response<ResourceModel1> GetIfExists(string resourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceModel1> Get(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = _resourceModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken);
+                var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<ResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                    throw _resourceModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,55 +177,63 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="resourceModel1SName"> The String to use. </param>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s
+        /// Operation Id: ResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
-        public async virtual Task<Response<ResourceModel1>> GetIfExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ResourceModel1> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
-
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
-            scope.Start();
-            try
+            async Task<Page<ResourceModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _resourceModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<ResourceModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new ResourceModel1(ArmClient, response.Value), response.GetRawResponse());
+                using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _resourceModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="resourceModel1SName"> The String to use. </param>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s
+        /// Operation Id: ResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
-        public virtual Response<bool> Exists(string resourceModel1SName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ResourceModel1> GetAll(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
-
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
-            scope.Start();
-            try
+            Page<ResourceModel1> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetIfExists(resourceModel1SName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
+                using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _resourceModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Get
+        /// </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
@@ -257,7 +242,7 @@ namespace SupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -271,71 +256,25 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel1s_List
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Get
+        /// </summary>
+        /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceModel1" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ResourceModel1> GetAll(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        public virtual Response<bool> Exists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Page<ResourceModel1> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _resourceModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(ArmClient, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-        }
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel1s_List
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceModel1" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ResourceModel1> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<ResourceModel1>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _resourceModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResourceModel1(ArmClient, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-        }
-
-        /// <summary> Filters the list of <see cref="ResourceModel1" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAllAsGenericResources");
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.Exists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ResourceModel1.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                var response = GetIfExists(resourceModel1SName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -344,21 +283,56 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> Filters the list of <see cref="ResourceModel1" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Get
+        /// </summary>
+        /// <param name="resourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        public async virtual Task<Response<ResourceModel1>> GetIfExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Collection.GetAllAsGenericResources");
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ResourceModel1.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<ResourceModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Get
+        /// </summary>
+        /// <param name="resourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        public virtual Response<ResourceModel1> GetIfExists(string resourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(resourceModel1SName, nameof(resourceModel1SName));
+
+            using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<ResourceModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

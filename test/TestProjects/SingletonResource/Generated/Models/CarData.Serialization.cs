@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace SingletonResource
 {
@@ -29,6 +30,7 @@ namespace SingletonResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("horsepower"))
@@ -51,8 +53,13 @@ namespace SingletonResource
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new CarData(id, name, type, horsepower.Value);
+            return new CarData(id, name, type, systemData, horsepower.Value);
         }
     }
 }

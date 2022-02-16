@@ -16,10 +16,12 @@ namespace custom_baseUrl_more_options
 {
     internal partial class PathsRestClient
     {
-        private string subscriptionId;
-        private string dnsSuffix;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _subscriptionId;
+        private readonly string _dnsSuffix;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of PathsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -29,9 +31,9 @@ namespace custom_baseUrl_more_options
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="dnsSuffix"/> is null. </exception>
         public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
-            this.dnsSuffix = dnsSuffix ?? throw new ArgumentNullException(nameof(dnsSuffix));
-            _clientDiagnostics = clientDiagnostics;
+            _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
+            _dnsSuffix = dnsSuffix ?? throw new ArgumentNullException(nameof(dnsSuffix));
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -43,9 +45,9 @@ namespace custom_baseUrl_more_options
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(vault, false);
             uri.AppendRaw(secret, false);
-            uri.AppendRaw(dnsSuffix, false);
+            uri.AppendRaw(_dnsSuffix, false);
             uri.AppendPath("/customuri/", false);
-            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/", false);
             uri.AppendPath(keyName, true);
             if (keyVersion != null)
@@ -86,7 +88,7 @@ namespace custom_baseUrl_more_options
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -119,7 +121,7 @@ namespace custom_baseUrl_more_options
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

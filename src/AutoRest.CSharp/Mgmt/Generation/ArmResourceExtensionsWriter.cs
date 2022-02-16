@@ -1,37 +1,56 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Core;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Generation.Types;
+using System;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmResourceExtensionsWriter : MgmtExtensionWriter
     {
-        public ArmResourceExtensionsWriter(CodeWriter writer, Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context, bool isArmCore = false)
-            : base(writer, extensions, context, typeof(ArmResource), isArmCore)
+        private MgmtExtensions This { get; }
+
+        public ArmResourceExtensionsWriter(MgmtExtensions extensions)
+            : base(extensions)
+        {
+            This = extensions;
+        }
+
+        protected override void WritePrivateHelpers()
         {
         }
 
-        protected override string Description => IsArmCore ? "A class representing the operations that can be performed over a specific resource." : "A class to add extension methods to ArmResource.";
-        protected override string ExtensionOperationVariableName => IsArmCore ? "this" : "armResource";
+        protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
+            => WriteCollectionBody(signature, false, false);
 
-        public override void Write()
+        private void WriteCollectionBody(MethodSignature signature, bool isAsync, bool isPaging)
         {
-            var theNamespace = IsArmCore ? "Azure.ResourceManager.Core" : Context.DefaultNamespace;
-            var modifier = IsArmCore ? "abstract" : "static";
-            var className = IsArmCore ? nameof(ArmResource) : TypeNameOfThis;
-            using (_writer.Namespace(theNamespace))
+            if (!IsArmCore)
             {
-                _writer.WriteXmlDocumentationSummary($"{Description}");
-                using (_writer.Scope($"{Accessibility} {modifier} partial class {className}"))
+                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient<{signature.ReturnType}>(({ArmClientReference.ToVariableName()}) =>"))
                 {
-                    // Write resource collection entries
-                    WriteChildResourceEntries();
+                    WriteGetter(signature.ReturnType, $"{ArmClientReference.ToVariableName()}");
                 }
+                _writer.Line($");");
             }
+            else
+            {
+                WriteGetter(signature.ReturnType, ArmClientReference);
+            }
+        }
+
+        private void WriteGetter(CSharpType? type, string armClientVariable)
+        {
+            _writer.Line($"return new {type}({armClientVariable}, {This.ExtensionParameter.Name}.Id);");
         }
     }
 }

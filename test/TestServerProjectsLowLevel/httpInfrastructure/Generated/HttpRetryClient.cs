@@ -19,8 +19,10 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -41,7 +43,7 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -62,12 +64,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head408Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead408Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -91,12 +93,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head408(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead408Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -121,12 +123,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Put500Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut500Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -151,12 +153,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Put500(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut500Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -181,12 +183,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Patch500Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch500Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -211,12 +213,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Patch500(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch500Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -240,12 +242,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get502Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet502Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -269,12 +271,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get502(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet502Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -298,12 +300,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Options502Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOptions502Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -327,12 +329,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Options502(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateOptions502Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -357,12 +359,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Post503Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost503Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -387,12 +389,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Post503(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost503Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -417,12 +419,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Delete503Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete503Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -447,12 +449,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Delete503(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete503Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -477,12 +479,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Put504Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut504Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -507,12 +509,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Put504(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePut504Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -537,12 +539,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Patch504Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch504Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -567,12 +569,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Patch504(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePatch504Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

@@ -74,21 +74,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return requestPath;
         }
 
-        public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath)
         {
             if (_scopeTypesCache.TryGetValue(requestPath, out var result))
                 return result;
 
-            result = requestPath.CalculateScopeResourceTypes(config);
+            result = requestPath.CalculateScopeResourceTypes();
             _scopeTypesCache.TryAdd(requestPath, result);
             return result;
         }
 
-        private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath)
         {
             if (!requestPath.GetScopePath().IsParameterizedScope())
                 return null;
-            if (config.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
+            if (MgmtContext.MgmtConfiguration.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
             return new[] { ResourceTypeSegment.Subscription, ResourceTypeSegment.ResourceGroup, ResourceTypeSegment.ManagementGroup, ResourceTypeSegment.Tenant, ResourceTypeSegment.Any };

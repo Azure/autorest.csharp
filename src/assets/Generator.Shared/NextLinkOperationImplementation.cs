@@ -4,16 +4,19 @@
 #nullable enable
 
 using System;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
     internal class NextLinkOperationImplementation : IOperation
     {
+        private const string ApiVersionParam = "api-version";
         private static readonly string[] FailureStates = { "failed", "canceled" };
         private static readonly string[] SuccessStates = { "succeeded" };
 
@@ -23,13 +26,16 @@ namespace Azure.Core
         private readonly OperationFinalStateVia _finalStateVia;
         private readonly RequestMethod _requestMethod;
         private readonly HttpPipeline _pipeline;
+        private readonly string? _apiVersion;
 
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
         public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
         {
-            var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, out var nextRequestUri);
+            TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion);
+            string? apiVersionStr = (apiVersion == null ? null : apiVersion.ToString());
+            var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
             {
                 return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
@@ -41,10 +47,10 @@ namespace Azure.Core
                     ? (true, locationUri)
                     : (false, null);
 
-            return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia);
+            return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
-        private NextLinkOperationImplementation(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia)
+        private NextLinkOperationImplementation(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia, string? apiVersion)
         {
             _requestMethod = requestMethod;
             _headerSource = headerSource;
@@ -54,6 +60,7 @@ namespace Azure.Core
             _lastKnownLocation = lastKnownLocation;
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
+            _apiVersion = apiVersion;
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
@@ -104,15 +111,80 @@ namespace Azure.Core
             switch (_headerSource)
             {
                 case HeaderSource.OperationLocation when headers.TryGetValue("Operation-Location", out string? operationLocation):
-                    _nextRequestUri = operationLocation;
+                    _nextRequestUri = AppendOrReplaceApiVersion(operationLocation, _apiVersion);
                     return;
                 case HeaderSource.AzureAsyncOperation when headers.TryGetValue("Azure-AsyncOperation", out string? azureAsyncOperation):
-                    _nextRequestUri = azureAsyncOperation;
+                    _nextRequestUri = AppendOrReplaceApiVersion(azureAsyncOperation, _apiVersion);
                     return;
                 case HeaderSource.Location when hasLocation:
-                    _nextRequestUri = location!;
+                    _nextRequestUri = AppendOrReplaceApiVersion(location!, _apiVersion);
                     return;
             }
+        }
+
+        internal static string AppendOrReplaceApiVersion(string uri, string? apiVersion)
+        {
+            if (!string.IsNullOrEmpty(apiVersion))
+            {
+                var uriSpan = uri.AsSpan();
+                var apiVersionParamSpan = ApiVersionParam.AsSpan();
+                var apiVersionIndex = uriSpan.IndexOf(apiVersionParamSpan);
+                if (apiVersionIndex == -1)
+                {
+                    var concatSymbol = uriSpan.IndexOf('?') > -1 ? "&" : "?";
+                    return $"{uri}{concatSymbol}api-version={apiVersion}";
+                }
+                else
+                {
+                    var lengthToEndOfApiVersionParam = apiVersionIndex + ApiVersionParam.Length;
+                    ReadOnlySpan<char> remaining = uriSpan.Slice(lengthToEndOfApiVersionParam);
+                    bool apiVersionHasEqualSign = false;
+                    if (remaining.IndexOf('=') == 0)
+                    {
+                        remaining = remaining.Slice(1);
+                        lengthToEndOfApiVersionParam += 1;
+                        apiVersionHasEqualSign = true;
+                    }
+                    var indexOfFirstSignAfterApiVersion = remaining.IndexOf('&');
+                    ReadOnlySpan<char> uriBeforeApiVersion = uriSpan.Slice(0, lengthToEndOfApiVersionParam);
+                    if (indexOfFirstSignAfterApiVersion == -1)
+                    {
+                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersionHasEqualSign ? string.Empty : "=", apiVersion);
+                    }
+                    else
+                    {
+                        ReadOnlySpan<char> uriAfterApiVersion = uriSpan.Slice(indexOfFirstSignAfterApiVersion + lengthToEndOfApiVersionParam);
+                        return string.Concat(uriBeforeApiVersion.ToString(), apiVersionHasEqualSign ? string.Empty : "=", apiVersion, uriAfterApiVersion.ToString());
+                    }
+                }
+            }
+            return uri;
+        }
+
+        internal static bool TryGetApiVersion(Uri startRequestUri, out ReadOnlySpan<char> apiVersion)
+        {
+            apiVersion = null;
+            ReadOnlySpan<char> uriSpan = startRequestUri.Query.AsSpan();
+            int startIndex = uriSpan.IndexOf(ApiVersionParam.AsSpan());
+            if (startIndex == -1)
+            {
+                return false;
+            }
+            startIndex += ApiVersionParam.Length;
+            ReadOnlySpan<char> remaining = uriSpan.Slice(startIndex);
+            if (remaining.IndexOf('=') == 0)
+            {
+                remaining = remaining.Slice(1);
+                startIndex += 1;
+            }
+            else
+            {
+                return false;
+            }
+            int endIndex = remaining.IndexOf('&');
+            int length = endIndex == -1 ? uriSpan.Length - startIndex : endIndex;
+            apiVersion = uriSpan.Slice(startIndex, length);
+            return true;
         }
 
         /// <summary>
@@ -235,7 +307,7 @@ namespace Azure.Core
         private static bool ShouldIgnoreHeader(RequestMethod method, Response response)
             => method.Method == RequestMethod.Patch.Method && response.Status == 200;
 
-        private static HeaderSource GetHeaderSource(RequestMethod requestMethod, Uri requestUri, Response response, out string nextRequestUri)
+        private static HeaderSource GetHeaderSource(RequestMethod requestMethod, Uri requestUri, Response response, string? apiVersion, out string nextRequestUri)
         {
             if (ShouldIgnoreHeader(requestMethod, response))
             {
@@ -246,19 +318,19 @@ namespace Azure.Core
             var headers = response.Headers;
             if (headers.TryGetValue("Operation-Location", out var operationLocationUri))
             {
-                nextRequestUri = operationLocationUri;
+                nextRequestUri = AppendOrReplaceApiVersion(operationLocationUri, apiVersion);
                 return HeaderSource.OperationLocation;
             }
 
             if (headers.TryGetValue("Azure-AsyncOperation", out var azureAsyncOperationUri))
             {
-                nextRequestUri = azureAsyncOperationUri;
+                nextRequestUri = AppendOrReplaceApiVersion(azureAsyncOperationUri, apiVersion);
                 return HeaderSource.AzureAsyncOperation;
             }
 
             if (headers.TryGetValue("Location", out var locationUri))
             {
-                nextRequestUri = locationUri;
+                nextRequestUri = AppendOrReplaceApiVersion(locationUri, apiVersion);
                 return HeaderSource.Location;
             }
 

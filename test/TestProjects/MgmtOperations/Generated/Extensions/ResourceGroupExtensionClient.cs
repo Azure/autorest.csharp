@@ -16,51 +16,63 @@ using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
-        private ClientDiagnostics _availabilitySetsClientDiagnostics;
-        private AvailabilitySetsRestOperations _availabilitySetsRestClient;
+        private ClientDiagnostics _availabilitySetClientDiagnostics;
+        private AvailabilitySetsRestOperations _availabilitySetRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(ResourceGroupExtensionClient).Assembly);
-
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
+        protected ResourceGroupExtensionClient()
         {
         }
 
-        private ClientDiagnostics AvailabilitySetsClientDiagnostics => _availabilitySetsClientDiagnostics ??= new ClientDiagnostics("MgmtOperations", AvailabilitySet.ResourceType.Namespace, DiagnosticOptions);
-        private AvailabilitySetsRestOperations AvailabilitySetsRestClient => _availabilitySetsRestClient ??= new AvailabilitySetsRestOperations(AvailabilitySetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySet.ResourceType));
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        {
+        }
+
+        private ClientDiagnostics AvailabilitySetClientDiagnostics => _availabilitySetClientDiagnostics ??= new ClientDiagnostics("MgmtOperations", AvailabilitySet.ResourceType.Namespace, DiagnosticOptions);
+        private AvailabilitySetsRestOperations AvailabilitySetRestClient => _availabilitySetRestClient ??= new AvailabilitySetsRestOperations(AvailabilitySetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySet.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AvailabilitySets_TestLROMethod
-        /// <summary> Update an availability set. </summary>
+        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
+        /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
+        public virtual AvailabilitySetCollection GetAvailabilitySets()
+        {
+            return new AvailabilitySetCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
+        /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
+        public virtual UnpatchableResourceCollection GetUnpatchableResources()
+        {
+            return new UnpatchableResourceCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Update an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
+        /// Operation Id: AvailabilitySets_TestLROMethod
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TestLROMethodAvailabilitySetOperation> TestLROMethodAvailabilitySetAsync(bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = AvailabilitySetsClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
+            using var scope = AvailabilitySetClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
             scope.Start();
             try
             {
-                var response = await _availabilitySetsRestClient.TestLROMethodAsync(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TestLROMethodAvailabilitySetOperation(AvailabilitySetsClientDiagnostics, Pipeline, AvailabilitySetsRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response);
+                var response = await AvailabilitySetRestClient.TestLROMethodAsync(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -72,27 +84,22 @@ namespace MgmtOperations
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AvailabilitySets_TestLROMethod
-        /// <summary> Update an availability set. </summary>
+        /// <summary>
+        /// Update an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/patchAvailabilitySets
+        /// Operation Id: AvailabilitySets_TestLROMethod
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual TestLROMethodAvailabilitySetOperation TestLROMethodAvailabilitySet(bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = AvailabilitySetsClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
+            using var scope = AvailabilitySetClientDiagnostics.CreateScope("ResourceGroupExtensionClient.TestLROMethodAvailabilitySet");
             scope.Start();
             try
             {
-                var response = _availabilitySetsRestClient.TestLROMethod(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken);
-                var operation = new TestLROMethodAvailabilitySetOperation(AvailabilitySetsClientDiagnostics, Pipeline, AvailabilitySetsRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response);
+                var response = AvailabilitySetRestClient.TestLROMethod(Id.SubscriptionId, Id.ResourceGroupName, parameters, cancellationToken);
+                var operation = new MgmtOperationsArmOperation<TestAvailabilitySet>(new TestAvailabilitySetOperationSource(), AvailabilitySetClientDiagnostics, Pipeline, AvailabilitySetRestClient.CreateTestLROMethodRequest(Id.SubscriptionId, Id.ResourceGroupName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

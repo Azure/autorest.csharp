@@ -14,38 +14,41 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources;
 
 namespace MgmtCollectionParent
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _clientDiagnostics;
-        private ComputeManagementRestOperations _restClient;
+        private ClientDiagnostics _orderResourceClientDiagnostics;
+        private ComputeManagementRestOperations _orderResourceRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
-
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
+        protected SubscriptionExtensionClient()
         {
         }
 
-        private ClientDiagnostics ClientDiagnostics => _clientDiagnostics ??= new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
-        private ComputeManagementRestOperations RestClient => _restClient ??= new ComputeManagementRestOperations(ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(OrderResource.ResourceType));
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        internal SubscriptionExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        {
+        }
+
+        private ClientDiagnostics OrderResourceClientDiagnostics => _orderResourceClientDiagnostics ??= new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
+        private ComputeManagementRestOperations OrderResourceRestClient => _orderResourceRestClient ??= new ComputeManagementRestOperations(OrderResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(OrderResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: ListOrderAtSubscriptionLevel
-        /// <summary> Lists order at subscription level. </summary>
+        /// <summary>
+        /// Lists order at subscription level.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
+        /// Operation Id: ListOrderAtSubscriptionLevel
+        /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
@@ -53,12 +56,12 @@ namespace MgmtCollectionParent
         {
             async Task<Page<OrderResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
+                using var scope = OrderResourceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
                 scope.Start();
                 try
                 {
-                    var response = await RestClient.ListOrderAtSubscriptionLevelAsync(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await OrderResourceRestClient.ListOrderAtSubscriptionLevelAsync(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -68,12 +71,12 @@ namespace MgmtCollectionParent
             }
             async Task<Page<OrderResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
+                using var scope = OrderResourceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
                 scope.Start();
                 try
                 {
-                    var response = await RestClient.ListOrderAtSubscriptionLevelNextPageAsync(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await OrderResourceRestClient.ListOrderAtSubscriptionLevelNextPageAsync(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -84,10 +87,11 @@ namespace MgmtCollectionParent
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: ListOrderAtSubscriptionLevel
-        /// <summary> Lists order at subscription level. </summary>
+        /// <summary>
+        /// Lists order at subscription level.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
+        /// Operation Id: ListOrderAtSubscriptionLevel
+        /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
@@ -95,12 +99,12 @@ namespace MgmtCollectionParent
         {
             Page<OrderResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
+                using var scope = OrderResourceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
                 scope.Start();
                 try
                 {
-                    var response = RestClient.ListOrderAtSubscriptionLevel(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = OrderResourceRestClient.ListOrderAtSubscriptionLevel(Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -110,12 +114,12 @@ namespace MgmtCollectionParent
             }
             Page<OrderResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
+                using var scope = OrderResourceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetOrderResources");
                 scope.Start();
                 try
                 {
-                    var response = RestClient.ListOrderAtSubscriptionLevelNextPage(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = OrderResourceRestClient.ListOrderAtSubscriptionLevelNextPage(nextLink, Id.SubscriptionId, skipToken, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new OrderResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -124,32 +128,6 @@ namespace MgmtCollectionParent
                 }
             }
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Filters the list of OrderResources for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetOrderResourcesAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(OrderResource.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of OrderResources for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetOrderResourcesAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(OrderResource.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
         }
     }
 }

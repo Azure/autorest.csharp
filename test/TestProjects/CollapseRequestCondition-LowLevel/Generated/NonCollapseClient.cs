@@ -19,8 +19,10 @@ namespace CollapseRequestCondition_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -41,7 +43,7 @@ namespace CollapseRequestCondition_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new CollapseRequestConditionsClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -54,12 +56,12 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, ifMatch, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -75,12 +77,12 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response CollapsePut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, ifMatch, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -95,12 +97,12 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -115,12 +117,12 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

@@ -14,16 +14,16 @@ namespace Azure.Core
 {
     internal static class LowLevelPageableHelpers
     {
-        public static async ValueTask<Page<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink", CancellationToken cancellationToken = default)
+        public static async ValueTask<Page<BinaryData>> ProcessMessageAsync(HttpPipeline pipeline, HttpMessage message, RequestContext? requestContext, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink", CancellationToken cancellationToken = default)
         {
-            var response = await pipeline.ProcessMessageAsync(message, clientDiagnostics, requestContext, cancellationToken).ConfigureAwait(false);
+            var response = await pipeline.ProcessMessageAsync(message, requestContext, cancellationToken).ConfigureAwait(false);
             var itemsAndNextLink = GetItemsAndNextLinkFromJson(response.Content, itemPropertyName, nextLinkPropertyName);
             return Page.FromValues(itemsAndNextLink.Items, itemsAndNextLink.NextLink!, response);
         }
 
-        public static Page<BinaryData> ProcessMessage(HttpPipeline pipeline, HttpMessage message, ClientDiagnostics clientDiagnostics, RequestContext? requestContext, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink", CancellationToken cancellationToken = default)
+        public static Page<BinaryData> ProcessMessage(HttpPipeline pipeline, HttpMessage message, RequestContext? requestContext, string itemPropertyName = "value", string? nextLinkPropertyName = "nextLink", CancellationToken cancellationToken = default)
         {
-            var response = pipeline.ProcessMessage(message, clientDiagnostics, requestContext, cancellationToken);
+            var response = pipeline.ProcessMessage(message, requestContext, cancellationToken);
             var itemsAndNextLink = GetItemsAndNextLinkFromJson(response.Content, itemPropertyName, nextLinkPropertyName);
             return Page.FromValues(itemsAndNextLink.Items, itemsAndNextLink.NextLink!, response);
         }

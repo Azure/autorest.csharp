@@ -11,6 +11,4 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/SupersetInheritance.json
 namespace: SupersetInheritance
-mgmt-debug:
-  show-request-path: true
 ```

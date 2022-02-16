@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> This model is x-ms-azure-resource, but only extends a Resource type and inherits Resource properties from flatten source. </summary>
-    public partial class AzureResourceFlattenModel5 : Resource
+    public partial class AzureResourceFlattenModel5 : ResourceData
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel5. </summary>
         public AzureResourceFlattenModel5()
@@ -22,8 +22,9 @@ namespace ExactMatchFlattenInheritance.Models
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"> New property. </param>
-        internal AzureResourceFlattenModel5(ResourceIdentifier id, string name, ResourceType type, int? foo) : base(id, name, type)
+        internal AzureResourceFlattenModel5(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, int? foo) : base(id, name, type, systemData)
         {
             Foo = foo;
         }

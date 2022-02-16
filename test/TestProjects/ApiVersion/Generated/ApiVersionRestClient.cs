@@ -17,10 +17,12 @@ namespace ApiVersion
 {
     internal partial class ApiVersionRestClient
     {
-        private Uri endpoint;
-        private string apiVersion;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
+        private readonly string _apiVersion;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of ApiVersionRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -30,9 +32,9 @@ namespace ApiVersion
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public ApiVersionRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "1.0.0")
         {
-            this.endpoint = endpoint ?? new Uri("");
-            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            _clientDiagnostics = clientDiagnostics;
+            _endpoint = endpoint ?? new Uri("");
+            _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -42,9 +44,9 @@ namespace ApiVersion
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/op", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("not-api-version-constant", "2.0", true);
             uri.AppendQuery("not-api-version-enum", notApiVersionEnum.ToString(), true);
             request.Uri = uri;
@@ -62,7 +64,7 @@ namespace ApiVersion
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -77,7 +79,7 @@ namespace ApiVersion
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

@@ -19,8 +19,10 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -41,7 +43,7 @@ namespace httpInfrastructure_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
             _endpoint = endpoint;
@@ -62,12 +64,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Head501Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead501Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -91,12 +93,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Head501(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead501Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -120,12 +122,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Get501Async(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet501Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -149,12 +151,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Get501(RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet501Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -179,12 +181,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Post505Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost505Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -209,12 +211,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Post505(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost505Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -239,12 +241,12 @@ namespace httpInfrastructure_LowLevel
         public virtual async Task<Response> Delete505Async(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete505Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -269,12 +271,12 @@ namespace httpInfrastructure_LowLevel
         public virtual Response Delete505(RequestContent content, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete505Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
