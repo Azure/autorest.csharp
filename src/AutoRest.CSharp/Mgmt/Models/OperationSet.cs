@@ -117,17 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private RequestPath GetNonHintRequestPath()
         {
             var operation = Operations.First();
-            var operationGroup = this[operation];
-            foreach (var request in operation.Requests)
-            {
-                var httpRequest = request.Protocol.Http as HttpRequest;
-                if (httpRequest is null)
-                    continue;
-
-                var pathSegments = RestClientBuilder.BuildRequestPathSegments(operation, request, httpRequest, new MgmtRestClientBuilder(operationGroup));
-                return Models.RequestPath.FromPathSegments(pathSegments, operation.GetHttpPath());
-            }
-            throw new InvalidOperationException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
+            return Models.RequestPath.FromOperation(operation, this[operation]);
         }
 
         public Operation? FindOperation(HttpMethod method)
