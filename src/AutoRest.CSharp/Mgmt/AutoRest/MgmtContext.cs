@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static CodeModel CodeModel => Context.CodeModel;
 
+        public static bool IsInitialized => _context is not null;
+
         public static void Initialize(BuildContext<MgmtOutputLibrary> context)
         {
             _context = context;

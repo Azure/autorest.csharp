@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The dns settings to be applied on the publicIP addresses . </summary>
         internal VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings DnsSettings { get; set; }
         /// <summary> The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created. </summary>
-        public string DnsSettingsDomainNameLabel
+        public string DnsDomainNameLabel
         {
             get => DnsSettings.DomainNameLabel;
             set => DnsSettings.DomainNameLabel = value;

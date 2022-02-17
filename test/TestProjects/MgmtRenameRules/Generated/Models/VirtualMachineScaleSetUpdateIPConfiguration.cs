@@ -50,7 +50,14 @@ namespace MgmtRenameRules.Models
         /// <summary> The IP configuration name. </summary>
         public string Name { get; set; }
         /// <summary> The subnet. </summary>
-        public WritableSubResource Subnet { get; set; }
+        internal WritableSubResource Subnet { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier SubnetId
+        {
+            get => Subnet.Id;
+            set => Subnet.Id = value;
+        }
+
         /// <summary> Specifies the primary IP Configuration in case the network interface has more than one IP Configuration. </summary>
         public bool? Primary { get; set; }
         /// <summary> The publicIPAddressConfiguration. </summary>

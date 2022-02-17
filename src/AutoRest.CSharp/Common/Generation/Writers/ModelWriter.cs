@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -84,7 +85,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 Stack<ObjectTypeProperty> heiarchyStack = new Stack<ObjectTypeProperty>();
                 heiarchyStack.Push(property);
                 BuildHeirarchy(property, heiarchyStack);
-                if (heiarchyStack.Count > 1)
+                if (MgmtContext.IsInitialized && heiarchyStack.Count > 1)
                 {
                     var innerProperty = heiarchyStack.Pop();
                     var immediateParentProperty = heiarchyStack.Pop();

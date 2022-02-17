@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The dns settings to be applied on the network interfaces. </summary>
         internal VirtualMachineScaleSetNetworkConfigurationDnsSettings DnsSettings { get; set; }
         /// <summary> List of DNS servers IP addresses. </summary>
-        public IList<string> DnsSettingsDnsServers
+        public IList<string> DnsServers
         {
             get => DnsSettings.DnsServers;
         }

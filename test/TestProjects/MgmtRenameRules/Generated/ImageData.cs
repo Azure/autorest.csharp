@@ -42,7 +42,14 @@ namespace MgmtRenameRules
         }
 
         /// <summary> The source virtual machine from which Image is created. </summary>
-        public WritableSubResource SourceVirtualMachine { get; set; }
+        internal WritableSubResource SourceVirtualMachine { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier SourceVirtualMachineId
+        {
+            get => SourceVirtualMachine.Id;
+            set => SourceVirtualMachine.Id = value;
+        }
+
         /// <summary> Specifies the storage settings for the virtual machine disks. </summary>
         public ImageStorageProfile StorageProfile { get; set; }
         /// <summary> The provisioning state. </summary>

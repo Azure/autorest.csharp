@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Describes automatic OS upgrade properties on the image. </summary>
         internal AutomaticOSUpgradeProperties AutomaticOSUpgradeProperties { get; set; }
         /// <summary> Specifies whether automatic OS upgrade is supported on the image. </summary>
-        public bool AutomaticOSUpgradePropertiesAutomaticOSUpgradeSupported
+        public bool AutomaticOSUpgradeSupported
         {
             get => AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
             set => AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported = value;

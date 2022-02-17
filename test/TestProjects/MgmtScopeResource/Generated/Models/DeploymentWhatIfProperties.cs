@@ -17,6 +17,12 @@ namespace MgmtScopeResource.Models
         }
 
         /// <summary> Optional What-If operation settings. </summary>
-        public DeploymentWhatIfSettings WhatIfSettings { get; set; }
+        internal DeploymentWhatIfSettings WhatIfSettings { get; set; }
+        /// <summary> The format of the What-If results. </summary>
+        public WhatIfResultFormat? WhatIfResultFormat
+        {
+            get => WhatIfSettings.ResultFormat;
+            set => WhatIfSettings.ResultFormat = value;
+        }
     }
 }

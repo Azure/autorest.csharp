@@ -10,7 +10,7 @@ using System;
 namespace MgmtNonStringPathVariable.Models
 {
     /// <summary> The instance view of a resource. </summary>
-    public partial class BarProperties
+    internal partial class BarProperties
     {
         /// <summary> Initializes a new instance of BarProperties. </summary>
         public BarProperties()

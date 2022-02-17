@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -35,6 +36,12 @@ namespace MgmtNonStringPathVariable
         }
 
         /// <summary> The instance view of a resource. </summary>
-        public BarProperties Properties { get; set; }
+        internal BarProperties Properties { get; set; }
+        /// <summary> Update Domain count. </summary>
+        public Guid? BarBuzz
+        {
+            get => Properties.Buzz;
+            set => Properties.Buzz = value;
+        }
     }
 }

@@ -85,9 +85,22 @@ namespace MgmtPropertyChooser
         /// <summary> The fake resources for the virtual machine. </summary>
         public IReadOnlyList<Resource> FakeResources { get; }
         /// <summary> The fake subresource. </summary>
-        public SubResource FakeSubResource { get; set; }
+        internal SubResource FakeSubResource { get; set; }
+        /// <summary> Gets Id. </summary>
+        public ResourceIdentifier FakeSubResourceId
+        {
+            get => FakeSubResource.Id;
+        }
+
         /// <summary> The fake writable subresource. </summary>
-        public WritableSubResource FakeWritableSubResource { get; set; }
+        internal WritableSubResource FakeWritableSubResource { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier FakeWritableSubResourceId
+        {
+            get => FakeWritableSubResource.Id;
+            set => FakeWritableSubResource.Id = value;
+        }
+
         /// <summary> The provisioning state, which only appears in the response. </summary>
         public string ProvisioningState { get; }
         /// <summary> Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15. </summary>

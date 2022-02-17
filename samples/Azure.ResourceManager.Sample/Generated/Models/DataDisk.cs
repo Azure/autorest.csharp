@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a data disk. </summary>
@@ -55,7 +57,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The virtual hard disk. </summary>
         internal VirtualHardDisk Vhd { get; set; }
         /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
-        public string VhdUri
+        public Uri VhdUri
         {
             get => Vhd.Uri;
             set => Vhd.Uri = value;
@@ -64,7 +66,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist. </summary>
         internal VirtualHardDisk Image { get; set; }
         /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
-        public string ImageUri
+        public Uri ImageUri
         {
             get => Image.Uri;
             set => Image.Uri = value;

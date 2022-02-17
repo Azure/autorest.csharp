@@ -8,7 +8,7 @@
 namespace NoTypeReplacement.Models
 {
     /// <summary> The MiddleResourceModel. </summary>
-    public partial class MiddleResourceModel
+    internal partial class MiddleResourceModel
     {
         /// <summary> Initializes a new instance of MiddleResourceModel. </summary>
         public MiddleResourceModel()
@@ -23,6 +23,11 @@ namespace NoTypeReplacement.Models
         }
 
         /// <summary> Gets or sets the foo. </summary>
-        public NoSubResourceModel2 Foo { get; set; }
+        internal NoSubResourceModel2 Foo { get; set; }
+        /// <summary> Gets the foo id. </summary>
+        public string FooId
+        {
+            get => Foo.Id;
+        }
     }
 }

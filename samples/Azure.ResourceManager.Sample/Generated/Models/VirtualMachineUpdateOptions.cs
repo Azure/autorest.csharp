@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies the hardware settings for the virtual machine. </summary>
         internal HardwareProfile HardwareProfile { get; set; }
         /// <summary> Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). </summary>
-        public VirtualMachineSizeTypes? HardwareProfileVmSize
+        public VirtualMachineSizeTypes? HardwareVmSize
         {
             get => HardwareProfile.VmSize;
             set => HardwareProfile.VmSize = value;
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies additional capabilities enabled or disabled on the virtual machine. </summary>
         internal AdditionalCapabilities AdditionalCapabilities { get; set; }
         /// <summary> The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled. </summary>
-        public bool? AdditionalCapabilitiesUltraSSDEnabled
+        public bool? UltraSSDEnabled
         {
             get => AdditionalCapabilities.UltraSSDEnabled;
             set => AdditionalCapabilities.UltraSSDEnabled = value;
@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies the network interfaces of the virtual machine. </summary>
         internal NetworkProfile NetworkProfile { get; set; }
         /// <summary> Specifies the list of resource Ids for the network interfaces associated with the virtual machine. </summary>
-        public IList<NetworkInterfaceReference> NetworkProfileNetworkInterfaces
+        public IList<NetworkInterfaceReference> NetworkInterfaces
         {
             get => NetworkProfile.NetworkInterfaces;
         }
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies the Security related profile settings for the virtual machine. </summary>
         internal SecurityProfile SecurityProfile { get; set; }
         /// <summary> This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. &lt;br&gt;&lt;br&gt; Default: The Encryption at host will be disabled unless this property is set to true for the resource. </summary>
-        public bool? SecurityProfileEncryptionAtHost
+        public bool? EncryptionAtHost
         {
             get => SecurityProfile.EncryptionAtHost;
             set => SecurityProfile.EncryptionAtHost = value;
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies the boot diagnostic settings state. &lt;br&gt;&lt;br&gt;Minimum api-version: 2015-06-15. </summary>
         internal DiagnosticsProfile DiagnosticsProfile { get; set; }
         /// <summary> Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor. </summary>
-        public BootDiagnostics DiagnosticsProfileBootDiagnostics
+        public BootDiagnostics BootDiagnostics
         {
             get => DiagnosticsProfile.BootDiagnostics;
             set => DiagnosticsProfile.BootDiagnostics = value;
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies the billing related details of a Azure Spot virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01. </summary>
         internal BillingProfile BillingProfile { get; set; }
         /// <summary> Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS. This price is in US Dollars. &lt;br&gt;&lt;br&gt; This price will be compared with the current Azure Spot price for the VM size. Also, the prices are compared at the time of create/update of Azure Spot VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current Azure Spot price. &lt;br&gt;&lt;br&gt; The maxPrice will also be used for evicting a Azure Spot VM/VMSS if the current Azure Spot price goes beyond the maxPrice after creation of VM/VMSS. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; - Any decimal value greater than zero. Example: 0.01538 &lt;br&gt;&lt;br&gt; -1 – indicates default price to be up-to on-demand. &lt;br&gt;&lt;br&gt; You can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01. </summary>
-        public double? BillingProfileMaxPrice
+        public double? BillingMaxPrice
         {
             get => BillingProfile.MaxPrice;
             set => BillingProfile.MaxPrice = value;

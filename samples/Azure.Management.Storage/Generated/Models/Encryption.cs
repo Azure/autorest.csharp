@@ -41,6 +41,12 @@ namespace Azure.Management.Storage.Models
         /// <summary> Properties provided by key vault. </summary>
         public KeyVaultProperties KeyVaultProperties { get; set; }
         /// <summary> The identity to be used with service-side encryption at rest. </summary>
-        public EncryptionIdentity EncryptionIdentity { get; set; }
+        internal EncryptionIdentity EncryptionIdentity { get; set; }
+        /// <summary> Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account. </summary>
+        public string EncryptionUserAssignedIdentity
+        {
+            get => EncryptionIdentity.EncryptionUserAssignedIdentity;
+            set => EncryptionIdentity.EncryptionUserAssignedIdentity = value;
+        }
     }
 }
