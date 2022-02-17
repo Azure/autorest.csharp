@@ -70,7 +70,7 @@ namespace MgmtListMethods
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<SubParentWithLocData>> CreateOrUpdateAsync(string subscriptionId, string subParentWithLocName, SubParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -107,7 +107,7 @@ namespace MgmtListMethods
         /// <param name="subParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<SubParentWithLocData> CreateOrUpdate(string subscriptionId, string subParentWithLocName, SubParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

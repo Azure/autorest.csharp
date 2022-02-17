@@ -340,7 +340,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetComplexArrayEmpty() => Test(async (host, pipeline) =>
         {
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetEmptyAsync();
-            Assert.AreEqual(new string[0], result.Value.Array);
+            Assert.AreEqual(Array.Empty<string>(), result.Value.Array);
         });
 
         [Test]

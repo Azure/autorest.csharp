@@ -177,9 +177,10 @@ namespace ResourceClients_LowLevel
         /// <summary> Initializes a new instance of ResourceGroup. </summary>
         /// <param name="groupId"> Group identifier. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual ResourceGroup GetResourceGroup(string groupId)
         {
-            Argument.AssertNotNull(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
             return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
         }
