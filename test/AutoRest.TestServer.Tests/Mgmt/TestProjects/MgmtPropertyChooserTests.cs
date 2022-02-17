@@ -72,12 +72,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             // but is not replaced when used as a property.
             Assert.AreEqual(virtualMachineData.BaseType, typeof(TrackedResourceData));
             Assert.AreEqual(properties.First(p => p.Name == "FakeResources").PropertyType.GetGenericArguments().First(), typeof(MgmtPropertyChooser.Models.Resource));
-            // VirtualMachineIdentity is replaced by ResourceIdentity, property name is unchanged, still called Identity.
-            Assert.IsFalse(properties.Any(p => p.Name == "ResourceIdentity"));
+            // VirtualMachineIdentity is replaced by ManagedServiceIdentity, property name is unchanged, still called Identity.
+            Assert.IsFalse(properties.Any(p => p.Name == "ManagedServiceIdentity"));
             Assert.IsTrue(properties.Any(p => p.Name == "Identity" && p.PropertyType == typeof(ManagedServiceIdentity)));
             // VirtualMachineIdentity is not generated
             var virtualMachineIdentityModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
             Assert.Null(virtualMachineIdentityModel);
+            //IdentityV3 is replaced by ManagedServiceIdentity
+            Assert.IsTrue(properties.Any(p => p.Name == "IdentityV3" && p.PropertyType == typeof(ManagedServiceIdentity)));
             // FakeSubResource is replaced by SubResource
             Assert.IsTrue(properties.Any(p => p.Name == "FakeSubResource" && p.PropertyType == typeof(SubResource)));
             // FakeWritableSubResource is replaced by WritableSubResource
