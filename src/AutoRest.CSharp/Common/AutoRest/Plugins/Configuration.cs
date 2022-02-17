@@ -26,9 +26,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string SingleTopLevelClient = "single-top-level-client";
             public const string AttachDebuggerFormat = "{0}.attach";
             public const string ProjectFolder = "project-folder";
+            public const string ProtocolMethodList = "protocol-method-list";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool dataplane, bool singleTopLevelClient, string projectFolder, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool dataplane, bool singleTopLevelClient, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -43,6 +44,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             DataPlane = dataplane;
             SingleTopLevelClient = singleTopLevelClient;
             ProjectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
+            ProtocolMethodList = protocolMethodList;
             MgmtConfiguration = mgmtConfiguration;
         }
 
@@ -58,6 +60,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SkipCSProjPackageReference { get; }
         public bool DataPlane { get; }
         public bool SingleTopLevelClient { get; }
+        public string[] ProtocolMethodList { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
         public string ProjectFolder { get; }
@@ -78,6 +81,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 dataplane: GetOptionValue(autoRest, Options.DataPlane),
                 singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
                 projectFolder: GetOptionStringValue(autoRest, Options.ProjectFolder, TrimFileSuffix),
+                protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }

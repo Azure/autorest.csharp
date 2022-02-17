@@ -85,6 +85,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.DataPlane, configuration.DataPlane);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder);
+                    WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), configuration.ProtocolMethodList);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -124,6 +125,20 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static void WriteNonEmptyArray(Utf8JsonWriter writer, string name, string[] values)
+        {
+            if (values.Count() > 0)
+            {
+                writer.WriteStartArray(name);
+                foreach (var s in values)
+                {
+                    writer.WriteStringValue(s);
+                }
+
+                writer.WriteEndArray();
+            }
+        }
+
         internal static Configuration LoadConfiguration(string basePath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
@@ -134,6 +149,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
             {
                 sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
             }
+
+            root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
+            var protocolMethods = protocolMethodList.ValueKind == JsonValueKind.Array
+                ? protocolMethodList.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : Array.Empty<string>();
 
             return new Configuration(
                 Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()),
@@ -149,6 +169,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.DataPlane),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadStringOption(root, Configuration.Options.ProjectFolder),
+                protocolMethods,
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
         }
 
-        private static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, string clientName)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(RestClientBuilder builder, IEnumerable<(ServiceRequest ServiceRequest, Operation Operation)> serviceRequests, string clientName)
         {
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
             foreach (var (serviceRequest, operation) in serviceRequests)
