@@ -868,6 +868,7 @@ namespace url_LowLevel
         /// <param name="stringPath"> null string value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -881,7 +882,7 @@ namespace url_LowLevel
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(stringPath, nameof(stringPath));
+            Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -901,6 +902,7 @@ namespace url_LowLevel
         /// <param name="stringPath"> null string value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -914,7 +916,7 @@ namespace url_LowLevel
         public virtual Response StringNull(string stringPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(stringPath, nameof(stringPath));
+            Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -934,6 +936,7 @@ namespace url_LowLevel
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -947,7 +950,7 @@ namespace url_LowLevel
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumPath, nameof(enumPath));
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -967,6 +970,7 @@ namespace url_LowLevel
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -980,7 +984,7 @@ namespace url_LowLevel
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumPath, nameof(enumPath));
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -1000,6 +1004,7 @@ namespace url_LowLevel
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1013,7 +1018,7 @@ namespace url_LowLevel
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumPath, nameof(enumPath));
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1033,6 +1038,7 @@ namespace url_LowLevel
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1046,7 +1052,7 @@ namespace url_LowLevel
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumPath, nameof(enumPath));
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();

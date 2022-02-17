@@ -37,7 +37,7 @@ namespace TenantOnly
         internal AgreementCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", Agreement.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(Agreement.ResourceType, out string agreementApiVersion);
+            TryGetApiVersion(Agreement.ResourceType, out string agreementApiVersion);
             _agreementRestClient = new AgreementsRestOperations(_agreementClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -58,7 +58,7 @@ namespace TenantOnly
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public async virtual Task<Response<Agreement>> GetAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -88,7 +88,7 @@ namespace TenantOnly
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public virtual Response<Agreement> Get(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -174,7 +174,7 @@ namespace TenantOnly
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -202,7 +202,7 @@ namespace TenantOnly
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public virtual Response<bool> Exists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -230,7 +230,7 @@ namespace TenantOnly
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public async virtual Task<Response<Agreement>> GetIfExistsAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -260,7 +260,7 @@ namespace TenantOnly
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
         public virtual Response<Agreement> GetIfExists(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {

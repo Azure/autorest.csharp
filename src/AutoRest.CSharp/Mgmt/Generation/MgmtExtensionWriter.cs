@@ -24,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private MgmtExtensions This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public MgmtExtensionWriter(MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context)
-            : base(new CodeWriter(), extensions, context)
+        public MgmtExtensionWriter(MgmtExtensions extensions)
+            : base(new CodeWriter(), extensions)
         {
             This = extensions;
         }
@@ -100,8 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return base.GetParametersForCollectionEntry(resourceCollection);
 
             List<Parameter> parameters = new List<Parameter>();
-            if (!IsArmCore)
-                parameters.Add(This.ExtensionParameter);
+            parameters.Add(This.ExtensionParameter);
             parameters.AddRange(resourceCollection.ExtraConstructorParameters);
             return parameters.ToArray();
         }
@@ -112,8 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return base.GetParametersForSingletonEntry();
 
             List<Parameter> parameters = new List<Parameter>();
-            if (!IsArmCore)
-                parameters.Add(This.ExtensionParameter);
+            parameters.Add(This.ExtensionParameter);
             return parameters.ToArray();
         }
     }

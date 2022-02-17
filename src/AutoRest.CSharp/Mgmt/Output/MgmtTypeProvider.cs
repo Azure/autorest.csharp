@@ -27,22 +27,20 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal abstract class MgmtTypeProvider : TypeProvider
     {
-        protected BuildContext<MgmtOutputLibrary> _context;
         protected bool IsArmCore { get; }
 
-        protected MgmtTypeProvider(BuildContext<MgmtOutputLibrary> context, string resourceName) : base(context)
+        protected MgmtTypeProvider(string resourceName) : base(MgmtContext.Context)
         {
-            _context = context;
             ResourceName = resourceName;
-            IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
+            IsArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
             IsStatic = !IsArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
         }
 
         protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
         public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: IdParamDescription,
-                Type: typeof(ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+                Type: typeof(ResourceIdentifier), DefaultValue: null, Validate: false);
         public static Parameter ArmClientParameter => new Parameter(Name: "client", Description: $"The client parameters to use in these operations.",
-            Type: typeof(ArmClient), DefaultValue: null, ValidateNotNull: false);
+            Type: typeof(ArmClient), DefaultValue: null, Validate: false);
 
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";
@@ -58,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public IEnumerable<CSharpType> EnumerableInterfaces => _enumerableInterfaces ??= EnsureGetInterfaces();
         protected virtual IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            return new CSharpType[] { };
+            return Array.Empty<CSharpType>();
         }
 
         public IEnumerable<CSharpType> GetImplementsList()
@@ -122,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: "protected",
-                Parameters: new Parameter[0]);
+                Parameters: Array.Empty<Parameter>());
         }
 
         private ConstructorSignature? _armClientCtor;
@@ -204,12 +202,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <summary>
         /// The collection of <see cref="Resource"/> that is a child of this generated class.
         /// </summary>
-        public virtual IEnumerable<Resource> ChildResources => _childResources ??= _context.Library.ArmResources.Where(resource => resource.Parent(_context).Contains(this));
+        public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.Parent().Contains(this));
 
         protected string GetOperationName(Operation operation, string clientResourceName)
         {
             // search the configuration for a override of this operation
-            if (operation.TryGetConfigOperationName(_context, out var name))
+            if (operation.TryGetConfigOperationName(out var name))
                 return name;
 
             return CalculateOperationName(operation, clientResourceName);
@@ -225,17 +223,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual string CalculateOperationName(Operation operation, string clientResourceName)
         {
             // search the configuration for a override of this operation
-            if (operation.TryGetConfigOperationName(_context, out var name))
+            if (operation.TryGetConfigOperationName(out var name))
                 return name;
 
-            var operationGroup = _context.Library.GetRestClient(operation).OperationGroup;
+            var operationGroup = MgmtContext.Library.GetRestClient(operation).OperationGroup;
             if (operationGroup.Key == clientResourceName)
             {
                 return operation.MgmtCSharpName(false);
             }
 
             var resourceName = string.Empty;
-            if (_context.Library.GetRestClientMethod(operation).IsListMethod(out _))
+            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out _))
             {
                 resourceName = operationGroup.Key.IsNullOrEmpty() ? string.Empty : operationGroup.Key.ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());

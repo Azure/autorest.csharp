@@ -155,7 +155,7 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<CustomModel1>> PutAsync(string subscriptionId, string resourceGroupName, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -196,7 +196,7 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<CustomModel1> Put(string subscriptionId, string resourceGroupName, string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -256,7 +256,7 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="customModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is null. </exception>
         public async Task<Response<CustomModel1>> GetAsync(string subscriptionId, string resourceGroupName, string customModel1SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -292,7 +292,7 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="customModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is null. </exception>
         public Response<CustomModel1> Get(string subscriptionId, string resourceGroupName, string customModel1SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

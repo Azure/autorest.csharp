@@ -114,6 +114,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? requestPathToSingletonResource = default,
             JsonElement? overrideOperationName = default,
             JsonElement? operationPositions = default,
+            JsonElement? renameRules = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default,
             JsonElement? resourceModelRequiresType = default,
@@ -129,6 +130,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             RequestPathToScopeResourceTypes = !IsValidJsonElement(requestPathToScopeResourceTypes) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(requestPathToScopeResourceTypes.ToString());
             RequestPathToSingletonResource = !IsValidJsonElement(requestPathToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(requestPathToSingletonResource.ToString());
             OverrideOperationName = !IsValidJsonElement(overrideOperationName) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(overrideOperationName.ToString());
+            RenameRules = !IsValidJsonElement(renameRules) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(renameRules.ToString());
             try
             {
                 OperationPositions = !IsValidJsonElement(operationPositions) ? new Dictionary<string, string[]>() : JsonSerializer.Deserialize<Dictionary<string, string[]>>(operationPositions.ToString());
@@ -182,6 +184,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> RequestPathToResourceType { get; }
         public IReadOnlyDictionary<string, string> RequestPathToSingletonResource { get; }
         public IReadOnlyDictionary<string, string> OverrideOperationName { get; }
+        public IReadOnlyDictionary<string, string> RenameRules { get; }
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
@@ -210,6 +213,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 operationPositions: autoRest.GetValue<JsonElement?>("operation-positions").GetAwaiter().GetResult(),
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 overrideOperationName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
+                renameRules: autoRest.GetValue<JsonElement?>("rename-rules").GetAwaiter().GetResult(),
                 mergeOperations: autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 armCore: autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult(),
                 resourceModelRequiresType: autoRest.GetValue<JsonElement?>("resource-model-requires-type").GetAwaiter().GetResult(),
@@ -233,6 +237,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(RequestPathToResourceType), RequestPathToResourceType);
             WriteNonEmptySettings(writer, nameof(RequestPathToScopeResourceTypes), RequestPathToScopeResourceTypes);
             WriteNonEmptySettings(writer, nameof(RequestPathToSingletonResource), RequestPathToSingletonResource);
+            WriteNonEmptySettings(writer, nameof(RenameRules), RenameRules);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
@@ -263,24 +268,25 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(RequestPathToScopeResourceTypes), out var requestPathToScopeResourceTypes);
             root.TryGetProperty(nameof(OperationPositions), out var operationPositions);
             root.TryGetProperty(nameof(RequestPathToSingletonResource), out var requestPathToSingletonResource);
+            root.TryGetProperty(nameof(RenameRules), out var renameRules);
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
 
             var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var requestPathIsNonResourceList = requestPathIsNonResource.ValueKind == JsonValueKind.Array
                 ? requestPathIsNonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var noPropertyTypeReplacementList = noPropertyTypeReplacment.ValueKind == JsonValueKind.Array
                 ? noPropertyTypeReplacment.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var listExceptionList = listException.ValueKind == JsonValueKind.Array
                 ? listException.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -304,6 +310,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 operationPositions: operationPositions,
                 requestPathToSingletonResource: requestPathToSingletonResource,
                 overrideOperationName: operationIdToName,
+                renameRules: renameRules,
                 mergeOperations: mergeOperations,
                 armCore: isArmCore,
                 resourceModelRequiresType: resourceModelRequiresType,

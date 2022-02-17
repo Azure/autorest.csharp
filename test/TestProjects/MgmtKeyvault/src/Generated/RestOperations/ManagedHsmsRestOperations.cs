@@ -75,7 +75,7 @@ namespace MgmtKeyvault
         /// <param name="name"> Name of the managed HSM Pool. </param>
         /// <param name="parameters"> Parameters to create or update the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -113,7 +113,7 @@ namespace MgmtKeyvault
         /// <param name="name"> Name of the managed HSM Pool. </param>
         /// <param name="parameters"> Parameters to create or update the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -175,7 +175,7 @@ namespace MgmtKeyvault
         /// <param name="name"> Name of the managed HSM Pool. </param>
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -213,7 +213,7 @@ namespace MgmtKeyvault
         /// <param name="name"> Name of the managed HSM Pool. </param>
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public Response Update(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -270,7 +270,7 @@ namespace MgmtKeyvault
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
         /// <param name="name"> The name of the managed HSM Pool to delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -304,7 +304,7 @@ namespace MgmtKeyvault
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
         /// <param name="name"> The name of the managed HSM Pool to delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -358,7 +358,7 @@ namespace MgmtKeyvault
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
         /// <param name="name"> The name of the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public async Task<Response<ManagedHsmData>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -399,7 +399,7 @@ namespace MgmtKeyvault
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
         /// <param name="name"> The name of the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public Response<ManagedHsmData> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -697,7 +697,7 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public async Task<Response<DeletedManagedHsmData>> GetDeletedAsync(string subscriptionId, string location, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -736,7 +736,7 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public Response<DeletedManagedHsmData> GetDeleted(string subscriptionId, string location, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -796,7 +796,7 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the soft-deleted managed HSM. </param>
         /// <param name="name"> The name of the soft-deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public async Task<Response> PurgeDeletedAsync(string subscriptionId, string location, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -828,7 +828,7 @@ namespace MgmtKeyvault
         /// <param name="location"> The location of the soft-deleted managed HSM. </param>
         /// <param name="name"> The name of the soft-deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="name"/> is null. </exception>
         public Response PurgeDeleted(string subscriptionId, string location, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -875,7 +875,7 @@ namespace MgmtKeyvault
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public async Task<Response<ManagedHsmListResult>> ListByResourceGroupNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -913,7 +913,7 @@ namespace MgmtKeyvault
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public Response<ManagedHsmListResult> ListByResourceGroupNextPage(string nextLink, string subscriptionId, string resourceGroupName, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

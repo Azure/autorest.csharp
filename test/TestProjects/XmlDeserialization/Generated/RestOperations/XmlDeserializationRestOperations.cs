@@ -171,7 +171,7 @@ namespace XmlDeserialization
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is null. </exception>
         public async Task<Response<bool>> GetEntityTagAsync(string subscriptionId, string resourceGroupName, string xmlName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -211,7 +211,7 @@ namespace XmlDeserialization
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is null. </exception>
         public Response<bool> GetEntityTag(string subscriptionId, string resourceGroupName, string xmlName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -271,7 +271,7 @@ namespace XmlDeserialization
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is null. </exception>
         public async Task<Response<XmlInstanceData>> GetAsync(string subscriptionId, string resourceGroupName, string xmlName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -310,7 +310,7 @@ namespace XmlDeserialization
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="xmlName"/> is null. </exception>
         public Response<XmlInstanceData> Get(string subscriptionId, string resourceGroupName, string xmlName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -379,7 +379,7 @@ namespace XmlDeserialization
         /// <param name="parameters"> Create or update parameters. </param>
         /// <param name="ifMatch"> ETag of the Entity. Not required when creating an entity, but required when updating an entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<XmlInstanceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -423,7 +423,7 @@ namespace XmlDeserialization
         /// <param name="parameters"> Create or update parameters. </param>
         /// <param name="ifMatch"> ETag of the Entity. Not required when creating an entity, but required when updating an entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<XmlInstanceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -487,7 +487,7 @@ namespace XmlDeserialization
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="ifMatch"> ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/>, or <paramref name="ifMatch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="ifMatch"/> is null. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string xmlName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -525,7 +525,7 @@ namespace XmlDeserialization
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="ifMatch"> ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/>, or <paramref name="ifMatch"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="xmlName"/> or <paramref name="ifMatch"/> is null. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string xmlName, string ifMatch, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -579,7 +579,7 @@ namespace XmlDeserialization
         /// <param name="top"> Number of records to return. </param>
         /// <param name="skip"> Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public async Task<Response<XmlCollection>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string filter = null, int? top = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -619,7 +619,7 @@ namespace XmlDeserialization
         /// <param name="top"> Number of records to return. </param>
         /// <param name="skip"> Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public Response<XmlCollection> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, string filter = null, int? top = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

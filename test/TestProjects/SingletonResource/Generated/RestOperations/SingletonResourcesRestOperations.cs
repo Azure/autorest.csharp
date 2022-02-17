@@ -76,7 +76,7 @@ namespace SingletonResource
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<SingletonResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string parentName, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -118,7 +118,7 @@ namespace SingletonResource
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<SingletonResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string parentName, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -181,7 +181,7 @@ namespace SingletonResource
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
         public async Task<Response<SingletonResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -220,7 +220,7 @@ namespace SingletonResource
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="parentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
         public Response<SingletonResourceData> Get(string subscriptionId, string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

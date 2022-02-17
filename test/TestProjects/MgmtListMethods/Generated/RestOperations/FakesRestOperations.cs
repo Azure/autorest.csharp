@@ -72,7 +72,7 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<FakeData>> CreateOrUpdateAsync(string subscriptionId, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -109,7 +109,7 @@ namespace MgmtListMethods
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<FakeData> CreateOrUpdate(string subscriptionId, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

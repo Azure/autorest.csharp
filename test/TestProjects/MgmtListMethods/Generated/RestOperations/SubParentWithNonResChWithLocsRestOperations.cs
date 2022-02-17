@@ -72,7 +72,7 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithNonResChWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<SubParentWithNonResChWithLocData>> CreateOrUpdateAsync(string subscriptionId, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -109,7 +109,7 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithNonResChWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<SubParentWithNonResChWithLocData> CreateOrUpdate(string subscriptionId, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

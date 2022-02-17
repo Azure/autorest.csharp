@@ -155,7 +155,7 @@ namespace NoTypeReplacement
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel3SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<NoTypeReplacementModel3Data>> PutAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -196,7 +196,7 @@ namespace NoTypeReplacement
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="parameters"> The NoTypeReplacementModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel3SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<NoTypeReplacementModel3Data> Put(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, NoTypeReplacementModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -256,7 +256,7 @@ namespace NoTypeReplacement
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         public async Task<Response<NoTypeReplacementModel3Data>> GetAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -294,7 +294,7 @@ namespace NoTypeReplacement
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         public Response<NoTypeReplacementModel3Data> Get(string subscriptionId, string resourceGroupName, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

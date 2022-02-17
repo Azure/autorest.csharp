@@ -46,14 +46,8 @@ namespace ResourceClients_LowLevel
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, or <paramref name="groupId"/> is null. </exception>
-        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint = null)
+        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint)
         {
-            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
-            Argument.AssertNotNull(pipeline, nameof(pipeline));
-            Argument.AssertNotNull(groupId, nameof(groupId));
-            endpoint ??= new Uri("http://localhost:3000");
-
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
@@ -146,9 +140,10 @@ namespace ResourceClients_LowLevel
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="itemId"> Item identifier. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="itemId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Resource GetResource(string itemId)
         {
-            Argument.AssertNotNull(itemId, nameof(itemId));
+            Argument.AssertNotNullOrEmpty(itemId, nameof(itemId));
 
             return new Resource(ClientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, Endpoint);
         }

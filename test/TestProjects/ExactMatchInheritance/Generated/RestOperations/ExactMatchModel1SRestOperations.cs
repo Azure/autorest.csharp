@@ -155,7 +155,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<ExactMatchModel1Data>> PutAsync(string subscriptionId, string resourceGroupName, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -196,7 +196,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<ExactMatchModel1Data> Put(string subscriptionId, string resourceGroupName, string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -256,7 +256,7 @@ namespace ExactMatchInheritance
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="exactMatchModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel1SName"/> is null. </exception>
         public async Task<Response<ExactMatchModel1Data>> GetAsync(string subscriptionId, string resourceGroupName, string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -294,7 +294,7 @@ namespace ExactMatchInheritance
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="exactMatchModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel1SName"/> is null. </exception>
         public Response<ExactMatchModel1Data> Get(string subscriptionId, string resourceGroupName, string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

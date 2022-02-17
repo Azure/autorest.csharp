@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
@@ -105,7 +106,7 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayCsvNull() => TestStatus(async (host) => await new QueriesClient(Key, host).ArrayStringCsvNullAsync( null));
 
         [Test]
-        public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host) => await new QueriesClient(Key, host).ArrayStringCsvEmptyAsync( new string[0]));
+        public Task UrlQueriesArrayCsvEmpty() => TestStatus(async (host) => await new QueriesClient(Key, host).ArrayStringCsvEmptyAsync(Enumerable.Empty<string>()));
 
         [Test]
         public Task UrlQueriesArraySsvValid() => TestStatus(async (host) => await new QueriesClient(Key, host).ArrayStringSsvValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
@@ -121,7 +122,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         [Ignore("https://github.com/Azure/autorest.csharp/issues/1161")]
-        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiEmptyAsync( new string[] { }));
+        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiEmptyAsync(Enumerable.Empty<string>()));
 
         [Test]
         public Task UrlQueriesArrayMultiValid() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));

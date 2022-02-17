@@ -378,7 +378,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="typeOneName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is null. </exception>
         public async Task<Response<TypeOneData>> GetTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -417,7 +417,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="typeOneName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeOneName"/> is null. </exception>
         public Response<TypeOneData> GetTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -481,7 +481,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="typeOneName"> The name. </param>
         /// <param name="typeOne"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/>, or <paramref name="typeOne"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
         public async Task<Response<TypeOneData>> CreateOrUpdateTypeOneAsync(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -523,7 +523,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="typeOneName"> The name. </param>
         /// <param name="typeOne"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/>, or <paramref name="typeOne"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
         public Response<TypeOneData> CreateOrUpdateTypeOne(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -584,7 +584,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="typeTwoName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is null. </exception>
         public async Task<Response<TypeTwoData>> GetTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -623,7 +623,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="typeTwoName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="typeTwoName"/> is null. </exception>
         public Response<TypeTwoData> GetTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -687,7 +687,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="typeTwo"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/>, or <paramref name="typeTwo"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
         public async Task<Response<TypeTwoData>> CreateOrUpdateTypeTwoAsync(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -729,7 +729,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="typeTwo"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/>, or <paramref name="typeTwo"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
         public Response<TypeTwoData> CreateOrUpdateTypeTwo(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

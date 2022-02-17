@@ -155,7 +155,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel6SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel6 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel6SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel6SName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<SupersetModel6Data>> PutAsync(string subscriptionId, string resourceGroupName, string supersetModel6SName, SupersetModel6Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -196,7 +196,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel6SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel6 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel6SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel6SName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<SupersetModel6Data> Put(string subscriptionId, string resourceGroupName, string supersetModel6SName, SupersetModel6Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -256,7 +256,7 @@ namespace SupersetInheritance
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel6SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="supersetModel6SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel6SName"/> is null. </exception>
         public async Task<Response<SupersetModel6Data>> GetAsync(string subscriptionId, string resourceGroupName, string supersetModel6SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -294,7 +294,7 @@ namespace SupersetInheritance
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel6SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="supersetModel6SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel6SName"/> is null. </exception>
         public Response<SupersetModel6Data> Get(string subscriptionId, string resourceGroupName, string supersetModel6SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

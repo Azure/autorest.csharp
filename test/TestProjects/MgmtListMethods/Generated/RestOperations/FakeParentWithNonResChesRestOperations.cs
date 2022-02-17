@@ -75,7 +75,7 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentWithNonResChName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<FakeParentWithNonResChData>> CreateOrUpdateAsync(string subscriptionId, string fakeName, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -117,7 +117,7 @@ namespace MgmtListMethods
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentWithNonResChName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<FakeParentWithNonResChData> CreateOrUpdate(string subscriptionId, string fakeName, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -178,7 +178,7 @@ namespace MgmtListMethods
         /// <param name="fakeName"> Name. </param>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public async Task<Response<FakeParentWithNonResChData>> GetAsync(string subscriptionId, string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -217,7 +217,7 @@ namespace MgmtListMethods
         /// <param name="fakeName"> Name. </param>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public Response<FakeParentWithNonResChData> Get(string subscriptionId, string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -277,7 +277,7 @@ namespace MgmtListMethods
         /// <param name="fakeName"> Name. </param>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public async Task<Response<NonResourceChildListResult>> ListNonResourceChildAsync(string subscriptionId, string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -314,7 +314,7 @@ namespace MgmtListMethods
         /// <param name="fakeName"> Name. </param>
         /// <param name="fakeParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         public Response<NonResourceChildListResult> ListNonResourceChild(string subscriptionId, string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -448,7 +448,7 @@ namespace MgmtListMethods
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="fakeName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is null. </exception>
         public async Task<Response<FakeParentWithNonResChListResult>> ListTestNextPageAsync(string nextLink, string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -485,7 +485,7 @@ namespace MgmtListMethods
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="fakeName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="fakeName"/> is null. </exception>
         public Response<FakeParentWithNonResChListResult> ListTestNextPage(string nextLink, string subscriptionId, string fakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

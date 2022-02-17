@@ -164,7 +164,7 @@ namespace SubscriptionExtensions
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="ovenName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -202,7 +202,7 @@ namespace SubscriptionExtensions
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="ovenName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
         public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -258,7 +258,7 @@ namespace SubscriptionExtensions
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="ovenName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is null. </exception>
         public async Task<Response<OvenData>> GetAsync(string subscriptionId, string resourceGroupName, string ovenName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -296,7 +296,7 @@ namespace SubscriptionExtensions
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="ovenName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="ovenName"/> is null. </exception>
         public Response<OvenData> Get(string subscriptionId, string resourceGroupName, string ovenName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -350,7 +350,7 @@ namespace SubscriptionExtensions
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public async Task<Response<OvenListResult>> ListAllNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -388,7 +388,7 @@ namespace SubscriptionExtensions
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public Response<OvenListResult> ListAllNextPage(string nextLink, string subscriptionId, string resourceGroupName, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

@@ -155,7 +155,7 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<Model2Data>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -196,7 +196,7 @@ namespace OmitOperationGroups
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="parameters"> The Model2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="model2SName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<Model2Data> CreateOrUpdate(string subscriptionId, string resourceGroupName, string model2SName, Model2Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -256,7 +256,7 @@ namespace OmitOperationGroups
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
         public async Task<Response<Model2Data>> GetAsync(string subscriptionId, string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -294,7 +294,7 @@ namespace OmitOperationGroups
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
         public Response<Model2Data> Get(string subscriptionId, string resourceGroupName, string model2SName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

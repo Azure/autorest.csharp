@@ -51,7 +51,7 @@ namespace MgmtCollectionParent
         internal OrderResource(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string orderResourceApiVersion);
+            TryGetApiVersion(ResourceType, out string orderResourceApiVersion);
             _orderResourceRestClient = new ComputeManagementRestOperations(_orderResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

@@ -15,22 +15,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class TypeExtensions
     {
-        /// <summary>
-        /// Is the type a string or an Enum that is modeled as string.
-        /// </summary>
-        /// <param name="type">Type to check.</param>
-        /// <returns>Is the type a string or an Enum that is modeled as string.</returns>
-        public static bool IsStringLike(this CSharpType type)
-        {
-            if (type.IsFrameworkType)
-            {
-                return type.Equals(typeof(string));
-            }
-            else
-            {
-                return type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
-            };
-        }
 
         /// <summary>
         /// Check whether two CSharpType instances equal or not
@@ -99,13 +83,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return type.Name == "Response" && type.Arguments.Length == 1 ? type.Arguments[0] : type;
         }
 
-        public static bool IsResourceDataType(this CSharpType type, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out ResourceData data)
+        public static bool IsResourceDataType(this CSharpType type, [MaybeNullWhen(false)] out ResourceData data)
         {
             data = null;
             if (type.IsFrameworkType)
                 return false;
 
-            if (context.Library.TryGetTypeProvider(type.Name, out var provider))
+            if (MgmtContext.Library.TryGetTypeProvider(type.Name, out var provider))
             {
                 data = provider as ResourceData;
                 return data != null;

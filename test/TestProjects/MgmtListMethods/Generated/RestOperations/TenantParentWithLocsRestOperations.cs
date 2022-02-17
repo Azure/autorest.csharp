@@ -72,7 +72,7 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<TenantParentWithLocData>> CreateOrUpdateAsync(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
@@ -109,7 +109,7 @@ namespace MgmtListMethods
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<TenantParentWithLocData> CreateOrUpdate(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)

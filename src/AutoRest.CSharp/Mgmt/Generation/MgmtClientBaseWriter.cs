@@ -39,7 +39,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected bool IsArmCore { get; }
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
-        protected BuildContext<MgmtOutputLibrary> Context { get; }
 
         internal static readonly Parameter CancellationTokenParameter = new Parameter(
             "cancellationToken",
@@ -56,14 +55,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public string FileName { get; }
 
-        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context)
+        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider)
         {
             _writer = writer;
-            Context = context;
             This = provider;
             FileName = This.Type.Name;
-            IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
-            LibraryArmOperation = $"{context.DefaultNamespace.Split('.').Last()}ArmOperation";
+            IsArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
+            LibraryArmOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
         }
 
         public virtual void Write()
@@ -219,7 +217,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (resource is not null)
             {
                 string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
-                _writer.Line($"{ArmClientReference}.TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
+                _writer.Line($"TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
                 apiVersionText = $", {apiVersionVariable}";
             }
             _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, diagFieldName, apiVersionText)};");
@@ -272,7 +270,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual Parameter[] GetParametersForSingletonEntry()
         {
-            return new Parameter[] { };
+            return Array.Empty<Parameter>();
         }
 
         protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
@@ -321,11 +319,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (returnType is null)
                 return $"ProviderConstants.DefaultProviderNamespace";
 
-            var resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == returnType);
+            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == returnType);
             if (resource is not null)
                 return $"{returnType}.ResourceType.Namespace";
 
-            if (Context.Library.TryGetTypeProvider(returnType, out var p) && p is ResourceData data)
+            if (MgmtContext.Library.TryGetTypeProvider(returnType, out var p) && p is ResourceData data)
                 return $"{returnType.Substring(0, returnType.Length - 4)}.ResourceType.Namespace";
 
             return $"ProviderConstants.DefaultProviderNamespace";
@@ -412,7 +410,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
 
             // find the corresponding class of this resource type. If we find only one, use the constant inside that class. If we have multiple, use the hard-coded magic string
-            var candidates = Context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
+            var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
             if (candidates.Count() == 1)
             {
                 return $"{candidates.First().Type}.ResourceType";
@@ -465,7 +463,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
             if (This.Accessibility == "public")
-                _writer.WriteXmlDocumentationMgmtRequiredParametersException(signature.Parameters);
+            {
+                _writer.WriteXmlDocumentationNonEmptyParametersException(signature.Parameters);
+                _writer.WriteXmlDocumentationRequiredParametersException(signature.Parameters);
+            }
 
             FormattableString? returnDesc = returnDescription ?? signature.ReturnDescription;
             if (returnDesc is not null)
@@ -473,7 +474,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var scope = _writer.WriteMethodDeclaration(signature, isAsync);
             if (This.Accessibility == "public")
-                _writer.WriteParameterNullOrEmptyChecks(signature.Parameters);
+                _writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
         }
@@ -576,7 +577,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .AppendIf($".{pagingMethod.ItemName}", !pagingMethod.ItemName.IsNullOrEmpty());
 
 
-            Resource? resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(itemType));
+            Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(itemType));
             // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
             if (resource is null)
                 resource = operation.Resource is not null && operation.Resource.Type.Equals(itemType)
@@ -664,7 +665,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-                Resource? resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
+                Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
                 resource ??= operation.Resource != null && operation.Resource.Type.Equals(operation.ReturnType.UnWrapResponse()) ? operation.Resource : null;
                 if (resource is not null)
                 {
@@ -779,7 +780,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (operation.OperationSource is not null)
                 {
                     _writer.Append($"new {operation.OperationSource.TypeName}(");
-                    if (Context.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
+                    if (MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
                         _writer.Append($"{ArmClientReference}");
                     _writer.Append($"), ");
                 }
@@ -823,7 +824,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && !parameter.Parameter.ValidateNotNull)
+                        if (passNullForOptionalParameters && !parameter.Parameter.Validate)
                             writer.Append($"null, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");

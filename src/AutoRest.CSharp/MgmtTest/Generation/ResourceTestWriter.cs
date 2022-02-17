@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         protected string TestBaseName => $"MockTestBase";
         private Resource This { get; }
 
-        public ResourceTestWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
+        public ResourceTestWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
             This = resource;
             _allOperation = resource.AllOperations;
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
-                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
+                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
                     return;
                 var testMethodName = CreateMethodName(methodName, async);

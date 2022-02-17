@@ -39,7 +39,7 @@ namespace MgmtOperations
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            Client.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
@@ -48,6 +48,13 @@ namespace MgmtOperations
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
             return new AvailabilitySetCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
+        /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
+        public virtual UnpatchableResourceCollection GetUnpatchableResources()
+        {
+            return new UnpatchableResourceCollection(Client, Id);
         }
 
         /// <summary>

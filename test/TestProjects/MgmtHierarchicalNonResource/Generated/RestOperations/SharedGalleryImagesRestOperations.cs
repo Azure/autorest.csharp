@@ -76,7 +76,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         public async Task<Response<SharedGalleryImageList>> ListAsync(string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -114,7 +114,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         public Response<SharedGalleryImageList> List(string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -174,7 +174,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="galleryUniqueName"/>, or <paramref name="galleryImageName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="galleryUniqueName"/> or <paramref name="galleryImageName"/> is null. </exception>
         public async Task<Response<SharedGalleryImage>> GetAsync(string subscriptionId, string location, string galleryUniqueName, string galleryImageName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -216,7 +216,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="galleryUniqueName"/>, or <paramref name="galleryImageName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="galleryUniqueName"/> or <paramref name="galleryImageName"/> is null. </exception>
         public Response<SharedGalleryImage> Get(string subscriptionId, string location, string galleryUniqueName, string galleryImageName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -273,7 +273,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         public async Task<Response<SharedGalleryImageList>> ListNextPageAsync(string nextLink, string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -316,7 +316,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         public Response<SharedGalleryImageList> ListNextPage(string nextLink, string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

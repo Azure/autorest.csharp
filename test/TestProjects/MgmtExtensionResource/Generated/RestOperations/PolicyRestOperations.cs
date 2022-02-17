@@ -70,7 +70,7 @@ namespace MgmtExtensionResource
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="domainNameLabel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(string subscriptionId, string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -107,7 +107,7 @@ namespace MgmtExtensionResource
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="domainNameLabel"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public Response<DnsNameAvailabilityResult> CheckDnsNameAvailability(string subscriptionId, string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

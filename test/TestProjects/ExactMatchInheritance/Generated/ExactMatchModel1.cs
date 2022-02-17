@@ -51,7 +51,7 @@ namespace ExactMatchInheritance
         internal ExactMatchModel1(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string exactMatchModel1ApiVersion);
+            TryGetApiVersion(ResourceType, out string exactMatchModel1ApiVersion);
             _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(_exactMatchModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

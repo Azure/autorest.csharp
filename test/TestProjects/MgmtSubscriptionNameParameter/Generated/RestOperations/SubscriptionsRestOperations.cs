@@ -170,7 +170,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="parameters"> Parameters supplied to create a subscription resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<SBSubscriptionData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -212,7 +212,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="parameters"> Parameters supplied to create a subscription resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<SBSubscriptionData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -273,7 +273,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is null. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string subscriptionName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -306,7 +306,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is null. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string subscriptionName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -359,7 +359,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is null. </exception>
         public async Task<Response<SBSubscriptionData>> GetAsync(string subscriptionId, string resourceGroupName, string subscriptionName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -398,7 +398,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is null. </exception>
         public Response<SBSubscriptionData> Get(string subscriptionId, string resourceGroupName, string subscriptionName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -453,7 +453,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="skip"> Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls. </param>
         /// <param name="top"> May be used to limit the number of results to the most recent N usageDetails. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public async Task<Response<SBSubscriptionListResult>> ListByTopicNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, int? skip = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -492,7 +492,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="skip"> Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls. </param>
         /// <param name="top"> May be used to limit the number of results to the most recent N usageDetails. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public Response<SBSubscriptionListResult> ListByTopicNextPage(string nextLink, string subscriptionId, string resourceGroupName, int? skip = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

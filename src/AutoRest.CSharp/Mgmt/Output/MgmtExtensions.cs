@@ -21,22 +21,22 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public IEnumerable<Operation> AllRawOperations { get; }
 
-        protected MgmtExtensions(BuildContext<MgmtOutputLibrary> context, MgmtExtensions mgmtExtension)
-            : this(mgmtExtension.AllRawOperations, mgmtExtension.ArmCoreType, context, mgmtExtension.ContextualPath)
+        protected MgmtExtensions(MgmtExtensions mgmtExtension)
+            : this(mgmtExtension.AllRawOperations, mgmtExtension.ArmCoreType, mgmtExtension.ContextualPath)
         {
         }
 
-        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, BuildContext<MgmtOutputLibrary> context, RequestPath contextualPath)
-            : base(context, armCoreType.Name)
+        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath)
+            : base(armCoreType.Name)
         {
-            _context = context;
             AllRawOperations = allRawOperations;
             ArmCoreType = armCoreType;
-            DefaultName = context.Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
-            DefaultNamespace = context.Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
-            Description = context.Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
+            DefaultName = MgmtContext.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
+            DefaultNamespace = MgmtContext.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
+            Description = MgmtContext.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
+            ChildResources = !MgmtContext.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
         }
 
         protected override ConstructorSignature? EnsureMockingCtor()
@@ -75,6 +75,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual RequestPath ContextualPath { get; }
 
+        public override IEnumerable<Resource> ChildResources { get; }
+
         public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
         protected override IEnumerable<FieldDeclaration> EnsureFieldDeclaration()
@@ -84,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
-            var extensionParamToUse = _context.Configuration.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
+            var extensionParamToUse = MgmtContext.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
             return AllRawOperations.Select(operation =>
             {
                 var operationName = GetOperationName(operation, ResourceName);
@@ -93,13 +95,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
-                        _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
-                        operation.GetRequestPath(_context),
+                        MgmtContext.Library.GetRestClientMethod(operation),
+                        MgmtContext.Library.GetRestClient(operation),
+                        operation.GetRequestPath(),
                         ContextualPath,
-                        operationName,
-                        _context),
-                    _context,
+                        operationName),
                     extensionParamToUse);
             });
         }
@@ -110,9 +110,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var opertionName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (_context.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.IsResourceDataType(_context, out var data))
+            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.IsResourceDataType(out var data))
             {
-                var requestPath = operation.GetRequestPath(_context);
+                var requestPath = operation.GetRequestPath();
                 // we need to find the correct resource type that links with this resource data
                 var resource = FindResourceFromResourceData(data, requestPath);
                 if (resource != null)
@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private Resource? FindResourceFromResourceData(ResourceData data, RequestPath requestPath)
         {
             // we need to find the correct resource type that links with this resource data
-            var candidates = _context.Library.FindResources(data);
+            var candidates = MgmtContext.Library.FindResources(data);
 
             // return null when there is no match
             if (!candidates.Any())
@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return candidates.Single();
 
             // if there is more candidates than one, we are going to some more matching to see if we could determine one
-            var resourceType = requestPath.GetResourceType(_context.Configuration.MgmtConfiguration);
+            var resourceType = requestPath.GetResourceType();
             var filteredResources = candidates.Where(resource => resource.ResourceType == resourceType);
 
             if (filteredResources.Count() == 1)

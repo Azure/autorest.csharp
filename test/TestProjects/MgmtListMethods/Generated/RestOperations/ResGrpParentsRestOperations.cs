@@ -75,7 +75,7 @@ namespace MgmtListMethods
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resGrpParentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<ResGrpParentData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -117,7 +117,7 @@ namespace MgmtListMethods
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resGrpParentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<ResGrpParentData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -178,7 +178,7 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="resGrpParentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resGrpParentName"/> is null. </exception>
         public async Task<Response<ResGrpParentData>> GetAsync(string subscriptionId, string resourceGroupName, string resGrpParentName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -217,7 +217,7 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="resGrpParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="resGrpParentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resGrpParentName"/> is null. </exception>
         public Response<ResGrpParentData> Get(string subscriptionId, string resourceGroupName, string resGrpParentName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

@@ -234,7 +234,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> CreateOrUpdateAtScopeAsync(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
@@ -267,7 +267,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response CreateOrUpdateAtScope(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
@@ -482,7 +482,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> ValidateAtScopeAsync(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
@@ -516,7 +516,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response ValidateAtScope(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
@@ -816,7 +816,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> WhatIfAtManagementGroupScopeAsync(string groupId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
@@ -849,7 +849,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response WhatIfAtManagementGroupScope(string groupId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
@@ -905,7 +905,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to What If. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> WhatIfAtSubscriptionScopeAsync(string subscriptionId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -938,7 +938,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to What If. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response WhatIfAtSubscriptionScope(string subscriptionId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -997,7 +997,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> WhatIfAsync(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -1035,7 +1035,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response WhatIf(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

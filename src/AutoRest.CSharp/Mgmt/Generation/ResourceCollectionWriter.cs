@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private ResourceCollection This { get; }
 
-        public ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context)
-            : base(writer, resourceCollection, context)
+        public ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection)
+            : base(writer, resourceCollection)
         {
             This = resourceCollection;
             _customMethods.Add(nameof(WriteExistsBody), WriteExistsBody);

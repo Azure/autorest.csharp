@@ -72,7 +72,7 @@ namespace MgmtListMethods
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGroupParentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<MgmtGroupParentData>> CreateOrUpdateAsync(string groupId, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
@@ -109,7 +109,7 @@ namespace MgmtListMethods
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGroupParentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<MgmtGroupParentData> CreateOrUpdate(string groupId, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
