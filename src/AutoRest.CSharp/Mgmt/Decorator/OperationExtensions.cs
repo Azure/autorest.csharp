@@ -20,6 +20,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OperationExtensions
     {
+        private static readonly ConcurrentDictionary<Operation, string> _operationIdCache = new ConcurrentDictionary<Operation, string>();
+
+        private static readonly ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath>();
+
+        private static readonly ConcurrentDictionary<Operation, IEnumerable<Resource>> _operationToResourceCache = new ConcurrentDictionary<Operation, IEnumerable<Resource>>();
+
         /// <summary>
         /// Returns the CSharpName of an operation in management plane pattern where we replace the word List with Get or GetAll depending on if there are following words
         /// </summary>
@@ -63,16 +69,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static readonly ConcurrentDictionary<Operation, string> _operationIdCache = new ConcurrentDictionary<Operation, string>();
-
-        private static readonly ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath>();
-
         public static RequestPath GetRequestPath(this Operation operation, ResourceTypeSegment? hint = null)
         {
             if (_operationToRequestPathCache.TryGetValue((operation, hint), out var requestPath))
                 return requestPath;
 
-            requestPath = new RequestPath(MgmtContext.Library.GetRestClientMethod(operation));
+            requestPath = MgmtContext.Library.GetRequestPath(operation);
             if (hint.HasValue)
                 requestPath = requestPath.ApplyHint(hint.Value);
 
@@ -232,7 +234,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return responseBodyType == resourceData.Type.Name;
         }
 
-        private static ConcurrentDictionary<Operation, IEnumerable<Resource>> _operationToResourceCache = new ConcurrentDictionary<Operation, IEnumerable<Resource>>();
         internal static IEnumerable<Resource> GetResourceFromResourceType(this Operation operation)
         {
             if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))

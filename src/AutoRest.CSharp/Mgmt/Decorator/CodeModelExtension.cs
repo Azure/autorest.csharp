@@ -69,7 +69,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (property.Language.Default.Name.EndsWith("Uri"))
+                    if (property.Language.Default.Name.EndsWith("Uri", StringComparison.Ordinal) ||
+                        property.Language.Default.Name.Equals("uri", StringComparison.Ordinal))
                         property.Schema.Type = AllSchemaTypes.Uri;
                 }
             }
