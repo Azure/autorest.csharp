@@ -105,11 +105,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _mergedOperations = MgmtContext.MgmtConfiguration.MergeOperations
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
-            _allSchemas = MgmtContext.CodeModel.Schemas.Choices.Cast<Schema>()
-                .Concat(MgmtContext.CodeModel.Schemas.SealedChoices)
-                .Concat(MgmtContext.CodeModel.Schemas.Objects)
-                .Concat(MgmtContext.CodeModel.Schemas.Groups);
-            _allSchemas.UpdateAcronyms();
+            MgmtContext.CodeModel.UpdateAcronyms();
+            _allSchemas = MgmtContext.CodeModel.AllSchemas;
             _allSchemas.UpdateFrameworkTypes();
 
             // We can only manipulate objects from the code model, not RestClientMethod
