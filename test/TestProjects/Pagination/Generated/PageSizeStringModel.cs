@@ -51,7 +51,7 @@ namespace Pagination
         internal PageSizeStringModel(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _pageSizeStringModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string pageSizeStringModelApiVersion);
+            TryGetApiVersion(ResourceType, out string pageSizeStringModelApiVersion);
             _pageSizeStringModelRestClient = new PageSizeStringModelsRestOperations(_pageSizeStringModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeStringModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);

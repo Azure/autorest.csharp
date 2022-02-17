@@ -14,7 +14,7 @@ using MgmtKeyvault.Models;
 namespace MgmtKeyvault
 {
     /// <summary> A class representing the PrivateEndpointConnection data model. </summary>
-    public partial class PrivateEndpointConnectionData : Models.Resource
+    public partial class PrivateEndpointConnectionData : Resource
     {
         /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
         public PrivateEndpointConnectionData()

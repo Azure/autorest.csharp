@@ -25,8 +25,10 @@ namespace AutoRest.CSharp.Utilities
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
         public static bool IsNullOrWhiteSpace(this string? text) => String.IsNullOrWhiteSpace(text);
 
+        private static bool IsWordSeparator(char c) => !SyntaxFacts.IsIdentifierPartCharacter(c) || c == '_';
+
         [return: NotNullIfNotNull("name")]
-        public static string ToCleanName(this string name, bool camelCase = true)
+        public static string ToCleanName(this string name, bool isCamelCase = true)
         {
             StringBuilder nameBuilder = new StringBuilder();
 
@@ -45,19 +47,33 @@ namespace AutoRest.CSharp.Utilities
             }
 
             bool upperCase = false;
+            int firstWordLength = 1;
             for (; i < name.Length; i++)
             {
                 var c = name[i];
-                if (!SyntaxFacts.IsIdentifierPartCharacter(c) || c == '_')
+                if (IsWordSeparator(c))
                 {
                     upperCase = true;
                     continue;
                 }
 
-                if (nameBuilder.Length == 0)
+                if (nameBuilder.Length == 0 && isCamelCase)
                 {
-                    c = camelCase ? char.ToUpper(c) : char.ToLower(c);
+                    c = char.ToUpper(c);
                     upperCase = false;
+                }
+                else if (nameBuilder.Length < firstWordLength && !isCamelCase)
+                {
+                    c = char.ToLower(c);
+                    upperCase = false;
+                    // grow the first word length when this letter follows by two other upper case letters
+                    // this happens in OSProfile, where OS is the first word
+                    if (i + 2 < name.Length && char.IsUpper(name[i + 1]) && (char.IsUpper(name[i + 2]) || IsWordSeparator(name[i + 2])))
+                        firstWordLength++;
+                    // grow the first word length when this letter follows by another upper case letter and an end of the string
+                    // this happens when the string only has one word, like OS, DNS
+                    if (i + 2 == name.Length && char.IsUpper(name[i + 1]))
+                        firstWordLength++;
                 }
 
                 if (upperCase)
@@ -73,7 +89,7 @@ namespace AutoRest.CSharp.Utilities
         }
 
         [return: NotNullIfNotNull("name")]
-        public static string ToVariableName(this string name) => ToCleanName(name, camelCase: false);
+        public static string ToVariableName(this string name) => ToCleanName(name, isCamelCase: false);
 
         public static GetPathPartsEnumerator GetPathParts(string? path) => new GetPathPartsEnumerator(path);
 

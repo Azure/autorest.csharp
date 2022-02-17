@@ -593,7 +593,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 if (paramName is null)
                 {
                     var paramNameDeclare = new CodeWriterDeclaration(passThruParameter.Name);
-                    if (passThruParameter.ValidateNotNull)
+                    if (passThruParameter.Validate)
                     {
                         _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = default; /* Can't find this parameter in example, please provide value here!*/");
                     }

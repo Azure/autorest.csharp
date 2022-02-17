@@ -41,9 +41,10 @@ namespace url_LowLevel
         /// <param name="globalStringQuery"> should contain value null. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/> or <paramref name="credential"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="globalStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         public PathItemsClient(string globalStringPath, AzureKeyCredential credential, Uri endpoint = null, string globalStringQuery = null, AutoRestUrlTestServiceClientOptions options = null)
         {
-            Argument.AssertNotNull(globalStringPath, nameof(globalStringPath));
+            Argument.AssertNotNullOrEmpty(globalStringPath, nameof(globalStringPath));
             Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestUrlTestServiceClientOptions();
@@ -63,6 +64,7 @@ namespace url_LowLevel
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -76,8 +78,8 @@ namespace url_LowLevel
         public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
-            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
@@ -100,6 +102,7 @@ namespace url_LowLevel
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -113,8 +116,8 @@ namespace url_LowLevel
         public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
-            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetAllWithValues");
             scope.Start();
@@ -137,6 +140,7 @@ namespace url_LowLevel
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -150,8 +154,8 @@ namespace url_LowLevel
         public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
-            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
@@ -174,6 +178,7 @@ namespace url_LowLevel
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -187,8 +192,8 @@ namespace url_LowLevel
         public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
-            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalQueryNull");
             scope.Start();
@@ -211,6 +216,7 @@ namespace url_LowLevel
         /// <param name="localStringQuery"> should contain null value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -224,8 +230,8 @@ namespace url_LowLevel
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
-            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
@@ -248,6 +254,7 @@ namespace url_LowLevel
         /// <param name="localStringQuery"> should contain null value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -261,8 +268,8 @@ namespace url_LowLevel
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
-            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetGlobalAndLocalQueryNull");
             scope.Start();
@@ -285,6 +292,7 @@ namespace url_LowLevel
         /// <param name="localStringQuery"> should contain value null. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -298,8 +306,8 @@ namespace url_LowLevel
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
-            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();
@@ -322,6 +330,7 @@ namespace url_LowLevel
         /// <param name="localStringQuery"> should contain value null. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="pathItemStringPath"/> or <paramref name="localStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -335,8 +344,8 @@ namespace url_LowLevel
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(pathItemStringPath, nameof(pathItemStringPath));
-            Argument.AssertNotNull(localStringPath, nameof(localStringPath));
+            Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
+            Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
 
             using var scope = ClientDiagnostics.CreateScope("PathItemsClient.GetLocalPathItemQueryNull");
             scope.Start();

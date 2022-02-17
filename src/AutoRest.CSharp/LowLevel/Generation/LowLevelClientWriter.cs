@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    WriteSubClientFactoryMethod(writer, context, client);
+                    WriteSubClientFactoryMethod(writer, client);
 
                     var responseClassifierTypes = new List<ResponseClassifierType>();
                     foreach (var method in client.RequestMethods)
@@ -91,8 +91,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteFieldDeclaration(field);
             }
 
-            writer.Line();
             writer
+                .Line()
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
                 .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {client.Fields.PipelineField.Name};");
 
@@ -359,52 +359,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSubClientFactoryMethod(CodeWriter writer, BuildContext context, LowLevelClient parentClient)
+        private void WriteSubClientFactoryMethod(CodeWriter writer, LowLevelClient client)
         {
-            var factoryMethods = new List<(FieldDeclaration?, MethodSignature, List<Reference>)>();
-            foreach (var subClient in parentClient.SubClients)
-            {
-                var methodParameters = new List<Parameter>();
-                var constructorCallParameters = new List<Reference>();
-
-                foreach (var parameter in subClient.SubClientInternalConstructor.Parameters)
-                {
-                    var field = parentClient.Fields.GetFieldByParameter(parameter);
-                    if (field == null)
-                    {
-                        methodParameters.Add(parameter);
-                        constructorCallParameters.Add(parameter);
-                    }
-                    else
-                    {
-                        constructorCallParameters.Add(new Reference(field.Name, field.Type));
-                    }
-                }
-
-                var subClientName = subClient.Type.Name;
-                var libraryName = context.DefaultLibraryName;
-                var methodName = subClientName.StartsWith(libraryName)
-                    ? subClientName[libraryName.Length..]
-                    : subClientName;
-
-                if (!subClient.IsResourceClient)
-                {
-                    methodName += ClientBuilder.GetClientSuffix(context);
-                }
-
-                var methodSignature = new MethodSignature($"Get{methodName}", $"Initializes a new instance of {subClient.Type.Name}", "public virtual", subClient.Type, null, methodParameters.ToArray());
-                if (methodParameters.Any())
-                {
-                    factoryMethods.Add((null, methodSignature, constructorCallParameters));
-                }
-                else
-                {
-                    var field = new FieldDeclaration(FieldModifiers.Private, subClient.Type, $"_cached{subClient.Type.Name}");
-                    factoryMethods.Add((field, methodSignature, constructorCallParameters));
-                }
-            }
-
-            foreach (var (field, _, _) in factoryMethods)
+            foreach (var (_, field, _) in client.SubClientFactoryMethods)
             {
                 if (field != null)
                 {
@@ -414,7 +371,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.Line();
 
-            foreach (var (field, methodSignature, constructorCallParameters) in factoryMethods)
+            foreach (var (methodSignature, field, constructorCallParameters) in client.SubClientFactoryMethods)
             {
                 writer.WriteMethodDocumentation(methodSignature);
                 using (writer.WriteMethodDeclaration(methodSignature))
@@ -422,16 +379,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteParametersValidation(methodSignature.Parameters);
                     writer.Line();
 
+                    var references = constructorCallParameters
+                        .Select(p => client.Fields.GetFieldByParameter(p) ?? (Reference)p)
+                        .ToArray();
+
                     if (field != null)
                     {
                         writer
                             .Append($"return {typeof(Volatile)}.{nameof(Volatile.Read)}(ref {field.Name})")
-                            .Append($" ?? {typeof(Interlocked)}.{nameof(Interlocked.CompareExchange)}(ref {field.Name}, new {methodSignature.ReturnType}({constructorCallParameters.GetIdentifiersFormattable()}), null)")
+                            .Append($" ?? {typeof(Interlocked)}.{nameof(Interlocked.CompareExchange)}(ref {field.Name}, new {methodSignature.ReturnType}({references.GetIdentifiersFormattable()}), null)")
                             .Line($" ?? {field.Name};");
                     }
                     else
                     {
-                        writer.Line($"return new {methodSignature.ReturnType}({constructorCallParameters.GetIdentifiersFormattable()});");
+                        writer.Line($"return new {methodSignature.ReturnType}({references.GetIdentifiersFormattable()});");
                     }
                 }
                 writer.Line();

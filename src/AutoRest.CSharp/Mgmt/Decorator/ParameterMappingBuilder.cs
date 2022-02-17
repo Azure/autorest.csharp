@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static FormattableString GetValueExpression(CSharpType type, FormattableString rawExpression)
         {
-            if (type.IsStringLike())
+            if (TypeFactory.IsStringLike(type))
                 return rawExpression;
 
             if (!type.IsFrameworkType)

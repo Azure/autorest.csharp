@@ -25,10 +25,10 @@ namespace ExactMatchInheritance.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(NEW))
+            if (Optional.IsDefined(Bar))
             {
-                writer.WritePropertyName("NEW");
-                writer.WriteStringValue(NEW);
+                writer.WritePropertyName("bar");
+                writer.WriteStringValue(Bar);
             }
             writer.WriteEndObject();
         }
@@ -37,7 +37,7 @@ namespace ExactMatchInheritance.Models
         {
             Optional<string> id = default;
             Optional<string> name = default;
-            Optional<string> nEW = default;
+            Optional<string> bar = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -50,13 +50,13 @@ namespace ExactMatchInheritance.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("NEW"))
+                if (property.NameEquals("bar"))
                 {
-                    nEW = property.Value.GetString();
+                    bar = property.Value.GetString();
                     continue;
                 }
             }
-            return new ExactMatchModel8(id.Value, name.Value, nEW.Value);
+            return new ExactMatchModel8(id.Value, name.Value, bar.Value);
         }
     }
 }

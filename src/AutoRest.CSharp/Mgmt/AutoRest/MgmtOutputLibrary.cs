@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO.Pipes;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
@@ -13,6 +15,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -36,6 +39,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// which is a collection of the operations with the same raw request path
         /// </summary>
         private CachedDictionary<string, OperationSet> RawRequestPathToOperationSets { get; }
+
+        /// <summary>
+        /// This is a map from operation to its request path
+        /// </summary>
+        private CachedDictionary<Operation, RequestPath> OperationsToRequestPaths { get; }
 
         /// <summary>
         /// This is a map from raw request path to the corresponding <see cref="MgmtRestClient"/>
@@ -74,7 +82,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <summary>
         /// This is a map from <see cref="OperationGroup"/> to the list of raw request path of its operations
         /// </summary>
-        private Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths;
+        private readonly Dictionary<OperationGroup, IEnumerable<string>> _operationGroupToRequestPaths;
 
         public MgmtOutputLibrary()
         {
@@ -82,6 +90,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             MgmtContext.CodeModel.UpdateSubscriptionIdForAllResource();
             _operationGroupToRequestPaths = new Dictionary<OperationGroup, IEnumerable<string>>();
             RawRequestPathToOperationSets = new CachedDictionary<string, OperationSet>(CategorizeOperationGroups);
+            OperationsToRequestPaths = new CachedDictionary<Operation, RequestPath>(PopulateOperationsToRequestPaths);
             ResourceDataSchemaNameToOperationSets = new CachedDictionary<string, HashSet<OperationSet>>(DecorateOperationSets);
             RawRequestPathToRestClient = new CachedDictionary<string, HashSet<MgmtRestClient>>(EnsureRestClients);
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
@@ -108,31 +117,113 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
-
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
+
+        private Dictionary<string, Schema> UpdatePatchParameterNames()
+        {
+            Dictionary<Schema, int> usageCounts = new Dictionary<Schema, int>();
+            Dictionary<string, Schema> updatedModels = new Dictionary<string, Schema>();
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    foreach (var request in operation.Requests)
+                    {
+                        var httpRequest = request.Protocol.Http as HttpRequest;
+                        if (httpRequest is null)
+                            continue;
+
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                        if (bodyParam is null)
+                            continue;
+
+                        IncrementCount(usageCounts, bodyParam);
+                    }
+                    foreach (var response in operation.Responses)
+                    {
+                        var responseSchema = response.ResponseSchema;
+                        if (responseSchema is null)
+                            continue;
+
+                        IncrementCount(usageCounts, responseSchema);
+                    }
+                }
+            }
+
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    foreach (var request in operation.Requests)
+                    {
+                        if (request.Protocol.Http is not HttpRequest {Method: HttpMethod.Patch})
+                            continue;
+
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body);
+                        if (bodyParam is null)
+                            continue;
+
+                        if (!usageCounts.TryGetValue(bodyParam.Schema, out var count))
+                            continue;
+
+                        if (count != 1)
+                            continue;
+
+                        RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup);
+                        var operationSet = RawRequestPathToOperationSets[requestPath];
+                        var resourceDataModelName = ResourceDataSchemaNameToOperationSets.FirstOrDefault(kv => kv.Value.Contains(operationSet));
+                        if (resourceDataModelName.Key is not null)
+                        {
+                            //TODO handle expandable request paths.  We assume that this is fine since if all of the expanded
+                            //types use the same model they should have a common name, but since this case doesn't exist yet
+                            //we don't know for sure
+                            if (requestPath.IsExpandable)
+                                throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
+                            var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
+                            updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
+                            bodyParam.Schema.Language.Default.Name = $"{name}UpdateOptions";
+                            bodyParam.Language.Default.Name = "options";
+                        }
+                    }
+                }
+            }
+            return updatedModels;
+        }
+
+        private static void IncrementCount(Dictionary<Schema, int> usageCounts, Schema schema)
+        {
+            if (usageCounts.ContainsKey(schema))
+            {
+                usageCounts[schema]++;
+            }
+            else
+            {
+                usageCounts.Add(schema, 1);
+            }
+        }
 
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<Schema, TypeProvider> InitializeModels()
         {
-            //_models = new Dictionary<Schema, TypeProvider>();
             var resourceModels = new Dictionary<Schema, TypeProvider>();
 
-            // first, construct models and resource data models
+            // first, construct resource data models
             foreach (var schema in _allSchemas)
             {
-                if (ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name))
-                {
-                    var model = BuildResourceModel(schema);
-                    resourceModels.Add(schema, model);
-                    _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
-                }
-                else
-                {
-                    var model = BuildModel(schema);
-                    resourceModels.Add(schema, model);
-                    _nameToTypeProvider.Add(schema.Name, model);
-                }
+                var model = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceModel(schema) : BuildModel(schema);
+                resourceModels.Add(schema, model);
+                _nameToTypeProvider.Add(schema.Name, model); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
+            }
 
+            //this is where we update
+            var updatedModels = UpdatePatchParameterNames();
+            foreach (var (oldName, schema) in updatedModels)
+            {
+                resourceModels.Remove(schema);
+                _nameToTypeProvider.Remove(oldName);
+                var model = BuildModel(schema);
+                resourceModels.Add(schema, model);
+                _nameToTypeProvider.Add(schema.Name, model);
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
@@ -181,12 +272,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<OperationSet>? _resourceOperationSets;
         public IEnumerable<OperationSet> ResourceOperationSets => _resourceOperationSets ??= ResourceDataSchemaNameToOperationSets.SelectMany(pair => pair.Value);
 
-        public OperationSet GetOperationSet(string requestPath)
-        {
-            return RawRequestPathToOperationSets[requestPath];
-        }
+        public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
 
         public RestClientMethod GetRestClientMethod(Operation operation) => RestClientMethods[operation];
+
+        public RequestPath GetRequestPath(Operation operation) => OperationsToRequestPaths[operation];
 
         private Dictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
         {
@@ -248,7 +338,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
         {
-            bool shouldGenerateChildren = MgmtContext.MgmtConfiguration.IsArmCore ? armCoreType.Namespace != MgmtContext.Context.DefaultNamespace : true;
+            bool shouldGenerateChildren = !MgmtContext.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
             var operations = shouldGenerateChildren ? GetChildOperations(contextualPath) : Enumerable.Empty<Operation>();
             return new MgmtExtensions(operations, armCoreType, contextualPath);
         }
@@ -343,18 +433,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return false;
         }
 
-        public bool TryGetResourceCollection(RequestPath requestPath, out ResourceCollection? collection)
-        {
-            collection = null;
-            if (RequestPathToResources.TryGetValue(requestPath, out var bag))
-            {
-                collection = bag.ResourceCollection;
-                return true;
-            }
-
-            return false;
-        }
-
         public MgmtRestClient GetRestClient(Operation operation)
         {
             var requestPath = operation.GetHttpPath();
@@ -394,7 +472,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             var requestPathToResources = new Dictionary<RequestPath, ResourceObjectAssociation>();
 
-            foreach ((var resourceName, var operationSets) in ResourceDataSchemaNameToOperationSets)
+            foreach ((var resourceDataSchemaName, var operationSets) in ResourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
                 foreach (var resourceOperations in resourceOperationsList)
@@ -414,7 +492,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     foreach (var resourcePath in resourcePaths)
                     {
                         var resourceType = resourcePath.GetResourceType();
-                        var resource = new Resource(resourceOperations, resourceName, resourceType, resourceData);
+                        var resource = new Resource(resourceOperations, GetResourceName(resourceDataSchemaName, resourceOperations.Keys.First(), resourcePath), resourceType, resourceData);
                         var collection = isSingleton ? null : new ResourceCollection(resourceOperations, resource);
                         resource.ResourceCollection = collection;
 
@@ -424,6 +502,114 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return requestPathToResources;
+        }
+
+        private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
+        {
+            if (MgmtContext.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
+                return name;
+            if (MgmtContext.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{resourceType}", out name))
+                return name;
+
+            return null;
+        }
+
+        private string GetResourceName(string candidateName, OperationSet operationSet, RequestPath requestPath)
+        {
+            // read configuration to see if we could get a configuration for this resource
+            var resourceType = requestPath.GetResourceType();
+            var defaultNameFromConfig = GetDefaultNameFromConfiguration(operationSet, resourceType);
+            if (defaultNameFromConfig != null)
+                return defaultNameFromConfig;
+
+            var resourcesWithSameName = ResourceDataSchemaNameToOperationSets[candidateName];
+            var resourcesWithSameType = ResourceOperationSets
+                .SelectMany(opSet => opSet.GetRequestPath().Expand())
+                .Where(rqPath => rqPath.GetResourceType().Equals(resourceType));
+
+            var isById = requestPath.IsById;
+            int countOfSameResourceDataName = resourcesWithSameName.Count();
+            int countOfSameResourceTypeName = resourcesWithSameType.Count();
+            if (!isById)
+            {
+                // this is a regular resource and the name is unique
+                if (countOfSameResourceDataName == 1)
+                    return candidateName;
+
+                // if countOfSameResourceDataName > 1, we need to have the resource types as the resource type name
+                // if we have the unique resource type, we just use the resource type to construct our resource type name
+                var types = resourceType.Types;
+                var name = string.Join("", types.Select(segment => segment.ConstantValue.LastWordToSingular().FirstCharToUpperCase()));
+                if (countOfSameResourceTypeName == 1)
+                    return name;
+
+                string parentPrefix = GetParentPrefix(requestPath);
+                // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
+                // first we try to add the parent name as prefix
+                if (!DoMultipleResourcesShareMyPrefixes(requestPath, parentPrefix, resourcesWithSameType))
+                    return $"{parentPrefix}{name}";
+
+                // if we get here, parent prefix is not enough, we try the resource name if it is a constant
+                if (requestPath.Last().IsConstant)
+                    return $"{requestPath.Last().ConstantValue.FirstCharToUpperCase()}{name}";
+
+                // if we get here, we have tried all approaches to get a solid resource type name, throw an exception
+                throw new InvalidOperationException($"Cannot determine a resource class name for resource with the request path: {requestPath}, please assign a valid resource name in `request-path-to-resource-name` section");
+            }
+            // if this resource is based on a "ById" operation
+            // if we only have one resource class with this name - we have no choice but use this "ById" resource
+            if (countOfSameResourceDataName == 1)
+                return candidateName;
+
+            // otherwise we need to add a "ById" suffix to make this resource to have a different name
+            // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
+            return $"{candidateName}ById";
+        }
+
+        private string GetParentPrefix(RequestPath pathToWalk)
+        {
+            while (pathToWalk.Count > 2)
+            {
+                pathToWalk = pathToWalk.GetParent();
+                if (RawRequestPathToResourceData.TryGetValue(pathToWalk.ToString()!, out var parentData))
+                {
+                    return parentData.Declaration.Name.Substring(0, parentData.Declaration.Name.Length - 4);
+                }
+                else
+                {
+                    var prefix = GetCoreParentName(pathToWalk);
+                    if (prefix is not null)
+                        return prefix;
+                }
+            }
+            return string.Empty;
+        }
+
+        private string? GetCoreParentName(RequestPath requestPath)
+        {
+            var resourceType = requestPath.GetResourceType();
+            if (resourceType.Equals(ResourceTypeSegment.ManagementGroup))
+                return nameof(ResourceTypeSegment.ManagementGroup);
+            if (resourceType.Equals(ResourceTypeSegment.ResourceGroup))
+                return nameof(ResourceTypeSegment.ResourceGroup);
+            if (resourceType.Equals(ResourceTypeSegment.Subscription))
+                return nameof(ResourceTypeSegment.Subscription);
+            if (resourceType.Equals(ResourceTypeSegment.Tenant))
+                return nameof(ResourceTypeSegment.Tenant);
+            return null;
+        }
+
+        private bool DoMultipleResourcesShareMyPrefixes(RequestPath requestPath, string parentPrefix, IEnumerable<RequestPath> resourcesWithSameType)
+        {
+            foreach (var resourcePath in resourcesWithSameType)
+            {
+                if (resourcePath.Equals(requestPath))
+                    continue; //skip myself
+
+                if (GetParentPrefix(resourcePath).Equals(parentPrefix, StringComparison.Ordinal))
+                    return true;
+            }
+            return false;
         }
 
         private struct RequestPathCollectionEqualityComparer : IEqualityComparer<IEnumerable<RequestPath>>
@@ -472,7 +658,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, HashSet<Operation>> EnsureResourceChildOperations()
         {
             var childOperations = new Dictionary<string, HashSet<Operation>>();
-            foreach ((var requestPath, var operationSet) in RawRequestPathToOperationSets)
+            foreach (var operationSet in RawRequestPathToOperationSets.Values)
             {
                 if (operationSet.IsResource())
                     continue;
@@ -515,11 +701,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public override CSharpType FindTypeForSchema(Schema schema)
         {
             TypeProvider? result;
-            if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
+            if (!AllSchemaMap.IsPopulated)
+            {
+                result = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceModel(schema) : BuildModel(schema);
+            }
+            else if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
             {
                 throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
             }
-
             return result.Type;
         }
 
@@ -591,8 +780,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 if (operationSet.TryGetResourceDataSchemaName(out var resourceDataSchemaName))
                 {
                     // if this operation set corresponds to a SDK resource, we add it to the map
-                    HashSet<OperationSet>? result;
-                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchemaName, out result))
+                    if (!resourceDataSchemaNameToOperationSets.TryGetValue(resourceDataSchemaName, out HashSet<OperationSet>? result))
                     {
                         result = new HashSet<OperationSet>();
                         resourceDataSchemaNameToOperationSets.Add(resourceDataSchemaName, result);
@@ -624,7 +812,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<string, OperationSet> CategorizeOperationGroups()
         {
-            Dictionary<string, OperationSet> rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
+            var rawRequestPathToOperationSets = new Dictionary<string, OperationSet>();
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
                 var requestPathList = new HashSet<string>();
@@ -648,6 +836,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
             return rawRequestPathToOperationSets;
+        }
+
+        private Dictionary<Operation, RequestPath> PopulateOperationsToRequestPaths()
+        {
+            var operationsToRequestPath = new Dictionary<Operation, RequestPath>();
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    operationsToRequestPath[operation] = RequestPath.FromOperation(operation, operationGroup);
+                }
+            }
+            return operationsToRequestPath;
         }
     }
 }
