@@ -96,16 +96,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void UriPropertyGenerated()
         {
-            // Arrange
+            // Arrange & Act
             Type uriClient = typeof(PathsClient);
-            Type expectedType = uriClient.GetField("_endpoint", BindingFlags.NonPublic | BindingFlags.Instance).FieldType;
-
-            // Act
-            var publicProperty = uriClient.GetProperty("Uri");
+            Type publicProperty = uriClient.GetProperty("Endpoint").PropertyType;
 
             // Assert
             Assert.NotNull(publicProperty);
-            Assert.AreEqual(expectedType, publicProperty.PropertyType);
+            Assert.AreEqual(typeof(Uri), publicProperty);
         }
     }
 }
