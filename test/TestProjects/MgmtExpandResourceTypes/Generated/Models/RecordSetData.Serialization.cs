@@ -149,19 +149,19 @@ namespace MgmtExpandResourceTypes
             ResourceType type = default;
             SystemData systemData = default;
             Optional<IDictionary<string, string>> metadata = default;
-            Optional<long> tTL = default;
+            Optional<long> ttl = default;
             Optional<string> fqdn = default;
             Optional<string> provisioningState = default;
             Optional<WritableSubResource> targetResource = default;
             Optional<IList<ARecord>> aRecords = default;
-            Optional<IList<AaaaRecord>> aAAARecords = default;
-            Optional<IList<MxRecord>> mXRecords = default;
-            Optional<IList<NsRecord>> nSRecords = default;
-            Optional<IList<PtrRecord>> pTRRecords = default;
-            Optional<IList<SrvRecord>> sRVRecords = default;
-            Optional<IList<TxtRecord>> tXTRecords = default;
-            Optional<CnameRecord> cNAMERecord = default;
-            Optional<SoaRecord> sOARecord = default;
+            Optional<IList<AaaaRecord>> aaaaRecords = default;
+            Optional<IList<MxRecord>> mxRecords = default;
+            Optional<IList<NsRecord>> nsRecords = default;
+            Optional<IList<PtrRecord>> ptrRecords = default;
+            Optional<IList<SrvRecord>> srvRecords = default;
+            Optional<IList<TxtRecord>> txtRecords = default;
+            Optional<CnameRecord> cnameRecord = default;
+            Optional<SoaRecord> soaRecord = default;
             Optional<IList<CaaRecord>> caaRecords = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -221,7 +221,7 @@ namespace MgmtExpandResourceTypes
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            tTL = property0.Value.GetInt64();
+                            ttl = property0.Value.GetInt64();
                             continue;
                         }
                         if (property0.NameEquals("fqdn"))
@@ -271,7 +271,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 array.Add(AaaaRecord.DeserializeAaaaRecord(item));
                             }
-                            aAAARecords = array;
+                            aaaaRecords = array;
                             continue;
                         }
                         if (property0.NameEquals("MXRecords"))
@@ -286,7 +286,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 array.Add(MxRecord.DeserializeMxRecord(item));
                             }
-                            mXRecords = array;
+                            mxRecords = array;
                             continue;
                         }
                         if (property0.NameEquals("NSRecords"))
@@ -301,7 +301,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 array.Add(NsRecord.DeserializeNsRecord(item));
                             }
-                            nSRecords = array;
+                            nsRecords = array;
                             continue;
                         }
                         if (property0.NameEquals("PTRRecords"))
@@ -316,7 +316,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 array.Add(PtrRecord.DeserializePtrRecord(item));
                             }
-                            pTRRecords = array;
+                            ptrRecords = array;
                             continue;
                         }
                         if (property0.NameEquals("SRVRecords"))
@@ -331,7 +331,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 array.Add(SrvRecord.DeserializeSrvRecord(item));
                             }
-                            sRVRecords = array;
+                            srvRecords = array;
                             continue;
                         }
                         if (property0.NameEquals("TXTRecords"))
@@ -346,7 +346,7 @@ namespace MgmtExpandResourceTypes
                             {
                                 array.Add(TxtRecord.DeserializeTxtRecord(item));
                             }
-                            tXTRecords = array;
+                            txtRecords = array;
                             continue;
                         }
                         if (property0.NameEquals("CNAMERecord"))
@@ -356,7 +356,7 @@ namespace MgmtExpandResourceTypes
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            cNAMERecord = CnameRecord.DeserializeCnameRecord(property0.Value);
+                            cnameRecord = CnameRecord.DeserializeCnameRecord(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("SOARecord"))
@@ -366,7 +366,7 @@ namespace MgmtExpandResourceTypes
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            sOARecord = SoaRecord.DeserializeSoaRecord(property0.Value);
+                            soaRecord = SoaRecord.DeserializeSoaRecord(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("caaRecords"))
@@ -388,7 +388,7 @@ namespace MgmtExpandResourceTypes
                     continue;
                 }
             }
-            return new RecordSetData(id, name, type, systemData, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(tTL), fqdn.Value, provisioningState.Value, targetResource, Optional.ToList(aRecords), Optional.ToList(aAAARecords), Optional.ToList(mXRecords), Optional.ToList(nSRecords), Optional.ToList(pTRRecords), Optional.ToList(sRVRecords), Optional.ToList(tXTRecords), cNAMERecord.Value, sOARecord.Value, Optional.ToList(caaRecords));
+            return new RecordSetData(id, name, type, systemData, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(ttl), fqdn.Value, provisioningState.Value, targetResource, Optional.ToList(aRecords), Optional.ToList(aaaaRecords), Optional.ToList(mxRecords), Optional.ToList(nsRecords), Optional.ToList(ptrRecords), Optional.ToList(srvRecords), Optional.ToList(txtRecords), cnameRecord.Value, soaRecord.Value, Optional.ToList(caaRecords));
         }
     }
 }
