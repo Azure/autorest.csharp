@@ -123,28 +123,30 @@ namespace AutoRest.CSharp.Generation.Writers
             if (immediateParentPropertyName.EndsWith(property.Name, StringComparison.Ordinal))
                 return immediateParentPropertyName;
 
+            IEnumerable<string> parentWords = immediateParentPropertyName.SplitByCamelCase();
             if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
                 immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
                 immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
                 immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
                 immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
             {
-                var parentWords = immediateParentPropertyName.SplitByCamelCase();
-                var parentWordsHash = new HashSet<string>(parentWords);
-                var nameWords = property.Name.SplitByCamelCase();
-                var lastWord = string.Empty;
-                foreach (var word in nameWords)
-                {
-                    lastWord = word;
-                    if (parentWordsHash.Contains(word))
-                        return property.Name;
-                }
-                //need to depluralize the last word and check
-                if (parentWordsHash.Contains(lastWord.ToSingular(false)))
-                    return property.Name;
-
-                parentName = string.Join("", parentWords.Take(parentWords.Count() - 1));
+                parentWords = parentWords.Take(parentWords.Count() - 1);
             }
+
+            var parentWordsHash = new HashSet<string>(parentWords);
+            var nameWords = property.Name.SplitByCamelCase();
+            var lastWord = string.Empty;
+            foreach (var word in nameWords)
+            {
+                lastWord = word;
+                if (parentWordsHash.Contains(word))
+                    return property.Name;
+            }
+            //need to depluralize the last word and check
+            if (parentWordsHash.Contains(lastWord.ToSingular(false)))
+                return property.Name;
+
+            parentName = string.Join("", parentWords);
 
             return $"{parentName}{property.Name}";
         }

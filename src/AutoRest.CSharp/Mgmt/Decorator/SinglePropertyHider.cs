@@ -31,10 +31,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     if (property.IsRequired && property.Schema is ObjectSchema objectSchema)
                         topLevelObjects.Add(objectSchema);
 
-                    if (property.Schema is not ArraySchema arraySchema)
+                    Schema element;
+                    if (property.Schema is ArraySchema arraySchema)
+                    {
+                        element = arraySchema.ElementType;
+                    }
+                    else if (property.Schema is DictionarySchema dictionarySchema)
+                    {
+                        element = dictionarySchema.ElementType;
+                    }
+                    else
+                    {
                         continue;
+                    }
 
-                    if (arraySchema.ElementType is ObjectSchema elementSchema)
+                    if (element is ObjectSchema elementSchema)
                         topLevelObjects.Add(elementSchema);
                 }
             }
