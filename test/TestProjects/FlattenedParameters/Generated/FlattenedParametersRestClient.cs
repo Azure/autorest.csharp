@@ -20,7 +20,9 @@ namespace FlattenedParameters
     internal partial class FlattenedParametersRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -31,7 +33,7 @@ namespace FlattenedParameters
         /// <param name="endpoint"> server parameter. </param>
         public FlattenedParametersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -42,7 +44,7 @@ namespace FlattenedParameters
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -92,7 +94,7 @@ namespace FlattenedParameters
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/OperationNotNull/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -147,7 +149,7 @@ namespace FlattenedParameters
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/OperationNotRequired/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -200,7 +202,7 @@ namespace FlattenedParameters
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/OperationRequired/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");

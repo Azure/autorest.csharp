@@ -20,8 +20,10 @@ namespace subscriptionId_apiVersion
     {
         private readonly HttpPipeline _pipeline;
         private readonly string _subscriptionId;
-        private readonly Uri _endpoint;
         private readonly string _apiVersion;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,7 +38,7 @@ namespace subscriptionId_apiVersion
         public GroupRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2014-04-01-preview")
         {
             _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -48,7 +50,7 @@ namespace subscriptionId_apiVersion
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourcegroups/", false);

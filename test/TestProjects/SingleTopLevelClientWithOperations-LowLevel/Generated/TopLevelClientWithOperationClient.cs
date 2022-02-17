@@ -22,16 +22,15 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of TopLevelClientWithOperationClient for mocking. </summary>
         protected TopLevelClientWithOperationClient()
@@ -52,7 +51,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -149,13 +148,13 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <summary> Initializes a new instance of Client1. </summary>
         public virtual Client1 GetClient1Client()
         {
-            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient1;
+            return Volatile.Read(ref _cachedClient1) ?? Interlocked.CompareExchange(ref _cachedClient1, new Client1(ClientDiagnostics, _pipeline, _keyCredential, Endpoint), null) ?? _cachedClient1;
         }
 
         /// <summary> Initializes a new instance of Client2. </summary>
         public virtual Client2 GetClient2Client()
         {
-            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(ClientDiagnostics, _pipeline, _keyCredential, _endpoint), null) ?? _cachedClient2;
+            return Volatile.Read(ref _cachedClient2) ?? Interlocked.CompareExchange(ref _cachedClient2, new Client2(ClientDiagnostics, _pipeline, _keyCredential, Endpoint), null) ?? _cachedClient2;
         }
 
         /// <summary> Initializes a new instance of Client4. </summary>
@@ -165,7 +164,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         {
             Argument.AssertNotNull(clientParameter, nameof(clientParameter));
 
-            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, clientParameter, _endpoint);
+            return new Client4(ClientDiagnostics, _pipeline, _keyCredential, clientParameter, Endpoint);
         }
 
         internal HttpMessage CreateOperationRequest(RequestContext context)
@@ -174,7 +173,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/client3", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -188,7 +187,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/client4", false);
             uri.AppendQuery("filter", filter, true);
             request.Uri = uri;
@@ -203,7 +202,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

@@ -20,7 +20,9 @@ namespace model_flattening
     internal partial class AutoRestResourceFlatteningTestServiceRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -31,7 +33,7 @@ namespace model_flattening
         /// <param name="endpoint"> server parameter. </param>
         public AutoRestResourceFlatteningTestServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -42,7 +44,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/array", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -99,7 +101,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/array", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -162,7 +164,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/wrappedarray", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -219,7 +221,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/wrappedarray", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -282,7 +284,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/dictionary", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -340,7 +342,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/dictionary", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -403,7 +405,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/resourcecollection", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -455,7 +457,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/resourcecollection", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -508,7 +510,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -570,7 +572,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/customFlattening", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -659,7 +661,7 @@ namespace model_flattening
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/model-flatten/customFlattening/parametergrouping/", false);
             uri.AppendPath(flattenParameterGroup.Name, true);
             uri.AppendPath("/", false);

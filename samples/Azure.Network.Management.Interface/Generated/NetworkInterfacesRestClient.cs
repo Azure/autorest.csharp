@@ -20,8 +20,10 @@ namespace Azure.Network.Management.Interface
     {
         private readonly HttpPipeline _pipeline;
         private readonly string _subscriptionId;
-        private readonly Uri _endpoint;
         private readonly string _apiVersion;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,7 +38,7 @@ namespace Azure.Network.Management.Interface
         public NetworkInterfacesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-11-01")
         {
             _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
-            _endpoint = endpoint ?? new Uri("https://management.azure.com");
+            Endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -48,7 +50,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
@@ -125,7 +127,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
@@ -214,7 +216,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
@@ -303,7 +305,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
@@ -400,7 +402,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/providers/Microsoft.Network/networkInterfaces", false);
@@ -456,7 +458,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
@@ -528,7 +530,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
@@ -604,7 +606,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
@@ -680,7 +682,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -747,7 +749,7 @@ namespace Azure.Network.Management.Interface
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

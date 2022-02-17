@@ -18,8 +18,10 @@ namespace ApiVersion
     internal partial class ApiVersionRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
         private readonly string _apiVersion;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -32,7 +34,7 @@ namespace ApiVersion
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public ApiVersionRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "1.0.0")
         {
-            _endpoint = endpoint ?? new Uri("");
+            Endpoint = endpoint ?? new Uri("");
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -44,7 +46,7 @@ namespace ApiVersion
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/op", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("not-api-version-constant", "2.0", true);

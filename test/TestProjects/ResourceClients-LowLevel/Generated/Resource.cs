@@ -19,13 +19,15 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
 
         /// <summary> Group identifier. </summary>
         public string GroupId { get; }
 
         /// <summary> Item identifier. </summary>
         public string ItemId { get; }
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -59,7 +61,7 @@ namespace ResourceClients_LowLevel
             _keyCredential = keyCredential;
             GroupId = groupId;
             ItemId = itemId;
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get an item. Method should stay in `Item` subclient. </summary>
@@ -108,7 +110,7 @@ namespace ResourceClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/items/", false);
             uri.AppendPath(GroupId, true);
             uri.AppendPath("/", false);

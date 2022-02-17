@@ -19,7 +19,9 @@ namespace paging
     internal partial class PagingRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -30,7 +32,7 @@ namespace paging
         /// <param name="endpoint"> server parameter. </param>
         public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +43,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/noitemname", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -94,7 +96,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/nullnextlink", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -147,7 +149,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/single", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -200,7 +202,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/firstResponseEmpty/1", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -253,7 +255,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -322,7 +324,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/getWithQueryParams", false);
             uri.AppendQuery("requiredQueryParameter", requiredQueryParameter, true);
             uri.AppendQuery("queryConstant", true, true);
@@ -379,7 +381,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/nextOperationWithQueryParams", false);
             uri.AppendQuery("queryConstant", true, true);
             request.Uri = uri;
@@ -433,7 +435,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -502,7 +504,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/withpath/", false);
             uri.AppendPath(pagingGetMultiplePagesWithOffsetOptions.Offset, true);
             request.Uri = uri;
@@ -584,7 +586,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/retryfirst", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -637,7 +639,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/retrysecond", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -690,7 +692,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/single/failure", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -743,7 +745,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/failure", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -796,7 +798,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/failureuri", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -849,7 +851,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendQuery("api_version", apiVersion, true);
@@ -928,7 +930,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(customParameterGroup.Tenant, true);
             uri.AppendQuery("api_version", customParameterGroup.ApiVersion, true);
@@ -997,7 +999,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1056,7 +1058,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/fragment/", false);
             uri.AppendPath(tenant, true);
             uri.AppendPath("/", false);
@@ -1147,7 +1149,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/multiple/fragmentwithgrouping/", false);
             uri.AppendPath(customParameterGroup.Tenant, true);
             uri.AppendPath("/", false);
@@ -1228,7 +1230,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/paging/itemNameWithXMSClientName", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1281,7 +1283,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1348,7 +1350,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1415,7 +1417,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1482,7 +1484,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1565,7 +1567,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1648,7 +1650,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -1739,7 +1741,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1806,7 +1808,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1873,7 +1875,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1940,7 +1942,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2007,7 +2009,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2074,7 +2076,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             if (clientRequestId != null)
@@ -2147,7 +2149,7 @@ namespace paging
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

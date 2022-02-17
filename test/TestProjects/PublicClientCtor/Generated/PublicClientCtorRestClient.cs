@@ -18,10 +18,12 @@ namespace PublicClientCtor
     internal partial class PublicClientCtorRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
         private readonly string _param1;
         private readonly string _param2;
         private readonly string _apiVersion;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,7 +38,7 @@ namespace PublicClientCtor
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public PublicClientCtorRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
         {
-            _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             _param1 = param1;
             _param2 = param2;
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
@@ -50,7 +52,7 @@ namespace PublicClientCtor
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRaw("/publicclientctor/1.0.0", false);
             uri.AppendPath("/op", false);
             uri.AppendQuery("api-version", _apiVersion, true);

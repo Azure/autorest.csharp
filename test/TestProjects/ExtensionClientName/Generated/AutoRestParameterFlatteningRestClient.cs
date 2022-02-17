@@ -18,7 +18,9 @@ namespace ExtensionClientName
     internal partial class AutoRestParameterFlatteningRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,7 +31,7 @@ namespace ExtensionClientName
         /// <param name="endpoint"> server parameter. </param>
         public AutoRestParameterFlatteningRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -40,7 +42,7 @@ namespace ExtensionClientName
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/originalOperation/", false);
             uri.AppendPath(renamedPathParameter, true);
             uri.AppendQuery("originalQueryParameter", renamedQueryParameter, true);

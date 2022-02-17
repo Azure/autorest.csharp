@@ -18,7 +18,9 @@ namespace body_string
     internal partial class StringRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,7 +31,7 @@ namespace body_string
         /// <param name="endpoint"> server parameter. </param>
         public StringRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -40,7 +42,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -107,7 +109,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -159,7 +161,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -212,7 +214,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -259,7 +261,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -312,7 +314,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -359,7 +361,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -412,7 +414,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -459,7 +461,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/notProvided", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -512,7 +514,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/base64Encoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -565,7 +567,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -618,7 +620,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -679,7 +681,7 @@ namespace body_string
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/string/nullBase64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

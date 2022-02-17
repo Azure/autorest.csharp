@@ -19,16 +19,15 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of HttpClientFailureClient for mocking. </summary>
         protected HttpClientFailureClient()
@@ -49,7 +48,7 @@ namespace httpInfrastructure_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
@@ -1592,7 +1591,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1606,7 +1605,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1620,7 +1619,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1634,7 +1633,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1650,7 +1649,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1666,7 +1665,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1682,7 +1681,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1698,7 +1697,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/401", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1712,7 +1711,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/402", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1726,7 +1725,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1740,7 +1739,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1754,7 +1753,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/404", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1770,7 +1769,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/405", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1786,7 +1785,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/406", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1802,7 +1801,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/407", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1818,7 +1817,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/409", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1834,7 +1833,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/410", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1848,7 +1847,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/411", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1862,7 +1861,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1876,7 +1875,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1890,7 +1889,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/413", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1906,7 +1905,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/414", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1922,7 +1921,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/415", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1938,7 +1937,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/416", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1952,7 +1951,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/417", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1968,7 +1967,7 @@ namespace httpInfrastructure_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/http/failure/client/429", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

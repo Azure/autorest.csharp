@@ -19,7 +19,9 @@ namespace additionalProperties
     internal partial class PetsRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -30,7 +32,7 @@ namespace additionalProperties
         /// <param name="endpoint"> server parameter. </param>
         public PetsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +43,7 @@ namespace additionalProperties
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/additionalProperties/true", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -112,7 +114,7 @@ namespace additionalProperties
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/additionalProperties/true-subclass", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -183,7 +185,7 @@ namespace additionalProperties
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/additionalProperties/type/object", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -254,7 +256,7 @@ namespace additionalProperties
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/additionalProperties/type/string", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -325,7 +327,7 @@ namespace additionalProperties
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/additionalProperties/in/properties", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -396,7 +398,7 @@ namespace additionalProperties
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/additionalProperties/in/properties/with/additionalProperties/string", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

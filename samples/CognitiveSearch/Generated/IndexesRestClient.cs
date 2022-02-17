@@ -19,8 +19,10 @@ namespace CognitiveSearch
     internal partial class IndexesRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _endpoint;
         private readonly string _apiVersion;
+
+        /// <summary> The endpoint URL of the search service. </summary>
+        public string Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -33,7 +35,7 @@ namespace CognitiveSearch
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public IndexesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string apiVersion = "2019-05-06-Preview")
         {
-            _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -45,7 +47,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendPath("/indexes", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -119,7 +121,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendPath("/indexes", false);
             if (select != null)
             {
@@ -181,7 +183,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')", false);
@@ -288,7 +290,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')", false);
@@ -362,7 +364,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')", false);
@@ -434,7 +436,7 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')/search.stats", false);
@@ -506,7 +508,7 @@ namespace CognitiveSearch
             var request0 = message.Request;
             request0.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendPath("/indexes('", false);
             uri.AppendPath(indexName, true);
             uri.AppendPath("')/search.analyze", false);

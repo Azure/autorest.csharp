@@ -19,16 +19,15 @@ namespace header_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of HeaderClient for mocking. </summary>
         protected HeaderClient()
@@ -49,7 +48,7 @@ namespace header_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
@@ -1974,7 +1973,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/existingkey", false);
             request.Uri = uri;
             request.Headers.Add("User-Agent", userAgent);
@@ -1989,7 +1988,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/existingkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2003,7 +2002,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/protectedkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2017,7 +2016,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/protectedkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -2031,7 +2030,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/integer", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2047,7 +2046,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/integer", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2062,7 +2061,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/long", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2078,7 +2077,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/long", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2093,7 +2092,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/float", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2109,7 +2108,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/float", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2124,7 +2123,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/double", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2140,7 +2139,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/double", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2155,7 +2154,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/bool", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2171,7 +2170,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/bool", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2186,7 +2185,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/string", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2205,7 +2204,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/string", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2220,7 +2219,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/date", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2236,7 +2235,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/date", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2251,7 +2250,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/datetime", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2267,7 +2266,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/datetime", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2282,7 +2281,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2301,7 +2300,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2316,7 +2315,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/duration", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2332,7 +2331,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/duration", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2347,7 +2346,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/byte", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2363,7 +2362,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/byte", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2378,7 +2377,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/param/prim/enum", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2397,7 +2396,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/response/prim/enum", false);
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
@@ -2412,7 +2411,7 @@ namespace header_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

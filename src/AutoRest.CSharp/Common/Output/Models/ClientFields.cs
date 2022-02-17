@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (Parameter parameter in parameters)
             {
-                var field = parameter.IsResourceIdentifier
+                var field = parameter.IsResourceIdentifier || parameter.Name == "endpoint"
                     ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
                     : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
 

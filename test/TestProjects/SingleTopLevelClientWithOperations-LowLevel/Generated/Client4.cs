@@ -19,10 +19,12 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
 
         /// <summary> The String to use. </summary>
         public string ClientParameter { get; }
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -53,7 +55,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             ClientParameter = clientParameter;
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
@@ -110,7 +112,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/client4", false);
             uri.AppendQuery("filter", filter, true);
             uri.AppendQuery("clientParameter", ClientParameter, true);

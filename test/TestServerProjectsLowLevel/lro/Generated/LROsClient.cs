@@ -19,16 +19,15 @@ namespace lro_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of LROsClient for mocking. </summary>
         protected LROsClient()
@@ -49,7 +48,7 @@ namespace lro_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
@@ -4236,7 +4235,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/200/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4252,7 +4251,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/patch/200/succeeded/ignoreheaders", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4268,7 +4267,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/patch/201/retry/onlyAsyncHeader", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4284,7 +4283,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/patch/202/retry/asyncAndLocationHeader", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4300,7 +4299,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/201/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4316,7 +4315,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/list", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4330,7 +4329,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/200/succeeded/nostate", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4346,7 +4345,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/202/retry/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4362,7 +4361,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/201/creating/succeeded/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4378,7 +4377,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/200/updating/succeeded/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4394,7 +4393,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/201/created/failed/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4410,7 +4409,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/200/accepted/canceled/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4426,7 +4425,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/put/noheader/202/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4442,7 +4441,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4458,7 +4457,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putasync/noretry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4474,7 +4473,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putasync/retry/failed", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4490,7 +4489,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putasync/noretry/canceled", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4506,7 +4505,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putasync/noheader/201/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4522,7 +4521,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putnonresource/202/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4538,7 +4537,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putnonresourceasync/202/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4554,7 +4553,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putsubresource/202/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4570,7 +4569,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/putsubresourceasync/202/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4586,7 +4585,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/delete/provisioning/202/accepted/200/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4600,7 +4599,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/delete/provisioning/202/deleting/200/failed", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4614,7 +4613,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/delete/provisioning/202/deleting/200/canceled", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4628,7 +4627,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/delete/204/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4642,7 +4641,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/delete/202/retry/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4656,7 +4655,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/delete/202/noretry/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4670,7 +4669,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/delete/noheader", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4684,7 +4683,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/deleteasync/noheader/202/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4698,7 +4697,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/deleteasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4712,7 +4711,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/deleteasync/noretry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4726,7 +4725,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/deleteasync/retry/failed", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4740,7 +4739,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/deleteasync/retry/canceled", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4754,7 +4753,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/post/payload/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4768,7 +4767,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/post/202/retry/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4784,7 +4783,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/post/202/noretry/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4800,7 +4799,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/LROPostDoubleHeadersFinalLocationGet", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4814,7 +4813,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/LROPostDoubleHeadersFinalAzureHeaderGet", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4828,7 +4827,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/LROPostDoubleHeadersFinalAzureHeaderGetDefault", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4842,7 +4841,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/postasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4858,7 +4857,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/postasync/noretry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4874,7 +4873,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/postasync/retry/failed", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -4890,7 +4889,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/postasync/retry/canceled", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

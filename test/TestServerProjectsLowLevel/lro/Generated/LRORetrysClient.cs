@@ -19,16 +19,15 @@ namespace lro_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of LRORetrysClient for mocking. </summary>
         protected LRORetrysClient()
@@ -49,7 +48,7 @@ namespace lro_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -668,7 +667,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/retryerror/put/201/creating/succeeded/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -684,7 +683,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/retryerror/putasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -700,7 +699,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/retryerror/delete/provisioning/202/accepted/200/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -714,7 +713,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/retryerror/delete/202/retry/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -728,7 +727,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/retryerror/deleteasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -742,7 +741,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/retryerror/post/202/retry/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -758,7 +757,7 @@ namespace lro_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/lro/retryerror/postasync/retry/succeeded", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

@@ -20,7 +20,9 @@ namespace NameConflicts
     internal partial class AutoRestParameterFlatteningRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -31,7 +33,7 @@ namespace NameConflicts
         /// <param name="endpoint"> server parameter. </param>
         public AutoRestParameterFlatteningRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -42,7 +44,7 @@ namespace NameConflicts
             var request0 = message0.Request;
             request0.Method = RequestMethod.Patch;
             var uri0 = new RawRequestUriBuilder();
-            uri0.Reset(_endpoint);
+            uri0.Reset(Endpoint);
             uri0.AppendPath("/originalOperation", false);
             uri0.AppendQuery("request", request, true);
             uri0.AppendQuery("message", message, true);
@@ -177,7 +179,7 @@ namespace NameConflicts
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/conflictingLROOverloads", false);
             request.Uri = uri;
             if (stringBody != null)
@@ -226,7 +228,7 @@ namespace NameConflicts
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/conflictingLROOverloads", false);
             request.Uri = uri;
             if (stringBody != null)
@@ -277,7 +279,7 @@ namespace NameConflicts
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/HttpMessage", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -337,7 +339,7 @@ namespace NameConflicts
             var request0 = message.Request;
             request0.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/Request", false);
             request0.Uri = uri;
             request0.Headers.Add("Accept", "application/json");
@@ -397,7 +399,7 @@ namespace NameConflicts
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/Response", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

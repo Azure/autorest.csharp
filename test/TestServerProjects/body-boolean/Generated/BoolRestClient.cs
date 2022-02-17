@@ -18,7 +18,9 @@ namespace body_boolean
     internal partial class BoolRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,7 +31,7 @@ namespace body_boolean
         /// <param name="endpoint"> server parameter. </param>
         public BoolRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -40,7 +42,7 @@ namespace body_boolean
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/bool/true", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -93,7 +95,7 @@ namespace body_boolean
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/bool/true", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -140,7 +142,7 @@ namespace body_boolean
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/bool/false", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -193,7 +195,7 @@ namespace body_boolean
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/bool/false", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -240,7 +242,7 @@ namespace body_boolean
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/bool/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -307,7 +309,7 @@ namespace body_boolean
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/bool/invalid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

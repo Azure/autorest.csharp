@@ -19,7 +19,9 @@ namespace body_complex
     internal partial class DictionaryRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -30,7 +32,7 @@ namespace body_complex
         /// <param name="endpoint"> server parameter. </param>
         public DictionaryRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +43,7 @@ namespace body_complex
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/dictionary/typed/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -94,7 +96,7 @@ namespace body_complex
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/dictionary/typed/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -155,7 +157,7 @@ namespace body_complex
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/dictionary/typed/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -208,7 +210,7 @@ namespace body_complex
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/dictionary/typed/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -269,7 +271,7 @@ namespace body_complex
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/dictionary/typed/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -322,7 +324,7 @@ namespace body_complex
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/dictionary/typed/notprovided", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

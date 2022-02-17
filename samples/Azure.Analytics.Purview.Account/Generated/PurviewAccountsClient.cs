@@ -22,17 +22,16 @@ namespace Azure.Analytics.Purview.Account
         private static readonly string[] AuthorizationScopes = new string[] { "https://purview.azure.net/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
         private readonly string _apiVersion;
+
+        /// <summary> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of PurviewAccountsClient for mocking. </summary>
         protected PurviewAccountsClient()
@@ -53,7 +52,7 @@ namespace Azure.Analytics.Purview.Account
             ClientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
@@ -1130,13 +1129,13 @@ namespace Azure.Analytics.Purview.Account
         {
             Argument.AssertNotNull(collectionName, nameof(collectionName));
 
-            return new PurviewAccountCollections(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, collectionName, _apiVersion);
+            return new PurviewAccountCollections(ClientDiagnostics, _pipeline, _tokenCredential, Endpoint, collectionName, _apiVersion);
         }
 
         /// <summary> Initializes a new instance of PurviewAccountResourceSetRules. </summary>
         public virtual PurviewAccountResourceSetRules GetResourceSetRulesClient()
         {
-            return Volatile.Read(ref _cachedPurviewAccountResourceSetRules) ?? Interlocked.CompareExchange(ref _cachedPurviewAccountResourceSetRules, new PurviewAccountResourceSetRules(ClientDiagnostics, _pipeline, _tokenCredential, _endpoint, _apiVersion), null) ?? _cachedPurviewAccountResourceSetRules;
+            return Volatile.Read(ref _cachedPurviewAccountResourceSetRules) ?? Interlocked.CompareExchange(ref _cachedPurviewAccountResourceSetRules, new PurviewAccountResourceSetRules(ClientDiagnostics, _pipeline, _tokenCredential, Endpoint, _apiVersion), null) ?? _cachedPurviewAccountResourceSetRules;
         }
 
         internal HttpMessage CreateGetAccountPropertiesRequest(RequestContext context)
@@ -1145,7 +1144,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -1160,7 +1159,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -1177,7 +1176,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/listkeys", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -1192,7 +1191,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/regeneratekeys", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -1209,7 +1208,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/resourceSetRuleConfigs", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (skipToken != null)
@@ -1228,7 +1227,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/collections", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (skipToken != null)
@@ -1247,7 +1246,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1261,7 +1260,7 @@ namespace Azure.Analytics.Purview.Account
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

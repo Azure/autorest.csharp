@@ -21,7 +21,9 @@ namespace constants
         private readonly Enum8 _headerConstant;
         private readonly Enum9 _queryConstant;
         private readonly Enum10 _pathConstant;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,7 +40,7 @@ namespace constants
             _headerConstant = headerConstant;
             _queryConstant = queryConstant;
             _pathConstant = pathConstant;
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -49,7 +51,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault", false);
             if (input != null)
             {
@@ -97,7 +99,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredTwoValueDefault", false);
             if (input != null)
             {
@@ -145,7 +147,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueNoDefault", false);
             uri.AppendQuery("input", "value1", true);
             request.Uri = uri;
@@ -188,7 +190,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueDefault", false);
             uri.AppendQuery("input", "value1", true);
             request.Uri = uri;
@@ -231,7 +233,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredTwoValueNoDefault", false);
             uri.AppendQuery("input", input.ToSerialString(), true);
             request.Uri = uri;
@@ -276,7 +278,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredTwoValueDefault", false);
             uri.AppendQuery("input", input.ToSerialString(), true);
             request.Uri = uri;
@@ -321,7 +323,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredOneValueNoDefault", false);
             uri.AppendQuery("input", "value1", true);
             request.Uri = uri;
@@ -364,7 +366,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putNoModelAsStringRequiredOneValueDefault", false);
             uri.AppendQuery("input", "value1", true);
             request.Uri = uri;
@@ -407,7 +409,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putModelAsStringNoRequiredTwoValueNoDefault", false);
             if (input != null)
             {
@@ -455,7 +457,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putModelAsStringNoRequiredTwoValueDefault", false);
             if (input != null)
             {
@@ -507,7 +509,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putModelAsStringNoRequiredOneValueNoDefault", false);
             if (input != null)
             {
@@ -555,7 +557,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putModelAsStringNoRequiredOneValueDefault", false);
             if (input != null)
             {
@@ -607,7 +609,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredTwoValueNoDefault", false);
             uri.AppendQuery("input", input.ToString(), true);
             request.Uri = uri;
@@ -652,7 +654,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredTwoValueDefault", false);
             if (input != null)
             {
@@ -704,7 +706,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredOneValueNoDefault", false);
             uri.AppendQuery("input", input.ToString(), true);
             request.Uri = uri;
@@ -749,7 +751,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredOneValueDefault", false);
             if (input != null)
             {
@@ -801,7 +803,7 @@ namespace constants
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/constants/clientConstants/", false);
             uri.AppendPath(_pathConstant.ToString(), true);
             uri.AppendQuery("query-constant", _queryConstant.ToString(), true);

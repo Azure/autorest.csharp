@@ -19,16 +19,15 @@ namespace body_file_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of FilesClient for mocking. </summary>
         protected FilesClient()
@@ -49,7 +48,7 @@ namespace body_file_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get file. </summary>
@@ -233,7 +232,7 @@ namespace body_file_LowLevel
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/files/stream/nonempty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
@@ -248,7 +247,7 @@ namespace body_file_LowLevel
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/files/stream/verylarge", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
@@ -263,7 +262,7 @@ namespace body_file_LowLevel
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/files/stream/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");

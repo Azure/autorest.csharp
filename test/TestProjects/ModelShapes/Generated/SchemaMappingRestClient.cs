@@ -19,7 +19,9 @@ namespace ModelShapes
     internal partial class SchemaMappingRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -30,7 +32,7 @@ namespace ModelShapes
         /// <param name="endpoint"> server parameter. </param>
         public SchemaMappingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +43,7 @@ namespace ModelShapes
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -100,7 +102,7 @@ namespace ModelShapes
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -169,7 +171,7 @@ namespace ModelShapes
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/op", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -220,7 +222,7 @@ namespace ModelShapes
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/op2", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -289,7 +291,7 @@ namespace ModelShapes
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/op3", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");

@@ -18,7 +18,9 @@ namespace body_datetime_rfc1123
     internal partial class Datetimerfc1123RestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,7 +31,7 @@ namespace body_datetime_rfc1123
         /// <param name="endpoint"> server parameter. </param>
         public Datetimerfc1123RestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -40,7 +42,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -107,7 +109,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/invalid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -160,7 +162,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/overflow", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -213,7 +215,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/underflow", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -266,7 +268,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/max", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -315,7 +317,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/max/lowercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -368,7 +370,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/max/uppercase", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -421,7 +423,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/min", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -470,7 +472,7 @@ namespace body_datetime_rfc1123
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/datetimerfc1123/min", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

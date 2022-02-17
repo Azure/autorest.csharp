@@ -20,7 +20,9 @@ namespace Azure.AI.FormRecognizer
     internal partial class AzureAIFormRecognizerRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _endpoint;
+
+        /// <summary> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com). </summary>
+        public string Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -32,7 +34,7 @@ namespace Azure.AI.FormRecognizer
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AzureAIFormRecognizerRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
-            _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            Endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -43,7 +45,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models", false);
             request.Uri = uri;
@@ -107,7 +109,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models/", false);
             uri.AppendPath(modelId, true);
@@ -170,7 +172,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models/", false);
             uri.AppendPath(modelId, true);
@@ -217,7 +219,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models/", false);
             uri.AppendPath(modelId, true);
@@ -282,7 +284,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models/", false);
             uri.AppendPath(modelId, true);
@@ -347,7 +349,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models/", false);
             uri.AppendPath(modelId, true);
@@ -408,7 +410,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models/", false);
             uri.AppendPath(modelId, true);
@@ -476,7 +478,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models/", false);
             uri.AppendPath(modelId, true);
@@ -537,7 +539,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models/copyAuthorization", false);
             request.Uri = uri;
@@ -593,7 +595,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/prebuilt/receipt/analyze", false);
             if (includeTextDetails != null)
@@ -654,7 +656,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/prebuilt/receipt/analyze", false);
             if (includeTextDetails != null)
@@ -715,7 +717,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/prebuilt/receipt/analyzeResults/", false);
             uri.AppendPath(resultId, true);
@@ -772,7 +774,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/layout/analyze", false);
             request.Uri = uri;
@@ -827,7 +829,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/layout/analyze", false);
             request.Uri = uri;
@@ -882,7 +884,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/layout/analyzeResults/", false);
             uri.AppendPath(resultId, true);
@@ -939,7 +941,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models", false);
             uri.AppendQuery("op", op.ToString(), true);
@@ -996,7 +998,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models", false);
             uri.AppendQuery("op", op.ToString(), true);
@@ -1053,7 +1055,7 @@ namespace Azure.AI.FormRecognizer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(_endpoint, false);
+            uri.AppendRaw(Endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;

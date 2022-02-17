@@ -19,16 +19,15 @@ namespace Accessibility_LowLevel_TokenAuth
         private static readonly string[] AuthorizationScopes = new string[] { "https://test.azure.com/.default" };
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of AccessibilityClient for mocking. </summary>
         protected AccessibilityClient()
@@ -49,7 +48,7 @@ namespace Accessibility_LowLevel_TokenAuth
             ClientDiagnostics = new ClientDiagnostics(options);
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -138,7 +137,7 @@ namespace Accessibility_LowLevel_TokenAuth
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
@@ -153,7 +152,7 @@ namespace Accessibility_LowLevel_TokenAuth
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/OperationInternal/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");

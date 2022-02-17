@@ -22,10 +22,12 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
 
         /// <summary> Group identifier. </summary>
         public string GroupId { get; }
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -56,7 +58,7 @@ namespace ResourceClients_LowLevel
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             GroupId = groupId;
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Get a group. Method should stay in `Group` subclient. </summary>
@@ -148,7 +150,7 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNull(itemId, nameof(itemId));
 
-            return new Resource(ClientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, _endpoint);
+            return new Resource(ClientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, Endpoint);
         }
 
         internal HttpMessage CreateGetGroupRequest(RequestContext context)
@@ -157,7 +159,7 @@ namespace ResourceClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/groups/", false);
             uri.AppendPath(GroupId, true);
             request.Uri = uri;
@@ -172,7 +174,7 @@ namespace ResourceClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/items/", false);
             uri.AppendPath(GroupId, true);
             request.Uri = uri;
@@ -187,7 +189,7 @@ namespace ResourceClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

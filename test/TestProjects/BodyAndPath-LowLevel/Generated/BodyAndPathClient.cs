@@ -20,16 +20,15 @@ namespace BodyAndPath_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of BodyAndPathClient for mocking. </summary>
         protected BodyAndPathClient()
@@ -50,7 +49,7 @@ namespace BodyAndPath_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Resets products. </summary>
@@ -365,7 +364,7 @@ namespace BodyAndPath_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/", false);
             uri.AppendPath(itemName, true);
             request.Uri = uri;
@@ -381,7 +380,7 @@ namespace BodyAndPath_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/", false);
             uri.AppendPath(itemNameStream, true);
             if (excluded != null)
@@ -404,7 +403,7 @@ namespace BodyAndPath_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/", false);
             uri.AppendPath(enumName1, true);
             uri.AppendPath("/", false);
@@ -422,7 +421,7 @@ namespace BodyAndPath_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/list", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -436,7 +435,7 @@ namespace BodyAndPath_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/listItems", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -450,7 +449,7 @@ namespace BodyAndPath_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/", false);
             uri.AppendPath(item3, true);
             uri.AppendPath("/item4/", false);

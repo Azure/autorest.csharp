@@ -22,16 +22,15 @@ namespace ResourceClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of ResourceServiceClient for mocking. </summary>
         protected ResourceServiceClient()
@@ -52,7 +51,7 @@ namespace ResourceClients_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <summary> Method that belongs to the top level service. </summary>
@@ -184,7 +183,7 @@ namespace ResourceClients_LowLevel
         {
             Argument.AssertNotNull(groupId, nameof(groupId));
 
-            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
+            return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, Endpoint);
         }
 
         internal HttpMessage CreateGetParametersRequest(RequestContext context)
@@ -193,7 +192,7 @@ namespace ResourceClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -207,7 +206,7 @@ namespace ResourceClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/groups", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -221,7 +220,7 @@ namespace ResourceClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/items", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -235,7 +234,7 @@ namespace ResourceClients_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

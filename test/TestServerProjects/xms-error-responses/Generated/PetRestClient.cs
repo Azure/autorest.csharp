@@ -19,7 +19,9 @@ namespace xms_error_responses
     internal partial class PetRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -30,7 +32,7 @@ namespace xms_error_responses
         /// <param name="endpoint"> server parameter. </param>
         public PetRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +43,7 @@ namespace xms_error_responses
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/errorStatusCodes/Pets/", false);
             uri.AppendPath(petId, true);
             uri.AppendPath("/GetPet", false);
@@ -114,7 +116,7 @@ namespace xms_error_responses
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/errorStatusCodes/Pets/doSomething/", false);
             uri.AppendPath(whatAction, true);
             request.Uri = uri;
@@ -182,7 +184,7 @@ namespace xms_error_responses
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/errorStatusCodes/Pets/hasModelsParam", false);
             if (models != null)
             {

@@ -19,7 +19,9 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -47,7 +49,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
-            _endpoint = endpoint;
+            Endpoint = endpoint;
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -94,7 +96,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/client1", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

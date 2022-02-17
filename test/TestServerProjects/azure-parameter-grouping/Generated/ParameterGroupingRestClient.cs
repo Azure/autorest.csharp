@@ -18,7 +18,9 @@ namespace azure_parameter_grouping
     internal partial class ParameterGroupingRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,7 +31,7 @@ namespace azure_parameter_grouping
         /// <param name="endpoint"> server parameter. </param>
         public ParameterGroupingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -40,7 +42,7 @@ namespace azure_parameter_grouping
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/parameterGrouping/postRequired/", false);
             uri.AppendPath(parameterGroupingPostRequiredParameters.Path, true);
             if (parameterGroupingPostRequiredParameters?.Query != null)
@@ -110,7 +112,7 @@ namespace azure_parameter_grouping
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/parameterGrouping/postOptional", false);
             if (parameterGroupingPostOptionalParameters?.Query != null)
             {
@@ -163,7 +165,7 @@ namespace azure_parameter_grouping
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/parameterGrouping/postReservedWords", false);
             if (parameterGroupingPostReservedWordsParameters?.From != null)
             {
@@ -216,7 +218,7 @@ namespace azure_parameter_grouping
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/parameterGrouping/postMultipleParameterGroups", false);
             if (firstParameterGroup?.QueryOne != null)
             {
@@ -279,7 +281,7 @@ namespace azure_parameter_grouping
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/parameterGrouping/sharedParameterGroupObject", false);
             if (firstParameterGroup?.QueryOne != null)
             {

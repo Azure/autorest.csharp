@@ -19,17 +19,16 @@ namespace body_complex_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
         private readonly string _apiVersion;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
-
-        /// <summary> The HTTP Uri. </summary>
-        public virtual Uri Uri => _endpoint;
 
         /// <summary> Initializes a new instance of BasicClient for mocking. </summary>
         protected BasicClient()
@@ -50,7 +49,7 @@ namespace body_complex_LowLevel
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = endpoint;
+            Endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
@@ -500,7 +499,7 @@ namespace body_complex_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/basic/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -514,7 +513,7 @@ namespace body_complex_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/basic/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -531,7 +530,7 @@ namespace body_complex_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/basic/invalid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -545,7 +544,7 @@ namespace body_complex_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/basic/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -559,7 +558,7 @@ namespace body_complex_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/basic/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -573,7 +572,7 @@ namespace body_complex_LowLevel
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/complex/basic/notprovided", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

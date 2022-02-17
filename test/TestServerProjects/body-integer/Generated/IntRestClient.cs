@@ -18,7 +18,9 @@ namespace body_integer
     internal partial class IntRestClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly Uri _endpoint;
+
+        /// <summary> server parameter. </summary>
+        public Uri Endpoint { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -29,7 +31,7 @@ namespace body_integer
         /// <param name="endpoint"> server parameter. </param>
         public IntRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            Endpoint = endpoint ?? new Uri("http://localhost:3000");
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -40,7 +42,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -107,7 +109,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/invalid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -160,7 +162,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/overflowint32", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -213,7 +215,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/underflowint32", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -266,7 +268,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/overflowint64", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -319,7 +321,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/underflowint64", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -372,7 +374,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/max/32", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -421,7 +423,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/max/64", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -470,7 +472,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/min/32", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -519,7 +521,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/min/64", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -568,7 +570,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/unixtime", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -621,7 +623,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/unixtime", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -670,7 +672,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/invalidunixtime", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -723,7 +725,7 @@ namespace body_integer
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
+            uri.Reset(Endpoint);
             uri.AppendPath("/int/nullunixtime", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
