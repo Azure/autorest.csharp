@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -59,10 +60,20 @@ namespace AutoRest.TestServer.Tests
         public Task GetRawPages() => Test(async (host) =>
         {
             AsyncPageable<BinaryData> allPages = new DPGClient(Key, host).GetPagesAsync("raw");
-            await foreach (var page in allPages)
+            await foreach (var page in allPages.AsPages())
             {
-                var body = JsonData.FromBytes(page.ToMemory());
-                Assert.AreEqual("raw", (string)body["received"]);
+                var firstItem = JsonData.FromBytes(page.Values.First());
+                Assert.AreEqual("raw", (string)firstItem["received"]);
+            }
+        });
+
+        [Test]
+        public Task GetHandwrittenModelPages() => Test(async (host) =>
+        {
+            AsyncPageable<BinaryData> allPages = new DPGClient(Key, host).GetPagesAsync("model");
+            await foreach (ProductResult result in allPages.AsPages())
+            {
+                Assert.AreEqual("model", $"{result.Values.First().Received}");
             }
         });
     }

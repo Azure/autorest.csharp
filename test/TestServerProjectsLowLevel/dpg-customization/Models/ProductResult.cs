@@ -5,7 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace dpg_customization_LowLevel.Models
@@ -32,5 +35,17 @@ namespace dpg_customization_LowLevel.Models
         public IReadOnlyList<Product> Values { get; }
         /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
+
+        public static implicit operator ProductResult(Page<BinaryData> page)
+        {
+            try
+            {
+                return DeserializeProductResult(JsonDocument.Parse(page.GetRawResponse().Content.ToMemory()).RootElement);
+            }
+            catch
+            {
+                throw new RequestFailedException($"Failed to cast from Response to {typeof(ProductResult)}.");
+            }
+        }
     }
 }
