@@ -591,7 +591,7 @@ namespace AutoRest.CSharp.Output.Models
                     parameter.Description,
                     typeof(Uri),
                     parameter.DefaultValue,
-                    parameter.ValidateNotNull,
+                    parameter.Validate,
                     RequestLocation: GetRequestLocation(requestParameter)
                 );
             }
@@ -706,7 +706,7 @@ namespace AutoRest.CSharp.Output.Models
                 "The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,
-                ValidateNotNull: true);
+                Validate: true);
 
             PathSegment[] pathSegments = method.Request.PathSegments
                 .Where(ps => ps.IsRaw)
@@ -832,7 +832,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var requestParameter in requestParameters)
                 {
-                    AddRequestParameter(requestParameter);
+                    var parameter = _parent.BuildParameter(requestParameter);
+                    AddRequestParameter(GetRequestParameterName(requestParameter), requestParameter, parameter);
                 }
             }
 
@@ -883,6 +884,11 @@ namespace AutoRest.CSharp.Output.Models
             private void AddRequestParameter(string name, RequestParameter requestParameter, Type? frameworkParameterType = null)
             {
                 var parameter = _parent.BuildParameter(requestParameter, frameworkParameterType);
+                AddRequestParameter(name, requestParameter, parameter);
+            }
+
+            private void AddRequestParameter(string name, RequestParameter requestParameter, Parameter parameter)
+            {
                 var reference = _parent.CreateReference(requestParameter, parameter);
 
                 _referencesByName[name] = new ParameterInfo(requestParameter, reference);
