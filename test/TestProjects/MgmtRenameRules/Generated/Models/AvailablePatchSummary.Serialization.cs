@@ -20,6 +20,7 @@ namespace MgmtRenameRules.Models
             Optional<bool> rebootPending = default;
             Optional<int> criticalAndSecurityPatchCount = default;
             Optional<int> otherPatchCount = default;
+            Optional<Uri> uri = default;
             Optional<DateTimeOffset> startTime = default;
             Optional<DateTimeOffset> lastModifiedTime = default;
             Optional<ApiError> error = default;
@@ -70,6 +71,16 @@ namespace MgmtRenameRules.Models
                     otherPatchCount = property.Value.GetInt32();
                     continue;
                 }
+                if (property.NameEquals("uri"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    uri = new Uri(property.Value.GetString());
+                    continue;
+                }
                 if (property.NameEquals("startTime"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -101,7 +112,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new AvailablePatchSummary(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), error.Value);
+            return new AvailablePatchSummary(Optional.ToNullable(status), assessmentActivityId.Value, Optional.ToNullable(rebootPending), Optional.ToNullable(criticalAndSecurityPatchCount), Optional.ToNullable(otherPatchCount), uri.Value, Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), error.Value);
         }
     }
 }

@@ -193,6 +193,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary($"{methodBase.Description}");
             writer.WriteXmlDocumentationParameters(methodBase.Parameters);
             writer.WriteXmlDocumentationRequiredParametersException(methodBase.Parameters);
+            writer.WriteXmlDocumentationNonEmptyParametersException(methodBase.Parameters);
             if (methodBase is MethodSignature {ReturnDescription: { }} method)
             {
                 writer.WriteXmlDocumentationReturns(method.ReturnDescription);
@@ -273,6 +274,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     .Append($"{parameter.Name:I} ??= ")
                     .WriteConstant(parameter.DefaultValue.Value)
                     .LineRaw(";");
+            }
+            else if (HasEmptyCheck(parameter))
+            {
+                writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}({parameter.Name:I}, nameof({parameter.Name:I}));");
             }
             else if (CanWriteNullCheck(parameter))
             {
@@ -356,27 +361,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && !parameter.Type.IsValueType;
+        private static bool CanWriteNullCheck(Parameter parameter) => parameter.Validate && !parameter.Type.IsValueType;
 
-        internal static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
+        public static bool HasNullCheck(Parameter parameter) => !(parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue)) && CanWriteNullCheck(parameter);
 
-        public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
-
-        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [NotNullWhen(true)] out IReadOnlyList<Parameter>? requiredParameters)
-        {
-            var required = parameters
-                .Where(p => HasNullCheck(p))
-                .ToArray();
-
-            if (required.Length > 0)
-            {
-                requiredParameters = required;
-                return true;
-            }
-
-            requiredParameters = null;
-            return false;
-        }
+        public static bool HasEmptyCheck(Parameter parameter) => (parameter.RequestLocation == RequestLocation.Uri || parameter.RequestLocation == RequestLocation.Path) && HasNullCheck(parameter) && TypeFactory.IsStringLike(parameter.Type) && !parameter.SkipUrlEncoding;
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant)
         {

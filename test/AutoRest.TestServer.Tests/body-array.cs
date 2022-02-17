@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
         {
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetArrayItemEmptyAsync();
 
-            CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, new object[] { }, new object[] { "7", "8", "9" } }, result.Value);
+            CollectionAssert.AreEqual(new[] { new object[] { "1", "2", "3" }, Enumerable.Empty<object>(), new object[] { "7", "8", "9" } }, result.Value);
         });
 
         [Test]
@@ -521,7 +521,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task PutArrayEmpty() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutEmptyAsync(
-            new string[] { }));
+            Enumerable.Empty<string>()));
 
         [Test]
         public Task PutArrayEnumValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutEnumValidAsync(

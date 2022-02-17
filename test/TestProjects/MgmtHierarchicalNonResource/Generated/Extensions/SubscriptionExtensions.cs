@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
 
@@ -25,8 +26,8 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Gets a collection of SharedGalleries in the SharedGallery. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> Resource location. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="location"/> is empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An object representing collection of SharedGalleries and their operations over a SharedGallery. </returns>
         public static SharedGalleryCollection GetSharedGalleries(this Subscription subscription, string location)
         {

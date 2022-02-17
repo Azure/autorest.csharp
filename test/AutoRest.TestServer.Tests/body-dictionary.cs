@@ -30,7 +30,7 @@ namespace AutoRest.TestServer.Tests
             CollectionAssert.AreEqual(new Dictionary<string, ICollection<string>>
             {
                 { "0", new[] { "1", "2", "3" } },
-                { "1", new string[] { } },
+                { "1", Array.Empty<string>() },
                 { "2", new[] { "7", "8", "9" } }
             }, result.Value);
         });

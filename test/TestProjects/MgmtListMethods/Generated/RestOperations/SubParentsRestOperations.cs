@@ -70,7 +70,7 @@ namespace MgmtListMethods
         /// <param name="subParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<SubParentData>> CreateOrUpdateAsync(string subscriptionId, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -107,7 +107,7 @@ namespace MgmtListMethods
         /// <param name="subParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<SubParentData> CreateOrUpdate(string subscriptionId, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
