@@ -19,6 +19,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
+        private static readonly IEnumerable<string> EnumValuesShouldBePrompted = new[]
+        {
+            "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
+        };
+
         public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)
@@ -36,7 +41,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             IEnumerable<ChoiceValue> whateverLeft = originalValues;
             var result = new List<ChoiceValue>();
 
-            var words = "None".AsIEnumerable().Concat(MgmtContext.MgmtConfiguration.PromptedEnumValues);
+            var words = EnumValuesShouldBePrompted.Concat(MgmtContext.MgmtConfiguration.PromptedEnumValues);
+
+            static Func<ChoiceValue, bool> GetFilter(string word)
+            {
+                return v => v.CSharpName().Equals(word);
+            }
 
             foreach (var word in words)
             {
@@ -48,11 +58,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             result.AddRange(whateverLeft);
 
             return result;
-        }
-
-        private static Func<ChoiceValue, bool> GetFilter(string word)
-        {
-            return v => v.CSharpName().Equals(word);
         }
 
         public static void UpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
