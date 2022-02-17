@@ -52,7 +52,7 @@ namespace MgmtExpandResourceTypes
         internal RecordSetTxt(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _recordSetTxtRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string recordSetTxtRecordSetsApiVersion);
+            TryGetApiVersion(ResourceType, out string recordSetTxtRecordSetsApiVersion);
             _recordSetTxtRecordSetsRestClient = new RecordSetsRestOperations(_recordSetTxtRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetTxtRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -196,10 +196,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<RecordSetTxt>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxt.Update");
             scope.Start();
@@ -226,10 +223,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<RecordSetTxt> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _recordSetTxtRecordSetsClientDiagnostics.CreateScope("RecordSetTxt.Update");
             scope.Start();

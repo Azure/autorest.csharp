@@ -38,7 +38,7 @@ namespace MgmtOperations
         internal UnpatchableResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _unpatchableResourceClientDiagnostics = new ClientDiagnostics("MgmtOperations", UnpatchableResource.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(UnpatchableResource.ResourceType, out string unpatchableResourceApiVersion);
+            TryGetApiVersion(UnpatchableResource.ResourceType, out string unpatchableResourceApiVersion);
             _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(_unpatchableResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, unpatchableResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -60,15 +60,12 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="parameters"> Parameters supplied to the Create UnpatchableResource operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ArmOperation<UnpatchableResource>> CreateOrUpdateAsync(bool waitForCompletion, string name, UnpatchableResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _unpatchableResourceClientDiagnostics.CreateScope("UnpatchableResourceCollection.CreateOrUpdate");
             scope.Start();
@@ -96,15 +93,12 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="parameters"> Parameters supplied to the Create UnpatchableResource operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ArmOperation<UnpatchableResource> CreateOrUpdate(bool waitForCompletion, string name, UnpatchableResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _unpatchableResourceClientDiagnostics.CreateScope("UnpatchableResourceCollection.CreateOrUpdate");
             scope.Start();
@@ -131,7 +125,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<UnpatchableResource>> GetAsync(string name, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -161,7 +155,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<UnpatchableResource> Get(string name, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -247,7 +241,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string name, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -275,7 +269,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<bool> Exists(string name, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -303,7 +297,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<UnpatchableResource>> GetIfExistsAsync(string name, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -333,7 +327,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<UnpatchableResource> GetIfExists(string name, string expand = null, CancellationToken cancellationToken = default)
         {

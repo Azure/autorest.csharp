@@ -15,22 +15,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class TypeExtensions
     {
-        /// <summary>
-        /// Is the type a string or an Enum that is modeled as string.
-        /// </summary>
-        /// <param name="type">Type to check.</param>
-        /// <returns>Is the type a string or an Enum that is modeled as string.</returns>
-        public static bool IsStringLike(this CSharpType type)
-        {
-            if (type.IsFrameworkType)
-            {
-                return type.Equals(typeof(string));
-            }
-            else
-            {
-                return type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
-            };
-        }
 
         /// <summary>
         /// Check whether two CSharpType instances equal or not

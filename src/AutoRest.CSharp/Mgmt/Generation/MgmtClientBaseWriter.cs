@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (resource is not null)
             {
                 string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
-                _writer.Line($"{ArmClientReference}.TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
+                _writer.Line($"TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
                 apiVersionText = $", {apiVersionVariable}";
             }
             _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, diagFieldName, apiVersionText)};");
@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual Parameter[] GetParametersForSingletonEntry()
         {
-            return new Parameter[] { };
+            return Array.Empty<Parameter>();
         }
 
         protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
@@ -463,7 +463,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
             if (This.Accessibility == "public")
-                _writer.WriteXmlDocumentationMgmtRequiredParametersException(signature.Parameters);
+            {
+                _writer.WriteXmlDocumentationNonEmptyParametersException(signature.Parameters);
+                _writer.WriteXmlDocumentationRequiredParametersException(signature.Parameters);
+            }
 
             FormattableString? returnDesc = returnDescription ?? signature.ReturnDescription;
             if (returnDesc is not null)
@@ -471,7 +474,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var scope = _writer.WriteMethodDeclaration(signature, isAsync);
             if (This.Accessibility == "public")
-                _writer.WriteParameterNullOrEmptyChecks(signature.Parameters);
+                _writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
         }
@@ -821,7 +824,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && !parameter.Parameter.ValidateNotNull)
+                        if (passNullForOptionalParameters && !parameter.Parameter.Validate)
                             writer.Append($"null, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");

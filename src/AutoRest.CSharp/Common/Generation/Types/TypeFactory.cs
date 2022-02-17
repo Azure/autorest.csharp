@@ -123,6 +123,17 @@ namespace AutoRest.CSharp.Generation.Types
             throw new NotSupportedException(type.Name);
         }
 
+
+        /// <summary>
+        /// Is the type a string or an Enum that is modeled as string.
+        /// </summary>
+        /// <param name="type">Type to check.</param>
+        /// <returns>Is the type a string or an Enum that is modeled as string.</returns>
+        public static bool IsStringLike(CSharpType type) =>
+            type.IsFrameworkType
+                ? type.Equals(typeof(string))
+                : type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
+
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
 

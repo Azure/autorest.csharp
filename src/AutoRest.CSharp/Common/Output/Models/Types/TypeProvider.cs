@@ -58,5 +58,23 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             return result;
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is null)
+                return false;
+            if (obj is not TypeProvider other)
+                return false;
+
+            return string.Equals(DefaultName, other.DefaultName, StringComparison.Ordinal) &&
+                string.Equals(DefaultNamespace, other.DefaultNamespace, StringComparison.Ordinal) &&
+                string.Equals(DefaultAccessibility, other.DefaultAccessibility, StringComparison.Ordinal) &&
+                TypeKind == other.TypeKind;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(DefaultName, DefaultNamespace, DefaultAccessibility, TypeKind);
+        }
     }
 }

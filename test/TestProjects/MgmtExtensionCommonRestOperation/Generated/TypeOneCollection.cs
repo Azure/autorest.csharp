@@ -38,7 +38,7 @@ namespace MgmtExtensionCommonRestOperation
         internal TypeOneCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeOne.ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
+            TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
             _typeOneCommonRestClient = new CommonRestOperations(_typeOneCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -60,15 +60,12 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="typeOneName"> The name. </param>
         /// <param name="typeOne"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
         public async virtual Task<ArmOperation<TypeOne>> CreateOrUpdateAsync(bool waitForCompletion, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
-            if (typeOne == null)
-            {
-                throw new ArgumentNullException(nameof(typeOne));
-            }
+            Argument.AssertNotNull(typeOne, nameof(typeOne));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
             scope.Start();
@@ -96,15 +93,12 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="typeOneName"> The name. </param>
         /// <param name="typeOne"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
         public virtual ArmOperation<TypeOne> CreateOrUpdate(bool waitForCompletion, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
-            if (typeOne == null)
-            {
-                throw new ArgumentNullException(nameof(typeOne));
-            }
+            Argument.AssertNotNull(typeOne, nameof(typeOne));
 
             using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
             scope.Start();
@@ -130,7 +124,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public async virtual Task<Response<TypeOne>> GetAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -159,7 +153,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual Response<TypeOne> Get(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -242,7 +236,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -269,7 +263,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual Response<bool> Exists(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -296,7 +290,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public async virtual Task<Response<TypeOne>> GetIfExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -325,7 +319,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         public virtual Response<TypeOne> GetIfExists(string typeOneName, CancellationToken cancellationToken = default)
         {
