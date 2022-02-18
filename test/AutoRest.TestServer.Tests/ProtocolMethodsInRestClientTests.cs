@@ -13,6 +13,9 @@ namespace AutoRest.TestServer.Tests
         [TestCase("Delete", true)]
         [TestCase("Create", true)]
         [TestCase("Get", false)]
+        [TestCase("DeleteAsync", true)]
+        [TestCase("CreateAsync", true)]
+        [TestCase("GetAsync", false)]
         public void ProtocolMethodGeneratedInRestClient(string methodName, bool isProtocolMethodGenerated)
         {
             var methods = typeof(TestServiceRestClient).GetMethods();
