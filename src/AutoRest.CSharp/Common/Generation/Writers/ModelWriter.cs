@@ -97,9 +97,61 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
                     using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type} {myPropertyName:D}"))
                     {
-                        writer.Line($"get => {property.Declaration.Name:D}.{childPropertyName};");
-                        if (!innerProperty.IsReadOnly)
-                            writer.Line($"set => {property.Declaration.Name:D}.{childPropertyName} = value;");
+                        if (!property.IsReadOnly && innerProperty.IsReadOnly)
+                        {
+                            if (HasDefaultPublicCtor(property))
+                            {
+                                if (innerProperty.Declaration.Type.Arguments.Length > 0)
+                                {
+                                    using (writer.Scope($"get"))
+                                    {
+                                        writer.Line($"if ({property.Declaration.Name:D} is null)");
+                                        writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
+                                        writer.Line($"return {property.Declaration.Name:D}.{childPropertyName};");
+                                    }
+                                }
+                                else
+                                {
+                                    writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+                                }
+                            }
+                            else if (HasCtorWithSingleParam(property, innerProperty))
+                            {
+                                writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+                                writer.Line($"set => {property.Declaration.Name:D} = new {property.Declaration.Type}(value);");
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
+                            }
+                        }
+                        else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
+                        {
+                            writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+                            if (HasDefaultPublicCtor(property))
+                            {
+                                using (writer.Scope($"set"))
+                                {
+                                    writer.Line($"if ({property.Declaration.Name:D} is null)");
+                                    writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
+                                    writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value;");
+                                }
+                            }
+                            else if (HasCtorWithSingleParam(property, innerProperty))
+                            {
+                                writer.Line($"set => {property.Declaration.Name:D} = new {property.Declaration.Type}(value);");
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
+                            }
+                        }
+                        else
+                        {
+                            writer.Line($"get => {property.Declaration.Name:D}.{childPropertyName};");
+                            if (!innerProperty.IsReadOnly)
+                                writer.Line($"set => {property.Declaration.Name:D}.{childPropertyName} = value;");
+                        }
                     }
 
                     writer.Line();
@@ -111,12 +163,59 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
+        {
+            var type = property.Declaration.Type;
+            if (type.IsFrameworkType)
+                return false;
+
+            if (type.Implementation is not ObjectType objType)
+                return false;
+
+            foreach (var ctor in objType.Constructors)
+            {
+                if (ctor.Signature.Modifiers.Contains("public", StringComparison.Ordinal) &&
+                    ctor.Signature.Parameters.Length == 1)
+                {
+                    var paramType = ctor.Signature.Parameters[0].Type;
+                    var propertyType = innerProperty.Declaration.Type;
+                    if (paramType.Arguments.Length == 0 && paramType.Equals(propertyType))
+                        return true;
+
+                    if (paramType.Arguments.Length == 1 && propertyType.Arguments.Length == 1 && paramType.Arguments[0].Equals(propertyType.Arguments[0]))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool HasDefaultPublicCtor(ObjectTypeProperty objectTypeProperty)
+        {
+            var type = objectTypeProperty.Declaration.Type;
+            if (type.IsFrameworkType)
+                return true;
+
+            if (type.Implementation is not ObjectType objType)
+                return true;
+
+            foreach (var ctor in objType.Constructors)
+            {
+                if (ctor.Signature.Modifiers.Contains("public", StringComparison.Ordinal) && ctor.Signature.Parameters.Length == 0)
+                    return true;
+            }
+
+            return false;
+        }
+
         private string GetCombinedPropertyName(string immediateParentPropertyName, MemberDeclarationOptions property)
         {
             string parentName = immediateParentPropertyName;
 
             if (property.Type.Equals(typeof(bool)) || property.Type.Equals(typeof(bool?)))
-                return property.Name;
+            {
+                return property.Name.Equals("Enabled", StringComparison.Ordinal) ? $"{parentName}{property.Name}" : property.Name;
+            }
 
             if (property.Name.Equals("Id", StringComparison.Ordinal))
                 return $"{parentName}{property.Name}";
@@ -134,18 +233,30 @@ namespace AutoRest.CSharp.Generation.Writers
                 parentWords = parentWords.Take(parentWords.Count() - 1);
             }
 
-            var parentWordsHash = new HashSet<string>(parentWords);
-            var nameWords = property.Name.SplitByCamelCase();
+            var parentWordArray = parentWords.ToArray();
+            var parentWordsHash = new HashSet<string>(parentWordArray);
+            var nameWords = property.Name.SplitByCamelCase().ToArray();
             var lastWord = string.Empty;
-            foreach (var word in nameWords)
+            for (int i = 0; i < nameWords.Length; i++)
             {
+                var word = nameWords[i];
                 lastWord = word;
                 if (parentWordsHash.Contains(word))
+                {
+                    if (i == nameWords.Length - 2 && parentWordArray.Length >= 2 && word.Equals(parentWordArray[parentWordArray.Length - 2], StringComparison.Ordinal))
+                    {
+                        parentWords = parentWords.Take(parentWords.Count() - 2);
+                        break;
+                    }
+                    {
+                        return property.Name;
+                    }
+                }
+
+                //need to depluralize the last word and check
+                if (i == nameWords.Length - 1 && parentWordsHash.Contains(lastWord.ToSingular(false)))
                     return property.Name;
             }
-            //need to depluralize the last word and check
-            if (parentWordsHash.Contains(lastWord.ToSingular(false)))
-                return property.Name;
 
             parentName = string.Join("", parentWords);
 
