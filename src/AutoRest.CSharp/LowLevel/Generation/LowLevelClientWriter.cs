@@ -443,7 +443,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteMethodDocumentation(methodSignature);
             WriteSchemaDocumentationRemarks(writer, operationSchemas);
-            var scope = writer.WriteMethodDeclaration(methodSignature, "AZC0002");
+            var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
             return scope;
         }
