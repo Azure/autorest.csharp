@@ -34,8 +34,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier ProximityPlacementGroupId
         {
-            get => ProximityPlacementGroup.Id;
-            set => ProximityPlacementGroup.Id = value;
+            get => ProximityPlacementGroup is null ? default : ProximityPlacementGroup.Id;
+            set
+            {
+                if (ProximityPlacementGroup is null)
+                    ProximityPlacementGroup = new WritableSubResource();
+                ProximityPlacementGroup.Id = value;
+            }
         }
 
         /// <summary> The resource status information. </summary>

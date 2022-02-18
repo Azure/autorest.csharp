@@ -58,8 +58,8 @@ namespace Azure.Management.Storage.Models
         /// <summary> The key expiration period in days. </summary>
         public int KeyExpirationPeriodInDays
         {
-            get => KeyPolicy.KeyExpirationPeriodInDays;
-            set => KeyPolicy.KeyExpirationPeriodInDays = value;
+            get => KeyPolicy is null ? default : KeyPolicy.KeyExpirationPeriodInDays;
+            set => KeyPolicy = new KeyPolicy(value);
         }
 
         /// <summary> User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property. </summary>

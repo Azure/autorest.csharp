@@ -31,8 +31,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
         public Uri ImageUri
         {
-            get => Image.Uri;
-            set => Image.Uri = value;
+            get => Image is null ? default : Image.Uri;
+            set
+            {
+                if (Image is null)
+                    Image = new VirtualHardDisk();
+                Image.Uri = value;
+            }
         }
 
         /// <summary> The list of virtual hard disk container uris. </summary>

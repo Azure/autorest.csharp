@@ -35,8 +35,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier DiskEncryptionSetId
         {
-            get => DiskEncryptionSet.Id;
-            set => DiskEncryptionSet.Id = value;
+            get => DiskEncryptionSet is null ? default : DiskEncryptionSet.Id;
+            set
+            {
+                if (DiskEncryptionSet is null)
+                    DiskEncryptionSet = new WritableSubResource();
+                DiskEncryptionSet.Id = value;
+            }
         }
     }
 }

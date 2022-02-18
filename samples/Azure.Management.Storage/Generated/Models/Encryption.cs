@@ -45,8 +45,13 @@ namespace Azure.Management.Storage.Models
         /// <summary> Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account. </summary>
         public string EncryptionUserAssignedIdentity
         {
-            get => EncryptionIdentity.EncryptionUserAssignedIdentity;
-            set => EncryptionIdentity.EncryptionUserAssignedIdentity = value;
+            get => EncryptionIdentity is null ? default : EncryptionIdentity.EncryptionUserAssignedIdentity;
+            set
+            {
+                if (EncryptionIdentity is null)
+                    EncryptionIdentity = new EncryptionIdentity();
+                EncryptionIdentity.EncryptionUserAssignedIdentity = value;
+            }
         }
     }
 }

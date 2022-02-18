@@ -60,8 +60,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> The operating system of the osDiskImage. </summary>
         public OperatingSystemTypes OsDiskImageOperatingSystem
         {
-            get => OsDiskImage.OperatingSystem;
-            set => OsDiskImage.OperatingSystem = value;
+            get => OsDiskImage is null ? default : OsDiskImage.OperatingSystem;
+            set => OsDiskImage = new OSDiskImage(value);
         }
 
         /// <summary> Gets the data disk images. </summary>
@@ -71,8 +71,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies whether automatic OS upgrade is supported on the image. </summary>
         public bool AutomaticOSUpgradeSupported
         {
-            get => AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
-            set => AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported = value;
+            get => AutomaticOSUpgradeProperties is null ? default : AutomaticOSUpgradeProperties.AutomaticOSUpgradeSupported;
+            set => AutomaticOSUpgradeProperties = new AutomaticOSUpgradeProperties(value);
         }
 
         /// <summary> Specifies the HyperVGeneration Type. </summary>
@@ -82,8 +82,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> VM disk types which are disallowed. </summary>
         public VmDiskTypes? DisallowedVmDiskType
         {
-            get => Disallowed.VmDiskType;
-            set => Disallowed.VmDiskType = value;
+            get => Disallowed is null ? default : Disallowed.VmDiskType;
+            set
+            {
+                if (Disallowed is null)
+                    Disallowed = new DisallowedConfiguration();
+                Disallowed.VmDiskType = value;
+            }
         }
     }
 }

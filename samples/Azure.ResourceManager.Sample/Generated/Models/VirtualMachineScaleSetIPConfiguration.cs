@@ -63,8 +63,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SubnetId
         {
-            get => Subnet.Id;
-            set => Subnet.Id = value;
+            get => Subnet is null ? default : Subnet.Id;
+            set
+            {
+                if (Subnet is null)
+                    Subnet = new WritableSubResource();
+                Subnet.Id = value;
+            }
         }
 
         /// <summary> Specifies the primary network interface in case the virtual machine has more than 1 network interface. </summary>

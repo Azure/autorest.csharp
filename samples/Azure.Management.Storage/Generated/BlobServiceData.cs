@@ -56,7 +56,12 @@ namespace Azure.Management.Storage
         /// <summary> The List of CORS rules. You can include up to five CorsRule elements in the request. </summary>
         public IList<CorsRule> CorsRulesValue
         {
-            get => Cors.CorsRulesValue;
+            get
+            {
+                if (Cors is null)
+                    Cors = new CorsRules();
+                return Cors.CorsRulesValue;
+            }
         }
 
         /// <summary> DefaultServiceVersion indicates the default version to use for requests to the Blob service if an incoming request’s version is not specified. Possible values include version 2008-10-27 and all more recent versions. </summary>

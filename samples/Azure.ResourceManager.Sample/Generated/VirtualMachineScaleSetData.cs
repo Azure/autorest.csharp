@@ -103,8 +103,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier ProximityPlacementGroupId
         {
-            get => ProximityPlacementGroup.Id;
-            set => ProximityPlacementGroup.Id = value;
+            get => ProximityPlacementGroup is null ? default : ProximityPlacementGroup.Id;
+            set
+            {
+                if (ProximityPlacementGroup is null)
+                    ProximityPlacementGroup = new WritableSubResource();
+                ProximityPlacementGroup.Id = value;
+            }
         }
 
         /// <summary> Specifies information about the dedicated host group that the virtual machine scale set resides in. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. </summary>
@@ -112,8 +117,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier HostGroupId
         {
-            get => HostGroup.Id;
-            set => HostGroup.Id = value;
+            get => HostGroup is null ? default : HostGroup.Id;
+            set
+            {
+                if (HostGroup is null)
+                    HostGroup = new WritableSubResource();
+                HostGroup.Id = value;
+            }
         }
 
         /// <summary> Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type. </summary>
@@ -121,8 +131,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled. </summary>
         public bool? UltraSSDEnabled
         {
-            get => AdditionalCapabilities.UltraSSDEnabled;
-            set => AdditionalCapabilities.UltraSSDEnabled = value;
+            get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
+            set
+            {
+                if (AdditionalCapabilities is null)
+                    AdditionalCapabilities = new AdditionalCapabilities();
+                AdditionalCapabilities.UltraSSDEnabled = value;
+            }
         }
 
         /// <summary> Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in. </summary>
@@ -130,7 +145,12 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The rules to be followed when scaling-in a virtual machine scale set. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Default** When a virtual machine scale set is scaled in, the scale set will first be balanced across zones if it is a zonal scale set. Then, it will be balanced across Fault Domains as far as possible. Within each Fault Domain, the virtual machines chosen for removal will be the newest ones that are not protected from scale-in. &lt;br&gt;&lt;br&gt; **OldestVM** When a virtual machine scale set is being scaled-in, the oldest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the oldest virtual machines that are not protected will be chosen for removal. &lt;br&gt;&lt;br&gt; **NewestVM** When a virtual machine scale set is being scaled-in, the newest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the newest virtual machines that are not protected will be chosen for removal. &lt;br&gt;&lt;br&gt;. </summary>
         public IList<VirtualMachineScaleSetScaleInRules> ScaleInRules
         {
-            get => ScaleInPolicy.Rules;
+            get
+            {
+                if (ScaleInPolicy is null)
+                    ScaleInPolicy = new ScaleInPolicy();
+                return ScaleInPolicy.Rules;
+            }
         }
     }
 }

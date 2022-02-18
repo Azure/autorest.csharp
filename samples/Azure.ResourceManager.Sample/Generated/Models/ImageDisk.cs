@@ -43,8 +43,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SnapshotId
         {
-            get => Snapshot.Id;
-            set => Snapshot.Id = value;
+            get => Snapshot is null ? default : Snapshot.Id;
+            set
+            {
+                if (Snapshot is null)
+                    Snapshot = new WritableSubResource();
+                Snapshot.Id = value;
+            }
         }
 
         /// <summary> The managedDisk. </summary>
@@ -52,8 +57,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier ManagedDiskId
         {
-            get => ManagedDisk.Id;
-            set => ManagedDisk.Id = value;
+            get => ManagedDisk is null ? default : ManagedDisk.Id;
+            set
+            {
+                if (ManagedDisk is null)
+                    ManagedDisk = new WritableSubResource();
+                ManagedDisk.Id = value;
+            }
         }
 
         /// <summary> The Virtual Hard Disk. </summary>
@@ -69,8 +79,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier DiskEncryptionSetId
         {
-            get => DiskEncryptionSet.Id;
-            set => DiskEncryptionSet.Id = value;
+            get => DiskEncryptionSet is null ? default : DiskEncryptionSet.Id;
+            set
+            {
+                if (DiskEncryptionSet is null)
+                    DiskEncryptionSet = new WritableSubResource();
+                DiskEncryptionSet.Id = value;
+            }
         }
     }
 }

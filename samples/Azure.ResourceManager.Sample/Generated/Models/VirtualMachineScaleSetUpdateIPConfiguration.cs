@@ -54,8 +54,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SubnetId
         {
-            get => Subnet.Id;
-            set => Subnet.Id = value;
+            get => Subnet is null ? default : Subnet.Id;
+            set
+            {
+                if (Subnet is null)
+                    Subnet = new WritableSubResource();
+                Subnet.Id = value;
+            }
         }
 
         /// <summary> Specifies the primary IP Configuration in case the network interface has more than one IP Configuration. </summary>

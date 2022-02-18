@@ -44,7 +44,12 @@ namespace Azure.Management.Storage
         /// <summary> The List of CORS rules. You can include up to five CorsRule elements in the request. </summary>
         public IList<CorsRule> CorsRulesValue
         {
-            get => Cors.CorsRulesValue;
+            get
+            {
+                if (Cors is null)
+                    Cors = new CorsRules();
+                return Cors.CorsRulesValue;
+            }
         }
 
         /// <summary> The file service properties for share soft delete. </summary>
@@ -54,8 +59,13 @@ namespace Azure.Management.Storage
         /// <summary> Setting for SMB protocol. </summary>
         public SmbSetting ProtocolSmb
         {
-            get => ProtocolSettings.Smb;
-            set => ProtocolSettings.Smb = value;
+            get => ProtocolSettings is null ? default : ProtocolSettings.Smb;
+            set
+            {
+                if (ProtocolSettings is null)
+                    ProtocolSettings = new ProtocolSettings();
+                ProtocolSettings.Smb = value;
+            }
         }
     }
 }

@@ -39,8 +39,8 @@ namespace Azure.Management.Storage.Models
         /// <summary> The key expiration period in days. </summary>
         public int KeyExpirationPeriodInDays
         {
-            get => KeyPolicy.KeyExpirationPeriodInDays;
-            set => KeyPolicy.KeyExpirationPeriodInDays = value;
+            get => KeyPolicy is null ? default : KeyPolicy.KeyExpirationPeriodInDays;
+            set => KeyPolicy = new KeyPolicy(value);
         }
 
         /// <summary> Required for storage accounts where kind = BlobStorage. The access tier used for billing. </summary>

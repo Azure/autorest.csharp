@@ -23,8 +23,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SourceVirtualMachineId
         {
-            get => SourceVirtualMachine.Id;
-            set => SourceVirtualMachine.Id = value;
+            get => SourceVirtualMachine is null ? default : SourceVirtualMachine.Id;
+            set
+            {
+                if (SourceVirtualMachine is null)
+                    SourceVirtualMachine = new WritableSubResource();
+                SourceVirtualMachine.Id = value;
+            }
         }
 
         /// <summary> Specifies the storage settings for the virtual machine disks. </summary>

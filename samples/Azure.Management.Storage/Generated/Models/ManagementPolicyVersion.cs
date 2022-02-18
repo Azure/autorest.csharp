@@ -31,8 +31,8 @@ namespace Azure.Management.Storage.Models
         /// <summary> Value indicating the age in days after creation. </summary>
         public float TierToCoolDaysAfterCreationGreaterThan
         {
-            get => TierToCool.DaysAfterCreationGreaterThan;
-            set => TierToCool.DaysAfterCreationGreaterThan = value;
+            get => TierToCool is null ? default : TierToCool.DaysAfterCreationGreaterThan;
+            set => TierToCool = new DateAfterCreation(value);
         }
 
         /// <summary> The function to tier blob version to archive storage. Support blob version currently at Hot or Cool tier. </summary>
@@ -40,8 +40,8 @@ namespace Azure.Management.Storage.Models
         /// <summary> Value indicating the age in days after creation. </summary>
         public float TierToArchiveDaysAfterCreationGreaterThan
         {
-            get => TierToArchive.DaysAfterCreationGreaterThan;
-            set => TierToArchive.DaysAfterCreationGreaterThan = value;
+            get => TierToArchive is null ? default : TierToArchive.DaysAfterCreationGreaterThan;
+            set => TierToArchive = new DateAfterCreation(value);
         }
 
         /// <summary> The function to delete the blob version. </summary>
@@ -49,8 +49,8 @@ namespace Azure.Management.Storage.Models
         /// <summary> Value indicating the age in days after creation. </summary>
         public float DeleteDaysAfterCreationGreaterThan
         {
-            get => Delete.DaysAfterCreationGreaterThan;
-            set => Delete.DaysAfterCreationGreaterThan = value;
+            get => Delete is null ? default : Delete.DaysAfterCreationGreaterThan;
+            set => Delete = new DateAfterCreation(value);
         }
     }
 }

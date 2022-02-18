@@ -34,8 +34,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier SourceVaultId
         {
-            get => SourceVault.Id;
-            set => SourceVault.Id = value;
+            get => SourceVault is null ? default : SourceVault.Id;
+            set
+            {
+                if (SourceVault is null)
+                    SourceVault = new WritableSubResource();
+                SourceVault.Id = value;
+            }
         }
 
         /// <summary> The list of key vault references in SourceVault which contain certificates. </summary>

@@ -25,8 +25,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier HealthProbeId
         {
-            get => HealthProbe.Id;
-            set => HealthProbe.Id = value;
+            get => HealthProbe is null ? default : HealthProbe.Id;
+            set
+            {
+                if (HealthProbe is null)
+                    HealthProbe = new WritableSubResource();
+                HealthProbe.Id = value;
+            }
         }
 
         /// <summary> The list of network configurations. </summary>

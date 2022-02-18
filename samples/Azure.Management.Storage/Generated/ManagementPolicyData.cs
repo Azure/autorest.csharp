@@ -41,7 +41,8 @@ namespace Azure.Management.Storage
         /// <summary> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </summary>
         public IList<ManagementPolicyRule> Rules
         {
-            get => Policy.Rules;
+            get => Policy is null ? default : Policy.Rules;
+            set => Policy = new ManagementPolicySchema(value);
         }
     }
 }
