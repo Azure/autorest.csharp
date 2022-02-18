@@ -66,8 +66,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
-                            WriteClientMethod(writer, client, clientMethod, context.Configuration, true);
-                            WriteClientMethod(writer, client, clientMethod, context.Configuration, false);
+                            WriteClientMethod(writer, clientMethod, client.Fields, context.Configuration, true);
+                            WriteClientMethod(writer, clientMethod, client.Fields, context.Configuration, false);
                         }
                     }
 
@@ -76,15 +76,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     var responseClassifierTypes = new List<ResponseClassifierType>();
                     foreach (var method in client.RequestMethods)
                     {
-                        var responseClassifierType = CreateResponseClassifierType(method);
-                        responseClassifierTypes.Add(responseClassifierType);
-                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", client.Fields, responseClassifierType.Name, false);
+                        WriteRequestCreationMethod(writer, method, client.Fields, responseClassifierTypes);
                     }
 
-                    foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes.Distinct())
-                    {
-                        WriteResponseClassifier(writer, name, statusCodes);
-                    }
+                    WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
         }
@@ -201,7 +196,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteClientMethod(CodeWriter writer, LowLevelClient client, LowLevelClientMethod clientMethod, Configuration configuration, bool async)
+        public static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, Configuration configuration, bool async)
         {
             var restMethod = clientMethod.RequestMethod;
             var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
@@ -212,7 +207,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
-                using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, client.Fields.ClientDiagnosticsProperty.Name))
+                using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, fields.ClientDiagnosticsProperty.Name))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
                     writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});");
@@ -222,16 +217,16 @@ namespace AutoRest.CSharp.Generation.Writers
                         : headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage) : nameof(HttpPipelineExtensions.ProcessMessage);
 
                     FormattableString paramString = headAsBoolean
-                        ? (FormattableString)$"{messageVariable}, {client.Fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}"
+                        ? (FormattableString)$"{messageVariable}, {fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}"
                         : (FormattableString)$"{messageVariable}, {KnownParameters.RequestContext.Name:I}";
 
-                    writer.AppendRaw("return ").WriteMethodCall(async, $"{client.Fields.PipelineField.Name:I}.{methodName}", paramString);
+                    writer.AppendRaw("return ").WriteMethodCall(async, $"{fields.PipelineField.Name:I}.{methodName}", paramString);
                 }
             }
             writer.Line();
         }
 
-        private static void WritePagingMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
+        public static void WritePagingMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
             var method = clientMethod.RequestMethod;
             var pagingInfo = clientMethod.PagingInfo!;
@@ -293,7 +288,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
+        public static void WriteLongRunningOperationMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
             var startMethod = clientMethod.RequestMethod;
             var pagingInfo = clientMethod.PagingInfo;
@@ -401,6 +396,21 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
                 writer.Line();
+            }
+        }
+
+        public static void WriteRequestCreationMethod(CodeWriter writer, RestClientMethod restMethod, ClientFields fields, List<ResponseClassifierType> responseClassifierTypes)
+        {
+            var responseClassifierType = CreateResponseClassifierType(restMethod);
+            responseClassifierTypes.Add(responseClassifierType);
+            RequestWriterHelpers.WriteRequestCreation(writer, restMethod, "internal", fields, responseClassifierType.Name, false);
+        }
+
+        public static void WriteResponseClassifierMethod(CodeWriter writer, List<ResponseClassifierType> responseClassifierTypes)
+        {
+            foreach ((string name, StatusCodes[] statusCodes) in responseClassifierTypes.Distinct())
+            {
+                WriteResponseClassifier(writer, name, statusCodes);
             }
         }
 
@@ -636,7 +646,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private readonly struct ResponseClassifierType : IEquatable<ResponseClassifierType>
+        public readonly struct ResponseClassifierType : IEquatable<ResponseClassifierType>
         {
             public string Name { get; }
             private readonly StatusCodes[] _statusCodes;
