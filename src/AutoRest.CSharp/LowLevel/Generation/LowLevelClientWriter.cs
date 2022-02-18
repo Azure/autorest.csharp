@@ -43,11 +43,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void WriteClient(CodeWriter writer, LowLevelClient client, BuildContext<LowLevelOutputLibrary> context)
         {
-            var cs = client.Type;
-            using (writer.Namespace(cs.Namespace))
+            var clientType = client.Type;
+            using (writer.Namespace(clientType.Namespace))
             {
                 writer.WriteXmlDocumentationSummary($"{client.Description}");
-                using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
+                using (writer.Scope($"{client.Declaration.Accessibility} partial class {clientType:D}"))
                 {
                     WriteClientFields(writer, client);
                     WriteConstructors(writer, client);
