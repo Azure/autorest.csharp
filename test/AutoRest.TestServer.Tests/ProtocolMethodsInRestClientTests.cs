@@ -40,7 +40,6 @@ namespace AutoRest.TestServer.Tests
             else
             {
                 Assert.AreEqual(1, restClientMethods.Count());
-                Assert.IsFalse(isProtocolMethodGenerated);
                 var parameters = restClientMethods.FirstOrDefault().GetParameters();
                 Assert.IsFalse(parameters.Any(p => p.GetType().Equals(typeof(RequestContext))));
             }
