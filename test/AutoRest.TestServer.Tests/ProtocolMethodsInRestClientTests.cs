@@ -16,13 +16,13 @@ namespace AutoRest.TestServer.Tests
         [TestCase("DeleteAsync", true)]
         [TestCase("CreateAsync", true)]
         [TestCase("GetAsync", false)]
-        public void ProtocolMethodGeneratedInRestClient(string methodName, bool isProtocolMethodGenerated)
+        public void ProtocolMethodGeneratedInRestClient(string methodName, bool isMethodAddedInConfig)
         {
             var methods = typeof(TestServiceRestClient).GetMethods();
             Assert.IsNotNull(methods);
 
             var restClientMethods = methods.Where(m => m.Name.Equals(methodName));
-            if (isProtocolMethodGenerated)
+            if (isMethodAddedInConfig)
             {
                 Assert.AreEqual(2, restClientMethods.Count());
 
