@@ -10,39 +10,41 @@ namespace AutoRest.TestServer.Tests
 {
     internal class ProtocolMethodsInRestClientTests
     {
-        [TestCase("Delete", true)]
-        [TestCase("Create", true)]
-        [TestCase("Get", false)]
-        [TestCase("DeleteAsync", true)]
-        [TestCase("CreateAsync", true)]
-        [TestCase("GetAsync", false)]
-        public void ProtocolMethodGeneratedInRestClient(string methodName, bool isMethodAddedInConfig)
+        [TestCase("Delete")]
+        [TestCase("Create")]
+        [TestCase("DeleteAsync")]
+        [TestCase("CreateAsync")]
+        public void ProtocolMethodGeneratedInRestClient(string methodName)
         {
             var methods = typeof(TestServiceRestClient).GetMethods();
             Assert.IsNotNull(methods);
 
             var restClientMethods = methods.Where(m => m.Name.Equals(methodName));
-            if (isMethodAddedInConfig)
-            {
-                Assert.AreEqual(2, restClientMethods.Count());
+            Assert.AreEqual(2, restClientMethods.Count());
 
-                var isProtocolMethodExists = false;
-                foreach (var method in restClientMethods)
+            var isProtocolMethodExists = false;
+            foreach (var method in restClientMethods)
+            {
+                if (method.GetParameters().Any(p => p.ParameterType.Equals(typeof(RequestContext))))
                 {
-                    if (method.GetParameters().Any(p => p.ParameterType.Equals(typeof(RequestContext))))
-                    {
-                        isProtocolMethodExists = true;
-                    }
+                    isProtocolMethodExists = true;
                 }
+            }
 
-                Assert.IsTrue(isProtocolMethodExists);
-            }
-            else
-            {
-                Assert.AreEqual(1, restClientMethods.Count());
-                var parameters = restClientMethods.FirstOrDefault().GetParameters();
-                Assert.IsFalse(parameters.Any(p => p.GetType().Equals(typeof(RequestContext))));
-            }
+            Assert.IsTrue(isProtocolMethodExists);
+        }
+
+        [TestCase("Get")]
+        [TestCase("GetAsync")]
+        public void ProtocolMethodNotGeneratedInRestClient(string methodName)
+        {
+            var methods = typeof(TestServiceRestClient).GetMethods();
+            Assert.IsNotNull(methods);
+
+            var restClientMethods = methods.Where(m => m.Name.Equals(methodName));
+            Assert.AreEqual(1, restClientMethods.Count());
+            var parameters = restClientMethods.FirstOrDefault().GetParameters();
+            Assert.IsFalse(parameters.Any(p => p.GetType().Equals(typeof(RequestContext))));
         }
 
     }
