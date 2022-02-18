@@ -131,9 +131,7 @@ namespace ProtocolMethodsInRestClient
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
@@ -167,9 +165,7 @@ namespace ProtocolMethodsInRestClient
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Create(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("TestServiceClient.Create");
             scope.Start();
@@ -261,9 +257,7 @@ namespace ProtocolMethodsInRestClient
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DeleteAsync(string resourceId, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
@@ -286,9 +280,7 @@ namespace ProtocolMethodsInRestClient
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceId"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual Response Delete(string resourceId, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(resourceId, nameof(resourceId));
 
