@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> The ARM identifier for Private Endpoint. </summary>
         public ResourceIdentifier PrivateEndpointId
         {
-            get => PrivateEndpoint.Id;
+            get => PrivateEndpoint is null ? default : PrivateEndpoint.Id;
         }
 
         /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>

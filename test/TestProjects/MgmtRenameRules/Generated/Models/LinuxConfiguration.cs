@@ -35,7 +35,12 @@ namespace MgmtRenameRules.Models
         /// <summary> The list of SSH public keys used to authenticate with linux based VMs. </summary>
         public IList<SshPublicKeyInfo> SshPublicKeys
         {
-            get => Ssh.PublicKeys;
+            get
+            {
+                if (Ssh is null)
+                    Ssh = new SshConfiguration();
+                return Ssh.PublicKeys;
+            }
         }
 
         /// <summary> Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later. </summary>

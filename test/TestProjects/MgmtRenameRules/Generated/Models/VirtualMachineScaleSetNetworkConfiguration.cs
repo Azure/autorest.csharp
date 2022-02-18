@@ -60,8 +60,13 @@ namespace MgmtRenameRules.Models
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier NetworkSecurityGroupId
         {
-            get => NetworkSecurityGroup.Id;
-            set => NetworkSecurityGroup.Id = value;
+            get => NetworkSecurityGroup is null ? default : NetworkSecurityGroup.Id;
+            set
+            {
+                if (NetworkSecurityGroup is null)
+                    NetworkSecurityGroup = new WritableSubResource();
+                NetworkSecurityGroup.Id = value;
+            }
         }
 
         /// <summary> The dns settings to be applied on the network interfaces. </summary>
@@ -69,7 +74,12 @@ namespace MgmtRenameRules.Models
         /// <summary> List of DNS servers IP addresses. </summary>
         public IList<string> DnsServers
         {
-            get => DnsSettings.DnsServers;
+            get
+            {
+                if (DnsSettings is null)
+                    DnsSettings = new VirtualMachineScaleSetNetworkConfigurationDnsSettings();
+                return DnsSettings.DnsServers;
+            }
         }
 
         /// <summary> Specifies the IP configurations of the network interface. </summary>

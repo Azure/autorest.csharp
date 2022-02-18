@@ -89,7 +89,7 @@ namespace MgmtPropertyChooser
         /// <summary> Gets Id. </summary>
         public ResourceIdentifier FakeSubResourceId
         {
-            get => FakeSubResource.Id;
+            get => FakeSubResource is null ? default : FakeSubResource.Id;
         }
 
         /// <summary> The fake writable subresource. </summary>
@@ -97,8 +97,13 @@ namespace MgmtPropertyChooser
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier FakeWritableSubResourceId
         {
-            get => FakeWritableSubResource.Id;
-            set => FakeWritableSubResource.Id = value;
+            get => FakeWritableSubResource is null ? default : FakeWritableSubResource.Id;
+            set
+            {
+                if (FakeWritableSubResource is null)
+                    FakeWritableSubResource = new WritableSubResource();
+                FakeWritableSubResource.Id = value;
+            }
         }
 
         /// <summary> The provisioning state, which only appears in the response. </summary>

@@ -35,7 +35,7 @@ namespace NoTypeReplacement
         /// <summary> Gets Id. </summary>
         public ResourceIdentifier FooId
         {
-            get => Foo.Id;
+            get => Foo is null ? default : Foo.Id;
         }
     }
 }

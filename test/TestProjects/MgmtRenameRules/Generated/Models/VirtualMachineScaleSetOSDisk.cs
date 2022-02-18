@@ -66,8 +66,13 @@ namespace MgmtRenameRules.Models
         /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
         public Uri ImageUri
         {
-            get => Image.Uri;
-            set => Image.Uri = value;
+            get => Image is null ? default : Image.Uri;
+            set
+            {
+                if (Image is null)
+                    Image = new VirtualHardDisk();
+                Image.Uri = value;
+            }
         }
 
         /// <summary> Specifies the container urls that are used to store operating system disks for the scale set. </summary>

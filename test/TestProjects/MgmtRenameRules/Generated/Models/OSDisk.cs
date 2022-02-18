@@ -57,8 +57,13 @@ namespace MgmtRenameRules.Models
         /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
         public Uri VhdUri
         {
-            get => Vhd.Uri;
-            set => Vhd.Uri = value;
+            get => Vhd is null ? default : Vhd.Uri;
+            set
+            {
+                if (Vhd is null)
+                    Vhd = new VirtualHardDisk();
+                Vhd.Uri = value;
+            }
         }
 
         /// <summary> The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist. </summary>
@@ -66,8 +71,13 @@ namespace MgmtRenameRules.Models
         /// <summary> Specifies the virtual hard disk&apos;s uri. </summary>
         public Uri ImageUri
         {
-            get => Image.Uri;
-            set => Image.Uri = value;
+            get => Image is null ? default : Image.Uri;
+            set
+            {
+                if (Image is null)
+                    Image = new VirtualHardDisk();
+                Image.Uri = value;
+            }
         }
 
         /// <summary> Specifies the caching requirements. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **ReadOnly** &lt;br&gt;&lt;br&gt; **ReadWrite** &lt;br&gt;&lt;br&gt; Default: **None** for Standard storage. **ReadOnly** for Premium storage. </summary>

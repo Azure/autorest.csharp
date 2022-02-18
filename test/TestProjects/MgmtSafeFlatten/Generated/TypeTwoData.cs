@@ -43,8 +43,13 @@ namespace MgmtSafeFlatten
         /// <summary> MyProp description. </summary>
         public string LayerTwoMyProp
         {
-            get => Properties.LayerTwoMyProp;
-            set => Properties.LayerTwoMyProp = value;
+            get => Properties is null ? default : Properties.LayerTwoMyProp;
+            set
+            {
+                if (Properties is null)
+                    Properties = new LayerOneSingle();
+                Properties.LayerTwoMyProp = value;
+            }
         }
     }
 }

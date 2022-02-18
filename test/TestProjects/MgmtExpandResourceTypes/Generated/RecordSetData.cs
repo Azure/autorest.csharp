@@ -86,8 +86,13 @@ namespace MgmtExpandResourceTypes
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier TargetResourceId
         {
-            get => TargetResource.Id;
-            set => TargetResource.Id = value;
+            get => TargetResource is null ? default : TargetResource.Id;
+            set
+            {
+                if (TargetResource is null)
+                    TargetResource = new WritableSubResource();
+                TargetResource.Id = value;
+            }
         }
 
         /// <summary> The list of A records in the record set. </summary>
@@ -109,8 +114,13 @@ namespace MgmtExpandResourceTypes
         /// <summary> The canonical name for this CNAME record. </summary>
         public string Cname
         {
-            get => CnameRecord.Cname;
-            set => CnameRecord.Cname = value;
+            get => CnameRecord is null ? default : CnameRecord.Cname;
+            set
+            {
+                if (CnameRecord is null)
+                    CnameRecord = new CnameRecord();
+                CnameRecord.Cname = value;
+            }
         }
 
         /// <summary> The SOA record in the record set. </summary>

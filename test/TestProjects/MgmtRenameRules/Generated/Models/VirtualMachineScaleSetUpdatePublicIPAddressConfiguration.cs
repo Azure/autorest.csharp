@@ -35,8 +35,8 @@ namespace MgmtRenameRules.Models
         /// <summary> The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created. </summary>
         public string DnsDomainNameLabel
         {
-            get => DnsSettings.DomainNameLabel;
-            set => DnsSettings.DomainNameLabel = value;
+            get => DnsSettings is null ? default : DnsSettings.DomainNameLabel;
+            set => DnsSettings = new VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(value);
         }
     }
 }

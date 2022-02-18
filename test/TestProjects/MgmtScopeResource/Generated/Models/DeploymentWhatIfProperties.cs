@@ -21,8 +21,13 @@ namespace MgmtScopeResource.Models
         /// <summary> The format of the What-If results. </summary>
         public WhatIfResultFormat? WhatIfResultFormat
         {
-            get => WhatIfSettings.ResultFormat;
-            set => WhatIfSettings.ResultFormat = value;
+            get => WhatIfSettings is null ? default : WhatIfSettings.ResultFormat;
+            set
+            {
+                if (WhatIfSettings is null)
+                    WhatIfSettings = new DeploymentWhatIfSettings();
+                WhatIfSettings.ResultFormat = value;
+            }
         }
     }
 }

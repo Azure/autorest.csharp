@@ -47,7 +47,7 @@ namespace MgmtKeyvault
         /// <summary> Gets Id. </summary>
         public ResourceIdentifier PrivateEndpointId
         {
-            get => PrivateEndpoint.Id;
+            get => PrivateEndpoint is null ? default : PrivateEndpoint.Id;
         }
 
         /// <summary> Approval state of the private link connection. </summary>

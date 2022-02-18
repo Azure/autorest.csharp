@@ -40,8 +40,13 @@ namespace MgmtLRO
         /// <summary> Update Domain count. </summary>
         public Guid? BarBuzz
         {
-            get => Properties.Buzz;
-            set => Properties.Buzz = value;
+            get => Properties is null ? default : Properties.Buzz;
+            set
+            {
+                if (Properties is null)
+                    Properties = new BarProperties();
+                Properties.Buzz = value;
+            }
         }
     }
 }

@@ -93,8 +93,13 @@ namespace MgmtRenameRules
         /// <summary> Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). </summary>
         public VirtualMachineSizeTypes? HardwareVmSize
         {
-            get => HardwareProfile.VmSize;
-            set => HardwareProfile.VmSize = value;
+            get => HardwareProfile is null ? default : HardwareProfile.VmSize;
+            set
+            {
+                if (HardwareProfile is null)
+                    HardwareProfile = new HardwareProfile();
+                HardwareProfile.VmSize = value;
+            }
         }
 
         /// <summary> Specifies the storage settings for the virtual machine disks. </summary>
@@ -104,8 +109,13 @@ namespace MgmtRenameRules
         /// <summary> The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled. </summary>
         public bool? UltraSSDEnabled
         {
-            get => AdditionalCapabilities.UltraSSDEnabled;
-            set => AdditionalCapabilities.UltraSSDEnabled = value;
+            get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
+            set
+            {
+                if (AdditionalCapabilities is null)
+                    AdditionalCapabilities = new AdditionalCapabilities();
+                AdditionalCapabilities.UltraSSDEnabled = value;
+            }
         }
 
         /// <summary> Specifies the operating system settings for the virtual machine. </summary>
@@ -115,8 +125,13 @@ namespace MgmtRenameRules
         /// <summary> This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. &lt;br&gt;&lt;br&gt; Default: The Encryption at host will be disabled unless this property is set to true for the resource. </summary>
         public bool? EncryptionAtHost
         {
-            get => SecurityProfile.EncryptionAtHost;
-            set => SecurityProfile.EncryptionAtHost = value;
+            get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
+            set
+            {
+                if (SecurityProfile is null)
+                    SecurityProfile = new SecurityProfile();
+                SecurityProfile.EncryptionAtHost = value;
+            }
         }
 
         /// <summary> Specifies the network interfaces of the virtual machine. </summary>
@@ -124,7 +139,12 @@ namespace MgmtRenameRules
         /// <summary> Specifies the list of resource Ids for the network interfaces associated with the virtual machine. </summary>
         public IList<NetworkInterfaceReference> NetworkInterfaces
         {
-            get => NetworkProfile.NetworkInterfaces;
+            get
+            {
+                if (NetworkProfile is null)
+                    NetworkProfile = new NetworkProfile();
+                return NetworkProfile.NetworkInterfaces;
+            }
         }
 
         /// <summary> Specifies the network profile configuration of the virtual machine. </summary>
@@ -132,7 +152,12 @@ namespace MgmtRenameRules
         /// <summary> The list of network configurations. </summary>
         public IList<VirtualMachineScaleSetNetworkConfiguration> NetworkInterfaceConfigurations
         {
-            get => NetworkProfileConfiguration.NetworkInterfaceConfigurations;
+            get
+            {
+                if (NetworkProfileConfiguration is null)
+                    NetworkProfileConfiguration = new VirtualMachineScaleSetVmNetworkProfileConfiguration();
+                return NetworkProfileConfiguration.NetworkInterfaceConfigurations;
+            }
         }
 
         /// <summary> Specifies the boot diagnostic settings state. &lt;br&gt;&lt;br&gt;Minimum api-version: 2015-06-15. </summary>
@@ -140,8 +165,13 @@ namespace MgmtRenameRules
         /// <summary> Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor. </summary>
         public BootDiagnostics BootDiagnostics
         {
-            get => DiagnosticsProfile.BootDiagnostics;
-            set => DiagnosticsProfile.BootDiagnostics = value;
+            get => DiagnosticsProfile is null ? default : DiagnosticsProfile.BootDiagnostics;
+            set
+            {
+                if (DiagnosticsProfile is null)
+                    DiagnosticsProfile = new DiagnosticsProfile();
+                DiagnosticsProfile.BootDiagnostics = value;
+            }
         }
 
         /// <summary> Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set. </summary>
@@ -149,8 +179,13 @@ namespace MgmtRenameRules
         /// <summary> Gets or sets Id. </summary>
         public ResourceIdentifier AvailabilitySetId
         {
-            get => AvailabilitySet.Id;
-            set => AvailabilitySet.Id = value;
+            get => AvailabilitySet is null ? default : AvailabilitySet.Id;
+            set
+            {
+                if (AvailabilitySet is null)
+                    AvailabilitySet = new WritableSubResource();
+                AvailabilitySet.Id = value;
+            }
         }
 
         /// <summary> The provisioning state, which only appears in the response. </summary>

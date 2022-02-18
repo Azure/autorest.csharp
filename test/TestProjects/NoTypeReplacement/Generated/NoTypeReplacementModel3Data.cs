@@ -35,7 +35,7 @@ namespace NoTypeReplacement
         /// <summary> Gets the foo id. </summary>
         public string FooId
         {
-            get => Foo.FooId;
+            get => Foo is null ? default : Foo.FooId;
         }
     }
 }
