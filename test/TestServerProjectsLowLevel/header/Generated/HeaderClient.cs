@@ -62,9 +62,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(userAgent, nameof(userAgent));
 
@@ -95,9 +93,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamExistingKey(string userAgent, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(userAgent, nameof(userAgent));
 
@@ -126,9 +122,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseExistingKeyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
@@ -155,9 +149,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseExistingKey(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
@@ -186,9 +178,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(contentType, nameof(contentType));
 
@@ -219,9 +209,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamProtectedKey(string contentType, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(contentType, nameof(contentType));
 
@@ -250,9 +238,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseProtectedKeyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
@@ -279,9 +265,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseProtectedKey(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
@@ -311,9 +295,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -345,9 +327,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamInteger(string scenario, int value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -378,9 +358,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -411,9 +389,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseInteger(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -445,9 +421,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -479,9 +453,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamLong(string scenario, long value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -512,9 +484,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseLongAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -545,9 +515,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseLong(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -579,9 +547,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -613,9 +579,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamFloat(string scenario, float value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -646,9 +610,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -679,9 +641,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseFloat(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -713,9 +673,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -747,9 +705,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDouble(string scenario, double value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -780,9 +736,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -813,9 +767,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDouble(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -847,9 +799,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -881,9 +831,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamBool(string scenario, bool value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -914,9 +862,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -947,9 +893,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseBool(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -981,9 +925,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1015,9 +957,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamString(string scenario, string value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1048,9 +988,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseStringAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1081,9 +1019,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseString(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1115,9 +1051,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1149,9 +1083,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1182,9 +1114,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDateAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1215,9 +1145,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDate(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1249,9 +1177,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1283,9 +1209,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1316,9 +1240,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1349,9 +1271,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDatetime(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1383,9 +1303,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1417,9 +1335,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1450,9 +1366,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1483,9 +1397,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDatetimeRfc1123(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1517,9 +1429,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1551,9 +1461,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDuration(string scenario, TimeSpan value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1584,9 +1492,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1617,9 +1523,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDuration(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1651,9 +1555,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
             Argument.AssertNotNull(value, nameof(value));
@@ -1686,9 +1588,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamByte(string scenario, byte[] value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
             Argument.AssertNotNull(value, nameof(value));
@@ -1720,9 +1620,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseByteAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1753,9 +1651,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseByte(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1787,9 +1683,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1821,9 +1715,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamEnum(string scenario, string value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1854,9 +1746,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1887,9 +1777,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseEnum(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
 
@@ -1918,9 +1806,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CustomRequestIdAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
@@ -1947,9 +1833,7 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response CustomRequestId(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
