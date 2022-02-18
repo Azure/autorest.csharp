@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 
@@ -28,6 +29,20 @@ namespace Azure.Core
         public static void WriteObjectValue(this Utf8JsonWriter writer, IUtf8JsonSerializable value)
         {
             value.Write(writer);
+        }
+
+        public static void WriteNonEmptyArray(this Utf8JsonWriter writer, string name, string[] values)
+        {
+            if (values.Any())
+            {
+                writer.WriteStartArray(name);
+                foreach (var s in values)
+                {
+                    writer.WriteStringValue(s);
+                }
+
+                writer.WriteEndArray();
+            }
         }
 
         public static void WriteBase64StringValue(this Utf8JsonWriter writer, byte[] value, string format)

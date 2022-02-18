@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using Azure.Core;
 
 namespace AutoRest.CSharp.AutoRest.Communication
 {
@@ -85,7 +86,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.DataPlane, configuration.DataPlane);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder);
-                    WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), configuration.ProtocolMethodList);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), configuration.ProtocolMethodList);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -122,20 +123,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
             else
             {
                 return Configuration.GetDefaultOptionStringValue(option)!;
-            }
-        }
-
-        private static void WriteNonEmptyArray(Utf8JsonWriter writer, string name, string[] values)
-        {
-            if (values.Count() > 0)
-            {
-                writer.WriteStartArray(name);
-                foreach (var s in values)
-                {
-                    writer.WriteStringValue(s);
-                }
-
-                writer.WriteEndArray();
             }
         }
 
