@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Transactions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -37,9 +38,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 OperationType = typeof(ArmOperation<>);
                 ResponseType = typeof(Response<>);
                 OperationOrResponseType = typeof(OperationOrResponseInternals<>);
+                Arguments = BaseType.GetGenericArguments().Select(t => new CSharpType(t)).ToArray();
             }
             else
             {
+                Arguments = null;
                 BaseType = typeof(ArmOperation);
                 WaitMethod = "WaitForCompletionResponseAsync";
                 OperationType = typeof(ArmOperation);
@@ -47,6 +50,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 OperationOrResponseType = typeof(OperationOrResponseInternals);
             }
         }
+
+        protected override CSharpType[]? Arguments { get; }
 
         public Type BaseType { get; }
         public string WaitMethod { get; }

@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.Line($"#pragma warning disable SA1649 // File name should match first type name");
                 var genericString = _lro.IsGeneric ? "<T>" : string.Empty;
-                _writer.Line($"internal class {_lro.Type.Name}{genericString} : {_lro.BaseType}");
+                _writer.Line($"internal class {_lro.Type:D} : {_lro.BaseType}");
                 _writer.Line($"#pragma warning restore SA1649 // File name should match first type name");
                 using (_writer.Scope())
                 {
