@@ -45,6 +45,11 @@ namespace AutoRest.CSharp.Generation.Types
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
         }
 
+        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
+            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isNullable, arguments)
+        {
+        }
+
         public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
         {
             _implementation = implementation;
@@ -91,19 +96,9 @@ namespace AutoRest.CSharp.Generation.Types
             return IsFrameworkType && type == FrameworkType;
         }
 
-        public override int GetHashCode()
-        {
-            if (Arguments.Length == 1)
-            {
-                return HashCode.Combine(_implementation, _type, Arguments[0]);
-            }
-            else
-            {
-                return HashCode.Combine(_implementation, _type, Arguments);
-            }
-        }
+        public override int GetHashCode() => HashCode.Combine(_implementation, _type, HashCode.Combine(Arguments));
 
-        public bool IsGenericType => Arguments is not null && Arguments.Length > 0;
+        public bool IsGenericType => Arguments.Length > 0;
 
         public CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType

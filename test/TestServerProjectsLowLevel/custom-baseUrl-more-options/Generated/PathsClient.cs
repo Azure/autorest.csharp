@@ -71,9 +71,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(vault, nameof(vault));
             Argument.AssertNotNull(secret, nameof(secret));
@@ -110,9 +108,7 @@ namespace custom_baseUrl_more_options_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(vault, nameof(vault));
             Argument.AssertNotNull(secret, nameof(secret));
