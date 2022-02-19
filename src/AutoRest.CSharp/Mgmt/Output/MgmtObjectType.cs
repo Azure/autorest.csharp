@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : SchemaObjectType
     {
+        private string _accessibility = "internal";
         private ObjectTypeProperty[]? _myProperties;
 
         public MgmtObjectType(ObjectSchema objectSchema)
@@ -35,7 +36,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultNamespace;
         protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(Context, ObjectSchema, IsResourceType);
 
+        protected override string DefaultAccessibility => _accessibility;
+
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
+
+        internal void MarkPublic()
+        {
+            _dirty = true;
+            _accessibility = "public";
+        }
 
         private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {

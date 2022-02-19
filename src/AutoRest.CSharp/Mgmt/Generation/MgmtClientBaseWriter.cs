@@ -780,7 +780,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (operation.OperationSource is not null)
                 {
                     _writer.Append($"new {operation.OperationSource.TypeName}(");
-                    if (MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
+                    if (MgmtContext.Library.CSharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
                         _writer.Append($"{ArmClientReference}");
                     _writer.Append($"), ");
                 }

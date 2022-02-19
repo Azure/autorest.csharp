@@ -26,6 +26,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(schema.Name));
         }
 
+        protected override string DefaultAccessibility => "public";
+
         protected override bool IsResourceType => true;
 
         protected string CreateDescription(string clientPrefix)

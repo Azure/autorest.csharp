@@ -10,6 +10,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal abstract class TypeProvider
     {
+        protected bool _dirty = false;
         private readonly Lazy<INamedTypeSymbol?> _existingType;
         private TypeDeclarationOptions? _type;
 
@@ -20,7 +21,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum);
-        public TypeDeclarationOptions Declaration => _type ??= BuildType();
+        public TypeDeclarationOptions Declaration
+        {
+            get
+            {
+                if (_type == null || _dirty)
+                    _type = BuildType();
+                return _type;
+            }
+        }
 
         internal BuildContext Context { get; private set; }
         protected abstract string DefaultName { get; }
@@ -33,6 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private TypeDeclarationOptions BuildType()
         {
+            _dirty = false;
             return BuilderHelpers.CreateTypeAttributes(
                 DefaultName,
                 DefaultNamespace,
@@ -70,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(DefaultName, DefaultNamespace, DefaultAccessibility, TypeKind);
+            return HashCode.Combine(DefaultName, DefaultNamespace, TypeKind);
         }
     }
 }
