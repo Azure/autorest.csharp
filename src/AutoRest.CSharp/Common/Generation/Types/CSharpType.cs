@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Generation.Types
         public bool EqualsIgnoreNullable(CSharpType other) => Equals(other, ignoreNullable: true);
 
         public bool Equals(Type type) =>
-            IsFrameworkType && (FrameworkType.IsGenericTypeDefinition ? type.GetGenericTypeDefinition() == FrameworkType && ArgumentsEquals(type.GetGenericArguments()) : type == FrameworkType);
+            IsFrameworkType && (type.IsGenericType ? type.GetGenericTypeDefinition() == FrameworkType && ArgumentsEquals(type.GetGenericArguments()) : type == FrameworkType);
 
         private bool ArgumentsEquals(Type[] genericArguments)
         {

@@ -49,7 +49,12 @@ namespace Azure.Core.Tests
         }
 
         [TestCase(typeof(int), typeof(string))]
+        [TestCase(typeof(int), typeof(IList<>))]
+        [TestCase(typeof(IList<>), typeof(int))]
+        [TestCase(typeof(int), typeof(IList<int>))]
+        [TestCase(typeof(IList<int>), typeof(int))]
         [TestCase(typeof(IList<int>), typeof(IList<>))]
+        [TestCase(typeof(IList<>), typeof(IList<int>))]
         [TestCase(typeof(IList<int>), typeof(IList<string>))]
         [TestCase(typeof(IList<int>), typeof(ICollection<int>))]
         [TestCase(typeof(Tuple<>), typeof(Tuple<,>))]
@@ -65,7 +70,12 @@ namespace Azure.Core.Tests
         }
 
         [TestCase(typeof(int), typeof(string))]
+        [TestCase(typeof(int), typeof(IList<>))]
+        [TestCase(typeof(IList<>), typeof(int))]
+        [TestCase(typeof(int), typeof(IList<int>))]
+        [TestCase(typeof(IList<int>), typeof(int))]
         [TestCase(typeof(IList<int>), typeof(IList<>))]
+        [TestCase(typeof(IList<>), typeof(IList<int>))]
         [TestCase(typeof(IList<int>), typeof(IList<string>))]
         [TestCase(typeof(IList<int>), typeof(ICollection<int>))]
         [TestCase(typeof(IDictionary<int, string>), typeof(Dictionary<int, string>))]
@@ -77,7 +87,12 @@ namespace Azure.Core.Tests
         }
 
         [TestCase(typeof(int), typeof(string))]
+        [TestCase(typeof(int), typeof(IList<>))]
+        [TestCase(typeof(IList<>), typeof(int))]
+        [TestCase(typeof(int), typeof(IList<int>))]
+        [TestCase(typeof(IList<int>), typeof(int))]
         [TestCase(typeof(IList<int>), typeof(IList<>))]
+        [TestCase(typeof(IList<>), typeof(IList<int>))]
         [TestCase(typeof(IList<int>), typeof(IList<string>))]
         [TestCase(typeof(IList<int>), typeof(ICollection<int>))]
         [TestCase(typeof(IDictionary<int, string>), typeof(Dictionary<int, string>))]
