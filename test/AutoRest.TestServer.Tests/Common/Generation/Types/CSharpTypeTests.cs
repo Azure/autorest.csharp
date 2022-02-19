@@ -16,6 +16,7 @@ namespace Azure.Core.Tests
         [TestCase(typeof(IDictionary<,>))]
         [TestCase(typeof(IDictionary<int, int>))]
         [TestCase(typeof(IDictionary<string, int>))]
+        [TestCase(typeof(IDictionary<IDictionary<int, string>, IDictionary<string, int>>))]
         public void TypesAreEqual(Type type)
         {
             var cst1 = new CSharpType(type);
@@ -29,6 +30,7 @@ namespace Azure.Core.Tests
         [TestCase(typeof(IDictionary<,>))]
         [TestCase(typeof(IDictionary<int, int>))]
         [TestCase(typeof(IDictionary<string, int>))]
+        [TestCase(typeof(IDictionary<IDictionary<int, string>, IDictionary<string, int>>))]
         public void EqualToFrameworkType(Type type)
         {
             var cst = new CSharpType(type);
@@ -41,6 +43,7 @@ namespace Azure.Core.Tests
         [TestCase(typeof(IDictionary<,>))]
         [TestCase(typeof(IDictionary<int, int>))]
         [TestCase(typeof(IDictionary<string, int>))]
+        [TestCase(typeof(IDictionary<IDictionary<int, string>, IDictionary<string, int>>))]
         public void HashCodesAreEqual(Type type)
         {
             var cst1 = new CSharpType(type);
@@ -62,6 +65,7 @@ namespace Azure.Core.Tests
         [TestCase(typeof(IDictionary<int, string>), typeof(Dictionary<int, int>))]
         [TestCase(typeof(IDictionary<int, string>), typeof(Dictionary<int, string>))]
         [TestCase(typeof(IDictionary<int, string>), typeof(IDictionary<string, int>))]
+        [TestCase(typeof(IDictionary<IDictionary<int, string>, IDictionary<string, int>>), typeof(IDictionary<IDictionary<string, int>, IDictionary<string, int>>))]
         public void TypesAreNotEqual(Type type1, Type type2)
         {
             var cst1 = new CSharpType(type1);
@@ -80,6 +84,7 @@ namespace Azure.Core.Tests
         [TestCase(typeof(IList<int>), typeof(ICollection<int>))]
         [TestCase(typeof(IDictionary<int, string>), typeof(Dictionary<int, string>))]
         [TestCase(typeof(IDictionary<int, string>), typeof(IDictionary<string, int>))]
+        [TestCase(typeof(IDictionary<IDictionary<int, string>, IDictionary<string, int>>), typeof(IDictionary<IDictionary<string, int>, IDictionary<string, int>>))]
         public void NotEqualToFrameworkType(Type type1, Type type2)
         {
             var cst = new CSharpType(type1);
@@ -97,6 +102,7 @@ namespace Azure.Core.Tests
         [TestCase(typeof(IList<int>), typeof(ICollection<int>))]
         [TestCase(typeof(IDictionary<int, string>), typeof(Dictionary<int, string>))]
         [TestCase(typeof(IDictionary<int, string>), typeof(IDictionary<string, int>))]
+        [TestCase(typeof(IDictionary<IDictionary<int, string>, IDictionary<string, int>>), typeof(IDictionary<IDictionary<string, int>, IDictionary<string, int>>))]
         public void HashCodesAreNotEqual(Type type1, Type type2)
         {
             var cst1 = new CSharpType(type1);
