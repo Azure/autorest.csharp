@@ -12,7 +12,7 @@ using MgmtLRO;
 
 namespace MgmtLRO.Models
 {
-    public partial class BarListResult
+    internal partial class BarListResult
     {
         internal static BarListResult DeserializeBarListResult(JsonElement element)
         {

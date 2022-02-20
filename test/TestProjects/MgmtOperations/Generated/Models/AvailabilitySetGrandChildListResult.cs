@@ -13,7 +13,7 @@ using MgmtOperations;
 namespace MgmtOperations.Models
 {
     /// <summary> The List Availability Set operation response. </summary>
-    public partial class AvailabilitySetGrandChildListResult
+    internal partial class AvailabilitySetGrandChildListResult
     {
         /// <summary> Initializes a new instance of AvailabilitySetGrandChildListResult. </summary>
         /// <param name="value"> The list of availability sets. </param>

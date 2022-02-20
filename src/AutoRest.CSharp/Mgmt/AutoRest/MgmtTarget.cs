@@ -54,6 +54,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var isArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
 
+            // Experimental code
+            if (isArmCore)
+                MarkEverythingPublic();
+            else
+                MarkUsedModelsPublic();
+            // End of experimental code
+
             if (!isArmCore)
             {
                 var utilCodeWriter = new CodeWriter();
@@ -61,10 +68,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 staticUtilWriter.Write();
                 AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
             }
-
-            // Experimental code
-            MakeUsedModelsPublic();
-            // End of experimental code
 
             foreach (var model in MgmtContext.Library.Models)
             {
@@ -192,7 +195,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());
         }
 
-        private static void MakeUsedModelsPublic()
+        private static void MarkEverythingPublic()
+        {
+            foreach (var model in MgmtContext.Library.Models)
+            {
+                if (model is MgmtObjectType mgmtObjectType)
+                    mgmtObjectType.MarkPublic();
+            }
+        }
+
+        private static void MarkUsedModelsPublic()
         {
             var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)

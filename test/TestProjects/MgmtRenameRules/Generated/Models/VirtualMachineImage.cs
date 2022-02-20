@@ -12,7 +12,7 @@ using Azure.Core;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Describes a Virtual Machine Image. </summary>
-    public partial class VirtualMachineImage : VirtualMachineImageResource
+    internal partial class VirtualMachineImage : VirtualMachineImageResource
     {
         /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
         /// <param name="name"> The name of the resource. </param>
