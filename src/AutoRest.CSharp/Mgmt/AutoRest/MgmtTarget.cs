@@ -54,10 +54,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var isArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
 
-            // Experimental code
             if (!isArmCore)
-                MarkUsedModelsPublic();
-            // End of experimental code
+                MgmtContext.Library.MarkUsedModelsPublic();
 
             if (!isArmCore)
             {
@@ -191,76 +189,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             extensionWriter.Write();
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());
-        }
-
-        private static void MarkUsedModelsPublic()
-        {
-            var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
-                .Concat(MgmtContext.Library.ResourceCollections)
-                .Append(MgmtContext.Library.ArmClientExtensions)
-                .Append(MgmtContext.Library.ArmResourceExtensions)
-                .Append(MgmtContext.Library.ManagementGroupExtensions)
-                .Append(MgmtContext.Library.ResourceGroupExtensions)
-                .Append(MgmtContext.Library.SubscriptionExtensions)
-                .Append(MgmtContext.Library.TenantExtensions);
-            var clientOperations = mgmtTypeProviders.SelectMany(provider => provider.AllOperations).Distinct();
-            var restOperations = clientOperations.SelectMany(operation => operation).Distinct();
-            var queue = new Queue<MgmtObjectType>(restOperations.SelectMany(operation => GetTypeProvidersFromRestOperation(operation)).Distinct());
-            // recursively mark find everything referenced
-            while (queue.Count > 0)
-            {
-                var mgmtObjectType = queue.Dequeue();
-                // add this to the result
-                mgmtObjectType.MarkPublic();
-                // add the models referenced by this to public as well
-                if (mgmtObjectType.Inherits != null && TryGetMgmtObjectType(mgmtObjectType.Inherits, out var baseType))
-                {
-                    queue.Enqueue(baseType);
-                }
-                foreach (var property in mgmtObjectType.Properties)
-                {
-                    if (TryGetMgmtObjectType(property.ValueType, out var propertyType))
-                    {
-                        queue.Enqueue(propertyType);
-                    }
-                }
-            }
-        }
-
-        private static bool TryGetMgmtObjectType(CSharpType type, [MaybeNullWhen(false)] out MgmtObjectType mgmtObject)
-        {
-            mgmtObject = null;
-            if (!type.IsGenericType)
-            {
-                if (type.IsFrameworkType)
-                    return false;
-                if (MgmtContext.Library.TryGetTypeProvider(type.Name, out var provider))
-                {
-                    mgmtObject = provider as MgmtObjectType;
-                    return mgmtObject != null;
-                }
-
-                return false;
-            }
-            // take the last type argument if the type is generic
-            var lastTypeArgument = type.Arguments.Last();
-            return TryGetMgmtObjectType(lastTypeArgument, out mgmtObject);
-        }
-
-        private static IEnumerable<MgmtObjectType> GetTypeProvidersFromRestOperation(MgmtRestOperation operation)
-        {
-            foreach (var parameter in operation.Parameters)
-            {
-                if (TryGetMgmtObjectType(parameter.Type, out var mgmtObjectType))
-                    yield return mgmtObjectType;
-            }
-            // also add response types
-            if (operation.OriginalReturnType != null)
-            {
-                var returnType = operation.ReturnType;
-                if (TryGetMgmtObjectType(returnType, out var mgmtObjectType))
-                    yield return mgmtObjectType;
-            }
         }
 
         private static bool ShouldSkipModelGeneration(TypeProvider model)

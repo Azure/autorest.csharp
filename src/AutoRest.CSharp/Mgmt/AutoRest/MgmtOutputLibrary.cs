@@ -850,5 +850,75 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             return operationsToRequestPath;
         }
+
+        internal void MarkUsedModelsPublic()
+        {
+            var mgmtTypeProviders = ArmResources.Cast<MgmtTypeProvider>()
+                .Concat(ResourceCollections)
+                .Append(ArmClientExtensions)
+                .Append(ArmResourceExtensions)
+                .Append(ManagementGroupExtensions)
+                .Append(ResourceGroupExtensions)
+                .Append(SubscriptionExtensions)
+                .Append(TenantExtensions);
+            var clientOperations = mgmtTypeProviders.SelectMany(provider => provider.AllOperations).Distinct();
+            var restOperations = clientOperations.SelectMany(operation => operation).Distinct();
+            var queue = new Queue<MgmtObjectType>(restOperations.SelectMany(operation => GetTypeProvidersFromRestOperation(operation)).Distinct());
+            // recursively mark find everything referenced
+            while (queue.Count > 0)
+            {
+                var mgmtObjectType = queue.Dequeue();
+                // add this to the result
+                mgmtObjectType.MarkPublic();
+                // add the models referenced by this to public as well
+                if (mgmtObjectType.Inherits != null && TryGetMgmtObjectType(mgmtObjectType.Inherits, out var baseType))
+                {
+                    queue.Enqueue(baseType);
+                }
+                foreach (var property in mgmtObjectType.Properties)
+                {
+                    if (TryGetMgmtObjectType(property.ValueType, out var propertyType))
+                    {
+                        queue.Enqueue(propertyType);
+                    }
+                }
+            }
+        }
+
+        private bool TryGetMgmtObjectType(CSharpType type, [MaybeNullWhen(false)] out MgmtObjectType mgmtObject)
+        {
+            mgmtObject = null;
+            if (!type.IsGenericType)
+            {
+                if (type.IsFrameworkType)
+                    return false;
+                if (TryGetTypeProvider(type.Name, out var provider))
+                {
+                    mgmtObject = provider as MgmtObjectType;
+                    return mgmtObject != null;
+                }
+
+                return false;
+            }
+            // take the last type argument if the type is generic
+            var lastTypeArgument = type.Arguments.Last();
+            return TryGetMgmtObjectType(lastTypeArgument, out mgmtObject);
+        }
+
+        private IEnumerable<MgmtObjectType> GetTypeProvidersFromRestOperation(MgmtRestOperation operation)
+        {
+            foreach (var parameter in operation.Parameters)
+            {
+                if (TryGetMgmtObjectType(parameter.Type, out var mgmtObjectType))
+                    yield return mgmtObjectType;
+            }
+            // also add response types
+            if (operation.OriginalReturnType != null)
+            {
+                var returnType = operation.ReturnType;
+                if (TryGetMgmtObjectType(returnType, out var mgmtObjectType))
+                    yield return mgmtObjectType;
+            }
+        }
     }
 }
