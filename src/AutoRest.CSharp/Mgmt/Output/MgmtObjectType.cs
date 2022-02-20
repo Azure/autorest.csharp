@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultNamespace;
         protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(Context, ObjectSchema, IsResourceType);
 
-        protected override string DefaultAccessibility => _accessibility;
+        protected override string DefaultAccessibility => MgmtContext.MgmtConfiguration.IsArmCore ? base.DefaultAccessibility : _accessibility;
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 

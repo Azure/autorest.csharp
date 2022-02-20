@@ -55,9 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var isArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
 
             // Experimental code
-            if (isArmCore)
-                MarkEverythingPublic();
-            else
+            if (!isArmCore)
                 MarkUsedModelsPublic();
             // End of experimental code
 
@@ -193,15 +191,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             extensionWriter.Write();
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());
-        }
-
-        private static void MarkEverythingPublic()
-        {
-            foreach (var model in MgmtContext.Library.Models)
-            {
-                if (model is MgmtObjectType mgmtObjectType)
-                    mgmtObjectType.MarkPublic();
-            }
         }
 
         private static void MarkUsedModelsPublic()
