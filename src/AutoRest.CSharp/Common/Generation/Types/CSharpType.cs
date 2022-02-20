@@ -3,6 +3,7 @@
 
 using System;
 using System.Buffers;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
@@ -91,12 +92,28 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool EqualsIgnoreNullable(CSharpType other) => Equals(other, ignoreNullable: true);
 
-        public bool Equals(Type type)
+        public bool Equals(Type type) =>
+            IsFrameworkType && (type.IsGenericType ? type.GetGenericTypeDefinition() == FrameworkType && ArgumentsEquals(type.GetGenericArguments()) : type == FrameworkType);
+
+        private bool ArgumentsEquals(Type[] genericArguments)
         {
-            return IsFrameworkType && type == FrameworkType;
+            if (Arguments.Length != genericArguments.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < Arguments.Length; i++)
+            {
+                if (!Arguments[i].Equals(genericArguments[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
-        public override int GetHashCode() => HashCode.Combine(_implementation, _type, HashCode.Combine(Arguments));
+        public override int GetHashCode() => HashCode.Combine(_implementation, _type, ((System.Collections.IStructuralEquatable)Arguments).GetHashCode(EqualityComparer<CSharpType>.Default));
 
         public bool IsGenericType => Arguments.Length > 0;
 
