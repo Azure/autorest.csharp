@@ -63,11 +63,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             // Experimental code
-            var typesNeedToBePublic = MakeUsedModelsPublic();
-            foreach (var type in typesNeedToBePublic)
-            {
-                type.MarkPublic();
-            }
+            MakeUsedModelsPublic();
             // End of experimental code
 
             foreach (var model in MgmtContext.Library.Models)
@@ -196,9 +192,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());
         }
 
-        private static IEnumerable<MgmtObjectType> MakeUsedModelsPublic()
+        private static void MakeUsedModelsPublic()
         {
-            var result = new HashSet<MgmtObjectType>();
             var mgmtTypeProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
                 .Concat(MgmtContext.Library.ResourceCollections)
                 .Append(MgmtContext.Library.ArmClientExtensions)
@@ -215,7 +210,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var mgmtObjectType = queue.Dequeue();
                 // add this to the result
-                result.Add(mgmtObjectType);
+                mgmtObjectType.MarkPublic();
                 // add the models referenced by this to public as well
                 if (mgmtObjectType.Inherits != null && TryGetMgmtObjectType(mgmtObjectType.Inherits, out var baseType))
                 {
@@ -229,8 +224,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     }
                 }
             }
-
-            return result;
         }
 
         private static bool TryGetMgmtObjectType(CSharpType type, [MaybeNullWhen(false)] out MgmtObjectType mgmtObject)
