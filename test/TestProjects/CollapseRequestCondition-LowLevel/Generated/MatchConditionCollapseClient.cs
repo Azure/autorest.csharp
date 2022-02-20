@@ -170,46 +170,6 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> MulticollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
-        {
-            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
-        public virtual Response MulticollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
-        {
-            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);

@@ -134,12 +134,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> MissIfNonMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNonMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNonMatchGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-Match", "If-Modified-Since", "If-Unmodified-Since" });
                 using HttpMessage message = CreateMissIfNonMatchGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -154,12 +155,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response MissIfNonMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNonMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNonMatchGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-Match", "If-Modified-Since", "If-Unmodified-Since" });
                 using HttpMessage message = CreateMissIfNonMatchGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -174,12 +176,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> MissIfMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-None-Match", "If-Modified-Since", "If-Unmodified-Since" });
                 using HttpMessage message = CreateMissIfMatchGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -194,12 +197,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response MissIfMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-None-Match", "If-Modified-Since", "If-Unmodified-Since" });
                 using HttpMessage message = CreateMissIfMatchGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -214,12 +218,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> MissIfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-Match", "If-None-Match", "If-Unmodified-Since" });
                 using HttpMessage message = CreateMissIfModifiedSinceGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -234,12 +239,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response MissIfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-Match", "If-None-Match", "If-Unmodified-Since" });
                 using HttpMessage message = CreateMissIfModifiedSinceGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -254,12 +260,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> MissIfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-Match", "If-None-Match", "If-Modified-Since" });
                 using HttpMessage message = CreateMissIfUnmodifiedSinceGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -274,12 +281,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response MissIfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-Match", "If-None-Match", "If-Modified-Since" });
                 using HttpMessage message = CreateMissIfUnmodifiedSinceGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -294,12 +302,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual async Task<Response> MissIfMatchIfNonMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNonMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNonMatchGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-Modified-Since", "If-Unmodified-Since" });
                 using HttpMessage message = CreateMissIfMatchIfNonMatchGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -314,12 +323,13 @@ namespace CollapseRequestCondition_LowLevel
         public virtual Response MissIfMatchIfNonMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNonMatchGet");
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNonMatchGet");
             scope.Start();
             try
             {
+                Argument.AssertHasOnlySupportedHeaders(requestConditions, "requestConditions", new string[] { "If-Modified-Since", "If-Unmodified-Since" });
                 using HttpMessage message = CreateMissIfMatchIfNonMatchGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -375,7 +385,6 @@ namespace CollapseRequestCondition_LowLevel
             request.Uri = uri;
             if (requestConditions != null)
             {
-                if (requestConditions.IfNoneMatch != null) throw new NotSupportedException($"IfNoneMatch head is not supported here");
                 request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -393,7 +402,6 @@ namespace CollapseRequestCondition_LowLevel
             request.Uri = uri;
             if (requestConditions != null)
             {
-                if (requestConditions.IfMatch != null) throw new NotSupportedException($"IfMatch head is not supported here");
                 request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -411,7 +419,6 @@ namespace CollapseRequestCondition_LowLevel
             request.Uri = uri;
             if (requestConditions != null)
             {
-                if (requestConditions.IfModifiedSince != null) throw new NotSupportedException($"IfModifiedSince head is not supported here");
                 request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -429,7 +436,6 @@ namespace CollapseRequestCondition_LowLevel
             request.Uri = uri;
             if (requestConditions != null)
             {
-                if (requestConditions.IfUnmodifiedSince != null) throw new NotSupportedException($"IfUnmodifiedSince head is not supported here");
                 request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
@@ -447,8 +453,6 @@ namespace CollapseRequestCondition_LowLevel
             request.Uri = uri;
             if (requestConditions != null)
             {
-                if (requestConditions.IfMatch != null) throw new NotSupportedException($"IfMatch head is not supported here");
-                if (requestConditions.IfNoneMatch != null) throw new NotSupportedException($"IfNoneMatch head is not supported here");
                 request.Headers.Add(requestConditions, "R");
             }
             message.ResponseClassifier = ResponseClassifier200.Instance;
