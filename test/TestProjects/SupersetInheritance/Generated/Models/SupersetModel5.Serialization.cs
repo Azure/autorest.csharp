@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 
 namespace SupersetInheritance.Models
 {
-    public partial class SupersetModel5 : IUtf8JsonSerializable
+    internal partial class SupersetModel5 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

@@ -18,7 +18,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using ResourceRename.Models;
 
 namespace ResourceRename
 {
@@ -59,19 +58,20 @@ namespace ResourceRename
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="properties"> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </param>
+        /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async virtual Task<ArmOperation<SshPublicKeyInfo>> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<ArmOperation<SshPublicKeyInfo>> CreateOrUpdateAsync(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyInfoData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken).ConfigureAwait(false);
+                var response = await _sshPublicKeyInfoSshPublicKeysRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new ResourceRenameArmOperation<SshPublicKeyInfo>(Response.FromValue(new SshPublicKeyInfo(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -91,19 +91,20 @@ namespace ResourceRename
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="properties"> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </param>
+        /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public virtual ArmOperation<SshPublicKeyInfo> CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyProperties properties = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<SshPublicKeyInfo> CreateOrUpdate(bool waitForCompletion, string sshPublicKeyName, SshPublicKeyInfoData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfoCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _sshPublicKeyInfoSshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, properties, cancellationToken);
+                var response = _sshPublicKeyInfoSshPublicKeysRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken);
                 var operation = new ResourceRenameArmOperation<SshPublicKeyInfo>(Response.FromValue(new SshPublicKeyInfo(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
