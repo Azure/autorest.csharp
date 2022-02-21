@@ -24,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource)
-            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
+        public ResourceCollection(OperationSet operationSet, IEnumerable<Operation> operations, Resource resource)
+            : base(operationSet, operations, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
         {
             Resource = resource;
         }
@@ -79,21 +79,16 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var result = new List<ContextualParameterMapping>();
             Operation? op = null;
-            OperationSet? opSet = null;
-            foreach ((var operationSet, var operations) in _allOperationMap)
+            foreach (var operation in _clientOperations)
             {
-                foreach (var operation in operations)
+                if (IsListOperation(operation, OperationSet))
                 {
-                    if (IsListOperation(operation, operationSet))
-                    {
-                        op = operation;
-                        opSet = operationSet;
-                        break;
-                    }
+                    op = operation;
+                    break;
                 }
             }
 
-            if (op is null || opSet is null)
+            if (op is null)
                 return result;
 
             RestClientMethod method = MgmtContext.Library.GetRestClientMethod(op);
@@ -103,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var candidatesOfParameters = new List<Parameter>(method.Parameters);
 
             var opRequestPath = op.GetRequestPath(ResourceType);
-            foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(opSet, opRequestPath)))
+            foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(OperationSet, opRequestPath)))
             {
                 var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
                 if (index < 0)

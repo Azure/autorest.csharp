@@ -60,31 +60,31 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public OperationSet OperationSet { get; }
 
-        protected IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
+        protected IEnumerable<Operation> _clientOperations;
 
         private RequestPath? _requestPath;
         public RequestPath RequestPath => _requestPath ??= OperationSet.GetRequestPath(ResourceType);
 
         /// <summary>
         /// </summary>
-        /// <param name="allOperations">The map that contains all possible operations in this resource and its corresponding resource collection class (if any)</param>
+        /// <param name="operations">The map that contains all possible operations in this resource and its corresponding resource collection class (if any)</param>
         /// <param name="resourceName">The name of the corresponding resource data model</param>
         /// <param name="resourceType">The type of this resource instance represents</param>
         /// <param name="resourceData">The corresponding resource data model</param>
         /// <param name="context">The build context of this resource instance</param>
         /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
-        protected internal Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
+        protected internal Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
             : base(resourceName)
         {
             _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
-            OperationSet = allOperations.Keys.Single();
+            OperationSet = operationSet;
             ResourceType = resourceType;
             ResourceData = resourceData;
 
             if (OperationSet.TryGetSingletonResourceSuffix(out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
 
-            _allOperationMap = GetAllOperationsMap(allOperations);
+            _clientOperations = GetClientOperations(operationSet, operations);
 
             IsById = OperationSet.IsById;
 
@@ -126,22 +126,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
-        //TODO: make 1-1 mapping of operationset to resource
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
-            : this(allOperations, resourceName, resourceType, resourceData, ResourcePosition)
+        public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
+            : this(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition)
         { }
 
-        private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> GetAllOperationsMap(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations)
-        {
-            var result = new Dictionary<OperationSet, IEnumerable<Operation>>();
-
-            foreach ((var operationSet, var operations) in allOperations)
-            {
-                result.Add(operationSet, operations.Concat(operationSet.Where(operation => !MethodToExclude.Contains(operation.GetHttpRequest()!.Method))));
-            }
-
-            return result;
-        }
+        private static IEnumerable<Operation> GetClientOperations(OperationSet operationSet, IEnumerable<Operation> operations)
+            => operations.Concat(operationSet.Where(operation => !MethodToExclude.Contains(operation.GetHttpMethod())));
 
         protected bool IsById { get; }
 
@@ -262,7 +252,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<ContextualParameterMapping>? _extraContextualParameterMapping;
         public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping ??= EnsureExtraContextualParameterMapping();
-        protected virtual IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping() =>Enumerable.Empty<ContextualParameterMapping>();
+        protected virtual IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping() => Enumerable.Empty<ContextualParameterMapping>();
 
         /// <summary>
         /// A collection of ClientOperations.
@@ -280,44 +270,41 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return _clientOperationMap;
 
             var result = new Dictionary<string, List<MgmtRestOperation>>();
-            foreach ((var operationSet, var operations) in _allOperationMap)
+            var resourceRequestPath = OperationSet.GetRequestPath();
+            var resourceRestClient = MgmtContext.Library.GetRestClient(OperationSet.First());
+            // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
+            foreach (var operation in _clientOperations)
             {
-                var resourceRequestPath = operationSet.GetRequestPath();
-                var resourceRestClient = MgmtContext.Library.GetRestClient(operationSet.First());
-                // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
-                foreach (var operation in operations)
-                {
-                    if (!ShouldIncludeOperation(operation))
-                        continue; // meaning this operation will be included in the collection
-                    var method = operation.GetHttpMethod();
-                    // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
-                    // therefore we trim the scope off and then calculate the diff
-                    var requestPath = operation.GetRequestPath(ResourceType);
-                    var requestTrimmedPath = requestPath.TrimScope();
-                    var resourceTrimmedPath = resourceRequestPath.TrimScope();
-                    // the operations are grouped by the following key
-                    var key = $"{method}{resourceTrimmedPath.Minus(requestTrimmedPath)}";
-                    var contextualPath = GetContextualPath(operationSet, requestPath);
-                    var methodName = IsListOperation(operation, operationSet) ?
-                        "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
-                        GetOperationName(operation, resourceRestClient.OperationGroup.Key);
-                    // get the MgmtRestOperation with a proper name
-                    var restClient = MgmtContext.Library.GetRestClient(operation);
-                    var restOperation = new MgmtRestOperation(
-                        MgmtContext.Library.GetRestClientMethod(operation),
-                        restClient,
-                        requestPath,
-                        contextualPath,
-                        methodName);
+                if (!ShouldIncludeOperation(operation))
+                    continue; // meaning this operation will be included in the collection
+                var method = operation.GetHttpMethod();
+                // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
+                // therefore we trim the scope off and then calculate the diff
+                var requestPath = operation.GetRequestPath(ResourceType);
+                var requestTrimmedPath = requestPath.TrimScope();
+                var resourceTrimmedPath = resourceRequestPath.TrimScope();
+                // the operations are grouped by the following key
+                var key = $"{method}{resourceTrimmedPath.Minus(requestTrimmedPath)}";
+                var contextualPath = GetContextualPath(OperationSet, requestPath);
+                var methodName = IsListOperation(operation, OperationSet) ?
+                    "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
+                    GetOperationName(operation, resourceRestClient.OperationGroup.Key);
+                // get the MgmtRestOperation with a proper name
+                var restClient = MgmtContext.Library.GetRestClient(operation);
+                var restOperation = new MgmtRestOperation(
+                    MgmtContext.Library.GetRestClientMethod(operation),
+                    restClient,
+                    requestPath,
+                    contextualPath,
+                    methodName);
 
-                    if (result.TryGetValue(key, out var list))
-                    {
-                        list.Add(restOperation);
-                    }
-                    else
-                    {
-                        result.Add(key, new List<MgmtRestOperation> { restOperation });
-                    }
+                if (result.TryGetValue(key, out var list))
+                {
+                    list.Add(restOperation);
+                }
+                else
+                {
+                    result.Add(key, new List<MgmtRestOperation> { restOperation });
                 }
             }
 
