@@ -475,11 +475,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach ((var resourceDataSchemaName, var operationSets) in ResourceDataSchemaNameToOperationSets)
             {
                 var resourceOperationsList = FindResourceToChildOperationsMap(operationSets);
-                foreach (var resourceOperationsTuple in resourceOperationsList)
+                foreach ((var operationSet, var operations) in resourceOperationsList)
                 {
-                    // ensure this set of OperationSets are either all singletons, or none of them is singleton
-                    var operationSet = resourceOperationsTuple.Item1;
-                    var operations = resourceOperationsTuple.Item2;
                     var isSingleton = operationSet.IsSingletonResource();
                     // get the corresponding resource data
                     var originalResourcePath = operationSet.GetRequestPath();
@@ -626,17 +623,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private IEnumerable<Tuple<OperationSet, IEnumerable<Operation>>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
+        private Dictionary<OperationSet, IEnumerable<Operation>> FindResourceToChildOperationsMap(IEnumerable<OperationSet> resourceOperationSets)
         {
-            var operations = new List<Tuple<OperationSet, IEnumerable<Operation>>>();
-
-            foreach (var resourceOperationSet in resourceOperationSets)
-            {
-                // all the child operations with the parent of current request path
-                operations.Add(new Tuple<OperationSet, IEnumerable<Operation>>(resourceOperationSet, GetChildOperations(resourceOperationSet.RequestPath)));
-            }
-
-            return operations;
+            return resourceOperationSets.ToDictionary(
+                operationSet => operationSet,
+                operationSet => GetChildOperations(operationSet.RequestPath));
         }
 
         public IEnumerable<Operation> GetChildOperations(string requestPath)
