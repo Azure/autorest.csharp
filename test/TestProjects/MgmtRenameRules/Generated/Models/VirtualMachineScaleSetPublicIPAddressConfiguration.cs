@@ -33,15 +33,15 @@ namespace MgmtRenameRules.Models
         /// <param name="name"> The publicIP address configuration name. </param>
         /// <param name="idleTimeoutInMinutes"> The idle timeout of the public IP address. </param>
         /// <param name="dnsSettings"> The dns settings to be applied on the publicIP addresses . </param>
-        /// <param name="iPTags"> The list of IP tags associated with the public IP address. </param>
+        /// <param name="ipTags"> The list of IP tags associated with the public IP address. </param>
         /// <param name="publicIPPrefix"> The PublicIPPrefix from which to allocate publicIP addresses. </param>
         /// <param name="publicIPAddressVersion"> Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: &apos;IPv4&apos; and &apos;IPv6&apos;. </param>
-        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPTag> iPTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion)
+        internal VirtualMachineScaleSetPublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPTag> ipTags, WritableSubResource publicIPPrefix, IPVersion? publicIPAddressVersion)
         {
             Name = name;
             IdleTimeoutInMinutes = idleTimeoutInMinutes;
             DnsSettings = dnsSettings;
-            IPTags = iPTags;
+            IPTags = ipTags;
             PublicIPPrefix = publicIPPrefix;
             PublicIPAddressVersion = publicIPAddressVersion;
         }

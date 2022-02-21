@@ -57,9 +57,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get an item. Method should stay in `Item` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetItemAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
             scope.Start();
@@ -77,9 +75,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get an item. Method should stay in `Item` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetItem(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
             scope.Start();

@@ -61,9 +61,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
@@ -90,9 +88,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetBooleanTrue(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
@@ -119,9 +115,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
@@ -148,9 +142,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetBooleanFalse(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
@@ -177,9 +169,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
@@ -206,9 +196,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetIntOneMillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
@@ -235,9 +223,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -264,9 +250,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -293,9 +277,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
@@ -322,9 +304,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetTenBillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
@@ -351,9 +331,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
@@ -380,9 +358,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
@@ -409,9 +385,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
@@ -438,9 +412,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response FloatScientificPositive(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
@@ -467,9 +439,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
@@ -496,9 +466,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response FloatScientificNegative(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
@@ -525,9 +493,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
@@ -554,9 +520,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
@@ -583,9 +547,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
@@ -612,9 +574,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
@@ -641,9 +601,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
@@ -670,9 +628,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringUnicode(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
@@ -699,9 +655,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
@@ -728,9 +682,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringUrlEncoded(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
@@ -757,9 +709,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
@@ -786,9 +736,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringUrlNonEncoded(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
@@ -815,9 +763,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
@@ -844,9 +790,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringEmpty(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
@@ -876,9 +820,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
@@ -910,9 +852,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringNull(string stringPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
@@ -944,9 +884,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
@@ -978,9 +916,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
@@ -1012,9 +948,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
@@ -1046,9 +980,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
@@ -1079,9 +1011,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
@@ -1112,9 +1042,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteMultiByte(byte[] bytePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
@@ -1143,9 +1071,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
@@ -1172,9 +1098,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteEmpty(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
@@ -1203,9 +1127,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
@@ -1236,9 +1158,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteNull(byte[] bytePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
@@ -1267,9 +1187,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
@@ -1296,9 +1214,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateValid(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
@@ -1326,9 +1242,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
@@ -1356,9 +1270,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateNull(DateTimeOffset datePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
@@ -1385,9 +1297,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
@@ -1414,9 +1324,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateTimeValid(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
@@ -1444,9 +1352,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
@@ -1474,9 +1380,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
@@ -1505,9 +1409,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
@@ -1538,9 +1440,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Base64Url(byte[] base64UrlPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
@@ -1571,9 +1471,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
@@ -1604,9 +1502,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
@@ -1636,9 +1532,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
@@ -1666,9 +1560,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();

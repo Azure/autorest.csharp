@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -20,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class RestClientWriter
     {
-        public void WriteClient(CodeWriter writer, RestClient restClient)
+        public void WriteClient(CodeWriter writer, RestClient restClient, Configuration? configuration = null, IReadOnlyList<LowLevelClientMethod>? protocolMethods = null)
         {
             var cs = restClient.Type;
             var @namespace = cs.Namespace;
@@ -32,12 +34,44 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     WriteClientCtor(writer, restClient, cs);
 
+                    var responseClassifierTypes = new List<LowLevelClientWriter.ResponseClassifierType>();
                     foreach (var method in restClient.Methods)
                     {
                         WriteRequestCreation(writer, method, restClient.Parameters, restClient.Fields);
                         WriteOperation(writer, method, true);
                         WriteOperation(writer, method, false);
+
+                        if (protocolMethods != null)
+                        {
+                            var protocolMethodList = protocolMethods.Where(m => m.RequestMethod.Operation.Equals(method.Operation));
+                            if (protocolMethodList != null && protocolMethodList.Count() == 1)
+                            {
+                                var protocolMethod = protocolMethodList.FirstOrDefault();
+                                LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
+
+                                if (protocolMethod.IsLongRunning)
+                                {
+                                    LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, true);
+                                    LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, false);
+                                }
+                                else if (protocolMethod.PagingInfo != null)
+                                {
+                                    LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
+                                    LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);
+                                }
+                                else
+                                {
+                                    if (configuration != null)
+                                    {
+                                        LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, configuration, true);
+                                        LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, configuration, false);
+                                    }
+                                }
+                            }
+                        }
                     }
+
+                    LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
         }
