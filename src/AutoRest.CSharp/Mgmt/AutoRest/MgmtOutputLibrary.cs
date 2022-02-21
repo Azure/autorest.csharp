@@ -863,11 +863,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Append(TenantExtensions);
             var clientOperations = mgmtTypeProviders.SelectMany(provider => provider.AllOperations).Distinct();
             var restOperations = clientOperations.SelectMany(operation => operation).Distinct();
-            var queue = new Queue<MgmtObjectType>(restOperations.SelectMany(operation => GetTypeProvidersFromRestOperation(operation)).Distinct());
+            var modelsFromOperations = restOperations.SelectMany(operation => GetTypeProvidersFromRestOperation(operation)).Distinct();
+            var queue = new Queue<MgmtObjectType>(modelsFromOperations.Concat(ResourceData));
+            var visited = new HashSet<MgmtObjectType>();
             // recursively mark find everything referenced
             while (queue.Count > 0)
             {
                 var mgmtObjectType = queue.Dequeue();
+                if (visited.Contains(mgmtObjectType))
+                    continue;
+                visited.Add(mgmtObjectType);
                 // add this to the result
                 mgmtObjectType.MarkPublic();
                 // add the models referenced by this to public as well
