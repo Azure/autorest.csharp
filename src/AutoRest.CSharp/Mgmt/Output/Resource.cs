@@ -58,12 +58,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// </summary>
         protected string Position { get; }
 
-        public IEnumerable<OperationSet> OperationSets { get; }
+        public OperationSet OperationSet { get; }
 
         protected IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
 
-        private IEnumerable<RequestPath>? _requestPaths;
-        public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(ResourceType));
+        private RequestPath? _requestPath;
+        public RequestPath RequestPath => _requestPath ??= OperationSet.GetRequestPath(ResourceType);
 
         /// <summary>
         /// </summary>
@@ -77,16 +77,16 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(resourceName)
         {
             _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
-            OperationSets = allOperations.Keys;
+            OperationSet = allOperations.Keys.Single();
             ResourceType = resourceType;
             ResourceData = resourceData;
 
-            if (OperationSets.First().TryGetSingletonResourceSuffix(out var singletonResourceIdSuffix))
+            if (OperationSet.TryGetSingletonResourceSuffix(out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
 
             _allOperationMap = GetAllOperationsMap(allOperations);
 
-            IsById = OperationSets.Any(operationSet => operationSet.IsById);
+            IsById = OperationSet.IsById;
 
             Position = position;
         }
@@ -148,24 +148,21 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName, bool? isLongRunning = null, bool throwIfNull = false)
         {
             var result = new List<MgmtRestOperation>();
-            foreach (var operationSet in OperationSets)
+            var operation = OperationSet.GetOperation(method);
+            if (operation is not null)
             {
-                var operation = operationSet.GetOperation(method);
-                if (operation is not null)
-                {
-                    var restClient = MgmtContext.Library.GetRestClient(operation);
-                    var requestPath = operation.GetRequestPath(ResourceType);
-                    var contextualPath = GetContextualPath(operationSet, requestPath);
-                    var restOperation = new MgmtRestOperation(
-                        MgmtContext.Library.GetRestClientMethod(operation),
-                        restClient,
-                        requestPath,
-                        contextualPath,
-                        operationName,
-                        isLongRunning,
-                        throwIfNull);
-                    result.Add(restOperation);
-                }
+                var restClient = MgmtContext.Library.GetRestClient(operation);
+                var requestPath = operation.GetRequestPath(ResourceType);
+                var contextualPath = GetContextualPath(OperationSet, requestPath);
+                var restOperation = new MgmtRestOperation(
+                    MgmtContext.Library.GetRestClientMethod(operation),
+                    restClient,
+                    requestPath,
+                    contextualPath,
+                    operationName,
+                    isLongRunning,
+                    throwIfNull);
+                result.Add(restOperation);
             }
 
             return MgmtClientOperation.FromOperations(result);
@@ -173,7 +170,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual Resource GetResource() => this;
 
-        //private string? _defaultName;
         protected override string DefaultName => ResourceName;
 
         public override string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
@@ -334,7 +330,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         /// <summary>
-        /// This method returns the contextual path from one resource <see cref="OperationSet"/>
+        /// This method returns the contextual path from one resource <see cref="Models.OperationSet"/>
         /// In the <see cref="Resource"/> class, we just use the RequestPath of the OperationSet as its contextual path
         /// Also we need to replace the parameterized scope if there is any with the actual scope value.
         /// </summary>
@@ -360,7 +356,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override IEnumerable<MgmtRestClient> EnsureRestClients()
         {
             var childRestClients = ClientOperations.SelectMany(clientOperation => clientOperation.Select(restOperation => restOperation.RestClient)).Distinct();
-            var resourceRestClients = OperationSets.SelectMany(operationSet => operationSet.Select(operation => MgmtContext.Library.GetRestClient(operation))).Distinct();
+            var resourceRestClients = OperationSet.Select(operation => MgmtContext.Library.GetRestClient(operation)).Distinct();
 
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
@@ -379,16 +375,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Returns the different method signature for different base path of this resource
         /// </summary>
         /// <returns></returns>
-        public IDictionary<RequestPath, MethodSignature> CreateResourceIdentifierMethodSignature()
+        public MethodSignature CreateResourceIdentifierMethodSignature()
         {
-            return RequestPaths.ToDictionary(requestPath => requestPath,
-                requestPath => new MethodSignature(
+            return new MethodSignature(
                     Name: "CreateResourceIdentifier",
                     Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
                     Modifiers: "public static",
                     ReturnType: typeof(ResourceIdentifier),
                     ReturnDescription: null,
-                    Parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
+                    Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray());
         }
 
         public FormattableString ResourceDataIdExpression(FormattableString dataExpression)

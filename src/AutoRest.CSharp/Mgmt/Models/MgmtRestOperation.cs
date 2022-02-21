@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             ContextualPath = contextualPath;
             Name = methodName;
             Resource = GetResourceMatch(restClient, method, requestPath);
-            FinalStateVia = Method.Operation.IsLongRunning? Method.Operation.LongRunningFinalStateVia : null;
+            FinalStateVia = Method.Operation.IsLongRunning ? Method.Operation.LongRunningFinalStateVia : null;
             OriginalReturnType = Method.Operation.IsLongRunning ? GetFinalResponse() : Method.ReturnType;
             OperationSource = GetOperationSource();
         }
@@ -197,20 +197,17 @@ namespace AutoRest.CSharp.Mgmt.Models
             Dictionary<ResourceMatchType, HashSet<Resource>> matches = new Dictionary<ResourceMatchType, HashSet<Resource>>();
             foreach (var resource in restClient.Resources)
             {
-                foreach (var resourcePath in resource.RequestPaths)
+                var match = GetMatchType(method.Operation.GetHttpMethod(), resource.RequestPath, requestPath, method.IsListMethod(out var _));
+                if (match == ResourceMatchType.Exact)
+                    return resource;
+                if (match != ResourceMatchType.None)
                 {
-                    var match = GetMatchType(method.Operation.GetHttpMethod(), resourcePath, requestPath, method.IsListMethod(out var _));
-                    if (match == ResourceMatchType.Exact)
-                        return resource;
-                    if (match != ResourceMatchType.None)
+                    if (!matches.TryGetValue(match, out var result))
                     {
-                        if (!matches.TryGetValue(match, out var result))
-                        {
-                            result = new HashSet<Resource>();
-                            matches.Add(match, result);
-                        }
-                        result.Add(resource);
+                        result = new HashSet<Resource>();
+                        matches.Add(match, result);
                     }
+                    result.Add(resource);
                 }
             }
 

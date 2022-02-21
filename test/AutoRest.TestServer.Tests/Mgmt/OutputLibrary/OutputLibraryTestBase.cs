@@ -182,7 +182,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             foreach (var collection in MgmtContext.Library.ResourceCollections)
             {
                 // skip this if this collection is in the list-exception configuration
-                if (collection.RequestPaths.Any(path => MgmtContext.MgmtConfiguration.ListException.Contains(path)))
+                if (MgmtContext.MgmtConfiguration.ListException.Contains(collection.RequestPath))
                     continue;
                 var name = $"{_projectName}.{collection.Type.Name}";
                 var generatedCollectionType = Assembly.GetExecutingAssembly().GetType(name);
