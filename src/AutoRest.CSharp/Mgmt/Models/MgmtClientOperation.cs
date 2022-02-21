@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -37,11 +39,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             false);
 
 
-        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, BuildContext<MgmtOutputLibrary> context)
+        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), context, null);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), null);
             }
 
             return null;
@@ -58,18 +60,16 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Parameter>? _methodParameters;
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, BuildContext<MgmtOutputLibrary> context, Parameter? extensionParameter = null)
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null)
         {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, context, extensionParameter);
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter);
         }
 
         private IReadOnlyList<MgmtRestOperation> _operations;
 
-        private BuildContext<MgmtOutputLibrary> _context;
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, BuildContext<MgmtOutputLibrary> context, Parameter? extensionParameter)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter)
         {
             _operations = operations;
-            _context = context;
             _extensionParameter = extensionParameter;
         }
 
@@ -82,7 +82,17 @@ namespace AutoRest.CSharp.Mgmt.Models
         public string Name => _operations.First().Name;
 
         // TODO -- we need a better way to get the description of this
-        public string? Description => _operations.First().Description;
+        private string? _description;
+        public string Description => _description ??= BuildDescription();
+
+        private string BuildDescription()
+        {
+            var pathInformation = string.Join('\n', _operations.Select(operation => $"Request Path: {operation.RequestPath.SerializedPath}\nOperation Id: {operation.OperationId}"));
+            var descriptionOfOperation = _operations.First().Description;
+            if (descriptionOfOperation != null)
+                return $"{descriptionOfOperation}\n{pathInformation}";
+            return $"{pathInformation}";
+        }
 
         // TODO -- we need a better way to get this
         public IEnumerable<Parameter> Parameters => _operations.First().Parameters;
@@ -108,6 +118,12 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public CSharpType? ListItemType => _operations.First().ListItemType;
 
+        public CSharpType? MgmtReturnType => _operations.First().MgmtReturnType;
+
+        public bool IsFakeLongRunningOperation => _operations.First().IsFakeLongRunningOperation;
+
+        public Schema? FinalResponseSchema => _operations.First().FinalResponseSchema;
+
         private IReadOnlyDictionary<RequestPath, MgmtRestOperation> EnsureOperationMappings()
         {
             return this.ToDictionary(
@@ -123,7 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var contextualPath in OperationMappings.Keys)
             {
                 var adjustedPath = Resource is not null ? contextualPath.ApplyHint(Resource.ResourceType) : contextualPath;
-                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(_context, IdVariableName).Concat(contextParams));
+                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariableName).Concat(contextParams));
             }
             return OperationMappings.ToDictionary(
                 pair => pair.Key,

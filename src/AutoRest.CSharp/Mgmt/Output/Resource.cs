@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
 
         private IEnumerable<RequestPath>? _requestPaths;
-        public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(_context, ResourceType));
+        public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(ResourceType));
 
         /// <summary>
         /// </summary>
@@ -73,21 +73,20 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <param name="resourceData">The corresponding resource data model</param>
         /// <param name="context">The build context of this resource instance</param>
         /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
-        protected internal Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context, string position)
-            : base(context, resourceName)
+        protected internal Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
+            : base(resourceName)
         {
-            _context = context;
             _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
             OperationSets = allOperations.Keys;
             ResourceType = resourceType;
             ResourceData = resourceData;
 
-            if (OperationSets.First().TryGetSingletonResourceSuffix(context, out var singletonResourceIdSuffix))
+            if (OperationSets.First().TryGetSingletonResourceSuffix(out var singletonResourceIdSuffix))
                 SingletonResourceIdSuffix = singletonResourceIdSuffix;
 
             _allOperationMap = GetAllOperationsMap(allOperations);
 
-            IsById = OperationSets.Any(operationSet => operationSet.IsById(_context));
+            IsById = OperationSets.Any(operationSet => operationSet.IsById);
 
             Position = position;
         }
@@ -127,8 +126,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
-        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
-            : this(allOperations, resourceName, resourceType, resourceData, context, ResourcePosition)
+        //TODO: make 1-1 mapping of operationset to resource
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
+            : this(allOperations, resourceName, resourceType, resourceData, ResourcePosition)
         { }
 
         private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> GetAllOperationsMap(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations)
@@ -143,23 +143,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
-        public bool IsInOperationMap(Operation operation)
-        {
-            foreach (var opSet in _allOperationMap.Keys)
-            {
-                if (opSet.Contains(operation))
-                    return true;
-            }
-
-            foreach (var opSet in _allOperationMap.Values)
-            {
-                if (opSet.Contains(operation))
-                    return true;
-            }
-
-            return false;
-        }
-
         protected bool IsById { get; }
 
         protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName, bool? isLongRunning = null, bool throwIfNull = false)
@@ -170,98 +153,28 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var operation = operationSet.GetOperation(method);
                 if (operation is not null)
                 {
-                    var restClient = _context.Library.GetRestClient(operation);
-                    var requestPath = operation.GetRequestPath(_context, ResourceType);
+                    var restClient = MgmtContext.Library.GetRestClient(operation);
+                    var requestPath = operation.GetRequestPath(ResourceType);
                     var contextualPath = GetContextualPath(operationSet, requestPath);
                     var restOperation = new MgmtRestOperation(
-                        _context.Library.GetRestClientMethod(operation),
+                        MgmtContext.Library.GetRestClientMethod(operation),
                         restClient,
                         requestPath,
                         contextualPath,
                         operationName,
-                        operation.GetReturnTypeAsLongRunningOperation(GetResource(), operationName, _context),
-                        _context,
                         isLongRunning,
                         throwIfNull);
                     result.Add(restOperation);
                 }
             }
 
-            return MgmtClientOperation.FromOperations(result, _context);
+            return MgmtClientOperation.FromOperations(result);
         }
 
         public virtual Resource GetResource() => this;
 
-        private string? _defaultName;
-        protected override string DefaultName => _defaultName ??= EnsureResourceDefaultName();
-
-        private string EnsureResourceDefaultName()
-        {
-            // read configuration to see if we could get a configuration for this resource
-            var defaultNameFromConfig = GetDefaultNameFromConfiguration();
-            if (defaultNameFromConfig != null)
-                return defaultNameFromConfig;
-
-            var resourcesWithSameName = ResourcesWithSameResourceName();
-            var resourcesWithSameType = ResourcesWithSameResourceType();
-            int countOfSameResourceDataName = resourcesWithSameName.Count();
-            int countOfSameResourceTypeName = resourcesWithSameType.Count();
-            if (!IsById)
-            {
-                // this is a regular resource and the name is unique
-                if (countOfSameResourceDataName == 1)
-                    return ResourceName;
-
-                // if countOfSameResourceDataName > 1, we need to have the resource types as the resource type name
-
-                // if we have the unique resource type, we just use the resource type to construct our resource type name
-                var types = ResourceType.Types;
-                var name = string.Join("", types.Select(segment => segment.ConstantValue.LastWordToSingular().FirstCharToUpperCase()));
-                if (countOfSameResourceTypeName == 1)
-                    return name;
-
-                // if countOfSameResourceTypeName > 1, we will have to add the scope as prefix to fully qualify the resource type name
-                // first we try to add the parent name as prefix
-                var prefixes = resourcesWithSameType.Select(resource => ParentPrefix(resource)).Distinct();
-                if (prefixes.Count() == countOfSameResourceTypeName)
-                {
-                    // this means that we have unique parent prefix for each resource with the same type, use the parent as prefix
-                    return ParentPrefix(this) + name;
-                }
-                // if we get here, parent prefix is not enough, we try the resource name if it is a constant
-                var nameSegments = RequestPaths.Select(p => p.Last()).Where(segment => segment.IsConstant).Select(segment => segment.ConstantValue.FirstCharToUpperCase());
-                if (nameSegments.Any())
-                    return name + string.Join("", nameSegments);
-
-                // if we get here, we have tried all approaches to get a solid resource type name, throw an exception
-                throw new InvalidOperationException($"Cannot determine a resource class name for resource with the request path(s): {string.Join(", ", RequestPaths)}, please assign a valid resource name in `request-path-to-resource-name` section");
-            }
-            // if this resource is based on a "ById" operation
-            // if we only have one resource class with this name - we have no choice but use this "ById" resource
-            if (countOfSameResourceDataName == 1)
-                return ResourceName;
-
-            // otherwise we need to add a "ById" suffix to make this resource to have a different name
-            // TODO -- introduce a flag that suppress the exception here to be thrown which notice the user to assign a proper name in config
-            return $"{ResourceName}ById";
-        }
-
-        private string? GetDefaultNameFromConfiguration()
-        {
-            foreach (var operationSet in OperationSets)
-            {
-                if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
-                    return name;
-                if (_context.Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{ResourceType}", out name))
-                    return name;
-            }
-
-            return null;
-        }
-
-        private IEnumerable<Resource> ResourcesWithSameResourceName() => _context.Library.ArmResources.Where(resource => resource.ResourceName == ResourceName);
-
-        private IEnumerable<Resource> ResourcesWithSameResourceType() => _context.Library.ArmResources.Where(resource => resource.ResourceType == ResourceType);
+        //private string? _defaultName;
+        protected override string DefaultName => ResourceName;
 
         public override string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
 
@@ -295,7 +208,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return positions.Contains(Position);
             }
             // In the resource class, we need to exclude the List operations
-            var restClientMethod = _context.Library.GetRestClientMethod(operation);
+            var restClientMethod = MgmtContext.Library.GetRestClientMethod(operation);
             if (restClientMethod.IsListMethod(out var valueType))
                 return !valueType.EqualsByName(ResourceData.Type);
             return true;
@@ -322,10 +235,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "AddTag",
                         getOperation.MgmtReturnType,
                         "Add a tag to the current resource.",
-                        _context,
                         TagKeyParameter,
-                        TagValueParameter),
-                    _context));
+                        TagValueParameter)));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -333,9 +244,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "SetTags",
                         getOperation.MgmtReturnType,
                         "Replace the tags on the resource with the given set.",
-                        _context,
-                        TagSetParameter),
-                    _context));
+                        TagSetParameter)));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -343,9 +252,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "RemoveTag",
                         getOperation.MgmtReturnType,
                         "Removes a tag by key from the resource.",
-                        _context,
-                        TagKeyParameter),
-                    _context));
+                        TagKeyParameter)));
             }
             return result;
         }
@@ -354,7 +261,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
-            return branch.ParentRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration);
+            return branch.ParentRequestPath().GetResourceType();
         }
 
         private IEnumerable<ContextualParameterMapping>? _extraContextualParameterMapping;
@@ -379,8 +286,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             var result = new Dictionary<string, List<MgmtRestOperation>>();
             foreach ((var operationSet, var operations) in _allOperationMap)
             {
-                var resourceRequestPath = operationSet.GetRequestPath(_context);
-                var resourceRestClient = _context.Library.GetRestClient(operationSet.First());
+                var resourceRequestPath = operationSet.GetRequestPath();
+                var resourceRestClient = MgmtContext.Library.GetRestClient(operationSet.First());
                 // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
                 foreach (var operation in operations)
                 {
@@ -389,7 +296,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var method = operation.GetHttpMethod();
                     // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
                     // therefore we trim the scope off and then calculate the diff
-                    var requestPath = operation.GetRequestPath(_context, ResourceType);
+                    var requestPath = operation.GetRequestPath(ResourceType);
                     var requestTrimmedPath = requestPath.TrimScope();
                     var resourceTrimmedPath = resourceRequestPath.TrimScope();
                     // the operations are grouped by the following key
@@ -399,15 +306,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
                         GetOperationName(operation, resourceRestClient.OperationGroup.Key);
                     // get the MgmtRestOperation with a proper name
-                    var restClient = _context.Library.GetRestClient(operation);
+                    var restClient = MgmtContext.Library.GetRestClient(operation);
                     var restOperation = new MgmtRestOperation(
-                        _context.Library.GetRestClientMethod(operation),
+                        MgmtContext.Library.GetRestClientMethod(operation),
                         restClient,
                         requestPath,
                         contextualPath,
-                        methodName,
-                        operation.GetReturnTypeAsLongRunningOperation(GetResource(), methodName, _context),
-                        _context);
+                        methodName);
 
                     if (result.TryGetValue(key, out var list))
                     {
@@ -424,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // TODO -- what if the response type is not the same? Also we need to verify they have the same parameters before we could union those together
             _clientOperationMap = result.Where(pair => pair.Value.Count > 0).ToDictionary(
                 pair => pair.Key,
-                pair => MgmtClientOperation.FromOperations(pair.Value, _context)!); // We first filtered the ones with at least one operation, therefore this will never be null
+                pair => MgmtClientOperation.FromOperations(pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
             return _clientOperationMap;
         }
 
@@ -438,7 +343,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns></returns>
         protected virtual RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            var contextualPath = operationSet.GetRequestPath(_context);
+            var contextualPath = operationSet.GetRequestPath();
             // we need to replace the scope in this contextual path with the actual scope in the operation
             var scope = contextualPath.GetScopePath();
             if (!scope.IsParameterizedScope())
@@ -449,13 +354,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected bool IsListOperation(Operation operation, OperationSet operationSet)
         {
-            return operation.IsResourceCollectionOperation(_context, out var resourceOperationSet) && resourceOperationSet == operationSet;
+            return operation.IsResourceCollectionOperation(out var resourceOperationSet) && resourceOperationSet == operationSet;
         }
 
         protected override IEnumerable<MgmtRestClient> EnsureRestClients()
         {
             var childRestClients = ClientOperations.SelectMany(clientOperation => clientOperation.Select(restOperation => restOperation.RestClient)).Distinct();
-            var resourceRestClients = OperationSets.SelectMany(operationSet => operationSet.Select(operation => _context.Library.GetRestClient(operation))).Distinct();
+            var resourceRestClients = OperationSets.SelectMany(operationSet => operationSet.Select(operation => MgmtContext.Library.GetRestClient(operation))).Distinct();
 
             return resourceRestClients.Concat(childRestClients).Distinct();
         }
@@ -463,17 +368,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         private MgmtRestClient? _myRestClient;
         public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
 
-        private IEnumerable<MgmtRestClient>? _otherRestClients;
-        public IEnumerable<MgmtRestClient> OtherRestClients => _otherRestClients ??= RestClients.Where(client => client != MyRestClient);
-
         public ResourceTypeSegment ResourceType { get; }
 
         protected virtual string CreateDescription(string clientPrefix)
         {
             return $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.";
         }
-
-        private string ParentPrefix(Resource resource) => string.Join("", resource.Parent(_context).Select(p => p.ResourceName));
 
         /// <summary>
         /// Returns the different method signature for different base path of this resource
@@ -506,8 +406,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
-                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, ValidateNotNull: false);
+                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, Validate: false);
         public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
-                        Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
+                        Type: ResourceData.Type, DefaultValue: null, Validate: false);
     }
 }

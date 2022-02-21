@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     {
         public CodeWriterDelegate? _tagsWriterDelegate = null;
 
-        public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context) : base(writer, provider, context)
+        public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider) : base(writer, provider)
         {
         }
 
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             _writer.Line($"[RecordedTest]");
 
-            var testModelerConfig = Context.Configuration.MgmtConfiguration.TestModeler;
+            var testModelerConfig = MgmtContext.MgmtConfiguration.TestModeler;
             string? ignoreReason = testModelerConfig?.IgnoreReason;
             if (ignoreReason is not null)
             {
@@ -173,9 +173,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName)
         {
             // Find Polimophismed schema
-            if (sot is SchemaObjectType && Context.Library.SchemaMap.ContainsKey(ev.Schema))
+            if (sot is SchemaObjectType && MgmtContext.Library.SchemaMap.ContainsKey(ev.Schema))
             {
-                var mappedTypeProvider = Context.Library.SchemaMap[ev.Schema];
+                var mappedTypeProvider = MgmtContext.Library.SchemaMap[ev.Schema];
                 if (mappedTypeProvider is SchemaObjectType mappedSot)
                 {
                     sot = mappedSot;
@@ -543,7 +543,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 if (paramName is null)
                 {
                     var paramNameDeclare = new CodeWriterDeclaration(passThruParameter.Name);
-                    if (passThruParameter.ValidateNotNull)
+                    if (passThruParameter.Validate)
                     {
                         _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = default; /* Can't find this parameter in example, please provide value here!*/");
                     }

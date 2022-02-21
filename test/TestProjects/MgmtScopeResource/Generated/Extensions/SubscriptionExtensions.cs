@@ -31,10 +31,11 @@ namespace MgmtScopeResource
             return GetExtensionClient(subscription).GetDeploymentExtendeds();
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: ResourceLinks_ListAtSubscription
-        /// <summary> Gets all the linked resources for the subscription. </summary>
+        /// <summary>
+        /// Gets all the linked resources for the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
+        /// Operation Id: ResourceLinks_ListAtSubscription
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -44,10 +45,11 @@ namespace MgmtScopeResource
             return GetExtensionClient(subscription).GetResourceLinksAsync(filter, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: ResourceLinks_ListAtSubscription
-        /// <summary> Gets all the linked resources for the subscription. </summary>
+        /// <summary>
+        /// Gets all the linked resources for the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
+        /// Operation Id: ResourceLinks_ListAtSubscription
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

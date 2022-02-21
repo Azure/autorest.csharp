@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData : TrackedResource
+    public partial class AvailabilitySetData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         /// <param name="location"> The location. </param>

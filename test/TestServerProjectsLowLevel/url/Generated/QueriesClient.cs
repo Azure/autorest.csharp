@@ -21,7 +21,10 @@ namespace url_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -58,9 +61,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
@@ -87,9 +88,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetBooleanTrue(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
@@ -116,9 +115,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
@@ -145,9 +142,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetBooleanFalse(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
@@ -175,9 +170,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanNullAsync(bool? boolQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
@@ -205,9 +198,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetBooleanNull(bool? boolQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
@@ -234,9 +225,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
@@ -263,9 +252,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetIntOneMillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
@@ -292,9 +279,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -321,9 +306,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -351,9 +334,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntNullAsync(int? intQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
@@ -381,9 +362,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetIntNull(int? intQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
@@ -410,9 +389,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
@@ -439,9 +416,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetTenBillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
@@ -468,9 +443,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
@@ -497,9 +470,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
@@ -527,9 +498,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetLongNullAsync(long? longQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
@@ -557,9 +526,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetLongNull(long? longQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
@@ -586,9 +553,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
@@ -615,9 +580,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response FloatScientificPositive(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
@@ -644,9 +607,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
@@ -673,9 +634,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response FloatScientificNegative(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
@@ -703,9 +662,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> FloatNullAsync(float? floatQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
@@ -733,9 +690,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response FloatNull(float? floatQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
@@ -762,9 +717,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
@@ -791,9 +744,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
@@ -820,9 +771,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
@@ -849,9 +798,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
@@ -879,9 +826,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleNullAsync(double? doubleQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
@@ -909,9 +854,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DoubleNull(double? doubleQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
@@ -938,9 +881,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
@@ -967,9 +908,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringUnicode(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
@@ -996,9 +935,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
@@ -1025,9 +962,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringUrlEncoded(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
@@ -1054,9 +989,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
@@ -1083,9 +1016,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringEmpty(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
@@ -1113,9 +1044,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringNullAsync(string stringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
@@ -1143,9 +1072,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringNull(string stringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
@@ -1173,9 +1100,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> EnumValidAsync(string enumQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
@@ -1203,9 +1128,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response EnumValid(string enumQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
@@ -1233,9 +1156,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> EnumNullAsync(string enumQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
@@ -1263,9 +1184,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response EnumNull(string enumQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
@@ -1293,9 +1212,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -1323,9 +1240,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteMultiByte(byte[] byteQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -1352,9 +1267,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
@@ -1381,9 +1294,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteEmpty(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
@@ -1411,9 +1322,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -1441,9 +1350,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteNull(byte[] byteQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -1470,9 +1377,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
@@ -1499,9 +1404,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateValid(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
@@ -1529,9 +1432,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
@@ -1559,9 +1460,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateNull(DateTimeOffset? dateQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
@@ -1588,9 +1487,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
@@ -1617,9 +1514,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateTimeValid(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
@@ -1647,9 +1542,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
@@ -1677,9 +1570,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
@@ -1707,9 +1598,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
@@ -1737,9 +1626,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
@@ -1767,9 +1654,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
@@ -1797,9 +1682,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
@@ -1827,9 +1710,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
@@ -1857,9 +1738,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
@@ -1887,9 +1766,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
@@ -1917,9 +1794,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
@@ -1947,9 +1822,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
@@ -1977,9 +1850,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
@@ -2007,9 +1878,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
@@ -2037,9 +1906,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
@@ -2067,9 +1934,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
@@ -2097,9 +1962,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();

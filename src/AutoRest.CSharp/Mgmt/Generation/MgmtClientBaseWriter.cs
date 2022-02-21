@@ -35,12 +35,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         protected const string BaseUriProperty = "BaseUri";
         protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
-
+        private string LibraryArmOperation { get; }
         protected bool IsArmCore { get; }
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
-        protected BuildContext<MgmtOutputLibrary> Context { get; }
-        protected bool ShowRequestPathAndOperationId { get; }
 
         internal static readonly Parameter CancellationTokenParameter = new Parameter(
             "cancellationToken",
@@ -57,14 +55,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public string FileName { get; }
 
-        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context)
+        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider)
         {
             _writer = writer;
-            Context = context;
             This = provider;
             FileName = This.Type.Name;
-            IsArmCore = context.Configuration.MgmtConfiguration.IsArmCore;
-            ShowRequestPathAndOperationId = Context.Configuration.MgmtConfiguration.MgmtDebug.ShowRequestPath;
+            IsArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
+            LibraryArmOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
         }
 
         public virtual void Write()
@@ -93,8 +90,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteMethod(clientOperation, false);
                     }
 
-                    WriteCustomMethods();
-
                     if (This.EnumerableInterfaces.Any())
                         WriteEnumerables();
                 }
@@ -103,7 +98,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual void WritePrivateHelpers() { }
         protected virtual void WriteProperties() { }
         protected virtual void WriteStaticMethods() { }
-        protected virtual void WriteCustomMethods() { }
 
         protected void WriteClassDeclaration()
         {
@@ -223,7 +217,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (resource is not null)
             {
                 string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
-                _writer.Line($"{ArmClientReference}.TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
+                _writer.Line($"TryGetApiVersion({resourceName}.ResourceType, out string {apiVersionVariable});");
                 apiVersionText = $", {apiVersionVariable}";
             }
             _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, diagFieldName, apiVersionText)};");
@@ -276,7 +270,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual Parameter[] GetParametersForSingletonEntry()
         {
-            return new Parameter[] { };
+            return Array.Empty<Parameter>();
         }
 
         protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
@@ -325,11 +319,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (returnType is null)
                 return $"ProviderConstants.DefaultProviderNamespace";
 
-            var resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == returnType);
+            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Declaration.Name == returnType);
             if (resource is not null)
                 return $"{returnType}.ResourceType.Namespace";
 
-            if (Context.Library.TryGetTypeProvider(returnType, out var p) && p is ResourceData data)
+            if (MgmtContext.Library.TryGetTypeProvider(returnType, out var p) && p is ResourceData data)
                 return $"{returnType.Substring(0, returnType.Length - 4)}.ResourceType.Namespace";
 
             return $"ProviderConstants.DefaultProviderNamespace";
@@ -416,7 +410,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
 
             // find the corresponding class of this resource type. If we find only one, use the constant inside that class. If we have multiple, use the hard-coded magic string
-            var candidates = Context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
+            var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
             if (candidates.Count() == 1)
             {
                 return $"{candidates.First().Type}.ResourceType";
@@ -460,9 +454,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CodeWriter.CodeWriterScope WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line();
-            // write the extra information about the request path, operation id, etc
-            if (ShowRequestPathAndOperationId)
-                WriteRequestPathAndOperationId(clientOperation);
             var returnDescription = clientOperation.ReturnsDescription is not null ? clientOperation.ReturnsDescription(isAsync) : null;
             return WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync);
         }
@@ -472,7 +463,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
             if (This.Accessibility == "public")
-                _writer.WriteXmlDocumentationMgmtRequiredParametersException(signature.Parameters);
+            {
+                _writer.WriteXmlDocumentationNonEmptyParametersException(signature.Parameters);
+                _writer.WriteXmlDocumentationRequiredParametersException(signature.Parameters);
+            }
 
             FormattableString? returnDesc = returnDescription ?? signature.ReturnDescription;
             if (returnDesc is not null)
@@ -480,7 +474,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var scope = _writer.WriteMethodDeclaration(signature, isAsync);
             if (This.Accessibility == "public")
-                _writer.WriteParameterNullOrEmptyChecks(signature.Parameters);
+                _writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
         }
@@ -583,7 +577,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 .AppendIf($".{pagingMethod.ItemName}", !pagingMethod.ItemName.IsNullOrEmpty());
 
 
-            Resource? resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(itemType));
+            Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(itemType));
             // only when we are listing ourselves, we use Select to convert XXXResourceData to XXXResource
             if (resource is null)
                 resource = operation.Resource is not null && operation.Resource.Type.Equals(itemType)
@@ -671,7 +665,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-                Resource? resource = Context.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
+                Resource? resource = MgmtContext.Library.ArmResources.FirstOrDefault(resource => resource.Type.Equals(operation.ReturnType.UnWrapResponse()));
                 resource ??= operation.Resource != null && operation.Resource.Type.Equals(operation.ReturnType.UnWrapResponse()) ? operation.Resource : null;
                 if (resource is not null)
                 {
@@ -708,7 +702,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     // if we only have one branch, we would not need those if-else statements
                     var branch = clientOperation.OperationMappings.Keys.First();
-                    WriteLROMethodBranch(clientOperation.ReturnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
+                    WriteLROMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
                 }
                 else
                 {
@@ -725,7 +719,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         }
                         using (_writer.Scope($"{keyword} ({This.BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                         {
-                            WriteLROMethodBranch(clientOperation.ReturnType, operation, clientOperation.ParameterMappings[branch], async);
+                            WriteLROMethodBranch(operation, clientOperation.ParameterMappings[branch], async);
                         }
                         keyword = "else if";
                     }
@@ -741,7 +735,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         var branch = escapeBranches.First();
                         using (_writer.Scope($"else"))
                         {
-                            WriteLROMethodBranch(clientOperation.ReturnType, clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
+                            WriteLROMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
                         }
                     }
                     else
@@ -752,44 +746,52 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteLROMethodBranch(CSharpType lroObjectType, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             _writer.Append($"var response = {GetAwait(async)} ");
             _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-            WriteLROResponse(lroObjectType, GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async);
+            WriteLROResponse(GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async);
         }
 
-        protected virtual void WriteLROResponse(CSharpType lroObjectType, string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var operation = new {lroObjectType}(");
-
-            if (operation.Operation.IsLongRunning)
+            _writer.Append($"var operation = new {LibraryArmOperation}");
+            if (operation.ReturnType.IsGenericType)
             {
-                var longRunningOperation = Context.Library.GetLongRunningOperation(lroObjectType);
-                if (longRunningOperation.WrapperResource != null)
+                _writer.Append($"<{operation.MgmtReturnType}>");
+            }
+            _writer.Append($"(");
+            if (operation.IsFakeLongRunningOperation)
+            {
+                if (operation.MgmtReturnType is not null)
                 {
-                    _writer.Append($"{ArmClientReference}, ");
+                    _writer.Append($"{typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, response), response.GetRawResponse())");
                 }
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
-                WriteArguments(_writer, parameterMapping);
-                _writer.RemoveTrailingComma();
-                _writer.Append($").Request, ");
+                else
+                {
+                    _writer.Append($"response");
+                }
             }
             else
             {
-                var nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(lroObjectType);
-                // need to check implementation type as some delete operation uses ResourceData.
-                if (nonLongRunningOperation.ResultType != null && nonLongRunningOperation.ResultType.Implementation.GetType() == typeof(Resource))
+                if (operation.OperationSource is not null)
                 {
-                    _writer.Append($"{ArmClientReference}, ");
+                    _writer.Append($"new {operation.OperationSource.TypeName}(");
+                    if (MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
+                        _writer.Append($"{ArmClientReference}");
+                    _writer.Append($"), ");
                 }
+
+                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
+                WriteArguments(_writer, parameterMapping);
+                _writer.RemoveTrailingComma();
+                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }
-            _writer.Line($"response);");
-            CSharpType? lroResultType = GetLROResultType(lroObjectType, operation.Operation);
-            var waitForCompletionMethod = lroResultType == null ?
+            _writer.Line($");");
+            var waitForCompletionMethod = operation.MgmtReturnType is null ?
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
             _writer.Line($"if (waitForCompletion)");
@@ -802,6 +804,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var parameter in mapping)
             {
+                if (!parameter.IsPassThru && parameter.Parameter.IsEnumType)
+                    writer.UseNamespace(parameter.Parameter.Type.Namespace);
+
                 if (parameter.IsPassThru)
                 {
                     if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
@@ -819,7 +824,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && !parameter.Parameter.ValidateNotNull)
+                        if (passNullForOptionalParameters && !parameter.Parameter.Validate)
                             writer.Append($"null, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");
@@ -834,23 +839,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Append($"{parameter.ValueExpression}, ");
                 }
             }
-        }
-
-        protected CSharpType? GetLROResultType(CSharpType lroObjectType, Operation operation)
-        {
-            CSharpType? returnType = null;
-            if (operation.IsLongRunning)
-            {
-                var longRunningOperation = Context.Library.GetLongRunningOperation(lroObjectType);
-                returnType = longRunningOperation.WrapperResource?.Type ?? longRunningOperation.ResultType;
-            }
-            else
-            {
-                var nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(lroObjectType);
-                returnType = nonLongRunningOperation.ResultType;
-            }
-
-            return returnType;
         }
 
         public override string ToString()

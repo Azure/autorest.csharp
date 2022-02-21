@@ -13,7 +13,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing the Fake data model. </summary>
-    public partial class FakeData : TrackedResource
+    public partial class FakeData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of FakeData. </summary>
         /// <param name="location"> The location. </param>

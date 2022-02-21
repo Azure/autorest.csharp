@@ -23,9 +23,13 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Group identifier. </summary>
         public string GroupId { get; }
+
         /// <summary> Item identifier. </summary>
         public string ItemId { get; }
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -41,15 +45,8 @@ namespace ResourceClients_LowLevel
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="itemId"> Item identifier. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="groupId"/>, or <paramref name="itemId"/> is null. </exception>
-        internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, string itemId, Uri endpoint = null)
+        internal Resource(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, string itemId, Uri endpoint)
         {
-            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
-            Argument.AssertNotNull(pipeline, nameof(pipeline));
-            Argument.AssertNotNull(groupId, nameof(groupId));
-            Argument.AssertNotNull(itemId, nameof(itemId));
-            endpoint ??= new Uri("http://localhost:3000");
-
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
@@ -60,9 +57,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get an item. Method should stay in `Item` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetItemAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
             scope.Start();
@@ -80,9 +75,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get an item. Method should stay in `Item` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetItem(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
             scope.Start();

@@ -27,19 +27,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             _requestPathToResourceTypeCache.TryAdd(RequestPath.ManagementGroup, ResourceTypeSegment.ManagementGroup);
         }
 
-        public static ResourceTypeSegment GetResourceType(this RequestPath requestPath, MgmtConfiguration config)
+        public static ResourceTypeSegment GetResourceType(this RequestPath requestPath)
         {
             if (_requestPathToResourceTypeCache.TryGetValue(requestPath, out var resourceType))
                 return resourceType;
 
-            resourceType = CalculateResourceType(requestPath, config);
+            resourceType = CalculateResourceType(requestPath);
             _requestPathToResourceTypeCache.TryAdd(requestPath, resourceType);
             return resourceType;
         }
 
-        private static ResourceTypeSegment CalculateResourceType(RequestPath requestPath, MgmtConfiguration config)
+        private static ResourceTypeSegment CalculateResourceType(RequestPath requestPath)
         {
-            if (config.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
+            if (MgmtContext.MgmtConfiguration.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
                 return new ResourceTypeSegment(resourceType);
 
             // we cannot directly return the new ResourceType here, the requestPath here can be a parameterized scope, which does not have a resource type
@@ -50,9 +50,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return ResourceTypeSegment.ParseRequestPath(requestPath);
         }
 
-        public static ResourceTypeSegment GetResourceType(this IEnumerable<RequestPath> requestPaths, BuildContext<MgmtOutputLibrary> context)
+        public static ResourceTypeSegment GetResourceType(this IEnumerable<RequestPath> requestPaths)
         {
-            var resourceTypes = requestPaths.Select(path => path.GetResourceType(context.Configuration.MgmtConfiguration)).Distinct();
+            var resourceTypes = requestPaths.Select(path => path.GetResourceType()).Distinct();
 
             if (resourceTypes.Count() > 1)
                 throw new InvalidOperationException($"Request path(s) {string.Join(", ", requestPaths)} contain multiple resource types in it ({string.Join(", ", resourceTypes)}), please double check and override it in `request-path-to-resource-type` section.");

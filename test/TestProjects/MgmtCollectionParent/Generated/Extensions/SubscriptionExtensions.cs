@@ -23,10 +23,11 @@ namespace MgmtCollectionParent
             );
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: ListOrderAtSubscriptionLevel
-        /// <summary> Lists order at subscription level. </summary>
+        /// <summary>
+        /// Lists order at subscription level.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
+        /// Operation Id: ListOrderAtSubscriptionLevel
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -36,10 +37,11 @@ namespace MgmtCollectionParent
             return GetExtensionClient(subscription).GetOrderResourcesAsync(skipToken, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: ListOrderAtSubscriptionLevel
-        /// <summary> Lists order at subscription level. </summary>
+        /// <summary>
+        /// Lists order at subscription level.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/orders
+        /// Operation Id: ListOrderAtSubscriptionLevel
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

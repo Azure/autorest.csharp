@@ -10,6 +10,4 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/TenantOnly.json
 namespace: Azure.TenantOnly
-mgmt-debug:
-  show-request-path: true
 ```

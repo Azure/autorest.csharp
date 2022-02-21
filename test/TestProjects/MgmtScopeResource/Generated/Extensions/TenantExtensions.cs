@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
 
@@ -41,46 +42,39 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of ResourceLinks and their operations over a ResourceLink. </returns>
         public static ResourceLinkCollection GetResourceLinks(this Tenant tenant, string scope)
         {
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(scope, nameof(scope));
 
             return GetExtensionClient(tenant).GetResourceLinks(scope);
         }
 
-        /// RequestPath: /providers/Microsoft.Resources/calculateTemplateHash
-        /// ContextualPath: /
-        /// OperationId: Deployments_CalculateTemplateHash
-        /// <summary> Calculate the hash of the given template. </summary>
+        /// <summary>
+        /// Calculate the hash of the given template.
+        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
+        /// Operation Id: Deployments_CalculateTemplateHash
+        /// </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public async static Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, object template, CancellationToken cancellationToken = default)
         {
-            if (template == null)
-            {
-                throw new ArgumentNullException(nameof(template));
-            }
+            Argument.AssertNotNull(template, nameof(template));
 
             return await GetExtensionClient(tenant).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /providers/Microsoft.Resources/calculateTemplateHash
-        /// ContextualPath: /
-        /// OperationId: Deployments_CalculateTemplateHash
-        /// <summary> Calculate the hash of the given template. </summary>
+        /// <summary>
+        /// Calculate the hash of the given template.
+        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
+        /// Operation Id: Deployments_CalculateTemplateHash
+        /// </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this Tenant tenant, object template, CancellationToken cancellationToken = default)
         {
-            if (template == null)
-            {
-                throw new ArgumentNullException(nameof(template));
-            }
+            Argument.AssertNotNull(template, nameof(template));
 
             return GetExtensionClient(tenant).CalculateTemplateHashDeployment(template, cancellationToken);
         }

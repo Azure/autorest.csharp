@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         AppendType(new CSharpType(t));
                         break;
                     case CSharpType t:
-                        AppendType(t);
+                        AppendType(t, isDeclaration);
                         break;
                     case CodeWriterDeclaration declaration when isDeclaration:
                         Declaration(declaration);
@@ -283,10 +283,16 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        private void AppendType(CSharpType type)
+        private void AppendType(CSharpType type, bool isDeclaration = false)
         {
-            string? mappedName = type.IsFrameworkType ? GetKeywordMapping(type.FrameworkType) : null;
-            if (mappedName == null)
+            string? mappedName = type.IsFrameworkType
+                ? GetTypeNameMapping(type.FrameworkType)
+                : isDeclaration ? type.Implementation.Declaration.Name : null;
+            if (mappedName != null)
+            {
+                AppendRaw(mappedName);
+            }
+            else
             {
                 UseNamespace(type.Namespace);
 
@@ -294,10 +300,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 AppendRaw(type.Namespace);
                 AppendRaw(".");
                 AppendRaw(type.Name);
-            }
-            else
-            {
-                AppendRaw(mappedName);
             }
 
             if (type.Arguments.Any())
@@ -312,15 +314,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 AppendRaw(">");
             }
 
-            if (type.IsNullable && type.IsValueType)
+            if (!isDeclaration && type.IsNullable && type.IsValueType)
             {
                 AppendRaw("?");
             }
         }
 
-        private static string? GetKeywordMapping(Type? type) => type switch
+        private static string? GetTypeNameMapping(Type? type) => type switch
         {
             null => null,
+            var t when t.IsGenericParameter => t.Name,
             var t when t == typeof(bool) => "bool",
             var t when t == typeof(byte) => "byte",
             var t when t == typeof(sbyte) => "sbyte",

@@ -14,17 +14,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal class StaticUtilWriter
     {
         private CodeWriter _writer;
-        private BuildContext<MgmtOutputLibrary> _context;
 
-        public StaticUtilWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
+        public StaticUtilWriter(CodeWriter writer)
         {
             _writer = writer;
-            _context = context;
         }
 
         public void Write()
         {
-            using (_writer.Namespace(_context.DefaultNamespace))
+            using (_writer.Namespace(MgmtContext.Context.DefaultNamespace))
             {
                 using (_writer.Scope($"internal static class ProviderConstants"))
                 {

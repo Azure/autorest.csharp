@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace SupersetInheritance
 {
     /// <summary> A class representing the SupersetModel6 data model. </summary>
-    public partial class SupersetModel6Data : Resource
+    public partial class SupersetModel6Data : ResourceData
     {
         /// <summary> Initializes a new instance of SupersetModel6Data. </summary>
         public SupersetModel6Data()

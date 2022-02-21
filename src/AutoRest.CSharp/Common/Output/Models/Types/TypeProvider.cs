@@ -19,11 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _existingType = new Lazy<INamedTypeSymbol?>(() => Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
-        public CSharpType Type => new CSharpType(
-            this,
-            Declaration.Namespace,
-            Declaration.Name,
-            TypeKind == TypeKind.Struct || TypeKind == TypeKind.Enum);
+        public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         internal BuildContext Context { get; private set; }
@@ -57,6 +53,24 @@ namespace AutoRest.CSharp.Output.Models.Types
                 result = $"{context.DefaultNamespace}.Models";
             }
             return result;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is null)
+                return false;
+            if (obj is not TypeProvider other)
+                return false;
+
+            return string.Equals(DefaultName, other.DefaultName, StringComparison.Ordinal) &&
+                string.Equals(DefaultNamespace, other.DefaultNamespace, StringComparison.Ordinal) &&
+                string.Equals(DefaultAccessibility, other.DefaultAccessibility, StringComparison.Ordinal) &&
+                TypeKind == other.TypeKind;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(DefaultName, DefaultNamespace, DefaultAccessibility, TypeKind);
         }
     }
 }

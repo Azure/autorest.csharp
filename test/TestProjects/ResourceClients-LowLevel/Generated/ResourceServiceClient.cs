@@ -23,7 +23,10 @@ namespace ResourceClients_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -51,9 +54,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Method that belongs to the top level service. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetParametersAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
             scope.Start();
@@ -71,9 +72,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Method that belongs to the top level service. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetParameters(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
             scope.Start();
@@ -91,9 +90,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetGroupsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
             scope.Start();
@@ -111,9 +108,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetGroups(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetGroups");
             scope.Start();
@@ -131,9 +126,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "ResourceServiceClient.GetAllItems");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -152,9 +145,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "ResourceServiceClient.GetAllItems");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -174,9 +165,10 @@ namespace ResourceClients_LowLevel
         /// <summary> Initializes a new instance of ResourceGroup. </summary>
         /// <param name="groupId"> Group identifier. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual ResourceGroup GetResourceGroup(string groupId)
         {
-            Argument.AssertNotNull(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
             return new ResourceGroup(ClientDiagnostics, _pipeline, _keyCredential, groupId, _endpoint);
         }

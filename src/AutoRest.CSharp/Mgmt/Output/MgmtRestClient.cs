@@ -16,14 +16,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtRestClient : RestClient
     {
-        private BuildContext<MgmtOutputLibrary> _context;
         private MgmtRestClientBuilder _builder;
         private IReadOnlyList<Resource>? _resources;
 
-        public MgmtRestClient(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-            : base(operationGroup, context, operationGroup.Language.Default.Name, new MgmtRestClientBuilder(operationGroup, context))
+        public MgmtRestClient(OperationGroup operationGroup)
+            : base(operationGroup, MgmtContext.Context, operationGroup.Language.Default.Name, new MgmtRestClientBuilder(operationGroup))
         {
-            _context = context;
             _builder = (MgmtRestClientBuilder)Builder;
         }
 
@@ -31,9 +29,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             Func<string?, bool> f = delegate (string? responseBodyType)
             {
-                if (!_context.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
+                if (!MgmtContext.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
                     return false;
-                if (!operation.IsGetResourceOperation(responseBodyType, resourceData, _context))
+                if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
                     return false;
 
                 return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
@@ -48,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             HashSet<Resource> candidates = new HashSet<Resource>();
             foreach (var operation in OperationGroup.Operations)
             {
-                foreach (var resource in operation.GetResourceFromResourceType(_context))
+                foreach (var resource in operation.GetResourceFromResourceType())
                 {
                     candidates.Add(resource);
                 }

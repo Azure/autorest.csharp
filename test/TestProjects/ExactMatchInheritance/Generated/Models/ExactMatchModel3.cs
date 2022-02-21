@@ -18,9 +18,9 @@ namespace ExactMatchInheritance.Models
         /// <summary> Initializes a new instance of ExactMatchModel3. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="nEW"></param>
+        /// <param name="bar"></param>
         /// <param name="new"></param>
-        internal ExactMatchModel3(string id, string name, string nEW, string @new) : base(id, name, nEW)
+        internal ExactMatchModel3(string id, string name, string bar, string @new) : base(id, name, bar)
         {
             New = @new;
         }
