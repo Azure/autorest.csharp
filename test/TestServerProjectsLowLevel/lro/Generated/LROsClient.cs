@@ -88,9 +88,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put200SucceededAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
             scope.Start();
@@ -145,9 +143,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put200Succeeded(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
             scope.Start();
@@ -202,9 +198,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Patch200SucceededIgnoreHeadersAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
             scope.Start();
@@ -259,9 +253,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Patch200SucceededIgnoreHeaders(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
             scope.Start();
@@ -316,9 +308,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Patch201RetryWithAsyncHeaderAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch201RetryWithAsyncHeader");
             scope.Start();
@@ -373,9 +363,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Patch201RetryWithAsyncHeader(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch201RetryWithAsyncHeader");
             scope.Start();
@@ -430,9 +418,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Patch202RetryWithAsyncAndLocationHeaderAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch202RetryWithAsyncAndLocationHeader");
             scope.Start();
@@ -487,9 +473,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Patch202RetryWithAsyncAndLocationHeader(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Patch202RetryWithAsyncAndLocationHeader");
             scope.Start();
@@ -544,9 +528,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put201SucceededAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
             scope.Start();
@@ -601,9 +583,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put201Succeeded(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
             scope.Start();
@@ -644,9 +624,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Post202ListAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202List");
             scope.Start();
@@ -687,9 +665,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Post202List(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202List");
             scope.Start();
@@ -744,9 +720,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put200SucceededNoStateAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
             scope.Start();
@@ -801,9 +775,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put200SucceededNoState(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
             scope.Start();
@@ -858,9 +830,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put202Retry200Async(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put202Retry200");
             scope.Start();
@@ -915,9 +885,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put202Retry200(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put202Retry200");
             scope.Start();
@@ -972,9 +940,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put201CreatingSucceeded200Async(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
             scope.Start();
@@ -1029,9 +995,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put201CreatingSucceeded200(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
             scope.Start();
@@ -1086,9 +1050,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put200UpdatingSucceeded204Async(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
             scope.Start();
@@ -1143,9 +1105,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put200UpdatingSucceeded204(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
             scope.Start();
@@ -1200,9 +1160,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put201CreatingFailed200Async(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
             scope.Start();
@@ -1257,9 +1215,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put201CreatingFailed200(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
             scope.Start();
@@ -1314,9 +1270,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Put200Acceptedcanceled200Async(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
             scope.Start();
@@ -1371,9 +1325,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Put200Acceptedcanceled200(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
             scope.Start();
@@ -1428,9 +1380,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutNoHeaderInRetryAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
             scope.Start();
@@ -1485,9 +1435,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutNoHeaderInRetry(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
             scope.Start();
@@ -1542,9 +1490,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutAsyncRetrySucceededAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
             scope.Start();
@@ -1599,9 +1545,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutAsyncRetrySucceeded(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
             scope.Start();
@@ -1656,9 +1600,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutAsyncNoRetrySucceededAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
             scope.Start();
@@ -1713,9 +1655,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutAsyncNoRetrySucceeded(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
             scope.Start();
@@ -1770,9 +1710,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutAsyncRetryFailedAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
             scope.Start();
@@ -1827,9 +1765,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutAsyncRetryFailed(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
             scope.Start();
@@ -1884,9 +1820,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutAsyncNoRetrycanceledAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
             scope.Start();
@@ -1941,9 +1875,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutAsyncNoRetrycanceled(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
             scope.Start();
@@ -1998,9 +1930,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutAsyncNoHeaderInRetryAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
             scope.Start();
@@ -2055,9 +1985,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutAsyncNoHeaderInRetry(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
             scope.Start();
@@ -2098,9 +2026,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutNonResourceAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutNonResource");
             scope.Start();
@@ -2141,9 +2067,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutNonResource(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutNonResource");
             scope.Start();
@@ -2184,9 +2108,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutAsyncNonResourceAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
             scope.Start();
@@ -2227,9 +2149,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutAsyncNonResource(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
             scope.Start();
@@ -2276,9 +2196,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutSubResourceAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutSubResource");
             scope.Start();
@@ -2325,9 +2243,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutSubResource(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutSubResource");
             scope.Start();
@@ -2374,9 +2290,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PutAsyncSubResourceAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
             scope.Start();
@@ -2423,9 +2337,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PutAsyncSubResource(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
             scope.Start();
@@ -2466,9 +2378,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -2509,9 +2419,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteProvisioning202Accepted200Succeeded(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -2552,9 +2460,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteProvisioning202DeletingFailed200Async(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -2595,9 +2501,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteProvisioning202DeletingFailed200(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -2638,9 +2542,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Deletingcanceled200Async(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -2681,9 +2583,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteProvisioning202Deletingcanceled200(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -2711,9 +2611,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Delete204SucceededAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
             scope.Start();
@@ -2741,9 +2639,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Delete204Succeeded(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
             scope.Start();
@@ -2784,9 +2680,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Delete202Retry200Async(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
             scope.Start();
@@ -2827,9 +2721,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Delete202Retry200(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
             scope.Start();
@@ -2870,9 +2762,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Delete202NoRetry204Async(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
             scope.Start();
@@ -2913,9 +2803,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Delete202NoRetry204(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
             scope.Start();
@@ -2943,9 +2831,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteNoHeaderInRetryAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
             scope.Start();
@@ -2973,9 +2859,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteNoHeaderInRetry(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
             scope.Start();
@@ -3003,9 +2887,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteAsyncNoHeaderInRetryAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
             scope.Start();
@@ -3033,9 +2915,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteAsyncNoHeaderInRetry(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
             scope.Start();
@@ -3063,9 +2943,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteAsyncRetrySucceededAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
             scope.Start();
@@ -3093,9 +2971,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteAsyncRetrySucceeded(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
             scope.Start();
@@ -3123,9 +2999,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteAsyncNoRetrySucceededAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
             scope.Start();
@@ -3153,9 +3027,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteAsyncNoRetrySucceeded(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
             scope.Start();
@@ -3183,9 +3055,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteAsyncRetryFailedAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
             scope.Start();
@@ -3213,9 +3083,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteAsyncRetryFailed(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
             scope.Start();
@@ -3243,9 +3111,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> DeleteAsyncRetrycanceledAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
             scope.Start();
@@ -3273,9 +3139,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> DeleteAsyncRetrycanceled(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
             scope.Start();
@@ -3309,9 +3173,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Post200WithPayloadAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
             scope.Start();
@@ -3345,9 +3207,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Post200WithPayload(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
             scope.Start();
@@ -3389,9 +3249,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Post202Retry200Async(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202Retry200");
             scope.Start();
@@ -3433,9 +3291,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Post202Retry200(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202Retry200");
             scope.Start();
@@ -3490,9 +3346,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> Post202NoRetry204Async(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
             scope.Start();
@@ -3547,9 +3401,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Post202NoRetry204(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
             scope.Start();
@@ -3590,9 +3442,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalLocationGetAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -3633,9 +3483,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PostDoubleHeadersFinalLocationGet(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -3676,9 +3524,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -3719,9 +3565,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGet(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -3762,9 +3606,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -3805,9 +3647,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGetDefault(bool waitForCompletion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -3862,9 +3702,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PostAsyncRetrySucceededAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
             scope.Start();
@@ -3919,9 +3757,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PostAsyncRetrySucceeded(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
             scope.Start();
@@ -3976,9 +3812,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PostAsyncNoRetrySucceededAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
             scope.Start();
@@ -4033,9 +3867,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PostAsyncNoRetrySucceeded(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
             scope.Start();
@@ -4077,9 +3909,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PostAsyncRetryFailedAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
             scope.Start();
@@ -4121,9 +3951,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PostAsyncRetryFailed(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
             scope.Start();
@@ -4165,9 +3993,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> PostAsyncRetrycanceledAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
             scope.Start();
@@ -4209,9 +4035,7 @@ namespace lro_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> PostAsyncRetrycanceled(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
             scope.Start();

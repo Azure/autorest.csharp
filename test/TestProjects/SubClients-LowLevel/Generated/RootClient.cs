@@ -56,9 +56,7 @@ namespace SubClients_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetCachedParameterAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("RootClient.GetCachedParameter");
             scope.Start();
@@ -75,9 +73,7 @@ namespace SubClients_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetCachedParameter(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("RootClient.GetCachedParameter");
             scope.Start();
