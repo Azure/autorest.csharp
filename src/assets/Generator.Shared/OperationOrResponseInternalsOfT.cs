@@ -35,7 +35,7 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName).Internal)
+            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName, new ExponentialPollingStrategy()).Internal)
         {
             _operation = Operation as OperationInternal<T>;
         }
@@ -53,7 +53,9 @@ namespace Azure.Core
         public async ValueTask<Response<T>> WaitForCompletionAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return DoesWrapOperation
+                ? await _operation!.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false)
+                : _valueResponse!;
         }
 
         public async ValueTask<Response<T>> WaitForCompletionAsync(

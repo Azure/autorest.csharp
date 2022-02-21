@@ -40,18 +40,32 @@ namespace Azure.Core
             _source = source;
             _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
             _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName);
-            _operationInternal.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
+        }
+
+        public OperationInternals(
+            IOperationSource<T> source,
+            ClientDiagnostics clientDiagnostics,
+            HttpPipeline pipeline,
+            Request originalRequest,
+            Response originalResponse,
+            OperationFinalStateVia finalStateVia,
+            string scopeName,
+            OperationPollingStrategy pollingStrategy)
+        {
+            _source = source;
+            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
+            _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName, null, pollingStrategy);
         }
 
         public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
-            => _operationInternal.WaitForCompletionAsync(cancellationToken);
+            => _operationInternal.WaitForCompletionAsync(OperationInternals.DefaultPollingInterval, cancellationToken);
 
         public ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
             => _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
         public Response GetRawResponse() => _operationInternal.RawResponse;
 
-        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(cancellationToken);
+        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(OperationInternals.DefaultPollingInterval, cancellationToken);
 
         public ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
 
