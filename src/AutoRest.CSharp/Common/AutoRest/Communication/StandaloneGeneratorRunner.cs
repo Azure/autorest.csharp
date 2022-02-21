@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using Azure.Core;
 
 namespace AutoRest.CSharp.AutoRest.Communication
 {
@@ -85,6 +86,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.DataPlane, configuration.DataPlane);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, configuration.SingleTopLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, configuration.ProjectFolder);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), configuration.ProtocolMethodList);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -135,6 +137,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
             }
 
+            root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
+            var protocolMethods = protocolMethodList.ValueKind == JsonValueKind.Array
+                ? protocolMethodList.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : Array.Empty<string>();
+
             return new Configuration(
                 Path.Combine(basePath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()),
                 root.GetProperty(nameof(Configuration.Namespace)).GetString(),
@@ -149,6 +156,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.DataPlane),
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadStringOption(root, Configuration.Options.ProjectFolder),
+                protocolMethods,
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

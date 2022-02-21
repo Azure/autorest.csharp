@@ -36,16 +36,16 @@ namespace MgmtRenameRules.Models
         /// <param name="enableAcceleratedNetworking"> Specifies whether the network interface is accelerated networking-enabled. </param>
         /// <param name="networkSecurityGroup"> The network security group. </param>
         /// <param name="dnsSettings"> The dns settings to be applied on the network interfaces. </param>
-        /// <param name="iPConfigurations"> Specifies the IP configurations of the network interface. </param>
+        /// <param name="ipConfigurations"> Specifies the IP configurations of the network interface. </param>
         /// <param name="enableIPForwarding"> Whether IP forwarding enabled on this NIC. </param>
-        internal VirtualMachineScaleSetNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPConfiguration> iPConfigurations, bool? enableIPForwarding) : base(id)
+        internal VirtualMachineScaleSetNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPConfiguration> ipConfigurations, bool? enableIPForwarding) : base(id)
         {
             Name = name;
             Primary = primary;
             EnableAcceleratedNetworking = enableAcceleratedNetworking;
             NetworkSecurityGroup = networkSecurityGroup;
             DnsSettings = dnsSettings;
-            IPConfigurations = iPConfigurations;
+            IPConfigurations = ipConfigurations;
             EnableIPForwarding = enableIPForwarding;
         }
 

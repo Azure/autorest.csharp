@@ -3,6 +3,7 @@
 
 using System;
 using System.Buffers;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
@@ -43,6 +44,11 @@ namespace AutoRest.CSharp.Generation.Types
             Arguments = arguments;
             IsValueType = type.IsValueType;
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
+        }
+
+        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
+            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isNullable, arguments)
+        {
         }
 
         public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
@@ -86,24 +92,30 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool EqualsIgnoreNullable(CSharpType other) => Equals(other, ignoreNullable: true);
 
-        public bool Equals(Type type)
+        public bool Equals(Type type) =>
+            IsFrameworkType && (type.IsGenericType ? type.GetGenericTypeDefinition() == FrameworkType && ArgumentsEquals(type.GetGenericArguments()) : type == FrameworkType);
+
+        private bool ArgumentsEquals(Type[] genericArguments)
         {
-            return IsFrameworkType && type == FrameworkType;
+            if (Arguments.Length != genericArguments.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < Arguments.Length; i++)
+            {
+                if (!Arguments[i].Equals(genericArguments[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
-        public override int GetHashCode()
-        {
-            if (Arguments.Length == 1)
-            {
-                return HashCode.Combine(_implementation, _type, Arguments[0]);
-            }
-            else
-            {
-                return HashCode.Combine(_implementation, _type, Arguments);
-            }
-        }
+        public override int GetHashCode() => HashCode.Combine(_implementation, _type, ((System.Collections.IStructuralEquatable)Arguments).GetHashCode(EqualityComparer<CSharpType>.Default));
 
-        public bool IsGenericType => Arguments is not null && Arguments.Length > 0;
+        public bool IsGenericType => Arguments.Length > 0;
 
         public CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType

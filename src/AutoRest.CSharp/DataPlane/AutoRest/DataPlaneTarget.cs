@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var client in context.Library.RestClients)
             {
                 var restCodeWriter = new CodeWriter();
-                restClientWriter.WriteClient(restCodeWriter, client);
+                restClientWriter.WriteClient(restCodeWriter, client, context.Configuration, client.ProtocolMethods);
 
                 project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
             }
