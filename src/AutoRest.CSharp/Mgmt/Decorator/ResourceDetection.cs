@@ -40,14 +40,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             // try to get result from configuration
-            if (MgmtContext.MgmtConfiguration.RequestPathToResourceData.TryGetValue(set.RequestPath, out resourceName))
+            if (Configuration.MgmtConfiguration.RequestPathToResourceData.TryGetValue(set.RequestPath, out resourceName))
             {
                 _resourceDataSchemaNameCache.TryAdd(set.RequestPath, resourceName);
                 return true;
             }
 
             // try to get another configuration to see if this is marked as not a resource
-            if (MgmtContext.MgmtConfiguration.RequestPathIsNonResource.Contains(set.RequestPath))
+            if (Configuration.MgmtConfiguration.RequestPathIsNonResource.Contains(set.RequestPath))
             {
                 _resourceDataSchemaNameCache.TryAdd(set.RequestPath, null);
                 return false;

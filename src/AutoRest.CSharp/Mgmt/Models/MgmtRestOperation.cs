@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -370,7 +371,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         private bool IsResourceDataType(CSharpType? type, [MaybeNullWhen(false)] out ResourceData data)
         {
             data = null;
-            if (MgmtContext.MgmtConfiguration.IsArmCore)
+            if (Configuration.MgmtConfiguration.IsArmCore)
             {
                 if (type == null || type.IsFrameworkType)
                     return false;

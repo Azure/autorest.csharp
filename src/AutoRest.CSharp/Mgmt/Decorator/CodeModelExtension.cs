@@ -61,9 +61,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static void UpdateAcronyms(this CodeModel codeModel)
         {
-            if (MgmtContext.MgmtConfiguration.RenameRules.Count == 0)
+            if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
                 return;
-            var transformer = new NameTransformer(MgmtContext.MgmtConfiguration.RenameRules);
+            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
             var wordCache = new ConcurrentDictionary<string, string>();
             // first transform all the name of schemas, properties
             UpdateAcronyms(codeModel.AllSchemas, transformer, wordCache);

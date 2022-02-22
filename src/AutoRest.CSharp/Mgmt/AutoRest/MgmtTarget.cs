@@ -43,12 +43,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             project.AddGeneratedFile(filename, text);
         }
 
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             var addedFilenames = new HashSet<string>();
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
             var serializeWriter = new SerializationWriter();
-            var isArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
+            var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
 
             if (!isArmCore)
             {
@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static void WriteExtensionPair(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
         {
             WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
-            if (!MgmtContext.MgmtConfiguration.IsArmCore)
+            if (!Configuration.MgmtConfiguration.IsArmCore)
                 WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
         }
 
@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
             // Can go way after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
             // The includeArmCore parameter should also be removed in FindForType() then.
-            if (!MgmtContext.MgmtConfiguration.IsArmCore && MgmtContext.Context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name, includeArmCore: true) != null)
+            if (!Configuration.MgmtConfiguration.IsArmCore && MgmtContext.Context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name, includeArmCore: true) != null)
             {
                 return true;
             }

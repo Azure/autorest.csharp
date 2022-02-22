@@ -37,8 +37,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return library;
         }
 
-        public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel)
-            : base(codeModel, configuration, sourceInputModel)
+        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
+            : base(codeModel, sourceInputModel)
         {
         }
 

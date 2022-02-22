@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -130,8 +131,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             // if this resource was listed in list-exception section, we suppress the exception here
             // or if the debug flag `--mgmt-debug.suppress-list-exception` is on, we suppress the exception here
-            var suppressListException = RequestPaths.Any(path => MgmtContext.MgmtConfiguration.ListException.Contains(path))
-                || MgmtContext.MgmtConfiguration.MgmtDebug.SuppressListException;
+            var suppressListException = RequestPaths.Any(path => Configuration.MgmtConfiguration.ListException.Contains(path))
+                || Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
             var getAllOperation = ClientOperations.Where(operation => operation.Name == "GetAll").OrderBy(operation => ReferenceSegments(operation).Count()).FirstOrDefault();
             if (!suppressListException && getAllOperation == null)
                 throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method");
@@ -178,7 +179,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override bool ShouldIncludeOperation(Operation operation)
         {
             var requestPath = operation.GetHttpPath();
-            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
             {
                 return positions.Contains(Position);
             }

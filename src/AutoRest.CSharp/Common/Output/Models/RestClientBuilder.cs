@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -91,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models
             var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters);
             Request request = BuildRequest(httpRequest, buildContext);
 
-            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean;
+            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType);
 
             return new RestClientMethod(
@@ -131,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models
             var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, CreateReference(kvp.Key, kvp.Value)));
             var request = BuildRequest(httpRequest, new RequestMethodBuildContext(methodParameters, references));
 
-            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean;
+            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType, returnNullOn404Func);
 
             return new RestClientMethod(

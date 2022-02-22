@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (!requestPath.GetScopePath().IsParameterizedScope())
                 return null;
-            if (MgmtContext.MgmtConfiguration.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
+            if (Configuration.MgmtConfiguration.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
             return new[] { ResourceTypeSegment.Subscription, ResourceTypeSegment.ResourceGroup, ResourceTypeSegment.ManagementGroup, ResourceTypeSegment.Tenant, ResourceTypeSegment.Any };

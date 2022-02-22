@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -155,7 +156,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var operations = new Dictionary<Operation, LongRunningOperation>();
 
-            if (_context.Configuration.PublicClients)
+            if (Configuration.PublicClients)
             {
                 foreach (var operationGroup in _codeModel.OperationGroups)
                 {
@@ -181,7 +182,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var clients = new Dictionary<OperationGroup, DataPlaneClient>();
 
-            if (_context.Configuration.PublicClients)
+            if (Configuration.PublicClients)
             {
                 foreach (var operationGroup in _codeModel.OperationGroups)
                 {

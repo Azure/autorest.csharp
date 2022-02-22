@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -32,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer = new CodeWriter();
             _opSource = opSource;
             _isReturningResource = MgmtContext.Library.CsharpTypeToResource.ContainsKey(_opSource.ReturnType);
-            if (_opSource.Resource is not null && MgmtContext.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.Type.Name, out var mappings))
+            if (_opSource.Resource is not null && Configuration.MgmtConfiguration.OperationIdMappings.TryGetValue(_opSource.Resource.Type.Name, out var mappings))
                 _operationIdMappings = mappings;
         }
 

@@ -20,6 +20,7 @@ using System.Text.RegularExpressions;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.AutoRest.Plugins;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -35,7 +36,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             _writer.Line($"[RecordedTest]");
 
-            var testModelerConfig = MgmtContext.MgmtConfiguration.TestModeler;
+            var testModelerConfig = Configuration.MgmtConfiguration.TestModeler;
             string? ignoreReason = testModelerConfig?.IgnoreReason;
             if (ignoreReason is not null)
             {

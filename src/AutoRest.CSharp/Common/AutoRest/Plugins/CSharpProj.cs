@@ -94,11 +94,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            var configuration = Configuration.GetConfiguration(autoRest);
+            Configuration.Initialize(autoRest);
 
-            var context = new BuildContext(codeModel, configuration, null);
+            var context = new BuildContext(codeModel, null);
 
-            var isTestProject = configuration.MgmtConfiguration.TestModeler is not null;
+            var isTestProject = Configuration.MgmtConfiguration.TestModeler is not null;
             if (isTestProject)
             {
                 _coreCsProjContent += string.Format(@"
@@ -117,14 +117,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             string csProjContent;
-            if (configuration.SkipCSProjPackageReference)
+            if (Configuration.SkipCSProjPackageReference)
             {
                 string additionalContent = string.Empty;
-                if (configuration.AzureArm)
+                if (Configuration.AzureArm)
                 {
                   additionalContent += _armCsProjContent;
                 }
-                if (configuration.DataPlane)
+                if (Configuration.DataPlane)
                 {
                   additionalContent += _llcProjectContent;
                 }
@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
-            var projectFile = $"{configuration.ProjectFolder}{context.DefaultNamespace}";
+            var projectFile = $"{Configuration.ProjectFolder}{context.DefaultNamespace}";
             if (isTestProject)
             {
                 projectFile += "Test";

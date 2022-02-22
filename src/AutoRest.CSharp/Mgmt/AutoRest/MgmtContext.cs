@@ -17,10 +17,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static MgmtOutputLibrary Library => Context.Library;
 
-        public static Configuration Configuration => Context.Configuration;
-
-        public static MgmtConfiguration MgmtConfiguration => Context.Configuration.MgmtConfiguration;
-
         public static CodeModel CodeModel => Context.CodeModel;
 
         public static void Initialize(BuildContext<MgmtOutputLibrary> context)

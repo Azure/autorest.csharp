@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -32,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected MgmtTypeProvider(string resourceName) : base(MgmtContext.Context)
         {
             ResourceName = resourceName;
-            IsArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
+            IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             IsStatic = !IsArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
         }
 

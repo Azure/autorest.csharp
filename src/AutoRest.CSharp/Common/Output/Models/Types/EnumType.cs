@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -64,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return namespaceExtension;
             }
 
-            if (context.Configuration.ModelNamespace)
+            if (Configuration.ModelNamespace)
             {
                 return $"{context.DefaultNamespace}.Models";
             }

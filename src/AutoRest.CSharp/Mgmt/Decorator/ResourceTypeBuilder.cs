@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ResourceTypeSegment CalculateResourceType(RequestPath requestPath)
         {
-            if (MgmtContext.MgmtConfiguration.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
+            if (Configuration.MgmtConfiguration.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
                 return new ResourceTypeSegment(resourceType);
 
             // we cannot directly return the new ResourceType here, the requestPath here can be a parameterized scope, which does not have a resource type

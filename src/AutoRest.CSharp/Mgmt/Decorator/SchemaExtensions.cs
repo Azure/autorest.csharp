@@ -66,8 +66,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var allProperties = objSchema.GetAllProperties();
             bool idPropertyFound = false;
-            bool typePropertyFound = !MgmtContext.MgmtConfiguration.DoesResourceModelRequireType;
-            bool namePropertyFound = !MgmtContext.MgmtConfiguration.DoesResourceModelRequireName;
+            bool typePropertyFound = !Configuration.MgmtConfiguration.DoesResourceModelRequireType;
+            bool namePropertyFound = !Configuration.MgmtConfiguration.DoesResourceModelRequireName;
 
             foreach (var property in allProperties)
             {

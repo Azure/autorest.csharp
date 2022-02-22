@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -84,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models
             var operations = operationGroup.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = context.Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(operationGroup.Key) || resourceParameters.Any();
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(operationGroup.Key) || resourceParameters.Any();
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix(context);
 
             INamedTypeSymbol? existingType;
@@ -110,7 +111,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var topLevelClients = clientInfosByName.Values.Where(c => c.Parent == null).ToList();
-            if (!context.Configuration.SingleTopLevelClient || topLevelClients.Count == 1)
+            if (!Configuration.SingleTopLevelClient || topLevelClients.Count == 1)
             {
                 return topLevelClients;
             }

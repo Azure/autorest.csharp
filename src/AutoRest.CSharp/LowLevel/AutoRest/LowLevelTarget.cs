@@ -16,9 +16,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class LowLevelTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            var context = new BuildContext<LowLevelOutputLibrary>(codeModel, configuration, sourceInputModel);
+            var context = new BuildContext<LowLevelOutputLibrary>(codeModel, sourceInputModel);
             foreach (var client in context.Library.RestClients)
             {
                 var codeWriter = new CodeWriter();

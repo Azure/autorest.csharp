@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -203,7 +204,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
             var requestPath = operation.GetHttpPath();
-            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
             {
                 return positions.Contains(Position);
             }

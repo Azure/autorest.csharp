@@ -15,9 +15,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class DataPlaneTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, configuration, sourceInputModel);
+            BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, sourceInputModel);
             var modelWriter = new ModelWriter();
             var clientWriter = new DataPlaneClientWriter();
             var restClientWriter = new RestClientWriter();
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var client in context.Library.RestClients)
             {
                 var restCodeWriter = new CodeWriter();
-                restClientWriter.WriteClient(restCodeWriter, client, context.Configuration, client.ProtocolMethods);
+                restClientWriter.WriteClient(restCodeWriter, client, client.ProtocolMethods);
 
                 project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
             }
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            if (configuration.PublicClients && context.Library.Clients.Any())
+            if (Configuration.PublicClients && context.Library.Clients.Any())
             {
                 var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
                 var clientOptionsType = new ClientOptionsTypeProvider(context, $"{clientPrefix}ClientOptions", $"{clientPrefix}Client");
