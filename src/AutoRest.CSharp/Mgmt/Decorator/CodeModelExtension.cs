@@ -4,15 +4,8 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -61,9 +54,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static void UpdateAcronyms(this CodeModel codeModel)
         {
-            if (MgmtContext.MgmtConfiguration.RenameRules.Count == 0)
+            if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
                 return;
-            var transformer = new NameTransformer(MgmtContext.MgmtConfiguration.RenameRules);
+            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
             var wordCache = new ConcurrentDictionary<string, string>();
             // first transform all the name of schemas, properties
             UpdateAcronyms(codeModel.AllSchemas, transformer, wordCache);

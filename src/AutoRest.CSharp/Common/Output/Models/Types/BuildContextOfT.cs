@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -37,8 +36,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return library;
         }
 
-        public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel)
-            : base(codeModel, configuration, sourceInputModel)
+        public BuildContext(CodeModel codeModel, SourceInputModel? sourceInputModel)
+            : base(codeModel, sourceInputModel)
         {
         }
 

@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var operations = new Dictionary<Operation, LongRunningOperation>();
 
-            if (_context.Configuration.PublicClients)
+            if (Configuration.PublicClients)
             {
                 foreach (var operationGroup in _codeModel.OperationGroups)
                 {
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var clients = new Dictionary<OperationGroup, DataPlaneClient>();
 
-            if (_context.Configuration.PublicClients)
+            if (Configuration.PublicClients)
             {
                 foreach (var operationGroup in _codeModel.OperationGroups)
                 {
