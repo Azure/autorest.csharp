@@ -2,15 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -85,7 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 Stack<ObjectTypeProperty> heiarchyStack = new Stack<ObjectTypeProperty>();
                 heiarchyStack.Push(property);
                 BuildHeirarchy(property, heiarchyStack);
-                if (MgmtContext.IsInitialized && heiarchyStack.Count > 1)
+                if (Configuration.AzureArm && heiarchyStack.Count > 1)
                 {
                     var innerProperty = heiarchyStack.Pop();
                     var immediateParentProperty = heiarchyStack.Pop();
