@@ -13,6 +13,7 @@ using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 
@@ -170,5 +171,76 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         }
 
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
+
+        public async void RemoveOrphanedEnums(IReadOnlyList<string> keepOrphanedModels)
+        {
+            var orphanedModelsToKeep = keepOrphanedModels.Select(m => $"Models/{m}.cs").ToImmutableHashSet();
+            var compilation = await _project.GetCompilationAsync();
+            if (compilation == null)
+                return;
+            var docsToDelete = new HashSet<Document>();
+            foreach (var document in _project.Documents)
+            {
+                if (!IsGeneratedDocument(document) || orphanedModelsToKeep.Contains(document.Name))
+                {
+                    continue;
+                }
+                var tree = await document.GetSyntaxTreeAsync();
+                if (IsOrphanedEnum(compilation, document, tree!))
+                {
+                    docsToDelete.Add(document);
+                }
+            }
+            var docNamesToDelete = docsToDelete.Select(d => d.Name).ToHashSet();
+            var docIdsToDelete = _project.Documents.Where(d => IsGeneratedDocument(d) && IsOrphanedSerializationClass(d, docNamesToDelete)).Select(d => d.Id).Concat(docsToDelete.Select(d => d.Id)).ToImmutableArray();
+            _project = _project.RemoveDocuments(docIdsToDelete);
+        }
+
+        private bool IsOrphanedSerializationClass(Document document, HashSet<string> orphanedDocNames)
+        {
+            var nameSegments = document.Name.Split(".");
+            if (nameSegments.Length == 3 && nameSegments[1].Equals("Serialization"))
+            {
+                return orphanedDocNames.Contains($"{nameSegments[0]}.{nameSegments[2]}");
+            }
+            return false;
+        }
+
+        private bool IsOrphanedEnum(Compilation compilation, Document document, SyntaxTree tree)
+        {
+            var semanticModel = compilation.GetSemanticModel(tree!);
+            var root = tree!.GetRoot();
+            BaseTypeDeclarationSyntax? typeSyntax = root?.DescendantNodes().OfType<StructDeclarationSyntax>().FirstOrDefault();
+            if (typeSyntax == null)
+            {
+                typeSyntax = root?.DescendantNodes().OfType<EnumDeclarationSyntax>().FirstOrDefault();
+                if (typeSyntax == null)
+                    return false;
+            }
+            var typeSymbol = semanticModel.GetDeclaredSymbol(typeSyntax);
+            if (typeSymbol == null)
+            {
+                return false;
+            }
+            var declaringFiles = typeSymbol.DeclaringSyntaxReferences.Select(reference => reference.SyntaxTree.FilePath).ToHashSet();
+            var referencesToType = SymbolFinder.FindReferencesAsync(typeSymbol, _project.Solution).Result;
+            var refLocations = new HashSet<String>();
+            foreach (var reference in referencesToType)
+            {
+                foreach (var location in reference.Locations)
+                {
+                    if (!location.Document.Name.EndsWith($"{typeSyntax.Identifier.Value}.Serialization.cs"))
+                    {
+                        refLocations.Add(location.Document.Name);
+                    }
+                }
+            }
+            // If a model is only referenced by its declaring files and serialization file, it is orphaned.
+            if (declaringFiles.IsSupersetOf(refLocations))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
