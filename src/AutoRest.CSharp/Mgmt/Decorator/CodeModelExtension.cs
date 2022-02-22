@@ -59,15 +59,43 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        public static void UpdateAcronyms(this IEnumerable<Schema> allSchemas)
+        public static void UpdateAcronyms(this CodeModel codeModel)
         {
             if (MgmtContext.MgmtConfiguration.RenameRules.Count == 0)
                 return;
             var transformer = new NameTransformer(MgmtContext.MgmtConfiguration.RenameRules);
             var wordCache = new ConcurrentDictionary<string, string>();
+            // first transform all the name of schemas, properties
+            UpdateAcronyms(codeModel.AllSchemas, transformer, wordCache);
+            // transform all the parameter names
+            UpdateAcronyms(codeModel.OperationGroups, transformer, wordCache);
+        }
+
+        private static void UpdateAcronyms(IEnumerable<Schema> allSchemas, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
             foreach (var schema in allSchemas)
             {
                 TransformSchema(schema, transformer, wordCache);
+            }
+        }
+
+        private static void UpdateAcronyms(IEnumerable<OperationGroup> operationGroups, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            foreach (var operationGroup in operationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    TransformOperation(operation, transformer, wordCache);
+                }
+            }
+        }
+
+        private static void TransformOperation(Operation operation, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            TransformLanguage(operation.Language, transformer, wordCache);
+            foreach (var parameter in operation.Parameters)
+            {
+                TransformLanguage(parameter.Language, transformer, wordCache);
             }
         }
 
