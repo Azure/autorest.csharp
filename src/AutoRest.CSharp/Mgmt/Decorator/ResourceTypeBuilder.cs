@@ -5,13 +5,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -39,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ResourceTypeSegment CalculateResourceType(RequestPath requestPath)
         {
-            if (MgmtContext.MgmtConfiguration.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
+            if (Configuration.MgmtConfiguration.RequestPathToResourceType.TryGetValue(requestPath.SerializedPath, out var resourceType))
                 return new ResourceTypeSegment(resourceType);
 
             // we cannot directly return the new ResourceType here, the requestPath here can be a parameterized scope, which does not have a resource type

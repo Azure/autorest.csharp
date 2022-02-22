@@ -16,7 +16,7 @@ namespace MgmtRenameRules.Models
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
-        /// <param name="oSProfile"> Specifies the operating system settings for the virtual machines in the scale set. </param>
+        /// <param name="osProfile"> Specifies the operating system settings for the virtual machines in the scale set. </param>
         /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
         /// <param name="networkProfile"> Specifies properties of the network interfaces of the virtual machines in the scale set. </param>
         /// <param name="securityProfile"> Specifies the Security related profile settings for the virtual machines in the scale set. </param>
@@ -27,9 +27,9 @@ namespace MgmtRenameRules.Models
         /// <param name="evictionPolicy"> Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. &lt;br&gt;&lt;br&gt;For Azure Spot virtual machines, both &apos;Deallocate&apos; and &apos;Delete&apos; are supported and the minimum api-version is 2019-03-01. &lt;br&gt;&lt;br&gt;For Azure Spot scale sets, both &apos;Deallocate&apos; and &apos;Delete&apos; are supported and the minimum api-version is 2017-10-30-preview. </param>
         /// <param name="billingProfile"> Specifies the billing related details of a Azure Spot VMSS. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01. </param>
         /// <param name="scheduledEventsProfile"> Specifies Scheduled Event related configurations. </param>
-        internal VirtualMachineScaleSetVmProfile(VirtualMachineScaleSetOSProfile oSProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityTypes? priority, VirtualMachineEvictionPolicyTypes? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
+        internal VirtualMachineScaleSetVmProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityTypes? priority, VirtualMachineEvictionPolicyTypes? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
         {
-            OSProfile = oSProfile;
+            OSProfile = osProfile;
             StorageProfile = storageProfile;
             NetworkProfile = networkProfile;
             SecurityProfile = securityProfile;

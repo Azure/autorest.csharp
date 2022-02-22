@@ -11,9 +11,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -31,12 +29,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             AllRawOperations = allRawOperations;
             ArmCoreType = armCoreType;
-            DefaultName = MgmtContext.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
-            DefaultNamespace = MgmtContext.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
-            Description = MgmtContext.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
+            DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
+            DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
+            Description = Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
-            ChildResources = !MgmtContext.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
+            ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
         }
 
         protected override ConstructorSignature? EnsureMockingCtor()
@@ -59,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 IsExtensionParameter: true);
         }
 
-        protected virtual string VariableName => Context.Configuration.MgmtConfiguration.IsArmCore ? "this" : ArmCoreType.Name.ToVariableName();
+        protected virtual string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : ArmCoreType.Name.ToVariableName();
 
         public override CSharpType? BaseType => null;
 
@@ -86,7 +84,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
-            var extensionParamToUse = MgmtContext.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
+            var extensionParamToUse = Configuration.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
             return AllRawOperations.Select(operation =>
             {
                 var operationName = GetOperationName(operation, ResourceName);

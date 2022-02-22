@@ -24,8 +24,8 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A class representing collection of SBSubscription and their operations over its parent. </summary>
     public partial class SBSubscriptionCollection : ArmCollection, IEnumerable<SBSubscription>, IAsyncEnumerable<SBSubscription>
     {
-        private readonly ClientDiagnostics _sBSubscriptionSubscriptionsClientDiagnostics;
-        private readonly SubscriptionsRestOperations _sBSubscriptionSubscriptionsRestClient;
+        private readonly ClientDiagnostics _sbSubscriptionSubscriptionsClientDiagnostics;
+        private readonly SubscriptionsRestOperations _sbSubscriptionSubscriptionsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SBSubscriptionCollection"/> class for mocking. </summary>
         protected SBSubscriptionCollection()
@@ -37,9 +37,9 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal SBSubscriptionCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sBSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", SBSubscription.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(SBSubscription.ResourceType, out string sBSubscriptionSubscriptionsApiVersion);
-            _sBSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(_sBSubscriptionSubscriptionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sBSubscriptionSubscriptionsApiVersion);
+            _sbSubscriptionSubscriptionsClientDiagnostics = new ClientDiagnostics("MgmtSubscriptionNameParameter", SBSubscription.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(SBSubscription.ResourceType, out string sbSubscriptionSubscriptionsApiVersion);
+            _sbSubscriptionSubscriptionsRestClient = new SubscriptionsRestOperations(_sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sbSubscriptionSubscriptionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -67,11 +67,11 @@ namespace MgmtSubscriptionNameParameter
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.CreateOrUpdate");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _sBSubscriptionSubscriptionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _sbSubscriptionSubscriptionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscription>(Response.FromValue(new SBSubscription(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
@@ -100,11 +100,11 @@ namespace MgmtSubscriptionNameParameter
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.CreateOrUpdate");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _sBSubscriptionSubscriptionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken);
+                var response = _sbSubscriptionSubscriptionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, parameters, cancellationToken);
                 var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscription>(Response.FromValue(new SBSubscription(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -130,13 +130,13 @@ namespace MgmtSubscriptionNameParameter
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Get");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Get");
             scope.Start();
             try
             {
-                var response = await _sBSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken).ConfigureAwait(false);
+                var response = await _sbSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _sBSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _sbSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -159,13 +159,13 @@ namespace MgmtSubscriptionNameParameter
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Get");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Get");
             scope.Start();
             try
             {
-                var response = _sBSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken);
+                var response = _sbSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken);
                 if (response.Value == null)
-                    throw _sBSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _sbSubscriptionSubscriptionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -188,11 +188,11 @@ namespace MgmtSubscriptionNameParameter
         {
             async Task<Page<SBSubscription>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetAll");
+                using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sBSubscriptionSubscriptionsRestClient.ListByTopicAsync(Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sbSubscriptionSubscriptionsRestClient.ListByTopicAsync(Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -203,11 +203,11 @@ namespace MgmtSubscriptionNameParameter
             }
             async Task<Page<SBSubscription>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetAll");
+                using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sBSubscriptionSubscriptionsRestClient.ListByTopicNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sbSubscriptionSubscriptionsRestClient.ListByTopicNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -232,11 +232,11 @@ namespace MgmtSubscriptionNameParameter
         {
             Page<SBSubscription> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetAll");
+                using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sBSubscriptionSubscriptionsRestClient.ListByTopic(Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken);
+                    var response = _sbSubscriptionSubscriptionsRestClient.ListByTopic(Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -247,11 +247,11 @@ namespace MgmtSubscriptionNameParameter
             }
             Page<SBSubscription> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetAll");
+                using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sBSubscriptionSubscriptionsRestClient.ListByTopicNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken);
+                    var response = _sbSubscriptionSubscriptionsRestClient.ListByTopicNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new SBSubscription(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -276,7 +276,7 @@ namespace MgmtSubscriptionNameParameter
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
             scope.Start();
             try
             {
@@ -303,7 +303,7 @@ namespace MgmtSubscriptionNameParameter
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.Exists");
             scope.Start();
             try
             {
@@ -330,11 +330,11 @@ namespace MgmtSubscriptionNameParameter
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _sBSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _sbSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     return Response.FromValue<SBSubscription>(null, response.GetRawResponse());
                 return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());
@@ -359,11 +359,11 @@ namespace MgmtSubscriptionNameParameter
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
-            using var scope = _sBSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
+            using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscriptionCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _sBSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken: cancellationToken);
+                var response = _sbSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     return Response.FromValue<SBSubscription>(null, response.GetRawResponse());
                 return Response.FromValue(new SBSubscription(Client, response.Value), response.GetRawResponse());

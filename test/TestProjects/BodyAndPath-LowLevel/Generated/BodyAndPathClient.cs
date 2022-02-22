@@ -56,9 +56,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
             Argument.AssertNotNull(content, nameof(content));
@@ -83,9 +81,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
             Argument.AssertNotNull(content, nameof(content));
@@ -112,9 +108,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemNameStream"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
             Argument.AssertNotNull(content, nameof(content));
@@ -141,9 +135,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemNameStream"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
             Argument.AssertNotNull(content, nameof(content));
@@ -169,9 +161,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
             Argument.AssertNotNullOrEmpty(enumName2, nameof(enumName2));
@@ -198,9 +188,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/> or <paramref name="content"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
             Argument.AssertNotNullOrEmpty(enumName2, nameof(enumName2));
@@ -222,9 +210,7 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> List all. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
@@ -242,9 +228,7 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> List all. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetBodyAndPaths(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
@@ -262,9 +246,7 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> List all products. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
@@ -282,9 +264,7 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> List all products. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetItems(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
@@ -309,9 +289,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
             Argument.AssertNotNullOrEmpty(item2, nameof(item2));
@@ -341,9 +319,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
-#pragma warning disable AZC0002
         public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
             Argument.AssertNotNullOrEmpty(item2, nameof(item2));

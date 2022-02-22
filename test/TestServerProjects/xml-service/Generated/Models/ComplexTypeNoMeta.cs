@@ -16,10 +16,10 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ComplexTypeNoMeta. </summary>
-        /// <param name="iD"> The id of the res. </param>
-        internal ComplexTypeNoMeta(string iD)
+        /// <param name="id"> The id of the res. </param>
+        internal ComplexTypeNoMeta(string id)
         {
-            ID = iD;
+            ID = id;
         }
 
         /// <summary> The id of the res. </summary>
