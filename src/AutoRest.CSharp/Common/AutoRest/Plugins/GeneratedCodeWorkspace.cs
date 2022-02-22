@@ -172,16 +172,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
 
-        public async void RemoveOrphanedEnums(IReadOnlyList<string> keepOrphanedModels)
+        public async void RemoveOrphanedEnums(HashSet<string> orphanedDocsToKeep)
         {
-            var orphanedModelsToKeep = keepOrphanedModels.Select(m => $"Models/{m}.cs").ToImmutableHashSet();
             var compilation = await _project.GetCompilationAsync();
             if (compilation == null)
                 return;
             var docsToDelete = new HashSet<Document>();
             foreach (var document in _project.Documents)
             {
-                if (!IsGeneratedDocument(document) || orphanedModelsToKeep.Contains(document.Name))
+                if (!IsGeneratedDocument(document) || orphanedDocsToKeep.Contains(document.Name))
                 {
                     continue;
                 }
@@ -198,10 +197,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private bool IsOrphanedSerializationClass(Document document, HashSet<string> orphanedDocNames)
         {
-            var nameSegments = document.Name.Split(".");
-            if (nameSegments.Length == 3 && nameSegments[1].Equals("Serialization"))
+            if (document.Name.EndsWith(".Serialization.cs"))
             {
-                return orphanedDocNames.Contains($"{nameSegments[0]}.{nameSegments[2]}");
+                var docName = string.Join(".", document.Name.Split(".").SkipLast(2).Append("cs"));
+                return orphanedDocNames.Contains(docName);
             }
             return false;
         }
