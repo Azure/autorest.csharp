@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;

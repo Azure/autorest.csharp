@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Communication;
 
-namespace AutoRest.CSharp.AutoRest.Plugins
+namespace AutoRest.CSharp.Input
 {
     internal static class Configuration
     {

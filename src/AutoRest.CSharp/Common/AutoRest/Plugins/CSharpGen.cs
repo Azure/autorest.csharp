@@ -2,28 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.Simplification;
-using Microsoft.CodeAnalysis.Text;
-using Diagnostic = Microsoft.CodeAnalysis.Diagnostic;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {

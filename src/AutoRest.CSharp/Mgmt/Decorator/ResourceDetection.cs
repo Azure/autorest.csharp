@@ -5,9 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator

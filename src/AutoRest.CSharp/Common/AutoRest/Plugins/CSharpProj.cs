@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
-using System.Text.Json;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {

@@ -6,14 +6,11 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator

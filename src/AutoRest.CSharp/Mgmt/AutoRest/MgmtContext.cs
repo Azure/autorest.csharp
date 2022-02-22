@@ -2,9 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 

@@ -4,15 +4,8 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {

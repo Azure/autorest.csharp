@@ -3,18 +3,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
