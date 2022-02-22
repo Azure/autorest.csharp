@@ -17,9 +17,11 @@ namespace MultipleInputFiles
 {
     internal partial class MultipleInputFilesRestClient
     {
-        private Source? source;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly Source? _source;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of MultipleInputFilesRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -27,8 +29,8 @@ namespace MultipleInputFiles
         /// <param name="source"> source - server parameter. </param>
         public MultipleInputFilesRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = default)
         {
-            this.source = source ?? new Source("value1");
-            _clientDiagnostics = clientDiagnostics;
+            _source = source ?? new Source("value1");
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -39,7 +41,7 @@ namespace MultipleInputFiles
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
-            uri.AppendRaw(source.Value.ToString(), true);
+            uri.AppendRaw(_source.Value.ToString(), true);
             uri.AppendRaw(".fakeendpoint.azure.com", false);
             uri.AppendPath("/operation1", false);
             request.Uri = uri;
@@ -67,7 +69,7 @@ namespace MultipleInputFiles
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -88,7 +90,7 @@ namespace MultipleInputFiles
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -99,7 +101,7 @@ namespace MultipleInputFiles
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
-            uri.AppendRaw(source.Value.ToString(), true);
+            uri.AppendRaw(_source.Value.ToString(), true);
             uri.AppendRaw(".fakeendpoint.azure.com", false);
             uri.AppendPath("/operation2", false);
             request.Uri = uri;
@@ -127,7 +129,7 @@ namespace MultipleInputFiles
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -148,7 +150,7 @@ namespace MultipleInputFiles
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

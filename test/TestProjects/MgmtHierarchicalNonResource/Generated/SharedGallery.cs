@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,9 +28,11 @@ namespace MgmtHierarchicalNonResource
             return new ResourceIdentifier(resourceId);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SharedGalleriesRestOperations _sharedGalleriesRestClient;
+        private readonly ClientDiagnostics _sharedGalleryClientDiagnostics;
+        private readonly SharedGalleriesRestOperations _sharedGalleryRestClient;
+        private readonly ClientDiagnostics _sharedGalleryImagesClientDiagnostics;
         private readonly SharedGalleryImagesRestOperations _sharedGalleryImagesRestClient;
+        private readonly ClientDiagnostics _sharedGalleryImageVersionsClientDiagnostics;
         private readonly SharedGalleryImageVersionsRestOperations _sharedGalleryImageVersionsRestClient;
         private readonly SharedGalleryData _data;
 
@@ -41,24 +42,26 @@ namespace MgmtHierarchicalNonResource
         }
 
         /// <summary> Initializes a new instance of the <see cref = "SharedGallery"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SharedGallery(ArmClient armClient, SharedGalleryData data) : this(armClient, data.Id)
+        internal SharedGallery(ArmClient client, SharedGalleryData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
         }
 
         /// <summary> Initializes a new instance of the <see cref="SharedGallery"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SharedGallery(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SharedGallery(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(ResourceType, out string apiVersion);
-            _sharedGalleriesRestClient = new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
-            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
-            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
+            _sharedGalleryRestClient = new SharedGalleriesRestOperations(_sharedGalleryClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
+            _sharedGalleryImagesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_sharedGalleryImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _sharedGalleryImageVersionsClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
+            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_sharedGalleryImageVersionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -88,22 +91,23 @@ namespace MgmtHierarchicalNonResource
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceType), nameof(id));
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleries_Get
-        /// <summary> Get a shared gallery by subscription id or tenant id. </summary>
+        /// <summary>
+        /// Get a shared gallery by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
+        /// Operation Id: SharedGalleries_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SharedGallery>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SharedGallery.Get");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGallery.Get");
             scope.Start();
             try
             {
-                var response = await _sharedGalleriesRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw await _sharedGalleryClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -112,22 +116,23 @@ namespace MgmtHierarchicalNonResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleries_Get
-        /// <summary> Get a shared gallery by subscription id or tenant id. </summary>
+        /// <summary>
+        /// Get a shared gallery by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
+        /// Operation Id: SharedGalleries_Get
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SharedGallery> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SharedGallery.Get");
+            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGallery.Get");
             scope.Start();
             try
             {
-                var response = _sharedGalleriesRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw _sharedGalleryClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
-                return Response.FromValue(new SharedGallery(ArmClient, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -136,46 +141,11 @@ namespace MgmtHierarchicalNonResource
             }
         }
 
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<AzureLocation>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetAvailableLocations");
-            scope.Start();
-            try
-            {
-                return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<AzureLocation> GetAvailableLocations(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetAvailableLocations");
-            scope.Start();
-            try
-            {
-                return ListAvailableLocations(ResourceType, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleryImages_List
-        /// <summary> List shared gallery images by subscription id or tenant id. </summary>
+        /// <summary>
+        /// List shared gallery images by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images
+        /// Operation Id: SharedGalleryImages_List
+        /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SharedGalleryImage" /> that may take multiple service requests to iterate over. </returns>
@@ -183,7 +153,7 @@ namespace MgmtHierarchicalNonResource
         {
             async Task<Page<SharedGalleryImage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImages");
+                using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImages");
                 scope.Start();
                 try
                 {
@@ -198,7 +168,7 @@ namespace MgmtHierarchicalNonResource
             }
             async Task<Page<SharedGalleryImage>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImages");
+                using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImages");
                 scope.Start();
                 try
                 {
@@ -214,10 +184,11 @@ namespace MgmtHierarchicalNonResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleryImages_List
-        /// <summary> List shared gallery images by subscription id or tenant id. </summary>
+        /// <summary>
+        /// List shared gallery images by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images
+        /// Operation Id: SharedGalleryImages_List
+        /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SharedGalleryImage" /> that may take multiple service requests to iterate over. </returns>
@@ -225,7 +196,7 @@ namespace MgmtHierarchicalNonResource
         {
             Page<SharedGalleryImage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImages");
+                using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImages");
                 scope.Start();
                 try
                 {
@@ -240,7 +211,7 @@ namespace MgmtHierarchicalNonResource
             }
             Page<SharedGalleryImage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImages");
+                using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImages");
                 scope.Start();
                 try
                 {
@@ -256,19 +227,20 @@ namespace MgmtHierarchicalNonResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleryImages_Get
-        /// <summary> Get a shared gallery image by subscription id or tenant id. </summary>
+        /// <summary>
+        /// Get a shared gallery image by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}
+        /// Operation Id: SharedGalleryImages_Get
+        /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
         public async virtual Task<Response<SharedGalleryImage>> GetSharedGalleryImageAsync(string galleryImageName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
-            using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImage");
+            using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImage");
             scope.Start();
             try
             {
@@ -282,19 +254,20 @@ namespace MgmtHierarchicalNonResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleryImages_Get
-        /// <summary> Get a shared gallery image by subscription id or tenant id. </summary>
+        /// <summary>
+        /// Get a shared gallery image by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}
+        /// Operation Id: SharedGalleryImages_Get
+        /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
         public virtual Response<SharedGalleryImage> GetSharedGalleryImage(string galleryImageName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
-            using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImage");
+            using var scope = _sharedGalleryImagesClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImage");
             scope.Start();
             try
             {
@@ -308,14 +281,15 @@ namespace MgmtHierarchicalNonResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleryImageVersions_List
-        /// <summary> List shared gallery image versions by subscription id or tenant id. </summary>
+        /// <summary>
+        /// List shared gallery image versions by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions
+        /// Operation Id: SharedGalleryImageVersions_List
+        /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
         /// <returns> An async collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SharedGalleryImageVersion> GetSharedGalleryImageVersionsAsync(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
@@ -324,7 +298,7 @@ namespace MgmtHierarchicalNonResource
 
             async Task<Page<SharedGalleryImageVersion>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersions");
+                using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersions");
                 scope.Start();
                 try
                 {
@@ -339,7 +313,7 @@ namespace MgmtHierarchicalNonResource
             }
             async Task<Page<SharedGalleryImageVersion>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersions");
+                using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersions");
                 scope.Start();
                 try
                 {
@@ -355,14 +329,15 @@ namespace MgmtHierarchicalNonResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleryImageVersions_List
-        /// <summary> List shared gallery image versions by subscription id or tenant id. </summary>
+        /// <summary>
+        /// List shared gallery image versions by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions
+        /// Operation Id: SharedGalleryImageVersions_List
+        /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
         /// <returns> A collection of <see cref="SharedGalleryImageVersion" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SharedGalleryImageVersion> GetSharedGalleryImageVersions(string galleryImageName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
@@ -371,7 +346,7 @@ namespace MgmtHierarchicalNonResource
 
             Page<SharedGalleryImageVersion> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersions");
+                using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersions");
                 scope.Start();
                 try
                 {
@@ -386,7 +361,7 @@ namespace MgmtHierarchicalNonResource
             }
             Page<SharedGalleryImageVersion> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersions");
+                using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersions");
                 scope.Start();
                 try
                 {
@@ -402,21 +377,22 @@ namespace MgmtHierarchicalNonResource
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleryImageVersions_Get
-        /// <summary> Get a shared gallery image version by subscription id or tenant id. </summary>
+        /// <summary>
+        /// Get a shared gallery image version by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}
+        /// Operation Id: SharedGalleryImageVersions_Get
+        /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="galleryImageVersionName"> The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: &lt;MajorVersion&gt;.&lt;MinorVersion&gt;.&lt;Patch&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null. </exception>
         public async virtual Task<Response<SharedGalleryImageVersion>> GetSharedGalleryImageVersionAsync(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
             Argument.AssertNotNullOrEmpty(galleryImageVersionName, nameof(galleryImageVersionName));
 
-            using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersion");
+            using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersion");
             scope.Start();
             try
             {
@@ -430,21 +406,22 @@ namespace MgmtHierarchicalNonResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
-        /// OperationId: SharedGalleryImageVersions_Get
-        /// <summary> Get a shared gallery image version by subscription id or tenant id. </summary>
+        /// <summary>
+        /// Get a shared gallery image version by subscription id or tenant id.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}/images/{galleryImageName}/versions/{galleryImageVersionName}
+        /// Operation Id: SharedGalleryImageVersions_Get
+        /// </summary>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="galleryImageVersionName"> The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: &lt;MajorVersion&gt;.&lt;MinorVersion&gt;.&lt;Patch&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null. </exception>
         public virtual Response<SharedGalleryImageVersion> GetSharedGalleryImageVersion(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
             Argument.AssertNotNullOrEmpty(galleryImageVersionName, nameof(galleryImageVersionName));
 
-            using var scope = _clientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersion");
+            using var scope = _sharedGalleryImageVersionsClientDiagnostics.CreateScope("SharedGallery.GetSharedGalleryImageVersion");
             scope.Start();
             try
             {

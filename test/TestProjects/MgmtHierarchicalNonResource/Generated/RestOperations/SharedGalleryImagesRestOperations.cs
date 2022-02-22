@@ -19,11 +19,13 @@ namespace MgmtHierarchicalNonResource
 {
     internal partial class SharedGalleryImagesRestOperations
     {
-        private Uri endpoint;
-        private string apiVersion;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
         private readonly string _userAgent;
+        private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
+        private readonly string _apiVersion;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of SharedGalleryImagesRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -34,9 +36,9 @@ namespace MgmtHierarchicalNonResource
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public SharedGalleryImagesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
-            this.endpoint = endpoint ?? new Uri("https://management.azure.com");
-            this.apiVersion = apiVersion ?? "2020-06-01";
-            _clientDiagnostics = clientDiagnostics;
+            _endpoint = endpoint ?? new Uri("https://management.azure.com");
+            _apiVersion = apiVersion ?? "2020-06-01";
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
@@ -47,7 +49,7 @@ namespace MgmtHierarchicalNonResource
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
@@ -55,14 +57,14 @@ namespace MgmtHierarchicalNonResource
             uri.AppendPath("/sharedGalleries/", false);
             uri.AppendPath(galleryUniqueName, true);
             uri.AppendPath("/images", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (sharedTo != null)
             {
                 uri.AppendQuery("sharedTo", sharedTo.Value.ToString(), true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("UserAgentOverride", _userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -72,7 +74,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         public async Task<Response<SharedGalleryImageList>> ListAsync(string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -100,7 +102,7 @@ namespace MgmtHierarchicalNonResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -110,7 +112,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         public Response<SharedGalleryImageList> List(string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -138,7 +140,7 @@ namespace MgmtHierarchicalNonResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -148,7 +150,7 @@ namespace MgmtHierarchicalNonResource
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
@@ -157,10 +159,10 @@ namespace MgmtHierarchicalNonResource
             uri.AppendPath(galleryUniqueName, true);
             uri.AppendPath("/images/", false);
             uri.AppendPath(galleryImageName, true);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("UserAgentOverride", _userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -170,7 +172,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="galleryUniqueName"/>, or <paramref name="galleryImageName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="galleryUniqueName"/> or <paramref name="galleryImageName"/> is null. </exception>
         public async Task<Response<SharedGalleryImage>> GetAsync(string subscriptionId, string location, string galleryUniqueName, string galleryImageName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -202,7 +204,7 @@ namespace MgmtHierarchicalNonResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -212,7 +214,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="galleryImageName"> The name of the Shared Gallery Image Definition from which the Image Versions are to be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="galleryUniqueName"/>, or <paramref name="galleryImageName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/>, <paramref name="galleryUniqueName"/> or <paramref name="galleryImageName"/> is null. </exception>
         public Response<SharedGalleryImage> Get(string subscriptionId, string location, string galleryUniqueName, string galleryImageName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -244,7 +246,7 @@ namespace MgmtHierarchicalNonResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -254,11 +256,11 @@ namespace MgmtHierarchicalNonResource
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("UserAgentOverride", _userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -269,7 +271,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         public async Task<Response<SharedGalleryImageList>> ListNextPageAsync(string nextLink, string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -301,7 +303,7 @@ namespace MgmtHierarchicalNonResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -312,7 +314,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="location"/>, or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         public Response<SharedGalleryImageList> ListNextPage(string nextLink, string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -344,7 +346,7 @@ namespace MgmtHierarchicalNonResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

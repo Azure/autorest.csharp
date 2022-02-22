@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
@@ -25,8 +24,8 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of DeletedAccount and their operations over its parent. </summary>
     public partial class DeletedAccountCollection : ArmCollection, IEnumerable<DeletedAccount>, IAsyncEnumerable<DeletedAccount>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly DeletedAccountsRestOperations _deletedAccountsRestClient;
+        private readonly ClientDiagnostics _deletedAccountClientDiagnostics;
+        private readonly DeletedAccountsRestOperations _deletedAccountRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedAccountCollection"/> class for mocking. </summary>
         protected DeletedAccountCollection()
@@ -34,12 +33,13 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeletedAccountCollection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal DeletedAccountCollection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal DeletedAccountCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", DeletedAccount.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(DeletedAccount.ResourceType, out string apiVersion);
-            _deletedAccountsRestClient = new DeletedAccountsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _deletedAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", DeletedAccount.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(DeletedAccount.ResourceType, out string deletedAccountApiVersion);
+            _deletedAccountRestClient = new DeletedAccountsRestOperations(_deletedAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -51,60 +51,29 @@ namespace Azure.Management.Storage
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Subscription.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: DeletedAccounts_Get
-        /// <summary> Get properties of specified deleted account resource. </summary>
+        /// <summary>
+        /// Get properties of specified deleted account resource.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// Operation Id: DeletedAccounts_Get
+        /// </summary>
         /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
-        public virtual Response<DeletedAccount> Get(string location, string deletedAccountName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
-
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Get");
-            scope.Start();
-            try
-            {
-                var response = _deletedAccountsRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken);
-                if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: DeletedAccounts_Get
-        /// <summary> Get properties of specified deleted account resource. </summary>
-        /// <param name="location"> The location of the deleted storage account. </param>
-        /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
         public async virtual Task<Response<DeletedAccount>> GetAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Get");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
             try
             {
-                var response = await _deletedAccountsRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken).ConfigureAwait(false);
+                var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                    throw await _deletedAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -113,25 +82,29 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Get properties of specified deleted account resource.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// Operation Id: DeletedAccounts_Get
+        /// </summary>
         /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
-        public virtual Response<DeletedAccount> GetIfExists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        public virtual Response<DeletedAccount> Get(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Get");
             scope.Start();
             try
             {
-                var response = _deletedAccountsRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken);
+                var response = _deletedAccountRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<DeletedAccount>(null, response.GetRawResponse());
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                    throw _deletedAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -140,70 +113,106 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="location"> The location of the deleted storage account. </param>
-        /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
+        /// <summary>
+        /// Lists deleted accounts under the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
+        /// Operation Id: DeletedAccounts_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
-        public async virtual Task<Response<DeletedAccount>> GetIfExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="DeletedAccount" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<DeletedAccount> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
-
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
-            scope.Start();
-            try
+            async Task<Page<DeletedAccount>> FirstPageFunc(int? pageSizeHint)
             {
-                var response = await _deletedAccountsRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<DeletedAccount>(null, response.GetRawResponse());
-                return Response.FromValue(new DeletedAccount(ArmClient, response.Value), response.GetRawResponse());
+                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _deletedAccountRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
+            async Task<Page<DeletedAccount>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                scope.Failed(e);
-                throw;
+                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _deletedAccountRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="location"> The location of the deleted storage account. </param>
-        /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
+        /// <summary>
+        /// Lists deleted accounts under the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
+        /// Operation Id: DeletedAccounts_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
-        public virtual Response<bool> Exists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="DeletedAccount" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<DeletedAccount> GetAll(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
-
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
-            scope.Start();
-            try
+            Page<DeletedAccount> FirstPageFunc(int? pageSizeHint)
             {
-                var response = GetIfExists(location, deletedAccountName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
+                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _deletedAccountRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
+            Page<DeletedAccount> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                scope.Failed(e);
-                throw;
+                using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _deletedAccountRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// Operation Id: DeletedAccounts_Get
+        /// </summary>
         /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
             try
             {
@@ -217,103 +226,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: DeletedAccounts_List
-        /// <summary> Lists deleted accounts under the subscription. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// Operation Id: DeletedAccounts_Get
+        /// </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
+        /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeletedAccount" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DeletedAccount> GetAll(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public virtual Response<bool> Exists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            Page<DeletedAccount> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _deletedAccountsRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<DeletedAccount> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _deletedAccountsRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: DeletedAccounts_List
-        /// <summary> Lists deleted accounts under the subscription. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeletedAccount" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DeletedAccount> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<DeletedAccount>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _deletedAccountsRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<DeletedAccount>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _deletedAccountsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DeletedAccount(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Filters the list of <see cref="DeletedAccount" /> for this subscription represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAllAsGenericResources");
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.Exists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DeletedAccount.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as Subscription, filters, expand, top, cancellationToken);
+                var response = GetIfExists(location, deletedAccountName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -322,21 +255,60 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Filters the list of <see cref="DeletedAccount" /> for this subscription represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// Operation Id: DeletedAccounts_Get
+        /// </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
+        /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public async virtual Task<Response<DeletedAccount>> GetIfExistsAsync(string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeletedAccountCollection.GetAllAsGenericResources");
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
+
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DeletedAccount.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as Subscription, filters, expand, top, cancellationToken);
+                var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<DeletedAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
+        /// Operation Id: DeletedAccounts_Get
+        /// </summary>
+        /// <param name="location"> The location of the deleted storage account. </param>
+        /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
+        public virtual Response<DeletedAccount> GetIfExists(string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(deletedAccountName, nameof(deletedAccountName));
+
+            using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccountCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _deletedAccountRestClient.Get(Id.SubscriptionId, location, deletedAccountName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<DeletedAccount>(null, response.GetRawResponse());
+                return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

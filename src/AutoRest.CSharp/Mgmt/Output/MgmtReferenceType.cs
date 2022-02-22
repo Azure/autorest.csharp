@@ -14,12 +14,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtReferenceType : MgmtObjectType
     {
-        public MgmtReferenceType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context)
-            : base(objectSchema, context)
+        public MgmtReferenceType(ObjectSchema objectSchema)
+            : base(objectSchema)
         {
         }
 
-        public MgmtReferenceType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, string? name = default, string? nameSpace = default) : base(objectSchema, context, name, nameSpace)
+        public MgmtReferenceType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default) : base(objectSchema, name, nameSpace)
         {
         }
 

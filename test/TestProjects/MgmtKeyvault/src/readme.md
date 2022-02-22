@@ -16,8 +16,6 @@ model-namespace: false
 list-exception:
 - /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}
 - /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}
-mgmt-debug:
-  show-request-path: true
 directive:
   - from: swagger-document
     where: $.paths

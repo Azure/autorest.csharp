@@ -16,15 +16,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtRestClient : RestClient
     {
-        private BuildContext<MgmtOutputLibrary> _context;
         private MgmtRestClientBuilder _builder;
-        private Resource? _resource;
-        private bool _evaluatedResource = false;
+        private IReadOnlyList<Resource>? _resources;
 
-        public MgmtRestClient(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-            : base(operationGroup, context, operationGroup.Language.Default.Name, new MgmtRestClientBuilder(operationGroup, context))
+        public MgmtRestClient(OperationGroup operationGroup)
+            : base(operationGroup, MgmtContext.Context, operationGroup.Language.Default.Name, new MgmtRestClientBuilder(operationGroup))
         {
-            _context = context;
             _builder = (MgmtRestClientBuilder)Builder;
         }
 
@@ -32,9 +29,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             Func<string?, bool> f = delegate (string? responseBodyType)
             {
-                if (!_context.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
+                if (!MgmtContext.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
                     return false;
-                if (!operation.IsGetResourceOperation(responseBodyType, resourceData, _context))
+                if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
                     return false;
 
                 return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
@@ -42,27 +39,19 @@ namespace AutoRest.CSharp.Mgmt.Output
             return f;
         }
 
-        public Resource? Resource => _resource ??= GetResource();
+        public IReadOnlyList<Resource> Resources => _resources ??= GetResources();
 
-        private Resource? GetResource()
+        private IReadOnlyList<Resource> GetResources()
         {
-            if (_evaluatedResource)
-                return _resource;
-
-            Dictionary<string, Resource> candidates = new Dictionary<string, Resource>();
-            _evaluatedResource = true;
+            HashSet<Resource> candidates = new HashSet<Resource>();
             foreach (var operation in OperationGroup.Operations)
             {
-                var resource = MgmtExtensions.GetResourceFromResourceType(operation, _context);
-                if (resource is not null)
+                foreach (var resource in operation.GetResourceFromResourceType())
                 {
-                    candidates.TryAdd(resource.ResourceName, resource);
+                    candidates.Add(resource);
                 }
             }
-            if (candidates.Count == 1)
-                return candidates.Values.First();
-
-            return null;
+            return candidates.ToList();
         }
     }
 }

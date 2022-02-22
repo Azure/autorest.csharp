@@ -12,23 +12,21 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions
     {
-        #region TenantTest
-        /// <summary> Gets an object representing a TenantTestCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="TenantTestCollection" /> object. </returns>
-        public static TenantTestCollection GetTenantTests(this Tenant tenant)
-        {
-            return new TenantTestCollection(tenant);
-        }
-        #endregion
-
         private static TenantExtensionClient GetExtensionClient(Tenant tenant)
         {
-            return tenant.GetCachedClient((armClient) =>
+            return tenant.GetCachedClient((client) =>
             {
-                return new TenantExtensionClient(armClient, tenant.Id);
+                return new TenantExtensionClient(client, tenant.Id);
             }
             );
+        }
+
+        /// <summary> Gets a collection of TenantTests in the TenantTest. </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of TenantTests and their operations over a TenantTest. </returns>
+        public static TenantTestCollection GetTenantTests(this Tenant tenant)
+        {
+            return GetExtensionClient(tenant).GetTenantTests();
         }
     }
 }

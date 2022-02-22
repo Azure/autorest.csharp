@@ -17,7 +17,7 @@ using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         private ClientDiagnostics _customModel1sClientDiagnostics;
@@ -39,43 +39,61 @@ namespace SupersetFlattenInheritance
         private ClientDiagnostics _nonResourceModel1sClientDiagnostics;
         private NonResourceModel1SRestOperations _nonResourceModel1sRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(ResourceGroupExtensionClient).Assembly);
-
-        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
+        protected ResourceGroupExtensionClient()
         {
         }
 
-        private ClientDiagnostics CustomModel1sClientDiagnostics => _customModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        {
+        }
+
+        private ClientDiagnostics CustomModel1sClientDiagnostics => _customModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private CustomModel1SRestOperations CustomModel1sRestClient => _customModel1sRestClient ??= new CustomModel1SRestOperations(CustomModel1sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics CustomModel2sClientDiagnostics => _customModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics CustomModel2sClientDiagnostics => _customModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private CustomModel2SRestOperations CustomModel2sRestClient => _customModel2sRestClient ??= new CustomModel2SRestOperations(CustomModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics SubResourceModel1sClientDiagnostics => _subResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics SubResourceModel1sClientDiagnostics => _subResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private SubResourceModel1SRestOperations SubResourceModel1sRestClient => _subResourceModel1sRestClient ??= new SubResourceModel1SRestOperations(SubResourceModel1sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics SubResourceModel2sClientDiagnostics => _subResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics SubResourceModel2sClientDiagnostics => _subResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private SubResourceModel2SRestOperations SubResourceModel2sRestClient => _subResourceModel2sRestClient ??= new SubResourceModel2SRestOperations(SubResourceModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics WritableSubResourceModel1sClientDiagnostics => _writableSubResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics WritableSubResourceModel1sClientDiagnostics => _writableSubResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private WritableSubResourceModel1SRestOperations WritableSubResourceModel1sRestClient => _writableSubResourceModel1sRestClient ??= new WritableSubResourceModel1SRestOperations(WritableSubResourceModel1sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics WritableSubResourceModel2sClientDiagnostics => _writableSubResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics WritableSubResourceModel2sClientDiagnostics => _writableSubResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private WritableSubResourceModel2SRestOperations WritableSubResourceModel2sRestClient => _writableSubResourceModel2sRestClient ??= new WritableSubResourceModel2SRestOperations(WritableSubResourceModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics ResourceModel2sClientDiagnostics => _resourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics ResourceModel2sClientDiagnostics => _resourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private ResourceModel2SRestOperations ResourceModel2sRestClient => _resourceModel2sRestClient ??= new ResourceModel2SRestOperations(ResourceModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics TrackedResourceModel2sClientDiagnostics => _trackedResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics TrackedResourceModel2sClientDiagnostics => _trackedResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private TrackedResourceModel2SRestOperations TrackedResourceModel2sRestClient => _trackedResourceModel2sRestClient ??= new TrackedResourceModel2SRestOperations(TrackedResourceModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics NonResourceModel1sClientDiagnostics => _nonResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", _defaultRpNamespace, DiagnosticOptions);
+        private ClientDiagnostics NonResourceModel1sClientDiagnostics => _nonResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private NonResourceModel1SRestOperations NonResourceModel1sRestClient => _nonResourceModel1sRestClient ??= new NonResourceModel1SRestOperations(NonResourceModel1sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_List
+        /// <summary> Gets a collection of ResourceModel1s in the ResourceModel1. </summary>
+        /// <returns> An object representing collection of ResourceModel1s and their operations over a ResourceModel1. </returns>
+        public virtual ResourceModel1Collection GetResourceModel1s()
+        {
+            return new ResourceModel1Collection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of TrackedResourceModel1s in the TrackedResourceModel1. </summary>
+        /// <returns> An object representing collection of TrackedResourceModel1s and their operations over a TrackedResourceModel1. </returns>
+        public virtual TrackedResourceModel1Collection GetTrackedResourceModel1s()
+        {
+            return new TrackedResourceModel1Collection(Client, Id);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
+        /// Operation Id: CustomModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel1> GetCustomModel1sAsync(CancellationToken cancellationToken = default)
@@ -98,9 +116,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s
+        /// Operation Id: CustomModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel1> GetCustomModel1s(CancellationToken cancellationToken = default)
@@ -123,22 +142,15 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Put
+        /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<CustomModel1>> PutCustomModel1Async(string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel1");
             scope.Start();
             try
@@ -153,22 +165,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Put
+        /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<CustomModel1> PutCustomModel1(string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel1");
             scope.Start();
             try
@@ -183,17 +188,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Get
+        /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public async virtual Task<Response<CustomModel1>> GetCustomModel1Async(string customModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel1");
             scope.Start();
             try
@@ -208,17 +210,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel1s/{customModel1sName}
+        /// Operation Id: CustomModel1s_Get
+        /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
         public virtual Response<CustomModel1> GetCustomModel1(string customModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
-
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel1");
             scope.Start();
             try
@@ -233,9 +232,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
+        /// Operation Id: CustomModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel2> GetCustomModel2sAsync(CancellationToken cancellationToken = default)
@@ -258,9 +258,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s
+        /// Operation Id: CustomModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel2> GetCustomModel2s(CancellationToken cancellationToken = default)
@@ -283,22 +284,15 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Put
+        /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<CustomModel2>> PutCustomModel2Async(string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel2");
             scope.Start();
             try
@@ -313,22 +307,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Put
+        /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<CustomModel2> PutCustomModel2(string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel2");
             scope.Start();
             try
@@ -343,17 +330,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Get
+        /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public async virtual Task<Response<CustomModel2>> GetCustomModel2Async(string customModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel2");
             scope.Start();
             try
@@ -368,17 +352,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: CustomModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{customModel2sName}
+        /// Operation Id: CustomModel2s_Get
+        /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
         public virtual Response<CustomModel2> GetCustomModel2(string customModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
-
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel2");
             scope.Start();
             try
@@ -393,9 +374,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
+        /// Operation Id: SubResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(CancellationToken cancellationToken = default)
@@ -418,9 +400,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s
+        /// Operation Id: SubResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubResourceModel1> GetSubResourceModel1s(CancellationToken cancellationToken = default)
@@ -443,22 +426,15 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Put
+        /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel1>> PutSubResourceModel1Async(string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel1");
             scope.Start();
             try
@@ -473,22 +449,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Put
+        /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<SubResourceModel1> PutSubResourceModel1(string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel1");
             scope.Start();
             try
@@ -503,17 +472,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Get
+        /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel1>> GetSubResourceModel1Async(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel1");
             scope.Start();
             try
@@ -528,17 +494,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel1s/{subResourceModel1sName}
+        /// Operation Id: SubResourceModel1s_Get
+        /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
         public virtual Response<SubResourceModel1> GetSubResourceModel1(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
-
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel1");
             scope.Start();
             try
@@ -553,9 +516,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
+        /// Operation Id: SubResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(CancellationToken cancellationToken = default)
@@ -578,9 +542,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s
+        /// Operation Id: SubResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubResourceModel2> GetSubResourceModel2s(CancellationToken cancellationToken = default)
@@ -603,22 +568,15 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Put
+        /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel2>> PutSubResourceModel2Async(string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel2");
             scope.Start();
             try
@@ -633,22 +591,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Put
+        /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<SubResourceModel2> PutSubResourceModel2(string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel2");
             scope.Start();
             try
@@ -663,17 +614,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Get
+        /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel2>> GetSubResourceModel2Async(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel2");
             scope.Start();
             try
@@ -688,17 +636,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/subResourceModel2s/{subResourceModel2sName}
+        /// Operation Id: SubResourceModel2s_Get
+        /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
         public virtual Response<SubResourceModel2> GetSubResourceModel2(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
-
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel2");
             scope.Start();
             try
@@ -713,9 +658,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
+        /// Operation Id: WritableSubResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(CancellationToken cancellationToken = default)
@@ -738,9 +684,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s
+        /// Operation Id: WritableSubResourceModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(CancellationToken cancellationToken = default)
@@ -763,22 +710,15 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Put
+        /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel1");
             scope.Start();
             try
@@ -793,22 +733,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Put
+        /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<WritableSubResourceModel1> PutWritableSubResourceModel1(string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel1");
             scope.Start();
             try
@@ -823,17 +756,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Get
+        /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel1");
             scope.Start();
             try
@@ -848,17 +778,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel1s/{writableSubResourceModel1sName}
+        /// Operation Id: WritableSubResourceModel1s_Get
+        /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public virtual Response<WritableSubResourceModel1> GetWritableSubResourceModel1(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
-
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel1");
             scope.Start();
             try
@@ -873,9 +800,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
+        /// Operation Id: WritableSubResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(CancellationToken cancellationToken = default)
@@ -898,9 +826,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s
+        /// Operation Id: WritableSubResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(CancellationToken cancellationToken = default)
@@ -923,22 +852,15 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Put
+        /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel2");
             scope.Start();
             try
@@ -953,22 +875,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Put
+        /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<WritableSubResourceModel2> PutWritableSubResourceModel2(string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel2");
             scope.Start();
             try
@@ -983,17 +898,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Get
+        /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public async virtual Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel2");
             scope.Start();
             try
@@ -1008,17 +920,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: WritableSubResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/writableSubResourceModel2s/{writableSubResourceModel2sName}
+        /// Operation Id: WritableSubResourceModel2s_Get
+        /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public virtual Response<WritableSubResourceModel2> GetWritableSubResourceModel2(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
-
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel2");
             scope.Start();
             try
@@ -1033,9 +942,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
+        /// Operation Id: ResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceModel2> GetResourceModel2sAsync(CancellationToken cancellationToken = default)
@@ -1058,9 +968,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s
+        /// Operation Id: ResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceModel2> GetResourceModel2s(CancellationToken cancellationToken = default)
@@ -1083,22 +994,15 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<ResourceModel2>> PutResourceModel2Async(string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutResourceModel2");
             scope.Start();
             try
@@ -1113,22 +1017,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Put
+        /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<ResourceModel2> PutResourceModel2(string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutResourceModel2");
             scope.Start();
             try
@@ -1143,17 +1040,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public async virtual Task<Response<ResourceModel2>> GetResourceModel2Async(string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetResourceModel2");
             scope.Start();
             try
@@ -1168,17 +1062,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: ResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel2s/{resourceModel2sName}
+        /// Operation Id: ResourceModel2s_Get
+        /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
         public virtual Response<ResourceModel2> GetResourceModel2(string resourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
-
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetResourceModel2");
             scope.Start();
             try
@@ -1193,9 +1084,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
+        /// Operation Id: TrackedResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(CancellationToken cancellationToken = default)
@@ -1218,9 +1110,10 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s
+        /// Operation Id: TrackedResourceModel2s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(CancellationToken cancellationToken = default)
@@ -1243,22 +1136,15 @@ namespace SupersetFlattenInheritance
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Put
+        /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutTrackedResourceModel2");
             scope.Start();
             try
@@ -1273,22 +1159,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Put
+        /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<TrackedResourceModel2> PutTrackedResourceModel2(string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutTrackedResourceModel2");
             scope.Start();
             try
@@ -1303,17 +1182,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Get
+        /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public async virtual Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetTrackedResourceModel2");
             scope.Start();
             try
@@ -1328,17 +1204,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: TrackedResourceModel2s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel2s/{trackedResourceModel2sName}
+        /// Operation Id: TrackedResourceModel2s_Get
+        /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public virtual Response<TrackedResourceModel2> GetTrackedResourceModel2(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
-
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetTrackedResourceModel2");
             scope.Start();
             try
@@ -1353,22 +1226,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Put
+        /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<NonResourceModel1>> PutNonResourceModel1Async(string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutNonResourceModel1");
             scope.Start();
             try
@@ -1383,22 +1249,15 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Put
+        /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<NonResourceModel1> PutNonResourceModel1(string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutNonResourceModel1");
             scope.Start();
             try
@@ -1413,17 +1272,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Get
+        /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public async virtual Task<Response<NonResourceModel1>> GetNonResourceModel1Async(string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetNonResourceModel1");
             scope.Start();
             try
@@ -1438,17 +1294,14 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: NonResourceModel1s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/nonResourceModel1s/{nonResourceModel1sName}
+        /// Operation Id: NonResourceModel1s_Get
+        /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         public virtual Response<NonResourceModel1> GetNonResourceModel1(string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
-
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetNonResourceModel1");
             scope.Start();
             try

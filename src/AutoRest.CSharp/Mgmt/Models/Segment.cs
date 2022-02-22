@@ -9,34 +9,41 @@ using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
     /// <summary>
     /// A <see cref="Segment"/> represents a segment of a request path which could be either a <see cref="Constant"/> or a <see cref="Reference"/>
     /// </summary>
-    internal struct Segment : IEquatable<Segment>
+    internal readonly struct Segment : IEquatable<Segment>
     {
         public static readonly Segment Providers = "providers";
 
-        private ReferenceOrConstant _value;
-        private string _stringValue;
+        private readonly ReferenceOrConstant _value;
+        private readonly string _stringValue;
+        private readonly CSharpType? _expandableType;
 
-        public Segment(ReferenceOrConstant value, bool escape, bool strict = false)
+        public Segment(ReferenceOrConstant value, bool escape, bool strict = false, CSharpType? expandableType = null)
         {
             _value = value;
             _stringValue = value.IsConstant ? value.Constant.Value?.ToString() ?? "null"
                 : $"({value.Reference.Type.Name}){value.Reference.Name}";
             IsStrict = strict;
             Escape = escape;
+            _expandableType = expandableType;
         }
 
-        public Segment(string value, bool escape = true, bool strict = false)
+        /// <summary>
+        /// Creates a new instance of <see cref="Segment"/>.
+        /// </summary>
+        /// <param name="value"> The string value for the segment. </param>
+        /// <param name="escape"> Wether or not this segment is escaped. </param>
+        /// <param name="strict"> Wether or not to use strict validate for this segment. </param>
+        /// <param name="isConstant"> Whether this segment is a constant vs a reference. </param>
+        public Segment(string value, bool escape = true, bool strict = false, bool isConstant = true)
+             : this(isConstant ? new Constant(value, typeof(string)) : new Reference(value, typeof(string)), escape, strict)
         {
-            _stringValue = value;
-            _value = new Constant(value, typeof(string));
-            IsStrict = strict;
-            Escape = escape;
         }
 
         /// <summary>
@@ -62,7 +69,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsReference => !IsConstant;
 
-        public CSharpType Type => _value.Type;
+        public bool IsExpandable => _expandableType is not null;
+
+        public CSharpType Type => _expandableType ?? _value.Type;
 
         /// <summary>
         /// Returns the <see cref="Constant"/> of this segment
@@ -88,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <exception cref="InvalidOperationException">if this.IsReference is false</exception>
         public string ReferenceName => _value.Reference.Name;
 
-        private bool Equals(Segment other, bool strict)
+        internal bool Equals(Segment other, bool strict)
         {
             if (strict)
                 return ExactEquals(this, other);
@@ -103,7 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private static bool ExactEquals(Segment left, Segment right)
         {
-            return left._stringValue.Equals(right._stringValue, StringComparison.InvariantCultureIgnoreCase);
+            return left._stringValue.Equals(right._stringValue, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>

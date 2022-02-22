@@ -14,43 +14,46 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources;
 using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _zonesClientDiagnostics;
-        private ZonesRestOperations _zonesRestClient;
+        private ClientDiagnostics _zoneClientDiagnostics;
+        private ZonesRestOperations _zoneRestClient;
         private ClientDiagnostics _dnsResourceReferenceClientDiagnostics;
         private DnsResourceReferenceRestOperations _dnsResourceReferenceRestClient;
 
-        private static string _defaultRpNamespace = ClientDiagnostics.GetResourceProviderNamespace(typeof(SubscriptionExtensionClient).Assembly);
-
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
+        protected SubscriptionExtensionClient()
         {
         }
 
-        private ClientDiagnostics ZonesClientDiagnostics => _zonesClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
-        private ZonesRestOperations ZonesRestClient => _zonesRestClient ??= new ZonesRestOperations(ZonesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Zone.ResourceType));
-        private ClientDiagnostics DnsResourceReferenceClientDiagnostics => _dnsResourceReferenceClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", _defaultRpNamespace, DiagnosticOptions);
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        internal SubscriptionExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        {
+        }
+
+        private ClientDiagnostics ZoneClientDiagnostics => _zoneClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
+        private ZonesRestOperations ZoneRestClient => _zoneRestClient ??= new ZonesRestOperations(ZoneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Zone.ResourceType));
+        private ClientDiagnostics DnsResourceReferenceClientDiagnostics => _dnsResourceReferenceClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private DnsResourceReferenceRestOperations DnsResourceReferenceRestClient => _dnsResourceReferenceRestClient ??= new DnsResourceReferenceRestOperations(DnsResourceReferenceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Zones_List
-        /// <summary> Lists the DNS zones in all resource groups in a subscription. </summary>
+        /// <summary>
+        /// Lists the DNS zones in all resource groups in a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
+        /// Operation Id: Zones_List
+        /// </summary>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
@@ -58,12 +61,12 @@ namespace MgmtExpandResourceTypes
         {
             async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = await ZonesRestClient.ListAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await ZoneRestClient.ListAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -73,12 +76,12 @@ namespace MgmtExpandResourceTypes
             }
             async Task<Page<Zone>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = await ZonesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await ZoneRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -89,10 +92,11 @@ namespace MgmtExpandResourceTypes
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Zones_List
-        /// <summary> Lists the DNS zones in all resource groups in a subscription. </summary>
+        /// <summary>
+        /// Lists the DNS zones in all resource groups in a subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones
+        /// Operation Id: Zones_List
+        /// </summary>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
@@ -100,12 +104,12 @@ namespace MgmtExpandResourceTypes
         {
             Page<Zone> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = ZonesRestClient.List(Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = ZoneRestClient.List(Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -115,12 +119,12 @@ namespace MgmtExpandResourceTypes
             }
             Page<Zone> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = ZonesRestClient.ListNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = ZoneRestClient.ListNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -131,46 +135,15 @@ namespace MgmtExpandResourceTypes
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of Zones for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetZonesAsGenericResourcesAsync(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(Zone.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContextAsync(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of Zones for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetZonesAsGenericResources(string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            ResourceFilterCollection filters = new(Zone.ResourceType);
-            filters.SubstringFilter = filter;
-            return ResourceListOperations.GetAtContext(ArmClient.GetSubscription(Id), filters, expand, top, cancellationToken);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: DnsResourceReference_GetByTargetResources
-        /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
+        /// <summary>
+        /// Returns the DNS records specified by the referencing targetResourceIds.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
+        /// Operation Id: DnsResourceReference_GetByTargetResources
+        /// </summary>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetByTargetResourcesDnsResourceReference");
             scope.Start();
             try
@@ -185,20 +158,15 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: DnsResourceReference_GetByTargetResources
-        /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
+        /// <summary>
+        /// Returns the DNS records specified by the referencing targetResourceIds.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Network/getDnsResourceReference
+        /// Operation Id: DnsResourceReference_GetByTargetResources
+        /// </summary>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetByTargetResourcesDnsResourceReference");
             scope.Start();
             try

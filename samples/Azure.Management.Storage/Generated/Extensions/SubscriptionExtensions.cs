@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using Azure;
+using Azure.Core;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Resources;
 
@@ -16,118 +17,108 @@ namespace Azure.Management.Storage
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region DeletedAccount
-        /// <summary> Gets an object representing a DeletedAccountCollection along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DeletedAccountCollection" /> object. </returns>
-        public static DeletedAccountCollection GetDeletedAccounts(this Subscription subscription)
-        {
-            return new DeletedAccountCollection(subscription);
-        }
-        #endregion
-
         private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
         {
-            return subscription.GetCachedClient((armClient) =>
+            return subscription.GetCachedClient((client) =>
             {
-                return new SubscriptionExtensionClient(armClient, subscription.Id);
+                return new SubscriptionExtensionClient(client, subscription.Id);
             }
             );
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Skus_List
+        /// <summary> Gets a collection of DeletedAccounts in the DeletedAccount. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeletedAccounts and their operations over a DeletedAccount. </returns>
+        public static DeletedAccountCollection GetDeletedAccounts(this Subscription subscription)
+        {
+            return GetExtensionClient(subscription).GetDeletedAccounts();
+        }
+
+        /// <summary>
+        /// Lists the available SKUs supported by Microsoft.Storage for given subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
+        /// Operation Id: Skus_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SkuInformation> GetSkusAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetSkusAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Skus_List
+        /// <summary>
+        /// Lists the available SKUs supported by Microsoft.Storage for given subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/skus
+        /// Operation Id: Skus_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SkuInformation> GetSkus(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetSkus(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: StorageAccounts_List
+        /// <summary>
+        /// Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+        /// Operation Id: StorageAccounts_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<StorageAccount> GetStorageAccountsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetStorageAccountsAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: StorageAccounts_List
+        /// <summary>
+        /// Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts
+        /// Operation Id: StorageAccounts_List
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<StorageAccount> GetStorageAccounts(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetStorageAccounts(cancellationToken);
         }
 
-        /// <summary> Filters the list of StorageAccounts for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResource> GetStorageAccountsAsGenericResourcesAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetStorageAccountsAsGenericResourcesAsync(filter, expand, top, cancellationToken);
-        }
-
-        /// <summary> Filters the list of StorageAccounts for a <see cref="Subscription" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="filter"> The string to filter the list. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResource> GetStorageAccountsAsGenericResources(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscription).GetStorageAccountsAsGenericResources(filter, expand, top, cancellationToken);
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Usages_ListByLocation
+        /// <summary>
+        /// Gets the current usage count and the limit for the resources of the location under the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
+        /// Operation Id: Usages_ListByLocation
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Usage> GetUsagesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+
             return GetExtensionClient(subscription).GetUsagesByLocationAsync(location, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Usages_ListByLocation
+        /// <summary>
+        /// Gets the current usage count and the limit for the resources of the location under the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/usages
+        /// Operation Id: Usages_ListByLocation
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<Usage> GetUsagesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+
             return GetExtensionClient(subscription).GetUsagesByLocation(location, cancellationToken);
         }
     }

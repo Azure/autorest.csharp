@@ -286,8 +286,8 @@ namespace AutoRest.TestServer.Tests
             var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetEmptyWrappedListsAsync();
             var value = result.Value;
 
-            CollectionAssert.AreEqual(new string[] {}, value.BadApples);
-            CollectionAssert.AreEqual(new string[] {}, value.GoodApples);
+            CollectionAssert.AreEqual(Enumerable.Empty<string>(), value.BadApples);
+            CollectionAssert.AreEqual(Enumerable.Empty<string>(), value.GoodApples);
         });
 
         [Test]

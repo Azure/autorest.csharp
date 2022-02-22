@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
@@ -48,6 +49,7 @@ namespace Azure.Management.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<EncryptionScopeSource> source = default;
             Optional<EncryptionScopeState> state = default;
             Optional<DateTimeOffset> creationTime = default;
@@ -69,6 +71,11 @@ namespace Azure.Management.Storage
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -144,7 +151,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new EncryptionScopeData(id, name, type, Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value, Optional.ToNullable(requireInfrastructureEncryption));
+            return new EncryptionScopeData(id, name, type, systemData, Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value, Optional.ToNullable(requireInfrastructureEncryption));
         }
     }
 }

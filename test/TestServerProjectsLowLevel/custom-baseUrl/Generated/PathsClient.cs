@@ -19,8 +19,10 @@ namespace custom_baseUrl_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _host;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -41,7 +43,7 @@ namespace custom_baseUrl_LowLevel
             Argument.AssertNotNull(host, nameof(host));
             options ??= new PathsClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _host = host;
@@ -60,18 +62,16 @@ namespace custom_baseUrl_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(accountName, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -93,18 +93,16 @@ namespace custom_baseUrl_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(accountName, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

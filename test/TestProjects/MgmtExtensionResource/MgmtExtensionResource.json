@@ -34,6 +34,109 @@
         }
     },
     "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/CheckDnsNameAvailability": {
+            "get": {
+                "operationId": "CheckDnsNameAvailability",
+                "description": "Checks whether a domain name in the cloudapp.azure.com zone is available for use.",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The location of the domain name."
+                    },
+                    {
+                        "name": "domainNameLabel",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": "The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. Returns whether the DNS name is available.",
+                        "schema": {
+                            "$ref": "#/definitions/DnsNameAvailabilityResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default": {
+            "get": {
+                "tags": [
+                    "SubSingletons"
+                ],
+                "operationId": "SubSingletons_Get",
+                "summary": "Singleton that belongs to a subscription.",
+                "description": "Singleton that belongs to a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The singleton object",
+                        "schema": {
+                            "$ref": "#/definitions/SubSingleton"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Singleton/subSingletons/default/execute": {
+            "post": {
+                "tags": [
+                    "SubSingletons"
+                ],
+                "operationId": "SubSingletons_Execute",
+                "summary": "Singleton that belongs to a subscription.",
+                "description": "Singleton that belongs to a subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.OrphanedPost/validateSomething": {
             "post": {
                 "tags": [
@@ -705,6 +808,39 @@
                 }
             },
             "description": "Validate something options."
+        },
+        "SubSingleton": {
+            "properties": {
+                "something": {
+                    "type": "string",
+                    "description": "The something."
+                },
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The ID of the policy definition."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The name of the policy definition."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The type of the resource (Microsoft.Authorization/policyDefinitions)."
+                }
+            },
+            "description": "SubSingleton object."
+        },
+        "DnsNameAvailabilityResult": {
+            "properties": {
+                "available": {
+                    "type": "boolean",
+                    "description": "Domain availability (True/False)."
+                }
+            },
+            "description": "Response for the CheckDnsNameAvailability API service call."
         }
     },
     "parameters": {

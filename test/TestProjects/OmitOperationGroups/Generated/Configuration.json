@@ -12,8 +12,5 @@
   "skip-csproj-packagereference": true,
   "OperationGroupsToOmit": [
     "Model1s"
-  ],
-  "MgmtDebug": {
-    "ShowRequestPath": true
-  }
+  ]
 }

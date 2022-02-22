@@ -22,8 +22,10 @@ namespace paging_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -44,7 +46,7 @@ namespace paging_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new PagingClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -61,11 +63,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetNoItemNamePages");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetNoItemNamePages");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -73,7 +73,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetNoItemNamePagesRequest(context)
                         : CreateGetNoItemNamePagesNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -91,11 +91,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetNoItemNamePages(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetNoItemNamePages");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetNoItemNamePages");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -103,7 +101,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetNoItemNamePagesRequest(context)
                         : CreateGetNoItemNamePagesNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -128,15 +126,13 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 using var message = CreateGetNullNextLinkNamePagesRequest(context);
-                var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", null, cancellationToken).ConfigureAwait(false);
+                var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", null, cancellationToken).ConfigureAwait(false);
                 yield return page;
             }
         }
@@ -158,15 +154,13 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetNullNextLinkNamePages");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 using var message = CreateGetNullNextLinkNamePagesRequest(context);
-                var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", null);
+                var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", null);
                 yield return page;
             }
         }
@@ -188,11 +182,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetSinglePages");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetSinglePages");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -200,7 +192,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetSinglePagesRequest(context)
                         : CreateGetSinglePagesNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -225,11 +217,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetSinglePages(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetSinglePages");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetSinglePages");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -237,7 +227,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetSinglePagesRequest(context)
                         : CreateGetSinglePagesNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -255,11 +245,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.FirstResponseEmpty");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.FirstResponseEmpty");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -267,7 +255,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateFirstResponseEmptyRequest(context)
                         : CreateFirstResponseEmptyNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -285,11 +273,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> FirstResponseEmpty(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.FirstResponseEmpty");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.FirstResponseEmpty");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -297,7 +283,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateFirstResponseEmptyRequest(context)
                         : CreateFirstResponseEmptyNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "value", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -325,11 +311,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePages");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePages");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -337,7 +321,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context)
                         : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -365,11 +349,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePages");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePages");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -377,7 +359,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context)
                         : CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -403,11 +385,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetWithQueryParams");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetWithQueryParams");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -415,7 +395,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetWithQueryParamsRequest(requiredQueryParameter, context)
                         : CreateNextOperationWithQueryParamsRequest(context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -441,11 +421,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetWithQueryParams");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetWithQueryParams");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -453,7 +431,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetWithQueryParamsRequest(requiredQueryParameter, context)
                         : CreateNextOperationWithQueryParamsRequest(context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -478,15 +456,13 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextOperationWithQueryParams");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextOperationWithQueryParams");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 using var message = CreateNextOperationWithQueryParamsRequest(context);
-                var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", null, cancellationToken).ConfigureAwait(false);
+                var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", null, cancellationToken).ConfigureAwait(false);
                 yield return page;
             }
         }
@@ -508,15 +484,13 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextOperationWithQueryParams");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextOperationWithQueryParams");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 using var message = CreateNextOperationWithQueryParamsRequest(context);
-                var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", null);
+                var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", null);
                 yield return page;
             }
         }
@@ -541,11 +515,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetOdataMultiplePages");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetOdataMultiplePages");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -553,7 +525,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context)
                         : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -581,11 +553,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetOdataMultiplePages");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetOdataMultiplePages");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -593,7 +563,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context)
                         : CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -622,11 +592,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -634,7 +602,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context)
                         : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -663,11 +631,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesWithOffset");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -675,7 +641,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context)
                         : CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -700,11 +666,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -712,7 +676,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesRetryFirstRequest(context)
                         : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -737,11 +701,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesRetryFirst");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -749,7 +711,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesRetryFirstRequest(context)
                         : CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -774,11 +736,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -786,7 +746,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesRetrySecondRequest(context)
                         : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -811,11 +771,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesRetrySecond");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -823,7 +781,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesRetrySecondRequest(context)
                         : CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -848,11 +806,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetSinglePagesFailure");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetSinglePagesFailure");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -860,7 +816,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetSinglePagesFailureRequest(context)
                         : CreateGetSinglePagesFailureNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -885,11 +841,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetSinglePagesFailure");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetSinglePagesFailure");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -897,7 +851,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetSinglePagesFailureRequest(context)
                         : CreateGetSinglePagesFailureNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -922,11 +876,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFailure");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFailure");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -934,7 +886,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesFailureRequest(context)
                         : CreateGetMultiplePagesFailureNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -959,11 +911,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFailure");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFailure");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -971,7 +921,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesFailureRequest(context)
                         : CreateGetMultiplePagesFailureNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -996,11 +946,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1008,7 +956,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesFailureUriRequest(context)
                         : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1033,11 +981,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFailureUri");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1045,7 +991,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesFailureUriRequest(context)
                         : CreateGetMultiplePagesFailureUriNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1057,6 +1003,7 @@ namespace paging_LowLevel
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1073,14 +1020,12 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1088,7 +1033,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesFragmentNextLinkRequest(tenant, apiVersion, context)
                         : CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1100,6 +1045,7 @@ namespace paging_LowLevel
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1116,14 +1062,12 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string tenant, string apiVersion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentNextLink");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1131,7 +1075,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesFragmentNextLinkRequest(tenant, apiVersion, context)
                         : CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1143,6 +1087,7 @@ namespace paging_LowLevel
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1159,14 +1104,12 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1174,7 +1117,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(tenant, apiVersion, context)
                         : CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1186,6 +1129,7 @@ namespace paging_LowLevel
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenant"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1202,14 +1146,12 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string tenant, string apiVersion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1217,7 +1159,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(tenant, apiVersion, context)
                         : CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1229,7 +1171,8 @@ namespace paging_LowLevel
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1246,21 +1189,19 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> NextFragmentAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextFragment");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextFragment");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
                 {
                     var message = CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1272,7 +1213,8 @@ namespace paging_LowLevel
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1289,21 +1231,19 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> NextFragment(string tenant, string nextLink, string apiVersion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextFragment");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextFragment");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
                 {
                     var message = CreateNextFragmentRequest(tenant, nextLink, apiVersion, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1315,7 +1255,8 @@ namespace paging_LowLevel
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1332,21 +1273,19 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.NextFragmentWithGrouping");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.NextFragmentWithGrouping");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
                 {
                     var message = CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "odata.nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1358,7 +1297,8 @@ namespace paging_LowLevel
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenant"/>, <paramref name="nextLink"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1375,21 +1315,19 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> NextFragmentWithGrouping(string tenant, string nextLink, string apiVersion, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(tenant, nameof(tenant));
+            Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.NextFragmentWithGrouping");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.NextFragmentWithGrouping");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
                 {
                     var message = CreateNextFragmentWithGroupingRequest(tenant, nextLink, apiVersion, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "odata.nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "odata.nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1414,11 +1352,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -1426,7 +1362,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context)
                         : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1451,11 +1387,9 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PagingClient.GetPagingModelWithItemNameWithXMSClientName");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -1463,7 +1397,7 @@ namespace paging_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context)
                         : CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -1492,16 +1426,14 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(bool waitForCompletion, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
+            using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitForCompletion, CreateEnumerableAsync).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitForCompletion, CreateEnumerableAsync).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1521,7 +1453,7 @@ namespace paging_LowLevel
                 while (!string.IsNullOrEmpty(nextLink))
                 {
                     var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
-                    page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 }
@@ -1550,16 +1482,14 @@ namespace paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(bool waitForCompletion, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
+            using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitForCompletion, CreateEnumerable);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "PagingClient.GetMultiplePagesLRO", OperationFinalStateVia.Location, context, waitForCompletion, CreateEnumerable);
             }
             catch (Exception e)
             {
@@ -1579,7 +1509,7 @@ namespace paging_LowLevel
                 while (!string.IsNullOrEmpty(nextLink))
                 {
                     var message = CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
-                    page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 }

@@ -17,9 +17,11 @@ namespace body_formdata_urlencoded
 {
     internal partial class FormdataurlencodedRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of FormdataurlencodedRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -27,8 +29,8 @@ namespace body_formdata_urlencoded
         /// <param name="endpoint"> server parameter. </param>
         public FormdataurlencodedRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -38,7 +40,7 @@ namespace body_formdata_urlencoded
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/formsdataurlencoded/pet/add/", false);
             uri.AppendPath(petId, true);
             request.Uri = uri;
@@ -77,7 +79,7 @@ namespace body_formdata_urlencoded
                 case 405:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -99,7 +101,7 @@ namespace body_formdata_urlencoded
                 case 405:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -109,7 +111,7 @@ namespace body_formdata_urlencoded
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/formsdataurlencoded/partialConstantBody", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
@@ -145,7 +147,7 @@ namespace body_formdata_urlencoded
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -173,7 +175,7 @@ namespace body_formdata_urlencoded
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

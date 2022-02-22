@@ -14,10 +14,9 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Mgmt.Models;
-using Azure.ResourceManager.Resources;
 using System.Diagnostics.CodeAnalysis;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -26,22 +25,24 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ResourceCollectionTestWriter : MgmtBaseTestWriter
     {
-        private ResourceCollection _resourceCollection;
-
-        protected CSharpType TypeOfCollection => _resourceCollection.Type;
+        private MgmtClientOperation? _getAllOperation;
+        protected CSharpType TypeOfCollection => This.Type;
         protected string TypeNameOfCollection => TypeOfCollection.Name;
 
         protected string TestNamespace => TypeOfCollection.Namespace + ".Tests.Mock";
-        protected override string TypeNameOfThis => TypeOfCollection.Name + "MockTests";
+        private string TypeNameOfThis => This.Type.Name + "MockTests";
 
         protected string TestBaseName => $"MockTestBase";
+
+        private ResourceCollection This { get; }
 
         public List<Tuple<Parameter, MgmtClientOperation?>> collectionInitiateParameters = new List<Tuple<Parameter, MgmtClientOperation?>>();
         public Dictionary<Tuple<Parameter, MgmtClientOperation?>, string> collectionInitiateParametersMap = new Dictionary<Tuple<Parameter, MgmtClientOperation?>, string>();
 
-        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection, BuildContext<MgmtOutputLibrary> context): base(writer, resourceCollection, context)
+        public ResourceCollectionTestWriter(CodeWriter writer, ResourceCollection resourceCollection) : base(writer, resourceCollection)
         {
-            _resourceCollection = resourceCollection;
+            This = resourceCollection;
+            _getAllOperation = resourceCollection.GetAllOperation;
         }
 
         public void WriteCollectionTest()
@@ -50,7 +51,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             using (_writer.Namespace(TestNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"Test for {_resourceCollection.ResourceName}");
+                _writer.WriteXmlDocumentationSummary($"Test for {This.ResourceName}");
                 _writer.Append($"public partial class {TypeNameOfThis:D} : ");
                 _writer.Line($"{TestBaseName}");
                 using (_writer.Scope())
@@ -58,7 +59,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     WriteTesterCtors();
                     WriteCreateOrUpdateTest();
                     WriteGetTest();
-                    foreach (var clientOperation in _resourceCollection.ClientOperations)
+                    foreach (var clientOperation in This.ClientOperations)
                     {
                         WriteMethodTest(clientOperation, true, false);
                     }
@@ -66,17 +67,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        protected override void WriteUsings(CodeWriter writer)
+        private void WriteUsings(CodeWriter writer)
         {
-            base.WriteUsings(writer);
             writer.UseNamespace("System");
             writer.UseNamespace("System.Threading.Tasks");
             writer.UseNamespace("System.Net");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
-            writer.UseNamespace("Azure.ResourceManager.Resources");
-            writer.UseNamespace("Azure.ResourceManager.Resources.Models");
-            writer.UseNamespace($"{Context.DefaultNamespace}.Models");
         }
 
         protected void WriteTesterCtors()
@@ -97,99 +94,68 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected void WriteCreateOrUpdateTest()
         {
-            if (_resourceCollection.CreateOperation != null)
+            if (This.CreateOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(_resourceCollection.CreateOperation, true, true);
+                WriteMethodTest(This.CreateOperation, true, true);
             }
         }
 
         protected void WriteGetTest()
         {
-            if (_resourceCollection.GetOperation != null)
+            if (This.GetOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(_resourceCollection.GetOperation, true, false);
+                WriteMethodTest(This.GetOperation, true, false);
             }
         }
 
-        public void WriteGetCollection(MgmtClientOperation clientOperation, ExampleModel exampleModel, bool isAsync)
+        internal static string GetAsyncSuffix(bool isAsync)
         {
-            _writer.Append($"var collection = {GetAwait(isAsync)} Get{TypeNameOfCollection}{GetAsyncSuffix(isAsync)}(");
-            var methodParameters = GenExampleInstanceMethodParameters(clientOperation);
-            var usedParameters = new HashSet<ExampleParameter>();
-            var allMethodParameters = new HashSet<string>();
-            foreach (var methodParameter in methodParameters)
-            {
-                allMethodParameters.Add(methodParameter.Name);
-            }
-            foreach (var (parameter, op) in collectionInitiateParameters)
-            {
-                var found = false;
-                foreach (var exampleMethodParameter in exampleModel.MethodParameters)
-                {
-                    if (exampleMethodParameter.Parameter.CSharpName()==parameter.Name)
-                    {
-                        WriteExampleValue(_writer, parameter.Type, exampleMethodParameter.ExampleValue, parameter.Name);
-                        _writer.Append($", ");
-                        usedParameters.Add(exampleMethodParameter);
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found)
-                {
-                    foreach (var exampleMethodParameter in exampleModel.MethodParameters)
-                    {
-                        if (!usedParameters.Contains(exampleMethodParameter) && !allMethodParameters.Contains(exampleMethodParameter.Parameter.CSharpName()))
-                        {
-                            WriteExampleValue(_writer, parameter.Type, exampleMethodParameter.ExampleValue, parameter.Name);
-                            _writer.Append($", ");
-                            usedParameters.Add(exampleMethodParameter);
-                            break;
-                        }
-                    }
-                }
-            }
-            _writer.RemoveTrailingComma();
-            _writer.Line($");");
+            return isAsync ? "Async" : string.Empty;
         }
 
-        public void WriteGetCollection(MgmtTypeProvider parentTp, string requestPath, ExampleModel exampleModel)
+        public void WriteGetCollection(MgmtTypeProvider parentTp, string requestPath, ExampleModel exampleModel, List<KeyValuePair<string, FormattableString>> parameterValues)
         {
             var realRequestPath = ParseRequestPath(parentTp, requestPath, exampleModel)!;
             switch (parentTp)
             {
                 case Resource parentResource:
                     {
-                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
+                        var idVar = new CodeWriterDeclaration($"{parentResource.Type.Name.FirstCharToLowerCase()}Id");
+                        _writer.Line($"var {idVar:D} = {parentResource.Type}.CreateResourceIdentifier({ComposeResourceIdentifierParams(parentResource.RequestPaths.First(), exampleModel)});");
+                        _writer.Append($"var collection = GetArmClient().Get{parentResource.Type.Name}({idVar})");
                         break;
                     }
-                case Mgmt.Output.ResourceGroupExtensions:
+                case MgmtExtensions extension:
                     {
-                        _writer.Append($"var collection = GetArmClient().GetResourceGroup(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
-                        break;
-                    }
-                case Mgmt.Output.SubscriptionExtensions:
-                    {
-                        _writer.Append($"var collection = GetArmClient().GetSubscription(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
-                        break;
-                    }
-                case Mgmt.Output.TenantExtensions:
-                    {
-                        _writer.Append($"var collection = GetArmClient().GetTenants().GetAll().GetEnumerator().Current");
+                        _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({MgmtBaseTestWriter.FormatResourceId(realRequestPath):L}))");
                         break;
                     }
                 default:
                     throw new Exception($"Unknown parent {parentTp}");
             }
-            _writer.Line($".Get{_resourceCollection.Resource.Type.Name.ToPlural()}();");
+            List<FormattableString> extraParamNames = new List<FormattableString>();
+            var paramsMap = parameterValues.ToDictionary(pv => pv.Key, pv => pv);
+            foreach (var extraParam in This.ExtraConstructorParameters)
+            {
+                if (paramsMap.ContainsKey(extraParam.Name))
+                {
+                    extraParamNames.Add(paramsMap[extraParam.Name].Value);
+                    parameterValues.Remove(paramsMap[extraParam.Name]);
+                }
+                else
+                {
+                    extraParamNames.Add($"default");
+                }
+            }
+            _writer.Line($".{WriteMethodInvocation($"Get{This.Resource.Type.Name.ResourceNameToPlural()}", extraParamNames)};");
         }
 
         public MgmtTypeProvider? FindParentByRequestPath(string requestPath, ExampleModel exampleModel)
         {
             var mgmtParentResources = new List<MgmtTypeProvider>();
-            foreach (var parent in _resourceCollection.Resource.Parent(Context))
+            foreach (var parent in This.Resource.Parent())
             {
                 if (parent is MgmtExtensions mgmtParent)
                 {
@@ -208,15 +174,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         return -1;
                     }
-                    else if (x1 is Mgmt.Output.ResourceGroupExtensions)
-                    {
-                        return -1;
-                    }
-                    else if (x1 is Mgmt.Output.SubscriptionExtensions)
-                    {
-                        return -1;
-                    }
-                    else if (x1 is Mgmt.Output.TenantExtensions)
+                    else if (x1 is MgmtExtensions)
                     {
                         return -1;
                     }
@@ -226,28 +184,31 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach (var tp in mgmtParentResources)
             {
-                if (tp is Resource rt && ParseRequestPath(rt, requestPath, exampleModel) is not null)
+                if (tp is Resource rt && rt.RequestPaths is not null && rt.RequestPaths.Count() != 0)
                 {
                     return tp;
                 }
                 var segments = requestPath.Split('/');
-                if (tp is Mgmt.Output.ResourceGroupExtensions)
+                if (tp is MgmtExtensions extension)
                 {
-                    if (segments.Length > 5 && segments[3].ToLower() == "resourcegroups")
+                    if (extension.ArmCoreType == typeof(ResourceGroup))
+                    {
+                        if (segments.Length > 5 && segments[3].ToLower() == "resourcegroups")
+                        {
+                            return tp;
+                        }
+                    }
+                    if (extension.ArmCoreType == typeof(Subscription))
+                    {
+                        if (segments.Length > 3 && segments[1].ToLower() == "subscriptions")
+                        {
+                            return tp;
+                        }
+                    }
+                    if (extension.ArmCoreType == typeof(Tenant))
                     {
                         return tp;
                     }
-                }
-                if (tp is Mgmt.Output.SubscriptionExtensions)
-                {
-                    if (segments.Length > 3 && segments[1].ToLower() == "subscriptions")
-                    {
-                        return tp;
-                    }
-                }
-                if (tp is Mgmt.Output.TenantExtensions)
-                {
-                    return tp;
                 }
             }
             return null;
@@ -258,14 +219,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;
 
-            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             int exampleIdx = 0;
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
-                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(Context, operation);
+                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
                 if (exampleGroup is null || exampleGroup.Examples.Count() == 0)
                     return;
-                // var testMethodParameters = GenExampleInstanceMethodParameters(clientOperation);
                 var testMethodName = CreateMethodName(methodName, async);
 
                 foreach (var exampleModel in (exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>()))
@@ -278,36 +237,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
                     WriteTestDecorator();
                     var testCaseSuffix = exampleIdx > 0 ? (exampleIdx + 1).ToString() : String.Empty;
-                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {testMethodName}{testCaseSuffix}()");
+                    _writer.Append($"public {GetAsyncKeyword(async)} {MgmtBaseTestWriter.GetTaskOrVoid(async)} {methodName}{testCaseSuffix}()");
                     using (_writer.Scope())
                     {
                         _writer.Line($"// Example: {exampleModel.Name}");
-                        clearVariableNames();
-                        // WriteGetCollection(clientOperation, exampleModel, async);
-                        WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel);
-
-                        List<string> paramNames = WriteOperationParameters(methodParameters, new List<Parameter>(), exampleModel);
+                        List<KeyValuePair<string, FormattableString>> parameterValues = WriteOperationParameters(clientOperation.MethodParameters, exampleModel);
                         _writer.Line();
-                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", paramNames);
+                        WriteGetCollection(parentTp, operation.RequestPath.SerializedPath, exampleModel, parameterValues);
+                        WriteMethodTestInvocation(async, clientOperation, isLroOperation, $"collection.{testMethodName}", parameterValues.Select(pv => pv.Value));
                     }
                     _writer.Line();
                     exampleIdx++;
                 }
             }
-        }
-
-        protected override Resource? WrapResourceDataType(CSharpType? type, MgmtRestOperation operation)
-        {
-            if (!IsResourceDataType(type, operation, out _))
-                return null;
-
-            return _resourceCollection.Resource;
-        }
-
-        protected override bool IsResourceDataType(CSharpType? type, MgmtRestOperation operation, [MaybeNullWhen(false)] out ResourceData data)
-        {
-            data = _resourceCollection.ResourceData;
-            return data.Type.Equals(type);
         }
 
         public string GenExampleInstanceMethodName(string methodName, bool isAsync)
@@ -317,9 +259,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public IEnumerable<Parameter> GenExampleInstanceMethodParameters(MgmtClientOperation clientOperation)
         {
-            BuildParameters(clientOperation, out var operationMappings, out var parameterMappings, out var methodParameters);
             // var passThruParameters = parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter);
-            return methodParameters.Where(p => p.ValidateNotNull && p.Type.IsFrameworkType && (p.Type.FrameworkType.IsPrimitive || p.Type.FrameworkType == typeof(String))); // define all primitive parameters as method parameter
+            return clientOperation.MethodParameters.Where(p => p.Validate && p.Type.IsFrameworkType && (p.Type.FrameworkType.IsPrimitive || p.Type.FrameworkType == typeof(String))); // define all primitive parameters as method parameter
         }
     }
 }

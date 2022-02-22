@@ -6,12 +6,11 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
 using MgmtKeyvault.Models;
@@ -28,10 +27,9 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CreateOrUpdateAsync()
+        public async Task CreateOrUpdate()
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
-            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
             string name = "hsm1";
             MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData(location: "westus")
             {
@@ -44,27 +42,33 @@ namespace MgmtKeyvault.Tests.Mock
                 },
                 Sku = new MgmtKeyvault.Models.ManagedHsmSku(family: new MgmtKeyvault.Models.ManagedHsmSkuFamily("B"), name: MgmtKeyvault.Models.ManagedHsmSkuName.StandardB1),
             };
-            parameters.Tags.ReplaceWith(new System.Collections.Generic.Dictionary<string, string>() { ["Dept"] = "hsm", ["Environment"] = "dogfood", });
+            parameters.Tags.ReplaceWith(new Dictionary<string, string>()
+            {
+                ["Dept"] = "hsm",
+                ["Environment"] = "dogfood",
+            });
+
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
             await collection.CreateOrUpdateAsync(true, name, parameters);
         }
 
         [RecordedTest]
-        public async Task GetAsync()
+        public async Task Get()
         {
             // Example: Retrieve a managed HSM Pool
-            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
             string name = "hsm1";
 
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
             await collection.GetAsync(name);
         }
 
         [RecordedTest]
-        public async Task GetAllAsync()
+        public async Task GetAll()
         {
             // Example: List managed HSM Pools in a resource group
-            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
-            int? top = null;
+            int? top = default;
 
+            var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group")).GetManagedHsms();
             await foreach (var _ in collection.GetAllAsync(top))
             {
             }

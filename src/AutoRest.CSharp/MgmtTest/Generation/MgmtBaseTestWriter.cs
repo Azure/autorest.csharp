@@ -12,27 +12,22 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
-using System.Text.Json;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Requests;
-using System.Text.Json.Serialization;
-using Azure.Core.Serialization;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using Azure.Core;
+using Azure.ResourceManager.Resources;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
     internal partial class MgmtBaseTestWriter: MgmtClientBaseWriter
     {
-        public static CodeWriter _tagsWriter = new CodeWriter();
-        public static HashSet<string>  variableNames = new HashSet<string>();
+        public CodeWriterDelegate? _tagsWriterDelegate = null;
 
-        public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, BuildContext<MgmtOutputLibrary> context) : base(writer, provider, context)
+        public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider) : base(writer, provider)
         {
         }
 
@@ -40,33 +35,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             _writer.Line($"[RecordedTest]");
 
-            var testModelerConfig = Context.Configuration.MgmtConfiguration.TestModeler;
+            var testModelerConfig = MgmtContext.MgmtConfiguration.TestModeler;
             string? ignoreReason = testModelerConfig?.IgnoreReason;
             if (ignoreReason is not null)
             {
                 _writer.UseNamespace("NUnit.Framework");
                 _writer.Line($"[Ignore(\"{ignoreReason}\")]");
             }
-        }
-
-        public static object? ConvertToStringDictionary(object dict)
-        {
-            if (dict is null)
-            {
-                return dict;
-            }
-            Type t = dict.GetType();
-            bool isDict = t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>);
-            if (!isDict)
-            {
-                return dict;
-            }
-            var ret = new Dictionary<string, object?>();
-            foreach (KeyValuePair<object, object> entry in (IEnumerable< KeyValuePair<object, object>>)dict)
-            {
-                ret.Add(entry.Key.ToString()!, ConvertToStringDictionary(entry.Value));
-            }
-            return ret;
         }
 
         public static string FormatResourceId(string resourceId)
@@ -101,11 +76,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return isAsync ? "Task" : "void";
         }
 
-        public static ExampleGroup? FindExampleGroup(BuildContext<MgmtOutputLibrary> context, MgmtRestOperation restOperation)
+        public static ExampleGroup? FindExampleGroup(MgmtRestOperation restOperation)
         {
             if (restOperation is null)
                 return null;
-            foreach (var exampleGroup in context.CodeModel.TestModel?.MockTest.ExampleGroups ?? Enumerable.Empty<ExampleGroup>())
+            foreach (var exampleGroup in MgmtContext.CodeModel.TestModel?.MockTest.ExampleGroups ?? Enumerable.Empty<ExampleGroup>())
             {
                 if (exampleGroup.Examples.Count > 0 && exampleGroup.Examples.First().Operation == restOperation.Operation)
                 {
@@ -136,7 +111,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }));
         }
 
-        public static bool HasExample(BuildContext<MgmtOutputLibrary> context, MgmtClientOperation? clientOperation)
+        public static bool HasExample(MgmtClientOperation? clientOperation)
         {
             if (clientOperation is null)
             {
@@ -145,7 +120,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach ((var branch, var operation) in GetSortedOperationMappings(clientOperation))
             {
-                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(context, operation);
+                var exampleGroup = MgmtBaseTestWriter.FindExampleGroup(operation);
                 if (exampleGroup is not null && exampleGroup.Examples.Count > 0)
                     return true;
                 break;
@@ -245,12 +220,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return constructor;
         }
 
-        public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, string variableName)
+        public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName)
         {
             // Find Polimophismed schema
-            if (sot is SchemaObjectType && Context.Library.SchemaMap.ContainsKey(ev.Schema))
+            if (sot is SchemaObjectType && MgmtContext.Library.SchemaMap.ContainsKey(ev.Schema))
             {
-                var mappedTypeProvider = Context.Library.SchemaMap[ev.Schema];
+                var mappedTypeProvider = MgmtContext.Library.SchemaMap[ev.Schema];
                 if (mappedTypeProvider is SchemaObjectType mappedSot)
                 {
                     sot = mappedSot;
@@ -266,7 +241,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             {
                 var targetProperty = constructor.FindPropertyInitializedByParameter(p);
                 var paramValue = FindPropertyValue(sot, ev, targetProperty!);
-                writer.Append($"{p.Name}: ");
+                writer.Append($"{p.Name:D}: ");
                 if (paramValue is not null)
                 {
                     WriteExampleValue(writer, p.Type, paramValue!, $"{variableName}.{targetProperty!.Declaration.Name}");
@@ -309,7 +284,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 WriteSchemaObjectExampleProperties(writer, sot, ev, variableName, consumedProperties);
         }
 
-        private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, string variableName, HashSet<ObjectTypeProperty> consumedProperties)
+        protected void CreateTagWriterDelegate(FormattableString newVariableName, CSharpType valueType, ExampleValue ev)
+        {
+            _tagsWriterDelegate = new CodeWriterDelegate(writer =>
+            {
+                writer.Append($"{newVariableName}.ReplaceWith(");
+                WriteExampleValue(writer, valueType, ev, newVariableName);
+                writer.Append($");");
+            });
+        }
+
+        private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName, HashSet<ObjectTypeProperty> consumedProperties)
         {
             using (writer.Scope($"", newLine: false))
             {
@@ -322,16 +307,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                         if (paramValue is not null)
                         {
-                            var newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
+                            FormattableString newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
-                                MgmtBaseTestWriter._tagsWriter.Append($"{newVariableName}.ReplaceWith(");
-                                WriteExampleValue(_tagsWriter, targetProperty.ValueType, paramValue!, newVariableName);
-                                _tagsWriter.Append($");");
+                                CreateTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
                             }
                             else
                             {
-                                writer.Append($"{targetProperty.Declaration.Name} = ");
+                                writer.Append($"{targetProperty.Declaration.Name:D} = ");
                                 WriteExampleValue(writer, targetProperty.ValueType, paramValue!, newVariableName);
                                 writer.Append($", ");
                             }
@@ -428,7 +411,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, string variableName)
+        public void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
             if (cst.Name == "IList" || cst.Name == "IEnumerable")
             {
@@ -536,7 +519,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public void WriteExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, string variableName)
+        public void WriteExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
             TypeProvider? tp = cst.IsFrameworkType ? null : cst.Implementation;
             switch (tp)
@@ -556,47 +539,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
         }
 
-        public static string useVariableName(string variableName)
+        public FormattableString WriteExampleParameterDeclaration(CodeWriter writer, ExampleParameter exampleParameter, Parameter parameter)
         {
-            if (Utilities.StringExtensions.IsCSharpKeyword(variableName))
-            {
-                variableName = $"@{variableName}";
-            }
-            if (!variableNames.Contains(variableName))
-            {
-                variableNames.Add(variableName);
-                return variableName;
-            }
-
-            for (int i = 2; true; i++)
-            {
-                var newName = $"{variableName}{i}";
-                if (!variableNames.Contains(newName))
-                {
-                    variableNames.Add(newName);
-                    return newName;
-                }
-            }
-            throw new Exception($"Can't find a valid variable name start with {variableName}");
-        }
-
-        public static void clearVariableNames() {
-            variableNames = new HashSet<string>();
-        }
-
-        public string WriteExampleParameterDeclaration(CodeWriter writer, ExampleParameter exampleParameter, Parameter parameter)
-        {
-            var variableName = useVariableName(exampleParameter.Parameter.CSharpName());
-            writer.Append($"{parameter.Type} {variableName} = ");
-            WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, variableName);
+            var variableName = new CodeWriterDeclaration(exampleParameter.Parameter.CSharpName());
+            writer.Append($"{parameter.Type} {variableName:D} = ");
+            FormattableString formattableVariableName = $"{variableName}";
+            WriteExampleValue(writer, parameter.Type, exampleParameter.ExampleValue, formattableVariableName);
             writer.Line($";");
 
-            foreach (var tagLine in _tagsWriter.ToString(false).Split(Environment.NewLine))
-            {
-                writer.AppendRaw(tagLine);
+            if (_tagsWriterDelegate != null) {
+                writer.Line($"{_tagsWriterDelegate}");
             }
-            _tagsWriter = new CodeWriter();
-            return variableName;
+            _tagsWriterDelegate = null;
+            return formattableVariableName;
         }
 
         public static string BuildValueString(ExampleValue exampleValue, Schema schema)
@@ -609,33 +564,26 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             throw new NotImplementedException();
         }
 
-        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix)
+        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
         {
             throw new NotImplementedException();
         }
 
-        protected override void WriteResourceCollectionEntry(Resource resource)
+        protected override void WriteResourceCollectionEntry(ResourceCollection resource, MethodSignature signature)
         {
             throw new NotImplementedException();
         }
 
-        protected override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
+        public List<KeyValuePair<string, FormattableString>> WriteOperationParameters(IEnumerable<Parameter> methodParameters, ExampleModel exampleModel)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<string> WriteOperationParameters(IEnumerable<Parameter> methodParameters, IEnumerable<Parameter> testMethodParameters, ExampleModel exampleModel)
-        {
-            var paramNames = new List<string>();
+            var parameterValues = new List<KeyValuePair<string, FormattableString>>();
             foreach (var passThruParameter in methodParameters)
             {
-                if (testMethodParameters.Contains(passThruParameter))
-                {
-                    paramNames.Add(passThruParameter.Name);
+                if (passThruParameter.Name == MgmtClientOperation.WaitForCompletionParameter.Name ||
+                    passThruParameter.Name == MgmtClientBaseWriter.CancellationTokenParameter.Name)
                     continue;
-                }
-                string? paramName = null;
-                foreach (ExampleParameter exampleParameter in exampleModel.MethodParameters)
+                FormattableString? paramName = null;
+                foreach (ExampleParameter exampleParameter in exampleModel.AllParameter)
                 {
                     if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
                     {
@@ -644,19 +592,20 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 if (paramName is null)
                 {
-                    paramName = useVariableName(passThruParameter.Name);
-                    if (passThruParameter.ValidateNotNull)
+                    var paramNameDeclare = new CodeWriterDeclaration(passThruParameter.Name);
+                    if (passThruParameter.Validate)
                     {
-                        _writer.Line($"{passThruParameter.Type} {paramName} = null; /* Can't find this parameter in example, please provide value here!*/");
+                        _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = default; /* Can't find this parameter in example, please provide value here!*/");
                     }
                     else
                     {
-                        _writer.Line($"{passThruParameter.Type} {paramName} = null;");
+                        _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = default;");
                     }
+                    paramName = $"{paramNameDeclare}";
                 }
-                paramNames.Add(paramName);
+                parameterValues.Add(new KeyValuePair<string, FormattableString>(passThruParameter.Name, paramName));
             }
-            return paramNames;
+            return parameterValues;
         }
 
         public string? ParseRequestPath(MgmtTypeProvider tp, string requestPath, ExampleModel exampleModel)
@@ -704,13 +653,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         return String.Join("/", result.ToArray());
                     }
             int maxSegment = 0;
-            if (tp is ResourceGroupExtensions)
+            if (tp is MgmtExtensions extension)
             {
-                maxSegment = 5;
-            }
-            else if (tp is SubscriptionExtensions)
-            {
-                maxSegment = 3;
+                if (extension.ArmCoreType == typeof(ResourceGroup))
+                {
+                    maxSegment = 5;
+                }
+                else if (extension.ArmCoreType == typeof(Subscription))
+                {
+                    maxSegment = 3;
+                }
             }
             int i = 0;
             foreach (string segment in segements)
@@ -734,9 +686,35 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return String.Join("/", result.ToArray());
         }
 
+        public FormattableString ComposeResourceIdentifierParams(RequestPath requestPath, ExampleModel exampleModel)
+        {
+            var identifierParams = string.Join(", ", requestPath.Where(segment => segment.IsReference).Select(segment => {
+                var value = "\"default\"";
+                foreach (var parameterValue in exampleModel.AllParameter)
+                {
+                    if (parameterValue.Parameter.CSharpName() == segment.ReferenceName)
+                    {
+                        value = $"\"{parameterValue.ExampleValue.RawValue}\"";
+                    }
+                }
+
+                if (segment.ReferenceName == "subscriptionId")
+                {
+                    Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
+                    Match match = regex.Match(value);
+                    if (!match.Success)
+                    {
+                        value = "\"00000000-0000-0000-0000-000000000000\"";
+                    }
+                }
+                return value;
+            }));
+            return $"{identifierParams}";
+        }
+
         public string? FindParameterValueByName(ExampleModel exampleModel, string parameterName)
         {
-            foreach (var parameterValue in exampleModel.ClientParameters.Concat(exampleModel.MethodParameters))
+            foreach (var parameterValue in exampleModel.AllParameter)
             {
                 if ((parameterValue.Parameter.Language.Default.SerializedName ?? parameterValue.Parameter.Language.Default.Name) == parameterName)
                 {
@@ -746,7 +724,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return null;
         }
 
-        protected static CodeWriterDelegate WriteMethodInvocation(string methodName, IEnumerable<string> paramNames)
+        protected static CodeWriterDelegate WriteMethodInvocation(FormattableString methodName, IEnumerable<FormattableString> paramNames)
         {
             return new CodeWriterDelegate(writer =>
             {
@@ -760,14 +738,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             });
         }
 
-        protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, string methodName, IEnumerable<string> paramNames)
+        protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, FormattableString methodName, IEnumerable<FormattableString> paramNames)
         {
             _writer.Append($"{GetAwait(async)}");
-            if (isLroOperation || clientOperation.IsLongRunningOperation() && !clientOperation.IsPagingOperation(Context)) {
-                paramNames = new List<string>().Append("true").Concat(paramNames);   // assign  waitForCompletion = true
+            if (isLroOperation || clientOperation.IsLongRunningOperation && !clientOperation.IsPagingOperation) {
+                paramNames = new List<FormattableString>().Append<FormattableString>($"true").Concat(paramNames);   // assign  waitForCompletion = true
             }
-            var isPagingOperation = clientOperation.IsPagingOperation(Context)|| clientOperation.IsListOperation(Context, out var _);
-            if (isPagingOperation)
+
+            if (clientOperation.IsPagingOperation)
             {
                 using (_writer.Scope($"foreach (var _ in {WriteMethodInvocation($"{methodName}", paramNames)})"))
                 { }

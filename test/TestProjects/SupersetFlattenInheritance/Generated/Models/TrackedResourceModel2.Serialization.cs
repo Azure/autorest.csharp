@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace SupersetFlattenInheritance.Models
 {
@@ -56,6 +57,7 @@ namespace SupersetFlattenInheritance.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<string> foo0 = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -99,6 +101,11 @@ namespace SupersetFlattenInheritance.Models
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
                 if (property.NameEquals("properties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -117,7 +124,7 @@ namespace SupersetFlattenInheritance.Models
                     continue;
                 }
             }
-            return new TrackedResourceModel2(id, name, type, tags, location, foo.Value, bar.Value, foo0.Value);
+            return new TrackedResourceModel2(id, name, type, systemData, tags, location, foo.Value, bar.Value, foo0.Value);
         }
     }
 }

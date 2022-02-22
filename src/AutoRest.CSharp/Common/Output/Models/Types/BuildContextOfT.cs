@@ -15,23 +15,31 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private TypeFactory? _typeFactory;
 
-        public T Library { get; private set; }
+        private T? _library;
+        public T Library => _library ??= EnsureLibrary();
 
-        public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel) : base(codeModel, configuration, sourceInputModel)
+        private T EnsureLibrary()
         {
-            if (configuration.DataPlane)
+            T library;
+            if (Configuration.DataPlane)
             {
-                Library = (T)(object)LowLevelOutputLibraryFactory.Create(codeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
+                library = (T)(object)LowLevelOutputLibraryFactory.Create(CodeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
             }
-            else if (configuration.AzureArm)
+            else if (Configuration.AzureArm)
             {
-                Library = (T)(object)new MgmtOutputLibrary(codeModel, (BuildContext<MgmtOutputLibrary>)(object)this);
+                library = (T)(object)new MgmtOutputLibrary();
             }
             else
             {
-                Library = (T)(object)new DataPlaneOutputLibrary(codeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
+                library = (T)(object)new DataPlaneOutputLibrary(CodeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
             }
-            BaseLibrary = Library;
+            BaseLibrary = library;
+            return library;
+        }
+
+        public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel)
+            : base(codeModel, configuration, sourceInputModel)
+        {
         }
 
         public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);

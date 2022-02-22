@@ -15,16 +15,17 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A class representing collection of RecordSet and their operations over its parent. </summary>
+    /// <summary> A class representing collection of RecordSetCaa and their operations over its parent. </summary>
     public partial class RecordSetCaaCollection : ArmCollection, IEnumerable<RecordSetCaa>, IAsyncEnumerable<RecordSetCaa>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetsRestClient;
+        private readonly ClientDiagnostics _recordSetCaaRecordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetCaaRecordSetsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetCaaCollection"/> class for mocking. </summary>
         protected RecordSetCaaCollection()
@@ -32,12 +33,13 @@ namespace MgmtExpandResourceTypes
         }
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetCaaCollection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal RecordSetCaaCollection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal RecordSetCaaCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetCaa.ResourceType.Namespace, DiagnosticOptions);
-            ArmClient.TryGetApiVersion(RecordSetCaa.ResourceType, out string apiVersion);
-            _recordSetsRestClient = new RecordSetsRestOperations(_clientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, apiVersion);
+            _recordSetCaaRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetCaa.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(RecordSetCaa.ResourceType, out string recordSetCaaRecordSetsApiVersion);
+            _recordSetCaaRecordSetsRestClient = new RecordSetsRestOperations(_recordSetCaaRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetCaaRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -49,12 +51,11 @@ namespace MgmtExpandResourceTypes
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Zone.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// OperationId: RecordSets_CreateOrUpdate
-        /// <summary> Creates or updates a record set within a DNS zone. </summary>
+        /// <summary>
+        /// Creates or updates a record set within a DNS zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_CreateOrUpdate
+        /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="parameters"> Parameters supplied to the CreateOrUpdate operation. </param>
@@ -62,62 +63,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual RecordSetCaaCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<RecordSetCaa>> CreateOrUpdateAsync(bool waitForCompletion, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.CreateOrUpdate");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new RecordSetCaaCreateOrUpdateOperation(ArmClient, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// OperationId: RecordSets_CreateOrUpdate
-        /// <summary> Creates or updates a record set within a DNS zone. </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
-        /// <param name="parameters"> Parameters supplied to the CreateOrUpdate operation. </param>
-        /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
-        /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<RecordSetCaaCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
-        {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = await _recordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new RecordSetCaaCreateOrUpdateOperation(ArmClient, response);
+                var response = await _recordSetCaaRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetCaa>(Response.FromValue(new RecordSetCaa(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -129,28 +85,32 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// OperationId: RecordSets_Get
-        /// <summary> Gets a record set. </summary>
+        /// <summary>
+        /// Creates or updates a record set within a DNS zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_CreateOrUpdate
+        /// </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="parameters"> Parameters supplied to the CreateOrUpdate operation. </param>
+        /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
+        /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetCaa> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<RecordSetCaa> CreateOrUpdate(bool waitForCompletion, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.Get");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken);
-                if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetCaa(ArmClient, response.Value), response.GetRawResponse());
+                var response = _recordSetCaaRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetCaa>(Response.FromValue(new RecordSetCaa(Client, response), response.GetRawResponse()));
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -159,28 +119,26 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// OperationId: RecordSets_Get
-        /// <summary> Gets a record set. </summary>
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public async virtual Task<Response<RecordSetCaa>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.Get");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetCaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetCaa(ArmClient, response.Value), response.GetRawResponse());
+                    throw await _recordSetCaaRecordSetsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new RecordSetCaa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -189,25 +147,26 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetCaa> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetCaa> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.GetIfExists");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Get");
             scope.Start();
             try
             {
-                var response = _recordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                var response = _recordSetCaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<RecordSetCaa>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetCaa(ArmClient, response.Value), response.GetRawResponse());
+                    throw _recordSetCaaRecordSetsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new RecordSetCaa(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -216,70 +175,107 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <summary>
+        /// Lists the record sets of a specified type in a DNS zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA
+        /// Operation Id: RecordSets_ListByType
+        /// </summary>
+        /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
+        /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public async virtual Task<Response<RecordSetCaa>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="RecordSetCaa" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<RecordSetCaa> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
+            async Task<Page<RecordSetCaa>> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
+                using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _recordSetCaaRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaa(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.GetIfExists");
-            scope.Start();
-            try
+            async Task<Page<RecordSetCaa>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await _recordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<RecordSetCaa>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetCaa(ArmClient, response.Value), response.GetRawResponse());
+                using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _recordSetCaaRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaa(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <summary>
+        /// Lists the record sets of a specified type in a DNS zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA
+        /// Operation Id: RecordSets_ListByType
+        /// </summary>
+        /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
+        /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<bool> Exists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="RecordSetCaa" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<RecordSetCaa> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
+            Page<RecordSetCaa> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
+                using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _recordSetCaaRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaa(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.Exists");
-            scope.Start();
-            try
+            Page<RecordSetCaa> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetIfExists(relativeRecordSetName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
+                using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _recordSetCaaRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaa(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            if (relativeRecordSetName == null)
-            {
-                throw new ArgumentNullException(nameof(relativeRecordSetName));
-            }
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.Exists");
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Exists");
             scope.Start();
             try
             {
@@ -293,90 +289,86 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// OperationId: RecordSets_ListByType
-        /// <summary> Lists the record sets of a specified type in a DNS zone. </summary>
-        /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
-        /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetCaa" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<RecordSetCaa> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<bool> Exists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetCaa> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.Exists");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = GetIfExists(relativeRecordSetName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
-            Page<RecordSetCaa> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _recordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
-        /// OperationId: RecordSets_ListByType
-        /// <summary> Lists the record sets of a specified type in a DNS zone. </summary>
-        /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
-        /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetCaa" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<RecordSetCaa> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public async virtual Task<Response<RecordSetCaa>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetCaa>> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetIfExists");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = await _recordSetCaaRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<RecordSetCaa>(null, response.GetRawResponse());
+                return Response.FromValue(new RecordSetCaa(Client, response.Value), response.GetRawResponse());
             }
-            async Task<Page<RecordSetCaa>> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("RecordSetCaaCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _recordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetCaa(ArmClient, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetCaa> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
+
+            using var scope = _recordSetCaaRecordSetsClientDiagnostics.CreateScope("RecordSetCaaCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _recordSetCaaRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CAA".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<RecordSetCaa>(null, response.GetRawResponse());
+                return Response.FromValue(new RecordSetCaa(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         IEnumerator<RecordSetCaa> IEnumerable<RecordSetCaa>.GetEnumerator()

@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal struct ResourceTypeSegment : IEquatable<ResourceTypeSegment>, IReadOnlyList<Segment>
     {
-        public static readonly ResourceTypeSegment Scope = new(new Segment[0]);
+        public static readonly ResourceTypeSegment Scope = new(Array.Empty<Segment>());
 
         public static readonly ResourceTypeSegment Any = new(new[] { new Segment("*") });
 
@@ -148,6 +148,30 @@ namespace AutoRest.CSharp.Mgmt.Models
         public static bool operator !=(ResourceTypeSegment left, ResourceTypeSegment right)
         {
             return !(left == right);
+        }
+
+        internal bool DoesMatch(ResourceTypeSegment other)
+        {
+            if (Count == 0)
+                return other.Count == 0;
+
+            if (Count != other.Count)
+                return false;
+
+            if (this[Count - 1].IsConstant == other[Count - 1].IsConstant)
+                return this.Equals(other);
+
+            return DoAllButLastItemMatch(other); //TODO: limit matching to the enum values
+        }
+
+        private bool DoAllButLastItemMatch(ResourceTypeSegment other)
+        {
+            for (int i = 0; i < Count - 1; i++)
+            {
+                if (!this[i].Equals(other[i]))
+                    return false;
+            }
+            return true;
         }
     }
 }

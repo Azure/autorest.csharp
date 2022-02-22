@@ -16,16 +16,16 @@ namespace MgmtHierarchicalNonResource.Models
         }
 
         /// <summary> Initializes a new instance of RecommendedMachineConfiguration. </summary>
-        /// <param name="vCPUs"> Describes the resource range. </param>
+        /// <param name="vCpus"> Describes the resource range. </param>
         /// <param name="memory"> Describes the resource range. </param>
-        internal RecommendedMachineConfiguration(ResourceRange vCPUs, ResourceRange memory)
+        internal RecommendedMachineConfiguration(ResourceRange vCpus, ResourceRange memory)
         {
-            VCPUs = vCPUs;
+            VCpus = vCpus;
             Memory = memory;
         }
 
         /// <summary> Describes the resource range. </summary>
-        public ResourceRange VCPUs { get; }
+        public ResourceRange VCpus { get; }
         /// <summary> Describes the resource range. </summary>
         public ResourceRange Memory { get; }
     }

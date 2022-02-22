@@ -5,9 +5,11 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.ResourceManager.Resources;
 using OmitOperationGroups.Models;
 
@@ -16,98 +18,112 @@ namespace OmitOperationGroups
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region Model2
-        /// <summary> Gets an object representing a Model2Collection along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="Model2Collection" /> object. </returns>
-        public static Model2Collection GetModel2s(this ResourceGroup resourceGroup)
-        {
-            return new Model2Collection(resourceGroup);
-        }
-        #endregion
-
         private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
-            return resourceGroup.GetCachedClient((armClient) =>
+            return resourceGroup.GetCachedClient((client) =>
             {
-                return new ResourceGroupExtensionClient(armClient, resourceGroup.Id);
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
             }
             );
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_List
+        /// <summary> Gets a collection of Model2s in the Model2. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of Model2s and their operations over a Model2. </returns>
+        public static Model2Collection GetModel2s(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetModel2s();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
+        /// Operation Id: Model5s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Model5> GetModel5sAsync(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetModel5sAsync(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_List
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
+        /// Operation Id: Model5s_List
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<Model5> GetModel5s(this ResourceGroup resourceGroup, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(resourceGroup).GetModel5s(cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_CreateOrUpdate
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
+        /// Operation Id: Model5s_CreateOrUpdate
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Model5> CreateOrUpdateModel5Async(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
+        public async static Task<Response<Model5>> CreateOrUpdateModel5Async(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
+
             return await GetExtensionClient(resourceGroup).CreateOrUpdateModel5Async(model5SName, parameters, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_CreateOrUpdate
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
+        /// Operation Id: Model5s_CreateOrUpdate
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Model5 CreateOrUpdateModel5(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
+        public static Response<Model5> CreateOrUpdateModel5(this ResourceGroup resourceGroup, string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
+
             return GetExtensionClient(resourceGroup).CreateOrUpdateModel5(model5SName, parameters, cancellationToken);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
+        /// Operation Id: Model5s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
-        public static async Task<Model5> GetModel5Async(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
+        public async static Task<Response<Model5>> GetModel5Async(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+
             return await GetExtensionClient(resourceGroup).GetModel5Async(model5SName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Model5s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}
+        /// Operation Id: Model5s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="System.ArgumentException"> <paramref name="model5SName"/> is empty. </exception>
-        /// <exception cref="System.ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
-        public static Model5 GetModel5(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
+        public static Response<Model5> GetModel5(this ResourceGroup resourceGroup, string model5SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+
             return GetExtensionClient(resourceGroup).GetModel5(model5SName, cancellationToken);
         }
     }
