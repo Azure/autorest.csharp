@@ -33,5 +33,11 @@ namespace Azure.ResourceManager.Core
 
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
             => _operation.UpdateStatusAsync(cancellationToken);
+
+        public override ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default)
+            => _operation.WaitForCompletionResponseAsync(cancellationToken);
+
+        public override ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default)
+            => _operation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
     }
 }

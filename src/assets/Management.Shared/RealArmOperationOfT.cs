@@ -42,6 +42,12 @@ namespace Azure.ResourceManager.Core
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
             => _operation.UpdateStatusAsync(cancellationToken);
 
+        public override ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
+            => _operation.WaitForCompletionAsync(cancellationToken);
+
+        public override ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default)
+            => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+
         async ValueTask<OperationState<T>> IOperation<T>.UpdateStateAsync(bool async, CancellationToken cancellationToken)
         {
             var state = await _nextLinkOperation.UpdateStateAsync(async, cancellationToken).ConfigureAwait(false);
