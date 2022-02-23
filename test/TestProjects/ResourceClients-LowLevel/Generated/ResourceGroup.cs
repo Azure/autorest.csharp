@@ -44,14 +44,8 @@ namespace ResourceClients_LowLevel
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, or <paramref name="groupId"/> is null. </exception>
-        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint = null)
+        internal ResourceGroup(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, string groupId, Uri endpoint)
         {
-            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
-            Argument.AssertNotNull(pipeline, nameof(pipeline));
-            Argument.AssertNotNull(groupId, nameof(groupId));
-            endpoint ??= new Uri("http://localhost:3000");
-
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
@@ -61,9 +55,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get a group. Method should stay in `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetGroupAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
             scope.Start();
@@ -81,9 +73,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get a group. Method should stay in `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetGroup(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
             scope.Start();
@@ -101,9 +91,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "ResourceGroup.GetItems");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -122,9 +110,7 @@ namespace ResourceClients_LowLevel
 
         /// <summary> Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "ResourceGroup.GetItems");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -144,9 +130,10 @@ namespace ResourceClients_LowLevel
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="itemId"> Item identifier. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="itemId"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Resource GetResource(string itemId)
         {
-            Argument.AssertNotNull(itemId, nameof(itemId));
+            Argument.AssertNotNullOrEmpty(itemId, nameof(itemId));
 
             return new Resource(ClientDiagnostics, _pipeline, _keyCredential, GroupId, itemId, _endpoint);
         }

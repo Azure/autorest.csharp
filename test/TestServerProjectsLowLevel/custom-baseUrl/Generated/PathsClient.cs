@@ -62,9 +62,7 @@ namespace custom_baseUrl_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -95,9 +93,7 @@ namespace custom_baseUrl_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 

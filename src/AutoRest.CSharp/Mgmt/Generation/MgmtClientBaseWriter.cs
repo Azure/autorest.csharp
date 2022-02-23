@@ -7,11 +7,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -19,7 +18,6 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -27,7 +25,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -60,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer = writer;
             This = provider;
             FileName = This.Type.Name;
-            IsArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
+            IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             LibraryArmOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
         }
 
@@ -270,7 +267,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual Parameter[] GetParametersForSingletonEntry()
         {
-            return new Parameter[] { };
+            return Array.Empty<Parameter>();
         }
 
         protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
@@ -463,7 +460,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
             if (This.Accessibility == "public")
-                _writer.WriteXmlDocumentationMgmtRequiredParametersException(signature.Parameters);
+            {
+                _writer.WriteXmlDocumentationNonEmptyParametersException(signature.Parameters);
+                _writer.WriteXmlDocumentationRequiredParametersException(signature.Parameters);
+            }
 
             FormattableString? returnDesc = returnDescription ?? signature.ReturnDescription;
             if (returnDesc is not null)
@@ -471,7 +471,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var scope = _writer.WriteMethodDeclaration(signature, isAsync);
             if (This.Accessibility == "public")
-                _writer.WriteParameterNullOrEmptyChecks(signature.Parameters);
+                _writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
         }
@@ -821,7 +821,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        if (passNullForOptionalParameters && !parameter.Parameter.ValidateNotNull)
+                        if (passNullForOptionalParameters && !parameter.Parameter.Validate)
                             writer.Append($"null, ");
                         else
                             writer.Append($"{parameter.Parameter.Name}, ");

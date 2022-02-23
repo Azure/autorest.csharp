@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.ResourceManager.Resources;
 using MgmtExpandResourceTypes.Models;
 
@@ -65,10 +66,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async static Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             return await GetExtensionClient(subscription).GetByTargetResourcesDnsResourceReferenceAsync(parameters, cancellationToken).ConfigureAwait(false);
         }
@@ -84,10 +82,7 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this Subscription subscription, DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             return GetExtensionClient(subscription).GetByTargetResourcesDnsResourceReference(parameters, cancellationToken);
         }

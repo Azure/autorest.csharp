@@ -3,13 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.AutoRest.Plugins
+namespace AutoRest.CSharp.Input
 {
     public class MgmtConfiguration
     {
@@ -274,19 +272,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var requestPathIsNonResourceList = requestPathIsNonResource.ValueKind == JsonValueKind.Array
                 ? requestPathIsNonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var noPropertyTypeReplacementList = noPropertyTypeReplacment.ValueKind == JsonValueKind.Array
                 ? noPropertyTypeReplacment.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             var listExceptionList = listException.ValueKind == JsonValueKind.Array
                 ? listException.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
+                : Array.Empty<string>();
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);

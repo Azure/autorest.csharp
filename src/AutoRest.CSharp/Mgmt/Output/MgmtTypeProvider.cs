@@ -32,15 +32,15 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected MgmtTypeProvider(string resourceName) : base(MgmtContext.Context)
         {
             ResourceName = resourceName;
-            IsArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
+            IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             IsStatic = !IsArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
         }
 
         protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
         public Parameter ResourceIdentifierParameter => new Parameter(Name: "id", Description: IdParamDescription,
-                Type: typeof(ResourceIdentifier), DefaultValue: null, ValidateNotNull: false);
+                Type: typeof(ResourceIdentifier), DefaultValue: null, Validate: false);
         public static Parameter ArmClientParameter => new Parameter(Name: "client", Description: $"The client parameters to use in these operations.",
-            Type: typeof(ArmClient), DefaultValue: null, ValidateNotNull: false);
+            Type: typeof(ArmClient), DefaultValue: null, Validate: false);
 
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public IEnumerable<CSharpType> EnumerableInterfaces => _enumerableInterfaces ??= EnsureGetInterfaces();
         protected virtual IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            return new CSharpType[] { };
+            return Array.Empty<CSharpType>();
         }
 
         public IEnumerable<CSharpType> GetImplementsList()
@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: "protected",
-                Parameters: new Parameter[0]);
+                Parameters: Array.Empty<Parameter>());
         }
 
         private ConstructorSignature? _armClientCtor;

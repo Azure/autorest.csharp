@@ -16,13 +16,13 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// <summary>
     /// A <see cref="Segment"/> represents a segment of a request path which could be either a <see cref="Constant"/> or a <see cref="Reference"/>
     /// </summary>
-    internal struct Segment : IEquatable<Segment>
+    internal readonly struct Segment : IEquatable<Segment>
     {
         public static readonly Segment Providers = "providers";
 
-        private ReferenceOrConstant _value;
-        private string _stringValue;
-        private CSharpType? _expandableType;
+        private readonly ReferenceOrConstant _value;
+        private readonly string _stringValue;
+        private readonly CSharpType? _expandableType;
 
         public Segment(ReferenceOrConstant value, bool escape, bool strict = false, CSharpType? expandableType = null)
         {

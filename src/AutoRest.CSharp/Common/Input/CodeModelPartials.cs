@@ -282,6 +282,12 @@ namespace AutoRest.CSharp.Input
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "testModel")]
         public TestModel? TestModel { get; set; }
+
+        private IEnumerable<Schema>? _allSchemas;
+        public IEnumerable<Schema> AllSchemas => _allSchemas ??= Schemas.Choices.Cast<Schema>()
+                .Concat(Schemas.SealedChoices)
+                .Concat(Schemas.Objects)
+                .Concat(Schemas.Groups);
     }
 
     internal partial class TestDefinitionModel

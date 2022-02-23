@@ -37,13 +37,8 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <param name="pipeline"> The pipeline instance to use. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        internal Client5(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint = null)
+        internal Client5(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
-            Argument.AssertNotNull(pipeline, nameof(pipeline));
-            endpoint ??= new Uri("http://localhost:3000");
-
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
@@ -51,9 +46,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("Client5.Operation");
             scope.Start();
@@ -70,9 +63,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response Operation(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("Client5.Operation");
             scope.Start();

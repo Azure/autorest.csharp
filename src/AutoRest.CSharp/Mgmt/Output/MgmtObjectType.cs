@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns>true if this type should NOT be replaced when used as property type; false elsewise</returns>
         public bool ShouldNotReplaceForProperty()
         {
-            return MgmtContext.MgmtConfiguration.NoPropertyTypeReplacement.Contains(this.Type.Name);
+            return Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(this.Type.Name);
         }
 
         protected override CSharpType? CreateInheritedType()
