@@ -306,10 +306,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (property.ValueType.Implementation is not ObjectType objType)
                 return false;
 
-            bool isSingleProperty = objType.Properties.Length == 1;
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            bool isSingleProperty = properties.Count() == 1;
 
             if (isSingleProperty)
-                innerProperty = objType.Properties[0];
+                innerProperty = properties.First();
 
             return isSingleProperty;
         }
