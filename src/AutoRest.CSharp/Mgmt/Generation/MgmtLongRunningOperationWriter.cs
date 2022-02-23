@@ -70,9 +70,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     _writer.Line();
 
-                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia)"))
+                    using (_writer.Scope($"internal {_name}({_operationSourceString}{typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(HttpMessage)} message, {typeof(Response)} response, {typeof(OperationFinalStateVia)} finalStateVia)"))
                     {
-                        _writer.Line($"_operation = new {_operationOrResponseType}({_sourceString}clientDiagnostics, pipeline, request, response, finalStateVia, \"{_name}\");");
+                        _writer.Line($"_operation = MgmtPlaneOperationHelpers.CreateOperation({_sourceString}clientDiagnostics, pipeline, message, response, finalStateVia, \"{_name}\");");
                     }
                     _writer.Line();
 

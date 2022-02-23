@@ -785,7 +785,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
+                _writer.Append($"), response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }
             _writer.Line($");");
             var waitForCompletionMethod = operation.MgmtReturnType is null ?
