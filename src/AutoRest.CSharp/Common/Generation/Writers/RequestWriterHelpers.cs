@@ -436,5 +436,6 @@ namespace AutoRest.CSharp.Generation.Writers
             RequestParameterSerializationStyle.CommaDelimited => ",",
             _ => null
         };
+
     }
 }
