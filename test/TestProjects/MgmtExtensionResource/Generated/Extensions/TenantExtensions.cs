@@ -12,14 +12,21 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions
     {
-        #region BuiltInPolicyDefinition
-        /// <summary> Gets an object representing a BuiltInPolicyDefinitionCollection along with the instance operations that can be performed on it. </summary>
+        private static TenantExtensionClient GetExtensionClient(Tenant tenant)
+        {
+            return tenant.GetCachedClient((client) =>
+            {
+                return new TenantExtensionClient(client, tenant.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of BuiltInPolicyDefinitions in the BuiltInPolicyDefinition. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionCollection" /> object. </returns>
+        /// <returns> An object representing collection of BuiltInPolicyDefinitions and their operations over a BuiltInPolicyDefinition. </returns>
         public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this Tenant tenant)
         {
-            return new BuiltInPolicyDefinitionCollection(tenant);
+            return GetExtensionClient(tenant).GetBuiltInPolicyDefinitions();
         }
-        #endregion
     }
 }

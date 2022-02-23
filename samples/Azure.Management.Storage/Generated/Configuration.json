@@ -27,8 +27,5 @@
   },
   "OverrideOperationName": {
     "DeletedAccounts_List": "GetAll"
-  },
-  "MgmtDebug": {
-    "ShowRequestPath": true
   }
 }

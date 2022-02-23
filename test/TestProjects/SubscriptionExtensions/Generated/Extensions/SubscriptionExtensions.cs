@@ -12,14 +12,21 @@ namespace SubscriptionExtensions
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region Toaster
-        /// <summary> Gets an object representing a ToasterCollection along with the instance operations that can be performed on it. </summary>
+        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        {
+            return subscription.GetCachedClient((client) =>
+            {
+                return new SubscriptionExtensionClient(client, subscription.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of Toasters in the Toaster. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ToasterCollection" /> object. </returns>
+        /// <returns> An object representing collection of Toasters and their operations over a Toaster. </returns>
         public static ToasterCollection GetToasters(this Subscription subscription)
         {
-            return new ToasterCollection(subscription);
+            return GetExtensionClient(subscription).GetToasters();
         }
-        #endregion
     }
 }

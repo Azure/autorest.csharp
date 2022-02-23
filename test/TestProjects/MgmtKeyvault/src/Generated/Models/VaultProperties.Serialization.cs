@@ -34,7 +34,7 @@ namespace MgmtKeyvault.Models
             if (Optional.IsDefined(VaultUri))
             {
                 writer.WritePropertyName("vaultUri");
-                writer.WriteStringValue(VaultUri);
+                writer.WriteStringValue(VaultUri.AbsoluteUri);
             }
             if (Optional.IsDefined(EnabledForDeployment))
             {
@@ -94,7 +94,7 @@ namespace MgmtKeyvault.Models
             Guid tenantId = default;
             Sku sku = default;
             Optional<IList<AccessPolicyEntry>> accessPolicies = default;
-            Optional<string> vaultUri = default;
+            Optional<Uri> vaultUri = default;
             Optional<string> hsmPoolResourceId = default;
             Optional<bool> enabledForDeployment = default;
             Optional<bool> enabledForDiskEncryption = default;
@@ -136,7 +136,12 @@ namespace MgmtKeyvault.Models
                 }
                 if (property.NameEquals("vaultUri"))
                 {
-                    vaultUri = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    vaultUri = new Uri(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("hsmPoolResourceId"))

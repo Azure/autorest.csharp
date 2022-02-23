@@ -12,34 +12,37 @@ namespace NoTypeReplacement
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region NoTypeReplacementModel1
-        /// <summary> Gets an object representing a NoTypeReplacementModel1Collection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of NoTypeReplacementModel1s in the NoTypeReplacementModel1. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1Collection" /> object. </returns>
+        /// <returns> An object representing collection of NoTypeReplacementModel1s and their operations over a NoTypeReplacementModel1. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroup resourceGroup)
         {
-            return new NoTypeReplacementModel1Collection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel1s();
         }
-        #endregion
 
-        #region NoTypeReplacementModel2
-        /// <summary> Gets an object representing a NoTypeReplacementModel2Collection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel2s in the NoTypeReplacementModel2. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2Collection" /> object. </returns>
+        /// <returns> An object representing collection of NoTypeReplacementModel2s and their operations over a NoTypeReplacementModel2. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroup resourceGroup)
         {
-            return new NoTypeReplacementModel2Collection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel2s();
         }
-        #endregion
 
-        #region NoTypeReplacementModel3
-        /// <summary> Gets an object representing a NoTypeReplacementModel3Collection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel3s in the NoTypeReplacementModel3. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3Collection" /> object. </returns>
+        /// <returns> An object representing collection of NoTypeReplacementModel3s and their operations over a NoTypeReplacementModel3. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroup resourceGroup)
         {
-            return new NoTypeReplacementModel3Collection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel3s();
         }
-        #endregion
     }
 }

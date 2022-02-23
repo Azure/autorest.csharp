@@ -30,6 +30,5 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var classToCheck = classesToCheck.First(t => t.Name == className);
             Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
         }
-
     }
 }

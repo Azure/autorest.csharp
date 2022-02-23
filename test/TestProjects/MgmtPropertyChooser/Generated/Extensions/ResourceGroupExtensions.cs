@@ -12,14 +12,21 @@ namespace MgmtPropertyChooser
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region VirtualMachine
-        /// <summary> Gets an object representing a VirtualMachineCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="VirtualMachineCollection" /> object. </returns>
+        /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroup resourceGroup)
         {
-            return new VirtualMachineCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetVirtualMachines();
         }
-        #endregion
     }
 }

@@ -15,25 +15,33 @@ namespace MgmtNonStringPathVariable
     {
         #region Fake
         /// <summary> Gets an object representing a Fake along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Fake" /> object. </returns>
-        public static Fake GetFake(this ArmClient armClient, ResourceIdentifier id)
+        public static Fake GetFake(this ArmClient client, ResourceIdentifier id)
         {
-            Fake.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Fake(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                Fake.ValidateResourceId(id);
+                return new Fake(client, id);
+            }
+            );
         }
         #endregion
 
         #region Bar
         /// <summary> Gets an object representing a Bar along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Bar" /> object. </returns>
-        public static Bar GetBar(this ArmClient armClient, ResourceIdentifier id)
+        public static Bar GetBar(this ArmClient client, ResourceIdentifier id)
         {
-            Bar.ValidateResourceId(id);
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Bar(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                Bar.ValidateResourceId(id);
+                return new Bar(client, id);
+            }
+            );
         }
         #endregion
     }

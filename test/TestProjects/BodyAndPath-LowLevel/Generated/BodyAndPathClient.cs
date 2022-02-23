@@ -20,8 +20,10 @@ namespace BodyAndPath_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -42,7 +44,7 @@ namespace BodyAndPath_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new BodyAndPathClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -53,19 +55,18 @@ namespace BodyAndPath_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(itemName, nameof(itemName));
+            Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateRequest(itemName, content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -79,19 +80,18 @@ namespace BodyAndPath_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemName"/> or <paramref name="content"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(itemName, nameof(itemName));
+            Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateRequest(itemName, content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -107,19 +107,18 @@ namespace BodyAndPath_LowLevel
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemNameStream"/> or <paramref name="content"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(itemNameStream, nameof(itemNameStream));
+            Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -135,19 +134,18 @@ namespace BodyAndPath_LowLevel
         /// <param name="excluded"> Excluded connection Ids. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="itemNameStream"/> or <paramref name="content"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(itemNameStream, nameof(itemNameStream));
+            Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -161,21 +159,20 @@ namespace BodyAndPath_LowLevel
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumName1, nameof(enumName1));
-            Argument.AssertNotNull(enumName2, nameof(enumName2));
+            Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
+            Argument.AssertNotNullOrEmpty(enumName2, nameof(enumName2));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -189,21 +186,20 @@ namespace BodyAndPath_LowLevel
         /// <param name="enumName2"> The second name. Allowed values: &quot;latest&quot;. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/>, or <paramref name="content"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentNullException"> <paramref name="enumName1"/>, <paramref name="enumName2"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumName1, nameof(enumName1));
-            Argument.AssertNotNull(enumName2, nameof(enumName2));
+            Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
+            Argument.AssertNotNullOrEmpty(enumName2, nameof(enumName2));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.CreateEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCreateEnumRequest(enumName1, enumName2, content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -214,16 +210,14 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> List all. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBodyAndPathsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -234,16 +228,14 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> List all. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetBodyAndPaths(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBodyAndPathsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -254,16 +246,14 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> List all products. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetItemsRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -274,16 +264,14 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> List all products. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetItems(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetItemsRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -299,22 +287,21 @@ namespace BodyAndPath_LowLevel
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
         /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, or <paramref name="item1"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(item3, nameof(item3));
-            Argument.AssertNotNull(item2, nameof(item2));
+            Argument.AssertNotNullOrEmpty(item3, nameof(item3));
+            Argument.AssertNotNullOrEmpty(item2, nameof(item2));
             Argument.AssertNotNull(item4, nameof(item4));
             Argument.AssertNotNull(item1, nameof(item1));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -330,22 +317,21 @@ namespace BodyAndPath_LowLevel
         /// <param name="item5"> Expected to be the fifth parameter because it is an optional query parameter which goes after RequestContent. </param>
         /// <param name="item1"> Expected to be the sixth parameter because it is a query parameter and has a default value, so it is treated as optional despite &apos;required: true&apos;. &apos;item1&apos; in the path isn&apos;t a parameter, it is a static part of the path. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/>, or <paramref name="item1"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentNullException"> <paramref name="item3"/>, <paramref name="item2"/>, <paramref name="item4"/> or <paramref name="item1"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(item3, nameof(item3));
-            Argument.AssertNotNull(item2, nameof(item2));
+            Argument.AssertNotNullOrEmpty(item3, nameof(item3));
+            Argument.AssertNotNullOrEmpty(item2, nameof(item2));
             Argument.AssertNotNull(item4, nameof(item4));
             Argument.AssertNotNull(item1, nameof(item1));
 
-            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Update");
+            using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.Update");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateUpdateRequest(item3, item2, item4, content, item5, item1, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

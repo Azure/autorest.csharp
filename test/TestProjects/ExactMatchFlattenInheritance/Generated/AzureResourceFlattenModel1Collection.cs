@@ -18,15 +18,14 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of AzureResourceFlattenModel1 and their operations over its parent. </summary>
     public partial class AzureResourceFlattenModel1Collection : ArmCollection, IEnumerable<AzureResourceFlattenModel1>, IAsyncEnumerable<AzureResourceFlattenModel1>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly AzureResourceFlattenModel1SRestOperations _azureResourceFlattenModel1sRestClient;
+        private readonly ClientDiagnostics _azureResourceFlattenModel1ClientDiagnostics;
+        private readonly AzureResourceFlattenModel1SRestOperations _azureResourceFlattenModel1RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Collection"/> class for mocking. </summary>
         protected AzureResourceFlattenModel1Collection()
@@ -34,12 +33,13 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Collection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AzureResourceFlattenModel1Collection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal AzureResourceFlattenModel1Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(AzureResourceFlattenModel1.ResourceType, out string apiVersion);
-            _azureResourceFlattenModel1sRestClient = new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _azureResourceFlattenModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", AzureResourceFlattenModel1.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(AzureResourceFlattenModel1.ResourceType, out string azureResourceFlattenModel1ApiVersion);
+            _azureResourceFlattenModel1RestClient = new AzureResourceFlattenModel1SRestOperations(_azureResourceFlattenModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, azureResourceFlattenModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -51,71 +51,28 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel1s_Put
-        /// <summary> Create or update an AzureResourceFlattenModel1. </summary>
+        /// <summary>
+        /// Create or update an AzureResourceFlattenModel1.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Put
+        /// </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AzureResourceFlattenModel1CreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<AzureResourceFlattenModel1>> CreateOrUpdateAsync(bool waitForCompletion, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.CreateOrUpdate");
+            using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _azureResourceFlattenModel1sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new AzureResourceFlattenModel1CreateOrUpdateOperation(Parent, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel1s_Put
-        /// <summary> Create or update an AzureResourceFlattenModel1. </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AzureResourceFlattenModel1CreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = await _azureResourceFlattenModel1sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new AzureResourceFlattenModel1CreateOrUpdateOperation(Parent, response);
+                var response = await _azureResourceFlattenModel1RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new ExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1>(Response.FromValue(new AzureResourceFlattenModel1(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -127,28 +84,31 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel1s_Get
-        /// <summary> Get an AzureResourceFlattenModel1. </summary>
+        /// <summary>
+        /// Create or update an AzureResourceFlattenModel1.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Put
+        /// </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="name"> The String to use. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<AzureResourceFlattenModel1> Get(string name, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<AzureResourceFlattenModel1> CreateOrUpdate(bool waitForCompletion, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Get");
+            using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _azureResourceFlattenModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
-                if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AzureResourceFlattenModel1(Parent, response.Value), response.GetRawResponse());
+                var response = _azureResourceFlattenModel1RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var operation = new ExactMatchFlattenInheritanceArmOperation<AzureResourceFlattenModel1>(Response.FromValue(new AzureResourceFlattenModel1(Client, response), response.GetRawResponse()));
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -157,28 +117,27 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel1s_Get
-        /// <summary> Get an AzureResourceFlattenModel1. </summary>
+        /// <summary>
+        /// Get an AzureResourceFlattenModel1.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<AzureResourceFlattenModel1>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Get");
+            using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _azureResourceFlattenModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new AzureResourceFlattenModel1(Parent, response.Value), response.GetRawResponse());
+                    throw await _azureResourceFlattenModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new AzureResourceFlattenModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -187,25 +146,27 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Get an AzureResourceFlattenModel1.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<AzureResourceFlattenModel1> GetIfExists(string name, CancellationToken cancellationToken = default)
+        public virtual Response<AzureResourceFlattenModel1> Get(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetIfExists");
+            using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Get");
             scope.Start();
             try
             {
-                var response = _azureResourceFlattenModel1sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _azureResourceFlattenModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
+                    throw _azureResourceFlattenModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -214,70 +175,74 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <summary>
+        /// Get an AzureResourceFlattenModel1.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s
+        /// Operation Id: AzureResourceFlattenModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<Response<AzureResourceFlattenModel1>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="AzureResourceFlattenModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<AzureResourceFlattenModel1> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            async Task<Page<AzureResourceFlattenModel1>> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(name));
+                using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _azureResourceFlattenModel1RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new AzureResourceFlattenModel1(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _azureResourceFlattenModel1sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse());
-                return Response.FromValue(new AzureResourceFlattenModel1(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <summary>
+        /// Get an AzureResourceFlattenModel1.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s
+        /// Operation Id: AzureResourceFlattenModel1s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="AzureResourceFlattenModel1" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<AzureResourceFlattenModel1> GetAll(CancellationToken cancellationToken = default)
         {
-            if (name == null)
+            Page<AzureResourceFlattenModel1> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(name));
+                using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _azureResourceFlattenModel1RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new AzureResourceFlattenModel1(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Exists");
-            scope.Start();
-            try
-            {
-                var response = GetIfExists(name, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Exists");
+            using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Exists");
             scope.Start();
             try
             {
@@ -291,73 +256,25 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel1s_List
-        /// <summary> Get an AzureResourceFlattenModel1. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AzureResourceFlattenModel1" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<AzureResourceFlattenModel1> GetAll(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<bool> Exists(string name, CancellationToken cancellationToken = default)
         {
-            Page<AzureResourceFlattenModel1> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _azureResourceFlattenModel1sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new AzureResourceFlattenModel1(Parent, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-        }
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: AzureResourceFlattenModel1s_List
-        /// <summary> Get an AzureResourceFlattenModel1. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AzureResourceFlattenModel1" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<AzureResourceFlattenModel1> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<AzureResourceFlattenModel1>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _azureResourceFlattenModel1sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new AzureResourceFlattenModel1(Parent, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-        }
-
-        /// <summary> Filters the list of <see cref="AzureResourceFlattenModel1" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetAllAsGenericResources");
+            using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.Exists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AzureResourceFlattenModel1.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                var response = GetIfExists(name, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -366,21 +283,56 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> Filters the list of <see cref="AzureResourceFlattenModel1" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public async virtual Task<Response<AzureResourceFlattenModel1>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetAllAsGenericResources");
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetIfExists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AzureResourceFlattenModel1.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                var response = await _azureResourceFlattenModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<AzureResourceFlattenModel1> GetIfExists(string name, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
+            using var scope = _azureResourceFlattenModel1ClientDiagnostics.CreateScope("AzureResourceFlattenModel1Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _azureResourceFlattenModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<AzureResourceFlattenModel1>(null, response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -403,8 +355,5 @@ namespace ExactMatchFlattenInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, AzureResourceFlattenModel1, AzureResourceFlattenModel1Data> Construct() { }
     }
 }

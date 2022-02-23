@@ -17,6 +17,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChooser
     {
+        internal const string ReferenceAttributeName = "ReferenceTypeAttribute";
+        internal const string OptionalPropertiesName = "OptionalProperties";
+
         private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
         public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
@@ -24,13 +27,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(schema, out result);
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
             if (_valueCache.TryGetValue(originalType.ObjectSchema, out var result))
                 return result;
-            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
+            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
-                List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+                List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
                     result = GetCSharpType(originalType, parentType);
@@ -42,9 +45,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
-            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
+            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
                 if (IsSuperset(parentType, properties))
                 {
@@ -59,11 +62,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return CSharpType.FromSystemType(originalType.Context, parentType);
         }
 
+        private static List<PropertyInfo> GetParentPropertiesToCompare(System.Type parentType, ObjectTypeProperty[] properties)
+        {
+            var propertyNames = properties.Select(p => p.Declaration.Name).ToHashSet();
+            var attributeObj = parentType.GetCustomAttributes()?.Where(a => a.GetType().Name == ReferenceAttributeName).First();
+            var optionalPropertiesForMatch = new HashSet<string>((attributeObj?.GetType().GetProperty(OptionalPropertiesName)?.GetValue(attributeObj) as string[])!);
+            List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !optionalPropertiesForMatch.Contains(p.PropertyType.Name) || propertyNames.Contains(p.PropertyType.Name)).ToList();
+            return parentProperties;
+        }
+
         private static bool IsSuperset(System.Type parentType, ObjectTypeProperty[] properties)
         {
             var childProperties = properties.ToList();
-            List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
-
+            List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
             if (parentProperties.Count >= childProperties.Count)
                 return false;
 

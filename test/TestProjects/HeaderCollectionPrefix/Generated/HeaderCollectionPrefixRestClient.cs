@@ -16,9 +16,11 @@ namespace HeaderCollectionPrefix
 {
     internal partial class HeaderCollectionPrefixRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of HeaderCollectionPrefixRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -26,8 +28,8 @@ namespace HeaderCollectionPrefix
         /// <param name="endpoint"> server parameter. </param>
         public HeaderCollectionPrefixRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -37,7 +39,7 @@ namespace HeaderCollectionPrefix
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             if (metadata != null)
@@ -59,7 +61,7 @@ namespace HeaderCollectionPrefix
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -75,7 +77,7 @@ namespace HeaderCollectionPrefix
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

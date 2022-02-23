@@ -12,84 +12,77 @@ namespace Pagination
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region PageSizeIntegerModel
-        /// <summary> Gets an object representing a PageSizeIntegerModelCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of PageSizeIntegerModels in the PageSizeIntegerModel. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeIntegerModelCollection" /> object. </returns>
+        /// <returns> An object representing collection of PageSizeIntegerModels and their operations over a PageSizeIntegerModel. </returns>
         public static PageSizeIntegerModelCollection GetPageSizeIntegerModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeIntegerModelCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeIntegerModels();
         }
-        #endregion
 
-        #region PageSizeInt64Model
-        /// <summary> Gets an object representing a PageSizeInt64ModelCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeInt64Models in the PageSizeInt64Model. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeInt64ModelCollection" /> object. </returns>
+        /// <returns> An object representing collection of PageSizeInt64Models and their operations over a PageSizeInt64Model. </returns>
         public static PageSizeInt64ModelCollection GetPageSizeInt64Models(this ResourceGroup resourceGroup)
         {
-            return new PageSizeInt64ModelCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeInt64Models();
         }
-        #endregion
 
-        #region PageSizeInt32Model
-        /// <summary> Gets an object representing a PageSizeInt32ModelCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeInt32Models in the PageSizeInt32Model. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeInt32ModelCollection" /> object. </returns>
+        /// <returns> An object representing collection of PageSizeInt32Models and their operations over a PageSizeInt32Model. </returns>
         public static PageSizeInt32ModelCollection GetPageSizeInt32Models(this ResourceGroup resourceGroup)
         {
-            return new PageSizeInt32ModelCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeInt32Models();
         }
-        #endregion
 
-        #region PageSizeNumericModel
-        /// <summary> Gets an object representing a PageSizeNumericModelCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeNumericModels in the PageSizeNumericModel. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeNumericModelCollection" /> object. </returns>
+        /// <returns> An object representing collection of PageSizeNumericModels and their operations over a PageSizeNumericModel. </returns>
         public static PageSizeNumericModelCollection GetPageSizeNumericModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeNumericModelCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeNumericModels();
         }
-        #endregion
 
-        #region PageSizeFloatModel
-        /// <summary> Gets an object representing a PageSizeFloatModelCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeFloatModels in the PageSizeFloatModel. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeFloatModelCollection" /> object. </returns>
+        /// <returns> An object representing collection of PageSizeFloatModels and their operations over a PageSizeFloatModel. </returns>
         public static PageSizeFloatModelCollection GetPageSizeFloatModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeFloatModelCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeFloatModels();
         }
-        #endregion
 
-        #region PageSizeDoubleModel
-        /// <summary> Gets an object representing a PageSizeDoubleModelCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeDoubleModels in the PageSizeDoubleModel. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeDoubleModelCollection" /> object. </returns>
+        /// <returns> An object representing collection of PageSizeDoubleModels and their operations over a PageSizeDoubleModel. </returns>
         public static PageSizeDoubleModelCollection GetPageSizeDoubleModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeDoubleModelCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeDoubleModels();
         }
-        #endregion
 
-        #region PageSizeDecimalModel
-        /// <summary> Gets an object representing a PageSizeDecimalModelCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeDecimalModels in the PageSizeDecimalModel. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeDecimalModelCollection" /> object. </returns>
+        /// <returns> An object representing collection of PageSizeDecimalModels and their operations over a PageSizeDecimalModel. </returns>
         public static PageSizeDecimalModelCollection GetPageSizeDecimalModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeDecimalModelCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeDecimalModels();
         }
-        #endregion
 
-        #region PageSizeStringModel
-        /// <summary> Gets an object representing a PageSizeStringModelCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeStringModels in the PageSizeStringModel. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeStringModelCollection" /> object. </returns>
+        /// <returns> An object representing collection of PageSizeStringModels and their operations over a PageSizeStringModel. </returns>
         public static PageSizeStringModelCollection GetPageSizeStringModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeStringModelCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeStringModels();
         }
-        #endregion
     }
 }

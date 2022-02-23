@@ -27,12 +27,12 @@ namespace xml_service.Models
 
         internal static ComplexTypeWithMeta DeserializeComplexTypeWithMeta(XElement element)
         {
-            string iD = default;
-            if (element.Element("ID") is XElement iDElement)
+            string id = default;
+            if (element.Element("ID") is XElement idElement)
             {
-                iD = (string)iDElement;
+                id = (string)idElement;
             }
-            return new ComplexTypeWithMeta(iD);
+            return new ComplexTypeWithMeta(id);
         }
     }
 }

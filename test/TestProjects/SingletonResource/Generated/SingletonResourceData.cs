@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace SingletonResource
 {
     /// <summary> A class representing the SingletonResource data model. </summary>
-    public partial class SingletonResourceData : Resource
+    public partial class SingletonResourceData : ResourceData
     {
         /// <summary> Initializes a new instance of SingletonResourceData. </summary>
         public SingletonResourceData()
@@ -22,8 +22,9 @@ namespace SingletonResource
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="new"></param>
-        internal SingletonResourceData(ResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
+        internal SingletonResourceData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string @new) : base(id, name, type, systemData)
         {
             New = @new;
         }

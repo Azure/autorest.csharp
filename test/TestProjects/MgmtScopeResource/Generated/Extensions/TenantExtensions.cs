@@ -9,8 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Resources;
 using MgmtScopeResource.Models;
 
@@ -19,99 +18,65 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions
     {
-        #region DeploymentExtended
-        /// <summary> Gets an object representing a DeploymentExtendedCollection along with the instance operations that can be performed on it. </summary>
+        private static TenantExtensionClient GetExtensionClient(Tenant tenant)
+        {
+            return tenant.GetCachedClient((client) =>
+            {
+                return new TenantExtensionClient(client, tenant.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DeploymentExtendedCollection" /> object. </returns>
+        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this Tenant tenant)
         {
-            return new DeploymentExtendedCollection(tenant);
+            return GetExtensionClient(tenant).GetDeploymentExtendeds();
         }
-        #endregion
 
-        #region ResourceLink
-        /// <summary> Gets an object representing a ResourceLinkCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourceLinkCollection" /> object. </returns>
-        public static ResourceLinkCollection GetResourceLinks(this Tenant tenant)
+        /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        /// <returns> An object representing collection of ResourceLinks and their operations over a ResourceLink. </returns>
+        public static ResourceLinkCollection GetResourceLinks(this Tenant tenant, string scope)
         {
-            return new ResourceLinkCollection(tenant);
-        }
-        #endregion
+            Argument.AssertNotNull(scope, nameof(scope));
 
-        private static DeploymentsRestOperations GetDeploymentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, ArmClientOptions clientOptions, Uri endpoint = null, string apiVersion = default)
-        {
-            return new DeploymentsRestOperations(clientDiagnostics, pipeline, clientOptions, endpoint, apiVersion);
+            return GetExtensionClient(tenant).GetResourceLinks(scope);
         }
 
-        /// RequestPath: /providers/Microsoft.Resources/calculateTemplateHash
-        /// ContextualPath: /
-        /// OperationId: Deployments_CalculateTemplateHash
-        /// <summary> Calculate the hash of the given template. </summary>
+        /// <summary>
+        /// Calculate the hash of the given template.
+        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
+        /// Operation Id: Deployments_CalculateTemplateHash
+        /// </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, object template, CancellationToken cancellationToken = default)
+        public async static Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this Tenant tenant, object template, CancellationToken cancellationToken = default)
         {
-            if (template == null)
-            {
-                throw new ArgumentNullException(nameof(template));
-            }
+            Argument.AssertNotNull(template, nameof(template));
 
-            return await tenant.UseClientContext(async (baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("TenantExtensions.CalculateTemplateHashDeployment");
-                scope.Start();
-                try
-                {
-                    DeploymentsRestOperations restOperations = GetDeploymentsRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = await restOperations.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            ).ConfigureAwait(false);
+            return await GetExtensionClient(tenant).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
-        /// RequestPath: /providers/Microsoft.Resources/calculateTemplateHash
-        /// ContextualPath: /
-        /// OperationId: Deployments_CalculateTemplateHash
-        /// <summary> Calculate the hash of the given template. </summary>
+        /// <summary>
+        /// Calculate the hash of the given template.
+        /// Request Path: /providers/Microsoft.Resources/calculateTemplateHash
+        /// Operation Id: Deployments_CalculateTemplateHash
+        /// </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this Tenant tenant, object template, CancellationToken cancellationToken = default)
         {
-            if (template == null)
-            {
-                throw new ArgumentNullException(nameof(template));
-            }
+            Argument.AssertNotNull(template, nameof(template));
 
-            return tenant.UseClientContext((baseUri, credential, options, pipeline) =>
-            {
-                var clientDiagnostics = new ClientDiagnostics(options);
-                using var scope = clientDiagnostics.CreateScope("TenantExtensions.CalculateTemplateHashDeployment");
-                scope.Start();
-                try
-                {
-                    DeploymentsRestOperations restOperations = GetDeploymentsRestOperations(clientDiagnostics, pipeline, options, baseUri);
-                    var response = restOperations.CalculateTemplateHash(template, cancellationToken);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            );
+            return GetExtensionClient(tenant).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }
 }

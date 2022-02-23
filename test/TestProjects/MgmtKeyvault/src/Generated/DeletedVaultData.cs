@@ -12,7 +12,7 @@ using MgmtKeyvault.Models;
 namespace MgmtKeyvault
 {
     /// <summary> A class representing the DeletedVault data model. </summary>
-    public partial class DeletedVaultData : Azure.ResourceManager.Models.Resource
+    public partial class DeletedVaultData : ResourceData
     {
         /// <summary> Initializes a new instance of DeletedVaultData. </summary>
         internal DeletedVaultData()
@@ -23,8 +23,9 @@ namespace MgmtKeyvault
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> Properties of the vault. </param>
-        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType type, DeletedVaultProperties properties) : base(id, name, type)
+        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, DeletedVaultProperties properties) : base(id, name, type, systemData)
         {
             Properties = properties;
         }

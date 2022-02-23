@@ -23,7 +23,4 @@ request-path-to-parent:
 
 override-operation-name:
   ListOrderAtResourceGroupLevel: GetAll
-
-mgmt-debug:
-  show-request-path: true
 ```

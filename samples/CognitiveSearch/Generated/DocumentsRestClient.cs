@@ -19,11 +19,13 @@ namespace CognitiveSearch
 {
     internal partial class DocumentsRestClient
     {
-        private string endpoint;
-        private string indexName;
-        private string apiVersion;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _endpoint;
+        private readonly string _indexName;
+        private readonly string _apiVersion;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of DocumentsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -31,13 +33,13 @@ namespace CognitiveSearch
         /// <param name="endpoint"> The endpoint URL of the search service. </param>
         /// <param name="indexName"> The name of the index. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="indexName"/>, or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="indexName"/> or <paramref name="apiVersion"/> is null. </exception>
         public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
-            this.endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
-            this.indexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
-            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            _clientDiagnostics = clientDiagnostics;
+            _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            _indexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
+            _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -47,12 +49,12 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/$count", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -75,7 +77,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -96,7 +98,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -106,9 +108,9 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs", false);
             if (searchText != null)
@@ -167,7 +169,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$top", searchOptions.Top.Value, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -192,7 +194,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -215,7 +217,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -225,12 +227,12 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.search", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -264,7 +266,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -292,7 +294,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -302,9 +304,9 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs('", false);
             uri.AppendPath(key, true);
@@ -313,7 +315,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQueryDelimited("$select", selectedFields, ",", true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -344,7 +346,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -373,7 +375,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -383,9 +385,9 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.suggest", false);
             uri.AppendQuery("search", searchText, true);
@@ -417,7 +419,7 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$top", suggestOptions.Top.Value, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -453,7 +455,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -487,7 +489,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -497,12 +499,12 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.suggest", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -536,7 +538,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -564,7 +566,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -574,12 +576,12 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.index", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -614,7 +616,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -643,7 +645,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -653,12 +655,12 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.autocomplete", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("search", searchText, true);
             uri.AppendQuery("suggesterName", suggesterName, true);
             if (autocompleteOptions?.AutocompleteMode != null)
@@ -725,7 +727,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -759,7 +761,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -769,12 +771,12 @@ namespace CognitiveSearch
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/indexes('", false);
-            uri.AppendRaw(indexName, true);
+            uri.AppendRaw(_indexName, true);
             uri.AppendRaw("')", false);
             uri.AppendPath("/docs/search.post.autocomplete", false);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -808,7 +810,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -836,7 +838,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

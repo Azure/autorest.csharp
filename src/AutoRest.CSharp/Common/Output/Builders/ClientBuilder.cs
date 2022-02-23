@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
@@ -20,7 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private const string ClientSuffixValue = "Client";
         private const string OperationsSuffixValue = "Operations";
 
-        public static string GetClientSuffix(BuildContext context) => context.Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
+        public static string GetClientSuffix(BuildContext context) => Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
 
         public static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

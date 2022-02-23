@@ -9,13 +9,11 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
+using Azure.ResourceManager.Core;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -24,28 +22,114 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource, BuildContext<MgmtOutputLibrary> context)
-            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, context, CollectionPosition)
+        public ResourceCollection(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> operationSets, Resource resource)
+            : base(operationSets, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
         {
             Resource = resource;
         }
 
+        public override CSharpType? BaseType => typeof(ArmCollection);
+        protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
+        {
+            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => p.IsRequired))
+                return base.EnsureGetInterfaces();
+
+            var getRestOperation = GetAllOperation.OperationMappings.Values.First();
+            return new CSharpType[]
+            {
+                new CSharpType(typeof(IEnumerable<>), getRestOperation.MgmtReturnType!),
+                new CSharpType(typeof(IAsyncEnumerable<>), getRestOperation.MgmtReturnType!)
+            };
+        }
         public Resource Resource { get; }
 
-        public MgmtClientOperation? GetAllOperation => EnsureGetAllOperation();
+        public override Resource GetResource() => Resource;
+
+        public override bool CanValidateResourceType => ResourceTypes.SelectMany(p => p.Value).Distinct().Count() == 1;
+
+        public override string BranchIdVariableName => "Id";
+
+        private MgmtClientOperation? _getAllOperation;
+        public MgmtClientOperation? GetAllOperation => _getAllOperation ??= EnsureGetAllOperation();
 
         private Dictionary<Parameter, FormattableString> _extraConstructorParameters = new();
-        public IEnumerable<Parameter> ExtraConstructorParameters => _extraConstructorParameters.Keys;
 
-        private List<ContextualParameterMapping> _extraContextualParameterMapping = new();
-        public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping;
+        protected override IEnumerable<Parameter> EnsureExtraCtorParameters()
+        {
+            _ = ExtraContextualParameterMapping;
+            return _extraConstructorParameters.Keys;
+        }
+
+        protected override ConstructorSignature? EnsureArmClientCtor()
+        {
+            return new ConstructorSignature(
+              Name: Type.Name,
+              Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+              Modifiers: "internal",
+              Parameters: _armClientCtorParameters.Concat(ExtraConstructorParameters).ToArray(),
+              Initializer: new(
+                  isBase: true,
+                  arguments: _armClientCtorParameters));
+        }
+        protected override ConstructorSignature? EnsureResourceDataCtor() => null;
+
+        protected override IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping()
+        {
+            var result = new List<ContextualParameterMapping>();
+            Operation? op = null;
+            OperationSet? opSet = null;
+            foreach ((var operationSet, var operations) in _allOperationMap)
+            {
+                foreach (var operation in operations)
+                {
+                    if (IsListOperation(operation, operationSet))
+                    {
+                        op = operation;
+                        opSet = operationSet;
+                        break;
+                    }
+                }
+            }
+
+            if (op is null || opSet is null)
+                return result;
+
+            RestClientMethod method = MgmtContext.Library.GetRestClientMethod(op);
+            // calculate the ResourceType from the RequestPath of this resource
+            var resourceTypeSegments = ResourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
+            // iterate over all the reference segments in the diff of this GetAll operation
+            var candidatesOfParameters = new List<Parameter>(method.Parameters);
+
+            var opRequestPath = op.GetRequestPath(ResourceType);
+            foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(opSet, opRequestPath)))
+            {
+                var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
+                if (index < 0)
+                {
+                    var parameter = candidatesOfParameters.First(p => p.Name == segment.ReferenceName && p.Type.Equals(segment.Type));
+                    candidatesOfParameters.Remove(parameter);
+                    // this reference is not in the resource type, therefore this parameter goes to the constructor
+                    _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
+                    // there is a key for this parameter, get the key and add this one to contextual parameter mapping
+                    var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, opRequestPath);
+                    result.Add(new ContextualParameterMapping(key, segment, GetFieldName(parameter)));
+                }
+                else
+                {
+                    var candidate = resourceTypeSegments[index];
+                    var value = ResourceType[candidate.index];
+                    result.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
+                }
+            }
+            return result;
+        }
 
         private MgmtClientOperation? EnsureGetAllOperation()
         {
             // if this resource was listed in list-exception section, we suppress the exception here
             // or if the debug flag `--mgmt-debug.suppress-list-exception` is on, we suppress the exception here
-            var suppressListException = RequestPaths.Any(path => _context.Configuration.MgmtConfiguration.ListException.Contains(path))
-                || _context.Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
+            var suppressListException = RequestPaths.Any(path => Configuration.MgmtConfiguration.ListException.Contains(path))
+                || Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
             var getAllOperation = ClientOperations.Where(operation => operation.Name == "GetAll").OrderBy(operation => ReferenceSegments(operation).Count()).FirstOrDefault();
             if (!suppressListException && getAllOperation == null)
                 throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPaths: {string.Join(", ", RequestPaths)}) does not have a `GetAll` method");
@@ -61,32 +145,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return ReferenceSegments(getAllOperation).Any() ? null : getAllOperation;
             }
 
-            // calculate the ResourceType from the RequestPath of this resource
-            var resourceType = RequestPaths.GetResourceType(_context);
-            var resourceTypeSegments = resourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
-            // iterate over all the reference segments in the diff of this GetAll operation
-            var candidatesOfParameters = new List<Parameter>(getAllOperation.Parameters);
-            foreach (var segment in ReferenceSegments(getAllOperation))
-            {
-                var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
-                if (index < 0)
-                {
-                    var parameter = candidatesOfParameters.First(p => p.Name == segment.ReferenceName && p.Type.Equals(segment.Type));
-                    candidatesOfParameters.Remove(parameter);
-                    // this reference is not in the resource type, therefore this parameter goes to the constructor
-                    _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
-                    // there is a key for this parameter, get the key and add this one to contextual parameter mapping
-                    var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, getAllOperation.First().RequestPath);
-                    _extraContextualParameterMapping.Add(new ContextualParameterMapping(key, segment, GetFieldName(parameter)));
-                }
-                else
-                {
-                    var candidate = resourceTypeSegments[index];
-                    var value = ResourceType[candidate.index];
-                    _extraContextualParameterMapping.Add(new ContextualParameterMapping("", segment, $"\"{value.ConstantValue}\""));
-                }
-            }
-
             return getAllOperation;
         }
 
@@ -98,18 +156,27 @@ namespace AutoRest.CSharp.Mgmt.Output
         private static IEnumerable<Segment> ReferenceSegments(MgmtClientOperation clientOperation)
         {
             var operation = clientOperation.First();
+            return GetDiffFromRequestPath(operation.RequestPath, operation.ContextualPath);
+        }
+
+        private static IEnumerable<Segment> GetDiffFromRequestPath(RequestPath requestPath, RequestPath contextPath)
+        {
             RequestPath diff;
-            if (operation.RequestPath.IsAncestorOf(operation.ContextualPath))
-                diff = operation.RequestPath.TrimAncestorFrom(operation.ContextualPath);
+            if (requestPath.IsAncestorOf(contextPath))
+            {
+                diff = requestPath.TrimAncestorFrom(contextPath);
+            }
             else
-                diff = operation.ContextualPath.TrimAncestorFrom(operation.RequestPath);
+            {
+                diff = contextPath.TrimAncestorFrom(requestPath);
+            }
             return diff.Where(segment => segment.IsReference);
         }
 
         protected override bool ShouldIncludeOperation(Operation operation)
         {
             var requestPath = operation.GetHttpPath();
-            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
             {
                 return positions.Contains(Position);
             }
@@ -126,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns></returns>
         protected override RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            var contextualPath = operationSet.ParentRequestPath(_context);
+            var contextualPath = operationSet.ParentRequestPath();
             // we need to replace the scope in this contextual path with the actual scope in the operation
             var scope = contextualPath.GetScopePath();
             if (!scope.IsParameterizedScope())
@@ -142,21 +209,45 @@ namespace AutoRest.CSharp.Mgmt.Output
             return $"A class representing collection of {clientPrefix} and their operations over its parent.";
         }
 
-        private IEnumerable<MgmtClientOperation>? _allOperations;
-        public override IEnumerable<MgmtClientOperation> AllOperations => _allOperations ??= EnsureAllOperations();
-
-        private IEnumerable<MgmtClientOperation> EnsureAllOperations()
+        protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()
         {
             var result = new List<MgmtClientOperation>();
             if (CreateOperation != null)
                 result.Add(CreateOperation);
             if (GetOperation != null)
                 result.Add(GetOperation);
-            //if (DeleteOperation != null)
-            //    result.Add(DeleteOperation); // comment this back if we decide to include delete method in collections
             result.AddRange(ClientOperations);
+            if (GetOperation != null)
+            {
+                var getMgmtRestOperation = GetOperation.OperationMappings.Values.First();
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getMgmtRestOperation,
+                        "Exists",
+                        typeof(bool),
+                        $"Checks to see if the resource exists in azure.")));
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getMgmtRestOperation,
+                        "GetIfExists",
+                        getMgmtRestOperation.MgmtReturnType,
+                        $"Tries to get details for this resource from the service.")));
+            }
 
             return result;
+        }
+
+        public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
+        {
+            return branch.GetResourceType();
+        }
+
+        protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
+        {
+            foreach (var reference in ExtraConstructorParameters)
+            {
+                yield return new FieldDeclaration(FieldModifiers, reference.Type, GetFieldName(reference).ToString());
+            }
         }
 
         private IDictionary<RequestPath, ISet<ResourceTypeSegment>>? _resourceTypes;
@@ -184,17 +275,19 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<ResourceTypeSegment> GetResourceTypes(RequestPath requestPath, RequestPath contextualPath)
         {
-            var type = contextualPath.GetResourceType(_context.Configuration.MgmtConfiguration);
+            var type = contextualPath.GetResourceType();
             if (type == ResourceTypeSegment.Scope)
-                return requestPath.GetParameterizedScopeResourceTypes(_context.Configuration.MgmtConfiguration)!;
+                return requestPath.GetParameterizedScopeResourceTypes()!;
 
             return type.AsIEnumerable();
         }
 
-        public Parameter ParentParameter => OptionsParameter with
+        public Parameter ParentParameter => ResourceParameter with
         {
             Name = "parent",
             Description = $"The resource representing the parent resource."
         };
+
+        protected override string IdParamDescription => $"The identifier of the parent resource that is the target of operations.";
     }
 }

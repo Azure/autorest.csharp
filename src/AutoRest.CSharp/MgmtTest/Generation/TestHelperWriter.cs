@@ -4,8 +4,6 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -13,23 +11,20 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     {
         private CodeWriter _writer;
         private CodeWriter _tagsWriter = new CodeWriter();
-        private BuildContext<MgmtOutputLibrary> _context;
 
-        protected string TestNamespace => _context.DefaultNamespace + ".Tests";
+        protected string TestNamespace => MgmtContext.Context.DefaultNamespace + ".Tests";
         protected string TypeNameOfThis => "TestHelper";
 
-        public TestHelperWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
+        public TestHelperWriter(CodeWriter writer)
         {
             _writer = writer;
-            _context = context;
         }
 
         public void WriteMockExtension()
         {
-
             using (_writer.Namespace(TestNamespace))
             {
-                _writer.WriteXmlDocumentationSummary($"Test Extension for {_context.DefaultNamespace}");
+                _writer.WriteXmlDocumentationSummary($"Test Extension for {MgmtContext.Context.DefaultNamespace}");
                 _writer.Append($"public static partial class {TypeNameOfThis:D}");
                 using (_writer.Scope())
                 {

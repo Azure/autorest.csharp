@@ -15,17 +15,17 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of MgmtGroupParent and their operations over its parent. </summary>
     public partial class MgmtGroupParentCollection : ArmCollection, IEnumerable<MgmtGroupParent>, IAsyncEnumerable<MgmtGroupParent>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly MgmtGroupParentsRestOperations _mgmtGroupParentsRestClient;
+        private readonly ClientDiagnostics _mgmtGroupParentClientDiagnostics;
+        private readonly MgmtGroupParentsRestOperations _mgmtGroupParentRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentCollection"/> class for mocking. </summary>
         protected MgmtGroupParentCollection()
@@ -33,12 +33,13 @@ namespace MgmtListMethods
         }
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentCollection"/> class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal MgmtGroupParentCollection(ArmResource parent) : base(parent)
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal MgmtGroupParentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            ClientOptions.TryGetApiVersion(MgmtGroupParent.ResourceType, out string apiVersion);
-            _mgmtGroupParentsRestClient = new MgmtGroupParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri, apiVersion);
+            _mgmtGroupParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGroupParent.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(MgmtGroupParent.ResourceType, out string mgmtGroupParentApiVersion);
+            _mgmtGroupParentRestClient = new MgmtGroupParentsRestOperations(_mgmtGroupParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGroupParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -50,71 +51,28 @@ namespace MgmtListMethods
                 throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ManagementGroup.ResourceType), nameof(id));
         }
 
-        // Collection level operations.
-
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_CreateOrUpdate
-        /// <summary> Create or update. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_CreateOrUpdate
+        /// </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual MgmtGroupParentCreateOrUpdateOperation CreateOrUpdate(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ArmOperation<MgmtGroupParent>> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (mgmtGroupParentName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.CreateOrUpdate");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _mgmtGroupParentsRestClient.CreateOrUpdate(Id.Name, mgmtGroupParentName, parameters, cancellationToken);
-                var operation = new MgmtGroupParentCreateOrUpdateOperation(Parent, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_CreateOrUpdate
-        /// <summary> Create or update. </summary>
-        /// <param name="mgmtGroupParentName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<MgmtGroupParentCreateOrUpdateOperation> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
-        {
-            if (mgmtGroupParentName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = await _mgmtGroupParentsRestClient.CreateOrUpdateAsync(Id.Name, mgmtGroupParentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtGroupParentCreateOrUpdateOperation(Parent, response);
+                var response = await _mgmtGroupParentRestClient.CreateOrUpdateAsync(Id.Name, mgmtGroupParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtListMethodsArmOperation<MgmtGroupParent>(Response.FromValue(new MgmtGroupParent(Client, response), response.GetRawResponse()));
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -126,28 +84,31 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Create or update.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_CreateOrUpdate
+        /// </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="mgmtGroupParentName"> Name. </param>
+        /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public virtual Response<MgmtGroupParent> Get(string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<MgmtGroupParent> CreateOrUpdate(bool waitForCompletion, string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
         {
-            if (mgmtGroupParentName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _mgmtGroupParentsRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken);
-                if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MgmtGroupParent(Parent, response.Value), response.GetRawResponse());
+                var response = _mgmtGroupParentRestClient.CreateOrUpdate(Id.Name, mgmtGroupParentName, parameters, cancellationToken);
+                var operation = new MgmtListMethodsArmOperation<MgmtGroupParent>(Response.FromValue(new MgmtGroupParent(Client, response), response.GetRawResponse()));
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -156,28 +117,27 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_Get
-        /// <summary> Retrieves information. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
         public async virtual Task<Response<MgmtGroupParent>> GetAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGroupParentName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
             scope.Start();
             try
             {
-                var response = await _mgmtGroupParentsRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
+                var response = await _mgmtGroupParentRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new MgmtGroupParent(Parent, response.Value), response.GetRawResponse());
+                    throw await _mgmtGroupParentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new MgmtGroupParent(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -186,25 +146,27 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public virtual Response<MgmtGroupParent> GetIfExists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        public virtual Response<MgmtGroupParent> Get(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGroupParentName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.Get");
             scope.Start();
             try
             {
-                var response = _mgmtGroupParentsRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken);
+                var response = _mgmtGroupParentRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<MgmtGroupParent>(null, response.GetRawResponse());
-                return Response.FromValue(new MgmtGroupParent(this, response.Value), response.GetRawResponse());
+                    throw _mgmtGroupParentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new MgmtGroupParent(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,70 +175,104 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="mgmtGroupParentName"> Name. </param>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
+        /// Operation Id: MgmtGroupParents_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public async virtual Task<Response<MgmtGroupParent>> GetIfExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="MgmtGroupParent" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<MgmtGroupParent> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            if (mgmtGroupParentName == null)
+            async Task<Page<MgmtGroupParent>> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
+                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _mgmtGroupParentRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParent(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
-            scope.Start();
-            try
+            async Task<Page<MgmtGroupParent>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = await _mgmtGroupParentsRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<MgmtGroupParent>(null, response.GetRawResponse());
-                return Response.FromValue(new MgmtGroupParent(this, response.Value), response.GetRawResponse());
+                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _mgmtGroupParentRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParent(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="mgmtGroupParentName"> Name. </param>
+        /// <summary>
+        /// Lists all in a resource group.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
+        /// Operation Id: MgmtGroupParents_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public virtual Response<bool> Exists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="MgmtGroupParent" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<MgmtGroupParent> GetAll(CancellationToken cancellationToken = default)
         {
-            if (mgmtGroupParentName == null)
+            Page<MgmtGroupParent> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
+                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _mgmtGroupParentRestClient.List(Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParent(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
-            scope.Start();
-            try
+            Page<MgmtGroupParent> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                var response = GetIfExists(mgmtGroupParentName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
+                using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _mgmtGroupParentRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParent(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            if (mgmtGroupParentName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
-            }
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
             scope.Start();
             try
             {
@@ -290,86 +286,89 @@ namespace MgmtListMethods
             }
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
+        /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="MgmtGroupParent" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<MgmtGroupParent> GetAll(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
+        public virtual Response<bool> Exists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            Page<MgmtGroupParent> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
+
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.Exists");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _mgmtGroupParentsRestClient.List(Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = GetIfExists(mgmtGroupParentName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
-            Page<MgmtGroupParent> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _mgmtGroupParentsRestClient.ListNextPage(nextLink, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// RequestPath: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents
-        /// ContextualPath: /providers/Microsoft.Management/managementGroups/{managementGroupId}
-        /// OperationId: MgmtGroupParents_List
-        /// <summary> Lists all in a resource group. </summary>
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
+        /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="MgmtGroupParent" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<MgmtGroupParent> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
+        public async virtual Task<Response<MgmtGroupParent>> GetIfExistsAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            async Task<Page<MgmtGroupParent>> FirstPageFunc(int? pageSizeHint)
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
+
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _mgmtGroupParentsRestClient.ListAsync(Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                var response = await _mgmtGroupParentRestClient.GetAsync(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<MgmtGroupParent>(null, response.GetRawResponse());
+                return Response.FromValue(new MgmtGroupParent(Client, response.Value), response.GetRawResponse());
             }
-            async Task<Page<MgmtGroupParent>> NextPageFunc(string nextLink, int? pageSizeHint)
+            catch (Exception e)
             {
-                using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _mgmtGroupParentsRestClient.ListNextPageAsync(nextLink, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new MgmtGroupParent(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                scope.Failed(e);
+                throw;
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
+        /// <param name="mgmtGroupParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
+        public virtual Response<MgmtGroupParent> GetIfExists(string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(mgmtGroupParentName, nameof(mgmtGroupParentName));
+
+            using var scope = _mgmtGroupParentClientDiagnostics.CreateScope("MgmtGroupParentCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _mgmtGroupParentRestClient.Get(Id.Name, mgmtGroupParentName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<MgmtGroupParent>(null, response.GetRawResponse());
+                return Response.FromValue(new MgmtGroupParent(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         IEnumerator<MgmtGroupParent> IEnumerable<MgmtGroupParent>.GetEnumerator()
@@ -386,8 +385,5 @@ namespace MgmtListMethods
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, MgmtGroupParent, MgmtGroupParentData> Construct() { }
     }
 }

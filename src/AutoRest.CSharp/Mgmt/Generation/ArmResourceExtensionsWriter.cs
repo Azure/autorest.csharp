@@ -1,42 +1,56 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Core;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Generation.Types;
+using System;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmResourceExtensionsWriter : MgmtExtensionWriter
     {
-        public ArmResourceExtensionsWriter(CodeWriter writer, Output.MgmtExtensions extensions, BuildContext<MgmtOutputLibrary> context) : base(writer, extensions, context)
+        private MgmtExtensions This { get; }
+
+        public ArmResourceExtensionsWriter(MgmtExtensions extensions)
+            : base(extensions)
+        {
+            This = extensions;
+        }
+
+        protected override void WritePrivateHelpers()
         {
         }
 
-        protected override string Description => "A class to add extension methods to ArmResource.";
-        protected override string ExtensionOperationVariableName => "armResource";
+        protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
+            => WriteCollectionBody(signature, false, false);
 
-        protected override Type ExtensionOperationVariableType => typeof(ArmResource);
-
-        public override void Write()
+        private void WriteCollectionBody(MethodSignature signature, bool isAsync, bool isPaging)
         {
-            using (_writer.Namespace(Context.DefaultNamespace))
+            if (!IsArmCore)
             {
-                _writer.WriteXmlDocumentationSummary($"{Description}");
-                using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
+                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient<{signature.ReturnType}>(({ArmClientReference.ToVariableName()}) =>"))
                 {
-                    // Write resource collection entries
-                    WriteChildResourceEntries();
+                    WriteGetter(signature.ReturnType, $"{ArmClientReference.ToVariableName()}");
                 }
+                _writer.Line($");");
             }
+            else
+            {
+                WriteGetter(signature.ReturnType, ArmClientReference);
+            }
+        }
+
+        private void WriteGetter(CSharpType? type, string armClientVariable)
+        {
+            _writer.Line($"return new {type}({armClientVariable}, {This.ExtensionParameter.Name}.Id);");
         }
     }
 }

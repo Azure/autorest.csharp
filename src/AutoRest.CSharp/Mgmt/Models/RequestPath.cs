@@ -4,27 +4,36 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
     /// <summary>
     /// A <see cref="RequestPath"/> represents a parsed request path in the swagger which corresponds to an operation. For instance, `/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines`
     /// </summary>
-    internal struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
+    internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
     {
+        private const string _providerPath = "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}";
+        private const string _featurePath = "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features";
+
+        internal const string ManagementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
+        internal const string ResourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
+        internal const string SubscriptionScopePrefix = "/subscriptions";
+        internal const string TenantScopePrefix = "/tenants";
+
         /// <summary>
         /// This is a placeholder of request path for "any" resources in other RPs
         /// </summary>
         public static readonly RequestPath Any = new(new[] { new Segment("*") });
+
         /// <summary>
         /// The <see cref="RequestPath"/> of a resource group resource
         /// </summary>
@@ -32,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment("subscriptions"),
             new Segment(new Reference("subscriptionId", typeof(string)), true, true),
             new Segment("resourceGroups"),
-            new Segment(new Reference("resourceGroupName", typeof(string)), true, true)
+            new Segment(new Reference("resourceGroupName", typeof(string)), true, false)
         });
 
         /// <summary>
@@ -46,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// <summary>
         /// The <see cref="RequestPath"/> of tenants
         /// </summary>
-        public static readonly RequestPath Tenant = new(new Segment[] { });
+        public static readonly RequestPath Tenant = new(Enumerable.Empty<Segment>());
 
         /// <summary>
         /// The <see cref="RequestPath"/> of a management group resource
@@ -59,22 +68,39 @@ namespace AutoRest.CSharp.Mgmt.Models
             new Segment(new Reference("managementGroupId", typeof(string)), true, false)
         });
 
-        private IReadOnlyList<Segment> _segments;
+        private readonly IReadOnlyList<Segment> _segments;
 
-        /// <summary>
-        /// Constructs the <see cref="RequestPath"/> instance using the information in a <see cref="RestClientMethod"/>
-        /// Only the information about request path is used, other information, like HttpMethod is not used.
-        /// This is based on the facts that the paths of different operations under the same path are the same - they could have different non-path parameters, but path parameters must be the same
-        /// </summary>
-        /// <param name="method"></param>
-        public RequestPath(RestClientMethod method)
+        public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)
         {
-            var segments = method.Request.PathSegments
-                .SelectMany(pathSegment => ParsePathSegment(pathSegment))
-                .ToList();
-            _segments = CheckByIdPath(segments);
-            SerializedPath = method.Operation.GetHttpPath();
+            foreach (var request in operation.Requests)
+            {
+                var httpRequest = request.Protocol.Http as HttpRequest;
+                if (httpRequest is null)
+                    continue;
+
+                var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(operation, request.Parameters);
+                var segments = new List<Segment>();
+                var segmentIndex = 0;
+                CreateSegments(httpRequest.Uri, references, segments, ref segmentIndex);
+                CreateSegments(httpRequest.Path, references, segments, ref segmentIndex);
+
+                return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
+            }
+
+            throw new ErrorHelpers.ErrorException($"We didn't find request path for {operationGroup.Key}.{operation.CSharpName()}");
         }
+
+        private RequestPath(IReadOnlyList<Segment> segments, string httpPath)
+        {
+            _segments = segments;
+            SerializedPath = httpPath;
+            IsExpandable = GetIsExpandable(segments);
+        }
+
+        private static bool GetIsExpandable(IEnumerable<Segment> segments)
+            => segments
+                .Where((s, i) => i % 2 == 0 && s.IsReference && !s.Reference.Type.IsFrameworkType && s.Reference.Type.Implementation is EnumType)
+                .Any();
 
         private static IReadOnlyList<Segment> CheckByIdPath(IReadOnlyList<Segment> segments)
         {
@@ -98,10 +124,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// This is used for the request path that does not come from the swagger document, or an incomplete request path
         /// </summary>
         /// <param name="segments"></param>
-        public RequestPath(IEnumerable<Segment> segments)
+        public RequestPath(IEnumerable<Segment> segments) : this(segments.ToArray(), Segment.BuildSerializedSegments(segments))
         {
-            _segments = segments.ToArray();
-            SerializedPath = Segment.BuildSerializedSegments(segments);
         }
 
         /// <summary>
@@ -109,8 +133,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public string SerializedPath { get; }
 
+        public bool IsExpandable { get; }
+
         /// <summary>
-        /// Check if this <see cref="RequestPath"/> is the ancestor (aka prefix) of <code other/>
+        /// Check if this <see cref="RequestPath"/> is a prefix path of <code other/>
         /// Note that this.IsAncestorOf(this) will return false which indicates that this method is testing the "proper ancestor" like a proper subset.
         /// </summary>
         /// <param name="other"></param>
@@ -161,6 +187,12 @@ namespace AutoRest.CSharp.Mgmt.Models
                 diff = new RequestPath(other._segments.Skip(this.Count));
                 return true;
             }
+            // Handle the special case of trim provider from feature
+            else if (this.SerializedPath == _providerPath && other.SerializedPath.StartsWith(_featurePath))
+            {
+                diff = new RequestPath(other._segments.Skip(this.Count + 2));
+                return true;
+            }
             return false;
         }
 
@@ -172,7 +204,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         public RequestPath TrimScope()
         {
             var scope = this.GetScopePath();
-            if (scope == this)
+            // The scope for /subscriptions is /subscriptions/{subscriptionId}, we identify such case with scope.Count > this.Count.
+            if (scope == this || scope.Count > this.Count)
                 return Tenant; // if myself is a scope path, we return the empty path after the trim.
             return scope.TrimAncestorFrom(this);
         }
@@ -182,10 +215,48 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new RequestPath(this._segments.Concat(other._segments));
         }
 
-        public IEnumerable<RequestPath> Expand(MgmtConfiguration config)
+        public RequestPath ApplyHint(ResourceTypeSegment hint)
+        {
+            if (hint.Count == 0)
+                return this;
+            int hintIndex = 0;
+            List<Segment> newPath = new List<Segment>();
+            int thisIndex = 0;
+            for (; thisIndex < _segments.Count; thisIndex++)
+            {
+                var segment = this[thisIndex];
+                if (segment.IsExpandable)
+                {
+                    newPath.Add(hint[hintIndex]);
+                    hintIndex++;
+                }
+                else
+                {
+                    if (segment.Equals(hint[hintIndex]))
+                    {
+                        hintIndex++;
+                    }
+                    newPath.Add(segment);
+                }
+                if (hintIndex >= hint.Count)
+                {
+                    thisIndex++;
+                    break;
+                }
+            }
+
+            //copy remaining items in this
+            for (; thisIndex < _segments.Count; thisIndex++)
+            {
+                newPath.Add(_segments[thisIndex]);
+            }
+            return new RequestPath(newPath);
+        }
+
+        public IEnumerable<RequestPath> Expand()
         {
             // we first get the resource type
-            var resourceType = this.GetResourceType(config);
+            var resourceType = this.GetResourceType();
 
             // if this resource type is a constant, we do not need to expand it
             if (resourceType.IsConstant)
@@ -194,13 +265,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             // otherwise we need to expand them (the resource type is not a constant)
             // first we get all the segment that is not a constant
             var possibleValueMap = new Dictionary<Segment, IEnumerable<Segment>>();
-            foreach (var segment in resourceType.Where(segment => segment.IsReference))
+            foreach (var segment in resourceType.Where(segment => segment.IsReference && !segment.Reference.Type.IsFrameworkType))
             {
                 var type = segment.Reference.Type.Implementation;
                 switch (type)
                 {
                     case EnumType enumType:
-                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict)));
+                        possibleValueMap.Add(segment, enumType.Values.Select(v => new Segment(v.Value, segment.Escape, segment.IsStrict, enumType.Type)));
                         break;
                     default:
                         throw new InvalidOperationException($"The resource type {this} contains variables in it, but it is not an enum type, therefore we cannot expand it. Please double check and/or override it in `request-path-to-resource-type` section.");
@@ -241,28 +312,61 @@ namespace AutoRest.CSharp.Mgmt.Models
             return queue.Select(list => new RequestPath(list));
         }
 
-        private static IEnumerable<Segment> ParsePathSegment(PathSegment pathSegment)
+        private static void CreateSegments(string path, IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> references, ICollection<Segment> segments, ref int segmentIndex)
         {
-            // we explicitly skip the `uri` variable in the path (which should be `endpoint`)
-            if (pathSegment.Value.Type.IsFrameworkType &&
-                pathSegment.Value.Type.FrameworkType == typeof(Uri))
-                return Enumerable.Empty<Segment>();
-            if (pathSegment.Value.IsConstant)
+            foreach ((ReadOnlySpan<char> span, bool isLiteral) in Utilities.StringExtensions.GetPathParts(path))
             {
-                // in this case, we have a constant in this path segment, which might contains slashes
-                // we need to split it into real segments
-                // For instance we might get "/providers/Microsoft.Storage/blobServices/default" here
-                // we will never get null in this constant since it comes from request path
-                var type = pathSegment.Value.Constant.Type;
-                var value = pathSegment.Value.Constant.Value!;
-                // if this is a string type
-                if (type.IsFrameworkType && type.FrameworkType == typeof(string))
+                if (isLiteral)
                 {
-                    return ((string)value).Split('/', StringSplitOptions.RemoveEmptyEntries).Select(s => new Segment(s));
+                    // in this case, we have a constant in this path segment, which might contains slashes
+                    // we need to split it into real segments
+                    // For instance we might get "/providers/Microsoft.Storage/blobServices/default" here
+                    // we will never get null in this constant since it comes from request path
+                    var literalSpan = span;
+                    while (!literalSpan.IsEmpty)
+                    {
+                        var separatorIndex = literalSpan.IndexOf('/');
+                        if (separatorIndex > 0)
+                        {
+                            segmentIndex++;
+                            segments.Add(new Segment(literalSpan[..separatorIndex].ToString()));
+                        }
+
+                        if (separatorIndex < 0)
+                        {
+                            segments.Add(new Segment(literalSpan.ToString()));
+                            break;
+                        }
+
+                        literalSpan = literalSpan[(separatorIndex + 1)..];
+                    }
+                }
+                else
+                {
+                    if (references.TryGetValue(span.ToString(), out var parameterReference))
+                    {
+                        segmentIndex++;
+                        var (referenceOrConstant, skipUriEncoding) = parameterReference;
+                        var valueType = referenceOrConstant.Type;
+
+                        // we explicitly skip the `uri` variable in the path (which should be `endpoint`)
+                        if (valueType.Equals(typeof(Uri)))
+                        {
+                            continue;
+                        }
+
+                        //for now we only assume expand variables are in the key slot which will be an odd slot
+                        CSharpType? expandableType = segmentIndex % 2 == 0 && !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
+
+                        // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
+                        segments.Add(new Segment(referenceOrConstant, !skipUriEncoding, expandableType: expandableType));
+                    }
+                    else
+                    {
+                        ErrorHelpers.ThrowError($"\n\nError while processing request '{path}'\n\n  '{span.ToString()}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
+                    }
                 }
             }
-            // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-            return new Segment(pathSegment.Value, pathSegment.Escape).AsIEnumerable();
         }
 
         public int Count => _segments.Count;
@@ -281,13 +385,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return true;
         }
 
-        public override bool Equals(object? obj)
-        {
-            if (obj == null)
-                return false;
-            var other = (RequestPath)obj;
-            return other.Equals(this);
-        }
+        public override bool Equals(object? obj) => obj is RequestPath other && Equals(other);
 
         public IEnumerator<Segment> GetEnumerator() => _segments.GetEnumerator();
 

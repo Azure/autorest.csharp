@@ -15,9 +15,11 @@ namespace lro_parameterized_endpoints
 {
     internal partial class LROWithParamaterizedEndpointsRestClient
     {
-        private string host;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _host;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -26,8 +28,8 @@ namespace lro_parameterized_endpoints
         /// <exception cref="ArgumentNullException"> <paramref name="host"/> is null. </exception>
         public LROWithParamaterizedEndpointsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
-            this.host = host ?? throw new ArgumentNullException(nameof(host));
-            _clientDiagnostics = clientDiagnostics;
+            _host = host ?? throw new ArgumentNullException(nameof(host));
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
@@ -39,7 +41,7 @@ namespace lro_parameterized_endpoints
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendPath("/lroParameterizedEndpoints", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -66,7 +68,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -90,7 +92,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -102,7 +104,7 @@ namespace lro_parameterized_endpoints
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendPath("/lroConstantParameterizedEndpoints/", false);
             uri.AppendPath("iAmConstant", false);
             request.Uri = uri;
@@ -130,7 +132,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -154,7 +156,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }
