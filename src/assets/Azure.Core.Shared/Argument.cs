@@ -213,9 +213,13 @@ namespace Azure.Core
             return value;
         }
 
+#if AZURE_NULLABLE
+        public static void AssertNull<T>([AllowNull] T value, string name)
+#else
         public static void AssertNull<T>(T value, string name, string message)
+#endif
         {
-            if (value is null)
+            if (value is not null)
             {
                 throw new ArgumentException(message, name);
             }
