@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Reflection;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using NUnit.Framework;
@@ -41,5 +42,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(SupersetModel6Data), new string[] { }, new Type[] { })]
         [TestCase(typeof(SupersetModel7Data), new string[] { }, new Type[] { })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
+
+        [TestCase]
+        public void ValidateOrphanedEnumsRemoved()
+        {
+            var createdByTypeModel = Assembly.GetExecutingAssembly().GetType("SupersetInheritance.Models.CreatedByType");
+            Assert.Null(createdByTypeModel);
+        }
     }
 }

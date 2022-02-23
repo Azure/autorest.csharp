@@ -55,5 +55,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
         }
 
+        [TestCase]
+        public void ValidateOrphanedEnumsRemoved()
+        {
+            var resourceIdentityTypeModel = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.Models.ResourceIdentityType");
+            Assert.Null(resourceIdentityTypeModel);
+            var resourceIdentityTypeSerialization = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.Models.ResourceIdentityTypeExtensions");
+            Assert.Null(resourceIdentityTypeSerialization);
+        }
     }
 }
