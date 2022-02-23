@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace Pagination
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -20,16 +20,72 @@ namespace Pagination
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of PageSizeIntegerModels in the PageSizeIntegerModel. </summary>
+        /// <returns> An object representing collection of PageSizeIntegerModels and their operations over a PageSizeIntegerModel. </returns>
+        public virtual PageSizeIntegerModelCollection GetPageSizeIntegerModels()
+        {
+            return new PageSizeIntegerModelCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of PageSizeInt64Models in the PageSizeInt64Model. </summary>
+        /// <returns> An object representing collection of PageSizeInt64Models and their operations over a PageSizeInt64Model. </returns>
+        public virtual PageSizeInt64ModelCollection GetPageSizeInt64Models()
+        {
+            return new PageSizeInt64ModelCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of PageSizeInt32Models in the PageSizeInt32Model. </summary>
+        /// <returns> An object representing collection of PageSizeInt32Models and their operations over a PageSizeInt32Model. </returns>
+        public virtual PageSizeInt32ModelCollection GetPageSizeInt32Models()
+        {
+            return new PageSizeInt32ModelCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of PageSizeNumericModels in the PageSizeNumericModel. </summary>
+        /// <returns> An object representing collection of PageSizeNumericModels and their operations over a PageSizeNumericModel. </returns>
+        public virtual PageSizeNumericModelCollection GetPageSizeNumericModels()
+        {
+            return new PageSizeNumericModelCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of PageSizeFloatModels in the PageSizeFloatModel. </summary>
+        /// <returns> An object representing collection of PageSizeFloatModels and their operations over a PageSizeFloatModel. </returns>
+        public virtual PageSizeFloatModelCollection GetPageSizeFloatModels()
+        {
+            return new PageSizeFloatModelCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of PageSizeDoubleModels in the PageSizeDoubleModel. </summary>
+        /// <returns> An object representing collection of PageSizeDoubleModels and their operations over a PageSizeDoubleModel. </returns>
+        public virtual PageSizeDoubleModelCollection GetPageSizeDoubleModels()
+        {
+            return new PageSizeDoubleModelCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of PageSizeDecimalModels in the PageSizeDecimalModel. </summary>
+        /// <returns> An object representing collection of PageSizeDecimalModels and their operations over a PageSizeDecimalModel. </returns>
+        public virtual PageSizeDecimalModelCollection GetPageSizeDecimalModels()
+        {
+            return new PageSizeDecimalModelCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of PageSizeStringModels in the PageSizeStringModel. </summary>
+        /// <returns> An object representing collection of PageSizeStringModels and their operations over a PageSizeStringModel. </returns>
+        public virtual PageSizeStringModelCollection GetPageSizeStringModels()
+        {
+            return new PageSizeStringModelCollection(Client, Id);
         }
     }
 }

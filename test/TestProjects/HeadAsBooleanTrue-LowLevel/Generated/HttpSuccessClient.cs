@@ -20,7 +20,10 @@ namespace HeadAsBooleanTrue_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -48,9 +51,7 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head200Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
@@ -68,9 +69,7 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response<bool> Head200(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
@@ -88,9 +87,7 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head204Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
@@ -108,9 +105,7 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response<bool> Head204(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
@@ -128,9 +123,7 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 404 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head404Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
@@ -148,9 +141,7 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 404 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response<bool> Head404(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();

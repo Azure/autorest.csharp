@@ -22,7 +22,10 @@ namespace custom_baseUrl_paging_LowLevel
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
         private readonly string _host;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
@@ -68,9 +71,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -109,9 +110,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -150,9 +149,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -191,9 +188,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -233,9 +228,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
@@ -274,9 +267,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));

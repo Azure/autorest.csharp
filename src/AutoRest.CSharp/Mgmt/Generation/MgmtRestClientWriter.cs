@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Append($"{typeof(string)} {ApplicationIdVariable},");
         }
 
-        protected override bool UseUserAgentOverride()
+        protected override bool UseSDKUserAgent()
         {
             return true;
         }

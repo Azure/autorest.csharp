@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace SupersetFlattenInheritance.Models
 {
     /// <summary> TrackedResource with flatten properties, but the id comes from flattened properties, therefore this should not be a resource. </summary>
-    public partial class TrackedResourceModel2 : TrackedResource
+    public partial class TrackedResourceModel2 : TrackedResourceData
     {
         /// <summary> Initializes a new instance of TrackedResourceModel2. </summary>
         /// <param name="location"> The location. </param>

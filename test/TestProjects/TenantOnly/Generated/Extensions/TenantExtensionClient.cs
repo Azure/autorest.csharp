@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace TenantOnly
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Tenant. </summary>
     internal partial class TenantExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="TenantExtensionClient"/> class for mocking. </summary>
@@ -20,16 +20,23 @@ namespace TenantOnly
         }
 
         /// <summary> Initializes a new instance of the <see cref="TenantExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal TenantExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal TenantExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of BillingAccounts in the BillingAccount. </summary>
+        /// <returns> An object representing collection of BillingAccounts and their operations over a BillingAccount. </returns>
+        public virtual BillingAccountCollection GetBillingAccounts()
+        {
+            return new BillingAccountCollection(Client, Id);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -12,7 +13,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing the SubParent data model. </summary>
-    public partial class SubParentData : TrackedResource
+    public partial class SubParentData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of SubParentData. </summary>
         /// <param name="location"> The location. </param>
@@ -34,7 +35,7 @@ namespace MgmtMultipleParentResource
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal SubParentData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, systemData, tags, location)
+        internal SubParentData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState) : base(id, name, type, systemData, tags, location)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;
@@ -54,9 +55,9 @@ namespace MgmtMultipleParentResource
         /// <summary> The timeout in seconds to execute the run command. </summary>
         public int? TimeoutInSeconds { get; set; }
         /// <summary> Specifies the Azure storage blob where script output stream will be uploaded. </summary>
-        public string OutputBlobUri { get; set; }
+        public Uri OutputBlobUri { get; set; }
         /// <summary> Specifies the Azure storage blob where script error stream will be uploaded. </summary>
-        public string ErrorBlobUri { get; set; }
+        public Uri ErrorBlobUri { get; set; }
         /// <summary> The provisioning state, which only appears in the response. </summary>
         public string ProvisioningState { get; }
     }

@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtExtensionCommonRestOperation
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
         private ClientDiagnostics _typeOneCommonClientDiagnostics;
@@ -31,9 +31,9 @@ namespace MgmtExtensionCommonRestOperation
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal SubscriptionExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
@@ -44,14 +44,15 @@ namespace MgmtExtensionCommonRestOperation
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeOnesBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
+        /// Operation Id: Common_ListTypeOnesBySubscription
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeOne> GetTypeOnesAsync(CancellationToken cancellationToken = default)
@@ -63,7 +64,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = await TypeOneCommonRestClient.ListTypeOnesBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -74,10 +75,11 @@ namespace MgmtExtensionCommonRestOperation
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeOnesBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes
+        /// Operation Id: Common_ListTypeOnesBySubscription
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeOne> GetTypeOnes(CancellationToken cancellationToken = default)
@@ -89,7 +91,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = TypeOneCommonRestClient.ListTypeOnesBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -100,10 +102,11 @@ namespace MgmtExtensionCommonRestOperation
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeTwosBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
+        /// Operation Id: Common_ListTypeTwosBySubscription
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeTwo> GetTypeTwosAsync(CancellationToken cancellationToken = default)
@@ -115,7 +118,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = await TypeTwoCommonRestClient.ListTypeTwosBySubscriptionAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -126,10 +129,11 @@ namespace MgmtExtensionCommonRestOperation
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
-        /// ContextualPath: /subscriptions/{subscriptionId}
-        /// OperationId: Common_ListTypeTwosBySubscription
-        /// <summary> Description for Validate information for a certificate order. </summary>
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos
+        /// Operation Id: Common_ListTypeTwosBySubscription
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeTwo> GetTypeTwos(CancellationToken cancellationToken = default)
@@ -141,7 +145,7 @@ namespace MgmtExtensionCommonRestOperation
                 try
                 {
                     var response = TypeTwoCommonRestClient.ListTypeTwosBySubscription(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(ArmClient, value)), null, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeTwo(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

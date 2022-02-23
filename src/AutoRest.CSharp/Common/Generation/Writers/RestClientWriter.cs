@@ -4,9 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -20,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class RestClientWriter
     {
-        public void WriteClient(CodeWriter writer, RestClient restClient)
+        public void WriteClient(CodeWriter writer, RestClient restClient, IReadOnlyList<LowLevelClientMethod>? protocolMethods = null)
         {
             var cs = restClient.Type;
             var @namespace = cs.Namespace;
@@ -32,31 +34,61 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     WriteClientCtor(writer, restClient, cs);
 
+                    var responseClassifierTypes = new List<LowLevelClientWriter.ResponseClassifierType>();
                     foreach (var method in restClient.Methods)
                     {
-                        WriteRequestCreation(writer, method, restClient.Parameters);
+                        WriteRequestCreation(writer, method, restClient.Parameters, restClient.Fields);
                         WriteOperation(writer, method, true);
                         WriteOperation(writer, method, false);
+
+                        if (protocolMethods != null)
+                        {
+                            var protocolMethodList = protocolMethods.Where(m => m.RequestMethod.Operation.Equals(method.Operation));
+                            if (protocolMethodList != null && protocolMethodList.Count() == 1)
+                            {
+                                var protocolMethod = protocolMethodList.FirstOrDefault();
+                                LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
+
+                                if (protocolMethod.IsLongRunning)
+                                {
+                                    LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, true);
+                                    LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, false);
+                                }
+                                else if (protocolMethod.PagingInfo != null)
+                                {
+                                    LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
+                                    LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);
+                                }
+                                else
+                                {
+                                    if (!Configuration.AzureArm)
+                                    {
+                                        LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
+                                        LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
+                                    }
+                                }
+                            }
+                        }
                     }
+
+                    LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
         }
 
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
-        private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
+        private const string ClientDiagnosticsField = "ClientDiagnostics";
         private const string PipelineVariable = "pipeline";
         private const string PipelineField = "_" + PipelineVariable;
 
         private void WriteClientFields(CodeWriter writer, RestClient restClient)
         {
-            foreach (Parameter clientParameter in restClient.Parameters)
+            WriteAdditionalFields(writer);
+            foreach (var field in restClient.Fields)
             {
-                writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
+                writer.WriteFieldDeclaration(field);
             }
 
-            writer.Line($"private {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
-            WriteAdditionalFields(writer);
             writer.Line();
         }
 
@@ -76,7 +108,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
         }
 
-        protected virtual bool UseUserAgentOverride()
+        protected virtual bool UseSDKUserAgent()
         {
             return false;
         }
@@ -107,7 +139,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 foreach (Parameter clientParameter in restClient.Parameters)
                 {
-                    writer.WriteVariableAssignmentWithNullCheck($"this.{clientParameter.Name}", clientParameter);
+                    var field = restClient.Fields.GetFieldByParameter(clientParameter);
+                    if (field != null)
+                    {
+                        writer.WriteVariableAssignmentWithNullCheck($"{field.Name}", clientParameter);
+                    }
                 }
 
                 writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
@@ -119,9 +155,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, Parameter[] parameters)
+        private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, Parameter[] parameters, ClientFields fields)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", null, null, UseUserAgentOverride(), parameters);
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", fields, null, UseSDKUserAgent(), parameters);
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)

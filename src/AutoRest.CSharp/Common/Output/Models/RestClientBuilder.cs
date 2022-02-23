@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models
             var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters);
             Request request = BuildRequest(httpRequest, buildContext);
 
-            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean;
+            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType);
 
             return new RestClientMethod(
@@ -108,6 +108,12 @@ namespace AutoRest.CSharp.Output.Models
                 operation,
                 buildContext.RequestConditionFlag
             );
+        }
+
+        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
+        {
+            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            return allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => (CreateReference(kvp.Key, kvp.Value), kvp.Value.SkipUrlEncoding));
         }
 
         /// <summary>
@@ -127,7 +133,7 @@ namespace AutoRest.CSharp.Output.Models
             var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, CreateReference(kvp.Key, kvp.Value)));
             var request = BuildRequest(httpRequest, new RequestMethodBuildContext(methodParameters, references));
 
-            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean;
+            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType, returnNullOn404Func);
 
             return new RestClientMethod(
@@ -587,7 +593,7 @@ namespace AutoRest.CSharp.Output.Models
                     parameter.Description,
                     typeof(Uri),
                     parameter.DefaultValue,
-                    parameter.ValidateNotNull,
+                    parameter.Validate,
                     RequestLocation: GetRequestLocation(requestParameter)
                 );
             }
@@ -702,7 +708,7 @@ namespace AutoRest.CSharp.Output.Models
                 "The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,
-                ValidateNotNull: true);
+                Validate: true);
 
             PathSegment[] pathSegments = method.Request.PathSegments
                 .Where(ps => ps.IsRaw)
@@ -828,7 +834,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var requestParameter in requestParameters)
                 {
-                    AddRequestParameter(requestParameter);
+                    var parameter = _parent.BuildParameter(requestParameter);
+                    AddRequestParameter(GetRequestParameterName(requestParameter), requestParameter, parameter);
                 }
             }
 
@@ -879,6 +886,11 @@ namespace AutoRest.CSharp.Output.Models
             private void AddRequestParameter(string name, RequestParameter requestParameter, Type? frameworkParameterType = null)
             {
                 var parameter = _parent.BuildParameter(requestParameter, frameworkParameterType);
+                AddRequestParameter(name, requestParameter, parameter);
+            }
+
+            private void AddRequestParameter(string name, RequestParameter requestParameter, Parameter parameter)
+            {
                 var reference = _parent.CreateReference(requestParameter, parameter);
 
                 _referencesByName[name] = new ParameterInfo(requestParameter, reference);

@@ -612,7 +612,7 @@
                 "name": {
                     "type": "string"
                 },
-                "NEW": {
+                "bar": {
                     "type": "string"
                 }
             }

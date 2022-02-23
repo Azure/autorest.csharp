@@ -16,17 +16,15 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class MgmtObjectType : SchemaObjectType
     {
         private ObjectTypeProperty[]? _myProperties;
-        private readonly BuildContext<MgmtOutputLibrary> _context;
 
-        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context)
-            : this(objectSchema, context, default, default)
+        public MgmtObjectType(ObjectSchema objectSchema)
+            : this(objectSchema, default, default)
         {
         }
 
-        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, string? name = default, string? nameSpace = default)
-            : base(objectSchema, context)
+        public MgmtObjectType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default)
+            : base(objectSchema, MgmtContext.Context)
         {
-            _context = context;
             _defaultName = name;
             _defaultNamespace = nameSpace;
         }
@@ -94,7 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var typeToReplace = argType.IsFrameworkType ? null : argType.Implementation as MgmtObjectType;
                     if (typeToReplace != null)
                     {
-                        var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace, _context);
+                        var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         objectTypeProperty.ValueType.Arguments[i] = match ?? argType;
                     }
                 }
@@ -106,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
                 if (typeToReplace != null)
                 {
-                    var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace, _context);
+                    var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
                     {
                         propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
@@ -122,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns>true if this type should NOT be replaced when used as property type; false elsewise</returns>
         public bool ShouldNotReplaceForProperty()
         {
-            return this._context.Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(this.Type.Name);
+            return Configuration.MgmtConfiguration.NoPropertyTypeReplacement.Contains(this.Type.Name);
         }
 
         protected override CSharpType? CreateInheritedType()
@@ -134,13 +132,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
-                var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties, _context);
+                var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(this, MyProperties, _context) : inheritedType;
+            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(this, MyProperties) : inheritedType;
         }
 
         protected CSharpType? CreateInheritedTypeWithNoExtraMatch()

@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Input
             foreach (var (propKey, propValue) in matchedProperties)
             {
                 var innerInfo = properties[propKey];
-                innerInfo.SetValue(property, innerInfo.DeserializeDictionary(propValue));
+                innerInfo.SetValue(property, innerInfo.DeserializeDictionary(propValue!));
             }
             return property;
         }

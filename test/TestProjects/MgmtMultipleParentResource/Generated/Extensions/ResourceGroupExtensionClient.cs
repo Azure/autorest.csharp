@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> An internal class to add extension methods to. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     internal partial class ResourceGroupExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class for mocking. </summary>
@@ -20,16 +20,30 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupExtensionClient"/> class. </summary>
-        /// <param name="armClient"> The client parameters to use in these operations. </param>
+        /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceGroupExtensionClient(ArmClient armClient, ResourceIdentifier id) : base(armClient, id)
+        internal ResourceGroupExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
-            ArmClient.TryGetApiVersion(resourceType, out string apiVersion);
+            TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
+        }
+
+        /// <summary> Gets a collection of AnotherParents in the AnotherParent. </summary>
+        /// <returns> An object representing collection of AnotherParents and their operations over a AnotherParent. </returns>
+        public virtual AnotherParentCollection GetAnotherParents()
+        {
+            return new AnotherParentCollection(Client, Id);
+        }
+
+        /// <summary> Gets a collection of TheParents in the TheParent. </summary>
+        /// <returns> An object representing collection of TheParents and their operations over a TheParent. </returns>
+        public virtual TheParentCollection GetTheParents()
+        {
+            return new TheParentCollection(Client, Id);
         }
     }
 }

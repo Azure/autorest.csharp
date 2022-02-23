@@ -17,7 +17,4 @@ modelerfour:
 
 list-exception:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
-
-mgmt-debug:
-  show-request-path: true
 ```

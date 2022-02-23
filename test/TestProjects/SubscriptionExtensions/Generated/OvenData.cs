@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the Oven data model. </summary>
-    public partial class OvenData : TrackedResource
+    public partial class OvenData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of OvenData. </summary>
         /// <param name="location"> The location. </param>

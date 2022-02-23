@@ -9,26 +9,29 @@ using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
     /// <summary>
     /// A <see cref="Segment"/> represents a segment of a request path which could be either a <see cref="Constant"/> or a <see cref="Reference"/>
     /// </summary>
-    internal struct Segment : IEquatable<Segment>
+    internal readonly struct Segment : IEquatable<Segment>
     {
         public static readonly Segment Providers = "providers";
 
-        private ReferenceOrConstant _value;
-        private string _stringValue;
+        private readonly ReferenceOrConstant _value;
+        private readonly string _stringValue;
+        private readonly CSharpType? _expandableType;
 
-        public Segment(ReferenceOrConstant value, bool escape, bool strict = false)
+        public Segment(ReferenceOrConstant value, bool escape, bool strict = false, CSharpType? expandableType = null)
         {
             _value = value;
             _stringValue = value.IsConstant ? value.Constant.Value?.ToString() ?? "null"
                 : $"({value.Reference.Type.Name}){value.Reference.Name}";
             IsStrict = strict;
             Escape = escape;
+            _expandableType = expandableType;
         }
 
         /// <summary>
@@ -66,7 +69,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public bool IsReference => !IsConstant;
 
-        public CSharpType Type => _value.Type;
+        public bool IsExpandable => _expandableType is not null;
+
+        public CSharpType Type => _expandableType ?? _value.Type;
 
         /// <summary>
         /// Returns the <see cref="Constant"/> of this segment

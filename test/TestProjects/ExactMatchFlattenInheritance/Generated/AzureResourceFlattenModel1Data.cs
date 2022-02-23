@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the AzureResourceFlattenModel1 data model. </summary>
-    public partial class AzureResourceFlattenModel1Data : TrackedResource
+    public partial class AzureResourceFlattenModel1Data : TrackedResourceData
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
         /// <param name="location"> The location. </param>
