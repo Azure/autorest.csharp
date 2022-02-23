@@ -20,29 +20,28 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
         {
+            var wordCandidates = EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues);
             foreach (var schema in allSchemas)
             {
                 if (schema is not SealedChoiceSchema choiceSchema)
                     continue;
 
                 // rearrange the sequence in the choices
-                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices);
+                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices, wordCandidates);
             }
         }
 
-        private static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues)
+        private static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, IEnumerable<string> wordCandidates)
         {
             IEnumerable<ChoiceValue> whateverLeft = originalValues;
             var result = new List<ChoiceValue>();
-
-            var words = EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues);
 
             static Func<ChoiceValue, bool> GetFilter(string word)
             {
                 return v => v.CSharpName().Equals(word);
             }
 
-            foreach (var word in words)
+            foreach (var word in wordCandidates)
             {
                 var filtered = whateverLeft.Where(GetFilter(word));
                 whateverLeft = whateverLeft.Except(filtered);
