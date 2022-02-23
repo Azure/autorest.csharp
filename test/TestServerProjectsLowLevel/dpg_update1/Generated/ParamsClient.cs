@@ -19,8 +19,10 @@ namespace dpg_update1_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -41,7 +43,7 @@ namespace dpg_update1_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new ParamsClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -50,16 +52,14 @@ namespace dpg_update1_LowLevel
         /// <summary> Head request, no params. </summary>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> HeadNoParamsAsync(string newParameter = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHeadNoParamsRequest(newParameter, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -71,16 +71,14 @@ namespace dpg_update1_LowLevel
         /// <summary> Head request, no params. </summary>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response HeadNoParams(string newParameter = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHeadNoParamsRequest(newParameter, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -94,18 +92,16 @@ namespace dpg_update1_LowLevel
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
 
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetRequired");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetRequiredRequest(parameter, newParameter, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -119,18 +115,16 @@ namespace dpg_update1_LowLevel
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual Response GetRequired(string parameter, string newParameter = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
 
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetRequired");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetRequiredRequest(parameter, newParameter, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -145,18 +139,16 @@ namespace dpg_update1_LowLevel
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
 
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutRequiredOptionalRequest(requiredParam, optionalParam, newParameter, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -171,18 +163,16 @@ namespace dpg_update1_LowLevel
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
 
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PutRequiredOptional");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePutRequiredOptionalRequest(requiredParam, optionalParam, newParameter, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -193,16 +183,14 @@ namespace dpg_update1_LowLevel
 
         /// <summary> Delete something. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DeleteParametersAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.DeleteParameters");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.DeleteParameters");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteParametersRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -213,16 +201,14 @@ namespace dpg_update1_LowLevel
 
         /// <summary> Delete something. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response DeleteParameters(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.DeleteParameters");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.DeleteParameters");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDeleteParametersRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -235,16 +221,14 @@ namespace dpg_update1_LowLevel
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, string newParameter = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetOptional");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetOptionalRequest(optionalParam, newParameter, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -257,16 +241,14 @@ namespace dpg_update1_LowLevel
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetOptional(string optionalParam = null, string newParameter = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetOptional");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetOptionalRequest(optionalParam, newParameter, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -277,16 +259,14 @@ namespace dpg_update1_LowLevel
 
         /// <summary> I&apos;m a new operation. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetNewOperationAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNewOperationRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -297,16 +277,14 @@ namespace dpg_update1_LowLevel
 
         /// <summary> I&apos;m a new operation. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetNewOperation(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNewOperationRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

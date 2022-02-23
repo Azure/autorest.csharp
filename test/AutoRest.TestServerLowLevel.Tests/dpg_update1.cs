@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
     public class DpgUpdate1Test : TestServerLowLevelTestBase
     {
         [Test]
-        public Task DPGAddOptionalInput() => Test(async (host) =>
+        public Task DpgAddOptionalInput() => Test(async (host) =>
         {
             var result = await new ParamsClient(Key, host).GetRequiredAsync("a");
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
@@ -37,7 +37,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task DPGNewBodyType_JSON() => Test(async (host) =>
+        public Task DpgNewBodyType_JSON() => Test(async (host) =>
         {
             var value = new
             {
@@ -54,7 +54,7 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task DPGNewBodyType_JPEG() => Test(async (host) =>
+        public Task DpgNewBodyType_JPEG() => Test(async (host) =>
         {
             await using var value = new MemoryStream(Encoding.UTF8.GetBytes("JPEG"));
             var result = await new ParamsClient(Key, host).PostParametersAsync(RequestContent.Create(value), new ContentType("image/jpeg"));
@@ -62,14 +62,14 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task DPGAddNewOperation() => Test(async (host) =>
+        public Task DpgAddNewOperation() => Test(async (host) =>
         {
             var result = await new ParamsClient(Key, host).DeleteParametersAsync();
             Assert.AreEqual(204, result.Status);
         });
 
         [Test]
-        public Task DPGAddNewPath() => Test(async (host) =>
+        public Task DpgAddNewPath() => Test(async (host) =>
         {
             var result = await new ParamsClient(Key, host).GetNewOperationAsync();
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());

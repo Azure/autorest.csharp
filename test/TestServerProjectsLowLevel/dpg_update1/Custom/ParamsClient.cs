@@ -20,18 +20,16 @@ namespace dpg_update1_LowLevel
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetRequiredAsync(string parameter, RequestContext context)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
 
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetRequired");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetRequiredRequest(parameter, null, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -44,18 +42,16 @@ namespace dpg_update1_LowLevel
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual Response GetRequired(string parameter, RequestContext context)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
 
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.GetRequired");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetRequired");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetRequiredRequest(parameter, null, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -76,18 +72,16 @@ namespace dpg_update1_LowLevel
         /// </code>
         ///
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PostParameters");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostParametersRequest(content, ContentType.ApplicationJson, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,18 +102,16 @@ namespace dpg_update1_LowLevel
         /// </code>
         ///
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response PostParameters(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PostParameters");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostParametersRequest(content, ContentType.ApplicationJson, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -134,16 +126,14 @@ namespace dpg_update1_LowLevel
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> PostParametersAsync(RequestContent content, ContentType contentType, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PostParameters");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostParametersRequest(content, contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -158,16 +148,14 @@ namespace dpg_update1_LowLevel
         /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual Response PostParameters(RequestContent content, ContentType contentType, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("ParamsClient.PostParameters");
+            using var scope = ClientDiagnostics.CreateScope("ParamsClient.PostParameters");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostParametersRequest(content, contentType, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
