@@ -4,16 +4,10 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -41,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             IEnumerable<ChoiceValue> whateverLeft = originalValues;
             var result = new List<ChoiceValue>();
 
-            var words = EnumValuesShouldBePrompted.Concat(MgmtContext.MgmtConfiguration.PromptedEnumValues);
+            var words = EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues);
 
             static Func<ChoiceValue, bool> GetFilter(string word)
             {
@@ -101,15 +95,43 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        public static void UpdateAcronyms(this IEnumerable<Schema> allSchemas)
+        public static void UpdateAcronyms(this CodeModel codeModel)
         {
-            if (MgmtContext.MgmtConfiguration.RenameRules.Count == 0)
+            if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
                 return;
-            var transformer = new NameTransformer(MgmtContext.MgmtConfiguration.RenameRules);
+            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
             var wordCache = new ConcurrentDictionary<string, string>();
+            // first transform all the name of schemas, properties
+            UpdateAcronyms(codeModel.AllSchemas, transformer, wordCache);
+            // transform all the parameter names
+            UpdateAcronyms(codeModel.OperationGroups, transformer, wordCache);
+        }
+
+        private static void UpdateAcronyms(IEnumerable<Schema> allSchemas, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
             foreach (var schema in allSchemas)
             {
                 TransformSchema(schema, transformer, wordCache);
+            }
+        }
+
+        private static void UpdateAcronyms(IEnumerable<OperationGroup> operationGroups, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            foreach (var operationGroup in operationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    TransformOperation(operation, transformer, wordCache);
+                }
+            }
+        }
+
+        private static void TransformOperation(Operation operation, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            TransformLanguage(operation.Language, transformer, wordCache);
+            foreach (var parameter in operation.Parameters)
+            {
+                TransformLanguage(parameter.Language, transformer, wordCache);
             }
         }
 

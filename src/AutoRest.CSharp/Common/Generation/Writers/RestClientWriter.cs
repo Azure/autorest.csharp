@@ -7,8 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class RestClientWriter
     {
-        public void WriteClient(CodeWriter writer, RestClient restClient, Configuration? configuration = null, IReadOnlyList<LowLevelClientMethod>? protocolMethods = null)
+        public void WriteClient(CodeWriter writer, RestClient restClient, IReadOnlyList<LowLevelClientMethod>? protocolMethods = null)
         {
             var cs = restClient.Type;
             var @namespace = cs.Namespace;
@@ -61,10 +61,10 @@ namespace AutoRest.CSharp.Generation.Writers
                                 }
                                 else
                                 {
-                                    if (configuration != null)
+                                    if (!Configuration.AzureArm)
                                     {
-                                        LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, configuration, true);
-                                        LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, configuration, false);
+                                        LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
+                                        LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
                                     }
                                 }
                             }
