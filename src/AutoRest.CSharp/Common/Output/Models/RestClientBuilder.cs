@@ -900,16 +900,5 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
         }
-        /*
-        [Flags]
-        private enum RequestConditionHeaders
-        {
-            None = 0,
-            IfMatch = 1,
-            IfNoneMatch = 2,
-            IfModifiedSince = 4,
-            IfUnmodifiedSince = 8
-        }
-        */
     }
 }

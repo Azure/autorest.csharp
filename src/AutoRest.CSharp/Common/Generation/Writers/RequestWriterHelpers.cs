@@ -15,7 +15,6 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using Azure.Core;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using AutoRest.CSharp.Common.Output.Models;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
