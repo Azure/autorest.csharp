@@ -20,9 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _existingType = new Lazy<INamedTypeSymbol?>(() => Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
-        protected virtual CSharpType[]? Arguments { get; } = null;
-
-        public CSharpType Type => new(this, isValueType: TypeKind is TypeKind.Struct or TypeKind.Enum, arguments: Arguments);
+        public virtual CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         internal BuildContext Context { get; private set; }

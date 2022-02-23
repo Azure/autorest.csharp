@@ -15,7 +15,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -38,20 +38,22 @@ namespace AutoRest.CSharp.Mgmt.Output
                 OperationType = typeof(ArmOperation<>);
                 ResponseType = typeof(Response<>);
                 OperationOrResponseType = typeof(OperationOrResponseInternals<>);
+                // get the generic type parameter placeholder `T`
                 Arguments = BaseType.GetGenericArguments().Select(t => new CSharpType(t)).ToArray();
             }
             else
             {
-                Arguments = null;
                 BaseType = typeof(ArmOperation);
                 WaitMethod = "WaitForCompletionResponseAsync";
                 OperationType = typeof(ArmOperation);
                 ResponseType = typeof(Response);
                 OperationOrResponseType = typeof(OperationOrResponseInternals);
+                Arguments = null;
             }
         }
 
-        protected override CSharpType[]? Arguments { get; }
+        private CSharpType[]? Arguments { get; }
+        public override CSharpType Type => new CSharpType(this, isValueType: TypeKind is TypeKind.Struct or TypeKind.Enum, arguments: Arguments);
 
         public Type BaseType { get; }
         public string WaitMethod { get; }
