@@ -213,14 +213,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (WriteClientMethodDeclaration(writer, clientMethod, clientMethod.OperationSchemas, returnType, async))
             {
+                if (clientMethod.RequestMethod.ConditionHeaderFlag != RequestConditionHeaders.None &&
+                        clientMethod.RequestMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
+                {
+                    writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.RequestMethod.ConditionHeaderFlag);
+                    writer.Line();
+                }
                 using (WriteDiagnosticScope(writer, clientMethod.Diagnostic, client.Fields.ClientDiagnosticsProperty.Name))
                 {
-                    if (clientMethod.RequestMethod.ConditionHeaderFlag != RequestConditionHeaders.None &&
-                        clientMethod.RequestMethod.ConditionHeaderFlag != (RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch | RequestConditionHeaders.IfModifiedSince | RequestConditionHeaders.IfUnmodifiedSince))
-                    {
-                        writer.WriteRequestConditionParameterChecks(restMethod.Parameters, clientMethod.RequestMethod.ConditionHeaderFlag);
-                    }
-
                     var messageVariable = new CodeWriterDeclaration("message");
                     writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});");
 

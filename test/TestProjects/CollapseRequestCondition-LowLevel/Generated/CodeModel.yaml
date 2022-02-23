@@ -338,7 +338,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /RequestConditionCollapse/missIfNonMatch
+                path: /RequestConditionCollapse/missIfNoneMatch
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -357,7 +357,7 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: MissIfNonMatchGet
+            name: MissIfNoneMatchGet
             description: ''
         protocol: !Protocols {}
       - !Operation 
@@ -636,7 +636,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /RequestConditionCollapse/missIfMatchIfNonMatch
+                path: /RequestConditionCollapse/missIfMatchIfNoneMatch
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -654,7 +654,103 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: MissIfMatchIfNonMatchGet
+            name: MissIfMatchIfNoneMatchGet
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_1
+          - !Parameter &ref_28
+            schema: *ref_3
+            implementation: Method
+            extensions:
+              x-ms-parameter-grouping:
+                name: modified-access-conditions
+            language: !Languages 
+              default:
+                name: ifModifiedSince
+                description: Specify this header value to operate only on a blob if it has been modified since the specified date/time.
+                serializedName: If-Modified-Since
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /RequestConditionCollapse/ifModifiedSince
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_28
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Received correct format
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: IfModifiedSinceGet
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_1
+          - !Parameter &ref_29
+            schema: *ref_3
+            implementation: Method
+            extensions:
+              x-ms-parameter-grouping:
+                name: modified-access-conditions
+            language: !Languages 
+              default:
+                name: ifUnmodifiedSince
+                description: Specify this header value to operate only on a blob if it has not been modified since the specified date/time.
+                serializedName: If-Unmodified-Since
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /RequestConditionCollapse/ifUnmodifiedSince
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_29
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Received correct format
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: IfUnmodifiedSinceGet
             description: ''
         protocol: !Protocols {}
     language: !Languages 
@@ -671,7 +767,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_1
-          - !Parameter &ref_28
+          - !Parameter &ref_30
             schema: *ref_2
             implementation: Method
             extensions:
@@ -685,7 +781,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_29
+          - !Parameter &ref_31
             schema: *ref_2
             implementation: Method
             extensions:
@@ -699,7 +795,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_30
+          - !Parameter &ref_32
             schema: *ref_2
             implementation: Method
             language: !Languages 
@@ -722,9 +818,9 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_28
-          - *ref_29
           - *ref_30
+          - *ref_31
+          - *ref_32
         responses:
           - !Response 
             language: !Languages 
@@ -738,100 +834,6 @@ operationGroups:
         language: !Languages 
           default:
             name: CollapseGetWithHead
-            description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_1
-          - !Parameter &ref_32
-            schema: *ref_2
-            implementation: Method
-            extensions:
-              x-ms-parameter-grouping:
-                name: modified-access-conditions
-            language: !Languages 
-              default:
-                name: ifMatch
-                description: Specify an ETag value to operate only on blobs with a matching value.
-                serializedName: If-Match
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: header
-          - !Parameter &ref_33
-            schema: *ref_2
-            implementation: Method
-            extensions:
-              x-ms-parameter-grouping:
-                name: modified-access-conditions
-            language: !Languages 
-              default:
-                name: ifNoneMatch
-                description: Specify an ETag value to operate only on blobs without a matching value.
-                serializedName: If-None-Match
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: header
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_4
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_31
-                schema: *ref_2
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: body
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_31
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /MatchConditionCollapse/
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_32
-          - *ref_33
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Received correct format
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: CollapsePut
             description: ''
         protocol: !Protocols {}
       - !Operation 
@@ -870,6 +872,100 @@ operationGroups:
                 in: header
         requests:
           - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_33
+                schema: *ref_2
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: body
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /MatchConditionCollapse/
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_34
+          - *ref_35
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Received correct format
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CollapsePut
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_1
+          - !Parameter &ref_36
+            schema: *ref_2
+            implementation: Method
+            extensions:
+              x-ms-parameter-grouping:
+                name: modified-access-conditions
+            language: !Languages 
+              default:
+                name: ifMatch
+                description: Specify an ETag value to operate only on blobs with a matching value.
+                serializedName: If-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+          - !Parameter &ref_37
+            schema: *ref_2
+            implementation: Method
+            extensions:
+              x-ms-parameter-grouping:
+                name: modified-access-conditions
+            language: !Languages 
+              default:
+                name: ifNoneMatch
+                description: Specify an ETag value to operate only on blobs without a matching value.
+                serializedName: If-None-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+        requests:
+          - !Request 
             language: !Languages 
               default:
                 name: ''
@@ -880,8 +976,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_34
-          - *ref_35
+          - *ref_36
+          - *ref_37
         responses:
           - !Response 
             language: !Languages 
@@ -911,7 +1007,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_1
-          - !Parameter &ref_37
+          - !Parameter &ref_39
             schema: *ref_2
             implementation: Method
             extensions:
@@ -922,85 +1018,6 @@ operationGroups:
                 name: ifMatch
                 description: Specify an ETag value to operate only on blobs with a matching value.
                 serializedName: If-Match
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: header
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_4
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_36
-                schema: *ref_2
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: body
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-            signatureParameters:
-              - *ref_36
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /NonCollapse/ifMatch
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_37
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Received correct format
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: IfMatchPut
-            description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_1
-          - !Parameter &ref_39
-            schema: *ref_2
-            implementation: Method
-            extensions:
-              x-ms-parameter-grouping:
-                name: modified-access-conditions
-            language: !Languages 
-              default:
-                name: ifNoneMatch
-                description: Specify an ETag value to operate only on blobs without a matching value.
-                serializedName: If-None-Match
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
@@ -1040,7 +1057,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /NonCollapse/ifnonMatch
+                path: /NonCollapse/ifMatch
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -1060,7 +1077,86 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: IfNonMatchPut
+            name: IfMatchPut
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_1
+          - !Parameter &ref_41
+            schema: *ref_2
+            implementation: Method
+            extensions:
+              x-ms-parameter-grouping:
+                name: modified-access-conditions
+            language: !Languages 
+              default:
+                name: ifNoneMatch
+                description: Specify an ETag value to operate only on blobs without a matching value.
+                serializedName: If-None-Match
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_4
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_40
+                schema: *ref_2
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: body
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_40
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /NonCollapse/ifNoneMatch
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_41
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Received correct format
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: IfNoneMatchPut
             description: ''
         protocol: !Protocols {}
     language: !Languages 

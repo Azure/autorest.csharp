@@ -92,14 +92,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> IfNonMatchPutAsync(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
+        public virtual async Task<Response> IfNoneMatchPutAsync(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNonMatchPut");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIfNonMatchPutRequest(content, ifNoneMatch, context);
+                using HttpMessage message = CreateIfNoneMatchPutRequest(content, ifNoneMatch, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -113,14 +113,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
 #pragma warning disable AZC0002
-        public virtual Response IfNonMatchPut(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
+        public virtual Response IfNoneMatchPut(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
 #pragma warning restore AZC0002
         {
-            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNonMatchPut");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIfNonMatchPutRequest(content, ifNoneMatch, context);
+                using HttpMessage message = CreateIfNoneMatchPutRequest(content, ifNoneMatch, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -149,14 +149,14 @@ namespace CollapseRequestCondition_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateIfNonMatchPutRequest(RequestContent content, ETag? ifNoneMatch, RequestContext context)
+        internal HttpMessage CreateIfNoneMatchPutRequest(RequestContent content, ETag? ifNoneMatch, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/NonCollapse/ifnonMatch", false);
+            uri.AppendPath("/NonCollapse/ifNoneMatch", false);
             request.Uri = uri;
             if (ifNoneMatch != null)
             {

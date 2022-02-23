@@ -253,32 +253,31 @@ namespace AutoRest.CSharp.Generation.Writers
             {RequestConditionHeaders.IfModifiedSince, "If-Modified-Since" },
             {RequestConditionHeaders.IfUnmodifiedSince, "If-Unmodified-Since" }
         };
+
+        private static Dictionary<RequestConditionHeaders, string> requestConditionFieldNames = new Dictionary<RequestConditionHeaders, string> {
+            {RequestConditionHeaders.None, "" },
+            {RequestConditionHeaders.IfMatch, "IfMatch" },
+            {RequestConditionHeaders.IfNoneMatch, "IfNoneMatch" },
+            {RequestConditionHeaders.IfModifiedSince, "IfModifiedSince" },
+            {RequestConditionHeaders.IfUnmodifiedSince, "IfUnmodifiedSince" }
+        };
         public static CodeWriter WriteRequestConditionParameterChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters, RequestConditionHeaders requestConditionFlag)
         {
             foreach (Parameter parameter in parameters)
             {
                 if (parameter.Type.Equals(typeof(RequestConditions)))
                 {
-                    writer.Append($"Argument.AssertHasOnlySupportedHeaders({parameter.Name:I}, \"{parameter.Name:I}\"");
-                    writer.AppendRaw(", new string[]{");
-                    StringBuilder supportedHeaders = new StringBuilder();
 #pragma warning disable CS8605 // Unboxing a possibly null value.
                     foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
 #pragma warning restore CS8605 // Unboxing a possibly null value.
                     {
-                        if (val != RequestConditionHeaders.None && requestConditionFlag.HasFlag(val))
+                        if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
                         {
-                            supportedHeaders.Append($"\"{requestConditionHeaderNames[val]}\",");
+                            writer.Line($"Argument.AssertNull({parameter.Name:I}.{requestConditionFieldNames[val]}, nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
                         }
                     }
-                    supportedHeaders.Length--;
-                    writer.AppendRaw(supportedHeaders.ToString());
-                    writer.AppendRaw("}");
-                    writer.Append($");");
                 }
             }
-
-            writer.Line();
             return writer;
         }
 

@@ -297,9 +297,9 @@
         }
       }
     },
-    "/NonCollapse/ifnonMatch": {
+    "/NonCollapse/ifNoneMatch": {
       "put": {
-        "operationId": "NonCollapse_IfNonMatchPut",
+        "operationId": "NonCollapse_IfNoneMatchPut",
         "parameters": [
           {
             "name": "body",
@@ -328,9 +328,9 @@
         }
       }
     },
-    "/RequestConditionCollapse/missIfNonMatch": {
+    "/RequestConditionCollapse/missIfNoneMatch": {
       "get": {
-        "operationId": "RequestConditionCollapse_MissIfNonMatchGet",
+        "operationId": "RequestConditionCollapse_MissIfNoneMatchGet",
         "parameters": [
           {
             "name": "If-Match",
@@ -526,9 +526,9 @@
         }
       }
     },
-    "/RequestConditionCollapse/missIfMatchIfNonMatch": {
+    "/RequestConditionCollapse/missIfMatchIfNoneMatch": {
       "get": {
-        "operationId": "RequestConditionCollapse_MissIfMatchIfNonMatchGet",
+        "operationId": "RequestConditionCollapse_MissIfMatchIfNoneMatchGet",
         "parameters": [
           {
             "name": "If-Modified-Since",
@@ -563,6 +563,56 @@
           }
         }
       }
-    }
+    },
+    "/RequestConditionCollapse/ifModifiedSince": {
+      "get": {
+        "operationId": "RequestConditionCollapse_IfModifiedSinceGet",
+        "parameters": [
+          {
+            "name": "If-Modified-Since",
+            "x-ms-client-name": "ifModifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has been modified since the specified date/time."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
+    "/RequestConditionCollapse/ifUnmodifiedSince": {
+      "get": {
+        "operationId": "RequestConditionCollapse_IfUnmodifiedSinceGet",
+        "parameters": [
+          {
+            "name": "If-Unmodified-Since",
+            "x-ms-client-name": "ifUnmodifiedSince",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+              "name": "modified-access-conditions"
+            },
+            "description": "Specify this header value to operate only on a blob if it has not been modified since the specified date/time."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct format"
+          }
+        }
+      }
+    },
   }
 }
