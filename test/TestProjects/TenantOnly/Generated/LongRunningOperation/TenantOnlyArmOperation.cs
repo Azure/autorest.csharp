@@ -31,9 +31,9 @@ namespace TenantOnly
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal TenantOnlyArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal TenantOnlyArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "TenantOnlyArmOperation");
+            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "TenantOnlyArmOperation");
         }
 
         /// <inheritdoc />

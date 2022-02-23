@@ -31,9 +31,9 @@ namespace MgmtKeyvault
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtKeyvaultArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtKeyvaultArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtKeyvaultArmOperation");
+            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtKeyvaultArmOperation");
         }
 
         /// <inheritdoc />

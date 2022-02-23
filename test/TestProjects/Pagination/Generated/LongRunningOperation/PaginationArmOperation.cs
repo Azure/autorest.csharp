@@ -31,9 +31,9 @@ namespace Pagination
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal PaginationArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal PaginationArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "PaginationArmOperation");
+            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "PaginationArmOperation");
         }
 
         /// <inheritdoc />

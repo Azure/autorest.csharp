@@ -31,9 +31,9 @@ namespace MgmtExtensionCommonRestOperation
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtExtensionCommonRestOperationArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtExtensionCommonRestOperationArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtExtensionCommonRestOperationArmOperation");
+            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtExtensionCommonRestOperationArmOperation");
         }
 
         /// <inheritdoc />

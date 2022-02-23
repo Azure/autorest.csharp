@@ -31,9 +31,9 @@ namespace MgmtSubscriptionNameParameter
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtSubscriptionNameParameterArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtSubscriptionNameParameterArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtSubscriptionNameParameterArmOperation");
+            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtSubscriptionNameParameterArmOperation");
         }
 
         /// <inheritdoc />

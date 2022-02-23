@@ -31,9 +31,9 @@ namespace SupersetInheritance
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal SupersetInheritanceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal SupersetInheritanceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "SupersetInheritanceArmOperation");
+            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "SupersetInheritanceArmOperation");
         }
 
         /// <inheritdoc />

@@ -31,9 +31,9 @@ namespace MgmtNonStringPathVariable
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtNonStringPathVariableArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtNonStringPathVariableArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtNonStringPathVariableArmOperation");
+            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtNonStringPathVariableArmOperation");
         }
 
         /// <inheritdoc />
