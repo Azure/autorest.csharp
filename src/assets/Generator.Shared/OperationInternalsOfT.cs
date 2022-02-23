@@ -35,22 +35,8 @@ namespace Azure.Core
             Request originalRequest,
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
-            string scopeName)
-        {
-            _source = source;
-            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
-            _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName);
-        }
-
-        public OperationInternals(
-            IOperationSource<T> source,
-            ClientDiagnostics clientDiagnostics,
-            HttpPipeline pipeline,
-            Request originalRequest,
-            Response originalResponse,
-            OperationFinalStateVia finalStateVia,
             string scopeName,
-            OperationPollingStrategy pollingStrategy)
+            OperationPollingStrategy? pollingStrategy = null)
         {
             _source = source;
             _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
