@@ -2,24 +2,23 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using AutoRest.CSharp.Output.Models.Types;
+using System.Linq;
+using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Models;
-using System.Text.RegularExpressions;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
-using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -35,7 +34,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             _writer.Line($"[RecordedTest]");
 
-            var testModelerConfig = MgmtContext.MgmtConfiguration.TestModeler;
+            var testModelerConfig = Configuration.MgmtConfiguration.TestModeler;
             string? ignoreReason = testModelerConfig?.IgnoreReason;
             if (ignoreReason is not null)
             {
@@ -593,7 +592,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 if (paramName is null)
                 {
                     var paramNameDeclare = new CodeWriterDeclaration(passThruParameter.Name);
-                    if (passThruParameter.ValidateNotNull)
+                    if (passThruParameter.Validate)
                     {
                         _writer.Line($"{passThruParameter.Type} {paramNameDeclare:D} = default; /* Can't find this parameter in example, please provide value here!*/");
                     }
