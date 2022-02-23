@@ -3,6 +3,7 @@
 
 using System;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
 
@@ -50,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 result = namespaceExtension;
             }
-            else if (context.Configuration.ModelNamespace)
+            else if (Configuration.ModelNamespace)
             {
                 result = $"{context.DefaultNamespace}.Models";
             }

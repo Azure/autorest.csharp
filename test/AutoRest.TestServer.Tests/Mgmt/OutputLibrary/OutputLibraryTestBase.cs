@@ -44,13 +44,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, _subFolder, "Generated");
             }
 
-            var configuration = StandaloneGeneratorRunner.LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
+            StandaloneGeneratorRunner.LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
-            var projectDirectory = Path.Combine(configuration.OutputFolder, configuration.ProjectFolder);
-            var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
+            var projectDirectory = Path.Combine(Configuration.OutputFolder, Configuration.ProjectFolder);
+            var project = await GeneratedCodeWorkspace.Create(projectDirectory, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, sourceInputModel));
         }
 
         [Test]
@@ -182,7 +182,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             foreach (var collection in MgmtContext.Library.ResourceCollections)
             {
                 // skip this if this collection is in the list-exception configuration
-                if (collection.RequestPaths.Any(path => MgmtContext.MgmtConfiguration.ListException.Contains(path)))
+                if (collection.RequestPaths.Any(path => Configuration.MgmtConfiguration.ListException.Contains(path)))
                     continue;
                 var name = $"{_projectName}.{collection.Type.Name}";
                 var generatedCollectionType = Assembly.GetExecutingAssembly().GetType(name);

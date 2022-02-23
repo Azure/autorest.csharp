@@ -12,9 +12,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTestTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
             var extensionsWriter = new CodeWriter();
 
             bool hasCollectionTest = false;
