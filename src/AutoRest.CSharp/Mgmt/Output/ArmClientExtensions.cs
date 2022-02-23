@@ -6,7 +6,6 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -20,6 +19,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override bool IsEmpty => !MgmtContext.Library.ArmResources.Any();
 
-        protected override string VariableName => Context.Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
+        protected override string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
     }
 }

@@ -8,9 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -66,8 +64,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
-                            WriteClientMethod(writer, clientMethod, client.Fields, context.Configuration, true);
-                            WriteClientMethod(writer, clientMethod, client.Fields, context.Configuration, false);
+                            WriteClientMethod(writer, clientMethod, client.Fields, true);
+                            WriteClientMethod(writer, clientMethod, client.Fields, false);
                         }
                     }
 
@@ -196,10 +194,10 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, Configuration configuration, bool async)
+        public static void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
         {
             var restMethod = clientMethod.RequestMethod;
-            var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && configuration.HeadAsBoolean;
+            var headAsBoolean = restMethod.Request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
 
             var returnType = async
                 ? headAsBoolean ? typeof(Task<Response<bool>>) : typeof(Task<Response>)

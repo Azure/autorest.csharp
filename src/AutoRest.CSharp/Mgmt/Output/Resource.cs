@@ -12,12 +12,8 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -203,7 +199,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
             var requestPath = operation.GetHttpPath();
-            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
             {
                 return positions.Contains(Position);
             }
