@@ -109,6 +109,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     if (match != null)
                     {
                         propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
+                        // If the matched type is ManagedServiceIdentity and the type to replace is a sealed enum or extensible enum containing the v3 "SystemAssigned,UserAssigned" value,
+                        // we shall mark "x-ms-mgmt-modelVersion" to be "v3". The serializer will then use the v3 serializer for ManagedServiceIdentity later.
                         if (match.Implementation is SystemObjectType systemObjectType
                             && systemObjectType.SystemType == typeof(ManagedServiceIdentity)
                             && (typeToReplace.Properties.First(p => p.Declaration.Name == "Type")?.SchemaProperty?.Schema is SealedChoiceSchema sealedChoiceSchema
