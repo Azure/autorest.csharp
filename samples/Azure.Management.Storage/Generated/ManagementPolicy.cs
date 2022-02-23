@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
         /// Operation Id: ManagementPolicies_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ManagementPolicy>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ManagementPolicy>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _managementPolicyClientDiagnostics.CreateScope("ManagementPolicy.Get");
             scope.Start();
@@ -138,17 +138,14 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _managementPolicyClientDiagnostics.CreateScope("ManagementPolicy.Delete");
             scope.Start();
             try
             {
                 var response = await _managementPolicyRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation(response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {
@@ -171,10 +168,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _managementPolicyRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new StorageArmOperation(response);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {
@@ -192,7 +186,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<ArmOperation<ManagementPolicy>> CreateOrUpdateAsync(bool waitForCompletion, ManagementPolicyData properties, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ManagementPolicy>> CreateOrUpdateAsync(bool waitForCompletion, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(properties, nameof(properties));
 
@@ -201,10 +195,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _managementPolicyRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, properties, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation<ManagementPolicy>(Response.FromValue(new ManagementPolicy(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new ManagementPolicy(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,10 +222,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _managementPolicyRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, properties, cancellationToken);
-                var operation = new StorageArmOperation<ManagementPolicy>(Response.FromValue(new ManagementPolicy(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new ManagementPolicy(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {

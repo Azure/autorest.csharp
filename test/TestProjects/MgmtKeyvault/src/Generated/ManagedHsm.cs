@@ -101,7 +101,7 @@ namespace MgmtKeyvault
         /// Operation Id: ManagedHsms_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ManagedHsm>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ManagedHsm>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsm.Get");
             scope.Start();
@@ -150,17 +150,17 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _managedHsmClientDiagnostics.CreateScope("ManagedHsm.Delete");
             scope.Start();
             try
             {
-                var response = await _managedHsmRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation(_managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                using var message = _managedHsmRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, _managedHsmClientDiagnostics, waitForCompletion, "ManagedHsm.Delete", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -182,11 +182,11 @@ namespace MgmtKeyvault
             scope.Start();
             try
             {
-                var response = _managedHsmRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation(_managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                using var message = _managedHsmRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, _managedHsmClientDiagnostics, waitForCompletion, "ManagedHsm.Delete", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -204,7 +204,7 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<ManagedHsm>> UpdateAsync(bool waitForCompletion, ManagedHsmData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ManagedHsm>> UpdateAsync(bool waitForCompletion, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -212,11 +212,12 @@ namespace MgmtKeyvault
             scope.Start();
             try
             {
-                var response = await _managedHsmRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation<ManagedHsm>(new ManagedHsmOperationSource(Client), _managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                Argument.AssertNotNull(parameters, "parameters");
+                using var message = _managedHsmRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, _managedHsmClientDiagnostics, waitForCompletion, new ManagedHsmOperationSource(Client), "ManagedHsm.Update", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -242,11 +243,12 @@ namespace MgmtKeyvault
             scope.Start();
             try
             {
-                var response = _managedHsmRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation<ManagedHsm>(new ManagedHsmOperationSource(Client), _managedHsmClientDiagnostics, Pipeline, _managedHsmRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                Argument.AssertNotNull(parameters, "parameters");
+                using var message = _managedHsmRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, _managedHsmClientDiagnostics, waitForCompletion, new ManagedHsmOperationSource(Client), "ManagedHsm.Update", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -318,7 +320,7 @@ namespace MgmtKeyvault
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public async virtual Task<Response<ManagedHsm>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ManagedHsm>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
@@ -379,7 +381,7 @@ namespace MgmtKeyvault
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public async virtual Task<Response<ManagedHsm>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ManagedHsm>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
@@ -439,7 +441,7 @@ namespace MgmtKeyvault
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async virtual Task<Response<ManagedHsm>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ManagedHsm>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
 

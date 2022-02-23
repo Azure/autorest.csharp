@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
         /// Operation Id: BlobInventoryPolicies_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<BlobInventoryPolicy>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BlobInventoryPolicy>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicy.Get");
             scope.Start();
@@ -138,17 +138,14 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _blobInventoryPolicyClientDiagnostics.CreateScope("BlobInventoryPolicy.Delete");
             scope.Start();
             try
             {
                 var response = await _blobInventoryPolicyRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation(response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {
@@ -171,10 +168,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobInventoryPolicyRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new StorageArmOperation(response);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {

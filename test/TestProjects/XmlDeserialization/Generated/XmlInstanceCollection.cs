@@ -63,7 +63,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<XmlInstance>> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<XmlInstance>> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -73,10 +73,7 @@ namespace XmlDeserialization
             try
             {
                 var response = await _xmlInstanceXmlDeserializationRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new XmlDeserializationArmOperation<XmlInstance>(Response.FromValue(new XmlInstance(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new XmlInstance(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -107,10 +104,7 @@ namespace XmlDeserialization
             try
             {
                 var response = _xmlInstanceXmlDeserializationRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken);
-                var operation = new XmlDeserializationArmOperation<XmlInstance>(Response.FromValue(new XmlInstance(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new XmlInstance(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -128,7 +122,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public async virtual Task<Response<XmlInstance>> GetAsync(string xmlName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<XmlInstance>> GetAsync(string xmlName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
@@ -276,7 +270,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string xmlName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
@@ -330,7 +324,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public async virtual Task<Response<XmlInstance>> GetIfExistsAsync(string xmlName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<XmlInstance>> GetIfExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 

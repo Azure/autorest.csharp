@@ -61,7 +61,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<ParentResource>> CreateOrUpdateAsync(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ParentResource>> CreateOrUpdateAsync(bool waitForCompletion, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -71,10 +71,7 @@ namespace SingletonResource
             try
             {
                 var response = await _parentResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonResourceArmOperation<ParentResource>(Response.FromValue(new ParentResource(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new ParentResource(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -103,10 +100,7 @@ namespace SingletonResource
             try
             {
                 var response = _parentResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, parentName, parameters, cancellationToken);
-                var operation = new SingletonResourceArmOperation<ParentResource>(Response.FromValue(new ParentResource(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new ParentResource(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -124,7 +118,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
-        public async virtual Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 
@@ -236,7 +230,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string parentName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 
@@ -290,7 +284,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
-        public async virtual Task<Response<ParentResource>> GetIfExistsAsync(string parentName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ParentResource>> GetIfExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(parentName, nameof(parentName));
 

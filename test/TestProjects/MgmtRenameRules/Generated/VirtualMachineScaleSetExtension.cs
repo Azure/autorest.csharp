@@ -90,7 +90,7 @@ namespace MgmtRenameRules
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<VirtualMachineScaleSetExtension>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineScaleSetExtension>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetExtensionClientDiagnostics.CreateScope("VirtualMachineScaleSetExtension.Get");
             scope.Start();
@@ -140,17 +140,18 @@ namespace MgmtRenameRules
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetExtensionClientDiagnostics.CreateScope("VirtualMachineScaleSetExtension.Delete");
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetExtensionRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetExtensionClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Parent.Name, "Id.Parent.Name");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                using var message = _virtualMachineScaleSetExtensionRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, _virtualMachineScaleSetExtensionClientDiagnostics, waitForCompletion, "VirtualMachineScaleSetExtension.Delete", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -172,11 +173,12 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetExtensionRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetExtensionClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Parent.Name, "Id.Parent.Name");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                using var message = _virtualMachineScaleSetExtensionRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, _virtualMachineScaleSetExtensionClientDiagnostics, waitForCompletion, "VirtualMachineScaleSetExtension.Delete", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -194,7 +196,7 @@ namespace MgmtRenameRules
         /// <param name="options"> Parameters supplied to the Update VM scale set Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
-        public async virtual Task<ArmOperation<VirtualMachineScaleSetExtension>> UpdateAsync(bool waitForCompletion, VirtualMachineScaleSetExtensionUpdateOptions options, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<VirtualMachineScaleSetExtension>> UpdateAsync(bool waitForCompletion, VirtualMachineScaleSetExtensionUpdateOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
 
@@ -202,11 +204,13 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var response = await _virtualMachineScaleSetExtensionRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, options, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation<VirtualMachineScaleSetExtension>(new VirtualMachineScaleSetExtensionOperationSource(Client), _virtualMachineScaleSetExtensionClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, options).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Parent.Name, "Id.Parent.Name");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                Argument.AssertNotNull(options, "options");
+                using var message = _virtualMachineScaleSetExtensionRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, options);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, _virtualMachineScaleSetExtensionClientDiagnostics, waitForCompletion, new VirtualMachineScaleSetExtensionOperationSource(Client), "VirtualMachineScaleSetExtension.Update", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -232,11 +236,13 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var response = _virtualMachineScaleSetExtensionRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, options, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation<VirtualMachineScaleSetExtension>(new VirtualMachineScaleSetExtensionOperationSource(Client), _virtualMachineScaleSetExtensionClientDiagnostics, Pipeline, _virtualMachineScaleSetExtensionRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, options).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Parent.Name, "Id.Parent.Name");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                Argument.AssertNotNull(options, "options");
+                using var message = _virtualMachineScaleSetExtensionRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, options);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, _virtualMachineScaleSetExtensionClientDiagnostics, waitForCompletion, new VirtualMachineScaleSetExtensionOperationSource(Client), "VirtualMachineScaleSetExtension.Update", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {

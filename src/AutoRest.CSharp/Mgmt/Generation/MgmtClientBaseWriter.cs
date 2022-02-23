@@ -22,6 +22,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -304,11 +305,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteFields(CodeWriter writer)
         {
-            foreach (var field in This.Fields)
-            {
-                writer.WriteFieldDeclaration(field);
-            }
-            writer.Line();
+            writer.WriteFieldDeclarations(This.Fields);
         }
 
         protected FormattableString GetProviderNamespaceFromReturnType(string? returnType)
@@ -451,7 +448,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CodeWriter.CodeWriterScope WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line();
-            var returnDescription = clientOperation.ReturnsDescription is not null ? clientOperation.ReturnsDescription(isAsync) : null;
+            var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
             return WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync);
         }
 
@@ -699,7 +696,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     // if we only have one branch, we would not need those if-else statements
                     var branch = clientOperation.OperationMappings.Keys.First();
-                    WriteLROMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
+                    WriteLROMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], diagnostic.ScopeName, async);
                 }
                 else
                 {
@@ -716,7 +713,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         }
                         using (_writer.Scope($"{keyword} ({This.BranchIdVariableName}.ResourceType == {GetResourceTypeExpression(resourceType)})"))
                         {
-                            WriteLROMethodBranch(operation, clientOperation.ParameterMappings[branch], async);
+                            WriteLROMethodBranch(operation, clientOperation.ParameterMappings[branch], diagnostic.ScopeName, async);
                         }
                         keyword = "else if";
                     }
@@ -732,7 +729,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         var branch = escapeBranches.First();
                         using (_writer.Scope($"else"))
                         {
-                            WriteLROMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], async);
+                            WriteLROMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], diagnostic.ScopeName, async);
                         }
                     }
                     else
@@ -743,98 +740,135 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, string scopeName, bool async)
         {
-            _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(_writer, parameterMapping);
-            _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
-
-            WriteLROResponse(GetDiagnosticName(operation), PipelineProperty, operation, parameterMapping, async);
-        }
-
-        protected virtual void WriteLROResponse(string diagnosticsVariableName, string pipelineVariableName, MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
-        {
-            _writer.Append($"var operation = new {LibraryArmOperation}");
-            if (operation.ReturnType.IsGenericType)
-            {
-                _writer.Append($"<{operation.MgmtReturnType}>");
-            }
-            _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                if (operation.MgmtReturnType is not null)
+                WriteFakeLroMethodBranch(operation, parameterMappings, async);
+            }
+            else
+            {
+                WriteRealLroMethodBranch(operation, parameterMappings, scopeName, async);
+            }
+        }
+
+        private void WriteFakeLroMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool async)
+        {
+            var responseVariable = new CodeWriterDeclaration("response");
+
+            _writer.Append($"var {responseVariable:D} = {GetAwait(async)} ");
+            _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+            WriteArguments(_writer, parameterMappings);
+            _writer.Line($"{CancellationTokenParameter.Name}){GetConfigureAwait(async)};");
+
+            FormattableString fromResponseMethod = $"ArmOperationHelpers.{nameof(ArmOperationHelpers.FromResponse)}";
+
+            if (operation.MgmtReturnType is not null)
+            {
+                _writer.Line($"return {fromResponseMethod}(new {operation.MgmtReturnType}({ArmClientReference}, {responseVariable}), {responseVariable}.GetRawResponse());");
+            }
+            else
+            {
+                _writer.Line($"return {fromResponseMethod}({responseVariable});");
+            }
+        }
+
+        private void WriteRealLroMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, string scopeName, bool async)
+        {
+            WriteArgumentValidations(_writer, parameterMappings);
+
+            var messageVariable = new CodeWriterDeclaration("message");
+            _writer.Append($"using var {messageVariable:D} = {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
+            WriteArguments(_writer, parameterMappings);
+            _writer.RemoveTrailingComma();
+            _writer.Line($");");
+
+            var operationName = async ? nameof(ArmOperationHelpers.ProcessMessageAsync) : nameof(ArmOperationHelpers.ProcessMessage);
+            _writer.Append($"return {GetAwait(async)} ArmOperationHelpers.{operationName}({PipelineProperty}, {messageVariable}, {GetDiagnosticName(operation)}, waitForCompletion, ");
+            if (operation.OperationSource is not null)
+            {
+                _writer
+                    .Append($"new {operation.OperationSource.TypeName}(")
+                    .AppendIf($"{ArmClientReference}", MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
+                    .Append($"), ");
+            }
+
+            _writer.Line($"{scopeName:L}, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}, {CancellationTokenParameter.Name});");
+        }
+
+        #endregion
+
+        protected static void WriteArgumentValidations(CodeWriter writer, IEnumerable<ParameterMapping> mapping)
+        {
+            foreach (var parameter in mapping)
+            {
+                if (CodeWriterExtensions.HasEmptyCheck(parameter.Parameter))
                 {
-                    _writer.Append($"{typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, response), response.GetRawResponse())");
+                    writer.Append($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}(");
+                }
+                else if (CodeWriterExtensions.HasNullCheck(parameter.Parameter))
+                {
+                    writer.Append($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}(");
                 }
                 else
                 {
-                    _writer.Append($"response");
+                    continue;
+                }
+
+                WriteArgument(writer, parameter);
+                writer.AppendRaw(", \"");
+                WriteArgument(writer, parameter);
+                writer.LineRaw("\");");
+            }
+        }
+
+        protected static void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
+        {
+            foreach (var parameter in mapping)
+            {
+                WriteArgument(writer, parameter, passNullForOptionalParameters);
+                writer.AppendRaw(", ");
+            }
+        }
+
+        private static void WriteArgument(CodeWriter writer, ParameterMapping parameter, bool passNullForOptionalParameters = false)
+        {
+            if (!parameter.IsPassThru && parameter.Parameter.Type.IsEnum)
+            {
+                writer.UseNamespace(parameter.Parameter.Type.Namespace);
+            }
+
+            if (parameter.IsPassThru)
+            {
+                if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
+                {
+                    // always use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
+                    if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
+                    {
+                        writer.AppendRaw($"pageSizeHint");
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
+                        writer.Append($"{parameter.Parameter.Name}");
+                    }
+                }
+                else
+                {
+                    if (passNullForOptionalParameters && !parameter.Parameter.Validate)
+                        writer.Append($"null");
+                    else
+                        writer.Append($"{parameter.Parameter.Name}");
                 }
             }
             else
             {
-                if (operation.OperationSource is not null)
+                foreach (var @namespace in parameter.Usings)
                 {
-                    _writer.Append($"new {operation.OperationSource.TypeName}(");
-                    if (MgmtContext.Library.CsharpTypeToResource.ContainsKey(operation.MgmtReturnType!))
-                        _writer.Append($"{ArmClientReference}");
-                    _writer.Append($"), ");
+                    writer.UseNamespace(@namespace);
                 }
 
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
-                WriteArguments(_writer, parameterMapping);
-                _writer.RemoveTrailingComma();
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
-            }
-            _writer.Line($");");
-            var waitForCompletionMethod = operation.MgmtReturnType is null ?
-                    "WaitForCompletionResponse" :
-                    "WaitForCompletion";
-            _writer.Line($"if (waitForCompletion)");
-            _writer.Line($"{GetAwait(async)} operation.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken){GetConfigureAwait(async)};");
-            _writer.Line($"return operation;");
-        }
-        #endregion
-
-        protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
-        {
-            foreach (var parameter in mapping)
-            {
-                if (!parameter.IsPassThru && parameter.Parameter.IsEnumType)
-                    writer.UseNamespace(parameter.Parameter.Type.Namespace);
-
-                if (parameter.IsPassThru)
-                {
-                    if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
-                    {
-                        // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
-                        if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
-                        {
-                            writer.AppendRaw($"pageSizeHint, ");
-                        }
-                        else
-                        {
-                            Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            writer.Append($"{parameter.Parameter.Name}, ");
-                        }
-                    }
-                    else
-                    {
-                        if (passNullForOptionalParameters && !parameter.Parameter.Validate)
-                            writer.Append($"null, ");
-                        else
-                            writer.Append($"{parameter.Parameter.Name}, ");
-                    }
-                }
-                else
-                {
-                    foreach (var @namespace in parameter.Usings)
-                    {
-                        writer.UseNamespace(@namespace);
-                    }
-                    writer.Append($"{parameter.ValueExpression}, ");
-                }
+                writer.Append($"{parameter.ValueExpression}");
             }
         }
 

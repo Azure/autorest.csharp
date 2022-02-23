@@ -62,7 +62,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<Toaster>> CreateOrUpdateAsync(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<Toaster>> CreateOrUpdateAsync(bool waitForCompletion, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -72,10 +72,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _toasterRestClient.CreateOrUpdateAsync(Id.SubscriptionId, toasterName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionExtensionsArmOperation<Toaster>(Response.FromValue(new Toaster(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new Toaster(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -105,10 +102,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _toasterRestClient.CreateOrUpdate(Id.SubscriptionId, toasterName, parameters, cancellationToken);
-                var operation = new SubscriptionExtensionsArmOperation<Toaster>(Response.FromValue(new Toaster(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new Toaster(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -125,7 +119,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public async virtual Task<Response<Toaster>> GetAsync(string toasterName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Toaster>> GetAsync(string toasterName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
@@ -234,7 +228,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string toasterName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string toasterName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 
@@ -288,7 +282,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public async virtual Task<Response<Toaster>> GetIfExistsAsync(string toasterName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Toaster>> GetIfExistsAsync(string toasterName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
 

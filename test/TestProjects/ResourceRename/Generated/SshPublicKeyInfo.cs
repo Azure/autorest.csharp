@@ -88,7 +88,7 @@ namespace ResourceRename
         /// Operation Id: SshPublicKeys_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SshPublicKeyInfo>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SshPublicKeyInfo>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfo.Get");
             scope.Start();
@@ -137,17 +137,14 @@ namespace ResourceRename
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _sshPublicKeyInfoSshPublicKeysClientDiagnostics.CreateScope("SshPublicKeyInfo.Delete");
             scope.Start();
             try
             {
                 var response = await _sshPublicKeyInfoSshPublicKeysRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new ResourceRenameArmOperation(response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {
@@ -170,10 +167,7 @@ namespace ResourceRename
             try
             {
                 var response = _sshPublicKeyInfoSshPublicKeysRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new ResourceRenameArmOperation(response);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {

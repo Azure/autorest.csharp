@@ -87,7 +87,7 @@ namespace SupersetInheritance
         /// Operation Id: SupersetModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SupersetModel1>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _supersetModel1ClientDiagnostics.CreateScope("SupersetModel1.Get");
             scope.Start();

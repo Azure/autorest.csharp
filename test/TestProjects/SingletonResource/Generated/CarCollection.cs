@@ -61,7 +61,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<Car>> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<Car>> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -71,10 +71,7 @@ namespace SingletonResource
             try
             {
                 var response = await _carRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonResourceArmOperation<Car>(Response.FromValue(new Car(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new Car(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -103,10 +100,7 @@ namespace SingletonResource
             try
             {
                 var response = _carRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
-                var operation = new SingletonResourceArmOperation<Car>(Response.FromValue(new Car(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new Car(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -123,7 +117,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<Car>> GetAsync(string carName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Car>> GetAsync(string carName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
@@ -232,7 +226,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
@@ -286,7 +280,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<Car>> GetIfExistsAsync(string carName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Car>> GetIfExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 

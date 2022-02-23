@@ -87,7 +87,7 @@ namespace Pagination
         /// Operation Id: PageSizeNumericModels_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PageSizeNumericModel>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PageSizeNumericModel>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _pageSizeNumericModelClientDiagnostics.CreateScope("PageSizeNumericModel.Get");
             scope.Start();

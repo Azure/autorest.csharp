@@ -88,7 +88,7 @@ namespace MgmtExtensionResource
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<BuiltInPolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BuiltInPolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinition.Get");
             scope.Start();

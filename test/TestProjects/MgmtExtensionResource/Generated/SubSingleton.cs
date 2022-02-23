@@ -88,7 +88,7 @@ namespace MgmtExtensionResource
         /// Operation Id: SubSingletons_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SubSingleton>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingleton.Get");
             scope.Start();
@@ -136,7 +136,7 @@ namespace MgmtExtensionResource
         /// Operation Id: SubSingletons_Execute
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> ExecuteAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ExecuteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingleton.Execute");
             scope.Start();

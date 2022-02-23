@@ -87,7 +87,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: ResourceModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1.Get");
             scope.Start();

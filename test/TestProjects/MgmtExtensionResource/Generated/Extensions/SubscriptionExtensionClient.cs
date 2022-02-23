@@ -70,7 +70,7 @@ namespace MgmtExtensionResource
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(string location, string domainNameLabel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
             using var scope = DefaultClientDiagnostics.CreateScope("SubscriptionExtensionClient.CheckDnsNameAvailability");
             scope.Start();
@@ -117,7 +117,7 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="validateSomethingOptions"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> ValidateSomethingOrphanedPostAsync(ValidateSomethingOptions validateSomethingOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ValidateSomethingOrphanedPostAsync(ValidateSomethingOptions validateSomethingOptions, CancellationToken cancellationToken = default)
         {
             using var scope = OrphanedPostClientDiagnostics.CreateScope("SubscriptionExtensionClient.ValidateSomethingOrphanedPost");
             scope.Start();

@@ -406,17 +406,17 @@ namespace MgmtRenameRules
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionExtensionClient.ExportRequestRateByIntervalLogAnalytic");
             scope.Start();
             try
             {
-                var response = await LogAnalyticsRestClient.ExportRequestRateByIntervalAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(location, "location");
+                Argument.AssertNotNull(parameters, "parameters");
+                using var message = LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, parameters);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, LogAnalyticsClientDiagnostics, waitForCompletion, new LogAnalyticsOperationSource(), "SubscriptionExtensionClient.ExportRequestRateByIntervalLogAnalytic", OperationFinalStateVia.AzureAsyncOperation, cancellationToken);
             }
             catch (Exception e)
             {
@@ -440,11 +440,11 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var response = LogAnalyticsRestClient.ExportRequestRateByInterval(Id.SubscriptionId, location, parameters, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(location, "location");
+                Argument.AssertNotNull(parameters, "parameters");
+                using var message = LogAnalyticsRestClient.CreateExportRequestRateByIntervalRequest(Id.SubscriptionId, location, parameters);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, LogAnalyticsClientDiagnostics, waitForCompletion, new LogAnalyticsOperationSource(), "SubscriptionExtensionClient.ExportRequestRateByIntervalLogAnalytic", OperationFinalStateVia.AzureAsyncOperation, cancellationToken);
             }
             catch (Exception e)
             {
@@ -462,17 +462,17 @@ namespace MgmtRenameRules
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionExtensionClient.ExportThrottledRequestsLogAnalytic");
             scope.Start();
             try
             {
-                var response = await LogAnalyticsRestClient.ExportThrottledRequestsAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(location, "location");
+                Argument.AssertNotNull(parameters, "parameters");
+                using var message = LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, parameters);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, LogAnalyticsClientDiagnostics, waitForCompletion, new LogAnalyticsOperationSource(), "SubscriptionExtensionClient.ExportThrottledRequestsLogAnalytic", OperationFinalStateVia.AzureAsyncOperation, cancellationToken);
             }
             catch (Exception e)
             {
@@ -496,11 +496,11 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                var response = LogAnalyticsRestClient.ExportThrottledRequests(Id.SubscriptionId, location, parameters, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation<LogAnalytics>(new LogAnalyticsOperationSource(), LogAnalyticsClientDiagnostics, Pipeline, LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(location, "location");
+                Argument.AssertNotNull(parameters, "parameters");
+                using var message = LogAnalyticsRestClient.CreateExportThrottledRequestsRequest(Id.SubscriptionId, location, parameters);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, LogAnalyticsClientDiagnostics, waitForCompletion, new LogAnalyticsOperationSource(), "SubscriptionExtensionClient.ExportThrottledRequestsLogAnalytic", OperationFinalStateVia.AzureAsyncOperation, cancellationToken);
             }
             catch (Exception e)
             {

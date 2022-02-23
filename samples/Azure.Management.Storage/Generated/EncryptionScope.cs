@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// Operation Id: EncryptionScopes_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<EncryptionScope>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EncryptionScope>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _encryptionScopeClientDiagnostics.CreateScope("EncryptionScope.Get");
             scope.Start();
@@ -138,7 +138,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public async virtual Task<Response<EncryptionScope>> UpdateAsync(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EncryptionScope>> UpdateAsync(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(encryptionScope, nameof(encryptionScope));
 

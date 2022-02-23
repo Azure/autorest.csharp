@@ -52,6 +52,16 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
+        public static CodeWriter WriteFieldDeclarations(this CodeWriter writer, IEnumerable<FieldDeclaration> fields)
+        {
+            foreach (var field in fields)
+            {
+                writer.WriteFieldDeclaration(field);
+            }
+
+            return writer.Line();
+        }
+
         public static CodeWriter WriteFieldDeclaration(this CodeWriter writer, FieldDeclaration field)
         {
             if (field.Description != null)
@@ -117,17 +127,17 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"{methodBase.Modifiers} ");
             if (methodBase is MethodSignature method)
             {
-                if (isAsync && !method.IsPageable)
-                    writer.Append($"async ");
-
                 var firstParam = method.Parameters.FirstOrDefault();
                 bool isExtensionMethod = firstParam is not null && firstParam.IsExtensionParameter;
+
+                if (isExtensionMethod)
+                    writer.Append($"static ");
 
                 if (method.Modifiers.Contains("public") && !isExtensionMethod)
                     writer.Append($"virtual ");
 
-                if (isExtensionMethod)
-                    writer.Append($"static ");
+                if (isAsync && !method.IsPageable)
+                    writer.Append($"async ");
 
                 if (method.ReturnType != null)
                 {
@@ -216,7 +226,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             if (clientParameter.IsExtensionParameter)
+            {
                 writer.Append($"this ");
+            }
+
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null && clientParameter.UseDefaultValueInCtorParam)
             {
@@ -248,7 +261,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw(",");
         }
 
-        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IEnumerable<Parameter> parameters)
         {
             foreach (Parameter parameter in parameters)
             {

@@ -88,7 +88,7 @@ namespace MgmtScopeResource
         /// Operation Id: ResourceLinks_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ResourceLink>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResourceLink>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLink.Get");
             scope.Start();
@@ -137,17 +137,14 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _resourceLinkClientDiagnostics.CreateScope("ResourceLink.Delete");
             scope.Start();
             try
             {
                 var response = await _resourceLinkRestClient.DeleteAsync(Id, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtScopeResourceArmOperation(response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {
@@ -170,10 +167,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _resourceLinkRestClient.Delete(Id, cancellationToken);
-                var operation = new MgmtScopeResourceArmOperation(response);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {

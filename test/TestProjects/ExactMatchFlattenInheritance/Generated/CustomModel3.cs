@@ -88,7 +88,7 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: CustomModel3s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<CustomModel3>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel3>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _customModel3ClientDiagnostics.CreateScope("CustomModel3.Get");
             scope.Start();

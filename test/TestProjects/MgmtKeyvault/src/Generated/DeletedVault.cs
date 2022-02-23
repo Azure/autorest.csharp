@@ -88,7 +88,7 @@ namespace MgmtKeyvault
         /// Operation Id: Vaults_GetDeleted
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeletedVault>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeletedVault>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVault.Get");
             scope.Start();
@@ -137,17 +137,17 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> PurgeDeletedAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> PurgeDeletedAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _deletedVaultVaultsClientDiagnostics.CreateScope("DeletedVault.PurgeDeleted");
             scope.Start();
             try
             {
-                var response = await _deletedVaultVaultsRestClient.PurgeDeletedAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtKeyvaultArmOperation(_deletedVaultVaultsClientDiagnostics, Pipeline, _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.Parent.Name, "Id.Parent.Name");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                using var message = _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, _deletedVaultVaultsClientDiagnostics, waitForCompletion, "DeletedVault.PurgeDeleted", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -169,11 +169,11 @@ namespace MgmtKeyvault
             scope.Start();
             try
             {
-                var response = _deletedVaultVaultsRestClient.PurgeDeleted(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
-                var operation = new MgmtKeyvaultArmOperation(_deletedVaultVaultsClientDiagnostics, Pipeline, _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.Parent.Name, "Id.Parent.Name");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                using var message = _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, _deletedVaultVaultsClientDiagnostics, waitForCompletion, "DeletedVault.PurgeDeleted", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {

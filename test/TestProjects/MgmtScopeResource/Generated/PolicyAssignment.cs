@@ -88,7 +88,7 @@ namespace MgmtScopeResource
         /// Operation Id: PolicyAssignments_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _policyAssignmentClientDiagnostics.CreateScope("PolicyAssignment.Get");
             scope.Start();
@@ -137,17 +137,14 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation<PolicyAssignment>> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<PolicyAssignment>> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _policyAssignmentClientDiagnostics.CreateScope("PolicyAssignment.Delete");
             scope.Start();
             try
             {
                 var response = await _policyAssignmentRestClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtScopeResourceArmOperation<PolicyAssignment>(Response.FromValue(new PolicyAssignment(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new PolicyAssignment(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -170,10 +167,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _policyAssignmentRestClient.Delete(Id.Parent, Id.Name, cancellationToken);
-                var operation = new MgmtScopeResourceArmOperation<PolicyAssignment>(Response.FromValue(new PolicyAssignment(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new PolicyAssignment(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {

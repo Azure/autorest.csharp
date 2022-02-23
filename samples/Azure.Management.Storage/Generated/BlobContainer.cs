@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
         /// Operation Id: BlobContainers_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<BlobContainer>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BlobContainer>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainer.Get");
             scope.Start();
@@ -145,17 +145,14 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainer.Delete");
             scope.Start();
             try
             {
                 var response = await _blobContainerRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation(response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {
@@ -178,10 +175,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobContainerRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken);
-                var operation = new StorageArmOperation(response);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {
@@ -198,7 +192,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public async virtual Task<Response<BlobContainer>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BlobContainer>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(blobContainer, nameof(blobContainer));
 
@@ -250,7 +244,7 @@ namespace Azure.Management.Storage
         /// <param name="legalHold"> The LegalHold property that will be set to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="legalHold"/> is null. </exception>
-        public async virtual Task<Response<LegalHold>> SetLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LegalHold>> SetLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(legalHold, nameof(legalHold));
 
@@ -302,7 +296,7 @@ namespace Azure.Management.Storage
         /// <param name="legalHold"> The LegalHold property that will be clear from a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="legalHold"/> is null. </exception>
-        public async virtual Task<Response<LegalHold>> ClearLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LegalHold>> ClearLegalHoldAsync(LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(legalHold, nameof(legalHold));
 
@@ -353,7 +347,7 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="parameters"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<LeaseContainerResponse>> LeaseAsync(LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<LeaseContainerResponse>> LeaseAsync(LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainer.Lease");
             scope.Start();
@@ -399,17 +393,18 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> ObjectLevelWormAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> ObjectLevelWormAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _blobContainerClientDiagnostics.CreateScope("BlobContainer.ObjectLevelWorm");
             scope.Start();
             try
             {
-                var response = await _blobContainerRestClient.ObjectLevelWormAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation(_blobContainerClientDiagnostics, Pipeline, _blobContainerRestClient.CreateObjectLevelWormRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Parent.Parent.Name, "Id.Parent.Parent.Name");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                using var message = _blobContainerRestClient.CreateObjectLevelWormRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, _blobContainerClientDiagnostics, waitForCompletion, "BlobContainer.ObjectLevelWorm", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {
@@ -431,11 +426,12 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _blobContainerRestClient.ObjectLevelWorm(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken);
-                var operation = new StorageArmOperation(_blobContainerClientDiagnostics, Pipeline, _blobContainerRestClient.CreateObjectLevelWormRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(Id.SubscriptionId, "Id.SubscriptionId");
+                Argument.AssertNotNullOrEmpty(Id.ResourceGroupName, "Id.ResourceGroupName");
+                Argument.AssertNotNullOrEmpty(Id.Parent.Parent.Name, "Id.Parent.Parent.Name");
+                Argument.AssertNotNullOrEmpty(Id.Name, "Id.Name");
+                using var message = _blobContainerRestClient.CreateObjectLevelWormRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, _blobContainerClientDiagnostics, waitForCompletion, "BlobContainer.ObjectLevelWorm", OperationFinalStateVia.Location, cancellationToken);
             }
             catch (Exception e)
             {

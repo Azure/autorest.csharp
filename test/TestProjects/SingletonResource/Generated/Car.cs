@@ -94,7 +94,7 @@ namespace SingletonResource
         /// Operation Id: Cars_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Car>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Car>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _carClientDiagnostics.CreateScope("Car.Get");
             scope.Start();

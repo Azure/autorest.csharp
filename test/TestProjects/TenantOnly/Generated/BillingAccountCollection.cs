@@ -62,7 +62,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<BillingAccount>> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BillingAccount>> CreateOrUpdateAsync(bool waitForCompletion, string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -71,11 +71,10 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _billingAccountRestClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantOnlyArmOperation<BillingAccount>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                Argument.AssertNotNullOrEmpty(billingAccountName, "billingAccountName");
+                Argument.AssertNotNull(parameters, "parameters");
+                using var message = _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters);
+                return await ArmOperationHelpers.ProcessMessageAsync(Pipeline, message, _billingAccountClientDiagnostics, waitForCompletion, new BillingAccountOperationSource(Client), "BillingAccountCollection.CreateOrUpdate", OperationFinalStateVia.AzureAsyncOperation, cancellationToken);
             }
             catch (Exception e)
             {
@@ -104,11 +103,10 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _billingAccountRestClient.Create(billingAccountName, parameters, cancellationToken);
-                var operation = new TenantOnlyArmOperation<BillingAccount>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters).Request, response, OperationFinalStateVia.AzureAsyncOperation);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                Argument.AssertNotNullOrEmpty(billingAccountName, "billingAccountName");
+                Argument.AssertNotNull(parameters, "parameters");
+                using var message = _billingAccountRestClient.CreateCreateRequest(billingAccountName, parameters);
+                return ArmOperationHelpers.ProcessMessage(Pipeline, message, _billingAccountClientDiagnostics, waitForCompletion, new BillingAccountOperationSource(Client), "BillingAccountCollection.CreateOrUpdate", OperationFinalStateVia.AzureAsyncOperation, cancellationToken);
             }
             catch (Exception e)
             {
@@ -127,7 +125,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public async virtual Task<Response<BillingAccount>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BillingAccount>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
@@ -243,7 +241,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 
@@ -299,7 +297,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="billingAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public async virtual Task<Response<BillingAccount>> GetIfExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BillingAccount>> GetIfExistsAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(billingAccountName, nameof(billingAccountName));
 

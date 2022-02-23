@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, Parameter[]? clientParameters = null)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSdkUserAgent, Parameter[]? clientParameters = null)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
                 }
 
-                if (writeSDKUserAgent)
+                if (writeSdkUserAgent)
                 {
                     writer.Line($"{message}.SetProperty(\"SDKUserAgent\", _userAgent);");
                 }

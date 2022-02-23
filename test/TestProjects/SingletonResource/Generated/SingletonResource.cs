@@ -88,7 +88,7 @@ namespace SingletonResource
         /// Operation Id: SingletonResources_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _singletonResourceClientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
@@ -139,7 +139,7 @@ namespace SingletonResource
         /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<SingletonResource>> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SingletonResource>> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -148,10 +148,7 @@ namespace SingletonResource
             try
             {
                 var response = await _singletonResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SingletonResourceArmOperation<SingletonResource>(Response.FromValue(new SingletonResource(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new SingletonResource(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -178,10 +175,7 @@ namespace SingletonResource
             try
             {
                 var response = _singletonResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
-                var operation = new SingletonResourceArmOperation<SingletonResource>(Response.FromValue(new SingletonResource(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new SingletonResource(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {

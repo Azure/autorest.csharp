@@ -87,7 +87,7 @@ namespace NoTypeReplacement
         /// Operation Id: NoTypeReplacementModel3s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<NoTypeReplacementModel3>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NoTypeReplacementModel3>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _noTypeReplacementModel3ClientDiagnostics.CreateScope("NoTypeReplacementModel3.Get");
             scope.Start();

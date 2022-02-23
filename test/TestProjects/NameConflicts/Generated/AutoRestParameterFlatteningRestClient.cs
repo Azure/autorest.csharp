@@ -111,7 +111,7 @@ namespace NameConflicts
                         return Azure.Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message0.Response);
             }
         }
 
@@ -167,7 +167,7 @@ namespace NameConflicts
                         return Azure.Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
+                    throw new RequestFailedException(message0.Response);
             }
         }
 
@@ -200,7 +200,7 @@ namespace NameConflicts
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -216,7 +216,7 @@ namespace NameConflicts
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -251,7 +251,7 @@ namespace NameConflicts
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -267,7 +267,7 @@ namespace NameConflicts
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -307,7 +307,7 @@ namespace NameConflicts
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -327,7 +327,7 @@ namespace NameConflicts
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -367,7 +367,7 @@ namespace NameConflicts
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -387,7 +387,7 @@ namespace NameConflicts
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -427,7 +427,7 @@ namespace NameConflicts
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -447,7 +447,7 @@ namespace NameConflicts
                         return Azure.Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

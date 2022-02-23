@@ -88,7 +88,7 @@ namespace MgmtSubscriptionNameParameter
         /// Operation Id: Subscriptions_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SBSubscription>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SBSubscription>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Get");
             scope.Start();
@@ -137,17 +137,14 @@ namespace MgmtSubscriptionNameParameter
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _sbSubscriptionSubscriptionsClientDiagnostics.CreateScope("SBSubscription.Delete");
             scope.Start();
             try
             {
                 var response = await _sbSubscriptionSubscriptionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSubscriptionNameParameterArmOperation(response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {
@@ -170,10 +167,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = _sbSubscriptionSubscriptionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new MgmtSubscriptionNameParameterArmOperation(response);
-                if (waitForCompletion)
-                    operation.WaitForCompletionResponse(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(response);
             }
             catch (Exception e)
             {

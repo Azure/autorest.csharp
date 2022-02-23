@@ -97,7 +97,7 @@ namespace MgmtHierarchicalNonResource
         /// Operation Id: SharedGalleries_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SharedGallery>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SharedGallery>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGallery.Get");
             scope.Start();
@@ -236,7 +236,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
-        public async virtual Task<Response<SharedGalleryImage>> GetSharedGalleryImageAsync(string galleryImageName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SharedGalleryImage>> GetSharedGalleryImageAsync(string galleryImageName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
@@ -387,7 +387,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null. </exception>
-        public async virtual Task<Response<SharedGalleryImageVersion>> GetSharedGalleryImageVersionAsync(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SharedGalleryImageVersion>> GetSharedGalleryImageVersionAsync(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
             Argument.AssertNotNullOrEmpty(galleryImageVersionName, nameof(galleryImageVersionName));

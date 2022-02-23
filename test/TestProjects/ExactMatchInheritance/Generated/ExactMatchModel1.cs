@@ -87,7 +87,7 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ExactMatchModel1>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ExactMatchModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1.Get");
             scope.Start();

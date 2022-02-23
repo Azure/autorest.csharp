@@ -95,7 +95,7 @@ namespace Azure.Management.Storage
         /// Operation Id: FileServices_GetServiceProperties
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<FileService>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileService>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _fileServiceClientDiagnostics.CreateScope("FileService.Get");
             scope.Start();
@@ -146,7 +146,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<FileService>> CreateOrUpdateAsync(bool waitForCompletion, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FileService>> CreateOrUpdateAsync(bool waitForCompletion, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -155,10 +155,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _fileServiceRestClient.SetServicePropertiesAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation<FileService>(Response.FromValue(new FileService(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new FileService(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -185,10 +182,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _fileServiceRestClient.SetServiceProperties(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
-                var operation = new StorageArmOperation<FileService>(Response.FromValue(new FileService(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
+                return ArmOperationHelpers.FromResponse(new FileService(Client, response), response.GetRawResponse());
             }
             catch (Exception e)
             {

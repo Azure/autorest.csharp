@@ -3,7 +3,6 @@
 
 using System;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
@@ -11,7 +10,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsRequired => DefaultValue is null;
-        public bool IsEnumType => Type.IsFrameworkType ? Type.FrameworkType.IsEnum : Type.Implementation is EnumType;
     }
 
     internal enum RequestLocation

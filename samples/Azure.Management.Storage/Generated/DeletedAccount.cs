@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// Operation Id: DeletedAccounts_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeletedAccount>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeletedAccount>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccount.Get");
             scope.Start();

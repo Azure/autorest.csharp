@@ -87,7 +87,7 @@ namespace SingletonResource
         /// Operation Id: Ignitions_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Ignition>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Ignition>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _ignitionClientDiagnostics.CreateScope("Ignition.Get");
             scope.Start();

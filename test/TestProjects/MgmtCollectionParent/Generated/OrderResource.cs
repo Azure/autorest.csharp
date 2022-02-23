@@ -88,7 +88,7 @@ namespace MgmtCollectionParent
         /// Operation Id: GetOrderByName
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<OrderResource>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<OrderResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _orderResourceClientDiagnostics.CreateScope("OrderResource.Get");
             scope.Start();
