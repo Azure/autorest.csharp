@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -171,7 +172,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (!isArmCore)
             {
-                var orphanedDocsToKeep = MgmtContext.MgmtConfiguration.KeepOrphanedModels.Select(m => $"Models/{m}.cs").ToHashSet();
+                var orphanedDocsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.Select(m => $"Models/{m}.cs").ToHashSet();
                 project.RemoveOrphanedEnums(orphanedDocsToKeep);
             }
         }
