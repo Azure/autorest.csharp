@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class ResponseWriterHelpers
     {
-        public static void WriteStatusCodeSwitch(CodeWriter writer, string messageVariableName, RestClientMethod operation, bool async)
+        public static void WriteStatusCodeSwitch(CodeWriter writer, string messageVariableName, RestClientMethod operation, bool async, string? clientDiagnosticsVariableName = null)
         {
             string responseVariable = $"{messageVariableName}.Response";
 
@@ -148,9 +148,19 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                writer
-                    .Line($"default:")
-                    .Line($"throw new {typeof(RequestFailedException)}({responseVariable});");
+                writer.Line($"default:");
+                if (clientDiagnosticsVariableName == null)
+                {
+                    writer.Line($"throw new {typeof(RequestFailedException)}({responseVariable});");
+                }
+                else if (async)
+                {
+                    writer.Line($"throw await {clientDiagnosticsVariableName}.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
+                }
+                else
+                {
+                    writer.Line($"throw {clientDiagnosticsVariableName}.CreateRequestFailedException({responseVariable});");
+                }
             }
         }
 

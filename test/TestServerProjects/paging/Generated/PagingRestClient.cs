@@ -64,7 +64,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -84,7 +84,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -117,7 +117,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -137,7 +137,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -170,7 +170,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -190,7 +190,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -223,7 +223,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -243,7 +243,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -290,7 +290,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -312,7 +312,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -348,7 +348,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -369,7 +369,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -403,7 +403,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -423,7 +423,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -470,7 +470,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -492,7 +492,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -546,7 +546,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -574,7 +574,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -607,7 +607,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -627,7 +627,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -660,7 +660,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -680,7 +680,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -713,7 +713,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -733,7 +733,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -766,7 +766,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -786,7 +786,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -819,7 +819,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -839,7 +839,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -886,7 +886,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -918,7 +918,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -960,7 +960,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -987,7 +987,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1029,7 +1029,7 @@ namespace paging
                 case 202:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1046,7 +1046,7 @@ namespace paging
                 case 202:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1100,7 +1100,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1137,7 +1137,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1186,7 +1186,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1218,7 +1218,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1251,7 +1251,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1271,7 +1271,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1311,7 +1311,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1338,7 +1338,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1378,7 +1378,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1405,7 +1405,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1445,7 +1445,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1472,7 +1472,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1526,7 +1526,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1555,7 +1555,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1609,7 +1609,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1638,7 +1638,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1696,7 +1696,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1729,7 +1729,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1769,7 +1769,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1796,7 +1796,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1836,7 +1836,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1863,7 +1863,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1903,7 +1903,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1930,7 +1930,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1970,7 +1970,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1997,7 +1997,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2037,7 +2037,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2064,7 +2064,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2113,7 +2113,7 @@ namespace paging
                 case 200:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2137,7 +2137,7 @@ namespace paging
                 case 200:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -2177,7 +2177,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -2204,7 +2204,7 @@ namespace paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

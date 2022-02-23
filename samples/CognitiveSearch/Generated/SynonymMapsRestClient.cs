@@ -100,7 +100,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -136,7 +136,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -185,7 +185,7 @@ namespace CognitiveSearch
                 case 404:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -210,7 +210,7 @@ namespace CognitiveSearch
                 case 404:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -254,7 +254,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -282,7 +282,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -322,7 +322,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -344,7 +344,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -390,7 +390,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -418,7 +418,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

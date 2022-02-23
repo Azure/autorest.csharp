@@ -74,7 +74,7 @@ namespace Azure.AI.FormRecognizer
                 case 201:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -97,7 +97,7 @@ namespace Azure.AI.FormRecognizer
                 case 201:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -138,7 +138,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -160,7 +160,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -191,7 +191,7 @@ namespace Azure.AI.FormRecognizer
                 case 204:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -207,7 +207,7 @@ namespace Azure.AI.FormRecognizer
                 case 204:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -252,7 +252,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -272,7 +272,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -318,7 +318,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -337,7 +337,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -376,7 +376,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -398,7 +398,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -442,7 +442,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -466,7 +466,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -505,7 +505,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -527,7 +527,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -562,7 +562,7 @@ namespace Azure.AI.FormRecognizer
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -583,7 +583,7 @@ namespace Azure.AI.FormRecognizer
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -625,7 +625,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -644,7 +644,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -687,7 +687,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -705,7 +705,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -741,7 +741,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -762,7 +762,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -799,7 +799,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -817,7 +817,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -855,7 +855,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -872,7 +872,7 @@ namespace Azure.AI.FormRecognizer
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -908,7 +908,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -929,7 +929,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -965,7 +965,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -986,7 +986,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1022,7 +1022,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1043,7 +1043,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1085,7 +1085,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1113,7 +1113,7 @@ namespace Azure.AI.FormRecognizer
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

@@ -88,18 +88,9 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ListContainerItems>> ListAsync(string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, accountName, maxpagesize, filter, include);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -128,18 +119,9 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ListContainerItems> List(string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, accountName, maxpagesize, filter, include);
             _pipeline.Send(message, cancellationToken);
@@ -193,26 +175,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<BlobContainerData>> CreateAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (blobContainer == null)
-            {
-                throw new ArgumentNullException(nameof(blobContainer));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(blobContainer, nameof(blobContainer));
 
             using var message = CreateCreateRequest(subscriptionId, resourceGroupName, accountName, containerName, blobContainer);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -241,26 +208,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<BlobContainerData> Create(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (blobContainer == null)
-            {
-                throw new ArgumentNullException(nameof(blobContainer));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(blobContainer, nameof(blobContainer));
 
             using var message = CreateCreateRequest(subscriptionId, resourceGroupName, accountName, containerName, blobContainer);
             _pipeline.Send(message, cancellationToken);
@@ -315,26 +267,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<BlobContainerData>> UpdateAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (blobContainer == null)
-            {
-                throw new ArgumentNullException(nameof(blobContainer));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(blobContainer, nameof(blobContainer));
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, accountName, containerName, blobContainer);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -362,26 +299,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<BlobContainerData> Update(string subscriptionId, string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (blobContainer == null)
-            {
-                throw new ArgumentNullException(nameof(blobContainer));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(blobContainer, nameof(blobContainer));
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, accountName, containerName, blobContainer);
             _pipeline.Send(message, cancellationToken);
@@ -430,22 +352,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<BlobContainerData>> GetAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, accountName, containerName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -474,22 +384,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<BlobContainerData> Get(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, accountName, containerName);
             _pipeline.Send(message, cancellationToken);
@@ -539,22 +437,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, accountName, containerName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -577,22 +463,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, accountName, containerName);
             _pipeline.Send(message, cancellationToken);
@@ -643,26 +517,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<LegalHold>> SetLegalHoldAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, LegalHold legalHold, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (legalHold == null)
-            {
-                throw new ArgumentNullException(nameof(legalHold));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(legalHold, nameof(legalHold));
 
             using var message = CreateSetLegalHoldRequest(subscriptionId, resourceGroupName, accountName, containerName, legalHold);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -690,26 +549,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<LegalHold> SetLegalHold(string subscriptionId, string resourceGroupName, string accountName, string containerName, LegalHold legalHold, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (legalHold == null)
-            {
-                throw new ArgumentNullException(nameof(legalHold));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(legalHold, nameof(legalHold));
 
             using var message = CreateSetLegalHoldRequest(subscriptionId, resourceGroupName, accountName, containerName, legalHold);
             _pipeline.Send(message, cancellationToken);
@@ -764,26 +608,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<LegalHold>> ClearLegalHoldAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, LegalHold legalHold, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (legalHold == null)
-            {
-                throw new ArgumentNullException(nameof(legalHold));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(legalHold, nameof(legalHold));
 
             using var message = CreateClearLegalHoldRequest(subscriptionId, resourceGroupName, accountName, containerName, legalHold);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -811,26 +640,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<LegalHold> ClearLegalHold(string subscriptionId, string resourceGroupName, string accountName, string containerName, LegalHold legalHold, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (legalHold == null)
-            {
-                throw new ArgumentNullException(nameof(legalHold));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(legalHold, nameof(legalHold));
 
             using var message = CreateClearLegalHoldRequest(subscriptionId, resourceGroupName, accountName, containerName, legalHold);
             _pipeline.Send(message, cancellationToken);
@@ -894,22 +708,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ImmutabilityPolicyData>> CreateOrUpdateImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, parameters, ifMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -938,22 +740,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ImmutabilityPolicyData> CreateOrUpdateImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, parameters, ifMatch);
             _pipeline.Send(message, cancellationToken);
@@ -1009,22 +799,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ImmutabilityPolicyData>> GetImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateGetImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, ifMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1054,22 +832,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ImmutabilityPolicyData> GetImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateGetImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, ifMatch);
             _pipeline.Send(message, cancellationToken);
@@ -1124,26 +890,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ImmutabilityPolicyData>> DeleteImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateDeleteImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, ifMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1171,26 +922,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ImmutabilityPolicyData> DeleteImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateDeleteImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, ifMatch);
             _pipeline.Send(message, cancellationToken);
@@ -1242,26 +978,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ImmutabilityPolicyData>> LockImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateLockImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, ifMatch);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1289,26 +1010,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ImmutabilityPolicyData> LockImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateLockImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, ifMatch);
             _pipeline.Send(message, cancellationToken);
@@ -1368,26 +1074,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ImmutabilityPolicyData>> ExtendImmutabilityPolicyAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateExtendImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, ifMatch, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1416,26 +1107,11 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ImmutabilityPolicyData> ExtendImmutabilityPolicy(string subscriptionId, string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var message = CreateExtendImmutabilityPolicyRequest(subscriptionId, resourceGroupName, accountName, containerName, ifMatch, parameters);
             _pipeline.Send(message, cancellationToken);
@@ -1493,22 +1169,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<LeaseContainerResponse>> LeaseAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateLeaseRequest(subscriptionId, resourceGroupName, accountName, containerName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1536,22 +1200,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<LeaseContainerResponse> Lease(string subscriptionId, string resourceGroupName, string accountName, string containerName, LeaseContainerRequest parameters = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (containerName == null)
-            {
-                throw new ArgumentNullException(nameof(containerName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
+            Argument.AssertNotNullOrEmpty(containerName, nameof(containerName));
 
             using var message = CreateLeaseRequest(subscriptionId, resourceGroupName, accountName, containerName, parameters);
             _pipeline.Send(message, cancellationToken);
@@ -1618,22 +1270,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
         internal async Task<Response<ListContainerItems>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, accountName, maxpagesize, filter, include);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -1663,22 +1303,10 @@ namespace Azure.Management.Storage
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
         internal Response<ListContainerItems> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize = null, string filter = null, ListContainersInclude? include = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(accountName, nameof(accountName));
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, accountName, maxpagesize, filter, include);
             _pipeline.Send(message, cancellationToken);

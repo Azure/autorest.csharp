@@ -761,7 +761,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMappings);
             _writer.Line($"{CancellationTokenParameter.Name}){GetConfigureAwait(async)};");
 
-            FormattableString fromResponseMethod = $"{typeof(ArmOperationHelpers)}.{nameof(ArmOperationHelpers.FromResponse)}";
+            FormattableString fromResponseMethod = $"ArmOperationHelpers.{nameof(ArmOperationHelpers.FromResponse)}";
 
             if (operation.MgmtReturnType is not null)
             {
@@ -784,7 +784,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($");");
 
             var operationName = async ? nameof(ArmOperationHelpers.ProcessMessageAsync) : nameof(ArmOperationHelpers.ProcessMessage);
-            _writer.Append($"return {GetAwait(async)} {typeof(ArmOperationHelpers)}.{operationName}({PipelineProperty}, {messageVariable}, {GetDiagnosticName(operation)}, waitForCompletion, ");
+            _writer.Append($"return {GetAwait(async)} ArmOperationHelpers.{operationName}({PipelineProperty}, {messageVariable}, {GetDiagnosticName(operation)}, waitForCompletion, ");
             if (operation.OperationSource is not null)
             {
                 _writer

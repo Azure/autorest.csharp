@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -62,7 +61,7 @@ namespace HeaderCollectionPrefix
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -78,7 +77,7 @@ namespace HeaderCollectionPrefix
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

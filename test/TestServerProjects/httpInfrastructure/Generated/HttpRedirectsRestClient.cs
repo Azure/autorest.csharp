@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -61,7 +60,7 @@ namespace httpInfrastructure
                 case 300:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -78,7 +77,7 @@ namespace httpInfrastructure
                 case 300:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -119,7 +118,7 @@ namespace httpInfrastructure
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -147,7 +146,7 @@ namespace httpInfrastructure
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -177,7 +176,7 @@ namespace httpInfrastructure
                 case 301:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -194,7 +193,7 @@ namespace httpInfrastructure
                 case 301:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -224,7 +223,7 @@ namespace httpInfrastructure
                 case 301:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -241,7 +240,7 @@ namespace httpInfrastructure
                 case 301:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -274,7 +273,7 @@ namespace httpInfrastructure
                 case 301:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -290,7 +289,7 @@ namespace httpInfrastructure
                 case 301:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -320,7 +319,7 @@ namespace httpInfrastructure
                 case 302:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -337,7 +336,7 @@ namespace httpInfrastructure
                 case 302:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -367,7 +366,7 @@ namespace httpInfrastructure
                 case 302:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -384,7 +383,7 @@ namespace httpInfrastructure
                 case 302:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -417,7 +416,7 @@ namespace httpInfrastructure
                 case 302:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -433,7 +432,7 @@ namespace httpInfrastructure
                 case 302:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -467,7 +466,7 @@ namespace httpInfrastructure
                 case 303:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -484,7 +483,7 @@ namespace httpInfrastructure
                 case 303:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -514,7 +513,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -531,7 +530,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -561,7 +560,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -578,7 +577,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -608,7 +607,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -625,7 +624,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -659,7 +658,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -676,7 +675,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -710,7 +709,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -727,7 +726,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -761,7 +760,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -778,7 +777,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -812,7 +811,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -829,7 +828,7 @@ namespace httpInfrastructure
                 case 307:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

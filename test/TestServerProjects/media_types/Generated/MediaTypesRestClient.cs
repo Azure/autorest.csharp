@@ -72,7 +72,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -94,7 +94,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -135,7 +135,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -156,7 +156,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -190,7 +190,7 @@ namespace media_types
                 case 202:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -207,7 +207,7 @@ namespace media_types
                 case 202:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -242,7 +242,7 @@ namespace media_types
                 case 202:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -258,7 +258,7 @@ namespace media_types
                 case 202:
                     return message.Response;
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -297,7 +297,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -318,7 +318,7 @@ namespace media_types
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -360,7 +360,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw new RequestFailedException(message0.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
             }
         }
 
@@ -387,7 +387,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw new RequestFailedException(message0.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
             }
         }
 
@@ -429,7 +429,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw new RequestFailedException(message0.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
             }
         }
 
@@ -456,7 +456,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw new RequestFailedException(message0.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
             }
         }
 
@@ -497,7 +497,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw new RequestFailedException(message0.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
             }
         }
 
@@ -523,7 +523,7 @@ namespace media_types
                         return Response.FromValue(value, message0.Response);
                     }
                 default:
-                    throw new RequestFailedException(message0.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
             }
         }
     }

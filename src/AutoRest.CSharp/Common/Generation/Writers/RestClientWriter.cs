@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{PipelineField}.Send({messageVariable}, cancellationToken);");
                 }
 
-                ResponseWriterHelpers.WriteStatusCodeSwitch(writer, messageVariable.ActualName, operation, async);
+                ResponseWriterHelpers.WriteStatusCodeSwitch(writer, messageVariable.ActualName, operation, async, ClientDiagnosticsField);
             }
             writer.Line();
         }
