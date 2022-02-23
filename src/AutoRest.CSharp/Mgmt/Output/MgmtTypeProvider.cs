@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected MgmtTypeProvider(string resourceName) : base(MgmtContext.Context)
         {
             ResourceName = resourceName;
-            IsArmCore = MgmtContext.MgmtConfiguration.IsArmCore;
+            IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             IsStatic = !IsArmCore && BaseType is null && this is MgmtExtensions extension && extension.ArmCoreType != typeof(ArmResource) && extension.ArmCoreType != typeof(ArmClient);
         }
 

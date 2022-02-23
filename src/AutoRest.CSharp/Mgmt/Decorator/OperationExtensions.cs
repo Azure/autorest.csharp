@@ -6,14 +6,11 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -57,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static bool TryGetConfigOperationName(this Operation operation, [MaybeNullWhen(false)] out string name)
         {
             var operationId = operation.OperationId(MgmtContext.Library.GetRestClient(operation).OperationGroup);
-            return MgmtContext.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out name);
+            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out name);
         }
 
         public static string OperationId(this Operation operation, OperationGroup operationGroup)
@@ -127,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static OperationSet? FindOperationSetOfResource(RequestPath requestPath)
         {
-            if (MgmtContext.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var rawPath))
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var rawPath))
                 return MgmtContext.Library.GetOperationSet(rawPath);
             var candidates = new List<OperationSet>();
             // we need to iterate all resources to find if this is the parent of that

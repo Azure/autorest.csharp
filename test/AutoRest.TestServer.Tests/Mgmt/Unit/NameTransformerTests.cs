@@ -17,15 +17,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
             renameRules = new Dictionary<string, string>
             {
                 { "Os", "OS" },
-                { "DNS", "Dns" },
                 { "Ip", "IP" },
                 { "Ips", "IPs" },
                 { "ID", "Id" },
                 { "IDs", "Ids" },
+                { "VM", "Vm" },
+                { "VMs", "Vms" },
                 { "VPN", "Vpn" },
                 { "WAN", "Wan" },
                 { "WANs", "Wans" },
-                { "VM", "Vm" },
+                { "DNS", "Dns" },
             };
         }
 
@@ -53,6 +54,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase("VMIp", "VmIP")]
         [TestCase("SomethingVPNIp", "SomethingVpnIP")]
         [TestCase("SomethingVPNIP", "SomethingVpnIP")]
+        [TestCase("RestorePointSourceVMOSDisk", "RestorePointSourceVmOSDisk")]
         public void EnsureNameCaseTest(string name, string expected)
         {
             var transformer = new NameTransformer(renameRules);

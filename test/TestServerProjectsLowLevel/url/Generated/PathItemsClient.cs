@@ -74,9 +74,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
@@ -112,9 +110,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
@@ -150,9 +146,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
@@ -188,9 +182,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
@@ -226,9 +218,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
@@ -264,9 +254,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
@@ -302,9 +290,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
@@ -340,9 +326,7 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNullOrEmpty(pathItemStringPath, nameof(pathItemStringPath));
             Argument.AssertNotNullOrEmpty(localStringPath, nameof(localStringPath));
