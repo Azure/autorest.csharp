@@ -22,8 +22,10 @@ namespace dpg_customization_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -44,7 +46,7 @@ namespace dpg_customization_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new DPGClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -62,18 +64,16 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetModelAsync(string mode, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            using var scope = _clientDiagnostics.CreateScope("DPGClient.GetModel");
+            using var scope = ClientDiagnostics.CreateScope("DPGClient.GetModel");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetModelRequest(mode, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -94,18 +94,16 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetModel(string mode, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            using var scope = _clientDiagnostics.CreateScope("DPGClient.GetModel");
+            using var scope = ClientDiagnostics.CreateScope("DPGClient.GetModel");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetModelRequest(mode, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -132,19 +130,17 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> PostModelAsync(string mode, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(mode, nameof(mode));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("DPGClient.PostModel");
+            using var scope = ClientDiagnostics.CreateScope("DPGClient.PostModel");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostModelRequest(mode, content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -171,19 +167,17 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response PostModel(string mode, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(mode, nameof(mode));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = _clientDiagnostics.CreateScope("DPGClient.PostModel");
+            using var scope = ClientDiagnostics.CreateScope("DPGClient.PostModel");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePostModelRequest(mode, content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -209,13 +203,11 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetPagesAsync(string mode, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, _clientDiagnostics, "DPGClient.GetPages");
+            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "DPGClient.GetPages");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
             {
                 do
@@ -223,7 +215,7 @@ namespace dpg_customization_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesRequest(mode, context)
                         : CreateGetPagesNextPageRequest(nextLink, mode, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
+                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "values", "nextLink", cancellationToken).ConfigureAwait(false);
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -247,13 +239,11 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetPages(string mode, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            return PageableHelpers.CreatePageable(CreateEnumerable, _clientDiagnostics, "DPGClient.GetPages");
+            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "DPGClient.GetPages");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
             {
                 do
@@ -261,7 +251,7 @@ namespace dpg_customization_LowLevel
                     var message = string.IsNullOrEmpty(nextLink)
                         ? CreateGetPagesRequest(mode, context)
                         : CreateGetPagesNextPageRequest(nextLink, mode, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, context, "values", "nextLink");
+                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "values", "nextLink");
                     nextLink = page.ContinuationToken;
                     yield return page;
                 } while (!string.IsNullOrEmpty(nextLink));
@@ -282,18 +272,16 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> LroAsync(bool waitForCompletion, string mode, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            using var scope = _clientDiagnostics.CreateScope("DPGClient.Lro");
+            using var scope = ClientDiagnostics.CreateScope("DPGClient.Lro");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateLroRequest(mode, context);
-                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, _clientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitForCompletion).ConfigureAwait(false);
+                return await LowLevelOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitForCompletion).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -316,18 +304,16 @@ namespace dpg_customization_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> Lro(bool waitForCompletion, string mode, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
-            using var scope = _clientDiagnostics.CreateScope("DPGClient.Lro");
+            using var scope = ClientDiagnostics.CreateScope("DPGClient.Lro");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateLroRequest(mode, context);
-                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, _clientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitForCompletion);
+                return LowLevelOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "DPGClient.Lro", OperationFinalStateVia.Location, context, waitForCompletion);
             }
             catch (Exception e)
             {
