@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtScopeResource
 {
-    [CodeGenSuppress("GetPolicyAssignments", typeof(PolicyAssignmentCollection))]
+    [CodeGenSuppress("GetPolicyAssignments", typeof(ArmResource))]
     public static partial class ArmResourceExtensions
     {
     }

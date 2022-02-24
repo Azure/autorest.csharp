@@ -20,13 +20,5 @@ namespace MgmtScopeResource
             }
             );
         }
-
-        /// <summary> Gets a collection of PolicyAssignments in the PolicyAssignment. </summary>
-        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of PolicyAssignments and their operations over a PolicyAssignment. </returns>
-        public static PolicyAssignmentCollection GetPolicyAssignments(this ArmResource armResource)
-        {
-            return GetExtensionClient(armResource).GetPolicyAssignments();
-        }
     }
 }
