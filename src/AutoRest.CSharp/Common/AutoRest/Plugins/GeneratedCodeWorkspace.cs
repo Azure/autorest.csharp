@@ -220,11 +220,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             public IEnumerable<SyntaxNode> PublicMembers => _members;
 
-            /// <summary>
-            /// override this to add my self in, and add the base class in
-            /// </summary>
-            /// <param name="node"></param>
-            /// <returns></returns>
             public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
@@ -235,11 +230,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return node;
             }
 
-            /// <summary>
-            /// override this to add my property in
-            /// </summary>
-            /// <param name="node"></param>
-            /// <returns></returns>
             public override SyntaxNode? VisitPropertyDeclaration(PropertyDeclarationSyntax node)
             {
                 node = (PropertyDeclarationSyntax)base.VisitPropertyDeclaration(node)!;
@@ -250,18 +240,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return node;
             }
 
-            /// <summary>
-            /// override this to add my methods in
-            /// </summary>
-            /// <param name="node"></param>
-            /// <returns></returns>
             public override SyntaxNode? VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
                 node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node)!;
                 if (IsPublic(node.Modifiers))
-                {
                     _members.Add(node);
-                }
+                return node;
+            }
+
+            public override SyntaxNode? VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
+            {
+                node = (ConstructorDeclarationSyntax)base.VisitConstructorDeclaration(node)!;
+                if (IsPublic(node.Modifiers))
+                    _members.Add(node);
                 return node;
             }
         }
@@ -371,7 +362,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     await ProcessSymbol(propertySymbol.Type, result);
                     break;
                 default:
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException($"Not implemented for symbol {symbol.GetType()}");
             }
         }
 
