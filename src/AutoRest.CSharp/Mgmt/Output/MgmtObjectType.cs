@@ -10,7 +10,6 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
