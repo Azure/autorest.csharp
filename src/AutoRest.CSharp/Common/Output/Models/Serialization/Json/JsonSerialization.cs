@@ -5,14 +5,14 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal abstract class JsonSerialization: ObjectSerialization
     {
-        protected JsonSerialization(bool isNullable, string? version = null)
+        protected JsonSerialization(bool isNullable, JsonSerializationOptions options = JsonSerializationOptions.None)
         {
             IsNullable = isNullable;
-            Version = version;
+            Options = options;
         }
 
         public bool IsNullable { get; }
 
-        public string? Version { get; }
+        public JsonSerializationOptions Options { get; }
     }
 }

@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
                                 {
                                     var optionalSerializeOptions = string.Empty;
-                                    if (systemObjectType.SystemType == typeof(ManagedServiceIdentity) && valueSerialization.Version == "v3")
+                                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                                     {
                                         writer.UseNamespace("Azure.ResourceManager.Models");
                                         writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
@@ -484,8 +484,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     valueCallback(writer, w => w.Append(dictionaryVariable));
                     return;
                 case JsonValueSerialization valueSerialization:
-                    if (!valueSerialization.Type.IsFrameworkType && valueSerialization.Type.Implementation is SystemObjectType systemObjectType
-                        && systemObjectType.SystemType == typeof(ManagedServiceIdentity) && valueSerialization.Version == "v3")
+                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
                     {
                         writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
                     }
@@ -624,7 +623,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var systemObjectType = objectType as SystemObjectType;
                         if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
                         {
-                            var optionalSerializeOptions = (systemObjectType.SystemType == typeof(ManagedServiceIdentity) && serialization.Version == "v3") ? ", serializeOptions" : string.Empty;
+                            var optionalSerializeOptions = (serialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3) ? ", serializeOptions" : string.Empty;
                             writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){optionalSerializeOptions})");
                         }
                         else if (objectType is MgmtObjectType mgmtObjectType && TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema))

@@ -11,6 +11,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Builders
 {
@@ -77,13 +78,28 @@ namespace AutoRest.CSharp.Output.Builders
             return new XmlValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema));
         }
 
+        private bool IsManagedServiceIdentityV3(Schema schema, CSharpType type)
+        {
+            // If the type is the common type ManagedServiceIdentity and the schema contains a type property with sealed enum or extensible enum schema which has a choice of v3 "SystemAssigned,UserAssigned" value,
+            // then this is a v3 version of ManagedServiceIdentity.
+            if (!type.IsFrameworkType && type.Implementation is SystemObjectType systemObjectType
+                && systemObjectType.SystemType == typeof(ManagedServiceIdentity)
+                && schema is ObjectSchema objectSchema
+                && (objectSchema.Properties.First(p => p.SerializedName == "type")?.Schema is SealedChoiceSchema sealedChoiceSchema && sealedChoiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.systemAssignedUserAssignedV3Value)
+                    || objectSchema.Properties.First(p => p.SerializedName == "type")?.Schema is ChoiceSchema choiceSchema && choiceSchema.Choices.Any(c => c.Value == ManagedServiceIdentityTypeV3Converter.systemAssignedUserAssignedV3Value)))
+            {
+                return true;
+            }
+            return false;
+        }
+
         private JsonSerialization BuildSerialization(Schema schema, CSharpType type)
         {
             if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
             {
                 return new JsonValueSerialization(
                     type,
-                    BuilderHelpers.GetSerializationFormat(schema), type.IsNullable, schema.Extensions?.MgmtModelVersion);
+                    BuilderHelpers.GetSerializationFormat(schema), type.IsNullable);
             }
 
             switch (schema)
@@ -101,11 +117,12 @@ namespace AutoRest.CSharp.Output.Builders
                         BuildSerialization(dictionarySchema.ElementType, TypeFactory.GetElementType(type)),
                         type.IsNullable);
                 default:
+                    JsonSerializationOptions options = IsManagedServiceIdentityV3(schema, type) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None;
                     return new JsonValueSerialization(
                         type,
                         BuilderHelpers.GetSerializationFormat(schema),
                         type.IsNullable,
-                        schema.Extensions?.MgmtModelVersion);
+                        options);
             }
         }
 

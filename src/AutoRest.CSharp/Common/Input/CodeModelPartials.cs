@@ -129,8 +129,6 @@ namespace AutoRest.CSharp.Input
         /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src/autorest.md
         /// </summary>
         public bool MgmtTypeReferenceType => TryGetValue("x-ms-mgmt-typeReferenceType", out var value) && Convert.ToBoolean(value);
-
-        public string? MgmtModelVersion => TryGetValue("x-ms-mgmt-modelVersion", out object? value) ? value?.ToString() : null;
     }
 
     internal partial class ServiceResponse
