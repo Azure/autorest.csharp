@@ -13,7 +13,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtSubscriptionNameParameter.Models
 {
     /// <summary> The Resource definition. </summary>
-    public partial class TrackedResource : ResourceData
+    internal partial class TrackedResource : ResourceData
     {
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="location"> The Geo-location where the resource lives. </param>
