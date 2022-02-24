@@ -12,44 +12,45 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to ManagementGroup. </summary>
     public static partial class ManagementGroupExtensions
     {
-        #region MgmtGrpParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLocCollection along with the instance operations that can be performed on it. </summary>
+        private static ManagementGroupExtensionClient GetExtensionClient(ManagementGroup managementGroup)
+        {
+            return managementGroup.GetCachedClient((client) =>
+            {
+                return new ManagementGroupExtensionClient(client, managementGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocs in the MgmtGrpParentWithNonResChWithLoc. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocCollection" /> object. </returns>
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocs and their operations over a MgmtGrpParentWithNonResChWithLoc. </returns>
         public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroup managementGroup)
         {
-            return new MgmtGrpParentWithNonResChWithLocCollection(managementGroup);
+            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChWithLocs();
         }
-        #endregion
 
-        #region MgmtGrpParentWithNonResCh
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChes in the MgmtGrpParentWithNonResCh. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChCollection" /> object. </returns>
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChes and their operations over a MgmtGrpParentWithNonResCh. </returns>
         public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroup managementGroup)
         {
-            return new MgmtGrpParentWithNonResChCollection(managementGroup);
+            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChes();
         }
-        #endregion
 
-        #region MgmtGrpParentWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithLocCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithLocs in the MgmtGrpParentWithLoc. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithLocCollection" /> object. </returns>
+        /// <returns> An object representing collection of MgmtGrpParentWithLocs and their operations over a MgmtGrpParentWithLoc. </returns>
         public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroup managementGroup)
         {
-            return new MgmtGrpParentWithLocCollection(managementGroup);
+            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithLocs();
         }
-        #endregion
 
-        #region MgmtGroupParent
-        /// <summary> Gets an object representing a MgmtGroupParentCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of MgmtGroupParents in the MgmtGroupParent. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="MgmtGroupParentCollection" /> object. </returns>
+        /// <returns> An object representing collection of MgmtGroupParents and their operations over a MgmtGroupParent. </returns>
         public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroup managementGroup)
         {
-            return new MgmtGroupParentCollection(managementGroup);
+            return GetExtensionClient(managementGroup).GetMgmtGroupParents();
         }
-        #endregion
     }
 }

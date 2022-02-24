@@ -21,19 +21,25 @@ namespace MgmtScopeResource.Models
 
         /// <summary> Initializes a new instance of WhatIfOperationResult. </summary>
         /// <param name="status"> Status of the What-If operation. </param>
-        /// <param name="error"> Error when What-If operation fails. </param>
+        /// <param name="errorResponse"> Error when What-If operation fails. </param>
         /// <param name="changes"> List of resource changes predicted by What-If operation. </param>
-        internal WhatIfOperationResult(string status, ErrorResponse error, IReadOnlyList<WhatIfChange> changes)
+        internal WhatIfOperationResult(string status, ErrorResponse errorResponse, IReadOnlyList<WhatIfChange> changes)
         {
             Status = status;
-            Error = error;
+            ErrorResponse = errorResponse;
             Changes = changes;
         }
 
         /// <summary> Status of the What-If operation. </summary>
         public string Status { get; }
         /// <summary> Error when What-If operation fails. </summary>
-        public ErrorResponse Error { get; }
+        internal ErrorResponse ErrorResponse { get; }
+        /// <summary> The details of the error. </summary>
+        public string Error
+        {
+            get => ErrorResponse.Error;
+        }
+
         /// <summary> List of resource changes predicted by What-If operation. </summary>
         public IReadOnlyList<WhatIfChange> Changes { get; }
     }

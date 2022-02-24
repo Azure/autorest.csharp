@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The Private Endpoint Connection resource. </summary>
     [TypeReferenceType]
-    public partial class PrivateEndpointConnectionData : ResourceManager.Models.Resource
+    public partial class PrivateEndpointConnectionData : ResourceData
     {
         /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
         [InitializationConstructor]
@@ -25,11 +25,12 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="provisioningState"> The provisioning state of the private endpoint connection resource. </param>
         [SerializationConstructor]
-        internal PrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType type, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, type)
+        internal PrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType type, ResourceManager.Models.SystemData systemData, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, type, systemData)
         {
             PrivateEndpoint = privateEndpoint;
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
@@ -37,7 +38,13 @@ namespace Azure.ResourceManager.Fake.Models
         }
 
         /// <summary> The resource of private end point. </summary>
-        public PrivateEndpoint PrivateEndpoint { get; set; }
+        internal PrivateEndpoint PrivateEndpoint { get; set; }
+        /// <summary> The ARM identifier for Private Endpoint. </summary>
+        public ResourceIdentifier PrivateEndpointId
+        {
+            get => PrivateEndpoint is null ? default : PrivateEndpoint.Id;
+        }
+
         /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
         public PrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
         /// <summary> The provisioning state of the private endpoint connection resource. </summary>

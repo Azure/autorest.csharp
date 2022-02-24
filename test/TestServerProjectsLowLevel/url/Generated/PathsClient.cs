@@ -20,8 +20,10 @@ namespace url_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -42,7 +44,7 @@ namespace url_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestUrlTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -59,16 +61,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanTrueRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -88,16 +88,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetBooleanTrue(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanTrueRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -117,16 +115,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanFalseRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -146,16 +142,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetBooleanFalse(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetBooleanFalseRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -175,16 +169,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntOneMillionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -204,16 +196,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetIntOneMillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntOneMillionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -233,16 +223,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntNegativeOneMillionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -262,16 +250,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetIntNegativeOneMillionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -291,16 +277,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetTenBillionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -320,16 +304,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetTenBillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetTenBillionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -349,16 +331,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNegativeTenBillionRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -378,16 +358,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetNegativeTenBillionRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -407,16 +385,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateFloatScientificPositiveRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -436,16 +412,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response FloatScientificPositive(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateFloatScientificPositiveRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -465,16 +439,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateFloatScientificNegativeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -494,16 +466,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response FloatScientificNegative(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateFloatScientificNegativeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -523,16 +493,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDoubleDecimalPositiveRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -552,16 +520,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDoubleDecimalPositiveRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -581,16 +547,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDoubleDecimalNegativeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -610,16 +574,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDoubleDecimalNegativeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -639,16 +601,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringUnicodeRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -668,16 +628,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringUnicode(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringUnicodeRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -697,16 +655,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringUrlEncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -726,16 +682,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringUrlEncoded(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringUrlEncodedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -755,16 +709,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringUrlNonEncodedRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -784,16 +736,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringUrlNonEncoded(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringUrlNonEncodedRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -813,16 +763,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -842,16 +790,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringEmpty(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -864,6 +810,7 @@ namespace url_LowLevel
         /// <param name="stringPath"> null string value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -873,18 +820,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(stringPath, nameof(stringPath));
+            Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringNullRequest(stringPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -897,6 +842,7 @@ namespace url_LowLevel
         /// <param name="stringPath"> null string value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="stringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -906,18 +852,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response StringNull(string stringPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(stringPath, nameof(stringPath));
+            Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateStringNullRequest(stringPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -930,6 +874,7 @@ namespace url_LowLevel
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -939,18 +884,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumPath, nameof(enumPath));
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateEnumValidRequest(enumPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -963,6 +906,7 @@ namespace url_LowLevel
         /// <param name="enumPath"> send the value green. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -972,18 +916,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumPath, nameof(enumPath));
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateEnumValidRequest(enumPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -996,6 +938,7 @@ namespace url_LowLevel
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1005,18 +948,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumPath, nameof(enumPath));
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateEnumNullRequest(enumPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1029,6 +970,7 @@ namespace url_LowLevel
         /// <param name="enumPath"> send null should throw. Allowed values: &quot;red color&quot; | &quot;green color&quot; | &quot;blue color&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="enumPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1038,18 +980,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            Argument.AssertNotNull(enumPath, nameof(enumPath));
+            Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateEnumNullRequest(enumPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1071,18 +1011,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteMultiByteRequest(bytePath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1104,18 +1042,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteMultiByte(byte[] bytePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteMultiByteRequest(bytePath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1135,16 +1071,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteEmptyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1164,16 +1098,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteEmpty(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteEmptyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1195,18 +1127,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteNullRequest(bytePath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1228,18 +1158,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ByteNull(byte[] bytePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateByteNullRequest(bytePath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1259,16 +1187,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDateValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1288,16 +1214,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateValid(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDateValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1318,16 +1242,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDateNullRequest(datePath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1348,16 +1270,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateNull(DateTimeOffset datePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDateNullRequest(datePath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1377,16 +1297,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDateTimeValidRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1406,16 +1324,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateTimeValid(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDateTimeValidRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1436,16 +1352,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1466,16 +1380,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1497,18 +1409,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1530,18 +1440,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Base64Url(byte[] base64UrlPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1563,18 +1471,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1596,18 +1502,16 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
 
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1628,16 +1532,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1658,16 +1560,14 @@ namespace url_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {

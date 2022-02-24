@@ -60,9 +60,13 @@ namespace AutoRest.CSharp.Output.Models
             _parameters = clientParameters.ToDictionary(p => p.Language.Default.Name, BuildConstructorParameter);
         }
 
-        public Parameter[] GetOrderedParameters()
+        /// <summary>
+        /// Get sorted parameters, required parameters are at the beginning.
+        /// </summary>
+        /// <returns></returns>
+        public Parameter[] GetOrderedParametersByRequired()
         {
-            return OrderParameters(_parameters.Values);
+            return OrderParametersByRequired(_parameters.Values);
         }
 
         public static IEnumerable<RequestParameter> GetParametersFromOperations(ICollection<Operation> operations) =>
@@ -87,7 +91,7 @@ namespace AutoRest.CSharp.Output.Models
             var buildContext = CreateRequestMethodBuildContext(httpRequest, requestParameters);
             Request request = BuildRequest(httpRequest, buildContext);
 
-            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean;
+            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType);
 
             return new RestClientMethod(
@@ -104,19 +108,30 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
+        public IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> GetReferencesToOperationParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
+        {
+            var allParameters = GetOperationAllParameters(operation, requestParameters);
+            return allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => (CreateReference(kvp.Key, kvp.Value), kvp.Value.SkipUrlEncoding));
+        }
+
+        /// <summary>
+        /// Build RestClientMethod for mgmt and HLC
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="httpRequest"></param>
+        /// <param name="requestParameters"></param>
+        /// <param name="responseHeaderModel"></param>
+        /// <param name="accessibility"></param>
+        /// <param name="returnNullOn404Func"></param>
+        /// <returns></returns>
         public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
         {
-            var parameters = operation.Parameters
-                .Concat(requestParameters)
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
-                .ToArray();
-
-            var allParameters = parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
+            var allParameters = GetOperationAllParameters(operation, requestParameters);
             var methodParameters = BuildMethodParameters(allParameters);
             var references = allParameters.ToDictionary(kvp => GetRequestParameterName(kvp.Key), kvp => new ParameterInfo(kvp.Key, CreateReference(kvp.Key, kvp.Value)));
             var request = BuildRequest(httpRequest, new RequestMethodBuildContext(methodParameters, references));
 
-            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean;
+            var isHeadAsBoolean = request.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             Response[] responses = BuildResponses(operation, isHeadAsBoolean, out var responseType, returnNullOn404Func);
 
             return new RestClientMethod(
@@ -131,6 +146,16 @@ namespace AutoRest.CSharp.Output.Models
                 accessibility: accessibility,
                 operation
             );
+        }
+
+        private Dictionary<RequestParameter, Parameter> GetOperationAllParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
+        {
+            var parameters = operation.Parameters
+                .Concat(requestParameters)
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                .ToArray();
+
+            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter));
         }
 
         private Response[] BuildResponses(Operation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
@@ -287,7 +312,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        private Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
+        protected virtual Parameter[] BuildMethodParameters(IReadOnlyDictionary<RequestParameter, Parameter> allParameters)
         {
             List<Parameter> methodParameters = new();
             foreach (var (requestParameter, parameter) in allParameters)
@@ -299,7 +324,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return OrderParameters(methodParameters);
+            return OrderParametersByRequired(methodParameters);
         }
 
         private RequestBody? BuildRequestBody(IReadOnlyDictionary<string, ParameterInfo> allParameters, KnownMediaType mediaType)
@@ -521,7 +546,12 @@ namespace AutoRest.CSharp.Output.Models
             return segments;
         }
 
-        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
+        /// <summary>
+        /// Sort the parameters, move required parameters at the beginning, in order.
+        /// </summary>
+        /// <param name="parameters">Parameters to sort</param>
+        /// <returns></returns>
+        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
         // Merges operations without response types types together
         private CSharpType? ReduceResponses(List<Response> responses)
@@ -561,7 +591,7 @@ namespace AutoRest.CSharp.Output.Models
                     parameter.Description,
                     typeof(Uri),
                     parameter.DefaultValue,
-                    parameter.ValidateNotNull,
+                    parameter.Validate,
                     RequestLocation: GetRequestLocation(requestParameter)
                 );
             }
@@ -569,7 +599,7 @@ namespace AutoRest.CSharp.Output.Models
             return parameter;
         }
 
-        private static bool IsMethodParameter(RequestParameter requestParameter)
+        protected static bool IsMethodParameter(RequestParameter requestParameter)
             => requestParameter.Implementation == ImplementationLocation.Method && requestParameter.Schema is not ConstantSchema && !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
 
         public static bool IsEndpointParameter(RequestParameter requestParameter)
@@ -676,7 +706,7 @@ namespace AutoRest.CSharp.Output.Models
                 "The URL to the next page of results.",
                 typeof(string),
                 DefaultValue: null,
-                ValidateNotNull: true);
+                Validate: true);
 
             PathSegment[] pathSegments = method.Request.PathSegments
                 .Where(ps => ps.IsRaw)
@@ -802,7 +832,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var requestParameter in requestParameters)
                 {
-                    AddRequestParameter(requestParameter);
+                    var parameter = _parent.BuildParameter(requestParameter);
+                    AddRequestParameter(GetRequestParameterName(requestParameter), requestParameter, parameter);
                 }
             }
 
@@ -853,6 +884,11 @@ namespace AutoRest.CSharp.Output.Models
             private void AddRequestParameter(string name, RequestParameter requestParameter, Type? frameworkParameterType = null)
             {
                 var parameter = _parent.BuildParameter(requestParameter, frameworkParameterType);
+                AddRequestParameter(name, requestParameter, parameter);
+            }
+
+            private void AddRequestParameter(string name, RequestParameter requestParameter, Parameter parameter)
+            {
                 var reference = _parent.CreateReference(requestParameter, parameter);
 
                 _referencesByName[name] = new ParameterInfo(requestParameter, reference);

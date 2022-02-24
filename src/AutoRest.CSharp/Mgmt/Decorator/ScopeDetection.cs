@@ -3,14 +3,9 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -21,10 +16,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Tenant = "tenant";
         public const string ManagementGroups = "managementGroups";
         public const string Any = "*";
-        private const string _managementGroupScopePrefix = "/providers/Microsoft.Management/managementGroups";
-        private const string _resourceGroupScopePrefix = "/subscriptions/{subscriptionId}/resourceGroups";
-        private const string _subscriptionScopePrefix = "/subscriptions";
-        private const string _tenantScopePrefix = "/tenants";
 
         private static ConcurrentDictionary<RequestPath, RequestPath> _scopePathCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?> _scopeTypesCache = new ConcurrentDictionary<RequestPath, ResourceTypeSegment[]?>();
@@ -65,34 +56,34 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // if there is no providers segment, myself should be a scope request path. Just return myself
             if (indexOfProvider >= 0)
             {
-                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(_managementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(RequestPath.ManagementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                     return RequestPath.ManagementGroup;
                 return new RequestPath(requestPath.Take(indexOfProvider));
             }
-            if (requestPath.SerializedPath.StartsWith(_resourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+            if (requestPath.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                 return RequestPath.ResourceGroup;
-            if (requestPath.SerializedPath.StartsWith(_subscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+            if (requestPath.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
                 return RequestPath.Subscription;
-            if (requestPath.SerializedPath.Equals(_tenantScopePrefix))
+            if (requestPath.SerializedPath.Equals(RequestPath.TenantScopePrefix))
                 return RequestPath.Tenant;
             return requestPath;
         }
 
-        public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath)
         {
             if (_scopeTypesCache.TryGetValue(requestPath, out var result))
                 return result;
 
-            result = requestPath.CalculateScopeResourceTypes(config);
+            result = requestPath.CalculateScopeResourceTypes();
             _scopeTypesCache.TryAdd(requestPath, result);
             return result;
         }
 
-        private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath)
         {
             if (!requestPath.GetScopePath().IsParameterizedScope())
                 return null;
-            if (config.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
+            if (Configuration.MgmtConfiguration.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
             return new[] { ResourceTypeSegment.Subscription, ResourceTypeSegment.ResourceGroup, ResourceTypeSegment.ManagementGroup, ResourceTypeSegment.Tenant, ResourceTypeSegment.Any };

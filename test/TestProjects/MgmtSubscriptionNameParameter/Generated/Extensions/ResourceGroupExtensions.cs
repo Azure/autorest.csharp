@@ -12,14 +12,21 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region SBSubscription
-        /// <summary> Gets an object representing a SBSubscriptionCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of SBSubscriptions in the SBSubscription. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SBSubscriptionCollection" /> object. </returns>
+        /// <returns> An object representing collection of SBSubscriptions and their operations over a SBSubscription. </returns>
         public static SBSubscriptionCollection GetSBSubscriptions(this ResourceGroup resourceGroup)
         {
-            return new SBSubscriptionCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetSBSubscriptions();
         }
-        #endregion
     }
 }

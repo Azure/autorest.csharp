@@ -12,14 +12,21 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to ManagementGroup. </summary>
     public static partial class ManagementGroupExtensions
     {
-        #region ManagementGroupPolicyDefinition
-        /// <summary> Gets an object representing a ManagementGroupPolicyDefinitionCollection along with the instance operations that can be performed on it. </summary>
+        private static ManagementGroupExtensionClient GetExtensionClient(ManagementGroup managementGroup)
+        {
+            return managementGroup.GetCachedClient((client) =>
+            {
+                return new ManagementGroupExtensionClient(client, managementGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of ManagementGroupPolicyDefinitions in the ManagementGroupPolicyDefinition. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionCollection" /> object. </returns>
+        /// <returns> An object representing collection of ManagementGroupPolicyDefinitions and their operations over a ManagementGroupPolicyDefinition. </returns>
         public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroup managementGroup)
         {
-            return new ManagementGroupPolicyDefinitionCollection(managementGroup);
+            return GetExtensionClient(managementGroup).GetManagementGroupPolicyDefinitions();
         }
-        #endregion
     }
 }

@@ -14,7 +14,7 @@ using MgmtPropertyChooser.Models;
 namespace MgmtPropertyChooser
 {
     /// <summary> A class representing the VirtualMachine data model. </summary>
-    public partial class VirtualMachineData : TrackedResource
+    public partial class VirtualMachineData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineData. </summary>
         /// <param name="location"> The location. </param>
@@ -22,13 +22,14 @@ namespace MgmtPropertyChooser
         {
             Resources = new ChangeTrackingList<VirtualMachineExtension>();
             Zones = new ChangeTrackingList<string>();
-            FakeResources = new ChangeTrackingList<Models.Resource>();
+            FakeResources = new ChangeTrackingList<Resource>();
         }
 
         /// <summary> Initializes a new instance of VirtualMachineData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="plan"> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </param>
@@ -46,7 +47,7 @@ namespace MgmtPropertyChooser
         /// <param name="licenseType"> Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15. </param>
         /// <param name="vmId"> Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands. </param>
         /// <param name="extensionsTimeBudget"> Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01. </param>
-        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, Models.Plan plan, IReadOnlyList<VirtualMachineExtension> resources, ResourceIdentity identity, IdentityWithRenamedProperty identityWithRenamedProperty, IdentityWithDifferentPropertyType identityWithDifferentPropertyType, IdentityWithNoUserIdentity identityWithNoUserIdentity, IdentityWithNoSystemIdentity identityWithNoSystemIdentity, IList<string> zones, IReadOnlyList<Models.Resource> fakeResources, SubResource fakeSubResource, WritableSubResource fakeWritableSubResource, string provisioningState, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, type, tags, location)
+        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, Models.Plan plan, IReadOnlyList<VirtualMachineExtension> resources, ManagedServiceIdentity identity, IdentityWithRenamedProperty identityWithRenamedProperty, IdentityWithDifferentPropertyType identityWithDifferentPropertyType, IdentityWithNoUserIdentity identityWithNoUserIdentity, IdentityWithNoSystemIdentity identityWithNoSystemIdentity, IList<string> zones, IReadOnlyList<Resource> fakeResources, SubResource fakeSubResource, WritableSubResource fakeWritableSubResource, string provisioningState, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, type, systemData, tags, location)
         {
             Plan = plan;
             Resources = resources;
@@ -70,7 +71,7 @@ namespace MgmtPropertyChooser
         /// <summary> The virtual machine child extension resources. </summary>
         public IReadOnlyList<VirtualMachineExtension> Resources { get; }
         /// <summary> The identity of the virtual machine, if configured. </summary>
-        public ResourceIdentity Identity { get; set; }
+        public ManagedServiceIdentity Identity { get; set; }
         /// <summary> The identity of the virtual machine, if configured. </summary>
         public IdentityWithRenamedProperty IdentityWithRenamedProperty { get; set; }
         /// <summary> The identity of the virtual machine, if configured. </summary>
@@ -82,11 +83,29 @@ namespace MgmtPropertyChooser
         /// <summary> The virtual machine zones. </summary>
         public IList<string> Zones { get; }
         /// <summary> The fake resources for the virtual machine. </summary>
-        public IReadOnlyList<Models.Resource> FakeResources { get; }
+        public IReadOnlyList<Resource> FakeResources { get; }
         /// <summary> The fake subresource. </summary>
-        public SubResource FakeSubResource { get; set; }
+        internal SubResource FakeSubResource { get; set; }
+        /// <summary> Gets Id. </summary>
+        public ResourceIdentifier FakeSubResourceId
+        {
+            get => FakeSubResource is null ? default : FakeSubResource.Id;
+        }
+
         /// <summary> The fake writable subresource. </summary>
-        public WritableSubResource FakeWritableSubResource { get; set; }
+        internal WritableSubResource FakeWritableSubResource { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier FakeWritableSubResourceId
+        {
+            get => FakeWritableSubResource is null ? default : FakeWritableSubResource.Id;
+            set
+            {
+                if (FakeWritableSubResource is null)
+                    FakeWritableSubResource = new WritableSubResource();
+                FakeWritableSubResource.Id = value;
+            }
+        }
+
         /// <summary> The provisioning state, which only appears in the response. </summary>
         public string ProvisioningState { get; }
         /// <summary> Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15. </summary>

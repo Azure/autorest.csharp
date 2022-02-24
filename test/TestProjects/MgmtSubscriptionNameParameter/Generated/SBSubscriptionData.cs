@@ -13,7 +13,7 @@ using MgmtSubscriptionNameParameter.Models;
 namespace MgmtSubscriptionNameParameter
 {
     /// <summary> A class representing the SBSubscription data model. </summary>
-    public partial class SBSubscriptionData : Resource
+    public partial class SBSubscriptionData : ResourceData
     {
         /// <summary> Initializes a new instance of SBSubscriptionData. </summary>
         public SBSubscriptionData()
@@ -24,7 +24,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="systemData"> The system meta data relating to this resource. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="messageCount"> Number of messages. </param>
         /// <param name="createdAt"> Exact time the message was created. </param>
         /// <param name="accessedAt"> Last time there was a receive request to this subscription. </param>
@@ -42,9 +42,8 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="forwardDeadLetteredMessagesTo"> Queue/Topic name to forward the Dead Letter message. </param>
         /// <param name="isClientAffine"> Value that indicates whether the subscription has an affinity to the client id. </param>
         /// <param name="clientAffineProperties"> Properties specific to client affine subscriptions. </param>
-        internal SBSubscriptionData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, long? messageCount, DateTimeOffset? createdAt, DateTimeOffset? accessedAt, DateTimeOffset? updatedAt, TimeSpan? lockDuration, bool? requiresSession, TimeSpan? defaultMessageTimeToLive, bool? deadLetteringOnFilterEvaluationExceptions, bool? deadLetteringOnMessageExpiration, TimeSpan? duplicateDetectionHistoryTimeWindow, int? maxDeliveryCount, bool? enableBatchedOperations, TimeSpan? autoDeleteOnIdle, string forwardTo, string forwardDeadLetteredMessagesTo, bool? isClientAffine, SBClientAffineProperties clientAffineProperties) : base(id, name, type)
+        internal SBSubscriptionData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, long? messageCount, DateTimeOffset? createdAt, DateTimeOffset? accessedAt, DateTimeOffset? updatedAt, TimeSpan? lockDuration, bool? requiresSession, TimeSpan? defaultMessageTimeToLive, bool? deadLetteringOnFilterEvaluationExceptions, bool? deadLetteringOnMessageExpiration, TimeSpan? duplicateDetectionHistoryTimeWindow, int? maxDeliveryCount, bool? enableBatchedOperations, TimeSpan? autoDeleteOnIdle, string forwardTo, string forwardDeadLetteredMessagesTo, bool? isClientAffine, SBClientAffineProperties clientAffineProperties) : base(id, name, type, systemData)
         {
-            SystemData = systemData;
             MessageCount = messageCount;
             CreatedAt = createdAt;
             AccessedAt = accessedAt;
@@ -64,8 +63,6 @@ namespace MgmtSubscriptionNameParameter
             ClientAffineProperties = clientAffineProperties;
         }
 
-        /// <summary> The system meta data relating to this resource. </summary>
-        public SystemData SystemData { get; }
         /// <summary> Number of messages. </summary>
         public long? MessageCount { get; }
         /// <summary> Exact time the message was created. </summary>

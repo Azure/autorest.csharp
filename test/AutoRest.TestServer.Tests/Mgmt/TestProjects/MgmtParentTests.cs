@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using System.Collections.Generic;
+using MgmtParent;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -9,8 +11,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtParentTests()
             : base("MgmtParent")
         {
-            ListExceptions.Add("DedicatedHostGroupCollection");
         }
+
+        protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DedicatedHostGroupCollection) };
 
         [TestCase("AvailabilitySet", true)]
         [TestCase("DedicatedHostGroup", true)]
@@ -32,13 +35,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(isExists, collectionTypeExists);
         }
 
-        [TestCase("AvailabilitySetCollection", "GetAllAsGenericResources", true)]
-        [TestCase("DedicatedHostGroupCollection", "GetAllAsGenericResources", true)]
-        public void ValidateMethods(string className, string methodName, bool exist)
-        {
-            var classesToCheck = FindAllCollections();
-            var classToCheck = classesToCheck.First(t => t.Name == className);
-            Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
-        }
+        //[TestCase("AvailabilitySetCollection", "GetAllAsGenericResources", true)]
+        //[TestCase("DedicatedHostGroupCollection", "GetAllAsGenericResources", true)]
+        //public void ValidateMethods(string className, string methodName, bool exist)
+        //{
+        //    var classesToCheck = FindAllCollections();
+        //    var classToCheck = classesToCheck.First(t => t.Name == className);
+        //    Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
+        //}
     }
 }

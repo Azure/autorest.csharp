@@ -12,24 +12,29 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region Fake
-        /// <summary> Gets an object representing a FakeCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of Fakes in the Fake. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="FakeCollection" /> object. </returns>
+        /// <returns> An object representing collection of Fakes and their operations over a Fake. </returns>
         public static FakeCollection GetFakes(this ResourceGroup resourceGroup)
         {
-            return new FakeCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetFakes();
         }
-        #endregion
 
-        #region Bar
-        /// <summary> Gets an object representing a BarCollection along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of Bars in the Bar. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="BarCollection" /> object. </returns>
+        /// <returns> An object representing collection of Bars and their operations over a Bar. </returns>
         public static BarCollection GetBars(this ResourceGroup resourceGroup)
         {
-            return new BarCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetBars();
         }
-        #endregion
     }
 }

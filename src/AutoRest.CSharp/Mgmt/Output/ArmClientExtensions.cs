@@ -6,20 +6,19 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ArmClientExtensions : MgmtExtensions
     {
-        public ArmClientExtensions(IEnumerable<Operation> allOperations, BuildContext<MgmtOutputLibrary> context) : base(allOperations, "ArmClient", context)
+        public ArmClientExtensions(IEnumerable<Operation> allOperations)
+            : base(allOperations, typeof(ArmClient), RequestPath.Tenant)
         {
         }
 
-        protected override string DefaultName => "ArmClientExtensions";
+        public override bool IsEmpty => !MgmtContext.Library.ArmResources.Any();
 
-        protected override RequestPath ContextualPath => RequestPath.Tenant;
-
-        public override bool IsEmpty => !_context.Library.ArmResources.Any();
+        protected override string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
     }
 }

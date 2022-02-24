@@ -371,7 +371,7 @@ schemas: !Schemas
           name: WhatIfChangeUnsupportedReason
           description: The explanation about why the resource is unsupported by What-If.
       protocol: !Protocols {}
-    - !StringSchema &ref_180
+    - !StringSchema &ref_162
       type: string
       apiVersions:
         - !ApiVersion 
@@ -382,7 +382,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !StringSchema &ref_158
+    - !StringSchema &ref_163
       type: string
       apiVersions:
         - !ApiVersion 
@@ -394,7 +394,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_164
+    - !StringSchema &ref_167
       type: string
       apiVersions:
         - !ApiVersion 
@@ -404,17 +404,6 @@ schemas: !Schemas
           name: String
           description: ''
           header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_165
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-04-01'
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Retry-After
       protocol: !Protocols {}
     - !StringSchema &ref_168
       type: string
@@ -425,9 +414,20 @@ schemas: !Schemas
         default:
           name: String
           description: ''
+          header: Retry-After
+      protocol: !Protocols {}
+    - !StringSchema &ref_171
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_169
+    - !StringSchema &ref_172
       type: string
       apiVersions:
         - !ApiVersion 
@@ -438,7 +438,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !StringSchema &ref_170
+    - !StringSchema &ref_173
       type: string
       apiVersions:
         - !ApiVersion 
@@ -451,7 +451,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_174
+    - !StringSchema &ref_177
       type: string
       apiVersions:
         - !ApiVersion 
@@ -462,7 +462,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_175
+    - !StringSchema &ref_178
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1536,10 +1536,10 @@ schemas: !Schemas
                 description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
                 namespace: ''
             protocol: !Protocols {}
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
           protocol: !Protocols {}
       serializationFormats:
@@ -1850,10 +1850,10 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_24
                 readOnly: true
-                serializedName: error
+                serializedName: errorResponse
                 language: !Languages 
                   default:
-                    name: error
+                    name: errorResponse
                     description: The deployment error.
                 protocol: !Protocols {}
             serializationFormats:
@@ -1902,10 +1902,10 @@ schemas: !Schemas
         - !Property 
           schema: *ref_24
           readOnly: true
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: The deployment validation error.
           protocol: !Protocols {}
         - !Property 
@@ -1993,7 +1993,7 @@ schemas: !Schemas
           description: List of deployments.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_159
+    - !ObjectSchema &ref_158
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2029,7 +2029,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_30
     - *ref_46
-    - !ObjectSchema &ref_163
+    - !ObjectSchema &ref_161
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2045,10 +2045,10 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_24
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: Error when What-If operation fails.
           protocol: !Protocols {}
         - !Property 
@@ -2245,10 +2245,10 @@ schemas: !Schemas
                       protocol: !Protocols {}
                     - !Property 
                       schema: *ref_24
-                      serializedName: error
+                      serializedName: errorResponse
                       language: !Languages 
                         default:
-                          name: error
+                          name: errorResponse
                           description: The error reported by the operation.
                       protocol: !Protocols {}
                   serializationFormats:
@@ -2381,7 +2381,7 @@ schemas: !Schemas
           description: List of deployment operations.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_177
+    - !ObjectSchema &ref_180
       type: object
       apiVersions:
         - !ApiVersion 
@@ -4823,19 +4823,7 @@ operationGroups:
             version: '2021-04-01'
         parameters:
           - *ref_100
-          - !Parameter &ref_161
-            schema: *ref_158
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: groupId
-                description: The management group ID.
-                serializedName: groupId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_162
+          - !Parameter &ref_160
             schema: *ref_132
             implementation: Method
             required: true
@@ -4876,8 +4864,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_160
-                schema: *ref_159
+              - !Parameter &ref_159
+                schema: *ref_158
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -4902,25 +4890,24 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_160
+              - *ref_159
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+                path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
                 method: post
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_161
-          - *ref_162
+          - *ref_160
         responses:
           - !SchemaResponse 
-            schema: *ref_163
+            schema: *ref_161
             language: !Languages 
               default:
                 name: ''
@@ -4941,14 +4928,176 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_164
+                    schema: *ref_1
                     header: Location
                     language:
                       default:
                         name: Location
                         description: URL to get status of this long-running operation.
                   - !HttpHeader 
-                    schema: *ref_165
+                    schema: *ref_162
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of seconds to wait before polling for status.
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_106
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+          x-ms-long-running-operation-options:
+            final-state-via: location
+        language: !Languages 
+          default:
+            name: WhatIfAtTenantScope
+            description: Returns changes that will be made by the deployment if executed at the scope of the tenant group.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_100
+          - !Parameter &ref_165
+            schema: *ref_163
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: The management group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_166
+            schema: *ref_132
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_133
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_107
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_164
+                schema: *ref_158
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters to validate.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_103
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_164
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_165
+          - *ref_166
+        responses:
+          - !SchemaResponse 
+            schema: *ref_161
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns What-If operation status
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted - Returns URL in Location header to query for long-running operation status.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_167
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL to get status of this long-running operation.
+                  - !HttpHeader 
+                    schema: *ref_168
                     header: Retry-After
                     language:
                       default:
@@ -4985,7 +5134,7 @@ operationGroups:
             version: '2021-04-01'
         parameters:
           - *ref_100
-          - !Parameter &ref_167
+          - !Parameter &ref_170
             schema: *ref_132
             implementation: Method
             required: true
@@ -5027,8 +5176,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_166
-                schema: *ref_159
+              - !Parameter &ref_169
+                schema: *ref_158
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5053,7 +5202,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_166
+              - *ref_169
             language: !Languages 
               default:
                 name: ''
@@ -5067,10 +5216,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_167
+          - *ref_170
         responses:
           - !SchemaResponse 
-            schema: *ref_163
+            schema: *ref_161
             language: !Languages 
               default:
                 name: ''
@@ -5091,14 +5240,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_168
+                    schema: *ref_171
                     header: Location
                     language:
                       default:
                         name: Location
                         description: URL to get status of this long-running operation.
                   - !HttpHeader 
-                    schema: *ref_169
+                    schema: *ref_172
                     header: Retry-After
                     language:
                       default:
@@ -5135,8 +5284,8 @@ operationGroups:
             version: '2021-04-01'
         parameters:
           - *ref_100
-          - !Parameter &ref_172
-            schema: *ref_170
+          - !Parameter &ref_175
+            schema: *ref_173
             implementation: Method
             required: true
             language: !Languages 
@@ -5147,7 +5296,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_173
+          - !Parameter &ref_176
             schema: *ref_132
             implementation: Method
             required: true
@@ -5189,8 +5338,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_171
-                schema: *ref_159
+              - !Parameter &ref_174
+                schema: *ref_158
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -5215,7 +5364,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_171
+              - *ref_174
             language: !Languages 
               default:
                 name: ''
@@ -5229,11 +5378,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_172
-          - *ref_173
+          - *ref_175
+          - *ref_176
         responses:
           - !SchemaResponse 
-            schema: *ref_163
+            schema: *ref_161
             language: !Languages 
               default:
                 name: ''
@@ -5254,14 +5403,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_174
+                    schema: *ref_177
                     header: Location
                     language:
                       default:
                         name: Location
                         description: URL to get status of this long-running operation.
                   - !HttpHeader 
-                    schema: *ref_175
+                    schema: *ref_178
                     header: Retry-After
                     language:
                       default:
@@ -5327,7 +5476,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_176
+              - !Parameter &ref_179
                 schema: *ref_3
                 implementation: Method
                 required: true
@@ -5353,7 +5502,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_176
+              - *ref_179
             language: !Languages 
               default:
                 name: ''
@@ -5369,7 +5518,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_177
+            schema: *ref_180
             language: !Languages 
               default:
                 name: ''
@@ -5403,163 +5552,6 @@ operationGroups:
     language: !Languages 
       default:
         name: Deployments
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: ''
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2021-04-01'
-        parameters:
-          - *ref_100
-          - !Parameter &ref_179
-            schema: *ref_132
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: deploymentName
-                description: The name of the deployment.
-                serializedName: deploymentName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter 
-            schema: *ref_133
-            implementation: Method
-            origin: modelerfour:synthesized/api-version
-            required: true
-            language: !Languages 
-              default:
-                name: apiVersion
-                description: Api Version
-                serializedName: api-version
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_107
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_178
-                schema: *ref_159
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: Parameters to validate.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_103
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_178
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_179
-        responses:
-          - !SchemaResponse 
-            schema: *ref_163
-            language: !Languages 
-              default:
-                name: ''
-                description: OK - Returns What-If operation status
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted - Returns URL in Location header to query for long-running operation status.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_1
-                    header: Location
-                    language:
-                      default:
-                        name: Location
-                        description: URL to get status of this long-running operation.
-                  - !HttpHeader 
-                    schema: *ref_180
-                    header: Retry-After
-                    language:
-                      default:
-                        name: RetryAfter
-                        description: Number of seconds to wait before polling for status.
-                statusCodes:
-                  - '202'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_106
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-          x-ms-long-running-operation-options:
-            final-state-via: location
-        language: !Languages 
-          default:
-            name: WhatIf
-            description: Returns changes that will be made by the deployment if executed at the scope of the tenant group.
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: ''
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 

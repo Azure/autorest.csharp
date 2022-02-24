@@ -33,9 +33,9 @@ namespace xml_service.Models
         {
             ComplexTypeWithMeta refToModel = default;
             string something = default;
-            if (element.Element("XMLComplexTypeWithMeta") is XElement xMLComplexTypeWithMetaElement)
+            if (element.Element("XMLComplexTypeWithMeta") is XElement xmlComplexTypeWithMetaElement)
             {
-                refToModel = ComplexTypeWithMeta.DeserializeComplexTypeWithMeta(xMLComplexTypeWithMetaElement);
+                refToModel = ComplexTypeWithMeta.DeserializeComplexTypeWithMeta(xmlComplexTypeWithMetaElement);
             }
             if (element.Element("Something") is XElement somethingElement)
             {

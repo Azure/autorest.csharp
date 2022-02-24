@@ -4,11 +4,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -18,26 +15,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<OperationSet, string?> _singletonResourceCache = new ConcurrentDictionary<OperationSet, string?>();
 
-        public static bool IsSingletonResource(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        public static bool IsSingletonResource(this OperationSet operationSet)
         {
-            return operationSet.TryGetSingletonResourceSuffix(context, out _);
+            return operationSet.TryGetSingletonResourceSuffix(out _);
         }
 
-        public static bool TryGetSingletonResourceSuffix(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string singletonIdSuffix)
+        public static bool TryGetSingletonResourceSuffix(this OperationSet operationSet, [MaybeNullWhen(false)] out string singletonIdSuffix)
         {
             singletonIdSuffix = null;
             if (_singletonResourceCache.TryGetValue(operationSet, out singletonIdSuffix))
                 return singletonIdSuffix != null;
 
-            bool result = IsSingleton(operationSet, context, out singletonIdSuffix);
+            bool result = IsSingleton(operationSet, out singletonIdSuffix);
             _singletonResourceCache.TryAdd(operationSet, singletonIdSuffix);
             return result;
         }
 
-        private static bool IsSingleton(OperationSet operationSet, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out string singletonIdSuffix)
+        private static bool IsSingleton(OperationSet operationSet, [MaybeNullWhen(false)] out string singletonIdSuffix)
         {
             // we should first check the configuration for the singleton settings
-            if (context.Configuration.MgmtConfiguration.RequestPathToSingletonResource.TryGetValue(operationSet.RequestPath, out singletonIdSuffix))
+            if (Configuration.MgmtConfiguration.RequestPathToSingletonResource.TryGetValue(operationSet.RequestPath, out singletonIdSuffix))
             {
                 // ensure the singletonIdSuffix does not have a slash at the beginning
                 singletonIdSuffix = singletonIdSuffix.TrimStart('/');
@@ -46,19 +43,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             // we cannot find the corresponding request path in the configuration, trying to deduce from the path
             // return false if this is not a resource
-            if (!operationSet.IsResource(context.Configuration.MgmtConfiguration))
+            if (!operationSet.IsResource())
                 return false;
             // get the request path
-            var currentRequestPath = operationSet.GetRequestPath(context);
+            var currentRequestPath = operationSet.GetRequestPath();
             // if we are a singleton resource,
             // we need to find the suffix which should be the difference between our path and our parent resource
-            var parentRequestPath = operationSet.ParentRequestPath(context);
+            var parentRequestPath = operationSet.ParentRequestPath();
             var diff = parentRequestPath.TrimAncestorFrom(currentRequestPath);
             // if not all of the segment in difference are constant, we cannot be a singleton resource
             if (!diff.Any() || !diff.All(s => s.IsConstant))
                 return false;
             // see if the configuration says that we need to honor the dictionary for singletons
-            if (!context.Configuration.MgmtConfiguration.DoesSingletonRequiresKeyword)
+            if (!Configuration.MgmtConfiguration.DoesSingletonRequiresKeyword)
             {
                 singletonIdSuffix = string.Join('/', diff.Select(s => s.ConstantValue));
                 return true;

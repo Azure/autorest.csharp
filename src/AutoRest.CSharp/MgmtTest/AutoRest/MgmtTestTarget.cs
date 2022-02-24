@@ -12,16 +12,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTestTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
-            BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
             var extensionsWriter = new CodeWriter();
 
             bool hasCollectionTest = false;
-            foreach (var resourceCollection in context.Library.ResourceCollections)
+            foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
             {
                 var codeWriter = new CodeWriter();
-                var collectionTestWriter = new ResourceCollectionTestWriter(codeWriter, resourceCollection, context);
+                var collectionTestWriter = new ResourceCollectionTestWriter(codeWriter, resourceCollection);
                 collectionTestWriter.WriteCollectionTest();
 
                 project.AddGeneratedFile($"Mock/{resourceCollection.Type.Name}Test.cs", codeWriter.ToString());
@@ -30,15 +30,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (hasCollectionTest)
             {
-                var mockExtensionWriter = new TestHelperWriter(extensionsWriter, context);
+                var mockExtensionWriter = new TestHelperWriter(extensionsWriter);
                 mockExtensionWriter.WriteMockExtension();
                 project.AddGeneratedFile($"Mock/TestHelper.cs", extensionsWriter.ToString());
             }
 
-            foreach (var resource in context.Library.ArmResources)
+            foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var codeWriter = new CodeWriter();
-                var resourceTestWriter = new ResourceTestWriter(codeWriter, resource, context);
+                var resourceTestWriter = new ResourceTestWriter(codeWriter, resource);
                 resourceTestWriter.WriteCollectionTest();
 
                 project.AddGeneratedFile($"Mock/{resource.Type.Name}Test.cs", codeWriter.ToString());

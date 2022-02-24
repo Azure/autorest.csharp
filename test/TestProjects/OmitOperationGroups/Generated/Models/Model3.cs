@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace OmitOperationGroups.Models
 {
     /// <summary> The Model3. </summary>
-    public partial class Model3 : Resource
+    public partial class Model3 : ResourceData
     {
         /// <summary> Initializes a new instance of Model3. </summary>
         public Model3()
@@ -22,9 +22,10 @@ namespace OmitOperationGroups.Models
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="f"></param>
         /// <param name="g"></param>
-        internal Model3(ResourceIdentifier id, string name, ResourceType type, string f, string g) : base(id, name, type)
+        internal Model3(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string f, string g) : base(id, name, type, systemData)
         {
             F = f;
             G = g;

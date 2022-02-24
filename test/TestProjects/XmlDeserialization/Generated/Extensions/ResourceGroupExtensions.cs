@@ -12,14 +12,21 @@ namespace XmlDeserialization
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region XmlInstance
-        /// <summary> Gets an object representing a XmlInstanceCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of XmlInstances in the XmlInstance. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="XmlInstanceCollection" /> object. </returns>
+        /// <returns> An object representing collection of XmlInstances and their operations over a XmlInstance. </returns>
         public static XmlInstanceCollection GetXmlInstances(this ResourceGroup resourceGroup)
         {
-            return new XmlInstanceCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetXmlInstances();
         }
-        #endregion
     }
 }

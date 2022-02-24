@@ -13,7 +13,7 @@ using MgmtNonStringPathVariable.Models;
 namespace MgmtNonStringPathVariable
 {
     /// <summary> A class representing the Fake data model. </summary>
-    public partial class FakeData : TrackedResource
+    public partial class FakeData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of FakeData. </summary>
         /// <param name="location"> The location. </param>
@@ -25,10 +25,11 @@ namespace MgmtNonStringPathVariable
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal FakeData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, FakeProperties properties) : base(id, name, type, tags, location)
+        internal FakeData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, FakeProperties properties) : base(id, name, type, systemData, tags, location)
         {
             Properties = properties;
         }

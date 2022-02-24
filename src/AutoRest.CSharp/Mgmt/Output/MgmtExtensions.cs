@@ -3,64 +3,114 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal abstract class MgmtExtensions : MgmtTypeProvider
+    internal class MgmtExtensions : MgmtTypeProvider
     {
-        protected IEnumerable<Operation> _allOperations;
+        public IEnumerable<Operation> AllRawOperations { get; }
 
-        public MgmtExtensions(IEnumerable<Operation> allOperations, string resourceName, BuildContext<MgmtOutputLibrary> context) : base(context, resourceName)
+        protected MgmtExtensions(MgmtExtensions mgmtExtension)
+            : this(mgmtExtension.AllRawOperations, mgmtExtension.ArmCoreType, mgmtExtension.ContextualPath)
         {
-            _context = context;
-            _allOperations = allOperations;
         }
 
-        protected abstract RequestPath ContextualPath { get; }
+        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath)
+            : base(armCoreType.Name)
+        {
+            AllRawOperations = allRawOperations;
+            ArmCoreType = armCoreType;
+            DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
+            DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
+            Description = Configuration.MgmtConfiguration.IsArmCore ? string.Empty : $"A class to add extension methods to {ResourceName}.";
+            ContextualPath = contextualPath;
+            ArmCoreNamespace = ArmCoreType.Namespace!;
+            ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
+        }
 
-        protected override string DefaultAccessibility => "public";
+        protected override ConstructorSignature? EnsureMockingCtor()
+        {
+            return IsArmCore ? null : base.EnsureMockingCtor();
+        }
+
+        public override string BranchIdVariableName => $"{ExtensionParameter.Name}.Id";
+
+        private Parameter? _extensionParameter;
+        public Parameter ExtensionParameter => _extensionParameter ??= EnsureExtensionParameter();
+        private Parameter EnsureExtensionParameter()
+        {
+            return new Parameter(
+                VariableName,
+                $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
+                ArmCoreType,
+                null,
+                false,
+                IsExtensionParameter: true);
+        }
+
+        protected virtual string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : ArmCoreType.Name.ToVariableName();
+
+        public override CSharpType? BaseType => null;
+
+        public override string Description { get; }
+
+        public Type ArmCoreType { get; }
+
+        public string ArmCoreNamespace { get; }
+
+        protected override string DefaultName { get; }
+
+        protected override string DefaultNamespace { get; }
+
+        public virtual RequestPath ContextualPath { get; }
+
+        public override IEnumerable<Resource> ChildResources { get; }
 
         public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
-        public override IEnumerable<MgmtClientOperation> ClientOperations => _clientOperations ??= EnsureClientOperations();
-
-        private IEnumerable<MgmtClientOperation>? _clientOperations;
-        private IEnumerable<MgmtClientOperation> EnsureClientOperations()
+        protected override IEnumerable<FieldDeclaration> EnsureFieldDeclaration()
         {
-            return _allOperations.Select(operation =>
+            yield break;
+        }
+
+        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
+        {
+            var extensionParamToUse = Configuration.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
+            return AllRawOperations.Select(operation =>
             {
                 var operationName = GetOperationName(operation, ResourceName);
-                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together, some of the values are calculated multiple times (here and in writers).
+                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together
+                // some of the values are calculated multiple times (here and in writers).
                 // we just leave this implementation here since it could work for now
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
-                        _context.Library.GetRestClientMethod(operation),
-                        _context.Library.GetRestClient(operation),
-                        operation.GetRequestPath(_context),
+                        MgmtContext.Library.GetRestClientMethod(operation),
+                        MgmtContext.Library.GetRestClient(operation),
+                        operation.GetRequestPath(),
                         ContextualPath,
-                        operationName,
-                        GetResourceFromResourceType(operation.GetRequestPath(_context).GetResourceType(_context.Configuration.MgmtConfiguration)),
-                        operation.GetReturnTypeAsLongRunningOperation(null, operationName, _context)));
+                        operationName),
+                    extensionParamToUse);
             });
         }
+
+        public string GetOperationName(Operation operation) => GetOperationName(operation, ResourceName);
 
         protected override string CalculateOperationName(Operation operation, string clientResourceName)
         {
             var opertionName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (_context.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.IsResourceDataType(_context, out var data))
+            if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.IsResourceDataType(out var data))
             {
-                var requestPath = operation.GetRequestPath(_context);
+                var requestPath = operation.GetRequestPath();
                 // we need to find the correct resource type that links with this resource data
                 var resource = FindResourceFromResourceData(data, requestPath);
                 if (resource != null)
@@ -88,7 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private Resource? FindResourceFromResourceData(ResourceData data, RequestPath requestPath)
         {
             // we need to find the correct resource type that links with this resource data
-            var candidates = _context.Library.FindResources(data);
+            var candidates = MgmtContext.Library.FindResources(data);
 
             // return null when there is no match
             if (!candidates.Any())
@@ -99,33 +149,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return candidates.Single();
 
             // if there is more candidates than one, we are going to some more matching to see if we could determine one
-            var resourceType = requestPath.GetResourceType(_context.Configuration.MgmtConfiguration);
+            var resourceType = requestPath.GetResourceType();
             var filteredResources = candidates.Where(resource => resource.ResourceType == resourceType);
 
             if (filteredResources.Count() == 1)
                 return filteredResources.Single();
 
             return null;
-        }
-
-        private Resource? GetResourceFromResourceType(ResourceTypeSegment resourceType)
-        {
-            var candidates = _context.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
-            if (candidates.Count() == 0)
-                return null;
-
-            if (candidates.Count() == 1)
-                return candidates.First();
-
-            throw new InvalidOperationException($"Found more than 1 candidate for {resourceType}, results were ({string.Join(',', candidates.Select(r => r.ResourceName))})");
-        }
-
-        private IEnumerable<MgmtRestClient>? _restClients;
-        public override IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
-
-        private IEnumerable<MgmtRestClient> EnsureRestClients()
-        {
-            return ClientOperations.SelectMany(operation => operation.Select(restOperation => restOperation.RestClient)).Distinct();
         }
     }
 }

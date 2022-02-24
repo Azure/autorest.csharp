@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Azure;
+using Azure.ResourceManager;
 using MgmtLRO;
 using MgmtLRO.Models;
 using NUnit.Framework;
@@ -11,8 +12,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtLROTests() : base("MgmtLRO") { }
 
-        [TestCase("BarCollection", "CreateOrUpdate", typeof(BarCreateOrUpdateOperation))]
-        [TestCase("FakeCollection", "CreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
+        [TestCase("BarCollection", "CreateOrUpdate", typeof(ArmOperation<Bar>))]
+        [TestCase("FakeCollection", "CreateOrUpdate", typeof(ArmOperation<Fake>))]
         public void ValidateLongRunningOperationFunctionInCollection(string className, string functionName, Type returnType)
         {
             var collections = FindAllCollections().First(c => c.Name == className);

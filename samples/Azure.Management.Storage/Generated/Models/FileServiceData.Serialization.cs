@@ -8,6 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
@@ -39,10 +40,11 @@ namespace Azure.Management.Storage
 
         internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
-            Optional<Sku> sku = default;
+            Optional<Models.Sku> sku = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<CorsRules> cors = default;
             Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
             Optional<ProtocolSettings> protocolSettings = default;
@@ -55,7 +57,7 @@ namespace Azure.Management.Storage
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = Models.Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -71,6 +73,11 @@ namespace Azure.Management.Storage
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -116,7 +123,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new FileServiceData(id, name, type, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value, protocolSettings.Value);
+            return new FileServiceData(id, name, type, systemData, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value, protocolSettings.Value);
         }
     }
 }

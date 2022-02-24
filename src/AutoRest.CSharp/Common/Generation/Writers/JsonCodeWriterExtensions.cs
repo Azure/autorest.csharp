@@ -526,6 +526,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"new {typeof(Azure.Core.ResourceIdentifier)}({element}.GetString())");
                 return;
             }
+            else if (frameworkType == typeof(Azure.ResourceManager.Models.SystemData))
+            {
+                writer.Append($"JsonSerializer.Deserialize<{typeof(Azure.ResourceManager.Models.SystemData)}>({element}.ToString())");
+                return;
+            }
             else
             {
                 if (serializeFromType != null)
