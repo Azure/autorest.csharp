@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var operation = method.Operation;
                 var paging = operation.Language.Default.Paging;
-                Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                Schema? requestSchema = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body)?.Schema;
                 Schema? responseSchema = operation.Responses.FirstOrDefault()?.ResponseSchema;
                 Schema? exceptionSchema = operation.Exceptions.FirstOrDefault()?.ResponseSchema;
                 var operationSchemas = new LowLevelOperationSchemaInfo(requestSchema, responseSchema, exceptionSchema);
