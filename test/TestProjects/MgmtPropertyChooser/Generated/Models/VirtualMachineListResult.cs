@@ -13,7 +13,7 @@ using MgmtPropertyChooser;
 namespace MgmtPropertyChooser.Models
 {
     /// <summary> The List Virtual Machine operation response. </summary>
-    public partial class VirtualMachineListResult
+    internal partial class VirtualMachineListResult
     {
         /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
         /// <param name="value"> The list of virtual machines. </param>
