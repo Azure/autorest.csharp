@@ -172,7 +172,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!isArmCore)
             {
                 var orphanedDocsToKeep = MgmtContext.MgmtConfiguration.KeepOrphanedModels.Select(m => $"Models/{m}.cs").ToHashSet();
-                project.RemoveOrphanedEnums(orphanedDocsToKeep);
+                //project.RemoveOrphanedEnums(orphanedDocsToKeep);
+                project.RemoveOrphanedModels().GetAwaiter().GetResult();
             }
         }
 

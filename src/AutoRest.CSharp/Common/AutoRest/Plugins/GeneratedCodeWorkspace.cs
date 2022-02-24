@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             references.Add(MetadataReference.CreateFromFile(corlibLocation));
 
-            var trustedAssemblies = ((string?) AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
+            var trustedAssemblies = ((string?)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") ?? "").Split(Path.PathSeparator);
             foreach (var tpl in trustedAssemblies)
             {
                 references.Add(MetadataReference.CreateFromFile(tpl));
@@ -171,6 +171,243 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         }
 
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
+        private static bool IsMgmtRootDocument(Document document) => IsGeneratedDocument(document) && (!document.Name.Contains('/') || document.Name.Contains("Extensions/"));
+
+        private class ClassDeclarationVisitor : CSharpSyntaxRewriter
+        {
+            private List<ClassDeclarationSyntax> _classes = new();
+            internal IReadOnlyList<ClassDeclarationSyntax> ClassDeclarations => _classes;
+            public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
+            {
+                node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
+                if (IsPublic(node.Modifiers))
+                    _classes.Add(node);
+                return node;
+            }
+
+            // TODO -- add more, like enum visitor, struct visitor
+        }
+
+        private class PublicMemberVisitor : CSharpSyntaxRewriter
+        {
+            private List<SyntaxNode> _models = new();
+
+            public IEnumerable<SyntaxNode> PublicMembers => _models;
+
+            //private Document _document;
+            //private SyntaxTree _tree;
+            //private SemanticModel _semanticModel;
+
+            //internal PublicMemberVisitor(Document document)
+            //{
+            //    _document = document;
+            //    _tree = _document.GetSyntaxTreeAsync().Result!;
+            //    _semanticModel = _document.GetSemanticModelAsync().Result!;
+            //}
+
+            /// <summary>
+            /// override this to add my self in, and add the base class in
+            /// </summary>
+            /// <param name="node"></param>
+            /// <returns></returns>
+            public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
+            {
+                node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
+                if (IsPublic(node.Modifiers))
+                {
+                    _models.Add(node); // add myself
+                    // add base class of myself if any
+                    var list = node.BaseList;
+                    if (list != null)
+                    {
+                        foreach (var type in list.Types)
+                        {
+                            _models.Add(type);
+                        }
+                    }
+                }
+                return node;
+            }
+
+            /// <summary>
+            /// override this to add my property in
+            /// </summary>
+            /// <param name="node"></param>
+            /// <returns></returns>
+            public override SyntaxNode? VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+            {
+                node = (PropertyDeclarationSyntax)base.VisitPropertyDeclaration(node)!;
+                if (IsPublic(node.Modifiers))
+                {
+                    _models.Add(node);
+                }
+                return node;
+            }
+
+            /// <summary>
+            /// override this to add my methods in
+            /// </summary>
+            /// <param name="node"></param>
+            /// <returns></returns>
+            public override SyntaxNode? VisitMethodDeclaration(MethodDeclarationSyntax node)
+            {
+                node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node)!;
+                if (IsPublic(node.Modifiers))
+                {
+                    _models.Add(node);
+                }
+                return node;
+            }
+        }
+
+        private static bool IsPublic(SyntaxTokenList tokenList)
+            => tokenList.Any(token => token.IsKind(SyntaxKind.PublicKeyword));
+
+        private static bool IsStatic(SyntaxTokenList tokenList)
+            => tokenList.Any(token => token.IsKind(SyntaxKind.StaticKeyword));
+
+        private async Task<IEnumerable<SyntaxNode>> GetAllDeclaredModels()
+        {
+            var classVisitor = new ClassDeclarationVisitor();
+
+            foreach (var document in _project.Documents)
+            {
+                if (IsGeneratedDocument(document))
+                {
+                    var root = await document.GetSyntaxRootAsync();
+                    classVisitor.Visit(root);
+                }
+            }
+
+            return classVisitor.ClassDeclarations;
+        }
+
+        private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModels()
+        {
+            var compilation = await _project.GetCompilationAsync();
+            if (compilation == null)
+                yield break;
+
+            // get the root nodes
+            var classVisitor = new ClassDeclarationVisitor();
+            foreach (var document in _project.Documents)
+            {
+                // we only find the files directly under `Generated` and `Extensions`
+                if (IsMgmtRootDocument(document))
+                {
+                    var root = await document.GetSyntaxRootAsync();
+                    classVisitor.Visit(root);
+                }
+            }
+            var queue = new Queue<SyntaxNode>(classVisitor.ClassDeclarations);
+            // traverse all the models starting from the root nodes
+            var visited = new HashSet<SyntaxNode>();
+            while (queue.Count > 0)
+            {
+                var node = queue.Dequeue();
+                if (visited.Contains(node))
+                    continue;
+                visited.Add(node);
+                // add this node to the public list
+                yield return node;
+                // add every type referenced by this node to the queue
+                await foreach (var child in GetReferencedTypes(compilation, node))
+                {
+                    queue.Enqueue(child);
+                }
+            }
+        }
+
+        private async IAsyncEnumerable<SyntaxNode> GetReferencedTypes(Compilation compilation, SyntaxNode root)
+        {
+            var semanticModel = compilation.GetSemanticModel(root.SyntaxTree);
+            var publicMemberVisitor = new PublicMemberVisitor();
+            publicMemberVisitor.Visit(root);
+            foreach (var member in publicMemberVisitor.PublicMembers)
+            {
+                var symbol = semanticModel.GetDeclaredSymbol(member);
+                if (symbol == null)
+                    continue;
+                var list = new List<SyntaxNode>();
+                await ProcessSymbol(symbol, list);
+                foreach (var node in list)
+                {
+                    yield return node;
+                }
+            }
+        }
+
+        private async Task ProcessSymbol(ISymbol? symbol, List<SyntaxNode> result)
+        {
+            if (symbol == null || symbol.DeclaredAccessibility != Accessibility.Public)
+                return;
+            switch (symbol)
+            {
+                case INamedTypeSymbol typeSymbol:
+                    foreach (var reference in typeSymbol.DeclaringSyntaxReferences)
+                    {
+                        result.Add(await reference.GetSyntaxAsync());
+                    }
+                    await ProcessSymbol(typeSymbol.BaseType, result);
+                    foreach (var typeArgument in typeSymbol.TypeArguments)
+                    {
+                        await ProcessSymbol(typeArgument, result);
+                    }
+                    break;
+                case IMethodSymbol methodSymbol:
+                    await ProcessSymbol(methodSymbol.ReturnType, result);
+                    foreach (var parameter in methodSymbol.Parameters)
+                    {
+                        await ProcessSymbol(parameter.Type, result);
+                    }
+                    break;
+                case IPropertySymbol propertySymbol:
+                    await ProcessSymbol(propertySymbol.Type, result);
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        public async Task RemoveOrphanedModels()
+        {
+            // first get all the declared models
+            var models = await GetAllDeclaredModels();
+            // traverse all the root and recursively add all the things we met
+            var publicModels = TraverseAllPublicModels().ToEnumerable();
+            // get the models we need to mark internal
+            var internalModels = models.Except(publicModels);
+            foreach (var model in internalModels)
+            {
+                switch (model)
+                {
+                    case ClassDeclarationSyntax classDeclaration:
+                        MarkClassInternal(classDeclaration);
+                        break;
+                    default:
+                        throw new InvalidOperationException();
+                }
+            }
+        }
+
+        private void MarkClassInternal(ClassDeclarationSyntax classDeclaration)
+        {
+            var newClass = GetInternalClass(classDeclaration);
+            var tree = classDeclaration.SyntaxTree;
+            var document = _project.GetDocument(tree)!;
+            var newRoot = tree.GetRoot().ReplaceNode(classDeclaration, newClass).WithAdditionalAnnotations(Simplifier.Annotation);
+            _project = _project.RemoveDocument(document.Id);
+            document = document.WithSyntaxRoot(newRoot);
+            _project = document.Project;
+        }
+
+        private static ClassDeclarationSyntax GetInternalClass(ClassDeclarationSyntax classDeclaration)
+        {
+            var publicTokenInList = classDeclaration.Modifiers.First(token => token.IsKind(SyntaxKind.PublicKeyword));
+            var internalToken = SyntaxFactory.Token(publicTokenInList.LeadingTrivia, SyntaxKind.InternalKeyword, publicTokenInList.TrailingTrivia);
+            var newModifiers = classDeclaration.Modifiers.Replace(publicTokenInList, internalToken);
+            return classDeclaration.WithModifiers(newModifiers);
+        }
 
         public async void RemoveOrphanedEnums(HashSet<string> orphanedDocsToKeep)
         {
