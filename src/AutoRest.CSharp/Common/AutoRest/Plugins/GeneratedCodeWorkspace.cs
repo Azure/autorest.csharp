@@ -173,37 +173,52 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
         private static bool IsMgmtRootDocument(Document document) => IsGeneratedDocument(document) && (!document.Name.Contains('/') || document.Name.Contains("Extensions/"));
 
-        private class ClassDeclarationVisitor : CSharpSyntaxRewriter
+        private class PublicDefinitionVisitor : CSharpSyntaxRewriter
         {
-            private List<ClassDeclarationSyntax> _classes = new();
-            internal IReadOnlyList<ClassDeclarationSyntax> ClassDeclarations => _classes;
+            private List<SyntaxNode> _declarations = new();
+            internal IReadOnlyList<SyntaxNode> ModelDeclarations => _declarations;
+            private HashSet<string> _modelsToKeep;
+
+            public PublicDefinitionVisitor(HashSet<string> modelsToKeep)
+            {
+                _modelsToKeep = modelsToKeep;
+            }
+
+            public PublicDefinitionVisitor()
+            {
+                _modelsToKeep = new HashSet<string>();
+            }
+
             public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
-                if (IsPublic(node.Modifiers))
-                    _classes.Add(node);
+                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
+                    _declarations.Add(node);
                 return node;
             }
 
-            // TODO -- add more, like enum visitor, struct visitor
+            public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)
+            {
+                node = (StructDeclarationSyntax)base.VisitStructDeclaration(node)!;
+                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
+                    _declarations.Add(node);
+                return node;
+            }
+
+            public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
+            {
+                node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node)!;
+                if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
+                    _declarations.Add(node);
+                return node;
+            }
         }
 
         private class PublicMemberVisitor : CSharpSyntaxRewriter
         {
-            private List<SyntaxNode> _models = new();
+            private List<SyntaxNode> _members = new();
 
-            public IEnumerable<SyntaxNode> PublicMembers => _models;
-
-            //private Document _document;
-            //private SyntaxTree _tree;
-            //private SemanticModel _semanticModel;
-
-            //internal PublicMemberVisitor(Document document)
-            //{
-            //    _document = document;
-            //    _tree = _document.GetSyntaxTreeAsync().Result!;
-            //    _semanticModel = _document.GetSemanticModelAsync().Result!;
-            //}
+            public IEnumerable<SyntaxNode> PublicMembers => _members;
 
             /// <summary>
             /// override this to add my self in, and add the base class in
@@ -215,16 +230,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
                 if (IsPublic(node.Modifiers))
                 {
-                    _models.Add(node); // add myself
-                    // add base class of myself if any
-                    var list = node.BaseList;
-                    if (list != null)
-                    {
-                        foreach (var type in list.Types)
-                        {
-                            _models.Add(type);
-                        }
-                    }
+                    _members.Add(node); // add myself
                 }
                 return node;
             }
@@ -239,7 +245,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 node = (PropertyDeclarationSyntax)base.VisitPropertyDeclaration(node)!;
                 if (IsPublic(node.Modifiers))
                 {
-                    _models.Add(node);
+                    _members.Add(node);
                 }
                 return node;
             }
@@ -254,7 +260,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node)!;
                 if (IsPublic(node.Modifiers))
                 {
-                    _models.Add(node);
+                    _members.Add(node);
                 }
                 return node;
             }
@@ -266,9 +272,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static bool IsStatic(SyntaxTokenList tokenList)
             => tokenList.Any(token => token.IsKind(SyntaxKind.StaticKeyword));
 
-        private async Task<IEnumerable<SyntaxNode>> GetAllDeclaredModels()
+        private async Task<IEnumerable<SyntaxNode>> GetAllDeclaredModels(HashSet<string> modelsToKeep)
         {
-            var classVisitor = new ClassDeclarationVisitor();
+            var classVisitor = new PublicDefinitionVisitor(modelsToKeep);
 
             foreach (var document in _project.Documents)
             {
@@ -279,7 +285,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
 
-            return classVisitor.ClassDeclarations;
+            return classVisitor.ModelDeclarations;
         }
 
         private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModels()
@@ -289,7 +295,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 yield break;
 
             // get the root nodes
-            var classVisitor = new ClassDeclarationVisitor();
+            var classVisitor = new PublicDefinitionVisitor();
             foreach (var document in _project.Documents)
             {
                 // we only find the files directly under `Generated` and `Extensions`
@@ -299,7 +305,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     classVisitor.Visit(root);
                 }
             }
-            var queue = new Queue<SyntaxNode>(classVisitor.ClassDeclarations);
+            var queue = new Queue<SyntaxNode>(classVisitor.ModelDeclarations);
             // traverse all the models starting from the root nodes
             var visited = new HashSet<SyntaxNode>();
             while (queue.Count > 0)
@@ -369,44 +375,41 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        public async Task RemoveOrphanedModels()
+        public async Task RemoveOrphanedModels(HashSet<string> modelsToKeep)
         {
             // first get all the declared models
-            var models = await GetAllDeclaredModels();
+            var models = await GetAllDeclaredModels(modelsToKeep);
             // traverse all the root and recursively add all the things we met
             var publicModels = TraverseAllPublicModels().ToEnumerable();
             // get the models we need to mark internal
             var internalModels = models.Except(publicModels);
             foreach (var model in internalModels)
             {
-                switch (model)
-                {
-                    case ClassDeclarationSyntax classDeclaration:
-                        MarkClassInternal(classDeclaration);
-                        break;
-                    default:
-                        throw new InvalidOperationException();
-                }
+                MarkInternal(model);
             }
         }
 
-        private void MarkClassInternal(ClassDeclarationSyntax classDeclaration)
+        private void MarkInternal(SyntaxNode declarationNode)
         {
-            var newClass = GetInternalClass(classDeclaration);
-            var tree = classDeclaration.SyntaxTree;
+            var newNode = declarationNode switch
+            {
+                MemberDeclarationSyntax declaration => MarkInternal(declaration),
+                _ => throw new InvalidOperationException()
+            };
+            var tree = declarationNode.SyntaxTree;
             var document = _project.GetDocument(tree)!;
-            var newRoot = tree.GetRoot().ReplaceNode(classDeclaration, newClass).WithAdditionalAnnotations(Simplifier.Annotation);
+            var newRoot = tree.GetRoot().ReplaceNode(declarationNode, newNode).WithAdditionalAnnotations(Simplifier.Annotation);
             _project = _project.RemoveDocument(document.Id);
             document = document.WithSyntaxRoot(newRoot);
             _project = document.Project;
         }
 
-        private static ClassDeclarationSyntax GetInternalClass(ClassDeclarationSyntax classDeclaration)
+        private static MemberDeclarationSyntax MarkInternal(MemberDeclarationSyntax memberDeclaration)
         {
-            var publicTokenInList = classDeclaration.Modifiers.First(token => token.IsKind(SyntaxKind.PublicKeyword));
+            var publicTokenInList = memberDeclaration.Modifiers.First(token => token.IsKind(SyntaxKind.PublicKeyword));
             var internalToken = SyntaxFactory.Token(publicTokenInList.LeadingTrivia, SyntaxKind.InternalKeyword, publicTokenInList.TrailingTrivia);
-            var newModifiers = classDeclaration.Modifiers.Replace(publicTokenInList, internalToken);
-            return classDeclaration.WithModifiers(newModifiers);
+            var newModifiers = memberDeclaration.Modifiers.Replace(publicTokenInList, internalToken);
+            return memberDeclaration.WithModifiers(newModifiers);
         }
 
         public async void RemoveOrphanedEnums(HashSet<string> orphanedDocsToKeep)
