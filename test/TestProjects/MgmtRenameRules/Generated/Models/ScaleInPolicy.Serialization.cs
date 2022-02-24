@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class ScaleInPolicy : IUtf8JsonSerializable
+    internal partial class ScaleInPolicy : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

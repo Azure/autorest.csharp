@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class DeploymentWhatIfSettings : IUtf8JsonSerializable
+    internal partial class DeploymentWhatIfSettings : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

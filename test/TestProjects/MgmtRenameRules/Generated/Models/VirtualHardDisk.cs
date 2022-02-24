@@ -10,7 +10,7 @@ using System;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Describes the uri of a disk. </summary>
-    public partial class VirtualHardDisk
+    internal partial class VirtualHardDisk
     {
         /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
         public VirtualHardDisk()

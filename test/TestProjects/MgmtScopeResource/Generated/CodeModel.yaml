@@ -1536,10 +1536,10 @@ schemas: !Schemas
                 description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
                 namespace: ''
             protocol: !Protocols {}
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
           protocol: !Protocols {}
       serializationFormats:
@@ -1850,10 +1850,10 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_24
                 readOnly: true
-                serializedName: error
+                serializedName: errorResponse
                 language: !Languages 
                   default:
-                    name: error
+                    name: errorResponse
                     description: The deployment error.
                 protocol: !Protocols {}
             serializationFormats:
@@ -1902,10 +1902,10 @@ schemas: !Schemas
         - !Property 
           schema: *ref_24
           readOnly: true
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: The deployment validation error.
           protocol: !Protocols {}
         - !Property 
@@ -2045,10 +2045,10 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_24
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: Error when What-If operation fails.
           protocol: !Protocols {}
         - !Property 
@@ -2245,10 +2245,10 @@ schemas: !Schemas
                       protocol: !Protocols {}
                     - !Property 
                       schema: *ref_24
-                      serializedName: error
+                      serializedName: errorResponse
                       language: !Languages 
                         default:
-                          name: error
+                          name: errorResponse
                           description: The error reported by the operation.
                       protocol: !Protocols {}
                   serializationFormats:

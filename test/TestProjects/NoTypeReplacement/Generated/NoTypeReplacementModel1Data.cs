@@ -31,6 +31,11 @@ namespace NoTypeReplacement
         }
 
         /// <summary> Gets or sets the foo. </summary>
-        public SubResource Foo { get; set; }
+        internal SubResource Foo { get; set; }
+        /// <summary> Gets Id. </summary>
+        public ResourceIdentifier FooId
+        {
+            get => Foo is null ? default : Foo.Id;
+        }
     }
 }

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class HttpMessage
+    internal partial class HttpMessage
     {
         internal static HttpMessage DeserializeHttpMessage(JsonElement element)
         {
