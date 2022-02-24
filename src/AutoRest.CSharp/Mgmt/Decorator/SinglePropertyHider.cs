@@ -54,12 +54,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    var bodyParam = operation.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body);
+                    var bodyParam = operation.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
                     if (bodyParam is not null)
                     {
                         AddSchema(bodyParam.Schema, topLevelObjects);
                     }
-                    var bodyParams = operation.Requests.Select(request => request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body));
+                    var bodyParams = operation.Requests.Select(request => request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body));
                     foreach (var body in bodyParams)
                         AddSchema(body?.Schema, topLevelObjects);
 
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (!topLevelObjects.Contains(singlePropertySchema))
                 {
                     if (singlePropertySchema.Extensions is null)
-                        singlePropertySchema.Extensions = new DictionaryOfAny();
+                        singlePropertySchema.Extensions = new RecordOfStringAndAny();
 
                     singlePropertySchema.Extensions["x-accessibility"] = "internal";
                 }
