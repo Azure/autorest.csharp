@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // if this resource was listed in list-exception section, we suppress the exception here
             // or if the debug flag `--mgmt-debug.suppress-list-exception` is on, we suppress the exception here
             var suppressListException = Configuration.MgmtConfiguration.ListException.Contains(RequestPath)
-                || MgmtContext.MgmtConfiguration.MgmtDebug.SuppressListException;
+                || Configuration.MgmtConfiguration.MgmtDebug.SuppressListException;
             var getAllOperation = ClientOperations.Where(operation => operation.Name == "GetAll").OrderBy(operation => ReferenceSegments(operation).Count()).FirstOrDefault();
             if (!suppressListException && getAllOperation == null)
                 throw new ErrorHelpers.ErrorException($"The ResourceCollection {Type.Name} (RequestPath: {RequestPath}) does not have a `GetAll` method");
