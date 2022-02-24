@@ -31,12 +31,5 @@ namespace MgmtScopeResource
             TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
-
-        /// <summary> Gets a collection of PolicyAssignments in the PolicyAssignment. </summary>
-        /// <returns> An object representing collection of PolicyAssignments and their operations over a PolicyAssignment. </returns>
-        public virtual PolicyAssignmentCollection GetPolicyAssignments()
-        {
-            return new PolicyAssignmentCollection(Client, Id);
-        }
     }
 }
