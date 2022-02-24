@@ -9,7 +9,6 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -90,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static RequestPath ParentRequestPath(this OperationSet operationSet)
         {
             // escape the calculation if this is configured in the configuration
-            if (MgmtContext.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))
                 return GetRequestPathFromRawPath(rawPath);
 
             return operationSet.GetRequestPath().ParentRequestPath();
@@ -124,7 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static RequestPath GetParentRequestPath(this Operation operation)
         {
             // escape the calculation if this is configured in the configuration
-            if (MgmtContext.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
                 return GetRequestPathFromRawPath(rawPath);
 
             var currentRequestPath = operation.GetRequestPath();

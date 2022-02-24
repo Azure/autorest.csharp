@@ -1,13 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -15,7 +12,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         public static void RemoveOperationGroups()
         {
-            var omitSet = MgmtContext.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
+            var omitSet = Configuration.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
             if (MgmtContext.CodeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
             {
                 omitSet.Add("Operations");

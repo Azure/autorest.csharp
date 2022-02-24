@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Communication;
 
-namespace AutoRest.CSharp.AutoRest.Plugins
+namespace AutoRest.CSharp.Input
 {
-    internal class Configuration
+    internal static class Configuration
     {
         public static class Options
         {
@@ -29,12 +29,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string ProtocolMethodList = "protocol-method-list";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool dataplane, bool singleTopLevelClient, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
+        public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool dataplane, bool singleTopLevelClient, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
         {
-            OutputFolder = outputFolder;
+            _outputFolder = outputFolder;
             Namespace = ns;
             LibraryName = name;
-            SharedSourceFolders = sharedSourceFolders;
+            _sharedSourceFolders = sharedSourceFolders;
             SaveInputs = saveInputs;
             AzureArm = azureArm;
             PublicClients = publicClients || AzureArm;
@@ -43,31 +43,39 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             SkipCSProjPackageReference = skipCSProjPackageReference;
             DataPlane = dataplane;
             SingleTopLevelClient = singleTopLevelClient;
-            ProjectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
-            ProtocolMethodList = protocolMethodList;
-            MgmtConfiguration = mgmtConfiguration;
+            _projectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
+            _protocolMethodList = protocolMethodList;
+            _mgmtConfiguration = mgmtConfiguration;
         }
 
-        public string OutputFolder { get; }
-        public string? Namespace { get; }
-        public string? LibraryName { get; }
-        public string[] SharedSourceFolders { get; }
-        public bool SaveInputs { get; }
-        public bool AzureArm { get; }
-        public bool PublicClients { get; }
-        public bool ModelNamespace { get; }
-        public bool HeadAsBoolean { get; }
-        public bool SkipCSProjPackageReference { get; }
-        public bool DataPlane { get; }
-        public bool SingleTopLevelClient { get; }
-        public string[] ProtocolMethodList { get; }
-        public MgmtConfiguration MgmtConfiguration { get; }
+        private static string? _outputFolder;
+        public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static string? Namespace { get; private set; }
+        public static string? LibraryName { get; private set; }
 
-        public string ProjectFolder { get; }
+        private static string[]? _sharedSourceFolders;
+        public static string[] SharedSourceFolders => _sharedSourceFolders ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static bool SaveInputs { get; private set; }
+        public static bool AzureArm { get; private set; }
+        public static bool PublicClients { get; private set; }
+        public static bool ModelNamespace { get; private set; }
+        public static bool HeadAsBoolean { get; private set; }
+        public static bool SkipCSProjPackageReference { get; private set; }
+        public static bool DataPlane { get; private set; }
+        public static bool SingleTopLevelClient { get; private set; }
 
-        public static Configuration GetConfiguration(IPluginCommunication autoRest)
+        private static string[]? _protocolMethodList;
+        public static string[] ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        private static MgmtConfiguration? _mgmtConfiguration;
+        public static MgmtConfiguration MgmtConfiguration => _mgmtConfiguration ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        private static string? _projectFolder;
+        public static string ProjectFolder => _projectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        public static void Initialize(IPluginCommunication autoRest)
         {
-            return new Configuration(
+            Initialize(
                 outputFolder: TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder)),
                 ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult(),
                 name: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult(),

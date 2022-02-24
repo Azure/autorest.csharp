@@ -4,11 +4,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -37,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static bool IsSingleton(OperationSet operationSet, [MaybeNullWhen(false)] out string singletonIdSuffix)
         {
             // we should first check the configuration for the singleton settings
-            if (MgmtContext.MgmtConfiguration.RequestPathToSingletonResource.TryGetValue(operationSet.RequestPath, out singletonIdSuffix))
+            if (Configuration.MgmtConfiguration.RequestPathToSingletonResource.TryGetValue(operationSet.RequestPath, out singletonIdSuffix))
             {
                 // ensure the singletonIdSuffix does not have a slash at the beginning
                 singletonIdSuffix = singletonIdSuffix.TrimStart('/');
@@ -58,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (!diff.Any() || !diff.All(s => s.IsConstant))
                 return false;
             // see if the configuration says that we need to honor the dictionary for singletons
-            if (!MgmtContext.MgmtConfiguration.DoesSingletonRequiresKeyword)
+            if (!Configuration.MgmtConfiguration.DoesSingletonRequiresKeyword)
             {
                 singletonIdSuffix = string.Join('/', diff.Select(s => s.ConstantValue));
                 return true;

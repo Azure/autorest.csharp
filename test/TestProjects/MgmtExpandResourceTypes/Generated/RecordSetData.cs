@@ -82,7 +82,19 @@ namespace MgmtExpandResourceTypes
         /// <summary> provisioning State of the record set. </summary>
         public string ProvisioningState { get; }
         /// <summary> A reference to an azure resource from where the dns resource value is taken. </summary>
-        public WritableSubResource TargetResource { get; set; }
+        internal WritableSubResource TargetResource { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier TargetResourceId
+        {
+            get => TargetResource is null ? default : TargetResource.Id;
+            set
+            {
+                if (TargetResource is null)
+                    TargetResource = new WritableSubResource();
+                TargetResource.Id = value;
+            }
+        }
+
         /// <summary> The list of A records in the record set. </summary>
         public IList<ARecord> ARecords { get; }
         /// <summary> The list of AAAA records in the record set. </summary>
@@ -98,7 +110,19 @@ namespace MgmtExpandResourceTypes
         /// <summary> The list of TXT records in the record set. </summary>
         public IList<TxtRecord> TxtRecords { get; }
         /// <summary> The CNAME record in the  record set. </summary>
-        public CnameRecord CnameRecord { get; set; }
+        internal CnameRecord CnameRecord { get; set; }
+        /// <summary> The canonical name for this CNAME record. </summary>
+        public string Cname
+        {
+            get => CnameRecord is null ? default : CnameRecord.Cname;
+            set
+            {
+                if (CnameRecord is null)
+                    CnameRecord = new CnameRecord();
+                CnameRecord.Cname = value;
+            }
+        }
+
         /// <summary> The SOA record in the record set. </summary>
         public SoaRecord SoaRecord { get; set; }
         /// <summary> The list of CAA records in the record set. </summary>

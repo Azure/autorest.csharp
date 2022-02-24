@@ -14,7 +14,7 @@ using Azure.Core;
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(PrivateEndpointConnectionListConverter))]
-    public partial class PrivateEndpointConnectionList : IUtf8JsonSerializable
+    internal partial class PrivateEndpointConnectionList : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class DedicatedHostGroupInstanceView
+    internal partial class DedicatedHostGroupInstanceView
     {
         internal static DedicatedHostGroupInstanceView DeserializeDedicatedHostGroupInstanceView(JsonElement element)
         {
