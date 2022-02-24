@@ -9046,43 +9046,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Retrieve a managed HSM Pool:
-              parameters:
-                name: hsm1
-                api-version: 2021-04-01-preview
-                resourceGroupName: hsm-group
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    name: hsm1
-                    type: Microsoft.KeyVault/managedHSMs
-                    id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1
-                    location: westus
-                    properties:
-                      enablePurgeProtection: true
-                      enableSoftDelete: true
-                      hsmUri: https://westus.hsm1.managedhsm.azure.net
-                      initialAdminObjectIds:
-                        - 00000000-0000-0000-0000-000000000000
-                      provisioningState: Succeeded
-                      softDeleteRetentionInDays: 90
-                      statusMessage: ManagedHsm is functional.
-                      tenantId: 00000000-0000-0000-0000-000000000000
-                    sku:
-                      name: Standard_B1
-                      family: B
-                    tags:
-                      Dept: hsm
-                      Environment: dogfood
-                '202':
-                  headers:
-                    Location: >-
-                      https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1?api-version=2021-04-01-preview&kv-operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9
-                    Retry-After: '60'
-                '204': {}
         language: !Languages 
           default:
             name: Get
