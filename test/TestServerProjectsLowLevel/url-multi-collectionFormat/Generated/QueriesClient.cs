@@ -64,9 +64,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
             scope.Start();
@@ -94,9 +92,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
             scope.Start();
@@ -124,9 +120,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
             scope.Start();
@@ -154,9 +148,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
             scope.Start();
@@ -184,9 +176,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
             scope.Start();
@@ -214,9 +204,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
             scope.Start();

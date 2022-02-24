@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class LogAnalyticsOutput
+    internal partial class LogAnalyticsOutput
     {
         internal static LogAnalyticsOutput DeserializeLogAnalyticsOutput(JsonElement element)
         {

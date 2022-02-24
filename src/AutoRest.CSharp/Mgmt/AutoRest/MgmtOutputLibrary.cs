@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.IO.Pipes;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
@@ -15,7 +13,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -102,15 +99,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
             ChildOperations = new CachedDictionary<string, HashSet<Operation>>(EnsureResourceChildOperations);
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
-            _mergedOperations = MgmtContext.MgmtConfiguration.MergeOperations
+            _mergedOperations = Configuration.MgmtConfiguration.MergeOperations
                 .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
-            _allSchemas = MgmtContext.CodeModel.Schemas.Choices.Cast<Schema>()
-                .Concat(MgmtContext.CodeModel.Schemas.SealedChoices)
-                .Concat(MgmtContext.CodeModel.Schemas.Objects)
-                .Concat(MgmtContext.CodeModel.Schemas.Groups);
-            _allSchemas.UpdateAcronyms();
+            MgmtContext.CodeModel.UpdateAcronyms();
+            _allSchemas = MgmtContext.CodeModel.AllSchemas;
             _allSchemas.UpdateFrameworkTypes();
+
+            SinglePropertyHider.HideModels(_allSchemas);
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -338,7 +334,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
         {
-            bool shouldGenerateChildren = !MgmtContext.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
+            bool shouldGenerateChildren = !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
             var operations = shouldGenerateChildren ? GetChildOperations(contextualPath) : Enumerable.Empty<Operation>();
             return new MgmtExtensions(operations, armCoreType, contextualPath);
         }
@@ -506,9 +502,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private string? GetDefaultNameFromConfiguration(OperationSet operationSet, ResourceTypeSegment resourceType)
         {
-            if (MgmtContext.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
+            if (Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue(operationSet.RequestPath, out var name))
                 return name;
-            if (MgmtContext.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{resourceType}", out name))
+            if (Configuration.MgmtConfiguration.RequestPathToResourceName.TryGetValue($"{operationSet.RequestPath}|{resourceType}", out name))
                 return name;
 
             return null;

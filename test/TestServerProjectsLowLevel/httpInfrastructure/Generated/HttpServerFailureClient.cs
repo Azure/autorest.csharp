@@ -62,9 +62,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Head501Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
             scope.Start();
@@ -91,9 +89,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Head501(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
             scope.Start();
@@ -120,9 +116,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Get501Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
             scope.Start();
@@ -149,9 +143,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Get501(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
             scope.Start();
@@ -179,9 +171,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Post505Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
@@ -209,9 +199,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Post505(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
@@ -239,9 +227,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Delete505Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();
@@ -269,9 +255,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Delete505(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();

@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtNonStringPathVariable.Models
 {
-    public partial class BarProperties : IUtf8JsonSerializable
+    internal partial class BarProperties : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

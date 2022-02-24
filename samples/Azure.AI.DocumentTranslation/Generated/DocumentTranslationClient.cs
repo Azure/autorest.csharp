@@ -100,9 +100,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
             scope.Start();
@@ -164,9 +162,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
             scope.Start();
@@ -234,9 +230,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
             scope.Start();
@@ -304,9 +298,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetTranslationStatus(Guid id, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
             scope.Start();
@@ -377,9 +369,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CancelTranslationAsync(Guid id, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
             scope.Start();
@@ -450,9 +440,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response CancelTranslation(Guid id, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
             scope.Start();
@@ -504,9 +492,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
             scope.Start();
@@ -558,9 +544,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetSupportedDocumentFormats(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
             scope.Start();
@@ -612,9 +596,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
             scope.Start();
@@ -666,9 +648,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetSupportedGlossaryFormats(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
             scope.Start();
@@ -709,9 +689,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
             scope.Start();
@@ -752,9 +730,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetSupportedStorageSources(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
             scope.Start();
@@ -873,9 +849,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -995,9 +969,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "DocumentTranslationClient.GetTranslationsStatus");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1111,9 +1083,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -1227,9 +1197,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "DocumentTranslationClient.GetDocumentsStatus");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
@@ -1313,9 +1281,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Operation<BinaryData>> StartTranslationAsync(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -1400,9 +1366,7 @@ namespace Azure.AI.DocumentTranslation
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Operation<BinaryData> StartTranslation(bool waitForCompletion, RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(content, nameof(content));
 

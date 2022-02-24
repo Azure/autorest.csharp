@@ -62,9 +62,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Head400Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
@@ -91,9 +89,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Head400(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
@@ -120,9 +116,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Get400Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
@@ -149,9 +143,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Get400(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
@@ -178,9 +170,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Options400Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
@@ -207,9 +197,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Options400(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
@@ -237,9 +225,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Put400Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
@@ -267,9 +253,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Put400(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
@@ -297,9 +281,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Patch400Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
@@ -327,9 +309,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Patch400(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
@@ -357,9 +337,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Post400Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
@@ -387,9 +365,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Post400(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
@@ -417,9 +393,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Delete400Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
@@ -447,9 +421,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Delete400(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
@@ -476,9 +448,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Head401Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
@@ -505,9 +475,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Head401(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
@@ -534,9 +502,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Get402Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
@@ -563,9 +529,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Get402(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
@@ -592,9 +556,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Options403Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
@@ -621,9 +583,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Options403(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
@@ -650,9 +610,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Get403Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
@@ -679,9 +637,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Get403(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
@@ -709,9 +665,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Put404Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
@@ -739,9 +693,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Put404(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
@@ -769,9 +721,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Patch405Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
@@ -799,9 +749,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Patch405(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
@@ -829,9 +777,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Post406Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
@@ -859,9 +805,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Post406(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
@@ -889,9 +833,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Delete407Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
@@ -919,9 +861,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Delete407(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
@@ -949,9 +889,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Put409Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
@@ -979,9 +917,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Put409(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
@@ -1008,9 +944,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Head410Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
@@ -1037,9 +971,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Head410(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
@@ -1066,9 +998,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Get411Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
@@ -1095,9 +1025,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Get411(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
@@ -1124,9 +1052,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Options412Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
@@ -1153,9 +1079,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Options412(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
@@ -1182,9 +1106,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Get412Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
@@ -1211,9 +1133,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Get412(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
@@ -1241,9 +1161,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Put413Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
@@ -1271,9 +1189,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Put413(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
@@ -1301,9 +1217,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Patch414Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
@@ -1331,9 +1245,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Patch414(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
@@ -1361,9 +1273,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Post415Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
@@ -1391,9 +1301,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Post415(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
@@ -1420,9 +1328,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Get416Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
@@ -1449,9 +1355,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Get416(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
@@ -1479,9 +1383,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Delete417Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
@@ -1509,9 +1411,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Delete417(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
@@ -1538,9 +1438,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Head429Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
@@ -1567,9 +1465,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Head429(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();

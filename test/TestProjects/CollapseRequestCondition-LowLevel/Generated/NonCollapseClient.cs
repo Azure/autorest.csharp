@@ -54,9 +54,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
             scope.Start();
@@ -75,9 +73,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response CollapsePut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
             scope.Start();
@@ -95,9 +91,7 @@ namespace CollapseRequestCondition_LowLevel
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();
@@ -115,9 +109,7 @@ namespace CollapseRequestCondition_LowLevel
 
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
             scope.Start();

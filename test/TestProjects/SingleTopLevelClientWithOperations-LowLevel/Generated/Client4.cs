@@ -56,9 +56,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual async Task<Response> PatchAsync(string filter, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
@@ -80,9 +78,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual Response Patch(string filter, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(filter, nameof(filter));
 

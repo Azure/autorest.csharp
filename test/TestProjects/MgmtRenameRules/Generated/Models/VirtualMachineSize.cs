@@ -18,15 +18,15 @@ namespace MgmtRenameRules.Models
         /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
         /// <param name="name"> The name of the virtual machine size. </param>
         /// <param name="numberOfCores"> The number of cores supported by the virtual machine size. </param>
-        /// <param name="oSDiskSizeInMB"> The OS disk size, in MB, allowed by the virtual machine size. </param>
+        /// <param name="osDiskSizeInMB"> The OS disk size, in MB, allowed by the virtual machine size. </param>
         /// <param name="resourceDiskSizeInMB"> The resource disk size, in MB, allowed by the virtual machine size. </param>
         /// <param name="memoryInMB"> The amount of memory, in MB, supported by the virtual machine size. </param>
         /// <param name="maxDataDiskCount"> The maximum number of data disks that can be attached to the virtual machine size. </param>
-        internal VirtualMachineSize(string name, int? numberOfCores, int? oSDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount)
+        internal VirtualMachineSize(string name, int? numberOfCores, int? osDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount)
         {
             Name = name;
             NumberOfCores = numberOfCores;
-            OSDiskSizeInMB = oSDiskSizeInMB;
+            OSDiskSizeInMB = osDiskSizeInMB;
             ResourceDiskSizeInMB = resourceDiskSizeInMB;
             MemoryInMB = memoryInMB;
             MaxDataDiskCount = maxDataDiskCount;

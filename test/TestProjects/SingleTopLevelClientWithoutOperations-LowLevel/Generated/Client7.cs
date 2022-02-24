@@ -48,9 +48,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("Client7.Operation");
             scope.Start();
@@ -67,9 +65,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response Operation(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("Client7.Operation");
             scope.Start();

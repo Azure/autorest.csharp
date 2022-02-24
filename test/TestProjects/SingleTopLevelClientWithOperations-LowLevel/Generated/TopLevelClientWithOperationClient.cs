@@ -55,9 +55,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("TopLevelClientWithOperationClient.Operation");
             scope.Start();
@@ -74,9 +72,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response Operation(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("TopLevelClientWithOperationClient.Operation");
             scope.Start();
@@ -96,9 +92,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
@@ -121,9 +115,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(filter, nameof(filter));
 

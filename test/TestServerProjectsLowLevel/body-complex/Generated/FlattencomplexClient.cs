@@ -64,9 +64,7 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
             scope.Start();
@@ -95,9 +93,7 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetValid(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
             scope.Start();

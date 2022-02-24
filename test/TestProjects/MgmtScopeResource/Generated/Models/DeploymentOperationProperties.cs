@@ -55,8 +55,19 @@ namespace MgmtScopeResource.Models
         /// <summary> Operation status message from the resource provider. This property is optional.  It will only be provided if an error was received from the resource provider. </summary>
         public StatusMessage StatusMessage { get; }
         /// <summary> The HTTP request message. </summary>
-        public HttpMessage Request { get; }
+        internal HttpMessage Request { get; }
+        /// <summary> HTTP message content. </summary>
+        public object RequestContent
+        {
+            get => Request.Content;
+        }
+
         /// <summary> The HTTP response message. </summary>
-        public HttpMessage Response { get; }
+        internal HttpMessage Response { get; }
+        /// <summary> HTTP message content. </summary>
+        public object ResponseContent
+        {
+            get => Response.Content;
+        }
     }
 }
