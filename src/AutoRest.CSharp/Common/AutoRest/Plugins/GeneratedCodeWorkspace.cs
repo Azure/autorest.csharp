@@ -177,16 +177,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             private List<SyntaxNode> _declarations = new();
             internal IReadOnlyList<SyntaxNode> ModelDeclarations => _declarations;
-            private HashSet<string> _modelsToKeep;
+            private ImmutableHashSet<string> _modelsToKeep;
 
-            public PublicDefinitionVisitor(HashSet<string> modelsToKeep)
+            public PublicDefinitionVisitor(ImmutableHashSet<string> modelsToKeep)
             {
                 _modelsToKeep = modelsToKeep;
             }
 
             public PublicDefinitionVisitor()
             {
-                _modelsToKeep = new HashSet<string>();
+                _modelsToKeep = ImmutableHashSet<string>.Empty;
             }
 
             public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
@@ -272,7 +272,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static bool IsStatic(SyntaxTokenList tokenList)
             => tokenList.Any(token => token.IsKind(SyntaxKind.StaticKeyword));
 
-        private async Task<IEnumerable<SyntaxNode>> GetAllDeclaredModels(HashSet<string> modelsToKeep)
+        private async Task<IEnumerable<SyntaxNode>> GetAllDeclaredModels(ImmutableHashSet<string> modelsToKeep)
         {
             var classVisitor = new PublicDefinitionVisitor(modelsToKeep);
 
@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var symbol = semanticModel.GetDeclaredSymbol(member);
                 if (symbol == null)
                     continue;
-                var list = new List<SyntaxNode>();
+                var list = new HashSet<SyntaxNode>();
                 await ProcessSymbol(symbol, list);
                 foreach (var node in list)
                 {
@@ -343,7 +343,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        private async Task ProcessSymbol(ISymbol? symbol, List<SyntaxNode> result)
+        private async Task ProcessSymbol(ISymbol? symbol, HashSet<SyntaxNode> result)
         {
             if (symbol == null || symbol.DeclaredAccessibility != Accessibility.Public)
                 return;
@@ -375,7 +375,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        public async Task RemoveOrphanedModels(HashSet<string> modelsToKeep)
+        public async Task RemoveOrphanedModels(ImmutableHashSet<string> modelsToKeep)
         {
             // first get all the declared models
             var models = await GetAllDeclaredModels(modelsToKeep);
@@ -410,76 +410,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var internalToken = SyntaxFactory.Token(publicTokenInList.LeadingTrivia, SyntaxKind.InternalKeyword, publicTokenInList.TrailingTrivia);
             var newModifiers = memberDeclaration.Modifiers.Replace(publicTokenInList, internalToken);
             return memberDeclaration.WithModifiers(newModifiers);
-        }
-
-        public async void RemoveOrphanedEnums(HashSet<string> orphanedDocsToKeep)
-        {
-            var compilation = await _project.GetCompilationAsync();
-            if (compilation == null)
-                return;
-            var docsToDelete = new HashSet<Document>();
-            foreach (var document in _project.Documents)
-            {
-                if (!IsGeneratedDocument(document) || orphanedDocsToKeep.Contains(document.Name))
-                {
-                    continue;
-                }
-                var tree = await document.GetSyntaxTreeAsync();
-                if (IsOrphanedEnum(compilation, document, tree!))
-                {
-                    docsToDelete.Add(document);
-                }
-            }
-            var docNamesToDelete = docsToDelete.Select(d => d.Name).ToHashSet();
-            var docIdsToDelete = _project.Documents.Where(d => IsGeneratedDocument(d) && IsOrphanedSerializationClass(d, docNamesToDelete)).Select(d => d.Id).Concat(docsToDelete.Select(d => d.Id)).ToImmutableArray();
-            _project = _project.RemoveDocuments(docIdsToDelete);
-        }
-
-        private bool IsOrphanedSerializationClass(Document document, HashSet<string> orphanedDocNames)
-        {
-            if (document.Name.EndsWith(".Serialization.cs"))
-            {
-                var docName = string.Join(".", document.Name.Split(".").SkipLast(2).Append("cs"));
-                return orphanedDocNames.Contains(docName);
-            }
-            return false;
-        }
-
-        private bool IsOrphanedEnum(Compilation compilation, Document document, SyntaxTree tree)
-        {
-            var semanticModel = compilation.GetSemanticModel(tree!);
-            var root = tree!.GetRoot();
-            BaseTypeDeclarationSyntax? typeSyntax = root?.DescendantNodes().OfType<StructDeclarationSyntax>().FirstOrDefault();
-            if (typeSyntax == null)
-            {
-                typeSyntax = root?.DescendantNodes().OfType<EnumDeclarationSyntax>().FirstOrDefault();
-                if (typeSyntax == null)
-                    return false;
-            }
-            var typeSymbol = semanticModel.GetDeclaredSymbol(typeSyntax);
-            if (typeSymbol == null)
-            {
-                return false;
-            }
-            var declaringFiles = typeSymbol.DeclaringSyntaxReferences.Select(reference => reference.SyntaxTree.FilePath).ToHashSet();
-            var referencesToType = SymbolFinder.FindReferencesAsync(typeSymbol, _project.Solution).Result;
-            var refLocations = new HashSet<String>();
-            foreach (var reference in referencesToType)
-            {
-                foreach (var location in reference.Locations)
-                {
-                    if (!location.Document.Name.EndsWith($"{typeSyntax.Identifier.Value}.Serialization.cs"))
-                    {
-                        refLocations.Add(location.Document.Name);
-                    }
-                }
-            }
-            // If a model is only referenced by its declaring files and serialization file, it is orphaned.
-            if (declaringFiles.IsSupersetOf(refLocations))
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

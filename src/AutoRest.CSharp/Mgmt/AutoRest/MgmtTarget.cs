@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -172,7 +173,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (!isArmCore)
             {
-                var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.Select(m => $"Models/{m}.cs").ToHashSet();
+                var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
                 project.RemoveOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
             }
         }
