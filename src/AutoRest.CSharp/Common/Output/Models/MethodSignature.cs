@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -28,10 +30,34 @@ namespace AutoRest.CSharp.Output.Models
 
             if (ReturnType != null && TypeFactory.IsPageable(ReturnType))
             {
-                return this with {Name = Name + "Async", ReturnType = new CSharpType(typeof(AsyncPageable<>), ReturnType.Arguments)};
+                return this with
+                {
+                    Name = Name + "Async",
+                    ReturnType = new CSharpType(typeof(AsyncPageable<>), ReturnType.Arguments)
+                };
             }
 
-            return this with { Name = Name + "Async", Modifiers = Modifiers | Async, ReturnType = ReturnType != null ? new CSharpType(typeof(Task<>), ReturnType) : typeof(Task) };
+            if (ReturnType != null && TypeFactory.IsIEnumerableOfT(ReturnType))
+            {
+                return this with
+                {
+                    Name = Name + "Async",
+                    Modifiers = Modifiers | Async,
+                    ReturnType = new CSharpType(typeof(IAsyncEnumerable<>), ReturnType.Arguments),
+                    Parameters = Parameters.Append(KnownParameters.EnumeratorCancellationTokenParameter).ToArray()
+                };
+            }
+
+            return this with
+            {
+                Name = Name + "Async",
+                Modifiers = Modifiers | Async,
+                ReturnType = ReturnType != null
+                    ? TypeFactory.IsOperationOfPageable(ReturnType)
+                        ? new CSharpType(typeof(Task<>), new CSharpType(typeof(Operation<>), new CSharpType(typeof(AsyncPageable<>), ReturnType.Arguments[0].Arguments[0])))
+                        : new CSharpType(typeof(Task<>), ReturnType)
+                    : typeof(Task)
+            };
         }
 
         private MethodSignature MakeSync()
@@ -43,10 +69,34 @@ namespace AutoRest.CSharp.Output.Models
 
             if (ReturnType != null && TypeFactory.IsAsyncPageable(ReturnType))
             {
-                return this with { Name = Name[..^5], ReturnType = new CSharpType(typeof(Pageable<>), ReturnType.Arguments) };
+                return this with
+                {
+                    Name = Name[..^5],
+                    ReturnType = new CSharpType(typeof(Pageable<>), ReturnType.Arguments)
+                };
             }
 
-            return this with { Name = Name[..^5], Modifiers = Modifiers ^ Async, ReturnType = ReturnType?.Arguments.Length == 1 ? ReturnType.Arguments[0] : null };
+            if (ReturnType != null && TypeFactory.IsIAsyncEnumerableOfT(ReturnType))
+            {
+                return this with
+                {
+                    Name = Name[..^5],
+                    Modifiers = Modifiers ^ Async,
+                    ReturnType = new CSharpType(typeof(IEnumerable<>), ReturnType.Arguments),
+                    Parameters = Parameters.Where(p => p != KnownParameters.EnumeratorCancellationTokenParameter).ToArray()
+                };
+            }
+
+            return this with
+            {
+                Name = Name[..^5],
+                Modifiers = Modifiers ^ Async,
+                ReturnType = ReturnType?.Arguments.Length == 1
+                    ? TypeFactory.IsOperationOfAsyncPageable(ReturnType.Arguments[0])
+                        ? new CSharpType(typeof(Operation<>), new CSharpType(typeof(Pageable<>), ReturnType.Arguments[0].Arguments[0].Arguments[0]))
+                        : ReturnType.Arguments[0]
+                    : null
+            };
         }
     }
 }
