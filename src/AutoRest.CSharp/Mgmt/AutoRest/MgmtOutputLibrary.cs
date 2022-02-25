@@ -106,8 +106,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
             _allSchemas.UpdateFrameworkTypes();
 
-            SinglePropertyHider.HideModels(_allSchemas);
-
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
         }
