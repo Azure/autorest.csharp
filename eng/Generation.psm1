@@ -41,6 +41,18 @@ function Invoke-AutoRest($baseOutput, $projectName, $autoRestArguments, $sharedS
     Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
 }
 
+function Invoke-AutoRest-TestGen($baseOutput, $projectName, $autoRestArguments, $sharedSource)
+{
+    $outputPath = Join-Path $baseOutput "Generated"
+    $namespace = $projectName.Replace('-', '_')
+    $command = "$script:autoRestBinary $autoRestArguments  --skip-upgrade-check  --namespace=$namespace --output-folder=$outputPath"
+    if ($fast)
+    {
+        $command = "dotnet run --project $script:AutoRestPluginProject --no-build -- --standalone $outputPath"
+    }
+    Invoke $command
+}
+
 function AutoRest-Reset()
 {
     Invoke "$script:autoRestBinary --reset"
@@ -55,3 +67,4 @@ Export-ModuleMember -Function "Invoke"
 Export-ModuleMember -Function "Invoke-AutoRest"
 Export-ModuleMember -Function "AutoRest-Reset"
 Export-ModuleMember -Function "Get-AutoRestProject"
+Export-ModuleMember -Function "Invoke-AutoRest-TestGen"
