@@ -16,7 +16,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", false)]
         [TestCase("SubscriptionExtensions", "GetPolicyAssignments", false)]
         [TestCase("ResourceGroupExtensions", "GetPolicyAssignments", false)]
-        //[TestCase("ArmResourceExtensions", "GetPolicyAssignments", true)]   --Get from Azure.Core
         [TestCase("ManagementGroupExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("SubscriptionExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("ResourceGroupExtensions", "GetDeploymentExtendeds", true)]

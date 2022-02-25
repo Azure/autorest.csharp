@@ -147,10 +147,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!MgmtContext.Library.ArmResourceExtensions.IsEmpty)
             {
                 WriteExtensionPair(project, MgmtContext.Library.ArmResourceExtensionsClient);
-                //var armResourceExt = MgmtContext.Library.ArmResourceExtensions;
-                //var armResourceExtensionsCodeWriter = new ArmResourceExtensionsWriter(armResourceExt);
-                //armResourceExtensionsCodeWriter.Write();
-                //AddGeneratedFile(project, $"Extensions/{armResourceExtensionsCodeWriter.FileName}.cs", armResourceExtensionsCodeWriter.ToString());
             }
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
