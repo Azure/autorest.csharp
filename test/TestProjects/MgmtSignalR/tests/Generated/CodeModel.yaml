@@ -8993,9 +8993,7 @@ testModel:
     - &ref_385
       _filePath: scenarios\signalR.yaml
       cleanUpSteps: []
-      outputVariableNames:
-        - name
-        - resourceName
+      outputVariableNames: []
       prepareSteps: []
       requiredVariables:
         - subscriptionId
@@ -9027,8 +9025,6 @@ testModel:
                     metadata:
                       description: Name of the SignalR service.
                     value: '[concat(''sw'',uniqueString(resourceGroup().id))]'
-              outputVariableNames:
-                - resourceName
               outputVariables: {}
               requiredVariables: []
               requiredVariablesDefault: {}
@@ -9101,6 +9097,7 @@ testModel:
                 nameAvailable: false
                 reason: AlreadyExists
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 location: $(location)
@@ -9744,6 +9741,7 @@ testModel:
                 tags:
                   key1: value1
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 parameters:
@@ -10220,6 +10218,7 @@ testModel:
                 tags:
                   key1: value1
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 resourceGroupName: $(resourceGroupName)
@@ -10861,6 +10860,7 @@ testModel:
                 tags:
                   key1: value1
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 parameters:
@@ -10986,6 +10986,7 @@ testModel:
                 secondaryConnectionString: Endpoint=https://yourServiceName.service.signalr.net;AccessKey=secondaryAccessKey;Version=1.0
                 secondaryKey: secondaryAccessKey
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 resourceGroupName: $(resourceGroupName)
@@ -11045,6 +11046,7 @@ testModel:
               exampleName: SignalR_RegenerateKey
               expectedResponse: {}
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 parameters:
@@ -11096,6 +11098,7 @@ testModel:
               exampleName: SignalR_Restart
               expectedResponse: {}
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 resourceGroupName: $(resourceGroupName)
@@ -11235,6 +11238,7 @@ testModel:
                     limit: 100
                     unit: Count
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 location: $(location)
@@ -11664,6 +11668,7 @@ testModel:
                     tags:
                       key1: value1
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 resourceGroupName: $(resourceGroupName)
@@ -12088,6 +12093,7 @@ testModel:
                     tags:
                       key1: value1
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 subscriptionId: $(subscriptionId)
@@ -12182,6 +12188,7 @@ testModel:
                     isDataAction: false
                     properties: {}
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
               requestUpdate: []
@@ -12228,6 +12235,7 @@ testModel:
               exampleName: SignalR_Delete
               expectedResponse: {}
               outputVariables: {}
+              outputVariablesModel: {}
               requestParameters:
                 api-version: 2020-07-01-preview
                 resourceGroupName: $(resourceGroupName)

@@ -317,16 +317,16 @@ namespace AutoRest.CSharp.Input
             if (RawValue == null)
                 return false;
             Type t = RawValue.GetType();
-            return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>) || t.Name == "DictionaryOfAny";
+            return t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Dictionary<,>) || t.Name == "RecordOfStringAndAny";
         }
         public Dictionary<string, object?> AsDictionary()
         {
             var ret = new Dictionary<string, object?>();
             if (RawValue is null)
                 return ret;
-            if (RawValue is Dictionary<string, object?>)
+            if (RawValue is RecordOfStringAndAny)
             {
-                return (Dictionary<string, object?>)RawValue;
+                return (RecordOfStringAndAny)RawValue;
             }
             foreach (KeyValuePair<object, object?> entry in (IEnumerable<KeyValuePair<object, object?>>)RawValue)
             {
@@ -510,7 +510,25 @@ namespace AutoRest.CSharp.Input
         // test-modeler properties
         [YamlMember(Alias = "exampleModel")]
         public ExampleModel? ExampleModel;
+
+        [YamlMember(Alias = "outputVariablesModel")]
+        public Dictionary<string, ICollection<OutputVariableModel>>? OutputVariablesModel;
     };
+
+    internal partial class OutputVariableModel
+    {
+        [YamlMember(Alias = "index")]
+        public int? Index;
+
+        [YamlMember(Alias = "key")]
+        public string? Key;
+
+        [YamlMember(Alias = "languages")]
+        public Languages? Languages;
+
+        [YamlMember(Alias = "type")]
+        public string Type;
+    }
 
     internal partial class Scenario: OavVariableScope
     {
