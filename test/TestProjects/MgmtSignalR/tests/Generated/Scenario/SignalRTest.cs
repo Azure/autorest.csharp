@@ -53,10 +53,6 @@ namespace MgmtSignalR.Tests.Scenario
                 }));
                 if (deploymentOperation.Value.Data.Properties.Outputs is Dictionary<string, object> deployOutputs)
                 {
-                    if (deployOutputs.ContainsKey("resourceName") && deployOutputs["resourceName"] is Dictionary<string, object> outputVariable)
-                    {
-                        resourceName = outputVariable["value"].ToString();
-                    }
                 }
             }
 
