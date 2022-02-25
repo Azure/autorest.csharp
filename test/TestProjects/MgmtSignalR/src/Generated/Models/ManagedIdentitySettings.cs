@@ -8,7 +8,7 @@
 namespace MgmtSignalR.Models
 {
     /// <summary> Managed identity settings for upstream. </summary>
-    public partial class ManagedIdentitySettings
+    internal partial class ManagedIdentitySettings
     {
         /// <summary> Initializes a new instance of ManagedIdentitySettings. </summary>
         public ManagedIdentitySettings()

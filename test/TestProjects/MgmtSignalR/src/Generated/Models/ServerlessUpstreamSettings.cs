@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtSignalR.Models
 {
     /// <summary> The settings for the Upstream when the service is in server-less mode. </summary>
-    public partial class ServerlessUpstreamSettings
+    internal partial class ServerlessUpstreamSettings
     {
         /// <summary> Initializes a new instance of ServerlessUpstreamSettings. </summary>
         public ServerlessUpstreamSettings()

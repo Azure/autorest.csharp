@@ -324,9 +324,9 @@ namespace AutoRest.CSharp.Input
             var ret = new Dictionary<string, object?>();
             if (RawValue is null)
                 return ret;
-            if (RawValue is DictionaryOfAny)
+            if (RawValue is Dictionary<string, object?>)
             {
-                return (DictionaryOfAny)RawValue;
+                return (Dictionary<string, object?>)RawValue;
             }
             foreach (KeyValuePair<object, object?> entry in (IEnumerable<KeyValuePair<object, object?>>)RawValue)
             {

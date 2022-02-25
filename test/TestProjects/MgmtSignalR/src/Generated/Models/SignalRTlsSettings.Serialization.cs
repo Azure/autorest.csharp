@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtSignalR.Models
 {
-    public partial class SignalRTlsSettings : IUtf8JsonSerializable
+    internal partial class SignalRTlsSettings : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

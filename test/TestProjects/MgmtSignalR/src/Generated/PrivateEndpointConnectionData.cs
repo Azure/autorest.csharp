@@ -38,7 +38,19 @@ namespace MgmtSignalR
         /// <summary> Provisioning state of the private endpoint connection. </summary>
         public ProvisioningState? ProvisioningState { get; }
         /// <summary> Private endpoint associated with the private endpoint connection. </summary>
-        public WritableSubResource PrivateEndpoint { get; set; }
+        internal WritableSubResource PrivateEndpoint { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier PrivateEndpointId
+        {
+            get => PrivateEndpoint is null ? default : PrivateEndpoint.Id;
+            set
+            {
+                if (PrivateEndpoint is null)
+                    PrivateEndpoint = new WritableSubResource();
+                PrivateEndpoint.Id = value;
+            }
+        }
+
         /// <summary> Connection state. </summary>
         public PrivateLinkServiceConnectionState PrivateLinkServiceConnectionState { get; set; }
     }

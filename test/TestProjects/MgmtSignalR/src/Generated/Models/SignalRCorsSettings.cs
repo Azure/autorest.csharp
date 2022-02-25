@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtSignalR.Models
 {
     /// <summary> Cross-Origin Resource Sharing (CORS) settings. </summary>
-    public partial class SignalRCorsSettings
+    internal partial class SignalRCorsSettings
     {
         /// <summary> Initializes a new instance of SignalRCorsSettings. </summary>
         public SignalRCorsSettings()
