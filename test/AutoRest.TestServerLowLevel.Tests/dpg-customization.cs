@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetRawModel() => Test(async (host) =>
         {
-            var result = await new DPGClient(Key, host).GetModelAsync("raw");
+            Response result = await new DPGClient(Key, host).GetModelAsync("raw");
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
         });
@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
             {
                 hello = "world!"
             };
-            var result = await new DPGClient(Key, host).PostModelAsync("raw", RequestContent.Create(value));
+            Response result = await new DPGClient(Key, host).PostModelAsync("raw", RequestContent.Create(value));
             Assert.AreEqual(200, result.Status);
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
@@ -50,7 +50,7 @@ namespace AutoRest.TestServer.Tests
             using var writer = new Utf8JsonWriter(stream);
             input.Write(writer);
             writer.Flush();
-            var result = await new DPGClient(Key, host).PostModelAsync("model", RequestContent.Create(stream.ToArray()));
+            Response result = await new DPGClient(Key, host).PostModelAsync("model", RequestContent.Create(stream.ToArray()));
             Assert.AreEqual(200, result.Status);
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("model", (string)responseBody["received"]);
@@ -60,7 +60,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetRawPages() => Test(async (host) =>
         {
             AsyncPageable<BinaryData> allPages = new DPGClient(Key, host).GetPagesAsync("raw");
-            await foreach (var page in allPages.AsPages())
+            await foreach (Page<BinaryData> page in allPages.AsPages())
             {
                 var firstItem = JsonData.FromBytes(page.Values.First());
                 Assert.AreEqual("raw", (string)firstItem["received"]);
@@ -71,8 +71,9 @@ namespace AutoRest.TestServer.Tests
         public Task GetHandwrittenModelPages() => Test(async (host) =>
         {
             AsyncPageable<BinaryData> allPages = new DPGClient(Key, host).GetPagesAsync("model");
-            await foreach (ProductResult result in allPages.AsPages())
+            await foreach (Page<BinaryData> page in allPages.AsPages())
             {
+                ProductResult result = page.GetRawResponse();
                 Assert.AreEqual("model", $"{result.Values.First().Received}");
             }
         });

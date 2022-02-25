@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace dpg_customization_LowLevel.Models
 {
-    internal partial class ProductResult
+    public partial class ProductResult
     {
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {

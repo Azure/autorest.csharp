@@ -14,7 +14,7 @@ using Azure.Core;
 namespace dpg_customization_LowLevel.Models
 {
     /// <summary> The ProductResult. </summary>
-    internal partial class ProductResult
+    public partial class ProductResult
     {
         /// <summary> Initializes a new instance of ProductResult. </summary>
         internal ProductResult()
@@ -36,11 +36,11 @@ namespace dpg_customization_LowLevel.Models
         /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
 
-        public static implicit operator ProductResult(Page<BinaryData> page)
+        public static implicit operator ProductResult(Response response)
         {
             try
             {
-                return DeserializeProductResult(JsonDocument.Parse(page.GetRawResponse().Content.ToMemory()).RootElement);
+                return DeserializeProductResult(JsonDocument.Parse(response.Content.ToMemory()).RootElement);
             }
             catch
             {
