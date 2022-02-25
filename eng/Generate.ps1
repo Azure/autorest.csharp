@@ -280,7 +280,6 @@ $keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast;
+        Invoke-AutoRest-TestGen $_.output $_.projectName $_.arguments $using:sharedSource $using:fast;
     }
 } -ThrottleLimit $parallel
-
