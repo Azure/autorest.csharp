@@ -87,9 +87,31 @@ namespace MgmtSignalR
         /// </summary>
         public IList<SignalRFeature> Features { get; }
         /// <summary> Cross-Origin Resource Sharing (CORS) settings. </summary>
-        public SignalRCorsSettings Cors { get; set; }
+        internal SignalRCorsSettings Cors { get; set; }
+        /// <summary> Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use &quot;*&quot; to allow all. If omitted, allow all by default. </summary>
+        public IList<string> CorsAllowedOrigins
+        {
+            get
+            {
+                if (Cors is null)
+                    Cors = new SignalRCorsSettings();
+                return Cors.AllowedOrigins;
+            }
+        }
+
         /// <summary> Upstream settings when the Azure SignalR is in server-less mode. </summary>
-        public ServerlessUpstreamSettings Upstream { get; set; }
+        internal ServerlessUpstreamSettings Upstream { get; set; }
+        /// <summary> Gets or sets the list of Upstream URL templates. Order matters, and the first matching template takes effects. </summary>
+        public IList<UpstreamTemplate> UpstreamTemplates
+        {
+            get
+            {
+                if (Upstream is null)
+                    Upstream = new ServerlessUpstreamSettings();
+                return Upstream.Templates;
+            }
+        }
+
         /// <summary> Network ACLs. </summary>
         public SignalRNetworkACLs NetworkACLs { get; set; }
         /// <summary> Provisioning state of the resource. </summary>
@@ -107,6 +129,17 @@ namespace MgmtSignalR
         /// <summary> Private endpoint connections to the resource. </summary>
         public IReadOnlyList<PrivateEndpointConnectionData> PrivateEndpointConnections { get; }
         /// <summary> TLS settings. </summary>
-        public SignalRTlsSettings Tls { get; set; }
+        internal SignalRTlsSettings Tls { get; set; }
+        /// <summary> Request client certificate during TLS handshake if enabled. </summary>
+        public bool? ClientCertEnabled
+        {
+            get => Tls is null ? default : Tls.ClientCertEnabled;
+            set
+            {
+                if (Tls is null)
+                    Tls = new SignalRTlsSettings();
+                Tls.ClientCertEnabled = value;
+            }
+        }
     }
 }

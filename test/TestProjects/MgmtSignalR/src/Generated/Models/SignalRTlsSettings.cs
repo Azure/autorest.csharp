@@ -8,7 +8,7 @@
 namespace MgmtSignalR.Models
 {
     /// <summary> TLS settings for the resource. </summary>
-    public partial class SignalRTlsSettings
+    internal partial class SignalRTlsSettings
     {
         /// <summary> Initializes a new instance of SignalRTlsSettings. </summary>
         public SignalRTlsSettings()

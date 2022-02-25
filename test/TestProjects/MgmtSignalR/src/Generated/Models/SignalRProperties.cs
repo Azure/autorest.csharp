@@ -35,6 +35,12 @@ namespace MgmtSignalR.Models
         /// <summary> Private endpoint connections to the resource. </summary>
         public IReadOnlyList<PrivateEndpointConnectionData> PrivateEndpointConnections { get; }
         /// <summary> TLS settings. </summary>
-        public SignalRTlsSettings Tls { get; }
+        internal SignalRTlsSettings Tls { get; }
+        /// <summary> Request client certificate during TLS handshake if enabled. </summary>
+        public bool? ClientCertEnabled
+        {
+            get => Tls.ClientCertEnabled;
+            set => Tls.ClientCertEnabled = value;
+        }
     }
 }

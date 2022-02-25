@@ -29,9 +29,21 @@ namespace MgmtSignalR.Models
         /// </summary>
         public IReadOnlyList<SignalRFeature> Features { get; }
         /// <summary> Cross-Origin Resource Sharing (CORS) settings. </summary>
-        public SignalRCorsSettings Cors { get; }
+        internal SignalRCorsSettings Cors { get; }
+        /// <summary> Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use &quot;*&quot; to allow all. If omitted, allow all by default. </summary>
+        public IList<string> CorsAllowedOrigins
+        {
+            get => Cors.AllowedOrigins;
+        }
+
         /// <summary> Upstream settings when the Azure SignalR is in server-less mode. </summary>
-        public ServerlessUpstreamSettings Upstream { get; }
+        internal ServerlessUpstreamSettings Upstream { get; }
+        /// <summary> Gets or sets the list of Upstream URL templates. Order matters, and the first matching template takes effects. </summary>
+        public IList<UpstreamTemplate> UpstreamTemplates
+        {
+            get => Upstream.Templates;
+        }
+
         /// <summary> Network ACLs. </summary>
         public SignalRNetworkACLs NetworkACLs { get; }
     }
