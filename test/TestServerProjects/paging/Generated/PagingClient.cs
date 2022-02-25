@@ -458,6 +458,82 @@ namespace paging
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> DuplicateParamsAsync(string filter = null, CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.DuplicateParams");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.DuplicateParamsAsync(filter, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.DuplicateParams");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.DuplicateParamsNextPageAsync(nextLink, filter, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> DuplicateParams(string filter = null, CancellationToken cancellationToken = default)
+        {
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.DuplicateParams");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.DuplicateParams(filter, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.DuplicateParams");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.DuplicateParamsNextPage(nextLink, filter, cancellationToken);
+                    return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> NextOperationWithQueryParamsAsync(CancellationToken cancellationToken = default)

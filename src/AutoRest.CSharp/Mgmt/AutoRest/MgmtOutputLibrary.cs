@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (httpRequest is null)
                             continue;
 
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body)?.Schema;
                         if (bodyParam is null)
                             continue;
 
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (request.Protocol.Http is not HttpRequest {Method: HttpMethod.Patch})
                             continue;
 
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body);
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
                         if (bodyParam is null)
                             continue;
 
@@ -753,13 +753,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     if (httpRequest != null)
                     {
                         var orderedParams = operation.Parameters
-                            .Where(p => p.In == ParameterLocation.Path)
+                            .Where(p => p.In == HttpParameterIn.Path)
                             .OrderBy(
                                 p => httpRequest.Path.IndexOf(
                                     "{" + p.CSharpName() + "}",
                                     StringComparison.InvariantCultureIgnoreCase));
                         operation.Parameters = orderedParams.Concat(operation.Parameters
-                                .Where(p => p.In != ParameterLocation.Path).ToList())
+                                .Where(p => p.In != HttpParameterIn.Path).ToList())
                             .ToList();
                     }
                 }
