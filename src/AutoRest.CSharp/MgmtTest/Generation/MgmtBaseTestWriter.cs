@@ -191,13 +191,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var constructor = sot.Constructors[0];
             foreach (var c in sot.Constructors)
             {
-                if (c.Signature.Parameters.Count < constructor.Signature.Parameters.Count)
+                if (c.Signature.Parameters.Count < constructor.Signature.Parameters.Count && c.Signature.Modifiers.HasFlag(Public))
                     constructor = c;
+            }
+
+            // There is customized information not loaded in codegen for "Azure.ResourceManager.Resources.Models", use the simplest constructor
+            if (sot.Type.Namespace == "Azure.ResourceManager.Resources.Models")
+            {
+                return constructor;
             }
 
             foreach (var c in sot.Constructors)
             {
-                if (c.Signature.Modifiers.HasFlag(Public))
+                if (!c.Signature.Modifiers.HasFlag(Public))
                     continue;
                 var missAnyRequiredParameter = false;
                 foreach (var p in c.Signature.Parameters)

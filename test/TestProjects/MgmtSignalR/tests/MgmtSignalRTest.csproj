@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220213.3" />
+    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220216.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,10 +28,6 @@
 
   <ItemGroup>
     <Compile Include = "..\..\..\..\src\assets\TestFramework\*.cs" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Compile Include = "..\..\..\..\src\assets\MockMgmtResources\*.cs" />
   </ItemGroup>
 
 </Project>
