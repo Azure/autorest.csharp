@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -92,11 +93,26 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            WriteDisableWarnings(writer, disabledWarnings);
+            foreach (var disabledWarning in disabledWarnings)
+            {
+                writer.Line($"#pragma warning disable {disabledWarning}");
+            }
 
-            writer.Append($"{methodBase.Modifiers} ");
+            writer
+                .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
+                .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(Internal))
+                .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
+                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
+
+
             if (methodBase is MethodSignature method)
             {
+                writer
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && Configuration.AzureArm)
+                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
+                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && !Configuration.AzureArm);
+
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");
@@ -107,59 +123,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodBase.Name);
-        }
-
-        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, bool isAsync, params string[] disabledWarnings)
-        {
-            WriteDisableWarnings(writer, disabledWarnings);
-
-            writer.Append($"{methodBase.Modifiers} ");
-            if (methodBase is MethodSignature method)
-            {
-                if (isAsync && !method.IsPageable)
-                    writer.Append($"async ");
-
-                var firstParam = method.Parameters.FirstOrDefault();
-                bool isExtensionMethod = firstParam is not null && firstParam.IsExtensionParameter;
-
-                if (method.Modifiers.Contains("public") && !isExtensionMethod)
-                    writer.Append($"virtual ");
-
-                if (isExtensionMethod)
-                    writer.Append($"static ");
-
-                if (method.ReturnType != null)
-                {
-                    var finalType = method.IsPageable ? method.ReturnType.WrapPageable(isAsync) : method.ReturnType.WrapAsync(isAsync);
-                    writer.Append($"{finalType} ");
-                }
-                else
-                {
-                    writer.AppendRaw("void ");
-                }
-            }
-
-            string methodName = isAsync ? $"{methodBase.Name}Async" : methodBase.Name;
-            return WriteMethodDeclarationParameters(writer, methodBase, disabledWarnings, methodName);
-        }
-
-        private static void WriteDisableWarnings(CodeWriter writer, string[] disabledWarnings)
-        {
-            foreach (var disabledWarning in disabledWarnings)
-            {
-                writer.Line($"#pragma warning disable {disabledWarning}");
-            }
-        }
-
-        private static CodeWriter.CodeWriterScope WriteMethodDeclarationParameters(CodeWriter writer, MethodSignatureBase methodBase, string[] disabledWarnings, string methodName)
-        {
-            writer.Append($"{methodName}(");
+            writer
+                .Append($"{methodBase.Name}(")
+                .AppendRawIf("this ", methodBase.Modifiers.HasFlag(Extension));
 
             foreach (var parameter in methodBase.Parameters)
             {
                 writer.WriteParameter(parameter);
             }
+
             writer.RemoveTrailingComma();
             writer.Append($")");
 
@@ -215,8 +187,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.AppendRaw("]");
             }
 
-            if (clientParameter.IsExtensionParameter)
-                writer.Append($"this ");
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null && clientParameter.UseDefaultValueInCtorParam)
             {

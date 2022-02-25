@@ -22,6 +22,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Response = Azure.Response;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -243,7 +244,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 // We don't properly handle the case when one of the parameters has a name "nextLink" but isn't a continuation token
                 // So we assume that it is a string and use variable "nextLink" without declaration.
-                var createEnumerableMethodSignature = new MethodSignature(createEnumerableMethod.ActualName, null, async ? "async " : string.Empty, createEnumerableReturnType, null, createEnumerableParameters);
+                var createEnumerableMethodSignature = new MethodSignature(createEnumerableMethod.ActualName, null, async ? Async : None, createEnumerableReturnType, null, createEnumerableParameters);
                 using (writer.WriteMethodDeclaration(createEnumerableMethodSignature))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
@@ -321,7 +322,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter, EnumeratorCancellationTokenParameter }
                         : new[] { ResponseParameter, NextLinkParameter, PageSizeHintParameter };
                     var createEnumerableReturnType = async ? typeof(IAsyncEnumerable<Page<BinaryData>>) : typeof(IEnumerable<Page<BinaryData>>);
-                    var createEnumerableSignature = new MethodSignature(createEnumerableMethod.ActualName, null, async ? "async " : string.Empty, createEnumerableReturnType, null, createEnumerableParameters);
+                    var createEnumerableSignature = new MethodSignature(createEnumerableMethod.ActualName, null, async ? Async : None, createEnumerableReturnType, null, createEnumerableParameters);
 
                     using (writer.Line().WriteMethodDeclaration(createEnumerableSignature))
                     {
@@ -446,8 +447,8 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameters = clientMethod.IsLongRunning
                 ? clientMethod.RequestMethod.Parameters.Prepend(KnownParameters.WaitForCompletion).ToArray()
                 : clientMethod.RequestMethod.Parameters;
-            var asyncText = async && (clientMethod.PagingInfo == null || clientMethod.IsLongRunning) ? " async" : string.Empty;
-            var methodSignature = new MethodSignature(CreateMethodName(clientMethod.RequestMethod.Name, async), clientMethod.RequestMethod.Description, $"{clientMethod.RequestMethod.Accessibility} virtual{asyncText}", returnType, null, parameters);
+            var asyncModifier = async && (clientMethod.PagingInfo == null || clientMethod.IsLongRunning) ? Async : None;
+            var methodSignature = new MethodSignature(CreateMethodName(clientMethod.RequestMethod.Name, async), clientMethod.RequestMethod.Description, clientMethod.RequestMethod.Accessibility | Virtual | asyncModifier, returnType, null, parameters);
 
             writer.WriteMethodDocumentation(methodSignature);
             WriteSchemaDocumentationRemarks(writer, operationSchemas);

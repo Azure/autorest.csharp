@@ -3,10 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Generation.Types;
 using NUnit.Framework;
 
-namespace Azure.Core.Tests
+namespace AutoRest.CSharp.Generation.Types.Tests
 {
     public class CSharpTypeTests
     {

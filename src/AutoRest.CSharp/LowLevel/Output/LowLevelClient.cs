@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Operation = AutoRest.CSharp.Input.Operation;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -146,7 +147,7 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature BuildPublicConstructor(FieldDeclaration? credentialField, Parameter clientOptionsParameter)
         {
             var constructorParameters = RestClientBuilder.GetConstructorParameters(Parameters, credentialField?.Type).Append(clientOptionsParameter).ToArray();
-            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "public", constructorParameters);
+            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Public, constructorParameters);
         }
 
         public IEnumerable<LowLevelSubClientFactoryMethod> BuildSubClientFactoryMethods()
@@ -167,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models
                     methodName += ClientBuilder.GetClientSuffix(Context);
                 }
 
-                var methodSignature = new MethodSignature($"Get{methodName}", $"Initializes a new instance of {subClient.Type.Name}", "public virtual", subClient.Type, null, methodParameters.ToArray());
+                var methodSignature = new MethodSignature($"Get{methodName}", $"Initializes a new instance of {subClient.Type.Name}", Public | Virtual, subClient.Type, null, methodParameters.ToArray());
                 FieldDeclaration? cachingField = methodParameters.Any() ? null : new FieldDeclaration(FieldModifiers.Private, subClient.Type, $"_cached{subClient.Type.Name}");
 
                 yield return new LowLevelSubClientFactoryMethod(methodSignature, cachingField, constructorCallParameters);
@@ -180,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(p => p with {DefaultValue = null, Validate = false})
                 .ToArray();
 
-            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", "internal", constructorParameters);
+            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", Internal, constructorParameters);
         }
 
         private static IEnumerable<Parameter> GetSubClientFactoryMethodParameters(LowLevelClient subClient)

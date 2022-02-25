@@ -12,6 +12,7 @@ using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 
@@ -159,7 +160,11 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsIEnumerableType(CSharpType type)
             => type.IsFrameworkType &&
             (type.FrameworkType == typeof(IEnumerable) ||
-            (type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>)));
+            type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+
+        internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
+
+        internal static bool IsPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Pageable<>);
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
         {
