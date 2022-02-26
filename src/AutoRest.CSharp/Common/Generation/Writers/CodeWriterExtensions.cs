@@ -16,7 +16,10 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure;
+using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
+using System.Text;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -293,6 +296,41 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
+            return writer;
+        }
+
+        private static Dictionary<RequestConditionHeaders, string> requestConditionHeaderNames = new Dictionary<RequestConditionHeaders, string> {
+            {RequestConditionHeaders.None, "" },
+            {RequestConditionHeaders.IfMatch, "If-Match" },
+            {RequestConditionHeaders.IfNoneMatch, "If-None-Match" },
+            {RequestConditionHeaders.IfModifiedSince, "If-Modified-Since" },
+            {RequestConditionHeaders.IfUnmodifiedSince, "If-Unmodified-Since" }
+        };
+
+        private static Dictionary<RequestConditionHeaders, string> requestConditionFieldNames = new Dictionary<RequestConditionHeaders, string> {
+            {RequestConditionHeaders.None, "" },
+            {RequestConditionHeaders.IfMatch, "IfMatch" },
+            {RequestConditionHeaders.IfNoneMatch, "IfNoneMatch" },
+            {RequestConditionHeaders.IfModifiedSince, "IfModifiedSince" },
+            {RequestConditionHeaders.IfUnmodifiedSince, "IfUnmodifiedSince" }
+        };
+        public static CodeWriter WriteRequestConditionParameterChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters, RequestConditionHeaders requestConditionFlag)
+        {
+            foreach (Parameter parameter in parameters)
+            {
+                if (parameter.Type.Equals(typeof(RequestConditions)))
+                {
+#pragma warning disable CS8605 // Unboxing a possibly null value.
+                    foreach (RequestConditionHeaders val in Enum.GetValues(typeof(RequestConditionHeaders)))
+#pragma warning restore CS8605 // Unboxing a possibly null value.
+                    {
+                        if (val != RequestConditionHeaders.None && !requestConditionFlag.HasFlag(val))
+                        {
+                            writer.Line($"Argument.AssertNull({parameter.Name:I}.{requestConditionFieldNames[val]}, nameof({parameter.Name:I}), \"Service does not support the {requestConditionHeaderNames[val]} header for this operation.\");");
+                        }
+                    }
+                }
+            }
             return writer;
         }
 

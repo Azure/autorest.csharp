@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -104,7 +105,8 @@ namespace AutoRest.CSharp.Output.Models
                 null,
                 operation.Extensions?.BufferResponse ?? true,
                 accessibility: accessibility,
-                operation
+                operation,
+                buildContext.RequestConditionFlag
             );
         }
 
@@ -253,7 +255,7 @@ namespace AutoRest.CSharp.Output.Models
             parameters.AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter);
             parameters.AddRequestContext();
 
-            return new RequestMethodBuildContext(parameters.OrderedParameters, parameters.References, bodyParameter, requestConditionSerializationFormat);
+            return new RequestMethodBuildContext(parameters.OrderedParameters, parameters.References, bodyParameter, requestConditionSerializationFormat, requestConditionHeaders);
         }
 
         private Request BuildRequest(HttpRequest httpRequest, RequestMethodBuildContext buildContext)
@@ -787,7 +789,7 @@ namespace AutoRest.CSharp.Output.Models
                 _ => RequestLocation.None
             };
 
-        private record RequestMethodBuildContext(IReadOnlyList<Parameter> OrderedParameters, IReadOnlyDictionary<string, ParameterInfo> References, Parameter? BodyParameter = null, SerializationFormat ConditionalRequestSerializationFormat = SerializationFormat.Default);
+        private record RequestMethodBuildContext(IReadOnlyList<Parameter> OrderedParameters, IReadOnlyDictionary<string, ParameterInfo> References, Parameter? BodyParameter = null, SerializationFormat ConditionalRequestSerializationFormat = SerializationFormat.Default, RequestConditionHeaders RequestConditionFlag = RequestConditionHeaders.None);
 
         private readonly record struct ParameterInfo(RequestParameter? Parameter, ReferenceOrConstant Reference);
 
@@ -897,16 +899,6 @@ namespace AutoRest.CSharp.Output.Models
                     _parameters.Add(parameter);
                 }
             }
-        }
-
-        [Flags]
-        private enum RequestConditionHeaders
-        {
-            None = 0,
-            IfMatch = 1,
-            IfNoneMatch = 2,
-            IfModifiedSince = 4,
-            IfUnmodifiedSince = 8
         }
     }
 }
