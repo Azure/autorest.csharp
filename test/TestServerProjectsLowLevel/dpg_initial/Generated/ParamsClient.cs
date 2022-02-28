@@ -49,7 +49,10 @@ namespace dpg_initial_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Head request, no params. </summary>
+        /// <summary>
+        /// Head request, no params.
+        ///  Initially has no query parameters. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> HeadNoParamsAsync(RequestContext context = null)
         {
@@ -67,7 +70,10 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Head request, no params. </summary>
+        /// <summary>
+        /// Head request, no params.
+        ///  Initially has no query parameters. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response HeadNoParams(RequestContext context = null)
         {
@@ -85,7 +91,10 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Get true Boolean value on path. </summary>
+        /// <summary>
+        /// Get true Boolean value on path.
+        ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
@@ -107,7 +116,10 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Get true Boolean value on path. </summary>
+        /// <summary>
+        /// Get true Boolean value on path.
+        ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
@@ -129,7 +141,7 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Put, has both required and optional params. </summary>
+        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -152,7 +164,7 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Put, has both required and optional params. </summary>
+        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -235,7 +247,10 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Get true Boolean value on path. </summary>
+        /// <summary>
+        /// Get true Boolean value on path.
+        ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, RequestContext context = null)
@@ -254,7 +269,10 @@ namespace dpg_initial_LowLevel
             }
         }
 
-        /// <summary> Get true Boolean value on path. </summary>
+        /// <summary>
+        /// Get true Boolean value on path.
+        ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response GetOptional(string optionalParam = null, RequestContext context = null)

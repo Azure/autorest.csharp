@@ -190,7 +190,7 @@ operationGroups:
         language: !Languages 
           default:
             name: HeadNoParams
-            description: Head request, no params
+            description: Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -267,7 +267,9 @@ operationGroups:
         language: !Languages 
           default:
             name: GetRequired
-            description: Get true Boolean value on path
+            description: |-
+              Get true Boolean value on path.
+               Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -356,7 +358,7 @@ operationGroups:
         language: !Languages 
           default:
             name: PutRequiredOptional
-            description: Put, has both required and optional params
+            description: Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -525,7 +527,9 @@ operationGroups:
         language: !Languages 
           default:
             name: DeleteParameters
-            description: Delete something
+            description: |-
+              Delete something.
+               Initially the path exists but there is no delete method. After evolution this is a new method in a known path
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -601,7 +605,9 @@ operationGroups:
         language: !Languages 
           default:
             name: GetOptional
-            description: Get true Boolean value on path
+            description: |-
+              Get true Boolean value on path.
+               Initially has one optional query parameter. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -653,7 +659,9 @@ operationGroups:
         language: !Languages 
           default:
             name: GetNewOperation
-            description: I'm a new operation
+            description: |-
+              I'm a new operation.
+               Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
         protocol: !Protocols {}
     language: !Languages 
       default:

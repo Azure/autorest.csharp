@@ -157,7 +157,9 @@ operationGroups:
         language: !Languages 
           default:
             name: HeadNoParams
-            description: Head request, no params
+            description: |-
+              Head request, no params.
+               Initially has no query parameters. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -222,7 +224,9 @@ operationGroups:
         language: !Languages 
           default:
             name: GetRequired
-            description: Get true Boolean value on path
+            description: |-
+              Get true Boolean value on path.
+               Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -299,7 +303,7 @@ operationGroups:
         language: !Languages 
           default:
             name: PutRequiredOptional
-            description: Put, has both required and optional params
+            description: Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -444,7 +448,9 @@ operationGroups:
         language: !Languages 
           default:
             name: GetOptional
-            description: Get true Boolean value on path
+            description: |-
+              Get true Boolean value on path.
+               Initially has one optional query parameter. After evolution, a new optional query parameter is added
         protocol: !Protocols {}
     language: !Languages 
       default:

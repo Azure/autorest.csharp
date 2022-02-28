@@ -49,7 +49,7 @@ namespace dpg_update1_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Head request, no params. </summary>
+        /// <summary> Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> HeadNoParamsAsync(string newParameter = null, RequestContext context = null)
@@ -68,7 +68,7 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Head request, no params. </summary>
+        /// <summary> Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response HeadNoParams(string newParameter = null, RequestContext context = null)
@@ -87,7 +87,10 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Get true Boolean value on path. </summary>
+        /// <summary>
+        /// Get true Boolean value on path.
+        ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -110,7 +113,10 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Get true Boolean value on path. </summary>
+        /// <summary>
+        /// Get true Boolean value on path.
+        ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -133,7 +139,7 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Put, has both required and optional params. </summary>
+        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
@@ -157,7 +163,7 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Put, has both required and optional params. </summary>
+        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
@@ -181,7 +187,10 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Delete something. </summary>
+        /// <summary>
+        /// Delete something.
+        ///  Initially the path exists but there is no delete method. After evolution this is a new method in a known path
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> DeleteParametersAsync(RequestContext context = null)
         {
@@ -199,7 +208,10 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Delete something. </summary>
+        /// <summary>
+        /// Delete something.
+        ///  Initially the path exists but there is no delete method. After evolution this is a new method in a known path
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response DeleteParameters(RequestContext context = null)
         {
@@ -217,7 +229,10 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Get true Boolean value on path. </summary>
+        /// <summary>
+        /// Get true Boolean value on path.
+        ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -237,7 +252,10 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Get true Boolean value on path. </summary>
+        /// <summary>
+        /// Get true Boolean value on path.
+        ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
@@ -257,7 +275,10 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> I&apos;m a new operation. </summary>
+        /// <summary>
+        /// I&apos;m a new operation.
+        ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual async Task<Response> GetNewOperationAsync(RequestContext context = null)
         {
@@ -275,7 +296,10 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> I&apos;m a new operation. </summary>
+        /// <summary>
+        /// I&apos;m a new operation.
+        ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         public virtual Response GetNewOperation(RequestContext context = null)
         {
