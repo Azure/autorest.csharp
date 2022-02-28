@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         }
 
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
-        private static bool IsMgmtRootDocument(Document document) => IsGeneratedDocument(document) && (!document.Name.Contains('/') || document.Name.Contains("Extensions/"));
+        private static bool IsMgmtRootDocument(Document document) => IsGeneratedDocument(document) && Path.GetDirectoryName(document.Name) is "Extensions" or "";
 
         private class PublicDefinitionVisitor : CSharpSyntaxRewriter
         {
