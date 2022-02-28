@@ -361,15 +361,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                writer.Line($"default:");
-                if (async)
-                {
-                    writer.Line($"throw await {ClientDiagnosticsField}.CreateRequestFailedExceptionAsync({responseVariable}).ConfigureAwait(false);");
-                }
-                else
-                {
-                    writer.Line($"throw {ClientDiagnosticsField}.CreateRequestFailedException({responseVariable});");
-                }
+                writer
+                    .Line($"default:")
+                    .Line($"throw new {typeof(RequestFailedException)}({responseVariable});");
             }
         }
 

@@ -87,7 +87,7 @@ namespace Pagination
         /// Operation Id: PageSizeInt32Models_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PageSizeInt32Model>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PageSizeInt32Model>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _pageSizeInt32ModelClientDiagnostics.CreateScope("PageSizeInt32Model.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace Pagination
             {
                 var response = await _pageSizeInt32ModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _pageSizeInt32ModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeInt32Model(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace Pagination
             {
                 var response = _pageSizeInt32ModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _pageSizeInt32ModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeInt32Model(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

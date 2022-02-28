@@ -61,7 +61,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<SupersetModel7>> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel7SName, SupersetModel7Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SupersetModel7>> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel7SName, SupersetModel7Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel7SName, nameof(supersetModel7SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -123,7 +123,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
-        public async virtual Task<Response<SupersetModel7>> GetAsync(string supersetModel7SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel7>> GetAsync(string supersetModel7SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel7SName, nameof(supersetModel7SName));
 
@@ -133,7 +133,7 @@ namespace SupersetInheritance
             {
                 var response = await _supersetModel7RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _supersetModel7ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel7(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -161,7 +161,7 @@ namespace SupersetInheritance
             {
                 var response = _supersetModel7RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel7SName, cancellationToken);
                 if (response.Value == null)
-                    throw _supersetModel7ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel7(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -232,7 +232,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string supersetModel7SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string supersetModel7SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel7SName, nameof(supersetModel7SName));
 
@@ -286,7 +286,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
-        public async virtual Task<Response<SupersetModel7>> GetIfExistsAsync(string supersetModel7SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel7>> GetIfExistsAsync(string supersetModel7SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel7SName, nameof(supersetModel7SName));
 

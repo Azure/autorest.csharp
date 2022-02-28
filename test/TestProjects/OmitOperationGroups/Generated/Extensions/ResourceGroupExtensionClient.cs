@@ -110,7 +110,7 @@ namespace OmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.CreateOrUpdateModel5");
             scope.Start();
@@ -155,7 +155,7 @@ namespace OmitOperationGroups
         /// </summary>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
             using var scope = Model5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetModel5");
             scope.Start();

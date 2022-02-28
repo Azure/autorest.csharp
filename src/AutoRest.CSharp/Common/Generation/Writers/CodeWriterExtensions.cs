@@ -111,10 +111,9 @@ namespace AutoRest.CSharp.Generation.Writers
             if (methodBase is MethodSignature method)
             {
                 writer
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && Configuration.AzureArm)
                     .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
                     .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async) && !Configuration.AzureArm);
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
                 if (method.ReturnType != null)
                 {

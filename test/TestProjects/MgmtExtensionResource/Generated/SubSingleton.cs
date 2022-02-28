@@ -88,7 +88,7 @@ namespace MgmtExtensionResource
         /// Operation Id: SubSingletons_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SubSingleton>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingleton.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace MgmtExtensionResource
             {
                 var response = await _subSingletonRestClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _subSingletonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubSingleton(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace MgmtExtensionResource
             {
                 var response = _subSingletonRestClient.Get(Id.SubscriptionId, cancellationToken);
                 if (response.Value == null)
-                    throw _subSingletonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubSingleton(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -136,7 +136,7 @@ namespace MgmtExtensionResource
         /// Operation Id: SubSingletons_Execute
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> ExecuteAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ExecuteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _subSingletonClientDiagnostics.CreateScope("SubSingleton.Execute");
             scope.Start();

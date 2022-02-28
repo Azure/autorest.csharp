@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// Operation Id: DeletedAccounts_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeletedAccount>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeletedAccount>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deletedAccountClientDiagnostics.CreateScope("DeletedAccount.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
             {
                 var response = await _deletedAccountRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _deletedAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace Azure.Management.Storage
             {
                 var response = _deletedAccountRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _deletedAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeletedAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

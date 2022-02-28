@@ -83,7 +83,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SupersetModel2>> PutSupersetModel2Async(string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel2>> PutSupersetModel2Async(string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSupersetModel2");
             scope.Start();
@@ -128,7 +128,7 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SupersetModel2>> GetSupersetModel2Async(string supersetModel2SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel2>> GetSupersetModel2Async(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSupersetModel2");
             scope.Start();
@@ -173,7 +173,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SupersetModel3>> PutSupersetModel3Async(string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel3>> PutSupersetModel3Async(string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSupersetModel3");
             scope.Start();
@@ -218,7 +218,7 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SupersetModel3>> GetSupersetModel3Async(string supersetModel3SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel3>> GetSupersetModel3Async(string supersetModel3SName, CancellationToken cancellationToken = default)
         {
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSupersetModel3");
             scope.Start();

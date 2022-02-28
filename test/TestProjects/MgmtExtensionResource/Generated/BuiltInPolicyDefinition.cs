@@ -88,7 +88,7 @@ namespace MgmtExtensionResource
         /// Operation Id: PolicyDefinitions_GetBuiltIn
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<BuiltInPolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BuiltInPolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateScope("BuiltInPolicyDefinition.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace MgmtExtensionResource
             {
                 var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace MgmtExtensionResource
             {
                 var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BuiltInPolicyDefinition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

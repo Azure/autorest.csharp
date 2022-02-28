@@ -248,7 +248,7 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(VaultCheckNameAvailabilityParameters vaultName, CancellationToken cancellationToken = default)
         {
             using var scope = VaultsClientDiagnostics.CreateScope("SubscriptionExtensionClient.CheckNameAvailabilityVault");
             scope.Start();

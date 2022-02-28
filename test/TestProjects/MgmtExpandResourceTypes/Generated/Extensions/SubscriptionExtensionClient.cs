@@ -142,7 +142,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="parameters"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceRequest parameters, CancellationToken cancellationToken = default)
         {
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetByTargetResourcesDnsResourceReference");
             scope.Start();

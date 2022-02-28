@@ -88,7 +88,7 @@ namespace ExactMatchFlattenInheritance
         /// Operation Id: CustomModel2s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<CustomModel2>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel2>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _customModel2ClientDiagnostics.CreateScope("CustomModel2.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace ExactMatchFlattenInheritance
             {
                 var response = await _customModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _customModel2ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace ExactMatchFlattenInheritance
             {
                 var response = _customModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _customModel2ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

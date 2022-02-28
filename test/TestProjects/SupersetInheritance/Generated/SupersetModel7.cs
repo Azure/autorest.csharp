@@ -87,7 +87,7 @@ namespace SupersetInheritance
         /// Operation Id: SupersetModel7s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SupersetModel7>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel7>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _supersetModel7ClientDiagnostics.CreateScope("SupersetModel7.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace SupersetInheritance
             {
                 var response = await _supersetModel7RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _supersetModel7ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel7(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace SupersetInheritance
             {
                 var response = _supersetModel7RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _supersetModel7ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel7(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

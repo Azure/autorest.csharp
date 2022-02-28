@@ -668,8 +668,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     if (operation.ThrowIfNull)
                     {
-                        _writer.Line($"if ({response}.Value == null)");
-                        _writer.Line($"throw {GetAwait(async)} {GetDiagnosticName(operation)}.{CreateMethodName("CreateRequestFailedException", async)}({response}.GetRawResponse()){GetConfigureAwait(async)};");
+                        _writer
+                            .Line($"if ({response}.Value == null)")
+                            .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
                     }
 
                     if (resource.ResourceData.ShouldSetResourceIdentifier)

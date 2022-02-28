@@ -96,7 +96,7 @@ namespace MgmtScopeResource
         /// Operation Id: Deployments_GetAtScope
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeploymentExtended>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeploymentExtended>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.Get");
             scope.Start();
@@ -104,7 +104,7 @@ namespace MgmtScopeResource
             {
                 var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _deploymentExtendedDeploymentsClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtended(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -128,7 +128,7 @@ namespace MgmtScopeResource
             {
                 var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _deploymentExtendedDeploymentsClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtended(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -145,7 +145,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.Delete");
             scope.Start();
@@ -196,7 +196,7 @@ namespace MgmtScopeResource
         /// Operation Id: Deployments_CancelAtScope
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> CancelAtScopeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CancelAtScopeAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
             scope.Start();
@@ -243,7 +243,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<DeploymentValidateResult>> ValidateAtScopeAsync(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<DeploymentValidateResult>> ValidateAtScopeAsync(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -300,7 +300,7 @@ namespace MgmtScopeResource
         /// Operation Id: Deployments_ExportTemplateAtScope
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeploymentExportResult>> ExportTemplateAtScopeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeploymentExportResult>> ExportTemplateAtScopeAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
             scope.Start();
@@ -353,7 +353,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<WhatIfOperationResult>> WhatIfAsync(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<WhatIfOperationResult>> WhatIfAsync(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -481,7 +481,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
-        public async virtual Task<Response<DeploymentOperation>> GetAtScopeDeploymentOperationAsync(string operationId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeploymentOperation>> GetAtScopeDeploymentOperationAsync(string operationId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(operationId, nameof(operationId));
 
@@ -618,7 +618,7 @@ namespace MgmtScopeResource
         /// Operation Id: Deployments_CheckExistenceAtScope
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<bool>> CheckExistenceAtScopeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> CheckExistenceAtScopeAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
             scope.Start();
@@ -665,7 +665,7 @@ namespace MgmtScopeResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public async virtual Task<Response<DeploymentExtended>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeploymentExtended>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
@@ -726,7 +726,7 @@ namespace MgmtScopeResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public async virtual Task<Response<DeploymentExtended>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeploymentExtended>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
@@ -786,7 +786,7 @@ namespace MgmtScopeResource
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async virtual Task<Response<DeploymentExtended>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeploymentExtended>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
 

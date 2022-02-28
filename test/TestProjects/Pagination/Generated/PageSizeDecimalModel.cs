@@ -87,7 +87,7 @@ namespace Pagination
         /// Operation Id: PageSizeDecimalModels_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PageSizeDecimalModel>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PageSizeDecimalModel>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _pageSizeDecimalModelClientDiagnostics.CreateScope("PageSizeDecimalModel.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace Pagination
             {
                 var response = await _pageSizeDecimalModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _pageSizeDecimalModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDecimalModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace Pagination
             {
                 var response = _pageSizeDecimalModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _pageSizeDecimalModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDecimalModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

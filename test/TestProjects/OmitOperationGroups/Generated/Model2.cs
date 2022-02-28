@@ -92,7 +92,7 @@ namespace OmitOperationGroups
         /// Operation Id: Model2s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Model2>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model2>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _model2ClientDiagnostics.CreateScope("Model2.Get");
             scope.Start();
@@ -100,7 +100,7 @@ namespace OmitOperationGroups
             {
                 var response = await _model2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _model2ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -123,7 +123,7 @@ namespace OmitOperationGroups
             {
                 var response = _model2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _model2ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Model2(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -138,7 +138,7 @@ namespace OmitOperationGroups
         /// Operation Id: Model4s_GetDefault
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Model4>> GetDefaultModel4Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Model4>> GetDefaultModel4Async(CancellationToken cancellationToken = default)
         {
             using var scope = _model4sClientDiagnostics.CreateScope("Model2.GetDefaultModel4");
             scope.Start();

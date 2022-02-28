@@ -61,7 +61,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<Car>> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<Car>> CreateOrUpdateAsync(bool waitForCompletion, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -123,7 +123,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<Car>> GetAsync(string carName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Car>> GetAsync(string carName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
@@ -133,7 +133,7 @@ namespace SingletonResource
             {
                 var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _carClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -161,7 +161,7 @@ namespace SingletonResource
             {
                 var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken);
                 if (response.Value == null)
-                    throw _carClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -232,7 +232,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
@@ -286,7 +286,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<Car>> GetIfExistsAsync(string carName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Car>> GetIfExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 

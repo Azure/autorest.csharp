@@ -87,7 +87,7 @@ namespace NoTypeReplacement
         /// Operation Id: NoTypeReplacementModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<NoTypeReplacementModel1>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NoTypeReplacementModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _noTypeReplacementModel1ClientDiagnostics.CreateScope("NoTypeReplacementModel1.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace NoTypeReplacement
             {
                 var response = await _noTypeReplacementModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _noTypeReplacementModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace NoTypeReplacement
             {
                 var response = _noTypeReplacementModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _noTypeReplacementModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

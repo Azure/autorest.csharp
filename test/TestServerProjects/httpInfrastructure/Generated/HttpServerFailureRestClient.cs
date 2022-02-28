@@ -55,7 +55,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -68,7 +68,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -94,7 +94,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -107,7 +107,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -137,7 +137,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -150,7 +150,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -180,7 +180,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -193,7 +193,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }
