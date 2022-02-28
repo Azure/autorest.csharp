@@ -8,7 +8,7 @@
 namespace MgmtRenameRules.Models
 {
     /// <summary> Specifies the hardware settings for the virtual machine. </summary>
-    public partial class HardwareProfile
+    internal partial class HardwareProfile
     {
         /// <summary> Initializes a new instance of HardwareProfile. </summary>
         public HardwareProfile()

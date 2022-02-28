@@ -894,7 +894,7 @@
     "CloudError": {
       "x-ms-external": true,
       "properties": {
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse"
         }
       },
@@ -966,7 +966,7 @@
           "description": "Deployment parameters. "
         },
         
-        "error": {
+        "errorResponse": {
           "readOnly": true,
           "$ref": "#/definitions/ErrorResponse",
           "description": "The deployment error."
@@ -976,7 +976,7 @@
     },
     "DeploymentValidateResult": {
       "properties": {
-        "error": {
+        "errorResponse": {
           "readOnly": true,
           "$ref": "#/definitions/ErrorResponse",
           "description": "The deployment validation error."
@@ -1304,7 +1304,7 @@
           "$ref": "#/definitions/WhatIfOperationProperties",
           "description": "What-If operation properties."
         },
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse",
           "description": "Error when What-If operation fails."
         }
@@ -1318,7 +1318,7 @@
           "type": "string",
           "description": "Status of the deployment operation."
         },
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse",
           "description": "The error reported by the operation."
         }

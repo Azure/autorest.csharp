@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Specifies the network interfaces of the virtual machine. </summary>
-    public partial class NetworkProfile
+    internal partial class NetworkProfile
     {
         /// <summary> Initializes a new instance of NetworkProfile. </summary>
         public NetworkProfile()

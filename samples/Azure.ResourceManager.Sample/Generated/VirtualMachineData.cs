@@ -92,35 +92,166 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The virtual machine zones. </summary>
         public IList<string> Zones { get; }
         /// <summary> Specifies the hardware settings for the virtual machine. </summary>
-        public HardwareProfile HardwareProfile { get; set; }
+        internal HardwareProfile HardwareProfile { get; set; }
+        /// <summary> Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) &lt;br&gt;&lt;br&gt; [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). </summary>
+        public VirtualMachineSizeTypes? HardwareVmSize
+        {
+            get => HardwareProfile is null ? default : HardwareProfile.VmSize;
+            set
+            {
+                if (HardwareProfile is null)
+                    HardwareProfile = new HardwareProfile();
+                HardwareProfile.VmSize = value;
+            }
+        }
+
         /// <summary> Specifies the storage settings for the virtual machine disks. </summary>
         public StorageProfile StorageProfile { get; set; }
         /// <summary> Specifies additional capabilities enabled or disabled on the virtual machine. </summary>
-        public AdditionalCapabilities AdditionalCapabilities { get; set; }
+        internal AdditionalCapabilities AdditionalCapabilities { get; set; }
+        /// <summary> The flag that enables or disables a capability to have one or more managed data disks with UltraSSD_LRS storage account type on the VM or VMSS. Managed disks with storage account type UltraSSD_LRS can be added to a virtual machine or virtual machine scale set only if this property is enabled. </summary>
+        public bool? UltraSSDEnabled
+        {
+            get => AdditionalCapabilities is null ? default : AdditionalCapabilities.UltraSSDEnabled;
+            set
+            {
+                if (AdditionalCapabilities is null)
+                    AdditionalCapabilities = new AdditionalCapabilities();
+                AdditionalCapabilities.UltraSSDEnabled = value;
+            }
+        }
+
         /// <summary> Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned. </summary>
         public OSProfile OsProfile { get; set; }
         /// <summary> Specifies the network interfaces of the virtual machine. </summary>
-        public NetworkProfile NetworkProfile { get; set; }
+        internal NetworkProfile NetworkProfile { get; set; }
+        /// <summary> Specifies the list of resource Ids for the network interfaces associated with the virtual machine. </summary>
+        public IList<NetworkInterfaceReference> NetworkInterfaces
+        {
+            get
+            {
+                if (NetworkProfile is null)
+                    NetworkProfile = new NetworkProfile();
+                return NetworkProfile.NetworkInterfaces;
+            }
+        }
+
         /// <summary> Specifies the Security related profile settings for the virtual machine. </summary>
-        public SecurityProfile SecurityProfile { get; set; }
+        internal SecurityProfile SecurityProfile { get; set; }
+        /// <summary> This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. &lt;br&gt;&lt;br&gt; Default: The Encryption at host will be disabled unless this property is set to true for the resource. </summary>
+        public bool? EncryptionAtHost
+        {
+            get => SecurityProfile is null ? default : SecurityProfile.EncryptionAtHost;
+            set
+            {
+                if (SecurityProfile is null)
+                    SecurityProfile = new SecurityProfile();
+                SecurityProfile.EncryptionAtHost = value;
+            }
+        }
+
         /// <summary> Specifies the boot diagnostic settings state. &lt;br&gt;&lt;br&gt;Minimum api-version: 2015-06-15. </summary>
-        public DiagnosticsProfile DiagnosticsProfile { get; set; }
+        internal DiagnosticsProfile DiagnosticsProfile { get; set; }
+        /// <summary> Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. &lt;br&gt;&lt;br&gt; You can easily view the output of your console log. &lt;br&gt;&lt;br&gt; Azure also enables you to see a screenshot of the VM from the hypervisor. </summary>
+        public BootDiagnostics BootDiagnostics
+        {
+            get => DiagnosticsProfile is null ? default : DiagnosticsProfile.BootDiagnostics;
+            set
+            {
+                if (DiagnosticsProfile is null)
+                    DiagnosticsProfile = new DiagnosticsProfile();
+                DiagnosticsProfile.BootDiagnostics = value;
+            }
+        }
+
         /// <summary> Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. &lt;br&gt;&lt;br&gt;This property cannot exist along with a non-null properties.virtualMachineScaleSet reference. </summary>
-        public WritableSubResource AvailabilitySet { get; set; }
+        internal WritableSubResource AvailabilitySet { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier AvailabilitySetId
+        {
+            get => AvailabilitySet is null ? default : AvailabilitySet.Id;
+            set
+            {
+                if (AvailabilitySet is null)
+                    AvailabilitySet = new WritableSubResource();
+                AvailabilitySet.Id = value;
+            }
+        }
+
         /// <summary> Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. &lt;br&gt;&lt;br&gt;This property cannot exist along with a non-null properties.availabilitySet reference. &lt;br&gt;&lt;br&gt;Minimum api‐version: 2019‐03‐01. </summary>
-        public WritableSubResource VirtualMachineScaleSet { get; set; }
+        internal WritableSubResource VirtualMachineScaleSet { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier VirtualMachineScaleSetId
+        {
+            get => VirtualMachineScaleSet is null ? default : VirtualMachineScaleSet.Id;
+            set
+            {
+                if (VirtualMachineScaleSet is null)
+                    VirtualMachineScaleSet = new WritableSubResource();
+                VirtualMachineScaleSet.Id = value;
+            }
+        }
+
         /// <summary> Specifies information about the proximity placement group that the virtual machine should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01. </summary>
-        public WritableSubResource ProximityPlacementGroup { get; set; }
+        internal WritableSubResource ProximityPlacementGroup { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier ProximityPlacementGroupId
+        {
+            get => ProximityPlacementGroup is null ? default : ProximityPlacementGroup.Id;
+            set
+            {
+                if (ProximityPlacementGroup is null)
+                    ProximityPlacementGroup = new WritableSubResource();
+                ProximityPlacementGroup.Id = value;
+            }
+        }
+
         /// <summary> Specifies the priority for the virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01. </summary>
         public VirtualMachinePriorityTypes? Priority { get; set; }
         /// <summary> Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. &lt;br&gt;&lt;br&gt;For Azure Spot virtual machines, both &apos;Deallocate&apos; and &apos;Delete&apos; are supported and the minimum api-version is 2019-03-01. &lt;br&gt;&lt;br&gt;For Azure Spot scale sets, both &apos;Deallocate&apos; and &apos;Delete&apos; are supported and the minimum api-version is 2017-10-30-preview. </summary>
         public VirtualMachineEvictionPolicyTypes? EvictionPolicy { get; set; }
         /// <summary> Specifies the billing related details of a Azure Spot virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01. </summary>
-        public BillingProfile BillingProfile { get; set; }
+        internal BillingProfile BillingProfile { get; set; }
+        /// <summary> Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS. This price is in US Dollars. &lt;br&gt;&lt;br&gt; This price will be compared with the current Azure Spot price for the VM size. Also, the prices are compared at the time of create/update of Azure Spot VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current Azure Spot price. &lt;br&gt;&lt;br&gt; The maxPrice will also be used for evicting a Azure Spot VM/VMSS if the current Azure Spot price goes beyond the maxPrice after creation of VM/VMSS. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; - Any decimal value greater than zero. Example: 0.01538 &lt;br&gt;&lt;br&gt; -1 – indicates default price to be up-to on-demand. &lt;br&gt;&lt;br&gt; You can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01. </summary>
+        public double? BillingMaxPrice
+        {
+            get => BillingProfile is null ? default : BillingProfile.MaxPrice;
+            set
+            {
+                if (BillingProfile is null)
+                    BillingProfile = new BillingProfile();
+                BillingProfile.MaxPrice = value;
+            }
+        }
+
         /// <summary> Specifies information about the dedicated host that the virtual machine resides in. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-10-01. </summary>
-        public WritableSubResource Host { get; set; }
+        internal WritableSubResource Host { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier HostId
+        {
+            get => Host is null ? default : Host.Id;
+            set
+            {
+                if (Host is null)
+                    Host = new WritableSubResource();
+                Host.Id = value;
+            }
+        }
+
         /// <summary> Specifies information about the dedicated host group that the virtual machine resides in. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. &lt;br&gt;&lt;br&gt;NOTE: User cannot specify both host and hostGroup properties. </summary>
-        public WritableSubResource HostGroup { get; set; }
+        internal WritableSubResource HostGroup { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier HostGroupId
+        {
+            get => HostGroup is null ? default : HostGroup.Id;
+            set
+            {
+                if (HostGroup is null)
+                    HostGroup = new WritableSubResource();
+                HostGroup.Id = value;
+            }
+        }
+
         /// <summary> The provisioning state, which only appears in the response. </summary>
         public string ProvisioningState { get; }
         /// <summary> The virtual machine instance view. </summary>

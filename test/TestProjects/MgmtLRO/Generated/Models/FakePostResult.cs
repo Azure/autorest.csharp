@@ -23,6 +23,11 @@ namespace MgmtLRO.Models
         }
 
         /// <summary> Gets the properties. </summary>
-        public FakePostResultProperties Properties { get; }
+        internal FakePostResultProperties Properties { get; }
+        /// <summary> Bar property. </summary>
+        public string FakePostResultBar
+        {
+            get => Properties.Bar;
+        }
     }
 }

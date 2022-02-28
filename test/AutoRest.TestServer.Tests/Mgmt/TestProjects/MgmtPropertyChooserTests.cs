@@ -67,7 +67,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public void ValidatePropertyReplacement()
         {
             var virtualMachineData = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
-            var properties = virtualMachineData.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var properties = virtualMachineData.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             // Resource in the test swagger will be replaced by TrackedResource when used as the base class for inheritance,
             // but is not replaced when used as a property.
             Assert.AreEqual(virtualMachineData.BaseType, typeof(TrackedResourceData));

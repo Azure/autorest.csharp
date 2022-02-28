@@ -19,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -190,7 +191,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
             foreach (var c in sot.Constructors)
             {
-                if (c.Signature.Modifiers != "public" && !(c.Signature.Modifiers == "internal" && sot is SchemaObjectType))
+                if (!c.Signature.Modifiers.HasFlag(Public) && !(c.Signature.Modifiers.HasFlag(Internal) && sot is SchemaObjectType))
                     continue;
                 var missAnyRequiredParameter = false;
                 foreach (var p in c.Signature.Parameters)
