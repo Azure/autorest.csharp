@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -21,10 +22,20 @@ namespace AutoRest.CSharp.Output.Models.Requests
             ReturnType = returnType;
             HeaderModel = headerModel;
             BufferResponse = bufferResponse;
-            Accessibility = accessibility;
+            Accessibility = GetAccessibility(accessibility);
             Operation = operation;
             ConditionHeaderFlag = conditionRequestFlag;
         }
+
+        private static MethodSignatureModifiers GetAccessibility(string accessibility) =>
+            accessibility switch
+            {
+                "public" => MethodSignatureModifiers.Public,
+                "internal" => MethodSignatureModifiers.Internal,
+                "protected" => MethodSignatureModifiers.Protected,
+                "private" => MethodSignatureModifiers.Private,
+                _ => throw new NotSupportedException()
+            };
 
         public string Name { get; }
         public string? Description { get; }
@@ -34,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public DataPlaneResponseHeaderGroupType? HeaderModel { get; }
         public bool BufferResponse { get; }
         public CSharpType? ReturnType { get; }
-        public string Accessibility { get; }
+        public MethodSignatureModifiers Accessibility { get; }
         public Operation Operation { get; }
         public RequestConditionHeaders ConditionHeaderFlag { get; set; }
     }

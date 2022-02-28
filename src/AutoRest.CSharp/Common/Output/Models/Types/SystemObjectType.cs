@@ -11,9 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -104,17 +102,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
             }
 
-            string modifiers = GetModifiers(ctor);
+            var modifiers = ctor.IsFamily ? Protected : Public;
 
             return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), GetBaseCtor());
-        }
-
-        private string GetModifiers(ConstructorInfo ctor)
-        {
-            if (ctor.IsFamily)
-                return "protected";
-
-            return "public";
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.InitializationCtorAttributeName));

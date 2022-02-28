@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -298,7 +299,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var restClientMethod in restClient.Methods)
                 {
                     // skip all internal methods
-                    if (restClientMethod.Accessibility != "public")
+                    if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
                         continue;
                     restClientMethods.Add(restClientMethod.Operation, restClientMethod);
                 }
