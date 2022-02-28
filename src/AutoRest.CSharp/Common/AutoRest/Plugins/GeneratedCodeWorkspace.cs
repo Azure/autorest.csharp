@@ -366,7 +366,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        public async Task RemoveOrphanedModels(ImmutableHashSet<string> modelsToKeep)
+        public async Task InternalizeOrphanedModels(ImmutableHashSet<string> modelsToKeep)
         {
             // first get all the declared models
             var models = await GetAllDeclaredModels(modelsToKeep);

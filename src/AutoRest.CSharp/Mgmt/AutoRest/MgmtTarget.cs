@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!isArmCore)
             {
                 var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-                project.RemoveOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
+                project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
             }
         }
 
