@@ -67,6 +67,7 @@ namespace Azure.Core
         /// parameter <paramref name="operation"/>.
         /// </param>
         /// <param name="scopeAttributes">The attributes to use during diagnostic scope creation.</param>
+        /// <param name="pollingStrategy">Strategy for each iteration of polling.</param>
         public OperationInternal(
             ClientDiagnostics clientDiagnostics,
             IOperation operation,
