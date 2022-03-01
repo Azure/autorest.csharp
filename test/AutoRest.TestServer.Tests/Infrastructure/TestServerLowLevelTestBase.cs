@@ -81,7 +81,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private static string GetScenarioName()
         {
             var testName = TestContext.CurrentContext.Test.Name;
-            var indexOfUnderscore = testName.IndexOfAny(new[]{'_', '('});
+            var indexOfUnderscore = testName.LastIndexOfAny(new[]{'_', '('});
             return indexOfUnderscore == -1 ? testName : testName[..indexOfUnderscore];
         }
 
