@@ -11,7 +11,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Defines the parameters for the origin group override configuration. </summary>
-    internal partial class OriginGroupOverride
+    public partial class OriginGroupOverride
     {
         /// <summary> Initializes a new instance of OriginGroupOverride. </summary>
         public OriginGroupOverride()

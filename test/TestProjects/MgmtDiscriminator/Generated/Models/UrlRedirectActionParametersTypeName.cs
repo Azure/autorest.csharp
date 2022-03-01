@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The UrlRedirectActionParametersTypeName. </summary>
-    internal readonly partial struct UrlRedirectActionParametersTypeName : IEquatable<UrlRedirectActionParametersTypeName>
+    public readonly partial struct UrlRedirectActionParametersTypeName : IEquatable<UrlRedirectActionParametersTypeName>
     {
         private readonly string _value;
 

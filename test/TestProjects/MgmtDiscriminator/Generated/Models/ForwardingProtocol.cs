@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Protocol this rule will use when forwarding traffic to backends. </summary>
-    internal readonly partial struct ForwardingProtocol : IEquatable<ForwardingProtocol>
+    public readonly partial struct ForwardingProtocol : IEquatable<ForwardingProtocol>
     {
         private readonly string _value;
 

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class CacheExpirationActionParameters : IUtf8JsonSerializable
+    public partial class CacheExpirationActionParameters : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

@@ -8,7 +8,7 @@
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Defines the parameters for the route configuration override action. </summary>
-    internal partial class RouteConfigurationOverrideActionParameters
+    public partial class RouteConfigurationOverrideActionParameters
     {
         /// <summary> Initializes a new instance of RouteConfigurationOverrideActionParameters. </summary>
         /// <param name="typeName"></param>

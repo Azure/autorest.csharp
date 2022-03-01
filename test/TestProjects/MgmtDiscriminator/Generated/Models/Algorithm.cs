@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Algorithm to use for URL signing. </summary>
-    internal readonly partial struct Algorithm : IEquatable<Algorithm>
+    public readonly partial struct Algorithm : IEquatable<Algorithm>
     {
         private readonly string _value;
 

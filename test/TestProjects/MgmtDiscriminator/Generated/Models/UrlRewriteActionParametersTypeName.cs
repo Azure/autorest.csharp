@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The UrlRewriteActionParametersTypeName. </summary>
-    internal readonly partial struct UrlRewriteActionParametersTypeName : IEquatable<UrlRewriteActionParametersTypeName>
+    public readonly partial struct UrlRewriteActionParametersTypeName : IEquatable<UrlRewriteActionParametersTypeName>
     {
         private readonly string _value;
 

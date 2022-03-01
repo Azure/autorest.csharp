@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The UrlSigningActionParametersTypeName. </summary>
-    internal readonly partial struct UrlSigningActionParametersTypeName : IEquatable<UrlSigningActionParametersTypeName>
+    public readonly partial struct UrlSigningActionParametersTypeName : IEquatable<UrlSigningActionParametersTypeName>
     {
         private readonly string _value;
 

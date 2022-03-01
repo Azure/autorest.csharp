@@ -313,6 +313,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
             var queue = new Queue<SyntaxNode>(classVisitor.ModelDeclarations.Select(d => d.Definition));
+            // iterate over all the models again to add the derived types of the base types from discriminator
+            var baseTypes = publicModels.Where(m => m.IsBaseType).Select(m => m.Definition).ToHashSet();
+            foreach (var model in publicModels.Where(m => !m.IsBaseType && m.Definition is ClassDeclarationSyntax))
+            {
+                // find if the base type of this model is one of the "base type" we have marked
+                var semanticModel = compilation.GetSemanticModel(model.Definition.SyntaxTree);
+                var symbol = semanticModel.GetDeclaredSymbol(model.Definition) as INamedTypeSymbol;
+                if (symbol == null || symbol.BaseType == null)
+                    continue;
+                foreach (var reference in symbol.BaseType.DeclaringSyntaxReferences)
+                {
+                    var baseTypeNode = await reference.GetSyntaxAsync();
+                    if (baseTypes.Contains(baseTypeNode))
+                        queue.Enqueue(model.Definition);
+                }
+            }
             // traverse all the models starting from the root nodes
             var visited = new HashSet<SyntaxNode>();
             while (queue.Count > 0)
@@ -327,22 +343,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 await foreach (var child in GetReferencedTypes(compilation, node))
                 {
                     queue.Enqueue(child);
-                }
-            }
-            // iterate over all the models again to add the derived types of the base types from discriminator
-            var baseTypes = publicModels.Where(m => m.IsBaseType).Select(m => m.Definition).ToHashSet();
-            foreach (var model in publicModels.Where(m => !m.IsBaseType && m.Definition is ClassDeclarationSyntax))
-            {
-                // find if the base type of this model is one of the "base type" we have marked
-                var semanticModel = compilation.GetSemanticModel(model.Definition.SyntaxTree);
-                var symbol = semanticModel.GetDeclaredSymbol(model.Definition) as INamedTypeSymbol;
-                if (symbol == null || symbol.BaseType == null)
-                    continue;
-                foreach (var reference in symbol.BaseType.DeclaringSyntaxReferences)
-                {
-                    var baseTypeNode = await reference.GetSyntaxAsync();
-                    if (baseTypes.Contains(baseTypeNode))
-                        yield return model.Definition;
                 }
             }
         }

@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The CacheExpirationActionParametersTypeName. </summary>
-    internal readonly partial struct CacheExpirationActionParametersTypeName : IEquatable<CacheExpirationActionParametersTypeName>
+    public readonly partial struct CacheExpirationActionParametersTypeName : IEquatable<CacheExpirationActionParametersTypeName>
     {
         private readonly string _value;
 

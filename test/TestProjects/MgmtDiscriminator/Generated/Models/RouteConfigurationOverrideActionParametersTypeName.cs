@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The RouteConfigurationOverrideActionParametersTypeName. </summary>
-    internal readonly partial struct RouteConfigurationOverrideActionParametersTypeName : IEquatable<RouteConfigurationOverrideActionParametersTypeName>
+    public readonly partial struct RouteConfigurationOverrideActionParametersTypeName : IEquatable<RouteConfigurationOverrideActionParametersTypeName>
     {
         private readonly string _value;
 

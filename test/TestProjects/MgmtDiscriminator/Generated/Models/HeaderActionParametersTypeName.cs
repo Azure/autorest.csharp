@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The HeaderActionParametersTypeName. </summary>
-    internal readonly partial struct HeaderActionParametersTypeName : IEquatable<HeaderActionParametersTypeName>
+    public readonly partial struct HeaderActionParametersTypeName : IEquatable<HeaderActionParametersTypeName>
     {
         private readonly string _value;
 

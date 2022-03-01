@@ -10,7 +10,7 @@ using System;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Defines how to identify a parameter for a specific purpose e.g. expires. </summary>
-    internal partial class UrlSigningParamIdentifier
+    public partial class UrlSigningParamIdentifier
     {
         /// <summary> Initializes a new instance of UrlSigningParamIdentifier. </summary>
         /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>

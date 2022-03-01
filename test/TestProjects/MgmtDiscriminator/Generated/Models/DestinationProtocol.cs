@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Protocol to use for the redirect. The default value is MatchRequest. </summary>
-    internal readonly partial struct DestinationProtocol : IEquatable<DestinationProtocol>
+    public readonly partial struct DestinationProtocol : IEquatable<DestinationProtocol>
     {
         private readonly string _value;
 

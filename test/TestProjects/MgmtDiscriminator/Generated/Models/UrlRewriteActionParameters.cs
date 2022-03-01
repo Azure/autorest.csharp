@@ -10,7 +10,7 @@ using System;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Defines the parameters for the url rewrite action. </summary>
-    internal partial class UrlRewriteActionParameters
+    public partial class UrlRewriteActionParameters
     {
         /// <summary> Initializes a new instance of UrlRewriteActionParameters. </summary>
         /// <param name="typeName"></param>

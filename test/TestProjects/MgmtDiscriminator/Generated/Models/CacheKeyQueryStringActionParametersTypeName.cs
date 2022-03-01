@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The CacheKeyQueryStringActionParametersTypeName. </summary>
-    internal readonly partial struct CacheKeyQueryStringActionParametersTypeName : IEquatable<CacheKeyQueryStringActionParametersTypeName>
+    public readonly partial struct CacheKeyQueryStringActionParametersTypeName : IEquatable<CacheKeyQueryStringActionParametersTypeName>
     {
         private readonly string _value;
 

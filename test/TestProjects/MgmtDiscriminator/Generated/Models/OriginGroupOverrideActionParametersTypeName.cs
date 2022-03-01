@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The OriginGroupOverrideActionParametersTypeName. </summary>
-    internal readonly partial struct OriginGroupOverrideActionParametersTypeName : IEquatable<OriginGroupOverrideActionParametersTypeName>
+    public readonly partial struct OriginGroupOverrideActionParametersTypeName : IEquatable<OriginGroupOverrideActionParametersTypeName>
     {
         private readonly string _value;
 
