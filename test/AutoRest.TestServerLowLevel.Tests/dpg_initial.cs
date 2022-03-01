@@ -28,13 +28,13 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task DpgAddOptionalInput() => Test(async (host) =>
         {
-            var result = await new ParamsClient(Key, host).GetRequiredAsync("a");
+            var result = await new ParamsClient(Key, host).GetRequiredAsync("param");
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody["message"]);
-            var result2 = await new ParamsClient(Key, host).GetRequiredAsync("a", default);
+            var result2 = await new ParamsClient(Key, host).GetRequiredAsync("param", default);
             var responseBody2 = JsonData.FromBytes(result2.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody2["message"]);
-            var result3 = await new ParamsClient(Key, host).GetRequiredAsync("a", context: default);
+            var result3 = await new ParamsClient(Key, host).GetRequiredAsync("param", context: default);
             var responseBody3 = JsonData.FromBytes(result3.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody3["message"]);
             Assert.ThrowsAsync<ArgumentNullException>(async () => await new ParamsClient(Key, host).GetRequiredAsync(null));

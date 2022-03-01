@@ -41,24 +41,24 @@ namespace AutoRest.TestServer.Tests
         public Task DpgAddOptionalInput() => Test(async (host) =>
         {
             // compatible with dpg_initial
-            var result = await new ParamsClient(Key, host).GetRequiredAsync("a");
+            var result = await new ParamsClient(Key, host).GetRequiredAsync("param");
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody["message"]);
-            var result2 = await new ParamsClient(Key, host).GetRequiredAsync("a", default);
+            var result2 = await new ParamsClient(Key, host).GetRequiredAsync("param", default);
             var responseBody2 = JsonData.FromBytes(result2.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody2["message"]);
-            var result3 = await new ParamsClient(Key, host).GetRequiredAsync("a", context: default);
+            var result3 = await new ParamsClient(Key, host).GetRequiredAsync("param", context: default);
             var responseBody3 = JsonData.FromBytes(result3.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody3["message"]);
             Assert.ThrowsAsync<ArgumentNullException>(async () => await new ParamsClient(Key, host).GetRequiredAsync(null));
             // use methods in dpg_update1
-            var result4 = await new ParamsClient(Key, host).GetRequiredAsync("a", "b");
+            var result4 = await new ParamsClient(Key, host).GetRequiredAsync("param", "newParam");
             var responseBody4 = JsonData.FromBytes(result4.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody4["message"]);
-            var result5 = await new ParamsClient(Key, host).GetRequiredAsync("a", "b", default);
+            var result5 = await new ParamsClient(Key, host).GetRequiredAsync("param", "newParam", default);
             var responseBody5 = JsonData.FromBytes(result5.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody5["message"]);
-            var result6 = await new ParamsClient(Key, host).GetRequiredAsync("a", context: default, newParameter: "b");
+            var result6 = await new ParamsClient(Key, host).GetRequiredAsync("param", context: default, newParameter: "newParam");
             var responseBody6 = JsonData.FromBytes(result6.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody6["message"]);
         });
