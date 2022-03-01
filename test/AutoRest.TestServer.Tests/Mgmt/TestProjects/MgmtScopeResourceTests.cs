@@ -19,6 +19,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ManagementGroupExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("SubscriptionExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("ResourceGroupExtensions", "GetDeploymentExtendeds", true)]
+        [TestCase("ArmResourceExtensions", "GetFakePolicyAssignments", true)]
         [TestCase("ArmResourceExtensions", "GetDeploymentExtendeds", false)]
         [TestCase("FakePolicyAssignmentCollection", "CreateOrUpdate", true)]
         [TestCase("FakePolicyAssignmentCollection", "Get", true)]
