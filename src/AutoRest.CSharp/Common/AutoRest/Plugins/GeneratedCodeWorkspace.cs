@@ -173,10 +173,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static bool IsGeneratedDocument(Document document) => document.Folders.Contains(GeneratedFolder);
         private static bool IsMgmtRootDocument(Document document) => IsGeneratedDocument(document) && Path.GetDirectoryName(document.Name) is "Extensions" or "";
 
+        private struct PublicModelDeclaration
+        {
+            public SyntaxNode Definition;
+            public bool IsBaseType;
+        }
+
         private class PublicDefinitionVisitor : CSharpSyntaxRewriter
         {
-            private List<SyntaxNode> _declarations = new();
-            internal IReadOnlyList<SyntaxNode> ModelDeclarations => _declarations;
+            private List<PublicModelDeclaration> _declarations = new();
+            internal IReadOnlyList<PublicModelDeclaration> ModelDeclarations => _declarations;
             private ImmutableHashSet<string> _modelsToKeep;
 
             public PublicDefinitionVisitor(ImmutableHashSet<string> modelsToKeep)
@@ -193,7 +199,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
                 if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                    _declarations.Add(node);
+                    _declarations.Add(new PublicModelDeclaration
+                    {
+                        Definition = node,
+                        IsBaseType = HasDiscriminator(node)
+                    });
                 return node;
             }
 
@@ -201,7 +211,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 node = (StructDeclarationSyntax)base.VisitStructDeclaration(node)!;
                 if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                    _declarations.Add(node);
+                    _declarations.Add(new PublicModelDeclaration
+                    {
+                        Definition = node
+                    });
                 return node;
             }
 
@@ -209,7 +222,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node)!;
                 if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                    _declarations.Add(node);
+                    _declarations.Add(new PublicModelDeclaration
+                    {
+                        Definition = node
+                    });
                 return node;
             }
         }
@@ -263,7 +279,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static bool IsStatic(SyntaxTokenList tokenList)
             => tokenList.Any(token => token.IsKind(SyntaxKind.StaticKeyword));
 
-        private async Task<IEnumerable<SyntaxNode>> GetAllDeclaredModels(ImmutableHashSet<string> modelsToKeep)
+        private async Task<IEnumerable<PublicModelDeclaration>> GetAllDeclaredModels(ImmutableHashSet<string> modelsToKeep)
         {
             var classVisitor = new PublicDefinitionVisitor(modelsToKeep);
 
@@ -279,7 +295,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return classVisitor.ModelDeclarations;
         }
 
-        private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModels()
+        private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModels(IEnumerable<PublicModelDeclaration> publicModels)
         {
             var compilation = await _project.GetCompilationAsync();
             if (compilation == null)
@@ -296,7 +312,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     classVisitor.Visit(root);
                 }
             }
-            var queue = new Queue<SyntaxNode>(classVisitor.ModelDeclarations);
+            var queue = new Queue<SyntaxNode>(classVisitor.ModelDeclarations.Select(d => d.Definition));
             // traverse all the models starting from the root nodes
             var visited = new HashSet<SyntaxNode>();
             while (queue.Count > 0)
@@ -311,6 +327,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 await foreach (var child in GetReferencedTypes(compilation, node))
                 {
                     queue.Enqueue(child);
+                }
+            }
+            // iterate over all the models again to add the derived types of the base types from discriminator
+            var baseTypes = publicModels.Where(m => m.IsBaseType).Select(m => m.Definition).ToHashSet();
+            foreach (var model in publicModels.Where(m => !m.IsBaseType && m.Definition is ClassDeclarationSyntax))
+            {
+                // find if the base type of this model is one of the "base type" we have marked
+                var semanticModel = compilation.GetSemanticModel(model.Definition.SyntaxTree);
+                var symbol = semanticModel.GetDeclaredSymbol(model.Definition) as INamedTypeSymbol;
+                if (symbol == null || symbol.BaseType == null)
+                    continue;
+                foreach (var reference in symbol.BaseType.DeclaringSyntaxReferences)
+                {
+                    var baseTypeNode = await reference.GetSyntaxAsync();
+                    if (baseTypes.Contains(baseTypeNode))
+                        yield return model.Definition;
                 }
             }
         }
@@ -343,7 +375,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 case INamedTypeSymbol typeSymbol:
                     foreach (var reference in typeSymbol.DeclaringSyntaxReferences)
                     {
-                        result.Add(await reference.GetSyntaxAsync());
+                        var node = await reference.GetSyntaxAsync();
+                        result.Add(node);
                     }
                     await ProcessSymbol(typeSymbol.BaseType, result);
                     foreach (var typeArgument in typeSymbol.TypeArguments)
@@ -366,12 +399,35 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
+        private static bool HasDiscriminator(SyntaxNode node)
+        {
+            switch (node)
+            {
+                case ClassDeclarationSyntax classDeclaration:
+                    var methodName = $"Deserialize{classDeclaration.Identifier.Text}";
+                    var deserializeMethod = classDeclaration.Members.OfType<MethodDeclarationSyntax>().FirstOrDefault(method => method.Identifier.Text.Equals(methodName));
+                    if (deserializeMethod != null && deserializeMethod.Body != null)
+                    {
+                        var switchStatementNode = deserializeMethod.Body.DescendantNodes().OfType<SwitchStatementSyntax>();
+                        foreach (var switchNode in switchStatementNode)
+                        {
+                            var expression = switchNode.Expression;
+                            return switchNode.Expression.ToFullString().Contains("discriminator.GetString");
+                        }
+                    }
+                    return false;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
         public async Task InternalizeOrphanedModels(ImmutableHashSet<string> modelsToKeep)
         {
             // first get all the declared models
-            var models = await GetAllDeclaredModels(modelsToKeep);
+            var definitions = await GetAllDeclaredModels(modelsToKeep);
+            var models = definitions.Select(d => d.Definition);
             // traverse all the root and recursively add all the things we met
-            var publicModels = TraverseAllPublicModels().ToEnumerable();
+            var publicModels = TraverseAllPublicModels(definitions).ToEnumerable();
             // get the models we need to mark internal
             var internalModels = models.Except(publicModels);
             foreach (var model in internalModels)
