@@ -49,6 +49,12 @@ namespace MgmtPropertyChooser
                 writer.WritePropertyName("identityWithNoSystemIdentity");
                 writer.WriteObjectValue(IdentityWithNoSystemIdentity);
             }
+            if (Optional.IsDefined(IdentityV3))
+            {
+                writer.WritePropertyName("identityV3");
+                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
+                JsonSerializer.Serialize(writer, IdentityV3, serializeOptions);
+            }
             if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones");
@@ -104,6 +110,7 @@ namespace MgmtPropertyChooser
             Optional<IdentityWithDifferentPropertyType> identityWithDifferentPropertyType = default;
             Optional<IdentityWithNoUserIdentity> identityWithNoUserIdentity = default;
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
+            Optional<ManagedServiceIdentity> identityV3 = default;
             Optional<IList<string>> zones = default;
             Optional<IReadOnlyList<Resource>> fakeResources = default;
             Optional<SubResource> fakeSubResource = default;
@@ -193,6 +200,17 @@ namespace MgmtPropertyChooser
                         continue;
                     }
                     identityWithNoSystemIdentity = IdentityWithNoSystemIdentity.DeserializeIdentityWithNoSystemIdentity(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("identityV3"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
+                    identityV3 = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.ToString(), serializeOptions);
                     continue;
                 }
                 if (property.NameEquals("zones"))
@@ -313,7 +331,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }
