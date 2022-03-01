@@ -25,8 +25,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetHandwrittenModel() => Test(async (host) =>
         {
-            Product result = await new DPGClient(Key, host).GetModelAsync("model");
-            Assert.AreEqual("model", $"{result.Received}");
+            Response<Product> result = await new DPGClient(Key, host).GetModelValueAsync("model");
+            Assert.AreEqual("model", $"{result.Value.Received}");
         });
 
         [Test]
@@ -45,15 +45,9 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PostHandwrittenModel() => Test(async (host) =>
         {
-            IUtf8JsonSerializable input = new Input("world!");
-            using var stream = new MemoryStream();
-            using var writer = new Utf8JsonWriter(stream);
-            input.Write(writer);
-            writer.Flush();
-            Response result = await new DPGClient(Key, host).PostModelAsync("model", RequestContent.Create(stream.ToArray()));
-            Assert.AreEqual(200, result.Status);
-            var responseBody = JsonData.FromBytes(result.Content.ToMemory());
-            Assert.AreEqual("model", (string)responseBody["received"]);
+            Input input = new Input("world!");
+            Response<Product> result = await new DPGClient(Key, host).PostModelAsync("model", input);
+            Assert.AreEqual("model", $"{result.Value.Received}");
         });
 
         [Test]
@@ -70,11 +64,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetHandwrittenModelPages() => Test(async (host) =>
         {
-            AsyncPageable<BinaryData> allPages = new DPGClient(Key, host).GetPagesAsync("model");
-            await foreach (Page<BinaryData> page in allPages.AsPages())
+            AsyncPageable<Product> allPages = new DPGClient(Key, host).GetPagesValueAsync("model");
+            await foreach (Page<Product> page in allPages.AsPages())
             {
-                ProductResult result = page.GetRawResponse();
-                Assert.AreEqual("model", $"{result.Values.First().Received}");
+                Assert.AreEqual("model", $"{page.Values.First().Received}");
             }
         });
     }

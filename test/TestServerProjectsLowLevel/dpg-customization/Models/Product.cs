@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 
@@ -15,7 +16,7 @@ namespace dpg_customization_LowLevel.Models
     {
         /// <summary> Initializes a new instance of Product. </summary>
         /// <param name="received"></param>
-        internal Product(ProductReceived received)
+        public Product(ProductReceived received)
         {
             Received = received;
         }
@@ -24,14 +25,26 @@ namespace dpg_customization_LowLevel.Models
         public ProductReceived Received { get; }
 
         public static implicit operator Product(Response response)
-        {
+        {            
             try
             {
-                return DeserializeProduct(JsonDocument.Parse(response.Content.ToMemory()).RootElement);
+                return (Product)response.Content;
             }
             catch
             {
                 throw new RequestFailedException($"Failed to cast from Response to {typeof(Product)}.");
+            }
+        }
+
+        public static implicit operator Product(BinaryData binaryData)
+        {
+            try
+            {
+                return DeserializeProduct(JsonDocument.Parse(binaryData.ToMemory()).RootElement);
+            }
+            catch
+            {
+                throw new RequestFailedException($"Failed to cast from BinaryData to {typeof(Product)}.");
             }
         }
     }
