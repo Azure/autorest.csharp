@@ -31,5 +31,12 @@ namespace MgmtScopeResource
             TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
+
+        /// <summary> Gets a collection of FakePolicyAssignments in the FakePolicyAssignment. </summary>
+        /// <returns> An object representing collection of FakePolicyAssignments and their operations over a FakePolicyAssignment. </returns>
+        public virtual FakePolicyAssignmentCollection GetFakePolicyAssignments()
+        {
+            return new FakePolicyAssignmentCollection(Client, Id);
+        }
     }
 }

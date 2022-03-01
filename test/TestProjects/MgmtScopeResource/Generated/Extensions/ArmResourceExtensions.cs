@@ -20,5 +20,13 @@ namespace MgmtScopeResource
             }
             );
         }
+
+        /// <summary> Gets a collection of FakePolicyAssignments in the FakePolicyAssignment. </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of FakePolicyAssignments and their operations over a FakePolicyAssignment. </returns>
+        public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
+        {
+            return GetExtensionClient(armResource).GetFakePolicyAssignments();
+        }
     }
 }
