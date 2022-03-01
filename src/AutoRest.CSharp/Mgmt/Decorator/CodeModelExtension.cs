@@ -13,14 +13,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
-        private static readonly IEnumerable<string> EnumValuesShouldBePrompted = new[]
+        private static readonly List<string> EnumValuesShouldBePrompted = new()
         {
             "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
         };
 
         public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
         {
-            var wordCandidates = EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues);
+            var wordCandidates = new List<string>(EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues));
             foreach (var schema in allSchemas)
             {
                 if (schema is not SealedChoiceSchema choiceSchema)
@@ -31,26 +31,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, IEnumerable<string> wordCandidates)
+        private static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, List<string> wordCandidates)
         {
-            IEnumerable<ChoiceValue> whateverLeft = originalValues;
-            var result = new List<ChoiceValue>();
-
-            static Func<ChoiceValue, bool> GetFilter(string word)
+            return originalValues.OrderBy(choice =>
             {
-                return v => v.CSharpName().Equals(word);
-            }
-
-            foreach (var word in wordCandidates)
-            {
-                var filtered = whateverLeft.Where(GetFilter(word));
-                whateverLeft = whateverLeft.Except(filtered);
-                result.AddRange(filtered);
-            }
-
-            result.AddRange(whateverLeft);
-
-            return result;
+                var name = choice.CSharpName();
+                var index = wordCandidates.IndexOf(name);
+                return index >= 0 ? index : wordCandidates.Count;
+            }).ToList();
         }
 
         public static void UpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
