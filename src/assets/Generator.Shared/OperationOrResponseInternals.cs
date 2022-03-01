@@ -28,7 +28,7 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia), originalResponse, scopeName, null, new ExponentialPollingStrategy()))
+            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia), originalResponse, scopeName, null, new ExponentialDelayStrategy()))
         {
         }
 
@@ -74,6 +74,13 @@ namespace Azure.Core
                 ? Operation!.UpdateStatusAsync(cancellationToken)
                 : new ValueTask<Response>(VoidResponse!);
         }
+
+        public Response WaitForCompletionResponse(
+            CancellationToken cancellationToken = default) => WaitForCompletionResponseAsync(cancellationToken).EnsureCompleted();
+
+        public Response WaitForCompletionResponse(
+            TimeSpan pollingInterval,
+            CancellationToken cancellationToken) => WaitForCompletionResponseAsync(pollingInterval, cancellationToken).EnsureCompleted();
 
         public async ValueTask<Response> WaitForCompletionResponseAsync(
             CancellationToken cancellationToken = default)

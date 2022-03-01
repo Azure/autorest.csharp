@@ -35,7 +35,7 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName, new ExponentialPollingStrategy()).Internal)
+            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName, new ExponentialDelayStrategy()).Internal)
         {
             _operation = Operation as OperationInternal<T>;
         }
@@ -49,6 +49,13 @@ namespace Azure.Core
         public T Value => DoesWrapOperation ? _operation!.Value : _valueResponse!.Value;
 
         public bool HasValue => DoesWrapOperation ? _operation!.HasValue : true;
+
+        public Response<T> WaitForCompletion(
+            CancellationToken cancellationToken) => WaitForCompletionAsync(cancellationToken).EnsureCompleted();
+
+        public Response<T> WaitForCompletion(
+            TimeSpan pollingInterval,
+            CancellationToken cancellationToken) => WaitForCompletionAsync(pollingInterval, cancellationToken).EnsureCompleted();
 
         public async ValueTask<Response<T>> WaitForCompletionAsync(
             CancellationToken cancellationToken = default)

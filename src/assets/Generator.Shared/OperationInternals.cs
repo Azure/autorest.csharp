@@ -33,6 +33,10 @@ namespace Azure.Core
 
         public Response GetRawResponse() => _operationInternal.RawResponse;
 
+        public Response WaitForCompletionResponse(CancellationToken cancellationToken = default) => WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken).EnsureCompleted();
+
+        public Response WaitForCompletionResponse(TimeSpan pollingInterval, CancellationToken cancellationToken) => WaitForCompletionResponseAsync(pollingInterval, cancellationToken).EnsureCompleted();
+
         public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken);
 
         public ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
