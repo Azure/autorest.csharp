@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.Line();
 
-            var schemes = context.CodeModel.Security.Schemes.Distinct(SecuritySchemesComparer.Instance);
+            var schemes = context.CodeModel.Security.Schemes.OfType<SecurityScheme>().Distinct(SecuritySchemesComparer.Instance);
             var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
             foreach (var scheme in schemes)
             {

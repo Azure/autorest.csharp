@@ -8,7 +8,7 @@
 namespace MgmtRenameRules.Models
 {
     /// <summary> The ScheduledEventsProfile. </summary>
-    public partial class ScheduledEventsProfile
+    internal partial class ScheduledEventsProfile
     {
         /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
         public ScheduledEventsProfile()

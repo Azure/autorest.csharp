@@ -8,7 +8,7 @@
 namespace MgmtRenameRules.Models
 {
     /// <summary> The PatchSettings. </summary>
-    public partial class PatchSettings
+    internal partial class PatchSettings
     {
         /// <summary> Initializes a new instance of PatchSettings. </summary>
         public PatchSettings()

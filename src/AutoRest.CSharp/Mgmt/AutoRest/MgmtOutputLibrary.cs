@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -107,6 +108,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _allSchemas.UpdateFrameworkTypes();
             _allSchemas.UpdateSealChoiceTypes();
 
+            SinglePropertyHider.HideModels(_allSchemas);
+
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
         }
@@ -128,7 +131,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (httpRequest is null)
                             continue;
 
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body)?.Schema;
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body)?.Schema;
                         if (bodyParam is null)
                             continue;
 
@@ -154,7 +157,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (request.Protocol.Http is not HttpRequest {Method: HttpMethod.Patch})
                             continue;
 
-                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == ParameterLocation.Body);
+                        var bodyParam = request.Parameters.FirstOrDefault(p => p.In == HttpParameterIn.Body);
                         if (bodyParam is null)
                             continue;
 
@@ -297,7 +300,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var restClientMethod in restClient.Methods)
                 {
                     // skip all internal methods
-                    if (restClientMethod.Accessibility != "public")
+                    if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
                         continue;
                     restClientMethods.Add(restClientMethod.Operation, restClientMethod);
                 }
@@ -754,13 +757,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     if (httpRequest != null)
                     {
                         var orderedParams = operation.Parameters
-                            .Where(p => p.In == ParameterLocation.Path)
+                            .Where(p => p.In == HttpParameterIn.Path)
                             .OrderBy(
                                 p => httpRequest.Path.IndexOf(
                                     "{" + p.CSharpName() + "}",
                                     StringComparison.InvariantCultureIgnoreCase));
                         operation.Parameters = orderedParams.Concat(operation.Parameters
-                                .Where(p => p.In != ParameterLocation.Path).ToList())
+                                .Where(p => p.In != HttpParameterIn.Path).ToList())
                             .ToList();
                     }
                 }

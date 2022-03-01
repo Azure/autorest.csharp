@@ -14,21 +14,21 @@ namespace MgmtScopeResource.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
-            Optional<ErrorResponse> error = default;
+            Optional<ErrorResponse> errorResponse = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("error"))
+                if (property.NameEquals("errorResponse"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = ErrorResponse.DeserializeErrorResponse(property.Value);
+                    errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
             }
-            return new CloudError(error.Value);
+            return new CloudError(errorResponse.Value);
         }
     }
 }

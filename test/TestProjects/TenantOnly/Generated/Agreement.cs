@@ -152,7 +152,7 @@ namespace TenantOnly
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -183,7 +183,7 @@ namespace TenantOnly
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _agreementRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Agreement(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -213,7 +213,7 @@ namespace TenantOnly
             {
                 await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -243,7 +243,7 @@ namespace TenantOnly
             {
                 TagResource.Delete(true, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _agreementRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Agreement(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -272,7 +272,7 @@ namespace TenantOnly
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _agreementRestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -301,7 +301,7 @@ namespace TenantOnly
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _agreementRestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Agreement(Client, originalResponse.Value), originalResponse.GetRawResponse());
