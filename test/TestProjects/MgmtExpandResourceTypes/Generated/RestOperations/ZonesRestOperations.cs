@@ -83,7 +83,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<ZoneData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -128,7 +128,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new DNS zone to be created, but to prevent updating an existing zone. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<ZoneData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -195,7 +195,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="zoneName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is null. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string zoneName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -230,7 +230,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always delete the current zone. Specify the last-seen etag value to prevent accidentally deleting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="zoneName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is null. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string zoneName, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -284,7 +284,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="zoneName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is null. </exception>
         public async Task<Response<ZoneData>> GetAsync(string subscriptionId, string resourceGroupName, string zoneName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -323,7 +323,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="zoneName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is null. </exception>
         public Response<ZoneData> Get(string subscriptionId, string resourceGroupName, string zoneName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -392,7 +392,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="options"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/> or <paramref name="options"/> is null. </exception>
         public async Task<Response<ZoneData>> UpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, ZoneUpdateOptions options, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -435,7 +435,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="options"> Parameters supplied to the Update operation. </param>
         /// <param name="ifMatch"> The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/> or <paramref name="options"/> is null. </exception>
         public Response<ZoneData> Update(string subscriptionId, string resourceGroupName, string zoneName, ZoneUpdateOptions options, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -657,7 +657,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public async Task<Response<ZoneListResult>> ListByResourceGroupNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -695,7 +695,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public Response<ZoneListResult> ListByResourceGroupNextPage(string nextLink, string subscriptionId, string resourceGroupName, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

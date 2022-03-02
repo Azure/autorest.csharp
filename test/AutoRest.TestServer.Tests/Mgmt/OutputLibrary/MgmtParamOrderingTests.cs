@@ -42,7 +42,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var method = MgmtContext.CodeModel.OperationGroups.Single(p => p.Key.Equals(operationGroupName))
                 .Operations.Single(o => o.CSharpName().Equals(methodName));
 
-            Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.In == ParameterLocation.Path).Select(p => p.CSharpName())));
+            Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.In == HttpParameterIn.Path).Select(p => p.CSharpName())));
         }
 
         [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "parameters", "quick" }, new[] { true, true, false })]

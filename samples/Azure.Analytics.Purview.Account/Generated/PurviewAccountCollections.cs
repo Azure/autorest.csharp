@@ -46,15 +46,8 @@ namespace Azure.Analytics.Purview.Account
         /// <param name="endpoint"> The account endpoint of your Purview account. Example: https://{accountName}.purview.azure.com/account/. </param>
         /// <param name="collectionName"> The String to use. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, <paramref name="collectionName"/>, or <paramref name="apiVersion"/> is null. </exception>
-        internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion = "2019-11-01-preview")
+        internal PurviewAccountCollections(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, TokenCredential tokenCredential, Uri endpoint, string collectionName, string apiVersion)
         {
-            Argument.AssertNotNull(clientDiagnostics, nameof(clientDiagnostics));
-            Argument.AssertNotNull(pipeline, nameof(pipeline));
-            Argument.AssertNotNull(endpoint, nameof(endpoint));
-            Argument.AssertNotNull(collectionName, nameof(collectionName));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _tokenCredential = tokenCredential;
@@ -105,9 +98,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetCollectionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
@@ -165,9 +156,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetCollection(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
@@ -247,9 +236,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CreateOrUpdateCollectionAsync(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -331,9 +318,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response CreateOrUpdateCollection(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -373,9 +358,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> DeleteCollectionAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
             scope.Start();
@@ -413,9 +396,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response DeleteCollection(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.DeleteCollection");
             scope.Start();
@@ -459,9 +440,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetCollectionPathAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
@@ -505,9 +484,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetCollectionPath(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
@@ -558,9 +535,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual AsyncPageable<BinaryData> GetChildCollectionNamesAsync(string skipToken = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, "PurviewAccountCollections.GetChildCollectionNames");
             async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -612,9 +587,7 @@ namespace Azure.Analytics.Purview.Account
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Pageable<BinaryData> GetChildCollectionNames(string skipToken = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, "PurviewAccountCollections.GetChildCollectionNames");
             IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)

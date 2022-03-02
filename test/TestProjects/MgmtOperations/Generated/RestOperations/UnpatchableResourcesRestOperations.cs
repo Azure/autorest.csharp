@@ -73,7 +73,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="parameters"> Parameters supplied to the Create UnpatchableResource operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<UnpatchableResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string name, UnpatchableResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -115,7 +115,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="parameters"> Parameters supplied to the Create UnpatchableResource operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public Response<UnpatchableResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string name, UnpatchableResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -181,7 +181,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="options"> Parameters supplied to the Update UnpatchableResource operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="options"/> is null. </exception>
         public async Task<Response<UnpatchableResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string name, UnpatchableResourceUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -223,7 +223,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="options"> Parameters supplied to the Update UnpatchableResource operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="options"/> is null. </exception>
         public Response<UnpatchableResourceData> Update(string subscriptionId, string resourceGroupName, string name, UnpatchableResourceUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -283,7 +283,7 @@ namespace MgmtOperations
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -316,7 +316,7 @@ namespace MgmtOperations
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -374,7 +374,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public async Task<Response<UnpatchableResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string name, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -414,7 +414,7 @@ namespace MgmtOperations
         /// <param name="name"> The name of the UnpatchableResource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public Response<UnpatchableResourceData> Get(string subscriptionId, string resourceGroupName, string name, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

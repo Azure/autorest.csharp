@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Runtime.CompilerServices;
+using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using Azure;
 using Azure.Core;
@@ -30,5 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter RequestContext = new("context", "The request context, which can override default behaviors on the request on a per-call basis.", RequestContextNullableType, Constant.Default(RequestContextNullableType), false);
 
         public static readonly Parameter WaitForCompletion = new("waitForCompletion", "true if the method should wait to return until the long-running operation has completed on the service; false if it should return after starting the operation. For more information on long-running operations, please see <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md\"> Azure.Core Long-Running Operation samples</see>.", new CSharpType(typeof(bool)), null, false);
+
+        public static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", "Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), false) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
     }
 }

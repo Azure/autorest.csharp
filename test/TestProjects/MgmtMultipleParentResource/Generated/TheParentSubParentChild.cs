@@ -197,10 +197,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
         public async virtual Task<ArmOperation<TheParentSubParentChild>> UpdateAsync(bool waitForCompletion, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
-            if (childBody == null)
-            {
-                throw new ArgumentNullException(nameof(childBody));
-            }
+            Argument.AssertNotNull(childBody, nameof(childBody));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChild.Update");
             scope.Start();
@@ -230,10 +227,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
         public virtual ArmOperation<TheParentSubParentChild> Update(bool waitForCompletion, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
-            if (childBody == null)
-            {
-                throw new ArgumentNullException(nameof(childBody));
-            }
+            Argument.AssertNotNull(childBody, nameof(childBody));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChild.Update");
             scope.Start();
@@ -263,21 +257,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public async virtual Task<Response<TheParentSubParentChild>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChild.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _theParentSubParentChildChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TheParentSubParentChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -300,21 +288,15 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<TheParentSubParentChild> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChild.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _theParentSubParentChildChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new TheParentSubParentChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -336,10 +318,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public async virtual Task<Response<TheParentSubParentChild>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChild.SetTags");
             scope.Start();
@@ -347,7 +326,7 @@ namespace MgmtMultipleParentResource
             {
                 await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _theParentSubParentChildChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TheParentSubParentChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -369,10 +348,7 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<TheParentSubParentChild> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChild.SetTags");
             scope.Start();
@@ -380,7 +356,7 @@ namespace MgmtMultipleParentResource
             {
                 TagResource.Delete(true, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _theParentSubParentChildChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new TheParentSubParentChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -402,17 +378,14 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public async virtual Task<Response<TheParentSubParentChild>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChild.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _theParentSubParentChildChildrenRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TheParentSubParentChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -434,17 +407,14 @@ namespace MgmtMultipleParentResource
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<TheParentSubParentChild> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _theParentSubParentChildChildrenClientDiagnostics.CreateScope("TheParentSubParentChild.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _theParentSubParentChildChildrenRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new TheParentSubParentChild(Client, originalResponse.Value), originalResponse.GetRawResponse());

@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static FormattableString GetValueExpression(CSharpType type, FormattableString rawExpression)
         {
-            if (type.IsStringLike())
+            if (TypeFactory.IsStringLike(type))
                 return rawExpression;
 
             if (!type.IsFrameworkType)
@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // if we match one parameter, we need to remove the matching ContextualParameterMapping from the list to avoid multiple matching
             if (result != null)
                 contextualParameterMappings.Remove(result);
-            if (result is null && pathParameter.IsEnumType)
+            if (result is null && pathParameter.Type.IsEnum)
             {
                 var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type));
                 if (requestSegment.Any())

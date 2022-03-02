@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class Disallowed
+    internal partial class Disallowed
     {
         internal static Disallowed DeserializeDisallowed(JsonElement element)
         {

@@ -60,15 +60,12 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ArmOperation<SubParentWithNonResChWithLoc>> CreateOrUpdateAsync(bool waitForCompletion, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
@@ -96,15 +93,12 @@ namespace MgmtListMethods
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ArmOperation<SubParentWithNonResChWithLoc> CreateOrUpdate(bool waitForCompletion, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentWithNonResChWithLocName, nameof(subParentWithNonResChWithLocName));
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _subParentWithNonResChWithLocClientDiagnostics.CreateScope("SubParentWithNonResChWithLocCollection.CreateOrUpdate");
             scope.Start();
@@ -130,7 +124,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResChWithLoc>> GetAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -159,7 +153,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<SubParentWithNonResChWithLoc> Get(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -272,7 +266,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<bool>> ExistsAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -299,7 +293,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<bool> Exists(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -326,7 +320,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public async virtual Task<Response<SubParentWithNonResChWithLoc>> GetIfExistsAsync(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -355,7 +349,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
         public virtual Response<SubParentWithNonResChWithLoc> GetIfExists(string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {

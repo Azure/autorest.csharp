@@ -151,7 +151,7 @@ namespace MgmtParamOrdering
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
         public async Task<Response<WorkspaceData>> GetAsync(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -190,7 +190,7 @@ namespace MgmtParamOrdering
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
         public Response<WorkspaceData> Get(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -254,7 +254,7 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="parameters"> The parameters for creating or updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -293,7 +293,7 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="parameters"> The parameters for creating or updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/> or <paramref name="parameters"/> is null. </exception>
         public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -351,7 +351,7 @@ namespace MgmtParamOrdering
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -385,7 +385,7 @@ namespace MgmtParamOrdering
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="workspaceName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="workspaceName"/> is null. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string workspaceName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -444,7 +444,7 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="options"> The parameters for updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/> or <paramref name="options"/> is null. </exception>
         public async Task<Response<WorkspaceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -486,7 +486,7 @@ namespace MgmtParamOrdering
         /// <param name="workspaceName"> Name of Azure Machine Learning workspace. </param>
         /// <param name="options"> The parameters for updating a machine learning workspace. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="workspaceName"/> or <paramref name="options"/> is null. </exception>
         public Response<WorkspaceData> Update(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

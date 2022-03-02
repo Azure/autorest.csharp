@@ -38,10 +38,11 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/>, or <paramref name="dnsSuffix"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/> or <paramref name="dnsSuffix"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", PathsClientOptions options = null)
         {
-            Argument.AssertNotNull(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(dnsSuffix, nameof(dnsSuffix));
             options ??= new PathsClientOptions();
@@ -59,7 +60,8 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/>, or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -69,13 +71,11 @@ namespace custom_baseUrl_more_options_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(vault, nameof(vault));
             Argument.AssertNotNull(secret, nameof(secret));
-            Argument.AssertNotNull(keyName, nameof(keyName));
+            Argument.AssertNotNullOrEmpty(keyName, nameof(keyName));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
@@ -97,7 +97,8 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/>, or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -107,13 +108,11 @@ namespace custom_baseUrl_more_options_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
             Argument.AssertNotNull(vault, nameof(vault));
             Argument.AssertNotNull(secret, nameof(secret));
-            Argument.AssertNotNull(keyName, nameof(keyName));
+            Argument.AssertNotNullOrEmpty(keyName, nameof(keyName));
 
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();

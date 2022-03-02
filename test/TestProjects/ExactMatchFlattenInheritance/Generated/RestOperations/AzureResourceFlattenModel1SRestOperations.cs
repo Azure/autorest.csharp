@@ -156,7 +156,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<AzureResourceFlattenModel1Data>> PutAsync(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -198,7 +198,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         public Response<AzureResourceFlattenModel1Data> Put(string subscriptionId, string resourceGroupName, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -259,7 +259,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public async Task<Response<AzureResourceFlattenModel1Data>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -298,7 +298,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         public Response<AzureResourceFlattenModel1Data> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)

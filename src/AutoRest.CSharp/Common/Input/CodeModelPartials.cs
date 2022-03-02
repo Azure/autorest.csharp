@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Input
         }
     }
 
-    internal partial class DictionaryOfAny
+    internal partial class RecordOfStringAndAny
     {
         private static char[] _formatSplitChar = new[] { ',', ' ' };
 
@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Input
     {
         public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-identifier"));
 
-        public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
+        public HttpParameterIn In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : HttpParameterIn.None;
         public bool IsFlattened => Flattened ?? false;
     }
 
@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.Input
     {
         public Value()
         {
-            Extensions = new DictionaryOfAny();
+            Extensions = new RecordOfStringAndAny();
         }
 
         public bool IsNullable => Nullable ?? false;
@@ -246,28 +246,6 @@ namespace AutoRest.CSharp.Input
         public string? Summary { get; set; }
     }
 
-    internal partial class NoAuthSecurity : SecurityScheme
-    {
-    }
-
-    internal partial class Security
-    {
-        internal IEnumerable<SecurityScheme> GetSchemesOrAnonymous()
-        {
-            if (Schemes.Count == 0)
-            {
-                yield return new NoAuthSecurity();
-            }
-            else
-            {
-                foreach (var scheme in Schemes)
-                {
-                    yield return scheme;
-                }
-            }
-        }
-    }
-
     internal partial class OperationGroup
     {
         public override string ToString()
@@ -280,6 +258,12 @@ namespace AutoRest.CSharp.Input
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "testModel")]
         public TestModel? TestModel { get; set; }
+
+        private IEnumerable<Schema>? _allSchemas;
+        public IEnumerable<Schema> AllSchemas => _allSchemas ??= Schemas.Choices.Cast<Schema>()
+                .Concat(Schemas.SealedChoices)
+                .Concat(Schemas.Objects)
+                .Concat(Schemas.Groups);
     }
 
     internal partial class TestDefinitionModel
@@ -321,14 +305,14 @@ namespace AutoRest.CSharp.Input
         public string Step;
 
         [YamlMember(Alias = "armTemplatePayload")]
-        public DictionaryOfAny? ArmTemplatePayload;
+        public RecordOfStringAndAny? ArmTemplatePayload;
 
         [YamlMember(Alias = "armTemplateParametersPayload")]
-        public DictionaryOfAny? ArmTemplateParametersPayload;
+        public RecordOfStringAndAny? ArmTemplateParametersPayload;
 
         // for TestStepRestCall (type==restCall)
         [YamlMember(Alias = "operation")]
-        public DictionaryOfAny? Operation;
+        public RecordOfStringAndAny? Operation;
 
         [YamlMember(Alias = "exampleId")]
         public string? ExampleId;
@@ -337,10 +321,10 @@ namespace AutoRest.CSharp.Input
         public string? ExampleFilePath;
 
         [YamlMember(Alias = "requestParameters")]
-        public DictionaryOfAny? RequestParameters;
+        public RecordOfStringAndAny? RequestParameters;
 
         [YamlMember(Alias = "ResponseExpected")]
-        public DictionaryOfAny? responseExpected;
+        public RecordOfStringAndAny? responseExpected;
 
         // test-modeler properties
         [YamlMember(Alias = "exampleModel")]

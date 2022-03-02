@@ -245,10 +245,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ArmOperation<DeploymentValidateResult>> ValidateAtScopeAsync(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
             scope.Start();
@@ -278,10 +275,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ArmOperation<DeploymentValidateResult> ValidateAtScope(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
             scope.Start();
@@ -361,10 +355,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ArmOperation<WhatIfOperationResult>> WhatIfAsync(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
             scope.Start();
@@ -431,10 +422,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ArmOperation<WhatIfOperationResult> WhatIf(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
             scope.Start();
@@ -491,7 +479,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
         public async virtual Task<Response<DeploymentOperation>> GetAtScopeDeploymentOperationAsync(string operationId, CancellationToken cancellationToken = default)
         {
@@ -518,7 +506,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="operationId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="operationId"/> is null. </exception>
         public virtual Response<DeploymentOperation> GetAtScopeDeploymentOperation(string operationId, CancellationToken cancellationToken = default)
         {
@@ -679,21 +667,15 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public async virtual Task<Response<DeploymentExtended>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                originalTags.Value.Data.TagValues[key] = value;
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -716,21 +698,15 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
         public virtual Response<DeploymentExtended> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+            Argument.AssertNotNull(key, nameof(key));
+            Argument.AssertNotNull(value, nameof(value));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                originalTags.Value.Data.TagValues[key] = value;
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -752,10 +728,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public async virtual Task<Response<DeploymentExtended>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.SetTags");
             scope.Start();
@@ -763,7 +736,7 @@ namespace MgmtScopeResource
             {
                 await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -785,10 +758,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
         public virtual Response<DeploymentExtended> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
+            Argument.AssertNotNull(tags, nameof(tags));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.SetTags");
             scope.Start();
@@ -796,7 +766,7 @@ namespace MgmtScopeResource
             {
                 TagResource.Delete(true, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                originalTags.Value.Data.TagValues.ReplaceWith(tags);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -818,17 +788,14 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public async virtual Task<Response<DeploymentExtended>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                originalTags.Value.Data.TagValues.Remove(key);
                 await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
@@ -850,17 +817,14 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
         public virtual Response<DeploymentExtended> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+            Argument.AssertNotNull(key, nameof(key));
 
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                originalTags.Value.Data.TagValues.Remove(key);
                 TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());

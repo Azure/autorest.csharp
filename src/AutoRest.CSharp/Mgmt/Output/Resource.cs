@@ -12,13 +12,10 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -96,7 +93,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
               Name: Type.Name,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
-              Modifiers: "internal",
+              Modifiers: Internal,
               Parameters: _armClientCtorParameters,
               Initializer: new(
                   isBase: true,
@@ -108,7 +105,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
-                Modifiers: "internal",
+                Modifiers: Internal,
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
@@ -203,7 +200,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
             var requestPath = operation.GetHttpPath();
-            if (Context.Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
             {
                 return positions.Contains(Position);
             }
@@ -385,7 +382,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 requestPath => new MethodSignature(
                     Name: "CreateResourceIdentifier",
                     Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-                    Modifiers: "public static",
+                    Modifiers: Public | Static,
                     ReturnType: typeof(ResourceIdentifier),
                     ReturnDescription: null,
                     Parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
@@ -406,8 +403,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
-                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, ValidateNotNull: false);
+                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, Validate: false);
         public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
-                        Type: ResourceData.Type, DefaultValue: null, ValidateNotNull: false);
+                        Type: ResourceData.Type, DefaultValue: null, Validate: false);
     }
 }

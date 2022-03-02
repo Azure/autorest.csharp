@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace NoTypeReplacement.Models
 {
-    public partial class MiddleResourceModel : IUtf8JsonSerializable
+    internal partial class MiddleResourceModel : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

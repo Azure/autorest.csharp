@@ -60,9 +60,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
@@ -89,9 +87,7 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetEmptyError(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
@@ -109,9 +105,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
@@ -129,9 +123,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Get empty error form server. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetNoModelError(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
@@ -149,9 +141,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Get empty response from server. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
@@ -169,9 +159,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Get empty response from server. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response GetNoModelEmpty(RequestContext context = null)
-#pragma warning restore AZC0002
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();

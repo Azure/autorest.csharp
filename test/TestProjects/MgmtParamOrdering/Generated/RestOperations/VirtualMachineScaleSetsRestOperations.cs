@@ -78,7 +78,7 @@ namespace MgmtParamOrdering
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="quick"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters, string quick = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -117,7 +117,7 @@ namespace MgmtParamOrdering
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="quick"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
         public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters, string quick = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -179,7 +179,7 @@ namespace MgmtParamOrdering
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="options"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="options"/> is null. </exception>
         public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -216,7 +216,7 @@ namespace MgmtParamOrdering
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="options"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="options"/> is null. </exception>
         public Response Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -273,7 +273,7 @@ namespace MgmtParamOrdering
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="forceDeletion"> Optional parameter to force delete a VM scale set. (Feature in Preview). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -308,7 +308,7 @@ namespace MgmtParamOrdering
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="forceDeletion"> Optional parameter to force delete a VM scale set. (Feature in Preview). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -367,7 +367,7 @@ namespace MgmtParamOrdering
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. &apos;UserData&apos; retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
         public async Task<Response<VirtualMachineScaleSetData>> GetAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -407,7 +407,7 @@ namespace MgmtParamOrdering
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. &apos;UserData&apos; retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
         public Response<VirtualMachineScaleSetData> Get(string subscriptionId, string resourceGroupName, string vmScaleSetName, ExpandTypesForGetVMScaleSets? expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -479,7 +479,7 @@ namespace MgmtParamOrdering
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="expand"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
         public async Task<Response> DeallocateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -514,7 +514,7 @@ namespace MgmtParamOrdering
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="expand"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
         public Response Deallocate(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -577,7 +577,7 @@ namespace MgmtParamOrdering
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="vmInstanceIDs"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIDs"/> is null. </exception>
         public async Task<Response> DeleteInstancesAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -616,7 +616,7 @@ namespace MgmtParamOrdering
         /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="vmInstanceIDs"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIDs"/> is null. </exception>
         public Response DeleteInstances(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -681,7 +681,7 @@ namespace MgmtParamOrdering
         /// <param name="filter"> The String to use. </param>
         /// <param name="expand"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="filter"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="filter"/> is null. </exception>
         public async Task<Response<VirtualMachineScaleSetInstanceView>> GetInstanceViewAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string filter, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -724,7 +724,7 @@ namespace MgmtParamOrdering
         /// <param name="filter"> The String to use. </param>
         /// <param name="expand"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="filter"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="filter"/> is null. </exception>
         public Response<VirtualMachineScaleSetInstanceView> GetInstanceView(string subscriptionId, string resourceGroupName, string vmScaleSetName, string filter, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
@@ -862,7 +862,7 @@ namespace MgmtParamOrdering
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public async Task<Response<VirtualMachineScaleSetListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
@@ -899,7 +899,7 @@ namespace MgmtParamOrdering
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         public Response<VirtualMachineScaleSetListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)

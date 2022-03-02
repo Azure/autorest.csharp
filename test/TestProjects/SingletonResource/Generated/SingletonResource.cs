@@ -141,10 +141,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ArmOperation<SingletonResource>> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _singletonResourceClientDiagnostics.CreateScope("SingletonResource.CreateOrUpdate");
             scope.Start();
@@ -174,10 +171,7 @@ namespace SingletonResource
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public virtual ArmOperation<SingletonResource> CreateOrUpdate(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var scope = _singletonResourceClientDiagnostics.CreateScope("SingletonResource.CreateOrUpdate");
             scope.Start();
