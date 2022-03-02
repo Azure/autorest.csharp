@@ -431,7 +431,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteResponseClassifier(CodeWriter writer, string responseClassifierTypeName, StatusCodes[] statusCodes)
         {
-            // For head request all status codes are set to null
+            // All StatusCode.Code are set to null for head request methods where HeadAsBoolean is set to "true" in the config
             var areAllStatusCodesNull = statusCodes.All(statusCode => statusCode.Code == null);
             if (areAllStatusCodesNull)
             {
