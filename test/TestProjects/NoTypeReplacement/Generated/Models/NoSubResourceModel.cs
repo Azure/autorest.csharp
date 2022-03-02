@@ -8,7 +8,7 @@
 namespace NoTypeReplacement.Models
 {
     /// <summary> The NoSubResourceModel. </summary>
-    public partial class NoSubResourceModel
+    internal partial class NoSubResourceModel
     {
         /// <summary> Initializes a new instance of NoSubResourceModel. </summary>
         public NoSubResourceModel()

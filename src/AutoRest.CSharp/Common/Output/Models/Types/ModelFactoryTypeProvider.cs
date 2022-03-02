@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -69,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
-            return new MethodSignature(ctor.Name, ctor.Description, "public static", modelType.Type, returnDescription, methodParameters);
+            return new MethodSignature(ctor.Name, ctor.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
 
             static Constant GetDefaultValue(CSharpType inputType, CSharpType implementationType, Constant? defaultValue)
             {
@@ -129,7 +130,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return model.Constructors
-                .Where(c => c.Signature.Modifiers == "public")
+                .Where(c => c.Signature.Modifiers.HasFlag(Public))
                 .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
         }
     }

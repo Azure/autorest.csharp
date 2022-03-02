@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Append($"await ");
                 }
                 _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"originalTags.Value.Data.Properties.TagsValue[key] = value;");
+                _writer.Line($"originalTags.Value.Data.TagValues[key] = value;");
                 WriteTaggableCommonMethod(async);
             }
             _writer.Line();
@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Append($"await ");
                 }
                 _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);");
+                _writer.Line($"originalTags.Value.Data.TagValues.ReplaceWith(tags);");
                 WriteTaggableCommonMethod(async);
             }
             _writer.Line();
@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Append($"await ");
                 }
                 _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
-                _writer.Line($"originalTags.Value.Data.Properties.TagsValue.Remove(key);");
+                _writer.Line($"originalTags.Value.Data.TagValues.Remove(key);");
                 WriteTaggableCommonMethod(async);
             }
             _writer.Line();

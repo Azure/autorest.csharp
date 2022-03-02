@@ -358,7 +358,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_31
+    - !ObjectSchema &ref_32
       type: object
       apiVersions:
         - !ApiVersion 
@@ -400,7 +400,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_51
+    - !ObjectSchema &ref_52
       type: object
       apiVersions:
         - !ApiVersion 
@@ -967,7 +967,7 @@ operationGroups:
               itemName: values
               member: NextOperationWithQueryParams
               nextLinkName: nextLink
-              nextLinkOperation: !Operation &ref_27
+              nextLinkOperation: !Operation &ref_28
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
@@ -1049,14 +1049,95 @@ operationGroups:
                       nextLinkName: null
                 protocol: !Protocols {}
         protocol: !Protocols {}
-      - *ref_27
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_15
-          - !Parameter &ref_28
+          - !Parameter &ref_27
+            schema: *ref_19
+            implementation: Method
+            language: !Languages 
+              default:
+                name: filter
+                description: OData filter options. Pass in 'foo'
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_16
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /paging/multiple/duplicateParams/1
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_27
+        responses:
+          - !SchemaResponse 
+            schema: *ref_18
+            language: !Languages 
+              default:
+                name: ''
+                description: Initial response with ProvisioningState='Canceled'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-pageable:
+            itemName: values
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: DuplicateParams
+            description: Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+            paging:
+              itemName: values
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - *ref_28
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_15
+          - !Parameter &ref_29
             schema: *ref_19
             implementation: Method
             language: !Languages 
@@ -1067,7 +1148,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_29
+          - !Parameter &ref_30
             schema: *ref_20
             implementation: Method
             extensions:
@@ -1081,7 +1162,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_30
+          - !Parameter &ref_31
             schema: *ref_21
             implementation: Method
             extensions:
@@ -1122,12 +1203,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_28
           - *ref_29
           - *ref_30
+          - *ref_31
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1167,7 +1248,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_15
-          - !Parameter &ref_32
+          - !Parameter &ref_33
             schema: *ref_19
             implementation: Method
             language: !Languages 
@@ -1178,7 +1259,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_33
+          - !Parameter &ref_34
             schema: *ref_20
             implementation: Method
             extensions:
@@ -1192,7 +1273,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_34
+          - !Parameter &ref_35
             schema: *ref_20
             implementation: Method
             required: true
@@ -1207,7 +1288,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_35
+          - !Parameter &ref_36
             schema: *ref_21
             implementation: Method
             extensions:
@@ -1248,10 +1329,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_32
           - *ref_33
           - *ref_34
           - *ref_35
+          - *ref_36
         responses:
           - !SchemaResponse 
             schema: *ref_18
@@ -1639,7 +1720,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_15
-          - !Parameter &ref_36
+          - !Parameter &ref_37
             schema: *ref_19
             implementation: Method
             required: true
@@ -1651,7 +1732,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_37
+          - !Parameter &ref_38
             schema: *ref_19
             implementation: Method
             required: true
@@ -1690,11 +1771,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_36
           - *ref_37
+          - *ref_38
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1730,13 +1811,13 @@ operationGroups:
               itemName: values
               member: NextFragment
               nextLinkName: odata.nextLink
-              nextLinkOperation: !Operation &ref_41
+              nextLinkOperation: !Operation &ref_42
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
                 parameters:
                   - *ref_15
-                  - !Parameter &ref_38
+                  - !Parameter &ref_39
                     schema: *ref_19
                     implementation: Method
                     required: true
@@ -1748,7 +1829,7 @@ operationGroups:
                     protocol: !Protocols 
                       http: !HttpParameter 
                         in: query
-                  - !Parameter &ref_39
+                  - !Parameter &ref_40
                     schema: *ref_19
                     implementation: Method
                     required: true
@@ -1760,7 +1841,7 @@ operationGroups:
                     protocol: !Protocols 
                       http: !HttpParameter 
                         in: path
-                  - !Parameter &ref_40
+                  - !Parameter &ref_41
                     schema: *ref_19
                     implementation: Method
                     required: true
@@ -1801,12 +1882,12 @@ operationGroups:
                         method: get
                         uri: '{$host}'
                 signatureParameters:
-                  - *ref_38
                   - *ref_39
                   - *ref_40
+                  - *ref_41
                 responses:
                   - !SchemaResponse 
-                    schema: *ref_31
+                    schema: *ref_32
                     language: !Languages 
                       default:
                         name: ''
@@ -1842,7 +1923,7 @@ operationGroups:
                       itemName: values
                       member: NextFragment
                       nextLinkName: odata.nextLink
-                      nextLinkOperation: *ref_41
+                      nextLinkOperation: *ref_42
                 protocol: !Protocols {}
         protocol: !Protocols {}
       - !Operation 
@@ -1851,7 +1932,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_15
-          - !Parameter &ref_42
+          - !Parameter &ref_43
             schema: *ref_19
             implementation: Method
             required: true
@@ -1866,7 +1947,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_43
+          - !Parameter &ref_44
             schema: *ref_19
             implementation: Method
             required: true
@@ -1908,11 +1989,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_42
           - *ref_43
+          - *ref_44
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1948,13 +2029,13 @@ operationGroups:
               itemName: values
               member: NextFragmentWithGrouping
               nextLinkName: odata.nextLink
-              nextLinkOperation: !Operation &ref_47
+              nextLinkOperation: !Operation &ref_48
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
                 parameters:
                   - *ref_15
-                  - !Parameter &ref_44
+                  - !Parameter &ref_45
                     schema: *ref_19
                     implementation: Method
                     required: true
@@ -1969,7 +2050,7 @@ operationGroups:
                     protocol: !Protocols 
                       http: !HttpParameter 
                         in: query
-                  - !Parameter &ref_45
+                  - !Parameter &ref_46
                     schema: *ref_19
                     implementation: Method
                     required: true
@@ -1984,7 +2065,7 @@ operationGroups:
                     protocol: !Protocols 
                       http: !HttpParameter 
                         in: path
-                  - !Parameter &ref_46
+                  - !Parameter &ref_47
                     schema: *ref_19
                     implementation: Method
                     required: true
@@ -2025,12 +2106,12 @@ operationGroups:
                         method: get
                         uri: '{$host}'
                 signatureParameters:
-                  - *ref_44
                   - *ref_45
                   - *ref_46
+                  - *ref_47
                 responses:
                   - !SchemaResponse 
-                    schema: *ref_31
+                    schema: *ref_32
                     language: !Languages 
                       default:
                         name: ''
@@ -2066,7 +2147,7 @@ operationGroups:
                       itemName: values
                       member: NextFragmentWithGrouping
                       nextLinkName: odata.nextLink
-                      nextLinkOperation: *ref_47
+                      nextLinkOperation: *ref_48
                 protocol: !Protocols {}
         protocol: !Protocols {}
       - !Operation 
@@ -2075,7 +2156,7 @@ operationGroups:
             version: 1.0.0
         parameters:
           - *ref_15
-          - !Parameter &ref_48
+          - !Parameter &ref_49
             schema: *ref_19
             implementation: Method
             language: !Languages 
@@ -2086,7 +2167,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_49
+          - !Parameter &ref_50
             schema: *ref_20
             implementation: Method
             extensions:
@@ -2100,7 +2181,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - !Parameter &ref_50
+          - !Parameter &ref_51
             schema: *ref_21
             implementation: Method
             extensions:
@@ -2141,9 +2222,9 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_48
           - *ref_49
           - *ref_50
+          - *ref_51
         responses:
           - !SchemaResponse 
             schema: *ref_18
@@ -2181,8 +2262,8 @@ operationGroups:
               itemName: values
               nextLinkName: nextLink
         protocol: !Protocols {}
-      - *ref_41
-      - *ref_47
+      - *ref_42
+      - *ref_48
       - !Operation 
         apiVersions:
           - !ApiVersion 
@@ -2218,7 +2299,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_52
             language: !Languages 
               default:
                 name: ''

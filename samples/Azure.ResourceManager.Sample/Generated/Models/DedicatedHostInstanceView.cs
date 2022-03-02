@@ -33,7 +33,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Specifies the unique id of the dedicated physical machine on which the dedicated host resides. </summary>
         public string AssetId { get; }
         /// <summary> Unutilized capacity of the dedicated host. </summary>
-        public DedicatedHostAvailableCapacity AvailableCapacity { get; }
+        internal DedicatedHostAvailableCapacity AvailableCapacity { get; }
+        /// <summary> The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host. </summary>
+        public IReadOnlyList<DedicatedHostAllocatableVM> AvailableCapacityAllocatableVMs
+        {
+            get => AvailableCapacity.AllocatableVMs;
+        }
+
         /// <summary> The resource status information. </summary>
         public IReadOnlyList<InstanceViewStatus> Statuses { get; }
     }

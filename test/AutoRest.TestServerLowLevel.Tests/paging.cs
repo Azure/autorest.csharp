@@ -644,6 +644,49 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task PagingDuplicateParameters() => Test(async (endpoint) =>
+        {
+            var id = 1;
+            var product = "Product";
+            var linkPart = "/paging/multiple/duplicateParams/2?%24filter=serviceReturned&%24skiptoken=bar";
+
+            var pageableAsync = new PagingClient(Key, endpoint).DuplicateParamsAsync("foo");
+            await foreach (var page in pageableAsync.AsPages())
+            {
+                if (id == 2)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    Assert.AreEqual(id, page.Values.Single().ToObjectFromJson<Product>().Properties.Id);
+                    Assert.AreEqual(product, page.Values.Single().ToObjectFromJson<Product>().Properties.Name);
+                    StringAssert.EndsWith(linkPart, page.ContinuationToken);
+                    id++;
+                }
+            }
+            Assert.AreEqual(2, id);
+
+            id = 1;
+            var pageable = new PagingClient(Key, endpoint).DuplicateParams("foo");
+            foreach (var page in pageable.AsPages())
+            {
+                if (id == 2)
+                {
+                    Assert.IsNull(page.ContinuationToken);
+                }
+                else
+                {
+                    Assert.AreEqual(id, page.Values.Single().ToObjectFromJson<Product>().Properties.Id);
+                    Assert.AreEqual(product, page.Values.Single().ToObjectFromJson<Product>().Properties.Name);
+                    StringAssert.EndsWith(linkPart, page.ContinuationToken);
+                    id++;
+                }
+            }
+            Assert.AreEqual(2, id);
+        });
+
+        [Test]
         public Task PagingFirstResponseEmpty() => Test(async (endpoint) =>
         {
             var result = new PagingClient(Key, endpoint).FirstResponseEmptyAsync(new());

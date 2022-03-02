@@ -74,14 +74,14 @@ namespace AutoRest.TestServer.Tests
         public void DiscriminatorValueIsSetOnObjectConstruction()
         {
             var baseClassWithDiscriminator = new BaseClassWithDiscriminator();
-            Assert.AreEqual("BaseClassWithDiscriminator", baseClassWithDiscriminator.DiscriminatorProperty);
+            Assert.AreEqual(null, baseClassWithDiscriminator.DiscriminatorProperty);
         }
 
         [Test]
         public void DiscriminatorValueIsSetOnObjectSerializationConstruction()
         {
             var baseClassWithDiscriminator = new BaseClassWithDiscriminator(null, null);
-            Assert.AreEqual("BaseClassWithDiscriminator", baseClassWithDiscriminator.DiscriminatorProperty);
+            Assert.AreEqual(null, baseClassWithDiscriminator.DiscriminatorProperty);
         }
 
         [Test]

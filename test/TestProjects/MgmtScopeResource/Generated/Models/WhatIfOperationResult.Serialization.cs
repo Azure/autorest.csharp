@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
         internal static WhatIfOperationResult DeserializeWhatIfOperationResult(JsonElement element)
         {
             Optional<string> status = default;
-            Optional<ErrorResponse> error = default;
+            Optional<ErrorResponse> errorResponse = default;
             Optional<IReadOnlyList<WhatIfChange>> changes = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -25,14 +25,14 @@ namespace MgmtScopeResource.Models
                     status = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("error"))
+                if (property.NameEquals("errorResponse"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = ErrorResponse.DeserializeErrorResponse(property.Value);
+                    errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -63,7 +63,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new WhatIfOperationResult(status.Value, error.Value, Optional.ToList(changes));
+            return new WhatIfOperationResult(status.Value, errorResponse.Value, Optional.ToList(changes));
         }
     }
 }

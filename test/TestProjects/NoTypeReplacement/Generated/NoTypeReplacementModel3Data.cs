@@ -31,6 +31,11 @@ namespace NoTypeReplacement
         }
 
         /// <summary> Gets or sets the foo. </summary>
-        public MiddleResourceModel Foo { get; set; }
+        internal MiddleResourceModel Foo { get; set; }
+        /// <summary> Gets the foo id. </summary>
+        public string FooId
+        {
+            get => Foo is null ? default : Foo.FooId;
+        }
     }
 }

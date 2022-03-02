@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> A list of private link resources. </summary>
     [TypeReferenceType]
-    public partial class PrivateLinkResourceList
+    internal partial class PrivateLinkResourceList
     {
         /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
         [InitializationConstructor]

@@ -8,7 +8,7 @@
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies the disallowed configuration for a virtual machine image. </summary>
-    public partial class DisallowedConfiguration
+    internal partial class DisallowedConfiguration
     {
         /// <summary> Initializes a new instance of DisallowedConfiguration. </summary>
         public DisallowedConfiguration()
