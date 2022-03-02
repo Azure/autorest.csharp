@@ -431,11 +431,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteResponseClassifier(CodeWriter writer, string responseClassifierTypeName, StatusCodes[] statusCodes)
         {
-            // All StatusCode.Code are set to null for head request methods where HeadAsBoolean is set to "true" in the config
-            var areAllStatusCodesNull = statusCodes.All(statusCode => statusCode.Code == null);
-            if (areAllStatusCodesNull)
+            var hasStatusCodeRanges = statusCodes.Any(statusCode => statusCode.Family != null);
+            if (hasStatusCodeRanges)
             {
-                // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "areAllStatusCodesNull" condition and this class
+                // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "hasStatusCodeRanges" condition and this class
                 using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {typeof(ResponseClassifier)}"))
                 {
                     using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
@@ -456,7 +455,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.Line($"private static {typeof(ResponseClassifier)} _{responseClassifierTypeName.FirstCharToLowerCase()};");
             writer.Append($"private static {typeof(ResponseClassifier)} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
-            if (areAllStatusCodesNull)
+            if (hasStatusCodeRanges)
             {
                 writer.Line($"{responseClassifierTypeName}Override();");
             }

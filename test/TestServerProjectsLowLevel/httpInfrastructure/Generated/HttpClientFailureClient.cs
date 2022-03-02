@@ -1843,18 +1843,7 @@ namespace httpInfrastructure_LowLevel
             return message;
         }
 
-        private sealed class ResponseClassifierOverride : ResponseClassifier
-        {
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    _ => true
-                };
-            }
-        }
-
         private static ResponseClassifier _responseClassifier;
-        private static ResponseClassifier ResponseClassifier => _responseClassifier ??= new ResponseClassifierOverride();
+        private static ResponseClassifier ResponseClassifier => _responseClassifier ??= new CoreResponseClassifier(stackalloc int[] { });
     }
 }
