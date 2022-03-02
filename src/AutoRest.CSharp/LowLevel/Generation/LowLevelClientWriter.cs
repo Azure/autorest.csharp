@@ -473,8 +473,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.Line($"}});");
             }
-
-
         }
 
         private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, CSharpType returnType, bool async)
