@@ -3,6 +3,7 @@
 
 using System;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
 
@@ -19,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _existingType = new Lazy<INamedTypeSymbol?>(() => Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
-        public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum);
+        public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         internal BuildContext Context { get; private set; }
@@ -48,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 result = namespaceExtension;
             }
-            else if (context.Configuration.ModelNamespace)
+            else if (Configuration.ModelNamespace)
             {
                 result = $"{context.DefaultNamespace}.Models";
             }

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a scale-in policy for a virtual machine scale set. </summary>
-    public partial class ScaleInPolicy
+    internal partial class ScaleInPolicy
     {
         /// <summary> Initializes a new instance of ScaleInPolicy. </summary>
         public ScaleInPolicy()

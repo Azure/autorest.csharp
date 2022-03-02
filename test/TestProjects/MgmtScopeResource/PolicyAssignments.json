@@ -515,7 +515,7 @@
       "CloudError": {
         "x-ms-external": true,
         "properties": {
-          "error": {
+          "errorResponse": {
             "$ref": "#/definitions/ErrorResponse"
           }
         },

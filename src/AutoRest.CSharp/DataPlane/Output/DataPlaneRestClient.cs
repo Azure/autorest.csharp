@@ -4,11 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -16,7 +14,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         private BuildContext<DataPlaneOutputLibrary> _context;
 
-        public IReadOnlyList<LowLevelClientMethod>? ProtocolMethods => _context.Configuration.ProtocolMethodList.Length > 0 && GetProtocolMethods() != null
+        public IReadOnlyList<LowLevelClientMethod>? ProtocolMethods => Configuration.ProtocolMethodList.Length > 0 && GetProtocolMethods() != null
             ? GetProtocolMethods().ToArray() : null;
 
         public DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
@@ -65,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool isProtocolMethodExists(Operation operation)
         {
-            var protocolMethods = _context.Configuration.ProtocolMethodList;
+            var protocolMethods = Configuration.ProtocolMethodList;
             return protocolMethods.Any(m => m.Equals(operation.Language.Default.Name, StringComparison.OrdinalIgnoreCase));
         }
 

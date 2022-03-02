@@ -12,6 +12,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Input;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -30,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Name: Type.Name,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
-                Modifiers: "internal",
+                Modifiers: Internal,
                 Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
                 Initializer: new(
                     isBase: true,

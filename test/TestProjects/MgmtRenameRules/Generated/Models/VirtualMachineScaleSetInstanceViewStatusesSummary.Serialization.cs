@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class VirtualMachineScaleSetInstanceViewStatusesSummary
+    internal partial class VirtualMachineScaleSetInstanceViewStatusesSummary
     {
         internal static VirtualMachineScaleSetInstanceViewStatusesSummary DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(JsonElement element)
         {
