@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, List<string> wordCandidates)
+        internal static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, List<string> wordCandidates)
         {
             return originalValues.OrderBy(choice =>
             {
