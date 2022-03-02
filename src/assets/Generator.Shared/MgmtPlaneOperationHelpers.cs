@@ -9,17 +9,17 @@ using Azure.Core.Pipeline;
 
 namespace Azure.Core
 {
-    internal static class MgmtPlaneOperationHelpers
+    internal static class ArmOperationHelpers
     {
         /// <summary>
         /// Store the property values that are shared by current management plane RP.
         /// </summary>
-        private static ConcurrentDictionary<string, object> _mgmtProperties = new ConcurrentDictionary<string, object>();
+        private static ConcurrentDictionary<string, object> _armProperties = new ConcurrentDictionary<string, object>();
 
         public static bool TryGetProperty(string name, out object? value)
         {
             value = null;
-            return _mgmtProperties.TryGetValue(name, out value) == true;
+            return _armProperties.TryGetValue(name, out value) == true;
         }
 
         private static void SetProperty(HttpMessage message)
@@ -28,8 +28,8 @@ namespace Azure.Core
             {
                 if (propertyValue is string userAgent)
                 {
-                    _mgmtProperties.TryAdd("IsMgmtPlane", true);
-                    _mgmtProperties.TryAdd("SDKUserAgent", userAgent);
+                    _armProperties.TryAdd("IsArmOperation", true);
+                    _armProperties.TryAdd("SDKUserAgent", userAgent);
                 }
                 else
                 {

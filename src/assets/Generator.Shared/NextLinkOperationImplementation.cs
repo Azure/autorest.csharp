@@ -28,7 +28,7 @@ namespace Azure.Core
         private readonly HttpPipeline _pipeline;
         private readonly string? _apiVersion;
         private readonly string? _userAgent;
-        private readonly bool? _isMgmtPlane;
+        private readonly bool? _isArmOperation;
 
         private string? _lastKnownLocation;
         private string _nextRequestUri;
@@ -63,8 +63,8 @@ namespace Azure.Core
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
             _apiVersion = apiVersion;
-            _userAgent = MgmtPlaneOperationHelpers.TryGetProperty("SDKUserAgent", out Object? userAgentValue) && userAgentValue is string userAgent ? userAgent : null;
-            _isMgmtPlane = MgmtPlaneOperationHelpers.TryGetProperty("IsMgmtPlane", out Object? isMgmtPlaneValue) && isMgmtPlaneValue is bool isMgmtPlane ? isMgmtPlane : null;
+            _userAgent = ArmOperationHelpers.TryGetProperty("SDKUserAgent", out Object? userAgentValue) && userAgentValue is string userAgent ? userAgent : null;
+            _isArmOperation = ArmOperationHelpers.TryGetProperty("IsArmOperation", out Object? isMgmtPlaneValue) && isMgmtPlaneValue is bool isMgmtPlane ? isMgmtPlane : null;
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
@@ -212,7 +212,7 @@ namespace Azure.Core
             // 1.Original request is a put method;
             // 2.Original request is a management plane patch method. For data plane patch method, the final uri will be determinned by the original response header and "_finalStateVia";
             // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
-            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && (_isMgmtPlane ?? false) || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && (_isArmOperation ?? false) || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
                 return _startRequestUri.AbsoluteUri;
             }
