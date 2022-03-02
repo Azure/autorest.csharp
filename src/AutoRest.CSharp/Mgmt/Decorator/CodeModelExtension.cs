@@ -11,6 +11,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
+        public static void UpdatePatchOperations(this CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (operation.GetHttpMethod() == HttpMethod.Patch)
+                    {
+                        var bodyParameter = operation.GetBodyParameter();
+                        if (bodyParameter != null)
+                            bodyParameter.Required = true;
+                    }
+                }
+            }
+        }
+
         public static void UpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)

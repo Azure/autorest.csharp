@@ -107,6 +107,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
             _allSchemas.UpdateFrameworkTypes();
 
+            MgmtContext.CodeModel.UpdatePatchOperations();
+
             SinglePropertyHider.HideModels(_allSchemas);
 
             // We can only manipulate objects from the code model, not RestClientMethod
@@ -794,16 +796,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 if (operation is null)
                     continue;
 
-                var operationId = operation.OperationId(operationSet[operation]);
-
-                var bodyParameter = operation.GetBodyParameter();
-                if (bodyParameter is null)
-                    continue;
-
-                if (!bodyParameter.IsRequired)
-                    throw new ErrorHelpers.ErrorException($"Patch operation {operation.GetHttpPath()} (operationId: {operationId}) has optional body parameter, please correct this using directive.");
-
-                var bodySchema = bodyParameter.Schema;
+                var bodySchema = operation.GetBodyParameter()?.Schema;
                 if (bodySchema is null)
                     continue;
 
