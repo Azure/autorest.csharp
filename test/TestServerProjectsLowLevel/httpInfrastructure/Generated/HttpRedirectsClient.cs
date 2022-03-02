@@ -929,7 +929,7 @@ namespace httpInfrastructure_LowLevel
 
         internal HttpMessage CreateHead300Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200300);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -937,13 +937,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/300", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200300.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet300Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200300);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -951,13 +950,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/300", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200300.Instance;
             return message;
         }
 
         internal HttpMessage CreateHead301Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200301);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -965,13 +963,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/301", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200301.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet301Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200301);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -979,13 +976,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/301", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200301.Instance;
             return message;
         }
 
         internal HttpMessage CreatePut301Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier301);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -995,13 +991,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier301.Instance;
             return message;
         }
 
         internal HttpMessage CreateHead302Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200302);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1009,13 +1004,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/302", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200302.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet302Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200302);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1023,13 +1017,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/302", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200302.Instance;
             return message;
         }
 
         internal HttpMessage CreatePatch302Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier302);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1039,13 +1032,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier302.Instance;
             return message;
         }
 
         internal HttpMessage CreatePost303Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200303);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1055,13 +1047,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200303.Instance;
             return message;
         }
 
         internal HttpMessage CreateHead307Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1069,13 +1060,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/307", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200307.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet307Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1083,13 +1073,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/307", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200307.Instance;
             return message;
         }
 
         internal HttpMessage CreateOptions307Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1097,13 +1086,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/redirect/307", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200307.Instance;
             return message;
         }
 
         internal HttpMessage CreatePut307Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1113,13 +1101,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200307.Instance;
             return message;
         }
 
         internal HttpMessage CreatePatch307Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1129,13 +1116,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200307.Instance;
             return message;
         }
 
         internal HttpMessage CreatePost307Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1145,13 +1131,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200307.Instance;
             return message;
         }
 
         internal HttpMessage CreateDelete307Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200307);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1161,105 +1146,22 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200307.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200300 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200300();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    300 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier200301 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200301();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    301 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier301 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier301();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    301 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier200302 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200302();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    302 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier302 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier302();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    302 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier200303 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200303();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    303 => false,
-                    _ => true
-                };
-            }
-        }
-        private sealed class ResponseClassifier200307 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200307();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    307 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200300;
+        private static ResponseClassifier ResponseClassifier200300 => _responseClassifier200300 ??= new CoreResponseClassifier(stackalloc int[] { 200, 300 });
+        private static ResponseClassifier _responseClassifier200301;
+        private static ResponseClassifier ResponseClassifier200301 => _responseClassifier200301 ??= new CoreResponseClassifier(stackalloc int[] { 200, 301 });
+        private static ResponseClassifier _responseClassifier301;
+        private static ResponseClassifier ResponseClassifier301 => _responseClassifier301 ??= new CoreResponseClassifier(stackalloc int[] { 301 });
+        private static ResponseClassifier _responseClassifier200302;
+        private static ResponseClassifier ResponseClassifier200302 => _responseClassifier200302 ??= new CoreResponseClassifier(stackalloc int[] { 200, 302 });
+        private static ResponseClassifier _responseClassifier302;
+        private static ResponseClassifier ResponseClassifier302 => _responseClassifier302 ??= new CoreResponseClassifier(stackalloc int[] { 302 });
+        private static ResponseClassifier _responseClassifier200303;
+        private static ResponseClassifier ResponseClassifier200303 => _responseClassifier200303 ??= new CoreResponseClassifier(stackalloc int[] { 200, 303 });
+        private static ResponseClassifier _responseClassifier200307;
+        private static ResponseClassifier ResponseClassifier200307 => _responseClassifier200307 ??= new CoreResponseClassifier(stackalloc int[] { 200, 307 });
     }
 }

@@ -45,7 +45,7 @@ namespace httpInfrastructure_LowLevel
 
             ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -271,7 +271,7 @@ namespace httpInfrastructure_LowLevel
 
         internal HttpMessage CreateHead501Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -279,13 +279,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/server/501", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet501Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -293,13 +292,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/server/501", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
         internal HttpMessage CreatePost505Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -309,13 +307,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
         internal HttpMessage CreateDelete505Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -325,14 +322,11 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier : Azure.Core.ResponseClassifier
+        private sealed class ResponseClassifierOverride : ResponseClassifier
         {
-            private static Azure.Core.ResponseClassifier _instance;
-            public static Azure.Core.ResponseClassifier Instance => _instance ??= new ResponseClassifier();
             public override bool IsErrorResponse(HttpMessage message)
             {
                 return message.Response.Status switch
@@ -341,5 +335,8 @@ namespace httpInfrastructure_LowLevel
                 };
             }
         }
+
+        private static ResponseClassifier _responseClassifier;
+        private static ResponseClassifier ResponseClassifier => _responseClassifier ??= new ResponseClassifierOverride();
     }
 }

@@ -414,31 +414,50 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteResponseClassifier(CodeWriter writer, string responseClassifierTypeName, StatusCodes[] statusCodes)
         {
-            using (writer.Scope($"private sealed class {responseClassifierTypeName} : {typeof(ResponseClassifier)}"))
+            // For head request all status codes are set to null
+            var areAllStatusCodesNull = statusCodes.All(statusCode => statusCode.Code == null);
+            if (areAllStatusCodesNull)
             {
-                writer.Line($"private static {typeof(ResponseClassifier)} _instance;");
-                writer.Line($"public static {typeof(ResponseClassifier)} Instance => _instance ??= new {responseClassifierTypeName}();");
-
-                using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
+                // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "areAllStatusCodesNull" condition and this class  
+                using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {typeof(ResponseClassifier)}"))
                 {
-                    using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{nameof(Response.Status)} switch", end: "};"))
+                    using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
                     {
-                        foreach (var statusCode in statusCodes)
+                        using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{nameof(Response.Status)} switch", end: "};"))
                         {
-                            if (statusCode.Code != null)
-                            {
-                                writer.Line($"{statusCode.Code} => false,");
-                            }
-                            else
+                            foreach (var statusCode in statusCodes)
                             {
                                 writer.Line($">= {statusCode.Family * 100:L} and < {statusCode.Family * 100 + 100:L} => false,");
                             }
-                        }
 
-                        writer.LineRaw("_ => true");
+                            writer.LineRaw("_ => true");
+                        }
                     }
                 }
+                writer.Line();
             }
+
+            writer.Line($"private static {typeof(ResponseClassifier)} _{responseClassifierTypeName.FirstCharToLowerCase()};");
+            writer.Append($"private static {typeof(ResponseClassifier)} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
+            if (areAllStatusCodesNull)
+            {
+                writer.Line($"{responseClassifierTypeName}Override();");
+            }
+            else
+            {
+                writer.Append($"{typeof(CoreResponseClassifier)}(stackalloc int[]{{");
+                foreach (var statusCode in statusCodes)
+                {
+                    if (statusCode.Code != null)
+                    {
+                        writer.Append($"{statusCode.Code}, ");
+                    }
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($"}});");
+            }
+
+
         }
 
         private static CodeWriter.CodeWriterScope WriteClientMethodDeclaration(CodeWriter writer, LowLevelClientMethod clientMethod, LowLevelOperationSchemaInfo operationSchemas, CSharpType returnType, bool async)

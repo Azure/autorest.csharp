@@ -41,7 +41,7 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CognitiveServicesClient.GetServiceStatistics");
             scope.Start();
@@ -59,7 +59,7 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ServiceStatistics> GetServiceStatistics(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<ServiceStatistics> GetServiceStatistics(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CognitiveServicesClient.GetServiceStatistics");
             scope.Start();
