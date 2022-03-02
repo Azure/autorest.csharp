@@ -11,9 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -44,18 +42,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal Type SystemType => _type;
 
-        private IEnumerable<ParameterInfo> GetCtorParameters(string attributeType)
+        private ConstructorInfo GetCtor(string attributeType)
         {
-            foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.CreateInstance))
+            foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
             {
-                if (!ctor.IsPublic)
-                {
-                    if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == attributeType) != null)
-                        return ctor.GetParameters();
-                }
+                if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == attributeType) != null)
+                    return ctor;
             }
 
-            return new List<ParameterInfo>();
+            throw new InvalidOperationException($"{attributeType} ctor was not found for {_type.Name}");
         }
 
         private static Type? GetSerializeAs(Type type) => type.Name switch
@@ -94,9 +89,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return index == -1 ? name : name.Substring(0, index);
         }
 
-        private ObjectTypeConstructor BuildConstructor(IEnumerable<ParameterInfo> paramInfos)
+        private ObjectTypeConstructor BuildConstructor(ConstructorInfo ctor)
         {
-            var parameters = paramInfos
+            var parameters = ctor.GetParameters()
                 .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, false))
                 .ToArray();
 
@@ -107,10 +102,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
             }
 
-            return new ObjectTypeConstructor(DefaultName, "protected", parameters, initializers.ToArray(), GetBaseCtor());
+            var modifiers = ctor.IsFamily ? Protected : Public;
+
+            return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), GetBaseCtor());
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtorParameters(ReferenceClassFinder.InitializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.InitializationCtorAttributeName));
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
@@ -161,11 +158,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter != null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtorParameters(ReferenceClassFinder.SerializationCtorAttributeName));
+        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtor(ReferenceClassFinder.SerializationCtorAttributeName));
 
         protected override CSharpType? CreateInheritedType()
         {
-            return _type.BaseType == null ? null : CSharpType.FromSystemType(Context, _type.BaseType);
+            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(Context, _type.BaseType);
         }
     }
 }

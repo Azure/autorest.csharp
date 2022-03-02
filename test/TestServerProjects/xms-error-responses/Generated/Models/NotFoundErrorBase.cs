@@ -13,7 +13,6 @@ namespace xms_error_responses.Models
         /// <summary> Initializes a new instance of NotFoundErrorBase. </summary>
         internal NotFoundErrorBase()
         {
-            WhatNotFound = "NotFoundErrorBase";
         }
 
         /// <summary> Initializes a new instance of NotFoundErrorBase. </summary>
@@ -23,7 +22,7 @@ namespace xms_error_responses.Models
         internal NotFoundErrorBase(string someBaseProp, string reason, string whatNotFound) : base(someBaseProp)
         {
             Reason = reason;
-            WhatNotFound = whatNotFound ?? "NotFoundErrorBase";
+            WhatNotFound = whatNotFound;
         }
 
         /// <summary> Gets the reason. </summary>

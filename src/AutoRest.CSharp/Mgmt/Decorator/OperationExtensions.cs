@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static RequestParameter? GetBodyParameter(this Operation operation)
         {
             var serviceRequest = operation.GetServiceRequest();
-            return serviceRequest?.Parameters.FirstOrDefault(parameter => parameter.In == ParameterLocation.Body);
+            return serviceRequest?.Parameters.FirstOrDefault(parameter => parameter.In == HttpParameterIn.Body);
         }
 
         public static ServiceRequest? GetServiceRequest(this Operation operation)

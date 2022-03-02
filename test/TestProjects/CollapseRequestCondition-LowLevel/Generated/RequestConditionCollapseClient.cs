@@ -123,6 +123,296 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual async Task<Response> MissIfNoneMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNoneMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfNoneMatchGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual Response MissIfNoneMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfNoneMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfNoneMatchGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual async Task<Response> MissIfMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfMatchGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual Response MissIfMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfMatchGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual async Task<Response> MissIfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfModifiedSinceGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual Response MissIfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfModifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfModifiedSinceGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual async Task<Response> MissIfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfUnmodifiedSinceGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual Response MissIfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfUnmodifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfUnmodifiedSinceGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual async Task<Response> MissIfMatchIfNoneMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNoneMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfMatchIfNoneMatchGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual Response MissIfMatchIfNoneMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.MissIfMatchIfNoneMatchGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateMissIfMatchIfNoneMatchGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual async Task<Response> IfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfModifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateIfModifiedSinceGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual Response IfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfModifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateIfModifiedSinceGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual async Task<Response> IfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfUnmodifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateIfUnmodifiedSinceGetRequest(requestConditions, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
+        public virtual Response IfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
+        {
+            Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
+            Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
+
+            using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.IfUnmodifiedSinceGet");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateIfUnmodifiedSinceGetRequest(requestConditions, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateCollapsePutRequest(RequestContent content, RequestConditions requestConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -149,6 +439,118 @@ namespace CollapseRequestCondition_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/RequestConditionCollapse/", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                request.Headers.Add(requestConditions, "R");
+            }
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfNoneMatchGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfNoneMatch", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                request.Headers.Add(requestConditions, "R");
+            }
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfMatchGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfMatch", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                request.Headers.Add(requestConditions, "R");
+            }
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfModifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfModifiedSince", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                request.Headers.Add(requestConditions, "R");
+            }
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfUnmodifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfUnmodifiedSince", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                request.Headers.Add(requestConditions, "R");
+            }
+            return message;
+        }
+
+        internal HttpMessage CreateMissIfMatchIfNoneMatchGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/missIfMatchIfNoneMatch", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                request.Headers.Add(requestConditions, "R");
+            }
+            return message;
+        }
+
+        internal HttpMessage CreateIfModifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/ifModifiedSince", false);
+            request.Uri = uri;
+            if (requestConditions != null)
+            {
+                request.Headers.Add(requestConditions, "R");
+            }
+            return message;
+        }
+
+        internal HttpMessage CreateIfUnmodifiedSinceGetRequest(RequestConditions requestConditions, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/RequestConditionCollapse/ifUnmodifiedSince", false);
             request.Uri = uri;
             if (requestConditions != null)
             {

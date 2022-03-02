@@ -161,42 +161,6 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        public virtual async Task<Response> MulticollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        public virtual Response MulticollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
-        {
-            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
@@ -247,22 +211,6 @@ namespace CollapseRequestCondition_LowLevel
             if (matchConditions != null)
             {
                 request.Headers.Add(matchConditions);
-            }
-            return message;
-        }
-
-        internal HttpMessage CreateMulticollapseGetRequest(RequestConditions requestConditions, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/MatchConditionCollapse/multi", false);
-            request.Uri = uri;
-            if (requestConditions != null)
-            {
-                request.Headers.Add(requestConditions, "R");
             }
             return message;
         }

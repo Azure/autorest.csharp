@@ -21,7 +21,7 @@ namespace MgmtScopeResource.Models
             Optional<string> duration = default;
             Optional<object> outputs = default;
             Optional<object> parameters = default;
-            Optional<ErrorResponse> error = default;
+            Optional<ErrorResponse> errorResponse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("provisioningState"))
@@ -74,18 +74,18 @@ namespace MgmtScopeResource.Models
                     parameters = property.Value.GetObject();
                     continue;
                 }
-                if (property.NameEquals("error"))
+                if (property.NameEquals("errorResponse"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = ErrorResponse.DeserializeErrorResponse(property.Value);
+                    errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
             }
-            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), duration.Value, outputs.Value, parameters.Value, error.Value);
+            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), duration.Value, outputs.Value, parameters.Value, errorResponse.Value);
         }
     }
 }
