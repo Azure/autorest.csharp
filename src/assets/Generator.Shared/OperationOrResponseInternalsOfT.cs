@@ -50,24 +50,28 @@ namespace Azure.Core
 
         public bool HasValue => DoesWrapOperation ? _operation!.HasValue : true;
 
-        public Response<T> WaitForCompletion(
-            CancellationToken cancellationToken) => WaitForCompletionAsync(cancellationToken).EnsureCompleted();
+        public Response<T> WaitForCompletion(CancellationToken cancellationToken)
+        {
+            return DoesWrapOperation
+                ? _operation!.WaitForCompletion(cancellationToken)
+                : _valueResponse!;
+        }
 
-        public Response<T> WaitForCompletion(
-            TimeSpan pollingInterval,
-            CancellationToken cancellationToken) => WaitForCompletionAsync(pollingInterval, cancellationToken).EnsureCompleted();
+        public Response<T> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        {
+            return DoesWrapOperation
+                ? _operation!.WaitForCompletion(pollingInterval, cancellationToken)
+                : _valueResponse!;
+        }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(
-            CancellationToken cancellationToken = default)
+        public async ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
         {
             return DoesWrapOperation
                 ? await _operation!.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false)
                 : _valueResponse!;
         }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(
-            TimeSpan pollingInterval,
-            CancellationToken cancellationToken)
+        public async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
         {
             return DoesWrapOperation
                 ? await _operation!.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false)

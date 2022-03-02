@@ -43,17 +43,13 @@ namespace Azure.Core
             _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName, null, fallbackDelayStrategy);
         }
 
-        public Response<T> WaitForCompletion(CancellationToken cancellationToken = default)
-            => WaitForCompletionAsync(cancellationToken).EnsureCompleted();
+        public Response<T> WaitForCompletion(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionAsync(cancellationToken).EnsureCompleted();
 
-        public Response<T> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken)
-            => WaitForCompletionAsync(pollingInterval, cancellationToken).EnsureCompleted();
+        public Response<T> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken).EnsureCompleted();
 
-        public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
-            => _operationInternal.WaitForCompletionAsync(cancellationToken);
+        public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionAsync(cancellationToken);
 
-        public ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
-            => _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
         public Response GetRawResponse() => _operationInternal.RawResponse;
 

@@ -75,12 +75,19 @@ namespace Azure.Core
                 : new ValueTask<Response>(VoidResponse!);
         }
 
-        public Response WaitForCompletionResponse(
-            CancellationToken cancellationToken = default) => WaitForCompletionResponseAsync(cancellationToken).EnsureCompleted();
+        public Response WaitForCompletionResponse(CancellationToken cancellationToken = default)
+        {
+            return DoesWrapOperation
+                ? Operation!.WaitForCompletionResponse(cancellationToken)
+                : VoidResponse!;
+        }
 
-        public Response WaitForCompletionResponse(
-            TimeSpan pollingInterval,
-            CancellationToken cancellationToken) => WaitForCompletionResponseAsync(pollingInterval, cancellationToken).EnsureCompleted();
+        public Response WaitForCompletionResponse(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        {
+            return DoesWrapOperation
+                ? Operation!.WaitForCompletionResponse(pollingInterval, cancellationToken)
+                : VoidResponse!;
+        }
 
         public async ValueTask<Response> WaitForCompletionResponseAsync(
             CancellationToken cancellationToken = default)
