@@ -33,7 +33,7 @@ namespace SupersetFlattenInheritance
 
         internal SupersetFlattenInheritanceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "SupersetFlattenInheritanceArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "SupersetFlattenInheritanceArmOperation");
         }
 
         /// <inheritdoc />

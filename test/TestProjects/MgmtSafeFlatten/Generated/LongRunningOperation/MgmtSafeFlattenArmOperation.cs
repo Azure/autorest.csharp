@@ -31,9 +31,9 @@ namespace MgmtSafeFlatten
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtSafeFlattenArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtSafeFlattenArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtSafeFlattenArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtSafeFlattenArmOperation");
         }
 
         /// <inheritdoc />

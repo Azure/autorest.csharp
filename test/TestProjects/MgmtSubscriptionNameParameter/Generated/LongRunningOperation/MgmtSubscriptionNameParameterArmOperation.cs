@@ -33,7 +33,7 @@ namespace MgmtSubscriptionNameParameter
 
         internal MgmtSubscriptionNameParameterArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtSubscriptionNameParameterArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtSubscriptionNameParameterArmOperation");
         }
 
         /// <inheritdoc />

@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
 
         internal StorageArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "StorageArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "StorageArmOperation");
         }
 
         /// <inheritdoc />

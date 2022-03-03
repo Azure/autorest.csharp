@@ -33,7 +33,7 @@ namespace SubscriptionExtensions
 
         internal SubscriptionExtensionsArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "SubscriptionExtensionsArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "SubscriptionExtensionsArmOperation");
         }
 
         /// <inheritdoc />

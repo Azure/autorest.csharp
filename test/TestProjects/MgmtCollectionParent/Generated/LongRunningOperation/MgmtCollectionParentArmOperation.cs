@@ -33,7 +33,7 @@ namespace MgmtCollectionParent
 
         internal MgmtCollectionParentArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtCollectionParentArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtCollectionParentArmOperation");
         }
 
         /// <inheritdoc />

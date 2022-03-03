@@ -33,7 +33,7 @@ namespace MgmtExpandResourceTypes
 
         internal MgmtExpandResourceTypesArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtExpandResourceTypesArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtExpandResourceTypesArmOperation");
         }
 
         /// <inheritdoc />

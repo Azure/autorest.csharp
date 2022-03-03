@@ -33,7 +33,7 @@ namespace ExactMatchFlattenInheritance
 
         internal ExactMatchFlattenInheritanceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "ExactMatchFlattenInheritanceArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "ExactMatchFlattenInheritanceArmOperation");
         }
 
         /// <inheritdoc />

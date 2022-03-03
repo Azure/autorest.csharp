@@ -33,7 +33,7 @@ namespace MgmtPropertyChooser
 
         internal MgmtPropertyChooserArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtPropertyChooserArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtPropertyChooserArmOperation");
         }
 
         /// <inheritdoc />

@@ -33,7 +33,7 @@ namespace NoTypeReplacement
 
         internal NoTypeReplacementArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "NoTypeReplacementArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "NoTypeReplacementArmOperation");
         }
 
         /// <inheritdoc />

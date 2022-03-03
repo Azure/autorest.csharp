@@ -33,7 +33,7 @@ namespace OmitOperationGroups
 
         internal OmitOperationGroupsArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = MgmtPlaneOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "OmitOperationGroupsArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "OmitOperationGroupsArmOperation");
         }
 
         /// <inheritdoc />
