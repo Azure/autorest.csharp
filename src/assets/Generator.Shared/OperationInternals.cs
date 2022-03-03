@@ -21,7 +21,7 @@ namespace Azure.Core
     /// </summary>
     internal class OperationInternals
     {
-        public static TimeSpan DefaultPollingInterval { get; private set; } = TimeSpan.FromSeconds(1);
+        public static readonly TimeSpan DefaultPollingInterval = TimeSpan.FromSeconds(1);
 
         private readonly OperationInternal _operationInternal;
 
@@ -29,12 +29,15 @@ namespace Azure.Core
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
             _operationInternal = new OperationInternal(clientDiagnostics, nextLinkOperation, originalResponse, scopeName);
-            _operationInternal.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
         }
 
         public Response GetRawResponse() => _operationInternal.RawResponse;
 
-        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(cancellationToken);
+        public Response WaitForCompletionResponse(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken).EnsureCompleted();
+
+        public Response WaitForCompletionResponse(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionResponseAsync(pollingInterval, cancellationToken).EnsureCompleted();
+
+        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken);
 
         public ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
 

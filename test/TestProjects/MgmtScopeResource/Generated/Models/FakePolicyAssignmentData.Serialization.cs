@@ -13,7 +13,7 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    public partial class PolicyAssignmentData : IUtf8JsonSerializable
+    public partial class FakePolicyAssignmentData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -90,7 +90,7 @@ namespace MgmtScopeResource
             writer.WriteEndObject();
         }
 
-        internal static PolicyAssignmentData DeserializePolicyAssignmentData(JsonElement element)
+        internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element)
         {
             Optional<string> location = default;
             Optional<SystemAssignedServiceIdentity> identity = default;
@@ -242,7 +242,7 @@ namespace MgmtScopeResource
                     continue;
                 }
             }
-            return new PolicyAssignmentData(id, name, type, systemData, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages));
+            return new FakePolicyAssignmentData(id, name, type, systemData, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages));
         }
     }
 }
