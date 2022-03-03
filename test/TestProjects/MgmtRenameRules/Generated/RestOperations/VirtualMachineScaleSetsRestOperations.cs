@@ -426,7 +426,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateDeallocateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs)
+        internal HttpMessage CreateDeallocateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -442,11 +442,11 @@ namespace MgmtRenameRules
             uri.AppendPath("/deallocate", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (vmInstanceIDs != null)
+            if (vmInstanceIds != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -457,10 +457,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> DeallocateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public async Task<Response> DeallocateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -475,7 +475,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateDeallocateRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateDeallocateRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -491,10 +491,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response Deallocate(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public Response Deallocate(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -509,7 +509,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateDeallocateRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateDeallocateRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -521,7 +521,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateDeleteInstancesRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIDs)
+        internal HttpMessage CreateDeleteInstancesRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -539,7 +539,7 @@ namespace MgmtRenameRules
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+            content.JsonWriter.WriteObjectValue(vmInstanceIds);
             request.Content = content;
             message.SetProperty("SDKUserAgent", _userAgent);
             return message;
@@ -549,10 +549,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIDs"/> is null. </exception>
-        public async Task<Response> DeleteInstancesAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIDs, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIds"/> is null. </exception>
+        public async Task<Response> DeleteInstancesAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIds, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -566,12 +566,12 @@ namespace MgmtRenameRules
             {
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
-            if (vmInstanceIDs == null)
+            if (vmInstanceIds == null)
             {
-                throw new ArgumentNullException(nameof(vmInstanceIDs));
+                throw new ArgumentNullException(nameof(vmInstanceIds));
             }
 
-            using var message = CreateDeleteInstancesRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateDeleteInstancesRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -587,10 +587,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIDs"/> is null. </exception>
-        public Response DeleteInstances(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIDs, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIds"/> is null. </exception>
+        public Response DeleteInstances(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIds, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -604,12 +604,12 @@ namespace MgmtRenameRules
             {
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
-            if (vmInstanceIDs == null)
+            if (vmInstanceIds == null)
             {
-                throw new ArgumentNullException(nameof(vmInstanceIDs));
+                throw new ArgumentNullException(nameof(vmInstanceIds));
             }
 
-            using var message = CreateDeleteInstancesRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateDeleteInstancesRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1060,7 +1060,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreatePowerOffRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs, bool? skipShutdown)
+        internal HttpMessage CreatePowerOffRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds, bool? skipShutdown)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1080,11 +1080,11 @@ namespace MgmtRenameRules
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (vmInstanceIDs != null)
+            if (vmInstanceIds != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -1095,11 +1095,11 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> PowerOffAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PowerOffAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1114,7 +1114,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreatePowerOffRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs, skipShutdown);
+            using var message = CreatePowerOffRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds, skipShutdown);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1130,11 +1130,11 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response PowerOff(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public Response PowerOff(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1149,7 +1149,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreatePowerOffRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs, skipShutdown);
+            using var message = CreatePowerOffRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds, skipShutdown);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1161,7 +1161,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateRestartRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs)
+        internal HttpMessage CreateRestartRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1177,11 +1177,11 @@ namespace MgmtRenameRules
             uri.AppendPath("/restart", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (vmInstanceIDs != null)
+            if (vmInstanceIds != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -1192,10 +1192,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> RestartAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public async Task<Response> RestartAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1210,7 +1210,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateRestartRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateRestartRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1226,10 +1226,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response Restart(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public Response Restart(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1244,7 +1244,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateRestartRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateRestartRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1256,7 +1256,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateStartRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs)
+        internal HttpMessage CreateStartRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1272,11 +1272,11 @@ namespace MgmtRenameRules
             uri.AppendPath("/start", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (vmInstanceIDs != null)
+            if (vmInstanceIds != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -1287,10 +1287,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> StartAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public async Task<Response> StartAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1305,7 +1305,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateStartRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateStartRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1321,10 +1321,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response Start(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public Response Start(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1339,7 +1339,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateStartRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateStartRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1351,7 +1351,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateRedeployRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs)
+        internal HttpMessage CreateRedeployRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1367,11 +1367,11 @@ namespace MgmtRenameRules
             uri.AppendPath("/redeploy", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (vmInstanceIDs != null)
+            if (vmInstanceIds != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -1382,10 +1382,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> RedeployAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public async Task<Response> RedeployAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1400,7 +1400,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateRedeployRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateRedeployRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1416,10 +1416,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response Redeploy(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public Response Redeploy(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1434,7 +1434,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateRedeployRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateRedeployRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1446,7 +1446,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreatePerformMaintenanceRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs)
+        internal HttpMessage CreatePerformMaintenanceRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1462,11 +1462,11 @@ namespace MgmtRenameRules
             uri.AppendPath("/performMaintenance", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (vmInstanceIDs != null)
+            if (vmInstanceIds != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -1477,10 +1477,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> PerformMaintenanceAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public async Task<Response> PerformMaintenanceAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1495,7 +1495,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreatePerformMaintenanceRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreatePerformMaintenanceRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1511,10 +1511,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response PerformMaintenance(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public Response PerformMaintenance(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1529,7 +1529,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreatePerformMaintenanceRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreatePerformMaintenanceRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1541,7 +1541,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateUpdateInstancesRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIDs)
+        internal HttpMessage CreateUpdateInstancesRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1559,7 +1559,7 @@ namespace MgmtRenameRules
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+            content.JsonWriter.WriteObjectValue(vmInstanceIds);
             request.Content = content;
             message.SetProperty("SDKUserAgent", _userAgent);
             return message;
@@ -1569,10 +1569,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIDs"/> is null. </exception>
-        public async Task<Response> UpdateInstancesAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIDs, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIds"/> is null. </exception>
+        public async Task<Response> UpdateInstancesAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIds, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1586,12 +1586,12 @@ namespace MgmtRenameRules
             {
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
-            if (vmInstanceIDs == null)
+            if (vmInstanceIds == null)
             {
-                throw new ArgumentNullException(nameof(vmInstanceIDs));
+                throw new ArgumentNullException(nameof(vmInstanceIds));
             }
 
-            using var message = CreateUpdateInstancesRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateUpdateInstancesRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1607,10 +1607,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIDs"/> is null. </exception>
-        public Response UpdateInstances(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIDs, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIds"/> is null. </exception>
+        public Response UpdateInstances(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIds, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1624,12 +1624,12 @@ namespace MgmtRenameRules
             {
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
-            if (vmInstanceIDs == null)
+            if (vmInstanceIds == null)
             {
-                throw new ArgumentNullException(nameof(vmInstanceIDs));
+                throw new ArgumentNullException(nameof(vmInstanceIds));
             }
 
-            using var message = CreateUpdateInstancesRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateUpdateInstancesRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1736,7 +1736,7 @@ namespace MgmtRenameRules
             }
         }
 
-        internal HttpMessage CreateReimageAllRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs)
+        internal HttpMessage CreateReimageAllRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1752,11 +1752,11 @@ namespace MgmtRenameRules
             uri.AppendPath("/reimageall", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (vmInstanceIDs != null)
+            if (vmInstanceIds != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmInstanceIDs);
+                content.JsonWriter.WriteObjectValue(vmInstanceIds);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -1767,10 +1767,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> ReimageAllAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ReimageAllAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1785,7 +1785,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateReimageAllRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateReimageAllRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1801,10 +1801,10 @@ namespace MgmtRenameRules
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="vmInstanceIDs"> A list of virtual machine instance IDs from the VM scale set. </param>
+        /// <param name="vmInstanceIds"> A list of virtual machine instance IDs from the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response ReimageAll(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIDs = null, CancellationToken cancellationToken = default)
+        public Response ReimageAll(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1819,7 +1819,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateReimageAllRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIDs);
+            using var message = CreateReimageAllRequest(subscriptionId, resourceGroupName, vmScaleSetName, vmInstanceIds);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
