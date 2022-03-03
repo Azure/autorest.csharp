@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 
@@ -86,9 +87,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void TransformOperation(Operation operation, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
             TransformLanguage(operation.Language, transformer, wordCache);
+            // this iteration only applies to path and query parameter (maybe headers?) but not to body parameter
             foreach (var parameter in operation.Parameters)
             {
                 TransformLanguage(parameter.Language, transformer, wordCache);
+            }
+
+            // we need to iterate over the parameters in each request (actually only one request) to ensure the name of body parameters are also taken care of
+            foreach (var request in operation.Requests)
+            {
+                foreach (var parameter in request.Parameters)
+                {
+                    TransformLanguage(parameter.Language, transformer, wordCache);
+                }
             }
         }
 
