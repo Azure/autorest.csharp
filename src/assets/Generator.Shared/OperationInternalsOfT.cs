@@ -43,9 +43,11 @@ namespace Azure.Core
             _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName, null, fallbackDelayStrategy);
         }
 
+#pragma warning disable AZC0106 // Non-public asynchronous method needs 'async' parameter.
         public Response<T> WaitForCompletion(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionAsync(cancellationToken).EnsureCompleted();
 
         public Response<T> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken).EnsureCompleted();
+#pragma warning restore AZC0106 // Non-public asynchronous method needs 'async' parameter.
 
         public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionAsync(cancellationToken);
 

@@ -33,9 +33,11 @@ namespace Azure.Core
 
         public Response GetRawResponse() => _operationInternal.RawResponse;
 
+#pragma warning disable AZC0106 // Non-public asynchronous method needs 'async' parameter.
         public Response WaitForCompletionResponse(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken).EnsureCompleted();
 
         public Response WaitForCompletionResponse(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionResponseAsync(pollingInterval, cancellationToken).EnsureCompleted();
+#pragma warning restore AZC0106 // Non-public asynchronous method needs 'async' parameter.
 
         public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken);
 
