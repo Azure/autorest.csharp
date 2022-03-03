@@ -8,9 +8,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Azure.Core;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
 using MgmtSignalR;
 using MgmtSignalR.Models;
@@ -33,10 +31,6 @@ namespace MgmtSignalR.Tests.Mock
             string privateEndpointConnectionName = "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e";
             MgmtSignalR.PrivateEndpointConnectionData parameters = new MgmtSignalR.PrivateEndpointConnectionData()
             {
-                PrivateEndpoint = new WritableSubResource()
-                {
-                    Id = new ResourceIdentifier($"/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"),
-                },
                 PrivateLinkServiceConnectionState = new MgmtSignalR.Models.PrivateLinkServiceConnectionState()
                 {
                     Status = new MgmtSignalR.Models.PrivateLinkServiceConnectionStatus("Approved"),

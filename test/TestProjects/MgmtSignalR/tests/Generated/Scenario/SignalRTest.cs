@@ -82,34 +82,12 @@ namespace MgmtSignalR.Tests.Scenario
                     {
                         Type = new MgmtSignalR.Models.ManagedIdentityType($"SystemAssigned"),
                     },
-                    Cors = new MgmtSignalR.Models.SignalRCorsSettings(),
-                    Upstream = new MgmtSignalR.Models.ServerlessUpstreamSettings(),
                     NetworkACLs = new MgmtSignalR.Models.SignalRNetworkACLs()
                     {
                         DefaultAction = new MgmtSignalR.Models.ACLAction($"Deny"),
                         PublicNetwork = new MgmtSignalR.Models.NetworkACL(),
                     },
-                    Tls = new MgmtSignalR.Models.SignalRTlsSettings()
-                    {
-                        ClientCertEnabled = false,
-                    },
                 };
-                parameters.Cors.AllowedOrigins.Add($"https://foo.com");
-                parameters.Cors.AllowedOrigins.Add($"https://bar.com");
-                parameters.Upstream.Templates.Add(new MgmtSignalR.Models.UpstreamTemplate(urlTemplate: $"https://example.com/chat/api/connect")
-                {
-                    HubPattern = $"*",
-                    EventPattern = $"connect,disconnect",
-                    CategoryPattern = $"*",
-                    Auth = new MgmtSignalR.Models.UpstreamAuthSettings()
-                    {
-                        Type = new MgmtSignalR.Models.UpstreamAuthType($"ManagedIdentity"),
-                        ManagedIdentity = new MgmtSignalR.Models.ManagedIdentitySettings()
-                        {
-                            Resource = $"api://example",
-                        },
-                    },
-                });
                 parameters.NetworkACLs.PublicNetwork.Allow.Add(new MgmtSignalR.Models.SignalRRequestType($"ClientConnection"));
                 parameters.NetworkACLs.PrivateEndpoints.Add(new MgmtSignalR.Models.PrivateEndpointACL(name: $"{resourceName}.1fa229cd-bf3f-47f0-8c49-afb36723997e"));
                 parameters.Tags.ReplaceWith(new Dictionary<string, string>()
@@ -151,34 +129,12 @@ namespace MgmtSignalR.Tests.Scenario
                     {
                         Type = new MgmtSignalR.Models.ManagedIdentityType($"SystemAssigned"),
                     },
-                    Cors = new MgmtSignalR.Models.SignalRCorsSettings(),
-                    Upstream = new MgmtSignalR.Models.ServerlessUpstreamSettings(),
                     NetworkACLs = new MgmtSignalR.Models.SignalRNetworkACLs()
                     {
                         DefaultAction = new MgmtSignalR.Models.ACLAction($"Deny"),
                         PublicNetwork = new MgmtSignalR.Models.NetworkACL(),
                     },
-                    Tls = new MgmtSignalR.Models.SignalRTlsSettings()
-                    {
-                        ClientCertEnabled = false,
-                    },
                 };
-                parameters.Cors.AllowedOrigins.Add($"https://foo.com");
-                parameters.Cors.AllowedOrigins.Add($"https://bar.com");
-                parameters.Upstream.Templates.Add(new MgmtSignalR.Models.UpstreamTemplate(urlTemplate: $"https://example.com/chat/api/connect")
-                {
-                    HubPattern = $"*",
-                    EventPattern = $"connect,disconnect",
-                    CategoryPattern = $"*",
-                    Auth = new MgmtSignalR.Models.UpstreamAuthSettings()
-                    {
-                        Type = new MgmtSignalR.Models.UpstreamAuthType($"ManagedIdentity"),
-                        ManagedIdentity = new MgmtSignalR.Models.ManagedIdentitySettings()
-                        {
-                            Resource = $"api://example",
-                        },
-                    },
-                });
                 parameters.NetworkACLs.PublicNetwork.Allow.Add(new MgmtSignalR.Models.SignalRRequestType($"ClientConnection"));
                 parameters.NetworkACLs.PrivateEndpoints.Add(new MgmtSignalR.Models.PrivateEndpointACL(name: $"{resourceName}.1fa229cd-bf3f-47f0-8c49-afb36723997e"));
                 parameters.Tags.ReplaceWith(new Dictionary<string, string>()
