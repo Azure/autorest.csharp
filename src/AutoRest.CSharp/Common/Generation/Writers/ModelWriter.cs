@@ -290,30 +290,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
         {
-            if (IsSinglePropertyObject(property, out var childProp))
+            if (property.IsSinglePropertyObject(out var childProp))
             {
                 heirarchyStack.Push(childProp);
                 BuildHeirarchy(childProp, heirarchyStack);
             }
-        }
-
-        private bool IsSinglePropertyObject(ObjectTypeProperty property, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
-        {
-            innerProperty = null;
-
-            if (property.ValueType.IsFrameworkType)
-                return false;
-
-            if (property.ValueType.Implementation is not ObjectType objType)
-                return false;
-
-            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
-            bool isSingleProperty = properties.Count() == 1;
-
-            if (isSingleProperty)
-                innerProperty = properties.First();
-
-            return isSingleProperty;
         }
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)

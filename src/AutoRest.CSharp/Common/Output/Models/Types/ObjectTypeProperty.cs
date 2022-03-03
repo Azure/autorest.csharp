@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 
@@ -34,5 +36,24 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// </summary>
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
+
+        public bool IsSinglePropertyObject([MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
+        {
+            innerProperty = null;
+
+            if (this.ValueType.IsFrameworkType)
+                return false;
+
+            if (this.ValueType.Implementation is not ObjectType objType)
+                return false;
+
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            bool isSingleProperty = properties.Count() == 1;
+
+            if (isSingleProperty)
+                innerProperty = properties.First();
+
+            return isSingleProperty;
+        }
     }
 }

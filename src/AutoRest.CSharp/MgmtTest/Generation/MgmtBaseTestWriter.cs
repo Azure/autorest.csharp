@@ -232,6 +232,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return constructor;
         }
 
+        public FormattableString PropertyVaraibleName(FormattableString variableName, ObjectTypeProperty targetProperty)
+        {
+            bool isSingleProperty = targetProperty.IsSinglePropertyObject(out var innerProperty);
+            return isSingleProperty ? variableName : $"{variableName}.{targetProperty.Declaration.Name}";
+        }
+
         public void WriteSchemaObjectExampleValue(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName)
         {
             // Find Polimophismed schema
@@ -252,11 +258,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             foreach (var p in signature.Parameters)
             {
                 var targetProperty = constructor.FindPropertyInitializedByParameter(p);
-                var paramValue = FindPropertyValue(sot, ev, targetProperty!);
+                if (targetProperty is null)
+                {
+                    writer.Append($"default, /* Can't find property for this parameter!*/");
+                    continue;
+                }
+                var paramValue = FindPropertyValue(sot, ev, targetProperty);
                 writer.Append($"{p.Name:D}: ");
                 if (paramValue is not null)
                 {
-                    WriteExampleValue(writer, p.Type, paramValue!, $"{variableName}.{targetProperty!.Declaration.Name}");
+                    WriteExampleValue(writer, p.Type, paramValue!, $"{PropertyVaraibleName(variableName, targetProperty)}");
                 }
                 else
                 {
@@ -305,7 +316,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                     if (paramValue is not null)
                     {
-                        assignmentWriterDelegates.Enqueue(CreateAssignmentWriterDelegate(targetProperty.ValueType, paramValue, $"{variableName}.{targetProperty.Declaration.Name}"));
+                        assignmentWriterDelegates.Enqueue(CreateAssignmentWriterDelegate(targetProperty.ValueType, paramValue, $"{PropertyVaraibleName(variableName, targetProperty)}"));
                     }
                 }
             }
@@ -364,18 +375,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         var paramValue = FindPropertyValue(sot, ev, targetProperty!);
                         if (paramValue is not null)
                         {
-                            FormattableString newVariableName = $"{variableName}.{targetProperty.Declaration.Name}";
+                            FormattableString newVariableName = $"{PropertyVaraibleName(variableName, targetProperty)}";
                             if (targetProperty.Declaration.Name == "Tags" && targetProperty.ValueType.Name == "IDictionary")
                             {
                                 AddTagWriterDelegate(newVariableName, targetProperty.ValueType, paramValue);
+                                consumedProperties.Add(targetProperty);
                             }
-                            else
+                            else if (!targetProperty.IsSinglePropertyObject(out var innerProperty))
                             {
                                 writer.Append($"{targetProperty.Declaration.Name:D} = ");
                                 WriteExampleValue(writer, targetProperty.ValueType, paramValue!, newVariableName);
                                 writer.Append($", ");
+                                consumedProperties.Add(targetProperty);
                             }
-                            consumedProperties.Add(targetProperty);
                         }
                     }
                 }
