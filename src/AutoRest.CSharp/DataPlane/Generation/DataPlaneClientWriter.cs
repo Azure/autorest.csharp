@@ -58,6 +58,12 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        protected new void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
+        {
+            base.WriteClientFields(writer, client, writePipelineField);
+            writer.Append($"{UriPropertyAccessibility} {typeof(Uri)} {UriProperty}").LineRaw(" { get; }");
+        }
+
         private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)
         {
             CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
@@ -266,6 +272,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
                 writer.Line($"{PipelineField} = {PipelineVariable};");
+                writer.Line($"{UriProperty} = {UriVariable};");
             }
             writer.Line();
         }
