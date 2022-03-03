@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _name = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
             _genericString = isGeneric ? "<T>" : string.Empty;
             Filename = isGeneric ? $"LongRunningOperation/{_name}OfT.cs" : $"LongRunningOperation/{_name}.cs";
-            _waitMethod = isGeneric ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
+            _waitMethod = isGeneric ? "WaitForCompletion" : "WaitForCompletionResponse";
             _operationType = isGeneric ? typeof(ArmOperation<>) : typeof(ArmOperation);
             _responseType = isGeneric ? typeof(Response<>) : typeof(Response);
             _operationOrResponseType = isGeneric ? typeof(OperationOrResponseInternals<>) : typeof(OperationOrResponseInternals);
@@ -108,11 +108,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(_responseType)} {_waitMethod}({typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}(cancellationToken);");
+                    _writer.Line($"public override {_responseType} {_waitMethod}({typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}(cancellationToken);");
                     _writer.Line();
 
                     _writer.WriteXmlDocumentationInheritDoc();
-                    _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(_responseType)} {_waitMethod}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}(pollingInterval, cancellationToken);");
+                    _writer.Line($"public override {_responseType} {_waitMethod}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}(pollingInterval, cancellationToken);");
+                    _writer.Line();
+
+                    _writer.WriteXmlDocumentationInheritDoc();
+                    _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(_responseType)} {_waitMethod}Async({typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}Async(cancellationToken);");
+                    _writer.Line();
+
+                    _writer.WriteXmlDocumentationInheritDoc();
+                    _writer.Line($"public override {typeof(ValueTask<>).MakeGenericType(_responseType)} {_waitMethod}Async({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{_waitMethod}Async(pollingInterval, cancellationToken);");
                     _writer.Line();
                 }
             }

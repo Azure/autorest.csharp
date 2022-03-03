@@ -28,7 +28,7 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia), originalResponse, scopeName))
+            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia), originalResponse, scopeName, null, new ExponentialDelayStrategy()))
         {
         }
 
@@ -75,10 +75,26 @@ namespace Azure.Core
                 : new ValueTask<Response>(VoidResponse!);
         }
 
+        public Response WaitForCompletionResponse(CancellationToken cancellationToken = default)
+        {
+            return DoesWrapOperation
+                ? Operation!.WaitForCompletionResponse(cancellationToken)
+                : VoidResponse!;
+        }
+
+        public Response WaitForCompletionResponse(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        {
+            return DoesWrapOperation
+                ? Operation!.WaitForCompletionResponse(pollingInterval, cancellationToken)
+                : VoidResponse!;
+        }
+
         public async ValueTask<Response> WaitForCompletionResponseAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionResponseAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return DoesWrapOperation
+                ? await Operation!.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false)
+                : VoidResponse!;
         }
 
         public async ValueTask<Response> WaitForCompletionResponseAsync(

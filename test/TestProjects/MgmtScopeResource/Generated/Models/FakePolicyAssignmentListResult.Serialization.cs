@@ -12,11 +12,11 @@ using MgmtScopeResource;
 
 namespace MgmtScopeResource.Models
 {
-    internal partial class PolicyAssignmentListResult
+    internal partial class FakePolicyAssignmentListResult
     {
-        internal static PolicyAssignmentListResult DeserializePolicyAssignmentListResult(JsonElement element)
+        internal static FakePolicyAssignmentListResult DeserializeFakePolicyAssignmentListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<PolicyAssignmentData>> value = default;
+            Optional<IReadOnlyList<FakePolicyAssignmentData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtScopeResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PolicyAssignmentData> array = new List<PolicyAssignmentData>();
+                    List<FakePolicyAssignmentData> array = new List<FakePolicyAssignmentData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PolicyAssignmentData.DeserializePolicyAssignmentData(item));
+                        array.Add(FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(item));
                     }
                     value = array;
                     continue;
@@ -41,7 +41,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new PolicyAssignmentListResult(Optional.ToList(value), nextLink.Value);
+            return new FakePolicyAssignmentListResult(Optional.ToList(value), nextLink.Value);
         }
     }
 }
