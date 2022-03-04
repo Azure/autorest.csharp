@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Builders
             DateTimeSchema {Format: DateTimeSchemaFormat.DateTime} => SerializationFormat.DateTime_ISO8601,
             DateTimeSchema {Format: DateTimeSchemaFormat.DateTimeRfc1123} => SerializationFormat.DateTime_RFC1123,
             DateSchema _ => SerializationFormat.Date_ISO8601,
-            DurationSchema _ => SerializationFormat.Duration_ISO8601,
+            DurationSchema _ => schema.Extensions?.Format?.Equals("duration-c") == true ? SerializationFormat.Duration_Constant : SerializationFormat.Duration_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
             _ => SerializationFormat.Default
         };
