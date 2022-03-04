@@ -3,12 +3,14 @@ trigger:
     include:
     - feature/*
     - pipelinetest/*
+    - pipelinetest
 
 pr:
   branches:
     include:
     - feature/*
     - pipelinetest/*
+    - pipelinetest
 
 variables:
   BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
