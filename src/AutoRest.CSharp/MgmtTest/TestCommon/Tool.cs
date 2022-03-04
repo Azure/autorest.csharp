@@ -4,10 +4,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using Newtonsoft.Json;
 using System.Text.Json;
 
@@ -72,51 +69,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
             }
             return sb.ToString();
-        }
-
-        public static void WriteAnonymousObject(CodeWriter writer, object? obj)
-        {
-            JsonRawValue jsonRawValue = new JsonRawValue(obj);
-            if (jsonRawValue.IsDictionary())
-            {
-                var dict = jsonRawValue.AsDictionary();
-                using (writer.Scope($"new ", newLine: false))
-                {
-                    foreach (var property in dict.Keys)
-                    {
-                        writer.Append($"{property} = ");
-                        WriteAnonymousObject(writer, dict[property]);
-                        writer.Line($", ");
-                    }
-                }
-            }
-            else if (jsonRawValue.IsEnumerable())
-            {
-                using (writer.Scope($"new object[]", newLine: false))
-                {
-                    foreach (var element in jsonRawValue.AsEnumerable())
-                    {
-                        WriteAnonymousObject(writer, element);
-                        writer.Line($", ");
-                    }
-                }
-            }
-            else
-            {
-                if (jsonRawValue.IsString())
-                {
-                    writer.Append($"{jsonRawValue.AsString():L}");
-                }
-                else
-                if (jsonRawValue.IsNull())
-                {
-                    writer.Append($"null");
-                }
-                else
-                {
-                    writer.Append($"{jsonRawValue.RawValue}");
-                }
-            }
         }
     }
 }
