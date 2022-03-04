@@ -102,6 +102,9 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub, npm and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - pwsh: ./eng/InitMockTests.ps1
+            displayName: "Generate All SDK"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - job: MockInit
         timeoutInMinutes: 120
         pool:
@@ -110,9 +113,9 @@ stages:
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
-          - pwsh: ./eng/InitMockTests.ps1
-            displayName: "Generate All SDK"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        #   - pwsh: ./eng/InitMockTests.ps1
+        #     displayName: "Generate All SDK"
+        #     workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: smoke-test.yml
         parameters:
           name: SmokeTest_A_C
