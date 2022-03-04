@@ -237,6 +237,12 @@ function  MockTestInit {
 
         # Init All Track2 Sdk
         $sdkFolder = Get-ChildItem $netRepoSdkFolder
+        Write-Host "================================================================================="
+        Write-Host "================================================================================="
+        Write-Host "================================================================================="
+        Write-Host "================================================================================="
+        Write-Host "================================================================================="
+        Write-Host $sdkFolder
         $sdkFolder  | ForEach-Object {
             $curFolderPRs = Get-ChildItem($_)
             foreach ($item in $curFolderPRs) {
