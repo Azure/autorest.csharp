@@ -3,23 +3,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
-using System.Diagnostics.CodeAnalysis;
 using AutoRest.CSharp.Common.Generation.Writers;
 using Azure.ResourceManager.Resources;
-using System.Runtime.InteropServices;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -30,8 +22,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     {
         protected TestDefinitionModel testDef;
         protected CodeWriter writer;
-        protected VariableScope variableScope = new VariableScope();
-
         protected string TestNamespace => MgmtContext.Context.DefaultNamespace + ".Tests.Scenario";
         public string TypeName => System.IO.Path.GetFileNameWithoutExtension(testDef.FilePath).ToCleanName();
         protected string TestBaseName => $"ManagementRecordedTestBase<{MgmtContext.Context.DefaultLibraryName}TestEnvironment>";
@@ -234,11 +224,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     var templatePayload = new CodeWriterDeclaration("templatePayload");
                     writer.Line($"var {templatePayload:D} = {Newtonsoft.Json.JsonConvert.SerializeObject(step.ArmTemplatePayload).RefScenariDefinedVariables(scenarioDefinedVariables)};");
-                    // writer.Line($"var {templatePayload:D} = {Tool.ToJsonString(JsonDocument.Parse(JsonSerializer.Serialize(step.ArmTemplatePayload))).RefScenariDefinedVariables(scenarioDefinedVariables)};");
                     var deploymentOperation = new CodeWriterDeclaration("deploymentOperation");
                     using (writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetDeployments().CreateOrUpdateAsync(true, {step.Step:L}, new Resources.Models.DeploymentInput(new Resources.Models.DeploymentProperties(Resources.Models.DeploymentMode.Complete)", "{", "}));"))
                     {
-                        // writer.Append($"Template = {Newtonsoft.Json.JsonConvert.SerializeObject(step.ArmTemplatePayload.RefScenariDefinedVariables(scenarioDefinedVariables)):L}");
                         writer.Append($"Template = {typeof(System.Text.Json.JsonDocument)}.Parse({templatePayload}).RootElement");
                         writer.Line($",");
                     }
@@ -344,27 +332,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 writer.Line($"{typeof(ResourceGroup)} resourceGroup;");
             }
 
-            // TODO: move this to testmodeler
             if (!(testDef.RequiredVariables?.Contains("resourceGroupName") is true))
             {
                 testDef.RequiredVariables?.Add("resourceGroupName");
             }
-
             WriteVariableInitializations(testDef, Enumerable.Empty<string>());
 
             using (writer.Scope($"public {TypeName}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
             {
             }
             writer.Line();
-        }
-
-        public string WriteGetResource(Resource resource, string resourceIdentifierParams, ExampleModel exampleModel)
-        {
-            var resourceVariableName = variableScope.useVariableName(resource.Type.Name.FirstCharToLowerCase());
-            var idVar = variableScope.useVariableName($"{resource.Type.Name.FirstCharToLowerCase()}Id");
-            writer.Line($"var {idVar} = {resource.Type}.CreateResourceIdentifier({resourceIdentifierParams});");
-            writer.Line($"var {resourceVariableName} = GetArmClient().Get{resource.Type.Name}({idVar});");
-            return resourceVariableName;
         }
     }
 }
