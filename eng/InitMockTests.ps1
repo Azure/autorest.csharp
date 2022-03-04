@@ -184,7 +184,7 @@ function  MockTestInit {
         & dotnet new -i $projRoot\MgmtTemplate\mocktests
 
         # Clone Azure/azure-sdk-for-net
-        # & git clone $netSdkRepoUri $projRoot\azure-sdk-for-net
+        & git clone $netSdkRepoUri $projRoot\azure-sdk-for-net
         $netRepoRoot = Join-Path $projRoot "azure-sdk-for-net"
         $netRepoSdkFolder = Join-Path $netRepoRoot "sdk"
         $CodeGenTargetFile = Join-Path $netRepoRoot "\eng\CodeGeneration.targets"
