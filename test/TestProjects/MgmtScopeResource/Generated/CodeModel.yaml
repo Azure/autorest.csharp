@@ -1243,7 +1243,7 @@ schemas: !Schemas
         - !ApiVersion 
           version: '2021-04-01'
       extensions:
-        x-ms-format: duration-c
+        x-ms-format: duration-constant
       language: !Languages 
         default:
           name: DeploymentOperationPropertiesAnotherDuration
@@ -2228,7 +2228,7 @@ schemas: !Schemas
                 readOnly: true
                 serializedName: anotherDuration
                 extensions:
-                  x-ms-format: duration-c
+                  x-ms-format: duration-constant
                 language: !Languages 
                   default:
                     name: anotherDuration

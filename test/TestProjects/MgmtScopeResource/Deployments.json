@@ -1137,7 +1137,7 @@
           "readOnly": true,
           "type": "string",
           "format": "duration",
-          "x-ms-format": "duration-c",
+          "x-ms-format": "duration-constant",
           "description": "Another duration of the operation."
         },
         "serviceRequestId": {
