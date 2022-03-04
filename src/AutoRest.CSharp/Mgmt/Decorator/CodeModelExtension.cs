@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         property.Language.Default.Name.Equals("uri", StringComparison.Ordinal))
                         property.Schema.Type = AllSchemaTypes.Uri;
                     if (property.Language.Default.Name.SplitByCamelCase().Last().Equals("Duration") && property.Schema.Type == AllSchemaTypes.String)
-                        throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add both \"format\": \"duration\" and \"x-ms-format\": \"duration-c\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to the duration format, please use \"x-ms-client-name\" to rename the property for the client.");
+                        throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add both \"format\": \"duration\" and \"x-ms-format\": \"duration-c\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to a TimeSpan format, please use \"x-ms-client-name\" to rename the property for the client.");
                 }
             }
         }

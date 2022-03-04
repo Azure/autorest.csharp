@@ -18,7 +18,8 @@ namespace MgmtScopeResource.Models
             Optional<ProvisioningOperation> provisioningOperation = default;
             Optional<string> provisioningState = default;
             Optional<DateTimeOffset> timestamp = default;
-            Optional<string> duration = default;
+            Optional<TimeSpan> duration = default;
+            Optional<TimeSpan> anotherDuration = default;
             Optional<string> serviceRequestId = default;
             Optional<string> statusCode = default;
             Optional<StatusMessage> statusMessage = default;
@@ -53,7 +54,22 @@ namespace MgmtScopeResource.Models
                 }
                 if (property.NameEquals("duration"))
                 {
-                    duration = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    duration = property.Value.GetTimeSpan("P");
+                    continue;
+                }
+                if (property.NameEquals("anotherDuration"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    anotherDuration = property.Value.GetTimeSpan("c");
                     continue;
                 }
                 if (property.NameEquals("serviceRequestId"))
@@ -97,7 +113,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentOperationProperties(Optional.ToNullable(provisioningOperation), provisioningState.Value, Optional.ToNullable(timestamp), duration.Value, serviceRequestId.Value, statusCode.Value, statusMessage.Value, request.Value, response.Value);
+            return new DeploymentOperationProperties(Optional.ToNullable(provisioningOperation), provisioningState.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), Optional.ToNullable(anotherDuration), serviceRequestId.Value, statusCode.Value, statusMessage.Value, request.Value, response.Value);
         }
     }
 }
