@@ -151,6 +151,8 @@ function  MockTestInit {
         [Parameter()]
         [bool]$GenerateNewSDKs = $false,
         [Parameter()]
+        [bool]$NpmInit = $false,
+        [Parameter()]
         [string]$netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
     )
     begin {
@@ -169,6 +171,11 @@ function  MockTestInit {
         $Script:RPMapping = [ordered]@{ }
     }
     process {
+        # Install npm and autorest
+        if ($NpmInit) {
+           & npm install -g autorest
+        }
+
         # Build current autorest project 
         $projRoot = Join-Path $PSScriptRoot "..\"
         & cd $projRoot
@@ -237,12 +244,6 @@ function  MockTestInit {
 
         # Init All Track2 Sdk
         $sdkFolder = Get-ChildItem $netRepoSdkFolder
-        Write-Host "================================================================================="
-        Write-Host "================================================================================="
-        Write-Host "================================================================================="
-        Write-Host "================================================================================="
-        Write-Host "================================================================================="
-        Write-Host $sdkFolder
         $sdkFolder  | ForEach-Object {
             $curFolderPRs = Get-ChildItem($_)
             foreach ($item in $curFolderPRs) {
@@ -286,5 +287,6 @@ function  MockTestInit {
 
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $true
+$NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
-MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -netSdkRepoUri $netSdkRepoUri
+MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
