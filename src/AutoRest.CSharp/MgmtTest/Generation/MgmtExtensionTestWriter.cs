@@ -5,16 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
-using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -23,7 +18,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class MgmtExtensionTestWriter : MgmtBaseTestWriter
     {
-        // protected SubscriptionExtensions subscriptionExtensions;
         protected MgmtExtensions extensions;
         protected string TestNamespace => extensions.Type.Namespace + ".Tests.Mock";
         protected string TypeNameOfThis => extensions.Type.Name + "MockTests";
@@ -68,7 +62,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected void WriteTesterCtors()
         {
-            // write protected default constructor
             _writer.Line();
             using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
             {
