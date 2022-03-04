@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Values;
         internal CachedDictionary<Schema, TypeProvider> SchemaMap => _models;
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+        public IDictionary<string, LowLevelOutputLibraryFactory.ClientInfo> DPGClientInfosByName => GetDPGClientInfosByName();
 
         public override CSharpType FindTypeForSchema(Schema schema)
         {
@@ -79,6 +80,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectSchema objectSchema => new SchemaObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
+
+        private IDictionary<string, LowLevelOutputLibraryFactory.ClientInfo> GetDPGClientInfosByName()
+        {
+            var clientInfosByName = _context.CodeModel.OperationGroups
+               .Select(og => LowLevelOutputLibraryFactory.CreateClientInfo(og, _context))
+               .ToDictionary(ci => ci.Name);
+            LowLevelOutputLibraryFactory.SetRequestsToClients(clientInfosByName.Values);
+
+            return clientInfosByName;
+        }
 
         public LongRunningOperation FindLongRunningOperation(Operation operation)
         {
@@ -144,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var operations = new Dictionary<Operation, LongRunningOperation>();
 
-            if (_context.Configuration.PublicClients)
+            if (Configuration.PublicClients)
             {
                 foreach (var operationGroup in _codeModel.OperationGroups)
                 {
@@ -170,7 +181,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var clients = new Dictionary<OperationGroup, DataPlaneClient>();
 
-            if (_context.Configuration.PublicClients)
+            if (Configuration.PublicClients)
             {
                 foreach (var operationGroup in _codeModel.OperationGroups)
                 {

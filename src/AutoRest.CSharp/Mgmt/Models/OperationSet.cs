@@ -7,7 +7,11 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -102,6 +106,26 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             return null;
         }
+
+        public RequestPath GetRequestPath(ResourceTypeSegment? hint = null)
+        {
+            return hint.HasValue ? NonHintRequestPath.ApplyHint(hint.Value) : NonHintRequestPath;
+        }
+
+        private RequestPath? _nonHintRequestPath;
+        public RequestPath NonHintRequestPath => _nonHintRequestPath ??= GetNonHintRequestPath();
+        private RequestPath GetNonHintRequestPath()
+        {
+            var operation = Operations.First();
+            return Models.RequestPath.FromOperation(operation, this[operation]);
+        }
+
+        public Operation? FindOperation(HttpMethod method)
+        {
+            return this.FirstOrDefault(operation => operation.GetHttpMethod() == method);
+        }
+
+        public bool IsById => NonHintRequestPath.IsById;
 
         public override string? ToString()
         {

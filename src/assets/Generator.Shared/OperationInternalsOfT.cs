@@ -35,19 +35,21 @@ namespace Azure.Core
             Request originalRequest,
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
-            string scopeName)
+            string scopeName,
+            DelayStrategy? fallbackDelayStrategy = null)
         {
             _source = source;
             _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
-            _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName);
-            _operationInternal.DefaultPollingInterval = OperationInternals.DefaultPollingInterval;
+            _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName, null, fallbackDelayStrategy);
         }
 
-        public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
-            => _operationInternal.WaitForCompletionAsync(cancellationToken);
+        public Response<T> WaitForCompletion(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletion(cancellationToken);
 
-        public ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
-            => _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public Response<T> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletion(pollingInterval, cancellationToken);
+
+        public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operationInternal.WaitForCompletionAsync(cancellationToken);
+
+        public ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken) => _operationInternal.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
         public Response GetRawResponse() => _operationInternal.RawResponse;
 

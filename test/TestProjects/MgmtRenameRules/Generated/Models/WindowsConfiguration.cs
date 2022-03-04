@@ -45,8 +45,30 @@ namespace MgmtRenameRules.Models
         /// <summary> Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. </summary>
         public IList<AdditionalUnattendContent> AdditionalUnattendContent { get; }
         /// <summary> Specifies settings related to in-guest patching (KBs). </summary>
-        public PatchSettings PatchSettings { get; set; }
+        internal PatchSettings PatchSettings { get; set; }
+        /// <summary> Specifies the mode of in-guest patching to IaaS virtual machine.&lt;br /&gt;&lt;br /&gt; Possible values are:&lt;br /&gt;&lt;br /&gt; **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false&lt;br /&gt;&lt;br /&gt; **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. &lt;br /&gt;&lt;br /&gt; ** AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true. </summary>
+        public InGuestPatchMode? PatchMode
+        {
+            get => PatchSettings is null ? default : PatchSettings.PatchMode;
+            set
+            {
+                if (PatchSettings is null)
+                    PatchSettings = new PatchSettings();
+                PatchSettings.PatchMode = value;
+            }
+        }
+
         /// <summary> Specifies the Windows Remote Management listeners. This enables remote Windows PowerShell. </summary>
-        public WinRMConfiguration WinRM { get; set; }
+        internal WinRMConfiguration WinRM { get; set; }
+        /// <summary> The list of Windows Remote Management listeners. </summary>
+        public IList<WinRMListener> WinRMListeners
+        {
+            get
+            {
+                if (WinRM is null)
+                    WinRM = new WinRMConfiguration();
+                return WinRM.Listeners;
+            }
+        }
     }
 }

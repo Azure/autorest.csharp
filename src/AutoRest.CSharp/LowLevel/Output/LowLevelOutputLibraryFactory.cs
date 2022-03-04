@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
             return allClients;
         }
 
-        private static ClientInfo CreateClientInfo(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context)
+        public static ClientInfo CreateClientInfo(OperationGroup operationGroup, BuildContext context)
         {
             var clientNamePrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
             var clientNamespace = context.DefaultNamespace;
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models
             var operations = operationGroup.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = context.Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(operationGroup.Key) || resourceParameters.Any();
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(operationGroup.Key) || resourceParameters.Any();
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix(context);
 
             INamedTypeSymbol? existingType;
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var topLevelClients = clientInfosByName.Values.Where(c => c.Parent == null).ToList();
-            if (!context.Configuration.SingleTopLevelClient || topLevelClients.Count == 1)
+            if (!Configuration.SingleTopLevelClient || topLevelClients.Count == 1)
             {
                 return topLevelClients;
             }
@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private static void SetRequestsToClients(IEnumerable<ClientInfo> clientInfos)
+        public static void SetRequestsToClients(IEnumerable<ClientInfo> clientInfos)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private static void SetRequestToClient(ClientInfo clientInfo, ServiceRequest request, Operation operation)
+        public static void SetRequestToClient(ClientInfo clientInfo, ServiceRequest request, Operation operation)
         {
             switch (clientInfo.ResourceParameters.Count)
             {
@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private class ClientInfo
+        public class ClientInfo
         {
             public string OperationGroupKey { get; }
             public string Name { get; }

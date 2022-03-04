@@ -1,13 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -22,6 +18,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static IEnumerable<Property> GetAllProperties(this ObjectSchema schema)
         {
             return schema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties).Concat(schema.Properties);
+        }
+
+        private static bool IsTagsProperty(Property property)
+            => property.CSharpName().Equals("Tags")
+                && property.Schema is DictionarySchema dictSchema
+                && dictSchema.ElementType.Type == AllSchemaTypes.String;
+
+        public static bool HasTags(this Schema schema)
+        {
+            if (schema is not ObjectSchema objSchema)
+            {
+                return false;
+            }
+
+            var allProperties = objSchema.GetAllProperties();
+
+            return allProperties.Any(property => IsTagsProperty(property));
         }
 
         public static bool IsTagsOnly(this Schema schema)
@@ -39,10 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var onlyProperty = allProperties.Single();
 
-            if (!onlyProperty.CSharpName().Equals("Tags"))
-                return false;
-
-            return onlyProperty.Schema is DictionarySchema dictSchema && dictSchema.ElementType.Type == AllSchemaTypes.String;
+            return IsTagsProperty(onlyProperty);
         }
 
         public static bool IsResourceModel(this Schema schema)
@@ -52,8 +62,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var allProperties = objSchema.GetAllProperties();
             bool idPropertyFound = false;
-            bool typePropertyFound = !MgmtContext.MgmtConfiguration.DoesResourceModelRequireType;
-            bool namePropertyFound = !MgmtContext.MgmtConfiguration.DoesResourceModelRequireName;
+            bool typePropertyFound = !Configuration.MgmtConfiguration.DoesResourceModelRequireType;
+            bool namePropertyFound = !Configuration.MgmtConfiguration.DoesResourceModelRequireName;
 
             foreach (var property in allProperties)
             {

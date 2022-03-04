@@ -2,9 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -17,11 +14,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static MgmtOutputLibrary Library => Context.Library;
 
-        public static Configuration Configuration => Context.Configuration;
-
-        public static MgmtConfiguration MgmtConfiguration => Context.Configuration.MgmtConfiguration;
-
         public static CodeModel CodeModel => Context.CodeModel;
+
+        public static bool IsInitialized => _context is not null;
 
         public static void Initialize(BuildContext<MgmtOutputLibrary> context)
         {

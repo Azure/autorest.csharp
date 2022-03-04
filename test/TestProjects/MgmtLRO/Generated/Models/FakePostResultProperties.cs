@@ -8,7 +8,7 @@
 namespace MgmtLRO.Models
 {
     /// <summary> The FakePostResultProperties. </summary>
-    public partial class FakePostResultProperties
+    internal partial class FakePostResultProperties
     {
         /// <summary> Initializes a new instance of FakePostResultProperties. </summary>
         internal FakePostResultProperties()

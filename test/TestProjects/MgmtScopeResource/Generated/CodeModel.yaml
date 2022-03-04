@@ -53,7 +53,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentPropertiesDisplayName
+          name: FakePolicyAssignmentPropertiesDisplayName
           description: The display name of the policy assignment.
       protocol: !Protocols {}
     - !StringSchema &ref_12
@@ -63,7 +63,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentPropertiesPolicyDefinitionId
+          name: FakePolicyAssignmentPropertiesPolicyDefinitionId
           description: The ID of the policy definition or policy set definition being assigned.
       protocol: !Protocols {}
     - !StringSchema &ref_13
@@ -73,7 +73,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentPropertiesScope
+          name: FakePolicyAssignmentPropertiesScope
           description: The scope for the policy assignment.
       protocol: !Protocols {}
     - !StringSchema &ref_14
@@ -83,7 +83,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentPropertiesNotScopesItem
+          name: FakePolicyAssignmentPropertiesNotScopesItem
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_16
@@ -93,7 +93,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentPropertiesDescription
+          name: FakePolicyAssignmentPropertiesDescription
           description: This message will be part of response in case of policy violation.
       protocol: !Protocols {}
     - !StringSchema &ref_18
@@ -125,7 +125,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentId
+          name: FakePolicyAssignmentId
           description: The ID of the policy assignment.
       protocol: !Protocols {}
     - !StringSchema &ref_5
@@ -135,7 +135,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentType
+          name: FakePolicyAssignmentType
           description: The type of the policy assignment.
       protocol: !Protocols {}
     - !StringSchema &ref_6
@@ -145,7 +145,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentName
+          name: FakePolicyAssignmentName
           description: The name of the policy assignment.
       protocol: !Protocols {}
     - !StringSchema &ref_7
@@ -155,7 +155,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentLocation
+          name: FakePolicyAssignmentLocation
           description: The location of the policy assignment. Only required when utilizing managed identity.
       protocol: !Protocols {}
     - !StringSchema &ref_8
@@ -224,7 +224,7 @@ schemas: !Schemas
           version: '2020-09-01'
       language: !Languages 
         default:
-          name: PolicyAssignmentListResultNextLink
+          name: FakePolicyAssignmentListResultNextLink
           description: The URL to use for getting the next set of results.
       protocol: !Protocols {}
     - !StringSchema &ref_1
@@ -1371,7 +1371,7 @@ schemas: !Schemas
             elementType: *ref_14
             language: !Languages 
               default:
-                name: PolicyAssignmentPropertiesNotScopes
+                name: FakePolicyAssignmentPropertiesNotScopes
                 description: The policy's excluded scopes.
             protocol: !Protocols {}
           flattenedNames:
@@ -1472,7 +1472,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: PolicyAssignmentPropertiesNonComplianceMessages
+                name: FakePolicyAssignmentPropertiesNonComplianceMessages
                 description: The messages that describe why a resource is non-compliant with the policy.
             protocol: !Protocols {}
           flattenedNames:
@@ -1493,7 +1493,7 @@ schemas: !Schemas
         x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: PolicyAssignment
+          name: FakePolicyAssignment
           description: The policy assignment.
           namespace: ''
       protocol: !Protocols {}
@@ -1536,10 +1536,10 @@ schemas: !Schemas
                 description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
                 namespace: ''
             protocol: !Protocols {}
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
           protocol: !Protocols {}
       serializationFormats:
@@ -1570,7 +1570,7 @@ schemas: !Schemas
             elementType: *ref_25
             language: !Languages 
               default:
-                name: PolicyAssignmentListResultValue
+                name: FakePolicyAssignmentListResultValue
                 description: An array of policy assignments.
             protocol: !Protocols {}
           serializedName: value
@@ -1593,7 +1593,7 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: PolicyAssignmentListResult
+          name: FakePolicyAssignmentListResult
           description: List of policy assignments.
           namespace: ''
       protocol: !Protocols {}
@@ -1850,10 +1850,10 @@ schemas: !Schemas
               - !Property 
                 schema: *ref_24
                 readOnly: true
-                serializedName: error
+                serializedName: errorResponse
                 language: !Languages 
                   default:
-                    name: error
+                    name: errorResponse
                     description: The deployment error.
                 protocol: !Protocols {}
             serializationFormats:
@@ -1902,10 +1902,10 @@ schemas: !Schemas
         - !Property 
           schema: *ref_24
           readOnly: true
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: The deployment validation error.
           protocol: !Protocols {}
         - !Property 
@@ -2045,10 +2045,10 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_24
-          serializedName: error
+          serializedName: errorResponse
           language: !Languages 
             default:
-              name: error
+              name: errorResponse
               description: Error when What-If operation fails.
           protocol: !Protocols {}
         - !Property 
@@ -2245,10 +2245,10 @@ schemas: !Schemas
                       protocol: !Protocols {}
                     - !Property 
                       schema: *ref_24
-                      serializedName: error
+                      serializedName: errorResponse
                       language: !Languages 
                         default:
-                          name: error
+                          name: errorResponse
                           description: The error reported by the operation.
                       protocol: !Protocols {}
                   serializationFormats:
@@ -2864,7 +2864,7 @@ globalParameters:
         in: uri
 operationGroups:
   - !OperationGroup 
-    $key: PolicyAssignments
+    $key: FakePolicyAssignments
     operations:
       - !Operation 
         apiVersions:
@@ -3807,7 +3807,7 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-odata: '#/components/schemas/PolicyAssignment'
+          x-ms-odata: '#/components/schemas/FakePolicyAssignment'
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -3825,7 +3825,7 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: PolicyAssignments
+        name: FakePolicyAssignments
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 

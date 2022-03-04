@@ -12,8 +12,10 @@ using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
+using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Generation.Types
 {
@@ -123,6 +125,17 @@ namespace AutoRest.CSharp.Generation.Types
             throw new NotSupportedException(type.Name);
         }
 
+
+        /// <summary>
+        /// Is the type a string or an Enum that is modeled as string.
+        /// </summary>
+        /// <param name="type">Type to check.</param>
+        /// <returns>Is the type a string or an Enum that is modeled as string.</returns>
+        public static bool IsStringLike(CSharpType type) =>
+            type.IsFrameworkType
+                ? type.Equals(typeof(string))
+                : type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string)) && enumType.IsExtendable;
+
         internal static bool IsDictionary(CSharpType type)
             => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
 
@@ -148,7 +161,21 @@ namespace AutoRest.CSharp.Generation.Types
         internal static bool IsIEnumerableType(CSharpType type)
             => type.IsFrameworkType &&
             (type.FrameworkType == typeof(IEnumerable) ||
-            (type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>)));
+            type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+
+        internal static bool IsIEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IEnumerable<>);
+
+        internal static bool IsIAsyncEnumerableOfT(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(IAsyncEnumerable<>);
+
+        internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
+
+        internal static bool IsOperationOfAsyncPageable(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsAsyncPageable(type.Arguments[0]);
+
+        internal static bool IsPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(Pageable<>);
+
+        internal static bool IsOperationOfPageable(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(Operation<>) && type.Arguments.Length == 1 && IsPageable(type.Arguments[0]);
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
         {

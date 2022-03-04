@@ -51,7 +51,7 @@ namespace XmlDeserialization
         internal XmlInstance(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
             _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", ResourceType.Namespace, DiagnosticOptions);
-            Client.TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
+            TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
             _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(_xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
@@ -141,10 +141,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstance.Delete");
             scope.Start();
@@ -174,10 +171,7 @@ namespace XmlDeserialization
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
         public virtual ArmOperation Delete(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
+            Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstance.Delete");
             scope.Start();

@@ -4,15 +4,8 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -27,7 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (property.Language.Default.Name.EndsWith("Uri"))
+                    if (property.Language.Default.Name.EndsWith("Uri", StringComparison.Ordinal) ||
+                        property.Language.Default.Name.Equals("uri", StringComparison.Ordinal))
                         property.Schema.Type = AllSchemaTypes.Uri;
                     if (property.Language.Default.Name.SplitByCamelCase().Last().Equals("Duration") && property.Schema.Type == AllSchemaTypes.String)
                         throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use \"format\": \"duration\" to be generated as TimeSpan type. Either fix service swagger or add the format with directive in autorest.md. If the property does not conform to the duration format, please use x-ms-client-name to rename the property for the client.");
@@ -60,15 +54,43 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        public static void UpdateAcronyms(this IEnumerable<Schema> allSchemas)
+        public static void UpdateAcronyms(this CodeModel codeModel)
         {
-            if (MgmtContext.MgmtConfiguration.RenameRules.Count == 0)
+            if (Configuration.MgmtConfiguration.RenameRules.Count == 0)
                 return;
-            var transformer = new NameTransformer(MgmtContext.MgmtConfiguration.RenameRules);
+            var transformer = new NameTransformer(Configuration.MgmtConfiguration.RenameRules);
             var wordCache = new ConcurrentDictionary<string, string>();
+            // first transform all the name of schemas, properties
+            UpdateAcronyms(codeModel.AllSchemas, transformer, wordCache);
+            // transform all the parameter names
+            UpdateAcronyms(codeModel.OperationGroups, transformer, wordCache);
+        }
+
+        private static void UpdateAcronyms(IEnumerable<Schema> allSchemas, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
             foreach (var schema in allSchemas)
             {
                 TransformSchema(schema, transformer, wordCache);
+            }
+        }
+
+        private static void UpdateAcronyms(IEnumerable<OperationGroup> operationGroups, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            foreach (var operationGroup in operationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    TransformOperation(operation, transformer, wordCache);
+                }
+            }
+        }
+
+        private static void TransformOperation(Operation operation, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            TransformLanguage(operation.Language, transformer, wordCache);
+            foreach (var parameter in operation.Parameters)
+            {
+                TransformLanguage(parameter.Language, transformer, wordCache);
             }
         }
 
@@ -76,9 +98,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             switch (schema)
             {
-                case ChoiceSchema:
-                case SealedChoiceSchema:
-                    TransformBasicSchema(schema, transformer, wordCache);
+                case ChoiceSchema choiceSchema:
+                    TransformChoiceSchema(choiceSchema.Language, choiceSchema.Choices, transformer, wordCache);
+                    break;
+                case SealedChoiceSchema sealedChoiceSchema:
+                    TransformChoiceSchema(sealedChoiceSchema.Language, sealedChoiceSchema.Choices, transformer, wordCache);
                     break;
                 case ObjectSchema objSchema: // GroupSchema inherits ObjectSchema, therefore we do not need to handle that
                     TransformObjectSchema(objSchema, transformer, wordCache);
@@ -88,9 +112,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void TransformBasicSchema(Schema schema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        private static void TransformChoiceSchema(Languages languages, ICollection<ChoiceValue> choiceValues, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
-            TransformLanguage(schema.Language, transformer, wordCache);
+            TransformLanguage(languages, transformer, wordCache);
+            TransformChoices(choiceValues, transformer, wordCache);
+        }
+
+        private static void TransformChoices(ICollection<ChoiceValue> choiceValues, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
+        {
+            foreach (var choiceValue in choiceValues)
+            {
+                TransformLanguage(choiceValue.Language, transformer, wordCache);
+            }
         }
 
         private static void TransformLanguage(Languages languages, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
@@ -109,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void TransformObjectSchema(ObjectSchema objSchema, NameTransformer transformer, ConcurrentDictionary<string, string> wordCache)
         {
             // transform the name of this schema
-            TransformBasicSchema(objSchema, transformer, wordCache);
+            TransformLanguage(objSchema.Language, transformer, wordCache);
             foreach (var property in objSchema.Properties)
             {
                 TransformLanguage(property.Language, transformer, wordCache);
