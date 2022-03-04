@@ -2,14 +2,12 @@ trigger:
   branches:
     include:
     - feature/*
-    - pipelinetest/*
     - pipelinetest
 
 pr:
   branches:
     include:
     - feature/*
-    - pipelinetest/*
     - pipelinetest
 
 variables:
@@ -104,6 +102,17 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub, npm and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+      - job: MockInit
+        timeoutInMinutes: 120
+        pool:
+          name: azsdk-pool-mms-win-2019-general
+          vmImage: MMS2019
+        steps:
+          - checkout: self
+          - checkout: azure-sdk-tools
+          - pwsh: ./eng/InitMockTests.ps1
+            displayName: "Generate All SDK"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: smoke-test.yml
         parameters:
           name: SmokeTest_A_C
