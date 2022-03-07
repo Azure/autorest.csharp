@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Output.Models;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -14,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteAdditionalFields(CodeWriter writer)
         {
-            writer.Line($"private readonly {typeof(string)} {UserAgentField};");
+            writer.Line($"private readonly {typeof(UserAgentValue)} {UserAgentField};");
         }
 
         protected override void WriteAdditionalParameters(CodeWriter writer)
@@ -27,9 +29,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return true;
         }
 
-        protected override void WriteAdditionalCtorBody(CodeWriter writer)
+        protected override void WriteAdditionalCtorBody(CodeWriter writer, RestClient restClient)
         {
-            writer.Line($"_userAgent = {typeof(HttpMessageUtilities)}.GetUserAgentName(this, {ApplicationIdVariable});");
+            writer.Line($"_userAgent = {typeof(UserAgentValue)}.FromType<{restClient.Type.Name}>({ApplicationIdVariable});");
         }
 
         protected override void WriteAdditionalXmlDocumentationParameters(CodeWriter writer)

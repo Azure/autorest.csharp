@@ -11,14 +11,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
     internal partial class OrphanedPostRestOperations
     {
-        private readonly string _userAgent;
+        private readonly UserAgentValue _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +38,7 @@ namespace MgmtExtensionResource
             _apiVersion = apiVersion ?? "2020-09-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = UserAgentValue.FromType<OrphanedPostRestOperations>(applicationId);
         }
 
         internal HttpMessage CreateValidateSomethingRequest(string subscriptionId, ValidateSomethingOptions validateSomethingOptions)
@@ -59,7 +58,7 @@ namespace MgmtExtensionResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(validateSomethingOptions);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
