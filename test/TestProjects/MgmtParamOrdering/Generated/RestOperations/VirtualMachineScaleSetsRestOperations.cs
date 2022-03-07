@@ -149,7 +149,7 @@ namespace MgmtParamOrdering
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -165,11 +165,11 @@ namespace MgmtParamOrdering
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (options != null)
+            if (data != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(options);
+                content.JsonWriter.WriteObjectValue(data);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -180,10 +180,10 @@ namespace MgmtParamOrdering
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
-        /// <param name="options"> The scale set object. </param>
+        /// <param name="data"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options = null, CancellationToken cancellationToken = default)
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -198,7 +198,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vmScaleSetName, options);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vmScaleSetName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -213,10 +213,10 @@ namespace MgmtParamOrdering
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
-        /// <param name="options"> The scale set object. </param>
+        /// <param name="data"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options = null, CancellationToken cancellationToken = default)
+        public Response Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -231,7 +231,7 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vmScaleSetName, options);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vmScaleSetName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

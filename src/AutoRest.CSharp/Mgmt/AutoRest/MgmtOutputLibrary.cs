@@ -178,8 +178,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                            bodyParam.Schema.Language.Default.Name = $"{name}UpdateOptions";
-                            bodyParam.Language.Default.Name = "options";
+                            bodyParam.Schema.Language.Default.Name = $"Patchable{name}Data";
+                            bodyParam.Language.Default.Name = "data";
                         }
                     }
                 }
