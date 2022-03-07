@@ -51,8 +51,8 @@ function Update-Branch([string]$CommitId, [string]$Path) {
     $store | Out-File -FilePath $file
 }
 function Send-ErrorMessage([string]$message) {
-    Write-Host -ForegroundColor Red $message
-    Write-Host -ForegroundColor Red "MockTestInit script exit."
+    Write-Host $message
+    Write-Host "MockTestInit script exit."
     exit
 }
 function Show-Result([array]$list) {
@@ -69,6 +69,7 @@ function Show-Result([array]$list) {
     }
     $result = $result -join "  "
     Write-Host $result
+    Write-Host "`n"
     Start-Sleep 2
 }
 function Update-AutorestTarget([string]$file, [string]$autorestVersion) {
@@ -173,7 +174,7 @@ function  MockTestInit {
     process {
         # Install npm and autorest
         if ($NpmInit) {
-           & npm install -g autorest
+            & npm install -g autorest
         }
 
         # Build current autorest project 
@@ -254,32 +255,87 @@ function  MockTestInit {
                 }
             }
         }
+
+        # Run build successed mock unit tests
+        $FinalStatics = @{}
+        $ErrorTypeStatic = @()
+        $RunRpList = @()
+        $sdkFolder  | ForEach-Object {
+            $curFolderPRs = Get-ChildItem($_)
+            foreach ($item in $curFolderPRs) {
+                if ($item.Name.Contains("Azure.ResourceManager.") -and $Script:testBuildSuccessedRps.Contains($item.Name)) {
+                    # let .sln test target to mocktests
+                    Update-Sln -path $item -RPName $item.Name
+                    $RunRpList += $item.ToString()
+                }
+            }
+        }
+        $RunRpList | ForEach-Object {
+            $RPName = ($_.Substring($_.IndexOf("Azure.ResourceManager"), $_.Length - $_.IndexOf("Azure.ResourceManager"))).Replace("Azure.ResourceManager.","")
+            # run .sln test
+            & cd $_
+            $response = dotnet test
+            $allResult = @()
+            $flag = $false
+        
+            # record each error cases
+            foreach ($item in $response) {
+                if ($item.Tostring().Contains("Failed!  - Failed:") -or ($item.Tostring().Contains("Passed!  - Failed:"))) {
+                    $FinalStatics += @{ RPName = $item.Substring(0, $item.IndexOf(", Duration")) }
+                    break
+                }
+                if ($item.Tostring().Contains("Error Message:")) {
+                    $flag = $true
+                    continue
+                }
+                if ($flag) {
+                    if (-not $allResult.Contains($item.ToString().Trim())) {
+                        $allResult += $item.ToString().Trim() 
+                    }
+                    $flag = $false
+                }
+            }
+            foreach ($item in $allResult) {
+                $ErrorTypeStatic += $RPName + ": " + $item
+            }
+            Write-Host "[$RPName] has been recorded"
+        }
         return
     }
     end {
         # All Successed Output statistical results
-        Start-Sleep 10
         Write-Host "`n`n"
         Write-Host "================================================================================="
-        Write-Host "Mock Test Initialize Completed."
-        Write-Host -ForegroundColor Blue "Track2 SDK Total: $Script:allTrack2Sdk"
-        Write-Host -ForegroundColor Blue "New generated track2 RPs: $Script:newGenerateSdk" 
-        Write-Host -ForegroundColor Green "srcGenerateSuccessedRps: "$Script:srcGenerateSuccessedRps.Count
+        Write-Host "=============================== Generate & Build  ==============================="
+        Write-Host "================================================================================="
+        Write-Host "Track2 SDK Total: $Script:allTrack2Sdk"
+        Write-Host "New generated track2 RPs: $Script:newGenerateSdk" 
+        Write-Host "srcGenerateSuccessedRps: "$Script:srcGenerateSuccessedRps.Count
         Show-Result($Script:srcGenerateSuccessedRps) 
-        Write-Host -ForegroundColor Green "srcBuildSuccessedRps: "$Script:srcBuildSuccessedRps.Count 
+        Write-Host "srcBuildSuccessedRps: "$Script:srcBuildSuccessedRps.Count 
         Show-Result($Script:srcBuildSuccessedRps) 
-        Write-Host -ForegroundColor Green "testGenerateSuccesseddRps: "$Script:testGenerateSuccessedRps.Count 
+        Write-Host "testGenerateSuccesseddRps: "$Script:testGenerateSuccessedRps.Count 
         Show-Result($Script:testGenerateSuccessedRps) 
-        Write-Host -ForegroundColor Green "testBuildSuccessedRps: "$Script:testBuildSuccessedRps.Count 
+        Write-Host "testBuildSuccessedRps: "$Script:testBuildSuccessedRps.Count 
         Show-Result($Script:testBuildSuccessedRps) 
-        Write-Host -ForegroundColor Red "Src generate error RPs: "$Script:srcGenerateErrorRps.Count 
+        Write-Host "Src generate error RPs: "$Script:srcGenerateErrorRps.Count 
         Show-Result($Script:srcGenerateErrorRps) 
-        Write-Host -ForegroundColor Red "Src build error RPs: "$Script:srcBuildErrorRps.Count 
+        Write-Host "Src build error RPs: "$Script:srcBuildErrorRps.Count 
         Show-Result($Script:srcBuildErrorRps) 
-        Write-Host -ForegroundColor Red "Mock test generate error RPs: "$Script:testGenerateErrorRps.Count 
+        Write-Host "Mock test generate error RPs: "$Script:testGenerateErrorRps.Count 
         Show-Result($Script:testGenerateErrorRps) 
-        Write-Host -ForegroundColor Red "Mock test build error RPs: "$Script:testBuildErrorRps.Count 
+        Write-Host "Mock test build error RPs: "$Script:testBuildErrorRps.Count 
         Show-Result($Script:testBuildErrorRps) 
+        Write-Host "================================================================================="
+        Write-Host "`n`n`n"
+        Write-Host "================================================================================="
+        Write-Host "============================ Unit Tests Run Result  ============================="
+        Write-Host "================================================================================="
+        $FinalStatics
+        Write-Host "`n"
+        foreach ($item in $ErrorTypeStatic){
+            Write-Host $item
+        }
         Write-Host "================================================================================="
         Write-Host ""
     }
