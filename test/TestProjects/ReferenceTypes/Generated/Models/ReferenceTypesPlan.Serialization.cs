@@ -12,8 +12,8 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(PlanConverter))]
-    public partial class Plan : IUtf8JsonSerializable
+    [JsonConverter(typeof(ReferenceTypesPlanConverter))]
+    public partial class ReferenceTypesPlan : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static Plan DeserializePlan(JsonElement element)
+        internal static ReferenceTypesPlan DeserializeReferenceTypesPlan(JsonElement element)
         {
             string name = default;
             string publisher = default;
@@ -72,19 +72,19 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new Plan(name, publisher, product, promotionCode.Value, version.Value);
+            return new ReferenceTypesPlan(name, publisher, product, promotionCode.Value, version.Value);
         }
 
-        internal partial class PlanConverter : JsonConverter<Plan>
+        internal partial class ReferenceTypesPlanConverter : JsonConverter<ReferenceTypesPlan>
         {
-            public override void Write(Utf8JsonWriter writer, Plan model, JsonSerializerOptions options)
+            public override void Write(Utf8JsonWriter writer, ReferenceTypesPlan model, JsonSerializerOptions options)
             {
                 writer.WriteObjectValue(model);
             }
-            public override Plan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override ReferenceTypesPlan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializePlan(document.RootElement);
+                return DeserializeReferenceTypesPlan(document.RootElement);
             }
         }
     }

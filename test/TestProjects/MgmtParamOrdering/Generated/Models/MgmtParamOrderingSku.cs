@@ -8,10 +8,10 @@
 namespace MgmtParamOrdering.Models
 {
     /// <summary> Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name. </summary>
-    public partial class Sku
+    public partial class MgmtParamOrderingSku
     {
-        /// <summary> Initializes a new instance of Sku. </summary>
-        public Sku()
+        /// <summary> Initializes a new instance of MgmtParamOrderingSku. </summary>
+        public MgmtParamOrderingSku()
         {
         }
 

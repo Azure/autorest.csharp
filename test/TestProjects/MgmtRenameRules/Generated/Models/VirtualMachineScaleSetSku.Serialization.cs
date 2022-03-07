@@ -15,7 +15,7 @@ namespace MgmtRenameRules.Models
         internal static VirtualMachineScaleSetSku DeserializeVirtualMachineScaleSetSku(JsonElement element)
         {
             Optional<string> resourceType = default;
-            Optional<Sku> sku = default;
+            Optional<MgmtRenameRulesSku> sku = default;
             Optional<VirtualMachineScaleSetSkuCapacity> capacity = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -31,7 +31,7 @@ namespace MgmtRenameRules.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = MgmtRenameRulesSku.DeserializeMgmtRenameRulesSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("capacity"))

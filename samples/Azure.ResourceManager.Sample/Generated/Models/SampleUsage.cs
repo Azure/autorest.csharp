@@ -10,14 +10,14 @@ using System;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes Compute Resource Usage. </summary>
-    public partial class Usage
+    public partial class SampleUsage
     {
-        /// <summary> Initializes a new instance of Usage. </summary>
+        /// <summary> Initializes a new instance of SampleUsage. </summary>
         /// <param name="currentValue"> The current usage of the resource. </param>
         /// <param name="limit"> The maximum permitted usage of the resource. </param>
         /// <param name="name"> The name of the type of usage. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal Usage(int currentValue, long limit, UsageName name)
+        internal SampleUsage(int currentValue, long limit, UsageName name)
         {
             if (name == null)
             {
@@ -30,12 +30,12 @@ namespace Azure.ResourceManager.Sample.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of Usage. </summary>
+        /// <summary> Initializes a new instance of SampleUsage. </summary>
         /// <param name="unit"> An enum describing the unit of usage measurement. </param>
         /// <param name="currentValue"> The current usage of the resource. </param>
         /// <param name="limit"> The maximum permitted usage of the resource. </param>
         /// <param name="name"> The name of the type of usage. </param>
-        internal Usage(string unit, int currentValue, long limit, UsageName name)
+        internal SampleUsage(string unit, int currentValue, long limit, UsageName name)
         {
             Unit = unit;
             CurrentValue = currentValue;

@@ -56,7 +56,7 @@ namespace MgmtKeyvault.Tests.Mock
                 Properties = new MgmtKeyvault.Models.VaultPatchProperties()
                 {
                     TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
-                    Sku = new MgmtKeyvault.Models.Sku(family: new MgmtKeyvault.Models.SkuFamily("A"), name: MgmtKeyvault.Models.SkuName.Standard),
+                    Sku = new MgmtKeyvault.Models.MgmtKeyvaultSku(family: new MgmtKeyvault.Models.SkuFamily("A"), name: MgmtKeyvault.Models.SkuName.Standard),
                     EnabledForDeployment = true,
                     EnabledForDiskEncryption = true,
                     EnabledForTemplateDeployment = true,

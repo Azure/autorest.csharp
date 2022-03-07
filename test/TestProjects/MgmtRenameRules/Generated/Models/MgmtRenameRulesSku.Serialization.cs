@@ -8,9 +8,9 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample.Models
+namespace MgmtRenameRules.Models
 {
-    public partial class Sku : IUtf8JsonSerializable
+    public partial class MgmtRenameRulesSku : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static Sku DeserializeSku(JsonElement element)
+        internal static MgmtRenameRulesSku DeserializeMgmtRenameRulesSku(JsonElement element)
         {
             Optional<string> name = default;
             Optional<string> tier = default;
@@ -61,7 +61,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new Sku(name.Value, tier.Value, Optional.ToNullable(capacity));
+            return new MgmtRenameRulesSku(name.Value, tier.Value, Optional.ToNullable(capacity));
         }
     }
 }

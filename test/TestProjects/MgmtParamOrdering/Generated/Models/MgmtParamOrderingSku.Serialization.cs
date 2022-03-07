@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class Sku : IUtf8JsonSerializable
+    public partial class MgmtParamOrderingSku : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

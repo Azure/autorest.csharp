@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtPropertyChooser.Models
 {
-    public partial class Plan : IUtf8JsonSerializable
+    public partial class MgmtPropertyChooserPlan : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -38,7 +38,7 @@ namespace MgmtPropertyChooser.Models
             writer.WriteEndObject();
         }
 
-        internal static Plan DeserializePlan(JsonElement element)
+        internal static MgmtPropertyChooserPlan DeserializeMgmtPropertyChooserPlan(JsonElement element)
         {
             Optional<string> name = default;
             Optional<string> publisher = default;
@@ -67,7 +67,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new Plan(name.Value, publisher.Value, product.Value, promotionCode.Value);
+            return new MgmtPropertyChooserPlan(name.Value, publisher.Value, product.Value, promotionCode.Value);
         }
     }
 }
