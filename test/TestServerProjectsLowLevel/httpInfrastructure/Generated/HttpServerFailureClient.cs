@@ -326,6 +326,6 @@ namespace httpInfrastructure_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier;
-        private static ResponseClassifier ResponseClassifier => _responseClassifier ??= new CoreResponseClassifier(stackalloc int[] { });
+        private static ResponseClassifier ResponseClassifier => _responseClassifier ??= new CoreResponseClassifier(stackalloc ushort[] { });
     }
 }

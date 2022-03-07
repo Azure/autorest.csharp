@@ -2160,8 +2160,8 @@ namespace paging_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new CoreResponseClassifier(stackalloc int[] { 200 });
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new CoreResponseClassifier(stackalloc ushort[] { 200 });
         private static ResponseClassifier _responseClassifier202;
-        private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new CoreResponseClassifier(stackalloc int[] { 202 });
+        private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new CoreResponseClassifier(stackalloc ushort[] { 202 });
     }
 }

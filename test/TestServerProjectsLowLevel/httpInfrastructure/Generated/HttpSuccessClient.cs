@@ -1379,14 +1379,14 @@ namespace httpInfrastructure_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new CoreResponseClassifier(stackalloc int[] { 200 });
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new CoreResponseClassifier(stackalloc ushort[] { 200 });
         private static ResponseClassifier _responseClassifier201;
-        private static ResponseClassifier ResponseClassifier201 => _responseClassifier201 ??= new CoreResponseClassifier(stackalloc int[] { 201 });
+        private static ResponseClassifier ResponseClassifier201 => _responseClassifier201 ??= new CoreResponseClassifier(stackalloc ushort[] { 201 });
         private static ResponseClassifier _responseClassifier202;
-        private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new CoreResponseClassifier(stackalloc int[] { 202 });
+        private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new CoreResponseClassifier(stackalloc ushort[] { 202 });
         private static ResponseClassifier _responseClassifier204;
-        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new CoreResponseClassifier(stackalloc int[] { 204 });
+        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new CoreResponseClassifier(stackalloc ushort[] { 204 });
         private static ResponseClassifier _responseClassifier204404;
-        private static ResponseClassifier ResponseClassifier204404 => _responseClassifier204404 ??= new CoreResponseClassifier(stackalloc int[] { 204, 404 });
+        private static ResponseClassifier ResponseClassifier204404 => _responseClassifier204404 ??= new CoreResponseClassifier(stackalloc ushort[] { 204, 404 });
     }
 }

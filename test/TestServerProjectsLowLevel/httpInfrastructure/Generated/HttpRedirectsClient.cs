@@ -1150,18 +1150,18 @@ namespace httpInfrastructure_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier200300;
-        private static ResponseClassifier ResponseClassifier200300 => _responseClassifier200300 ??= new CoreResponseClassifier(stackalloc int[] { 200, 300 });
+        private static ResponseClassifier ResponseClassifier200300 => _responseClassifier200300 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 300 });
         private static ResponseClassifier _responseClassifier200301;
-        private static ResponseClassifier ResponseClassifier200301 => _responseClassifier200301 ??= new CoreResponseClassifier(stackalloc int[] { 200, 301 });
+        private static ResponseClassifier ResponseClassifier200301 => _responseClassifier200301 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 301 });
         private static ResponseClassifier _responseClassifier301;
-        private static ResponseClassifier ResponseClassifier301 => _responseClassifier301 ??= new CoreResponseClassifier(stackalloc int[] { 301 });
+        private static ResponseClassifier ResponseClassifier301 => _responseClassifier301 ??= new CoreResponseClassifier(stackalloc ushort[] { 301 });
         private static ResponseClassifier _responseClassifier200302;
-        private static ResponseClassifier ResponseClassifier200302 => _responseClassifier200302 ??= new CoreResponseClassifier(stackalloc int[] { 200, 302 });
+        private static ResponseClassifier ResponseClassifier200302 => _responseClassifier200302 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 302 });
         private static ResponseClassifier _responseClassifier302;
-        private static ResponseClassifier ResponseClassifier302 => _responseClassifier302 ??= new CoreResponseClassifier(stackalloc int[] { 302 });
+        private static ResponseClassifier ResponseClassifier302 => _responseClassifier302 ??= new CoreResponseClassifier(stackalloc ushort[] { 302 });
         private static ResponseClassifier _responseClassifier200303;
-        private static ResponseClassifier ResponseClassifier200303 => _responseClassifier200303 ??= new CoreResponseClassifier(stackalloc int[] { 200, 303 });
+        private static ResponseClassifier ResponseClassifier200303 => _responseClassifier200303 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 303 });
         private static ResponseClassifier _responseClassifier200307;
-        private static ResponseClassifier ResponseClassifier200307 => _responseClassifier200307 ??= new CoreResponseClassifier(stackalloc int[] { 200, 307 });
+        private static ResponseClassifier ResponseClassifier200307 => _responseClassifier200307 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 307 });
     }
 }

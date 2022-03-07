@@ -461,7 +461,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                writer.Append($"{typeof(CoreResponseClassifier)}(stackalloc int[]{{");
+                writer.Append($"{typeof(CoreResponseClassifier)}(stackalloc ushort[]{{");
                 foreach (var statusCode in statusCodes)
                 {
                     if (statusCode.Code != null)
