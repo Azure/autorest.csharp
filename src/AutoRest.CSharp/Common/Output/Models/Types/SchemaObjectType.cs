@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -149,7 +150,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                IsAbstract ? "protected" : "internal",
+                IsAbstract ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
@@ -252,7 +253,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                IsAbstract ? "protected" : _usage.HasFlag(SchemaTypeUsage.Input) ? "public" : "internal",
+                IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
                 baseCtor);

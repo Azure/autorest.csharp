@@ -13,17 +13,17 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region PolicyAssignment
-        /// <summary> Gets an object representing a PolicyAssignment along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakePolicyAssignment
+        /// <summary> Gets an object representing a FakePolicyAssignment along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PolicyAssignment" /> object. </returns>
-        public static PolicyAssignment GetPolicyAssignment(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakePolicyAssignment" /> object. </returns>
+        public static FakePolicyAssignment GetFakePolicyAssignment(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PolicyAssignment.ValidateResourceId(id);
-                return new PolicyAssignment(client, id);
+                FakePolicyAssignment.ValidateResourceId(id);
+                return new FakePolicyAssignment(client, id);
             }
             );
         }

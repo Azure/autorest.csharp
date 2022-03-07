@@ -17,7 +17,7 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    internal partial class PolicyAssignmentsRestOperations
+    internal partial class FakePolicyAssignmentsRestOperations
     {
         private readonly string _userAgent;
         private readonly HttpPipeline _pipeline;
@@ -27,14 +27,14 @@ namespace MgmtScopeResource
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
 
-        /// <summary> Initializes a new instance of PolicyAssignmentsRestOperations. </summary>
+        /// <summary> Initializes a new instance of FakePolicyAssignmentsRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public PolicyAssignmentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        public FakePolicyAssignmentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-09-01";
@@ -66,7 +66,7 @@ namespace MgmtScopeResource
         /// <param name="policyAssignmentName"> The name of the policy assignment to delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="policyAssignmentName"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentData>> DeleteAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentData>> DeleteAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -83,13 +83,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentData value = default;
+                        FakePolicyAssignmentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentData.DeserializePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue((PolicyAssignmentData)null, message.Response);
+                    return Response.FromValue((FakePolicyAssignmentData)null, message.Response);
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -100,7 +100,7 @@ namespace MgmtScopeResource
         /// <param name="policyAssignmentName"> The name of the policy assignment to delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="policyAssignmentName"/> is null. </exception>
-        public Response<PolicyAssignmentData> Delete(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentData> Delete(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -117,19 +117,19 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentData value = default;
+                        FakePolicyAssignmentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentData.DeserializePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue((PolicyAssignmentData)null, message.Response);
+                    return Response.FromValue((FakePolicyAssignmentData)null, message.Response);
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal Azure.Core.HttpMessage CreateCreateRequest(string scope, string policyAssignmentName, PolicyAssignmentData parameters)
+        internal Azure.Core.HttpMessage CreateCreateRequest(string scope, string policyAssignmentName, FakePolicyAssignmentData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -157,7 +157,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentData>> CreateAsync(string scope, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentData>> CreateAsync(string scope, string policyAssignmentName, FakePolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -178,9 +178,9 @@ namespace MgmtScopeResource
             {
                 case 201:
                     {
-                        PolicyAssignmentData value = default;
+                        FakePolicyAssignmentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentData.DeserializePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -194,7 +194,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<PolicyAssignmentData> Create(string scope, string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentData> Create(string scope, string policyAssignmentName, FakePolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -215,9 +215,9 @@ namespace MgmtScopeResource
             {
                 case 201:
                     {
-                        PolicyAssignmentData value = default;
+                        FakePolicyAssignmentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentData.DeserializePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -248,7 +248,7 @@ namespace MgmtScopeResource
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="policyAssignmentName"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentData>> GetAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentData>> GetAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -265,13 +265,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentData value = default;
+                        FakePolicyAssignmentData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentData.DeserializePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PolicyAssignmentData)null, message.Response);
+                    return Response.FromValue((FakePolicyAssignmentData)null, message.Response);
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -282,7 +282,7 @@ namespace MgmtScopeResource
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="policyAssignmentName"/> is null. </exception>
-        public Response<PolicyAssignmentData> Get(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentData> Get(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -299,13 +299,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentData value = default;
+                        FakePolicyAssignmentData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentData.DeserializePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PolicyAssignmentData)null, message.Response);
+                    return Response.FromValue((FakePolicyAssignmentData)null, message.Response);
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -345,7 +345,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentListResult>> ListForResourceGroupAsync(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentListResult>> ListForResourceGroupAsync(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -362,9 +362,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -379,7 +379,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<PolicyAssignmentListResult> ListForResourceGroup(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentListResult> ListForResourceGroup(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -396,9 +396,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -452,7 +452,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceProviderNamespace"/>, <paramref name="parentResourcePath"/>, <paramref name="resourceType"/> or <paramref name="resourceName"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentListResult>> ListForResourceAsync(string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentListResult>> ListForResourceAsync(string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -485,9 +485,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -506,7 +506,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceProviderNamespace"/>, <paramref name="parentResourcePath"/>, <paramref name="resourceType"/> or <paramref name="resourceName"/> is null. </exception>
-        public Response<PolicyAssignmentListResult> ListForResource(string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentListResult> ListForResource(string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -539,9 +539,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -580,7 +580,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="managementGroupId"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentListResult>> ListForManagementGroupAsync(string managementGroupId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentListResult>> ListForManagementGroupAsync(string managementGroupId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (managementGroupId == null)
             {
@@ -593,9 +593,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -609,7 +609,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="managementGroupId"/> is null. </exception>
-        public Response<PolicyAssignmentListResult> ListForManagementGroup(string managementGroupId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentListResult> ListForManagementGroup(string managementGroupId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (managementGroupId == null)
             {
@@ -622,9 +622,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -663,7 +663,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentListResult>> ListAsync(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentListResult>> ListAsync(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -676,9 +676,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -692,7 +692,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public Response<PolicyAssignmentListResult> List(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentListResult> List(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -705,9 +705,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -737,7 +737,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentListResult>> ListForResourceGroupNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentListResult>> ListForResourceGroupNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -758,9 +758,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -776,7 +776,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<PolicyAssignmentListResult> ListForResourceGroupNextPage(string nextLink, string subscriptionId, string resourceGroupName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentListResult> ListForResourceGroupNextPage(string nextLink, string subscriptionId, string resourceGroupName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -797,9 +797,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -833,7 +833,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceProviderNamespace"/>, <paramref name="parentResourcePath"/>, <paramref name="resourceType"/> or <paramref name="resourceName"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentListResult>> ListForResourceNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentListResult>> ListForResourceNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -870,9 +870,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -892,7 +892,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceProviderNamespace"/>, <paramref name="parentResourcePath"/>, <paramref name="resourceType"/> or <paramref name="resourceName"/> is null. </exception>
-        public Response<PolicyAssignmentListResult> ListForResourceNextPage(string nextLink, string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentListResult> ListForResourceNextPage(string nextLink, string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -929,9 +929,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -960,7 +960,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="managementGroupId"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentListResult>> ListForManagementGroupNextPageAsync(string nextLink, string managementGroupId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentListResult>> ListForManagementGroupNextPageAsync(string nextLink, string managementGroupId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -977,9 +977,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -994,7 +994,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="managementGroupId"/> is null. </exception>
-        public Response<PolicyAssignmentListResult> ListForManagementGroupNextPage(string nextLink, string managementGroupId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentListResult> ListForManagementGroupNextPage(string nextLink, string managementGroupId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1011,9 +1011,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1042,7 +1042,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
-        public async Task<Response<PolicyAssignmentListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1059,9 +1059,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -1076,7 +1076,7 @@ namespace MgmtScopeResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
-        public Response<PolicyAssignmentListResult> ListNextPage(string nextLink, string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentListResult> ListNextPage(string nextLink, string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1093,9 +1093,9 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        PolicyAssignmentListResult value = default;
+                        FakePolicyAssignmentListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyAssignmentListResult.DeserializePolicyAssignmentListResult(document.RootElement);
+                        value = FakePolicyAssignmentListResult.DeserializeFakePolicyAssignmentListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

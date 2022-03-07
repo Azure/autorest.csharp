@@ -25,6 +25,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -230,7 +231,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var signature = new MethodSignature(
                         $"Get{resource.Type.Name}",
                         $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.",
-                        "public",
+                        GetMethodModifiers(),
                         resource.Type,
                         $"Returns a <see cref=\"{resource.Type}\" /> object.",
                         GetParametersForSingletonEntry());
@@ -245,7 +246,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var signature = new MethodSignature(
                         $"Get{resource.Type.Name.ResourceNameToPlural()}",
                         $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.",
-                        "public",
+                        GetMethodModifiers(),
                         collection.Type,
                         $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
                         GetParametersForCollectionEntry(collection));
@@ -265,10 +266,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(Azure.Core.ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
         }
 
-        protected virtual Parameter[] GetParametersForSingletonEntry()
-        {
-            return Array.Empty<Parameter>();
-        }
+        protected virtual MethodSignatureModifiers GetMethodModifiers() => Public | Virtual;
+
+        protected virtual Parameter[] GetParametersForSingletonEntry() => Array.Empty<Parameter>();
 
         protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
         {
@@ -469,7 +469,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (returnDesc is not null)
                 _writer.WriteXmlDocumentationReturns(returnDesc);
 
-            var scope = _writer.WriteMethodDeclaration(signature, isAsync);
+            var scope = _writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
             if (This.Accessibility == "public")
                 _writer.WriteParametersValidation(signature.Parameters);
 
@@ -801,7 +801,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var parameter in mapping)
             {
-                if (!parameter.IsPassThru && parameter.Parameter.IsEnumType)
+                if (!parameter.IsPassThru && parameter.Parameter.Type.IsEnum)
                     writer.UseNamespace(parameter.Parameter.Type.Namespace);
 
                 if (parameter.IsPassThru)
