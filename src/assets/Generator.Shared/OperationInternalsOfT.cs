@@ -32,14 +32,14 @@ namespace Azure.Core
             IOperationSource<T> source,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
-            Request originalRequest,
+            HttpMessage message,
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName,
             DelayStrategy? fallbackDelayStrategy = null)
         {
             _source = source;
-            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia);
+            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, message, originalResponse, finalStateVia);
             _operationInternal = new OperationInternal<T>(clientDiagnostics, this, originalResponse, scopeName, null, fallbackDelayStrategy);
         }
 

@@ -41,6 +41,8 @@ namespace Azure.ResourceManager.Sample
             _userAgent = UserAgentValue.FromType<VirtualMachineScaleSetRollingUpgradesRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCancelRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();

@@ -51,7 +51,7 @@ namespace lro_parameterized_endpoints
             try
             {
                 var originalResponse = await RestClient.PollWithParameterizedEndpointsAsync(accountName, cancellationToken).ConfigureAwait(false);
-                return new LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithParameterizedEndpointsRequest(accountName).Request, originalResponse);
+                return new LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithParameterizedEndpointsRequest(accountName), originalResponse);
             }
             catch (Exception e)
             {
@@ -76,7 +76,7 @@ namespace lro_parameterized_endpoints
             try
             {
                 var originalResponse = RestClient.PollWithParameterizedEndpoints(accountName, cancellationToken);
-                return new LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithParameterizedEndpointsRequest(accountName).Request, originalResponse);
+                return new LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithParameterizedEndpointsRequest(accountName), originalResponse);
             }
             catch (Exception e)
             {
@@ -101,7 +101,7 @@ namespace lro_parameterized_endpoints
             try
             {
                 var originalResponse = await RestClient.PollWithConstantParameterizedEndpointsAsync(accountName, cancellationToken).ConfigureAwait(false);
-                return new LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithConstantParameterizedEndpointsRequest(accountName).Request, originalResponse);
+                return new LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithConstantParameterizedEndpointsRequest(accountName), originalResponse);
             }
             catch (Exception e)
             {
@@ -126,7 +126,7 @@ namespace lro_parameterized_endpoints
             try
             {
                 var originalResponse = RestClient.PollWithConstantParameterizedEndpoints(accountName, cancellationToken);
-                return new LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithConstantParameterizedEndpointsRequest(accountName).Request, originalResponse);
+                return new LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithConstantParameterizedEndpointsRequest(accountName), originalResponse);
             }
             catch (Exception e)
             {

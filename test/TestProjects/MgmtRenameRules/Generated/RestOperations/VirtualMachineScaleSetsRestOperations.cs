@@ -42,6 +42,8 @@ namespace MgmtRenameRules
             _userAgent = UserAgentValue.FromType<VirtualMachineScaleSetsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters)
         {
             var message = _pipeline.CreateMessage();

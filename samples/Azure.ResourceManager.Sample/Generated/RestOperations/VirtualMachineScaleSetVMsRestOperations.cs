@@ -42,6 +42,8 @@ namespace Azure.ResourceManager.Sample
             _userAgent = UserAgentValue.FromType<VirtualMachineScaleSetVMsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateReimageRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMReimageParameters vmScaleSetVMReimageInput)
         {
             var message = _pipeline.CreateMessage();

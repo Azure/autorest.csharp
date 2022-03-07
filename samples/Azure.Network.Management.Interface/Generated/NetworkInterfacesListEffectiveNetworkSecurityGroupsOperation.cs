@@ -26,9 +26,9 @@ namespace Azure.Network.Management.Interface
         {
         }
 
-        internal NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<EffectiveNetworkSecurityGroupListResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation");
+            _operation = new OperationInternals<EffectiveNetworkSecurityGroupListResult>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation");
         }
 
         /// <inheritdoc />

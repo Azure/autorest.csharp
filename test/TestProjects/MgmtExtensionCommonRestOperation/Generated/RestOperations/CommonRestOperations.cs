@@ -42,6 +42,8 @@ namespace MgmtExtensionCommonRestOperation
             _userAgent = UserAgentValue.FromType<CommonRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListTypeOnesBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();

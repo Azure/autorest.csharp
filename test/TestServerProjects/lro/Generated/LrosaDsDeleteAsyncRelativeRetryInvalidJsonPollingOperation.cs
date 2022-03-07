@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingOperation");
         }
 
         /// <inheritdoc />

@@ -42,6 +42,8 @@ namespace MgmtKeyvault
             _userAgent = UserAgentValue.FromType<VaultsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vaultName, VaultCreateOrUpdateParameters parameters)
         {
             var message = _pipeline.CreateMessage();

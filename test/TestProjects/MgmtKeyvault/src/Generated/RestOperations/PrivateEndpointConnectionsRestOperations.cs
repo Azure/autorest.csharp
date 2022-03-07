@@ -42,6 +42,8 @@ namespace MgmtKeyvault
             _userAgent = UserAgentValue.FromType<PrivateEndpointConnectionsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vaultName, string privateEndpointConnectionName)
         {
             var message = _pipeline.CreateMessage();

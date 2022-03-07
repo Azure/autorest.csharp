@@ -41,6 +41,8 @@ namespace MgmtExtensionResource
             _userAgent = UserAgentValue.FromType<SubSingletonsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateGetRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();

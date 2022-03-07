@@ -42,6 +42,8 @@ namespace MgmtHierarchicalNonResource
             _userAgent = UserAgentValue.FromType<SharedGalleryImagesRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListRequest(string subscriptionId, string location, string galleryUniqueName, SharedToValues? sharedTo)
         {
             var message = _pipeline.CreateMessage();

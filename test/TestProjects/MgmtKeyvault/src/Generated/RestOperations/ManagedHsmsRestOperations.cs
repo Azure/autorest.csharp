@@ -42,6 +42,8 @@ namespace MgmtKeyvault
             _userAgent = UserAgentValue.FromType<ManagedHsmsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters)
         {
             var message = _pipeline.CreateMessage();

@@ -42,6 +42,8 @@ namespace Azure.ResourceManager.Sample
             _userAgent = UserAgentValue.FromType<VirtualMachineExtensionsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmName, string vmExtensionName, VirtualMachineExtensionData extensionParameters)
         {
             var message = _pipeline.CreateMessage();

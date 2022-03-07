@@ -31,9 +31,9 @@ namespace ReferenceTypes
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal ReferenceTypesArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal ReferenceTypesArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "ReferenceTypesArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "ReferenceTypesArmOperation", userAgent);
         }
 
         /// <inheritdoc />

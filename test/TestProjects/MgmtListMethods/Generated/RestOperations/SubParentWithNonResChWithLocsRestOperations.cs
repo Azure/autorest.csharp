@@ -42,6 +42,8 @@ namespace MgmtListMethods
             _userAgent = UserAgentValue.FromType<SubParentWithNonResChWithLocsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string subParentWithNonResChWithLocName, SubParentWithNonResChWithLocData parameters)
         {
             var message = _pipeline.CreateMessage();

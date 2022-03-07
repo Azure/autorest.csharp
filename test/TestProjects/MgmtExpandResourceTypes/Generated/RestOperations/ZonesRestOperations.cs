@@ -42,6 +42,8 @@ namespace MgmtExpandResourceTypes
             _userAgent = UserAgentValue.FromType<ZonesRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, ZoneData parameters, string ifMatch, string ifNoneMatch)
         {
             var message = _pipeline.CreateMessage();

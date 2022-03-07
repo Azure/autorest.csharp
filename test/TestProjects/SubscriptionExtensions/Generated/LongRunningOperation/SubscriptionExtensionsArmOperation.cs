@@ -31,9 +31,9 @@ namespace SubscriptionExtensions
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal SubscriptionExtensionsArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal SubscriptionExtensionsArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "SubscriptionExtensionsArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "SubscriptionExtensionsArmOperation", userAgent);
         }
 
         /// <inheritdoc />

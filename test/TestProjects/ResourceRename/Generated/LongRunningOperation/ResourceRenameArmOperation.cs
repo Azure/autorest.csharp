@@ -31,9 +31,9 @@ namespace ResourceRename
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal ResourceRenameArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal ResourceRenameArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "ResourceRenameArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "ResourceRenameArmOperation", userAgent);
         }
 
         /// <inheritdoc />

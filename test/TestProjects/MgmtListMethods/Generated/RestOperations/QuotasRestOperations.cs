@@ -42,6 +42,8 @@ namespace MgmtListMethods
             _userAgent = UserAgentValue.FromType<QuotasRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string location, QuotaUpdateParameters parameters)
         {
             var message = _pipeline.CreateMessage();

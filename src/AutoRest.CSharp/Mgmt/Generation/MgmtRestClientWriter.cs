@@ -38,5 +38,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             writer.WriteXmlDocumentationParameter(ApplicationIdVariable, $"The application id to use for user agent.");
         }
+
+        protected override void WriteHelperMethod(CodeWriter writer)
+        {
+            writer.Line($"internal string GetUserAgent() => {UserAgentField}.ToString();");
+            writer.Line();
+        }
     }
 }

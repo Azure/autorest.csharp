@@ -42,6 +42,8 @@ namespace MgmtScopeResource
             _userAgent = UserAgentValue.FromType<DeploymentsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal Azure.Core.HttpMessage CreateDeleteAtScopeRequest(string scope, string deploymentName)
         {
             var message = _pipeline.CreateMessage();

@@ -42,6 +42,8 @@ namespace TenantOnly
             _userAgent = UserAgentValue.FromType<AgreementsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListRequest(string billingAccountName, string expand)
         {
             var message = _pipeline.CreateMessage();

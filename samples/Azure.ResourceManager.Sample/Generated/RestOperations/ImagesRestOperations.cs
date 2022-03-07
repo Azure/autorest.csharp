@@ -42,6 +42,8 @@ namespace Azure.ResourceManager.Sample
             _userAgent = UserAgentValue.FromType<ImagesRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string imageName, ImageData parameters)
         {
             var message = _pipeline.CreateMessage();

@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsDelete204SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LrosaDsDelete204SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDelete204SucceededOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsDelete204SucceededOperation");
         }
 
         /// <inheritdoc />

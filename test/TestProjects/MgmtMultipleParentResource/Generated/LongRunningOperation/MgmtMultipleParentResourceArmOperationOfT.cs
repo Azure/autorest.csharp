@@ -31,9 +31,9 @@ namespace MgmtMultipleParentResource
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal MgmtMultipleParentResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtMultipleParentResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtMultipleParentResourceArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtMultipleParentResourceArmOperation", userAgent);
         }
 
         /// <inheritdoc />

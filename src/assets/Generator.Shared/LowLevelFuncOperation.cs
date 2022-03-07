@@ -16,10 +16,10 @@ namespace Azure.Core
         private readonly OperationInternal<T> _operation;
         private readonly IOperation _nextLinkOperation;
 
-        internal LowLevelFuncOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
+        internal LowLevelFuncOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string scopeName, Func<Response, T> resultSelector)
         {
             _resultSelector = resultSelector;
-            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, message, response, finalStateVia);
             _operation = new OperationInternal<T>(clientDiagnostics, this, response, scopeName);
         }
 

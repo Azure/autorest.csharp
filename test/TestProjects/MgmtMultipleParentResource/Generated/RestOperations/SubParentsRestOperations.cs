@@ -42,6 +42,8 @@ namespace MgmtMultipleParentResource
             _userAgent = UserAgentValue.FromType<SubParentsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentData subBody)
         {
             var message = _pipeline.CreateMessage();

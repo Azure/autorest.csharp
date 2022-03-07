@@ -42,6 +42,8 @@ namespace MgmtParent
             _userAgent = UserAgentValue.FromType<VirtualMachineExtensionImagesRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string location, string publisherName, string type, string version)
         {
             var message = _pipeline.CreateMessage();

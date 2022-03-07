@@ -31,9 +31,9 @@ namespace OmitOperationGroups
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal OmitOperationGroupsArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal OmitOperationGroupsArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "OmitOperationGroupsArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "OmitOperationGroupsArmOperation", userAgent);
         }
 
         /// <inheritdoc />

@@ -31,9 +31,9 @@ namespace MgmtRenameRules
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtRenameRulesArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtRenameRulesArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtRenameRulesArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtRenameRulesArmOperation", userAgent);
         }
 
         /// <inheritdoc />

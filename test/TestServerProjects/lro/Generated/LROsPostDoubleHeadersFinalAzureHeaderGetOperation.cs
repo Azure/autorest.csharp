@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsPostDoubleHeadersFinalAzureHeaderGetOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LROsPostDoubleHeadersFinalAzureHeaderGetOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "LROsPostDoubleHeadersFinalAzureHeaderGetOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.AzureAsyncOperation, "LROsPostDoubleHeadersFinalAzureHeaderGetOperation");
         }
 
         /// <inheritdoc />

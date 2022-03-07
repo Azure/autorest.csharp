@@ -42,6 +42,8 @@ namespace SupersetFlattenInheritance
             _userAgent = UserAgentValue.FromType<NonResourceModel1SRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string nonResourceModel1SName, NonResourceModel1 parameters)
         {
             var message = _pipeline.CreateMessage();

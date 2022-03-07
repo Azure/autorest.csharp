@@ -41,6 +41,8 @@ namespace MgmtRenameRules
             _userAgent = UserAgentValue.FromType<LogAnalyticsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateExportRequestRateByIntervalRequest(string subscriptionId, string location, RequestRateByIntervalInput parameters)
         {
             var message = _pipeline.CreateMessage();

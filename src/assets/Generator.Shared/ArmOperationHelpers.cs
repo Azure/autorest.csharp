@@ -14,40 +14,16 @@ namespace Azure.Core
         /// <summary>
         /// Store the property values that are shared by current management plane RP.
         /// </summary>
-        private static ConcurrentDictionary<string, object> _armProperties = new ConcurrentDictionary<string, object>();
+        private static void SetProperty(this HttpMessage message, string userAgent) => message.SetProperty("ArmUserAgent", userAgent);
 
-        public static bool TryGetProperty(string name, out object? value)
+        public static OperationOrResponseInternals<T> CreateOperation<T>(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string scopeName, string userAgent)
         {
-            value = null;
-            return _armProperties.TryGetValue(name, out value) == true;
+            return new OperationOrResponseInternals<T>(source, clientDiagnostics, pipeline, message, response, finalStateVia, scopeName);
         }
 
-        private static void SetProperty(HttpMessage message)
+        public static OperationOrResponseInternals CreateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string scopeName, string userAgent)
         {
-            if (message.TryGetProperty("SDKUserAgent", out Object? propertyValue))
-            {
-                if (propertyValue is string userAgent)
-                {
-                    _armProperties.TryAdd("IsArmOperation", true);
-                    _armProperties.TryAdd("SDKUserAgent", userAgent);
-                }
-                else
-                {
-                    throw new ArgumentException($"SDKUserAgent http message property must be a string but was {propertyValue?.GetType()}");
-                }
-            }
-        }
-
-        public static OperationOrResponseInternals<T> CreateOperation<T>(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string scopeName)
-        {
-            SetProperty(message);
-            return new OperationOrResponseInternals<T>(source, clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName);
-        }
-
-        public static OperationOrResponseInternals CreateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string scopeName)
-        {
-            SetProperty(message);
-            return new OperationOrResponseInternals(clientDiagnostics, pipeline, message.Request, response, finalStateVia, scopeName);
+            return new OperationOrResponseInternals(clientDiagnostics, pipeline, message, response, finalStateVia, scopeName);
         }
     }
 }

@@ -26,9 +26,9 @@ namespace Azure.Network.Management.Interface
         {
         }
 
-        internal NetworkInterfacesGetEffectiveRouteTableOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal NetworkInterfacesGetEffectiveRouteTableOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<EffectiveRouteListResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfacesGetEffectiveRouteTableOperation");
+            _operation = new OperationInternals<EffectiveRouteListResult>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "NetworkInterfacesGetEffectiveRouteTableOperation");
         }
 
         /// <inheritdoc />

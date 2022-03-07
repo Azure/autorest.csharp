@@ -42,6 +42,8 @@ namespace MgmtCollectionParent
             _userAgent = UserAgentValue.FromType<ComputeManagementRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListOrderAtSubscriptionLevelRequest(string subscriptionId, string skipToken)
         {
             var message = _pipeline.CreateMessage();

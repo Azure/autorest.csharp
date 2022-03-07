@@ -31,9 +31,9 @@ namespace MgmtScopeResource
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtScopeResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtScopeResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtScopeResourceArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtScopeResourceArmOperation", userAgent);
         }
 
         /// <inheritdoc />

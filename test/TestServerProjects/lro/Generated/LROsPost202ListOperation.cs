@@ -27,9 +27,9 @@ namespace lro
         {
         }
 
-        internal LROsPost202ListOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LROsPost202ListOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<IReadOnlyList<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
+            _operation = new OperationInternals<IReadOnlyList<Product>>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
         }
 
         /// <inheritdoc />

@@ -42,6 +42,8 @@ namespace Azure.ResourceManager.Sample
             _userAgent = UserAgentValue.FromType<DedicatedHostGroupsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters)
         {
             var message = _pipeline.CreateMessage();

@@ -392,7 +392,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"{parameter.Name}, ");
                     }
                     writer.RemoveTrailingComma();
-                    writer.Append($").Request, originalResponse");
+                    writer.Append($"), originalResponse");
 
                     var nextPageMethod = lroMethod.Operation.NextPageMethod;
                     if (nextPageMethod != null)

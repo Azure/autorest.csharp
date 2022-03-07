@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsPost200WithPayloadOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LROsPost200WithPayloadOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<Sku>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost200WithPayloadOperation");
+            _operation = new OperationInternals<Sku>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsPost200WithPayloadOperation");
         }
 
         /// <inheritdoc />

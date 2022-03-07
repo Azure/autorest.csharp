@@ -41,6 +41,8 @@ namespace SingletonResource
             _userAgent = UserAgentValue.FromType<IgnitionsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string carName)
         {
             var message = _pipeline.CreateMessage();

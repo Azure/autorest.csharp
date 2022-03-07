@@ -42,6 +42,8 @@ namespace Azure.Management.Storage
             _userAgent = UserAgentValue.FromType<StorageAccountsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCheckNameAvailabilityRequest(string subscriptionId, StorageAccountCheckNameAvailabilityParameters accountName)
         {
             var message = _pipeline.CreateMessage();

@@ -31,9 +31,9 @@ namespace ExactMatchInheritance
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal ExactMatchInheritanceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal ExactMatchInheritanceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "ExactMatchInheritanceArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "ExactMatchInheritanceArmOperation", userAgent);
         }
 
         /// <inheritdoc />

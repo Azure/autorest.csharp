@@ -311,7 +311,7 @@ namespace CustomNamespace
             try
             {
                 var originalResponse = await RestClient.OperationAsync(body, cancellationToken).ConfigureAwait(false);
-                return new MainOperation(_clientDiagnostics, _pipeline, RestClient.CreateOperationRequest(body).Request, originalResponse);
+                return new MainOperation(_clientDiagnostics, _pipeline, RestClient.CreateOperationRequest(body), originalResponse);
             }
             catch (Exception e)
             {
@@ -329,7 +329,7 @@ namespace CustomNamespace
             try
             {
                 var originalResponse = RestClient.Operation(body, cancellationToken);
-                return new MainOperation(_clientDiagnostics, _pipeline, RestClient.CreateOperationRequest(body).Request, originalResponse);
+                return new MainOperation(_clientDiagnostics, _pipeline, RestClient.CreateOperationRequest(body), originalResponse);
             }
             catch (Exception e)
             {

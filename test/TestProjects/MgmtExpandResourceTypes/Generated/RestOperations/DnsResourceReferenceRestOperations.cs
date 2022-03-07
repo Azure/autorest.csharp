@@ -42,6 +42,8 @@ namespace MgmtExpandResourceTypes
             _userAgent = UserAgentValue.FromType<DnsResourceReferenceRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateGetByTargetResourcesRequest(string subscriptionId, DnsResourceReferenceRequest parameters)
         {
             var message = _pipeline.CreateMessage();

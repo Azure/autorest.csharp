@@ -34,6 +34,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     WriteClientCtor(writer, restClient, cs);
 
+                    WriteHelperMethod(writer);
+
                     var responseClassifierTypes = new List<LowLevelClientWriter.ResponseClassifierType>();
                     foreach (var method in restClient.Methods)
                     {
@@ -111,6 +113,10 @@ namespace AutoRest.CSharp.Generation.Writers
         protected virtual bool UseSDKUserAgent()
         {
             return false;
+        }
+
+        protected virtual void WriteHelperMethod(CodeWriter writer)
+        {
         }
 
         private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)

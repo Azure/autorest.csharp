@@ -42,6 +42,8 @@ namespace MgmtScopeResource
             _userAgent = UserAgentValue.FromType<FakePolicyAssignmentsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal Azure.Core.HttpMessage CreateDeleteRequest(string scope, string policyAssignmentName)
         {
             var message = _pipeline.CreateMessage();

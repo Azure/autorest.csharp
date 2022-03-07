@@ -42,6 +42,8 @@ namespace MgmtParamOrdering
             _userAgent = UserAgentValue.FromType<VirtualMachineScaleSetsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters, string quick)
         {
             var message = _pipeline.CreateMessage();

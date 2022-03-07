@@ -42,6 +42,8 @@ namespace Azure.Management.Storage
             _userAgent = UserAgentValue.FromType<EncryptionScopesRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScopeData encryptionScope)
         {
             var message = _pipeline.CreateMessage();

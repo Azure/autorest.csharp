@@ -42,6 +42,8 @@ namespace Pagination
             _userAgent = UserAgentValue.FromType<PageSizeDoubleModelsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, double? maxpagesize)
         {
             var message = _pipeline.CreateMessage();

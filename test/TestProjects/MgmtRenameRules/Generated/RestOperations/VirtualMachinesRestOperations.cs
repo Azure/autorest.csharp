@@ -42,6 +42,8 @@ namespace MgmtRenameRules
             _userAgent = UserAgentValue.FromType<VirtualMachinesRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListByLocationRequest(string subscriptionId, string location)
         {
             var message = _pipeline.CreateMessage();

@@ -31,9 +31,9 @@ namespace ExactMatchFlattenInheritance
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal ExactMatchFlattenInheritanceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal ExactMatchFlattenInheritanceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "ExactMatchFlattenInheritanceArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "ExactMatchFlattenInheritanceArmOperation", userAgent);
         }
 
         /// <inheritdoc />

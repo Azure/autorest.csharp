@@ -42,6 +42,8 @@ namespace MgmtPropertyChooser
             _userAgent = UserAgentValue.FromType<VirtualMachinesRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();

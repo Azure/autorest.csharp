@@ -42,6 +42,8 @@ namespace ResourceRename
             _userAgent = UserAgentValue.FromType<SshPublicKeysRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();

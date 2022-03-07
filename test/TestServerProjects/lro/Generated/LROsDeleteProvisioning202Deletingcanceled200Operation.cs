@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsDeleteProvisioning202Deletingcanceled200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LROsDeleteProvisioning202Deletingcanceled200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteProvisioning202Deletingcanceled200Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsDeleteProvisioning202Deletingcanceled200Operation");
         }
 
         /// <inheritdoc />

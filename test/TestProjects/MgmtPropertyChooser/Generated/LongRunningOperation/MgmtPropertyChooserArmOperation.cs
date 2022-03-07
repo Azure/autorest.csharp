@@ -31,9 +31,9 @@ namespace MgmtPropertyChooser
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtPropertyChooserArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtPropertyChooserArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtPropertyChooserArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtPropertyChooserArmOperation", userAgent);
         }
 
         /// <inheritdoc />

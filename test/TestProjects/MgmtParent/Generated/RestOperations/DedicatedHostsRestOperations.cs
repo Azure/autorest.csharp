@@ -42,6 +42,8 @@ namespace MgmtParent
             _userAgent = UserAgentValue.FromType<DedicatedHostsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, string hostName, DedicatedHostData parameters)
         {
             var message = _pipeline.CreateMessage();

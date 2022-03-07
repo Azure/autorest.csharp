@@ -41,6 +41,8 @@ namespace MgmtExtensionResource
             _userAgent = UserAgentValue.FromType<OrphanedPostRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateValidateSomethingRequest(string subscriptionId, ValidateSomethingOptions validateSomethingOptions)
         {
             var message = _pipeline.CreateMessage();

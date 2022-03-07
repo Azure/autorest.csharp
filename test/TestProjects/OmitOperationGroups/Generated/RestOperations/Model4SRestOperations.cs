@@ -42,6 +42,8 @@ namespace OmitOperationGroups
             _userAgent = UserAgentValue.FromType<Model4SRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateGetDefaultRequest(string subscriptionId, string resourceGroupName, string model2SName)
         {
             var message = _pipeline.CreateMessage();

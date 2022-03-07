@@ -42,6 +42,8 @@ namespace MgmtParamOrdering
             _userAgent = UserAgentValue.FromType<AvailabilitySetsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters)
         {
             var message = _pipeline.CreateMessage();

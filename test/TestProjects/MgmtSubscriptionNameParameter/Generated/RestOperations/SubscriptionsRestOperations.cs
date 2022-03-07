@@ -42,6 +42,8 @@ namespace MgmtSubscriptionNameParameter
             _userAgent = UserAgentValue.FromType<SubscriptionsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListByTopicRequest(string subscriptionId, string resourceGroupName, int? skip, int? top)
         {
             var message = _pipeline.CreateMessage();

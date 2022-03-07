@@ -42,6 +42,8 @@ namespace SubscriptionExtensions
             _userAgent = UserAgentValue.FromType<OvensRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListAllRequest(string subscriptionId, string resourceGroupName, string statusOnly)
         {
             var message = _pipeline.CreateMessage();

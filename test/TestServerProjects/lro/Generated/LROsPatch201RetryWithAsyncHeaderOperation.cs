@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsPatch201RetryWithAsyncHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LROsPatch201RetryWithAsyncHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "LROsPatch201RetryWithAsyncHeaderOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.AzureAsyncOperation, "LROsPatch201RetryWithAsyncHeaderOperation");
         }
 
         /// <inheritdoc />

@@ -31,9 +31,9 @@ namespace NoTypeReplacement
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal NoTypeReplacementArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal NoTypeReplacementArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "NoTypeReplacementArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "NoTypeReplacementArmOperation", userAgent);
         }
 
         /// <inheritdoc />

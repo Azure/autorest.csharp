@@ -42,6 +42,8 @@ namespace MgmtNonStringPathVariable
             _userAgent = UserAgentValue.FromType<BarsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, int barName, BarData body)
         {
             var message = _pipeline.CreateMessage();

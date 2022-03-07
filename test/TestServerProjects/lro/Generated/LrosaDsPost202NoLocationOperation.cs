@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsPost202NoLocationOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LrosaDsPost202NoLocationOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPost202NoLocationOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsPost202NoLocationOperation");
         }
 
         /// <inheritdoc />

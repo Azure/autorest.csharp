@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsPut200InvalidJsonOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LrosaDsPut200InvalidJsonOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPut200InvalidJsonOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsPut200InvalidJsonOperation");
         }
 
         /// <inheritdoc />

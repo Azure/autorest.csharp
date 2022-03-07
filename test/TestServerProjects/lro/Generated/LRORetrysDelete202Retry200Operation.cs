@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LRORetrysDelete202Retry200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LRORetrysDelete202Retry200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LRORetrysDelete202Retry200Operation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LRORetrysDelete202Retry200Operation");
         }
 
         /// <inheritdoc />

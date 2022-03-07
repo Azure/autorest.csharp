@@ -42,6 +42,8 @@ namespace MgmtParamOrdering
             _userAgent = UserAgentValue.FromType<DedicatedHostGroupsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();

@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsPost202NoRetry204Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LROsPost202NoRetry204Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202NoRetry204Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsPost202NoRetry204Operation");
         }
 
         /// <inheritdoc />

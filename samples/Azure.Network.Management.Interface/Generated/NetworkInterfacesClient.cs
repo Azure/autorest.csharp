@@ -303,7 +303,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = await RestClient.DeleteAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-                return new NetworkInterfacesDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName).Request, originalResponse);
+                return new NetworkInterfacesDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName), originalResponse);
             }
             catch (Exception e)
             {
@@ -333,7 +333,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = RestClient.Delete(resourceGroupName, networkInterfaceName, cancellationToken);
-                return new NetworkInterfacesDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName).Request, originalResponse);
+                return new NetworkInterfacesDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(resourceGroupName, networkInterfaceName), originalResponse);
             }
             catch (Exception e)
             {
@@ -368,7 +368,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = await RestClient.CreateOrUpdateAsync(resourceGroupName, networkInterfaceName, parameters, cancellationToken).ConfigureAwait(false);
-                return new NetworkInterfacesCreateOrUpdateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters).Request, originalResponse);
+                return new NetworkInterfacesCreateOrUpdateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters), originalResponse);
             }
             catch (Exception e)
             {
@@ -403,7 +403,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = RestClient.CreateOrUpdate(resourceGroupName, networkInterfaceName, parameters, cancellationToken);
-                return new NetworkInterfacesCreateOrUpdateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters).Request, originalResponse);
+                return new NetworkInterfacesCreateOrUpdateOperation(_clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(resourceGroupName, networkInterfaceName, parameters), originalResponse);
             }
             catch (Exception e)
             {
@@ -433,7 +433,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = await RestClient.GetEffectiveRouteTableAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-                return new NetworkInterfacesGetEffectiveRouteTableOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName).Request, originalResponse);
+                return new NetworkInterfacesGetEffectiveRouteTableOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName), originalResponse);
             }
             catch (Exception e)
             {
@@ -463,7 +463,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = RestClient.GetEffectiveRouteTable(resourceGroupName, networkInterfaceName, cancellationToken);
-                return new NetworkInterfacesGetEffectiveRouteTableOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName).Request, originalResponse);
+                return new NetworkInterfacesGetEffectiveRouteTableOperation(_clientDiagnostics, _pipeline, RestClient.CreateGetEffectiveRouteTableRequest(resourceGroupName, networkInterfaceName), originalResponse);
             }
             catch (Exception e)
             {
@@ -493,7 +493,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = await RestClient.ListEffectiveNetworkSecurityGroupsAsync(resourceGroupName, networkInterfaceName, cancellationToken).ConfigureAwait(false);
-                return new NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation(_clientDiagnostics, _pipeline, RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName).Request, originalResponse);
+                return new NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation(_clientDiagnostics, _pipeline, RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName), originalResponse);
             }
             catch (Exception e)
             {
@@ -523,7 +523,7 @@ namespace Azure.Network.Management.Interface
             try
             {
                 var originalResponse = RestClient.ListEffectiveNetworkSecurityGroups(resourceGroupName, networkInterfaceName, cancellationToken);
-                return new NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation(_clientDiagnostics, _pipeline, RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName).Request, originalResponse);
+                return new NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation(_clientDiagnostics, _pipeline, RestClient.CreateListEffectiveNetworkSecurityGroupsRequest(resourceGroupName, networkInterfaceName), originalResponse);
             }
             catch (Exception e)
             {

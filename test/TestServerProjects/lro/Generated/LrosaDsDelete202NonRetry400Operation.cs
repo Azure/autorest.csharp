@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsDelete202NonRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LrosaDsDelete202NonRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDelete202NonRetry400Operation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsDelete202NonRetry400Operation");
         }
 
         /// <inheritdoc />

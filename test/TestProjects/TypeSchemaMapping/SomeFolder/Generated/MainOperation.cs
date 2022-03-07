@@ -24,9 +24,9 @@ namespace CustomNamespace
         {
         }
 
-        internal MainOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal MainOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<CustomizedModel>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "MainOperation");
+            _operation = new OperationInternals<CustomizedModel>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "MainOperation");
         }
 
         /// <inheritdoc />

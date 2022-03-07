@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsPutNonResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LROsPutNonResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<Sku>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutNonResourceOperation");
+            _operation = new OperationInternals<Sku>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsPutNonResourceOperation");
         }
 
         /// <inheritdoc />

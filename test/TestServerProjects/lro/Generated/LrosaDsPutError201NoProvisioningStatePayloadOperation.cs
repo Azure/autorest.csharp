@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsPutError201NoProvisioningStatePayloadOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LrosaDsPutError201NoProvisioningStatePayloadOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutError201NoProvisioningStatePayloadOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsPutError201NoProvisioningStatePayloadOperation");
         }
 
         /// <inheritdoc />

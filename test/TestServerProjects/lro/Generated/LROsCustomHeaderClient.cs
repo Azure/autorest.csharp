@@ -46,7 +46,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsCustomHeaderPutAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetrySucceededRequest(product).Request, originalResponse);
+                return new LROsCustomHeaderPutAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetrySucceededRequest(product), originalResponse);
             }
             catch (Exception e)
             {
@@ -65,7 +65,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutAsyncRetrySucceeded(product, cancellationToken);
-                return new LROsCustomHeaderPutAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetrySucceededRequest(product).Request, originalResponse);
+                return new LROsCustomHeaderPutAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetrySucceededRequest(product), originalResponse);
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put201CreatingSucceeded200Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsCustomHeaderPut201CreatingSucceeded200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingSucceeded200Request(product).Request, originalResponse);
+                return new LROsCustomHeaderPut201CreatingSucceeded200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingSucceeded200Request(product), originalResponse);
             }
             catch (Exception e)
             {
@@ -103,7 +103,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put201CreatingSucceeded200(product, cancellationToken);
-                return new LROsCustomHeaderPut201CreatingSucceeded200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingSucceeded200Request(product).Request, originalResponse);
+                return new LROsCustomHeaderPut201CreatingSucceeded200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingSucceeded200Request(product), originalResponse);
             }
             catch (Exception e)
             {
@@ -122,7 +122,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Post202Retry200Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsCustomHeaderPost202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202Retry200Request(product).Request, originalResponse);
+                return new LROsCustomHeaderPost202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202Retry200Request(product), originalResponse);
             }
             catch (Exception e)
             {
@@ -141,7 +141,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Post202Retry200(product, cancellationToken);
-                return new LROsCustomHeaderPost202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202Retry200Request(product).Request, originalResponse);
+                return new LROsCustomHeaderPost202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202Retry200Request(product), originalResponse);
             }
             catch (Exception e)
             {
@@ -160,7 +160,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PostAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsCustomHeaderPostAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrySucceededRequest(product).Request, originalResponse);
+                return new LROsCustomHeaderPostAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrySucceededRequest(product), originalResponse);
             }
             catch (Exception e)
             {
@@ -179,7 +179,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PostAsyncRetrySucceeded(product, cancellationToken);
-                return new LROsCustomHeaderPostAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrySucceededRequest(product).Request, originalResponse);
+                return new LROsCustomHeaderPostAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrySucceededRequest(product), originalResponse);
             }
             catch (Exception e)
             {

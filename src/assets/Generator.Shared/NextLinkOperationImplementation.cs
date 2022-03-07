@@ -28,19 +28,18 @@ namespace Azure.Core
         private readonly HttpPipeline _pipeline;
         private readonly string? _apiVersion;
         private readonly string? _userAgent;
-        private readonly bool? _isArmOperation;
-
+        private bool _isArmOperation => !string.IsNullOrEmpty(_userAgent);
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
-        public static IOperation Create(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, Response response, OperationFinalStateVia finalStateVia)
+        public static IOperation Create(HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
         {
-            TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion);
+            TryGetApiVersion(message.Request.Uri.ToUri(), out ReadOnlySpan<char> apiVersion);
             string? apiVersionStr = (apiVersion == null ? null : apiVersion.ToString());
-            var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
+            var headerSource = GetHeaderSource(message.Request.Method, message.Request.Uri.ToUri(), response, apiVersionStr, out var nextRequestUri);
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
             {
-                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
+                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(message.Request.Method, response));
             }
 
             var (originalResponseHasLocation, lastKnownLocation) = headerSource == HeaderSource.Location
@@ -49,22 +48,21 @@ namespace Azure.Core
                     ? (true, locationUri)
                     : (false, null);
 
-            return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
+            return new NextLinkOperationImplementation(pipeline, message, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
-        private NextLinkOperationImplementation(HttpPipeline pipeline, RequestMethod requestMethod, Uri startRequestUri, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia, string? apiVersion)
+        private NextLinkOperationImplementation(HttpPipeline pipeline, HttpMessage message, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia, string? apiVersion)
         {
-            _requestMethod = requestMethod;
+            _requestMethod = message.Request.Method;
             _headerSource = headerSource;
-            _startRequestUri = startRequestUri;
+            _startRequestUri = message.Request.Uri.ToUri();
             _nextRequestUri = nextRequestUri;
             _originalResponseHasLocation = originalResponseHasLocation;
             _lastKnownLocation = lastKnownLocation;
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
             _apiVersion = apiVersion;
-            _userAgent = ArmOperationHelpers.TryGetProperty("SDKUserAgent", out Object? userAgentValue) && userAgentValue is string userAgent ? userAgent : null;
-            _isArmOperation = ArmOperationHelpers.TryGetProperty("IsArmOperation", out Object? isMgmtPlaneValue) && isMgmtPlaneValue is bool isMgmtPlane ? isMgmtPlane : null;
+            _userAgent = message.TryGetProperty("ArmUserAgent", out Object? userAgentValue) && userAgentValue is string userAgent ? userAgent : null;
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
@@ -212,7 +210,7 @@ namespace Azure.Core
             // 1.Original request is a put method;
             // 2.Original request is a management plane patch method. For data plane patch method, the final uri will be determinned by the original response header and "_finalStateVia";
             // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
-            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && (_isArmOperation ?? false) || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && _isArmOperation || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
             {
                 return _startRequestUri.AbsoluteUri;
             }

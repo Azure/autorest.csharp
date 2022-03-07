@@ -42,6 +42,8 @@ namespace MgmtListMethods
             _userAgent = UserAgentValue.FromType<TenantParentWithLocsRestOperations>(applicationId);
         }
 
+        internal string GetUserAgent() => _userAgent.ToString();
+
         internal HttpMessage CreateCreateOrUpdateRequest(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters)
         {
             var message = _pipeline.CreateMessage();

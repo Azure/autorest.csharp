@@ -31,9 +31,9 @@ namespace MgmtExpandResourceTypes
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal MgmtExpandResourceTypesArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtExpandResourceTypesArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
         {
-            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtExpandResourceTypesArmOperation");
+            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtExpandResourceTypesArmOperation", userAgent);
         }
 
         /// <inheritdoc />
