@@ -28,23 +28,11 @@ namespace dpg_customization_LowLevel.Models
         {            
             try
             {
-                return (Product)response.Content;
+                return DeserializeProduct(JsonDocument.Parse(response.Content.ToMemory()).RootElement);
             }
             catch
             {
                 throw new RequestFailedException($"Failed to cast from Response to {typeof(Product)}.");
-            }
-        }
-
-        public static implicit operator Product(BinaryData binaryData)
-        {
-            try
-            {
-                return DeserializeProduct(JsonDocument.Parse(binaryData.ToMemory()).RootElement);
-            }
-            catch
-            {
-                throw new RequestFailedException($"Failed to cast from BinaryData to {typeof(Product)}.");
             }
         }
     }

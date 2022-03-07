@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
@@ -18,7 +16,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetRawModel() => Test(async (host) =>
         {
             Response result = await new DPGClient(Key, host).GetModelAsync("raw");
-            var responseBody = JsonData.FromBytes(result.Content.ToMemory());
+            JsonData responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
         });
 
@@ -38,7 +36,7 @@ namespace AutoRest.TestServer.Tests
             };
             Response result = await new DPGClient(Key, host).PostModelAsync("raw", RequestContent.Create(value));
             Assert.AreEqual(200, result.Status);
-            var responseBody = JsonData.FromBytes(result.Content.ToMemory());
+            JsonData responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
         });
 

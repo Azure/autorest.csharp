@@ -35,5 +35,17 @@ namespace dpg_customization_LowLevel.Models
         public IReadOnlyList<Product> Values { get; }
         /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
+
+        public static implicit operator ProductResult(Response response)
+        {
+            try
+            {
+                return DeserializeProductResult(JsonDocument.Parse(response.Content.ToMemory()).RootElement);
+            }
+            catch
+            {
+                throw new RequestFailedException($"Failed to cast from Response to {typeof(ProductResult)}.");
+            }
+        }
     }
 }
