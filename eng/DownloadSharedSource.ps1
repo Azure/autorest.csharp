@@ -23,7 +23,7 @@ $baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/core/add-n
 DownloadAll $files $baseUrl $downloadPath
 
 #Download management Shared
-$files = 'SharedExtensions.cs', 'HttpMessageUtilities.cs', 'ManagedServiceIdentityTypeV3Converter.cs'
+$files = 'SharedExtensions.cs', 'ManagedServiceIdentityTypeV3Converter.cs'
 $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Management.Shared')
 Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
 $baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/resourcemanager/Azure.ResourceManager/src/Shared/'
