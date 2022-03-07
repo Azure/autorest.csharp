@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using TenantOnly.Models;
 
 namespace TenantOnly
 {
     internal partial class BillingAccountsRestOperations
     {
-        private readonly string _userAgent;
+        private readonly UserAgentValue _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -40,7 +39,7 @@ namespace TenantOnly
             _apiVersion = apiVersion ?? "2020-05-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new UserAgentValue(GetType(), applicationId);
         }
 
         internal HttpMessage CreateListRequest(string expand)
@@ -58,7 +57,7 @@ namespace TenantOnly
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -120,7 +119,7 @@ namespace TenantOnly
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -200,7 +199,7 @@ namespace TenantOnly
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 

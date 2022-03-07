@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
     internal partial class DeploymentsRestOperations
     {
-        private readonly string _userAgent;
+        private readonly UserAgentValue _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -40,7 +39,7 @@ namespace MgmtScopeResource
             _apiVersion = apiVersion ?? "2021-04-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new UserAgentValue(GetType(), applicationId);
         }
 
         internal Azure.Core.HttpMessage CreateDeleteAtScopeRequest(string scope, string deploymentName)
@@ -57,7 +56,7 @@ namespace MgmtScopeResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -131,7 +130,7 @@ namespace MgmtScopeResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -223,7 +222,7 @@ namespace MgmtScopeResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -307,7 +306,7 @@ namespace MgmtScopeResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -394,7 +393,7 @@ namespace MgmtScopeResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -471,7 +470,7 @@ namespace MgmtScopeResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -558,7 +557,7 @@ namespace MgmtScopeResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -647,7 +646,7 @@ namespace MgmtScopeResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -726,7 +725,7 @@ namespace MgmtScopeResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -805,7 +804,7 @@ namespace MgmtScopeResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -894,7 +893,7 @@ namespace MgmtScopeResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -985,7 +984,7 @@ namespace MgmtScopeResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1080,7 +1079,7 @@ namespace MgmtScopeResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(template);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1148,7 +1147,7 @@ namespace MgmtScopeResource
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 

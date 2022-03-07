@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtRenameRules.Models;
 
 namespace MgmtRenameRules
 {
     internal partial class VirtualMachineScaleSetVMsRestOperations
     {
-        private readonly string _userAgent;
+        private readonly UserAgentValue _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -40,7 +39,7 @@ namespace MgmtRenameRules
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new UserAgentValue(GetType(), applicationId);
         }
 
         internal HttpMessage CreateReimageRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVmReimageParameters vmScaleSetVMReimageInput)
@@ -68,7 +67,7 @@ namespace MgmtRenameRules
                 content.JsonWriter.WriteObjectValue(vmScaleSetVMReimageInput);
                 request.Content = content;
             }
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -168,7 +167,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/reimageall", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -266,7 +265,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/deallocate", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -368,7 +367,7 @@ namespace MgmtRenameRules
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -475,7 +474,7 @@ namespace MgmtRenameRules
             uri.AppendPath(instanceId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -576,7 +575,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -687,7 +686,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -804,7 +803,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -910,7 +909,7 @@ namespace MgmtRenameRules
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1010,7 +1009,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/restart", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1108,7 +1107,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/start", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1206,7 +1205,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/redeploy", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1309,7 +1308,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1417,7 +1416,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/performMaintenance", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1515,7 +1514,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/simulateEviction", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -1603,7 +1602,7 @@ namespace MgmtRenameRules
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 

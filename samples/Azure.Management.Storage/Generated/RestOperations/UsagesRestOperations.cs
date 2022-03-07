@@ -13,13 +13,12 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     internal partial class UsagesRestOperations
     {
-        private readonly string _userAgent;
+        private readonly UserAgentValue _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -40,7 +39,7 @@ namespace Azure.Management.Storage
             _apiVersion = apiVersion ?? "2021-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new UserAgentValue(GetType(), applicationId);
         }
 
         internal HttpMessage CreateListByLocationRequest(string subscriptionId, string location)
@@ -58,7 +57,7 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 

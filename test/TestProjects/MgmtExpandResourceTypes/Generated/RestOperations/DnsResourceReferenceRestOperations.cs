@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
     internal partial class DnsResourceReferenceRestOperations
     {
-        private readonly string _userAgent;
+        private readonly UserAgentValue _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -40,7 +39,7 @@ namespace MgmtExpandResourceTypes
             _apiVersion = apiVersion ?? "2020-09-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new UserAgentValue(GetType(), applicationId);
         }
 
         internal HttpMessage CreateGetByTargetResourcesRequest(string subscriptionId, DnsResourceReferenceRequest parameters)
@@ -60,7 +59,7 @@ namespace MgmtExpandResourceTypes
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 

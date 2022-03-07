@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtExtensionCommonRestOperation.Models;
 
 namespace MgmtExtensionCommonRestOperation
 {
     internal partial class CommonRestOperations
     {
-        private readonly string _userAgent;
+        private readonly UserAgentValue _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -40,7 +39,7 @@ namespace MgmtExtensionCommonRestOperation
             _apiVersion = apiVersion ?? "2020-09-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new UserAgentValue(GetType(), applicationId);
         }
 
         internal HttpMessage CreateListTypeOnesBySubscriptionRequest(string subscriptionId)
@@ -56,7 +55,7 @@ namespace MgmtExtensionCommonRestOperation
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -127,7 +126,7 @@ namespace MgmtExtensionCommonRestOperation
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -200,7 +199,7 @@ namespace MgmtExtensionCommonRestOperation
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -283,7 +282,7 @@ namespace MgmtExtensionCommonRestOperation
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -367,7 +366,7 @@ namespace MgmtExtensionCommonRestOperation
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -469,7 +468,7 @@ namespace MgmtExtensionCommonRestOperation
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(typeOne);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -573,7 +572,7 @@ namespace MgmtExtensionCommonRestOperation
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
@@ -675,7 +674,7 @@ namespace MgmtExtensionCommonRestOperation
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(typeTwo);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            message.SetUserAgentString(_userAgent);
             return message;
         }
 
