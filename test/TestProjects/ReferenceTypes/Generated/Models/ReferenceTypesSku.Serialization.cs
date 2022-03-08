@@ -12,8 +12,8 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(SkuConverter))]
-    public partial class Sku : IUtf8JsonSerializable
+    [JsonConverter(typeof(ReferenceTypesSkuConverter))]
+    public partial class ReferenceTypesSku : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static Sku DeserializeSku(JsonElement element)
+        internal static ReferenceTypesSku DeserializeReferenceTypesSku(JsonElement element)
         {
             string name = default;
             Optional<SkuTier> tier = default;
@@ -88,19 +88,19 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new Sku(name, Optional.ToNullable(tier), size.Value, family.Value, Optional.ToNullable(capacity));
+            return new ReferenceTypesSku(name, Optional.ToNullable(tier), size.Value, family.Value, Optional.ToNullable(capacity));
         }
 
-        internal partial class SkuConverter : JsonConverter<Sku>
+        internal partial class ReferenceTypesSkuConverter : JsonConverter<ReferenceTypesSku>
         {
-            public override void Write(Utf8JsonWriter writer, Sku model, JsonSerializerOptions options)
+            public override void Write(Utf8JsonWriter writer, ReferenceTypesSku model, JsonSerializerOptions options)
             {
                 writer.WriteObjectValue(model);
             }
-            public override Sku Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override ReferenceTypesSku Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeSku(document.RootElement);
+                return DeserializeReferenceTypesSku(document.RootElement);
             }
         }
     }

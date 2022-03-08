@@ -103,7 +103,7 @@ namespace MgmtPropertyChooser
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            Optional<Models.Plan> plan = default;
+            Optional<MgmtPropertyChooserPlan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
@@ -112,7 +112,7 @@ namespace MgmtPropertyChooser
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<ManagedServiceIdentity> identityV3 = default;
             Optional<IList<string>> zones = default;
-            Optional<IReadOnlyList<Resource>> fakeResources = default;
+            Optional<IReadOnlyList<MgmtPropertyChooserResourceData>> fakeResources = default;
             Optional<SubResource> fakeSubResource = default;
             Optional<WritableSubResource> fakeWritableSubResource = default;
             IDictionary<string, string> tags = default;
@@ -134,7 +134,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Models.Plan.DeserializePlan(property.Value);
+                    plan = MgmtPropertyChooserPlan.DeserializeMgmtPropertyChooserPlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("resources"))
@@ -235,10 +235,10 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<Resource> array = new List<Resource>();
+                    List<MgmtPropertyChooserResourceData> array = new List<MgmtPropertyChooserResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Resource.DeserializeResource(item));
+                        array.Add(MgmtPropertyChooserResourceData.DeserializeMgmtPropertyChooserResourceData(item));
                     }
                     fakeResources = array;
                     continue;

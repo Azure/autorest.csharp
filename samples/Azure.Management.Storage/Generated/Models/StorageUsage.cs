@@ -8,19 +8,19 @@
 namespace Azure.Management.Storage.Models
 {
     /// <summary> Describes Storage Resource Usage. </summary>
-    public partial class Usage
+    public partial class StorageUsage
     {
-        /// <summary> Initializes a new instance of Usage. </summary>
-        internal Usage()
+        /// <summary> Initializes a new instance of StorageUsage. </summary>
+        internal StorageUsage()
         {
         }
 
-        /// <summary> Initializes a new instance of Usage. </summary>
+        /// <summary> Initializes a new instance of StorageUsage. </summary>
         /// <param name="unit"> Gets the unit of measurement. </param>
         /// <param name="currentValue"> Gets the current count of the allocated resources in the subscription. </param>
         /// <param name="limit"> Gets the maximum count of the resources that can be allocated in the subscription. </param>
         /// <param name="name"> Gets the name of the type of usage. </param>
-        internal Usage(UsageUnit? unit, int? currentValue, int? limit, UsageName name)
+        internal StorageUsage(UsageUnit? unit, int? currentValue, int? limit, UsageName name)
         {
             Unit = unit;
             CurrentValue = currentValue;

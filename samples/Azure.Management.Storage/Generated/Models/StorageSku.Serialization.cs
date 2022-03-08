@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class Sku : IUtf8JsonSerializable
+    public partial class StorageSku : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -20,7 +20,7 @@ namespace Azure.Management.Storage.Models
             writer.WriteEndObject();
         }
 
-        internal static Sku DeserializeSku(JsonElement element)
+        internal static StorageSku DeserializeStorageSku(JsonElement element)
         {
             SkuName name = default;
             Optional<SkuTier> tier = default;
@@ -42,7 +42,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new Sku(name, Optional.ToNullable(tier));
+            return new StorageSku(name, Optional.ToNullable(tier));
         }
     }
 }

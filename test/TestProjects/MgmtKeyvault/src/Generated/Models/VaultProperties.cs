@@ -18,7 +18,7 @@ namespace MgmtKeyvault.Models
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
         /// <param name="sku"> SKU details. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sku"/> is null. </exception>
-        public VaultProperties(Guid tenantId, Sku sku)
+        public VaultProperties(Guid tenantId, MgmtKeyvaultSku sku)
         {
             if (sku == null)
             {
@@ -48,7 +48,7 @@ namespace MgmtKeyvault.Models
         /// <param name="networkAcls"> Rules governing the accessibility of the key vault from specific network locations. </param>
         /// <param name="provisioningState"> Provisioning state of the vault. </param>
         /// <param name="privateEndpointConnections"> List of private endpoint connections associated with the key vault. </param>
-        internal VaultProperties(Guid tenantId, Sku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections)
+        internal VaultProperties(Guid tenantId, MgmtKeyvaultSku sku, IList<AccessPolicyEntry> accessPolicies, Uri vaultUri, string hsmPoolResourceId, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enableRbacAuthorization, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, VaultProvisioningState? provisioningState, IReadOnlyList<PrivateEndpointConnectionItem> privateEndpointConnections)
         {
             TenantId = tenantId;
             Sku = sku;
@@ -71,7 +71,7 @@ namespace MgmtKeyvault.Models
         /// <summary> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </summary>
         public Guid TenantId { get; set; }
         /// <summary> SKU details. </summary>
-        public Sku Sku { get; set; }
+        public MgmtKeyvaultSku Sku { get; set; }
         /// <summary> An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault&apos;s tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required. </summary>
         public IList<AccessPolicyEntry> AccessPolicies { get; }
         /// <summary> The URI of the vault for performing operations on keys and secrets. </summary>

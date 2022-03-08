@@ -108,6 +108,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             MgmtContext.CodeModel.UpdatePatchOperations();
             _allSchemas.VerifyAndUpdateFrameworkTypes();
             _allSchemas.UpdateSealChoiceTypes();
+            CommonSingleWordModels.Update(_allSchemas);
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
