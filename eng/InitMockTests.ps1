@@ -79,8 +79,7 @@ function Show-Result([array]$list) {
     }
     $result = $result -join "  "
     Write-Host $result
-    Write-Host "`n"
-    Start-Sleep 2
+    Write-Host ""
 }
 function Update-AutorestTarget([string]$file, [string]$autorestVersion) {
     $fileContent = Get-Content $file
@@ -336,19 +335,19 @@ function  MockTestInit {
         Show-Result($Script:testGenerateErrorRps) 
         Write-Host "Mock test build error RPs: "$Script:testBuildErrorRps.Count 
         Show-Result($Script:testBuildErrorRps) 
-        Write-Host "================================================================================="
-        Write-Host "`n`n`n"
+        Write-Host "`n"
         Write-Host "================================================================================="
         Write-Host "============================ Unit Tests Run Result  ============================="
         Write-Host "================================================================================="
-        $FinalStatics
+        foreach ($item in $FinalStatics.Keys) {
+            $show = $item.ToString() + ": " + $FinalStatics[$item]
+            Write-Host  $show
+        }
         Write-Host "`n"
         foreach ($item in $ErrorTypeStatic) {
             Write-Host $item
         }
-        Write-Host "================================================================================="
-        Write-Host "================================================================================="
-        Write-Host  "`n`n`n"
+        Write-Host "`n`n================================================================================="
         Write-Host "Track2 SDK Total: $Script:allTrack2Sdk"
         Write-Host "New generated track2 RPs: $Script:newGenerateSdk" 
         Write-Host "srcGenerateSuccessedRps: "$Script:srcGenerateSuccessedRps.Count
@@ -361,7 +360,7 @@ function  MockTestInit {
 }
 
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
-$GenerateNewSDKs = $false
+$GenerateNewSDKs = $true
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
