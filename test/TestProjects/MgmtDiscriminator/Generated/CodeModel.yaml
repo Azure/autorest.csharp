@@ -228,16 +228,6 @@ schemas: !Schemas
           name: HeaderActionParametersValue
           description: Value for the specified action
       protocol: !Protocols {}
-    - !StringSchema &ref_31
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: CacheExpirationActionParametersCacheDuration
-          description: The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss
-      protocol: !Protocols {}
     - !StringSchema &ref_34
       type: string
       apiVersions:
@@ -755,6 +745,17 @@ schemas: !Schemas
         default:
           name: AnyObject
           description: Any object
+      protocol: !Protocols {}
+  durations:
+    - !DurationSchema &ref_31
+      type: duration
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: CacheExpirationActionParametersCacheDuration
+          description: The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss
       protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_80
