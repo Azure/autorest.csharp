@@ -654,6 +654,7 @@ namespace AutoRest.CSharp.Generation.Writers
             SerializationFormat.Bytes_Base64Url => "U",
             SerializationFormat.Bytes_Base64 => "D",
             SerializationFormat.Duration_ISO8601 => "P",
+            SerializationFormat.Duration_Constant => "c",
             SerializationFormat.Time_ISO8601 => "T",
             _ => null
         };
