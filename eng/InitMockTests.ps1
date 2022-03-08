@@ -339,13 +339,13 @@ function  MockTestInit {
         Write-Host "================================================================================="
         Write-Host "============================ Unit Tests Run Result  ============================="
         Write-Host "================================================================================="
+        foreach ($item in $ErrorTypeStatic) {
+            Write-Host $item
+        }
+        Write-Host "`n"
         foreach ($item in $FinalStatics.Keys) {
             $show = $item.ToString() + ": " + $FinalStatics[$item]
             Write-Host  $show
-        }
-        Write-Host "`n"
-        foreach ($item in $ErrorTypeStatic) {
-            Write-Host $item
         }
         Write-Host "`n`n================================================================================="
         Write-Host "Track2 SDK Total: $Script:allTrack2Sdk"
