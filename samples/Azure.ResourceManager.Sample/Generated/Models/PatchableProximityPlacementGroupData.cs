@@ -8,10 +8,10 @@
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies information about the proximity placement group. </summary>
-    internal partial class ProximityPlacementGroupUpdateOptions : UpdateResource
+    internal partial class PatchableProximityPlacementGroupData : UpdateResource
     {
-        /// <summary> Initializes a new instance of ProximityPlacementGroupUpdateOptions. </summary>
-        public ProximityPlacementGroupUpdateOptions()
+        /// <summary> Initializes a new instance of PatchableProximityPlacementGroupData. </summary>
+        public PatchableProximityPlacementGroupData()
         {
         }
     }

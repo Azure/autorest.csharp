@@ -11,10 +11,10 @@ using Azure.Core;
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> Describes a request to update a DNS zone. </summary>
-    internal partial class ZoneUpdateOptions
+    internal partial class PatchableZoneData
     {
-        /// <summary> Initializes a new instance of ZoneUpdateOptions. </summary>
-        public ZoneUpdateOptions()
+        /// <summary> Initializes a new instance of PatchableZoneData. </summary>
+        public PatchableZoneData()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }

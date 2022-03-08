@@ -11,10 +11,10 @@ using Azure.Core;
 namespace MgmtOperations.Models
 {
     /// <summary> The update content of unpatchable resource. </summary>
-    internal partial class UnpatchableResourceUpdateOptions
+    internal partial class PatchableUnpatchableResourceData
     {
-        /// <summary> Initializes a new instance of UnpatchableResourceUpdateOptions. </summary>
-        public UnpatchableResourceUpdateOptions()
+        /// <summary> Initializes a new instance of PatchableUnpatchableResourceData. </summary>
+        public PatchableUnpatchableResourceData()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
