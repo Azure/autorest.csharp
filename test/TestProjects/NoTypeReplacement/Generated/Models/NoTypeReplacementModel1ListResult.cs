@@ -12,7 +12,7 @@ using NoTypeReplacement;
 namespace NoTypeReplacement.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class NoTypeReplacementModel1ListResult
+    internal partial class NoTypeReplacementModel1ListResult
     {
         /// <summary> Initializes a new instance of NoTypeReplacementModel1ListResult. </summary>
         internal NoTypeReplacementModel1ListResult()

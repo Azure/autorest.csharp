@@ -12,7 +12,7 @@ using SingletonResource;
 namespace SingletonResource.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class CarListResult
+    internal partial class CarListResult
     {
         /// <summary> Initializes a new instance of CarListResult. </summary>
         internal CarListResult()

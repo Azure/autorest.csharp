@@ -106,11 +106,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             MgmtContext.CodeModel.UpdateAcronyms();
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
             _allSchemas.UpdateFrameworkTypes();
-
             MgmtContext.CodeModel.UpdatePatchOperations();
-
-            SinglePropertyHider.HideModels(_allSchemas);
-
+            
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
         }
@@ -327,10 +324,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private MgmtExtensionClient? _managementGroupExtensionClient;
         private MgmtExtensionClient? _subscriptionExtensionClient;
         private MgmtExtensionClient? _resourceGroupExtensionClient;
+        private MgmtExtensionClient? _armResourceExtensionClient;
         public MgmtExtensionClient SubscriptionExtensionsClient => _subscriptionExtensionClient ??= EnsureExtensionsClient(SubscriptionExtensions);
         public MgmtExtensionClient ResourceGroupExtensionsClient => _resourceGroupExtensionClient ??= EnsureExtensionsClient(ResourceGroupExtensions);
         public MgmtExtensionClient TenantExtensionsClient => _tenantExtensionClient ??= EnsureExtensionsClient(TenantExtensions);
         public MgmtExtensionClient ManagementGroupExtensionsClient => _managementGroupExtensionClient ??= EnsureExtensionsClient(ManagementGroupExtensions);
+        public MgmtExtensionClient ArmResourceExtensionsClient => _armResourceExtensionClient ??= EnsureExtensionsClient(ArmResourceExtensions);
 
         private MgmtExtensionClient EnsureExtensionsClient(MgmtExtensions publicExtension) =>
             new MgmtExtensionClient(publicExtension);

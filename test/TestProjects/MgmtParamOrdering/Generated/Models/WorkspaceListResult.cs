@@ -13,7 +13,7 @@ using MgmtParamOrdering;
 namespace MgmtParamOrdering.Models
 {
     /// <summary> The list dedicated host operation response. </summary>
-    public partial class WorkspaceListResult
+    internal partial class WorkspaceListResult
     {
         /// <summary> Initializes a new instance of WorkspaceListResult. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>

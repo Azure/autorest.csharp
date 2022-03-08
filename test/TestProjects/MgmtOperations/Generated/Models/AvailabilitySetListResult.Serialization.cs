@@ -12,7 +12,7 @@ using MgmtOperations;
 
 namespace MgmtOperations.Models
 {
-    public partial class AvailabilitySetListResult
+    internal partial class AvailabilitySetListResult
     {
         internal static AvailabilitySetListResult DeserializeAvailabilitySetListResult(JsonElement element)
         {

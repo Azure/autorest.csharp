@@ -8,16 +8,15 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using MgmtScopeResource;
+using MgmtDiscriminator;
 
-namespace MgmtScopeResource.Models
+namespace MgmtDiscriminator.Models
 {
-    internal partial class PolicyAssignmentListResult
+    internal partial class DeliveryRuleListResult
     {
-        internal static PolicyAssignmentListResult DeserializePolicyAssignmentListResult(JsonElement element)
+        internal static DeliveryRuleListResult DeserializeDeliveryRuleListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<PolicyAssignmentData>> value = default;
-            Optional<string> nextLink = default;
+            Optional<IReadOnlyList<DeliveryRuleData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -27,21 +26,16 @@ namespace MgmtScopeResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PolicyAssignmentData> array = new List<PolicyAssignmentData>();
+                    List<DeliveryRuleData> array = new List<DeliveryRuleData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PolicyAssignmentData.DeserializePolicyAssignmentData(item));
+                        array.Add(DeliveryRuleData.DeserializeDeliveryRuleData(item));
                     }
                     value = array;
                     continue;
                 }
-                if (property.NameEquals("nextLink"))
-                {
-                    nextLink = property.Value.GetString();
-                    continue;
-                }
             }
-            return new PolicyAssignmentListResult(Optional.ToList(value), nextLink.Value);
+            return new DeliveryRuleListResult(Optional.ToList(value));
         }
     }
 }

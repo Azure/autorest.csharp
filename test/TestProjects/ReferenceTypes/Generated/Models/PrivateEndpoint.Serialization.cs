@@ -13,7 +13,7 @@ using Azure.Core;
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(PrivateEndpointConverter))]
-    internal partial class PrivateEndpoint : IUtf8JsonSerializable
+    public partial class PrivateEndpoint : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

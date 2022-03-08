@@ -12,25 +12,25 @@ using MgmtScopeResource;
 namespace MgmtScopeResource.Models
 {
     /// <summary> List of policy assignments. </summary>
-    internal partial class PolicyAssignmentListResult
+    internal partial class FakePolicyAssignmentListResult
     {
-        /// <summary> Initializes a new instance of PolicyAssignmentListResult. </summary>
-        internal PolicyAssignmentListResult()
+        /// <summary> Initializes a new instance of FakePolicyAssignmentListResult. </summary>
+        internal FakePolicyAssignmentListResult()
         {
-            Value = new ChangeTrackingList<PolicyAssignmentData>();
+            Value = new ChangeTrackingList<FakePolicyAssignmentData>();
         }
 
-        /// <summary> Initializes a new instance of PolicyAssignmentListResult. </summary>
+        /// <summary> Initializes a new instance of FakePolicyAssignmentListResult. </summary>
         /// <param name="value"> An array of policy assignments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal PolicyAssignmentListResult(IReadOnlyList<PolicyAssignmentData> value, string nextLink)
+        internal FakePolicyAssignmentListResult(IReadOnlyList<FakePolicyAssignmentData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> An array of policy assignments. </summary>
-        public IReadOnlyList<PolicyAssignmentData> Value { get; }
+        public IReadOnlyList<FakePolicyAssignmentData> Value { get; }
         /// <summary> The URL to use for getting the next set of results. </summary>
         public string NextLink { get; }
     }

@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Describes a Virtual Machine Extension Image. </summary>
-    public partial class VirtualMachineExtensionImage : TrackedResourceData
+    internal partial class VirtualMachineExtensionImage : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImage. </summary>
         /// <param name="location"> The location. </param>
