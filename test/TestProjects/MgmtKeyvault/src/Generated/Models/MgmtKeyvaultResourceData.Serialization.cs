@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtKeyvault.Models
 {
-    public partial class Resource : IUtf8JsonSerializable
+    public partial class MgmtKeyvaultResourceData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -20,7 +20,7 @@ namespace MgmtKeyvault.Models
             writer.WriteEndObject();
         }
 
-        internal static Resource DeserializeResource(JsonElement element)
+        internal static MgmtKeyvaultResourceData DeserializeMgmtKeyvaultResourceData(JsonElement element)
         {
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
@@ -71,7 +71,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new Resource(id, name, type, systemData, location.Value, Optional.ToDictionary(tags));
+            return new MgmtKeyvaultResourceData(id, name, type, systemData, location.Value, Optional.ToDictionary(tags));
         }
     }
 }

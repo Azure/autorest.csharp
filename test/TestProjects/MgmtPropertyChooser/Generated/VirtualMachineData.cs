@@ -22,7 +22,7 @@ namespace MgmtPropertyChooser
         {
             Resources = new ChangeTrackingList<VirtualMachineExtension>();
             Zones = new ChangeTrackingList<string>();
-            FakeResources = new ChangeTrackingList<Resource>();
+            FakeResources = new ChangeTrackingList<MgmtPropertyChooserResourceData>();
         }
 
         /// <summary> Initializes a new instance of VirtualMachineData. </summary>
@@ -48,7 +48,7 @@ namespace MgmtPropertyChooser
         /// <param name="licenseType"> Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15. </param>
         /// <param name="vmId"> Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands. </param>
         /// <param name="extensionsTimeBudget"> Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01. </param>
-        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtPropertyChooserPlan plan, IReadOnlyList<VirtualMachineExtension> resources, ManagedServiceIdentity identity, IdentityWithRenamedProperty identityWithRenamedProperty, IdentityWithDifferentPropertyType identityWithDifferentPropertyType, IdentityWithNoUserIdentity identityWithNoUserIdentity, IdentityWithNoSystemIdentity identityWithNoSystemIdentity, ManagedServiceIdentity identityV3, IList<string> zones, IReadOnlyList<Resource> fakeResources, SubResource fakeSubResource, WritableSubResource fakeWritableSubResource, string provisioningState, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, type, systemData, tags, location)
+        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtPropertyChooserPlan plan, IReadOnlyList<VirtualMachineExtension> resources, ManagedServiceIdentity identity, IdentityWithRenamedProperty identityWithRenamedProperty, IdentityWithDifferentPropertyType identityWithDifferentPropertyType, IdentityWithNoUserIdentity identityWithNoUserIdentity, IdentityWithNoSystemIdentity identityWithNoSystemIdentity, ManagedServiceIdentity identityV3, IList<string> zones, IReadOnlyList<MgmtPropertyChooserResourceData> fakeResources, SubResource fakeSubResource, WritableSubResource fakeWritableSubResource, string provisioningState, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, type, systemData, tags, location)
         {
             Plan = plan;
             Resources = resources;
@@ -87,7 +87,7 @@ namespace MgmtPropertyChooser
         /// <summary> The virtual machine zones. </summary>
         public IList<string> Zones { get; }
         /// <summary> The fake resources for the virtual machine. </summary>
-        public IReadOnlyList<Resource> FakeResources { get; }
+        public IReadOnlyList<MgmtPropertyChooserResourceData> FakeResources { get; }
         /// <summary> The fake subresource. </summary>
         internal SubResource FakeSubResource { get; set; }
         /// <summary> Gets Id. </summary>

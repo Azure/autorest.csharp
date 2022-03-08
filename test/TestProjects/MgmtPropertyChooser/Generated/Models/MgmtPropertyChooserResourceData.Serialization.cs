@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
-    public partial class Resource : IUtf8JsonSerializable
+    public partial class MgmtPropertyChooserResourceData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace MgmtPropertyChooser.Models
             writer.WriteEndObject();
         }
 
-        internal static Resource DeserializeResource(JsonElement element)
+        internal static MgmtPropertyChooserResourceData DeserializeMgmtPropertyChooserResourceData(JsonElement element)
         {
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
@@ -84,7 +84,7 @@ namespace MgmtPropertyChooser.Models
                     continue;
                 }
             }
-            return new Resource(id, name, type, systemData, location, Optional.ToDictionary(tags));
+            return new MgmtPropertyChooserResourceData(id, name, type, systemData, location, Optional.ToDictionary(tags));
         }
     }
 }
