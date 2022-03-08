@@ -7,12 +7,57 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
+        private static readonly List<string> EnumValuesShouldBePrompted = new()
+        {
+            "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
+        };
+
+        public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
+        {
+            var wordCandidates = new List<string>(EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues));
+            foreach (var schema in allSchemas)
+            {
+                if (schema is not SealedChoiceSchema choiceSchema)
+                    continue;
+
+                // rearrange the sequence in the choices
+                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices, wordCandidates);
+            }
+        }
+
+        internal static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, List<string> wordCandidates)
+        {
+            return originalValues.OrderBy(choice =>
+            {
+                var name = choice.CSharpName();
+                var index = wordCandidates.IndexOf(name);
+                return index >= 0 ? index : wordCandidates.Count;
+            }).ToList();
+        }
+
+        public static void UpdatePatchOperations(this CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (operation.GetHttpMethod() == HttpMethod.Patch)
+                    {
+                        var bodyParameter = operation.GetBodyParameter();
+                        if (bodyParameter != null)
+                            bodyParameter.Required = true;
+                    }
+                }
+            }
+        }
+
         public static void VerifyAndUpdateFrameworkTypes(this IEnumerable<Schema> allSchemas)
         {
             foreach (var schema in allSchemas)
@@ -54,13 +99,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     foreach (var p in op.Parameters)
                     {
-                        //updater the first subscriptionId to be 'method'
+                        // update the first subscriptionId parameter to be 'method' parameter
                         if (!setSubParam && p.Language.Default.Name.Equals("subscriptionId", StringComparison.OrdinalIgnoreCase))
                         {
                             setSubParam = true;
                             p.Implementation = ImplementationLocation.Method;
                         }
-                        //updater the first subscriptionId to be 'method'
+                        // update the apiVersion parameter to be 'client' method
                         if (p.Language.Default.Name.Equals("apiVersion", StringComparison.OrdinalIgnoreCase))
                         {
                             p.Implementation = ImplementationLocation.Client;
