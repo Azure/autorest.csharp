@@ -13,7 +13,7 @@ using MgmtExtensionCommonRestOperation;
 namespace MgmtExtensionCommonRestOperation.Models
 {
     /// <summary> The TypeOneListResult. </summary>
-    public partial class TypeOneListResult
+    internal partial class TypeOneListResult
     {
         /// <summary> Initializes a new instance of TypeOneListResult. </summary>
         /// <param name="value"> The list of of typeones. </param>

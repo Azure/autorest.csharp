@@ -12,7 +12,7 @@ using ExactMatchFlattenInheritance;
 
 namespace ExactMatchFlattenInheritance.Models
 {
-    public partial class AzureResourceFlattenModel1ListResult
+    internal partial class AzureResourceFlattenModel1ListResult
     {
         internal static AzureResourceFlattenModel1ListResult DeserializeAzureResourceFlattenModel1ListResult(JsonElement element)
         {

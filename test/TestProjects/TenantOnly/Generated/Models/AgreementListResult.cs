@@ -12,7 +12,7 @@ using TenantOnly;
 namespace TenantOnly.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class AgreementListResult
+    internal partial class AgreementListResult
     {
         /// <summary> Initializes a new instance of AgreementListResult. </summary>
         internal AgreementListResult()

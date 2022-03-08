@@ -12,7 +12,7 @@ using SupersetInheritance;
 
 namespace SupersetInheritance.Models
 {
-    public partial class SupersetModel6ListResult
+    internal partial class SupersetModel6ListResult
     {
         internal static SupersetModel6ListResult DeserializeSupersetModel6ListResult(JsonElement element)
         {

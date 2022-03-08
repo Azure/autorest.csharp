@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtParamOrdering.Models
 {
     /// <summary> Describes a virtual machine scale set virtual machine. </summary>
-    public partial class VirtualMachineScaleSetVM : TrackedResourceData
+    internal partial class VirtualMachineScaleSetVM : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVM. </summary>
         /// <param name="location"> The location. </param>
