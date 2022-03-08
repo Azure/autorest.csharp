@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var constructor = sot.Constructors[0];
             foreach (var c in sot.Constructors)
             {
-                if (c.Signature.Parameters.Length < constructor.Signature.Parameters.Length)
+                if (c.Signature.Parameters.Count < constructor.Signature.Parameters.Count)
                     constructor = c;
             }
 
@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 if (!missAnyRequiredParameter)
                 {
-                    if (c.Signature.Parameters.Length > constructor.Signature.Parameters.Length)
+                    if (c.Signature.Parameters.Count > constructor.Signature.Parameters.Count)
                         constructor = c;
                 }
             }

@@ -452,7 +452,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
             foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
-                var restClient = new MgmtRestClient(operationGroup);
+                var restClient = new MgmtRestClient(operationGroup, new MgmtRestClientBuilder(operationGroup));
                 foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
                 {
                     if (rawRequestPathToRestClient.TryGetValue(requestPath, out var set))

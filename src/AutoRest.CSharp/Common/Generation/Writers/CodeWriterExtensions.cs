@@ -94,6 +94,16 @@ namespace AutoRest.CSharp.Generation.Writers
             return field.WriteAsProperty ? writer.Line() : writer.Line($";");
         }
 
+        public static CodeWriter WriteFieldDeclarations(this CodeWriter writer, IEnumerable<FieldDeclaration> fields)
+        {
+            foreach (var field in fields)
+            {
+                writer.WriteFieldDeclaration(field);
+            }
+
+            return writer.Line();
+        }
+
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             foreach (var disabledWarning in disabledWarnings)
@@ -220,7 +230,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw(",");
         }
 
-        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
+        public static CodeWriter WriteParametersValidation(this CodeWriter writer, IEnumerable<Parameter> parameters)
         {
             foreach (Parameter parameter in parameters)
             {

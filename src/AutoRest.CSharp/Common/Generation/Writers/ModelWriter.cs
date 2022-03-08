@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var ctor in objType.Constructors)
             {
                 if (ctor.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                    ctor.Signature.Parameters.Length == 1)
+                    ctor.Signature.Parameters.Count == 1)
                 {
                     var paramType = ctor.Signature.Parameters[0].Type;
                     var propertyType = innerProperty.Declaration.Type;
