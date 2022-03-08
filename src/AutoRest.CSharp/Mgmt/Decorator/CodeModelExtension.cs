@@ -7,12 +7,41 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtension
     {
+        private static readonly List<string> EnumValuesShouldBePrompted = new()
+        {
+            "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
+        };
+
+        public static void UpdateSealChoiceTypes(this IEnumerable<Schema> allSchemas)
+        {
+            var wordCandidates = new List<string>(EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues));
+            foreach (var schema in allSchemas)
+            {
+                if (schema is not SealedChoiceSchema choiceSchema)
+                    continue;
+
+                // rearrange the sequence in the choices
+                choiceSchema.Choices = RearrangeChoices(choiceSchema.Choices, wordCandidates);
+            }
+        }
+
+        internal static ICollection<ChoiceValue> RearrangeChoices(ICollection<ChoiceValue> originalValues, List<string> wordCandidates)
+        {
+            return originalValues.OrderBy(choice =>
+            {
+                var name = choice.CSharpName();
+                var index = wordCandidates.IndexOf(name);
+                return index >= 0 ? index : wordCandidates.Count;
+            }).ToList();
+        }
+
         public static void UpdatePatchOperations(this CodeModel codeModel)
         {
             foreach (var operationGroup in codeModel.OperationGroups)
