@@ -2274,14 +2274,14 @@ namespace httpInfrastructure_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier200204;
-        private static ResponseClassifier ResponseClassifier200204 => _responseClassifier200204 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 204 });
+        private static ResponseClassifier ResponseClassifier200204 => _responseClassifier200204 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 204 });
         private static ResponseClassifier _responseClassifier200201;
-        private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 201 });
+        private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201 });
         private static ResponseClassifier _responseClassifier200201404;
-        private static ResponseClassifier ResponseClassifier200201404 => _responseClassifier200201404 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 201, 404 });
+        private static ResponseClassifier ResponseClassifier200201404 => _responseClassifier200201404 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201, 404 });
         private static ResponseClassifier _responseClassifier202204;
-        private static ResponseClassifier ResponseClassifier202204 => _responseClassifier202204 ??= new CoreResponseClassifier(stackalloc ushort[] { 202, 204 });
+        private static ResponseClassifier ResponseClassifier202204 => _responseClassifier202204 ??= new StatusCodeClassifier(stackalloc ushort[] { 202, 204 });
         private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new CoreResponseClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

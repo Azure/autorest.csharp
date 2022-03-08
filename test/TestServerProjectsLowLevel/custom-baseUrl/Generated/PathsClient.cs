@@ -127,6 +127,6 @@ namespace custom_baseUrl_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new CoreResponseClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

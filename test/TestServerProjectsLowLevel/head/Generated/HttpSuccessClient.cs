@@ -194,8 +194,8 @@ namespace head_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier200404;
-        private static ResponseClassifier ResponseClassifier200404 => _responseClassifier200404 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 404 });
+        private static ResponseClassifier ResponseClassifier200404 => _responseClassifier200404 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 404 });
         private static ResponseClassifier _responseClassifier204404;
-        private static ResponseClassifier ResponseClassifier204404 => _responseClassifier204404 ??= new CoreResponseClassifier(stackalloc ushort[] { 204, 404 });
+        private static ResponseClassifier ResponseClassifier204404 => _responseClassifier204404 ??= new StatusCodeClassifier(stackalloc ushort[] { 204, 404 });
     }
 }

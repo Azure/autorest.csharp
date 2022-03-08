@@ -4678,20 +4678,20 @@ namespace lro_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier200204;
-        private static ResponseClassifier ResponseClassifier200204 => _responseClassifier200204 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 204 });
+        private static ResponseClassifier ResponseClassifier200204 => _responseClassifier200204 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 204 });
         private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new CoreResponseClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
         private static ResponseClassifier _responseClassifier200201;
-        private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 201 });
+        private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201 });
         private static ResponseClassifier _responseClassifier200202;
-        private static ResponseClassifier ResponseClassifier200202 => _responseClassifier200202 ??= new CoreResponseClassifier(stackalloc ushort[] { 200, 202 });
+        private static ResponseClassifier ResponseClassifier200202 => _responseClassifier200202 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 202 });
         private static ResponseClassifier _responseClassifier201;
-        private static ResponseClassifier ResponseClassifier201 => _responseClassifier201 ??= new CoreResponseClassifier(stackalloc ushort[] { 201 });
+        private static ResponseClassifier ResponseClassifier201 => _responseClassifier201 ??= new StatusCodeClassifier(stackalloc ushort[] { 201 });
         private static ResponseClassifier _responseClassifier202;
-        private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new CoreResponseClassifier(stackalloc ushort[] { 202 });
+        private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new StatusCodeClassifier(stackalloc ushort[] { 202 });
         private static ResponseClassifier _responseClassifier204;
-        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new CoreResponseClassifier(stackalloc ushort[] { 204 });
+        private static ResponseClassifier ResponseClassifier204 => _responseClassifier204 ??= new StatusCodeClassifier(stackalloc ushort[] { 204 });
         private static ResponseClassifier _responseClassifier202204;
-        private static ResponseClassifier ResponseClassifier202204 => _responseClassifier202204 ??= new CoreResponseClassifier(stackalloc ushort[] { 202, 204 });
+        private static ResponseClassifier ResponseClassifier202204 => _responseClassifier202204 ??= new StatusCodeClassifier(stackalloc ushort[] { 202, 204 });
     }
 }

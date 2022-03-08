@@ -1955,8 +1955,8 @@ namespace url_LowLevel
         }
 
         private static ResponseClassifier _responseClassifier200;
-        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new CoreResponseClassifier(stackalloc ushort[] { 200 });
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
         private static ResponseClassifier _responseClassifier400;
-        private static ResponseClassifier ResponseClassifier400 => _responseClassifier400 ??= new CoreResponseClassifier(stackalloc ushort[] { 400 });
+        private static ResponseClassifier ResponseClassifier400 => _responseClassifier400 ??= new StatusCodeClassifier(stackalloc ushort[] { 400 });
     }
 }
