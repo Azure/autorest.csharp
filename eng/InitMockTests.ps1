@@ -50,6 +50,16 @@ function Update-Branch([string]$CommitId, [string]$Path) {
     }
     $store | Out-File -FilePath $file
 }
+
+function Update-Sln([string]$path, [string]$RPName) {
+    $slnFile = $item.ToString() + "\" + $item.Name + ".sln"
+    $content = Get-Content $slnFile
+    $store = @()
+    foreach ($line in $content) {
+        $store += $line.ToString().Replace("""tests\Azure", """mocktests\Azure")
+    }
+    $store | Out-File -FilePath $slnFile
+}
 function Send-ErrorMessage([string]$message) {
     Write-Host $message
     Write-Host "MockTestInit script exit."
