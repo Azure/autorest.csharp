@@ -263,7 +263,7 @@ function  MockTestInit {
         $sdkFolder  | ForEach-Object {
             $curFolderPRs = Get-ChildItem($_)
             foreach ($item in $curFolderPRs) {
-                if ($item.Name.Contains("Azure.ResourceManager.") -and $Script:testBuildSuccessedRps.Contains($item.Name)) {
+                if ($item.Name.Contains("Azure.ResourceManager.") -and $Script:testBuildSuccessedRps.Contains($item.Name.Replace("Azure.ResourceManager.", ""))) {
                     # let .sln test target to mocktests
                     Update-Sln -path $item -RPName $item.Name
                     $RunRpList += $item.ToString()
@@ -271,7 +271,7 @@ function  MockTestInit {
             }
         }
         $RunRpList | ForEach-Object {
-            $RPName = ($_.Substring($_.IndexOf("Azure.ResourceManager"), $_.Length - $_.IndexOf("Azure.ResourceManager"))).Replace("Azure.ResourceManager.","")
+            $RPName = ($_.Substring($_.IndexOf("Azure.ResourceManager"), $_.Length - $_.IndexOf("Azure.ResourceManager"))).Replace("Azure.ResourceManager.", "")
             # run .sln test
             & cd $_
             $response = dotnet test
@@ -281,7 +281,7 @@ function  MockTestInit {
             # record each error cases
             foreach ($item in $response) {
                 if ($item.Tostring().Contains("Failed!  - Failed:") -or ($item.Tostring().Contains("Passed!  - Failed:"))) {
-                    $FinalStatics += @{ RPName = $item.Substring(0, $item.IndexOf(", Duration")) }
+                    $FinalStatics += @{ $RPName = $item.Substring(0, $item.IndexOf(", Duration")) }
                     break
                 }
                 if ($item.Tostring().Contains("Error Message:")) {
@@ -333,7 +333,7 @@ function  MockTestInit {
         Write-Host "================================================================================="
         $FinalStatics
         Write-Host "`n"
-        foreach ($item in $ErrorTypeStatic){
+        foreach ($item in $ErrorTypeStatic) {
             Write-Host $item
         }
         Write-Host "================================================================================="
