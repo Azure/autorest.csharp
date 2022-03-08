@@ -580,6 +580,7 @@
                     "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
                     "type": "string",
                     "format": "duration",
+                    "x-ms-format": "duration-constant",
                     "x-nullable": true
                 }
             }
