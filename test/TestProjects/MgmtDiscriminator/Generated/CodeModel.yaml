@@ -752,6 +752,8 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
+      extensions:
+        x-ms-format: duration-constant
       language: !Languages 
         default:
           name: CacheExpirationActionParametersCacheDuration
@@ -1429,6 +1431,8 @@ schemas: !Schemas
                                             nullable: true
                                             required: false
                                             serializedName: cacheDuration
+                                            extensions:
+                                              x-ms-format: duration-constant
                                             language: !Languages 
                                               default:
                                                 name: cacheDuration
