@@ -22,17 +22,19 @@ namespace MgmtScopeResource.Models
         /// <param name="provisioningState"> The state of the provisioning. </param>
         /// <param name="timestamp"> The date and time of the operation. </param>
         /// <param name="duration"> The duration of the operation. </param>
+        /// <param name="anotherDuration"> Another duration of the operation. </param>
         /// <param name="serviceRequestId"> Deployment operation service request id. </param>
         /// <param name="statusCode"> Operation status code from the resource provider. This property may not be set if a response has not yet been received. </param>
         /// <param name="statusMessage"> Operation status message from the resource provider. This property is optional.  It will only be provided if an error was received from the resource provider. </param>
         /// <param name="request"> The HTTP request message. </param>
         /// <param name="response"> The HTTP response message. </param>
-        internal DeploymentOperationProperties(ProvisioningOperation? provisioningOperation, string provisioningState, DateTimeOffset? timestamp, string duration, string serviceRequestId, string statusCode, StatusMessage statusMessage, HttpMessage request, HttpMessage response)
+        internal DeploymentOperationProperties(ProvisioningOperation? provisioningOperation, string provisioningState, DateTimeOffset? timestamp, TimeSpan? duration, TimeSpan? anotherDuration, string serviceRequestId, string statusCode, StatusMessage statusMessage, HttpMessage request, HttpMessage response)
         {
             ProvisioningOperation = provisioningOperation;
             ProvisioningState = provisioningState;
             Timestamp = timestamp;
             Duration = duration;
+            AnotherDuration = anotherDuration;
             ServiceRequestId = serviceRequestId;
             StatusCode = statusCode;
             StatusMessage = statusMessage;
@@ -47,7 +49,9 @@ namespace MgmtScopeResource.Models
         /// <summary> The date and time of the operation. </summary>
         public DateTimeOffset? Timestamp { get; }
         /// <summary> The duration of the operation. </summary>
-        public string Duration { get; }
+        public TimeSpan? Duration { get; }
+        /// <summary> Another duration of the operation. </summary>
+        public TimeSpan? AnotherDuration { get; }
         /// <summary> Deployment operation service request id. </summary>
         public string ServiceRequestId { get; }
         /// <summary> Operation status code from the resource provider. This property may not be set if a response has not yet been received. </summary>

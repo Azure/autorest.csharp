@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtListMethods.Models
 {
-    public partial class UpdateWorkspaceQuotasResult
+    internal partial class UpdateWorkspaceQuotasResult
     {
         internal static UpdateWorkspaceQuotasResult DeserializeUpdateWorkspaceQuotasResult(JsonElement element)
         {

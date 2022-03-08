@@ -12,7 +12,7 @@ using ExactMatchFlattenInheritance;
 
 namespace ExactMatchFlattenInheritance.Models
 {
-    public partial class CustomModel3ListResult
+    internal partial class CustomModel3ListResult
     {
         internal static CustomModel3ListResult DeserializeCustomModel3ListResult(JsonElement element)
         {

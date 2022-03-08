@@ -18,7 +18,7 @@ namespace MgmtScopeResource.Models
             Optional<ProvisioningState> provisioningState = default;
             Optional<string> correlationId = default;
             Optional<DateTimeOffset> timestamp = default;
-            Optional<string> duration = default;
+            Optional<TimeSpan> duration = default;
             Optional<object> outputs = default;
             Optional<object> parameters = default;
             Optional<ErrorResponse> errorResponse = default;
@@ -51,7 +51,12 @@ namespace MgmtScopeResource.Models
                 }
                 if (property.NameEquals("duration"))
                 {
-                    duration = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    duration = property.Value.GetTimeSpan("P");
                     continue;
                 }
                 if (property.NameEquals("outputs"))
@@ -85,7 +90,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), duration.Value, outputs.Value, parameters.Value, errorResponse.Value);
+            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), outputs.Value, parameters.Value, errorResponse.Value);
         }
     }
 }

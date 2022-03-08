@@ -8,7 +8,7 @@
 namespace MgmtRenameRules.Models
 {
     /// <summary> The SubResourceWithColocationStatus. </summary>
-    public partial class SubResourceWithColocationStatus : SubResource
+    internal partial class SubResourceWithColocationStatus : SubResource
     {
         /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
         public SubResourceWithColocationStatus()
