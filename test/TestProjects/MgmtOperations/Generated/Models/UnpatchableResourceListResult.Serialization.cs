@@ -12,7 +12,7 @@ using MgmtOperations;
 
 namespace MgmtOperations.Models
 {
-    public partial class UnpatchableResourceListResult
+    internal partial class UnpatchableResourceListResult
     {
         internal static UnpatchableResourceListResult DeserializeUnpatchableResourceListResult(JsonElement element)
         {
