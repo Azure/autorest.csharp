@@ -12,7 +12,7 @@ using SupersetFlattenInheritance;
 
 namespace SupersetFlattenInheritance.Models
 {
-    public partial class TrackedResourceModel1ListResult
+    internal partial class TrackedResourceModel1ListResult
     {
         internal static TrackedResourceModel1ListResult DeserializeTrackedResourceModel1ListResult(JsonElement element)
         {

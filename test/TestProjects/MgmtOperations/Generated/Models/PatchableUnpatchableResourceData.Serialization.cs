@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtOperations.Models
 {
-    public partial class PatchableUnpatchableResourceData : IUtf8JsonSerializable
+    internal partial class UnpatchableResourceUpdateOptions : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

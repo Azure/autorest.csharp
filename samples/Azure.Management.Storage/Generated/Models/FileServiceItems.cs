@@ -12,7 +12,7 @@ using Azure.Management.Storage;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The FileServiceItems. </summary>
-    public partial class FileServiceItems
+    internal partial class FileServiceItems
     {
         /// <summary> Initializes a new instance of FileServiceItems. </summary>
         internal FileServiceItems()

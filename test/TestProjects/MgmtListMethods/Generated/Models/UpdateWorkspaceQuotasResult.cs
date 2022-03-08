@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtListMethods.Models
 {
     /// <summary> The result of update workspace quota. </summary>
-    public partial class UpdateWorkspaceQuotasResult
+    internal partial class UpdateWorkspaceQuotasResult
     {
         /// <summary> Initializes a new instance of UpdateWorkspaceQuotasResult. </summary>
         internal UpdateWorkspaceQuotasResult()

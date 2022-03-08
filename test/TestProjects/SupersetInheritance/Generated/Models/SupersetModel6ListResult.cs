@@ -12,7 +12,7 @@ using SupersetInheritance;
 namespace SupersetInheritance.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class SupersetModel6ListResult
+    internal partial class SupersetModel6ListResult
     {
         /// <summary> Initializes a new instance of SupersetModel6ListResult. </summary>
         internal SupersetModel6ListResult()

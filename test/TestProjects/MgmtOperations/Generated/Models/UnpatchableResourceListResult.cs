@@ -12,7 +12,7 @@ using MgmtOperations;
 namespace MgmtOperations.Models
 {
     /// <summary> The UnpatchableResourceListResult. </summary>
-    public partial class UnpatchableResourceListResult
+    internal partial class UnpatchableResourceListResult
     {
         /// <summary> Initializes a new instance of UnpatchableResourceListResult. </summary>
         internal UnpatchableResourceListResult()

@@ -12,7 +12,7 @@ using OmitOperationGroups;
 
 namespace OmitOperationGroups.Models
 {
-    public partial class Model2ListResult
+    internal partial class Model2ListResult
     {
         internal static Model2ListResult DeserializeModel2ListResult(JsonElement element)
         {

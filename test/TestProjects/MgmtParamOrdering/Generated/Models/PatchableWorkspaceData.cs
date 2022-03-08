@@ -11,10 +11,10 @@ using Azure.Core;
 namespace MgmtParamOrdering.Models
 {
     /// <summary> The parameters for updating a machine learning workspace. </summary>
-    public partial class PatchableWorkspaceData
+    internal partial class WorkspaceUpdateOptions
     {
-        /// <summary> Initializes a new instance of PatchableWorkspaceData. </summary>
-        public PatchableWorkspaceData()
+        /// <summary> Initializes a new instance of WorkspaceUpdateOptions. </summary>
+        public WorkspaceUpdateOptions()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
