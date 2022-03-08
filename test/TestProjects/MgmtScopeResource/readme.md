@@ -48,4 +48,7 @@ directive:
   - remove-operation: FakePolicyAssignments_DeleteById
   - remove-operation: FakePolicyAssignments_CreateById
   - remove-operation: FakePolicyAssignments_GetById
+  - from: Links.json
+    where: $.definitions.ResourceLink.properties.type
+    transform: $["x-ms-client-name"] = "ResourceLinkType"
 ```

@@ -2592,7 +2592,7 @@ schemas: !Schemas
           serializedName: type
           language: !Languages 
             default:
-              name: type
+              name: resourceLinkType
               description: The resource link object.
           protocol: !Protocols {}
         - !Property 

@@ -539,7 +539,7 @@ schemas: !Schemas
       choiceType: *ref_0
       language: !Languages 
         default:
-          name: ResourceIdentityTypeV3
+          name: ResourceIdentityV3Type
           description: >-
             The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the
             virtual machine.

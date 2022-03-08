@@ -18,9 +18,9 @@ namespace ExactMatchInheritance.Models
         /// <summary> Initializes a new instance of ExactMatchModel4. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="type"></param>
+        /// <param name="resourceType"></param>
         /// <param name="new"></param>
-        internal ExactMatchModel4(int? id, string name, string type, string @new) : base(id, name, type)
+        internal ExactMatchModel4(int? id, string name, string resourceType, string @new) : base(id, name, resourceType)
         {
             New = @new;
         }

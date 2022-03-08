@@ -38,17 +38,23 @@ namespace ExactMatchInheritance
         internal static ExactMatchModel5Data DeserializeExactMatchModel5Data(JsonElement element)
         {
             Optional<string> @new = default;
+            Optional<string> type = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
-            ResourceType type = default;
+            ResourceType type0 = default;
             SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
                 {
                     @new = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -78,7 +84,7 @@ namespace ExactMatchInheritance
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    type0 = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("systemData"))
@@ -87,7 +93,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel5Data(id, name, type, systemData, tags, location, @new.Value);
+            return new ExactMatchModel5Data(id, name, type0, systemData, tags, location, @new.Value, type.Value);
         }
     }
 }

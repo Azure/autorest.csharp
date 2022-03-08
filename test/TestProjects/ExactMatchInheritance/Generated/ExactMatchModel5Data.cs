@@ -23,17 +23,21 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="new"></param>
-        internal ExactMatchModel5Data(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new) : base(id, name, type, systemData, tags, location)
+        /// <param name="exactMatchModel11Type"></param>
+        internal ExactMatchModel5Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new, string exactMatchModel11Type) : base(id, name, resourceType, systemData, tags, location)
         {
             New = @new;
+            ExactMatchModel11Type = exactMatchModel11Type;
         }
 
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
+        /// <summary> Gets the exact match model 11 type. </summary>
+        public string ExactMatchModel11Type { get; }
     }
 }

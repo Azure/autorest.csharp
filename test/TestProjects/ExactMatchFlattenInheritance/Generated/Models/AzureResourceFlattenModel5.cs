@@ -21,10 +21,10 @@ namespace ExactMatchFlattenInheritance.Models
         /// <summary> Initializes a new instance of AzureResourceFlattenModel5. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"> New property. </param>
-        internal AzureResourceFlattenModel5(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, int? foo) : base(id, name, type, systemData)
+        internal AzureResourceFlattenModel5(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, int? foo) : base(id, name, resourceType, systemData)
         {
             Foo = foo;
         }

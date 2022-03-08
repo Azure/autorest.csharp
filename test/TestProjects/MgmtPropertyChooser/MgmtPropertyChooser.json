@@ -874,7 +874,7 @@
                         "None"
                     ],
                     "x-ms-enum": {
-                        "name": "ResourceIdentityTypeV3",
+                        "name": "ResourceIdentityV3Type",
                         "modelAsString": true
                     }
                 },

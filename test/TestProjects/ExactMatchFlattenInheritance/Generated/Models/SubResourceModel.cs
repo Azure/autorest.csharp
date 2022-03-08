@@ -19,7 +19,7 @@ namespace ExactMatchFlattenInheritance.Models
         public string Id { get; }
         /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> Gets the type. </summary>
-        public string Type { get; }
+        /// <summary> Gets the resource type. </summary>
+        public string ResourceType { get; }
     }
 }
