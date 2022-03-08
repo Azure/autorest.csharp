@@ -41,7 +41,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
                 {
-                    writer.Line($"var {message:D} = _pipeline.CreateMessage({KnownParameters.RequestContext.Name:I});");
+                    writer.Append($"var {message:D} = _pipeline.CreateMessage({KnownParameters.RequestContext.Name:I}");
+                    if (responseClassifierType != default)
+                    {
+                        writer.Append($", {responseClassifierType}");
+                    }
+                    writer.Line($");");
                 }
                 else
                 {
@@ -209,11 +214,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (writeSDKUserAgent)
                 {
                     writer.Line($"{message}.SetProperty(\"SDKUserAgent\", _userAgent);");
-                }
-
-                if (responseClassifierType != default)
-                {
-                    writer.Line($"{message}.{nameof(HttpMessage.ResponseClassifier)} = {responseClassifierType}.Instance;");
                 }
 
                 writer.Line($"return {message};");
