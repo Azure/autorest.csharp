@@ -13,15 +13,15 @@ namespace MgmtScopeResource.Models
     {
         public static string ToSerialString(this ResourceIdentityType value) => value switch
         {
-            ResourceIdentityType.SystemAssigned => "SystemAssigned",
             ResourceIdentityType.None => "None",
+            ResourceIdentityType.SystemAssigned => "SystemAssigned",
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ResourceIdentityType value.")
         };
 
         public static ResourceIdentityType ToResourceIdentityType(this string value)
         {
-            if (string.Equals(value, "SystemAssigned", StringComparison.InvariantCultureIgnoreCase)) return ResourceIdentityType.SystemAssigned;
             if (string.Equals(value, "None", StringComparison.InvariantCultureIgnoreCase)) return ResourceIdentityType.None;
+            if (string.Equals(value, "SystemAssigned", StringComparison.InvariantCultureIgnoreCase)) return ResourceIdentityType.SystemAssigned;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ResourceIdentityType value.");
         }
     }

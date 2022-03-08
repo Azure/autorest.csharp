@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtListMethods.Models
 {
-    public partial class NonResourceChildListResult
+    internal partial class NonResourceChildListResult
     {
         internal static NonResourceChildListResult DeserializeNonResourceChildListResult(JsonElement element)
         {
