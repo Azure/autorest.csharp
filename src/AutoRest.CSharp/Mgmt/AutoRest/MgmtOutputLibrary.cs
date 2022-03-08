@@ -105,8 +105,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             MgmtContext.CodeModel.UpdateAcronyms();
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
-            _allSchemas.UpdateFrameworkTypes();
             MgmtContext.CodeModel.UpdatePatchOperations();
+            _allSchemas.VerifyAndUpdateFrameworkTypes();
             
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
