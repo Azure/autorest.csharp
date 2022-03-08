@@ -203,8 +203,11 @@ namespace MgmtSignalR
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters for the update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation<SignalRResource>> UpdateAsync(bool waitForCompletion, SignalRResourceData parameters = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<ArmOperation<SignalRResource>> UpdateAsync(bool waitForCompletion, SignalRResourceData parameters, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(parameters, nameof(parameters));
+
             using var scope = _signalRResourceSignalRClientDiagnostics.CreateScope("SignalRResource.Update");
             scope.Start();
             try
@@ -230,8 +233,11 @@ namespace MgmtSignalR
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="parameters"> Parameters for the update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation<SignalRResource> Update(bool waitForCompletion, SignalRResourceData parameters = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<SignalRResource> Update(bool waitForCompletion, SignalRResourceData parameters, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(parameters, nameof(parameters));
+
             using var scope = _signalRResourceSignalRClientDiagnostics.CreateScope("SignalRResource.Update");
             scope.Start();
             try

@@ -586,13 +586,10 @@ namespace MgmtSignalR
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (parameters != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(parameters);
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(parameters);
+            request.Content = content;
             message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
@@ -603,8 +600,8 @@ namespace MgmtSignalR
         /// <param name="resourceName"> The name of the SignalR resource. </param>
         /// <param name="parameters"> Parameters for the update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resourceName"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string resourceName, SignalRResourceData parameters = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string resourceName, SignalRResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -617,6 +614,10 @@ namespace MgmtSignalR
             if (resourceName == null)
             {
                 throw new ArgumentNullException(nameof(resourceName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, resourceName, parameters);
@@ -637,8 +638,8 @@ namespace MgmtSignalR
         /// <param name="resourceName"> The name of the SignalR resource. </param>
         /// <param name="parameters"> Parameters for the update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="resourceName"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string resourceName, SignalRResourceData parameters = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="resourceName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response Update(string subscriptionId, string resourceGroupName, string resourceName, SignalRResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -651,6 +652,10 @@ namespace MgmtSignalR
             if (resourceName == null)
             {
                 throw new ArgumentNullException(nameof(resourceName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
             }
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, resourceName, parameters);
