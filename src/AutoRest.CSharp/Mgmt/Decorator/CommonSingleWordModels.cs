@@ -16,7 +16,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             "Sku",
             "Plan",
-            "Usage"
+            "Usage",
+            "Resource"
         };
 
         public static void Update(IEnumerable<Schema> allSchemas)
@@ -24,7 +25,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             foreach (var schema in allSchemas)
             {
                 if (_schemasToChange.Contains(schema.Name))
-                    schema.Language.Default.Name = MgmtContext.Context.DefaultNamespace.Split('.').Last() + schema.Name;
+                {
+                    string suffix = schema.Language.Default.Name.Equals("Resource") ? "Data" : string.Empty;
+                    schema.Language.Default.Name = MgmtContext.Context.DefaultNamespace.Split('.').Last() + schema.Name + suffix;
+                }
             }
         }
     }
