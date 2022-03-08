@@ -43,7 +43,7 @@ namespace MgmtRenameRules
             _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
-        internal HttpMessage CreateReimageRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVmReimageParameters vmScaleSetVMReimageInput)
+        internal HttpMessage CreateReimageRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVmReimageParameters vmScaleSetVmReimageInput)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -61,11 +61,11 @@ namespace MgmtRenameRules
             uri.AppendPath("/reimage", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (vmScaleSetVMReimageInput != null)
+            if (vmScaleSetVmReimageInput != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(vmScaleSetVMReimageInput);
+                content.JsonWriter.WriteObjectValue(vmScaleSetVmReimageInput);
                 request.Content = content;
             }
             message.SetProperty("SDKUserAgent", _userAgent);
@@ -77,10 +77,10 @@ namespace MgmtRenameRules
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="vmScaleSetVMReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
+        /// <param name="vmScaleSetVmReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response> ReimageAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVmReimageParameters vmScaleSetVMReimageInput = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ReimageAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVmReimageParameters vmScaleSetVmReimageInput = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -99,7 +99,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(instanceId));
             }
 
-            using var message = CreateReimageRequest(subscriptionId, resourceGroupName, vmScaleSetName, instanceId, vmScaleSetVMReimageInput);
+            using var message = CreateReimageRequest(subscriptionId, resourceGroupName, vmScaleSetName, instanceId, vmScaleSetVmReimageInput);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -116,10 +116,10 @@ namespace MgmtRenameRules
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="vmScaleSetVMReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
+        /// <param name="vmScaleSetVmReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="instanceId"/> is null. </exception>
-        public Response Reimage(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVmReimageParameters vmScaleSetVMReimageInput = null, CancellationToken cancellationToken = default)
+        public Response Reimage(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVmReimageParameters vmScaleSetVmReimageInput = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -138,7 +138,7 @@ namespace MgmtRenameRules
                 throw new ArgumentNullException(nameof(instanceId));
             }
 
-            using var message = CreateReimageRequest(subscriptionId, resourceGroupName, vmScaleSetName, instanceId, vmScaleSetVMReimageInput);
+            using var message = CreateReimageRequest(subscriptionId, resourceGroupName, vmScaleSetName, instanceId, vmScaleSetVmReimageInput);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

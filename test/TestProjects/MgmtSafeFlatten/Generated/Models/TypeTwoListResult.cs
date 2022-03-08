@@ -13,7 +13,7 @@ using MgmtSafeFlatten;
 namespace MgmtSafeFlatten.Models
 {
     /// <summary> The TypeTwoListResult. </summary>
-    public partial class TypeTwoListResult
+    internal partial class TypeTwoListResult
     {
         /// <summary> Initializes a new instance of TypeTwoListResult. </summary>
         /// <param name="value"> The list of of type twos. </param>

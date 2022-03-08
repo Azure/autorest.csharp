@@ -13,7 +13,7 @@ using SingletonResource;
 namespace SingletonResource.Models
 {
     /// <summary> The List Availability Set operation response. </summary>
-    public partial class ParentResourceListResult
+    internal partial class ParentResourceListResult
     {
         /// <summary> Initializes a new instance of ParentResourceListResult. </summary>
         /// <param name="value"> The list of parent resource. </param>

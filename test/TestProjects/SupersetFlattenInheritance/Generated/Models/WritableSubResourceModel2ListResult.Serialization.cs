@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace SupersetFlattenInheritance.Models
 {
-    public partial class WritableSubResourceModel2ListResult
+    internal partial class WritableSubResourceModel2ListResult
     {
         internal static WritableSubResourceModel2ListResult DeserializeWritableSubResourceModel2ListResult(JsonElement element)
         {

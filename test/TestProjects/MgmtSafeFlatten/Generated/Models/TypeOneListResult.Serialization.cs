@@ -12,7 +12,7 @@ using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
 {
-    public partial class TypeOneListResult
+    internal partial class TypeOneListResult
     {
         internal static TypeOneListResult DeserializeTypeOneListResult(JsonElement element)
         {
