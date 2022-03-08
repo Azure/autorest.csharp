@@ -52,7 +52,7 @@ namespace XmlDeserialization
         {
             _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
-            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(_xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
+            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

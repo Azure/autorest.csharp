@@ -52,7 +52,7 @@ namespace MgmtExtensionResource
         {
             _subSingletonClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string subSingletonApiVersion);
-            _subSingletonRestClient = new SubSingletonsRestOperations(_subSingletonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subSingletonApiVersion);
+            _subSingletonRestClient = new SubSingletonsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subSingletonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

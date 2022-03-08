@@ -39,7 +39,7 @@ namespace MgmtRenameRules
         {
             _imageClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", Image.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(Image.ResourceType, out string imageApiVersion);
-            _imageRestClient = new ImagesRestOperations(_imageClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, imageApiVersion);
+            _imageRestClient = new ImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, imageApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

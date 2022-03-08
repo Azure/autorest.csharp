@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         {
             _blobContainerClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string blobContainerApiVersion);
-            _blobContainerRestClient = new BlobContainersRestOperations(_blobContainerClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobContainerApiVersion);
+            _blobContainerRestClient = new BlobContainersRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobContainerApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

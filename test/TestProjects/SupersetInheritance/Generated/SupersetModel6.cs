@@ -52,7 +52,7 @@ namespace SupersetInheritance
         {
             _supersetModel6ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string supersetModel6ApiVersion);
-            _supersetModel6RestClient = new SupersetModel6SRestOperations(_supersetModel6ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel6ApiVersion);
+            _supersetModel6RestClient = new SupersetModel6SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel6ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -24,22 +24,17 @@ namespace Azure.ResourceManager.Sample
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of SshPublicKeysRestOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public SshPublicKeysRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        public SshPublicKeysRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-06-01";
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
             _userAgent = Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
@@ -64,12 +59,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SshPublicKeysGroupListResult>> ListBySubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListBySubscriptionRequest(subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -86,17 +79,14 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SshPublicKeysGroupListResult> ListBySubscription(string subscriptionId, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListBySubscriptionRequest(subscriptionId);
             _pipeline.Send(message, cancellationToken);
@@ -113,7 +103,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -138,16 +127,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SshPublicKeysGroupListResult>> ListByResourceGroupAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListByResourceGroupRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -164,22 +148,16 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SshPublicKeysGroupListResult> ListByResourceGroup(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListByResourceGroupRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
@@ -196,7 +174,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -228,24 +205,13 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SshPublicKeyData>> CreateAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreateCreateRequest(subscriptionId, resourceGroupName, sshPublicKeyName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -263,7 +229,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -271,24 +236,13 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SshPublicKeyData> Create(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreateCreateRequest(subscriptionId, resourceGroupName, sshPublicKeyName, parameters);
             _pipeline.Send(message, cancellationToken);
@@ -306,7 +260,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName, PatchableSshPublicKeyData data)
         {
             var message = _pipeline.CreateMessage();
@@ -338,24 +291,13 @@ namespace Azure.ResourceManager.Sample
         /// <param name="data"> Parameters supplied to update the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/> or <paramref name="data"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SshPublicKeyData>> UpdateAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, PatchableSshPublicKeyData data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, sshPublicKeyName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -372,7 +314,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Updates a new SSH public key resource. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -380,24 +321,13 @@ namespace Azure.ResourceManager.Sample
         /// <param name="data"> Parameters supplied to update the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/> or <paramref name="data"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SshPublicKeyData> Update(string subscriptionId, string resourceGroupName, string sshPublicKeyName, PatchableSshPublicKeyData data, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
+            Argument.AssertNotNull(data, nameof(data));
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, sshPublicKeyName, data);
             _pipeline.Send(message, cancellationToken);
@@ -414,7 +344,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
         {
             var message = _pipeline.CreateMessage();
@@ -440,20 +369,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, sshPublicKeyName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -466,27 +387,18 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Delete an SSH public key. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, sshPublicKeyName);
             _pipeline.Send(message, cancellationToken);
@@ -499,7 +411,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
         {
             var message = _pipeline.CreateMessage();
@@ -526,20 +437,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SshPublicKeyData>> GetAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, sshPublicKeyName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -558,27 +461,18 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Retrieves information about an SSH public key. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SshPublicKeyData> Get(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, sshPublicKeyName);
             _pipeline.Send(message, cancellationToken);
@@ -597,7 +491,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateGenerateKeyPairRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
         {
             var message = _pipeline.CreateMessage();
@@ -625,20 +518,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SshPublicKeyGenerateKeyPairResult>> GenerateKeyPairAsync(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var message = CreateGenerateKeyPairRequest(subscriptionId, resourceGroupName, sshPublicKeyName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -655,27 +540,18 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SshPublicKeyGenerateKeyPairResult> GenerateKeyPair(string subscriptionId, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(sshPublicKeyName, nameof(sshPublicKeyName));
 
             using var message = CreateGenerateKeyPairRequest(subscriptionId, resourceGroupName, sshPublicKeyName);
             _pipeline.Send(message, cancellationToken);
@@ -692,7 +568,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -712,16 +587,11 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SshPublicKeysGroupListResult>> ListBySubscriptionNextPageAsync(string nextLink, string subscriptionId, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListBySubscriptionNextPageRequest(nextLink, subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -738,22 +608,16 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SshPublicKeysGroupListResult> ListBySubscriptionNextPage(string nextLink, string subscriptionId, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListBySubscriptionNextPageRequest(nextLink, subscriptionId);
             _pipeline.Send(message, cancellationToken);
@@ -770,7 +634,6 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -791,20 +654,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SshPublicKeysGroupListResult>> ListByResourceGroupNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListByResourceGroupNextPageRequest(nextLink, subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -821,27 +676,18 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SshPublicKeysGroupListResult> ListByResourceGroupNextPage(string nextLink, string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListByResourceGroupNextPageRequest(nextLink, subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);

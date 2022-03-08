@@ -57,11 +57,11 @@ namespace MgmtHierarchicalNonResource
         {
             _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
-            _sharedGalleryRestClient = new SharedGalleriesRestOperations(_sharedGalleryClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
+            _sharedGalleryRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
             _sharedGalleryImagesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_sharedGalleryImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
             _sharedGalleryImageVersionsClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_sharedGalleryImageVersionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

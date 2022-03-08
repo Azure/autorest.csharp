@@ -28,11 +28,12 @@ namespace ProtocolMethodsInRestClient
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public TestServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateCreateRequest(Resource resource)
@@ -82,6 +83,131 @@ namespace ProtocolMethodsInRestClient
         public Response<Resource> Create(Resource resource = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateCreateRequest(resource);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Resource value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = Resource.DeserializeResource(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateDeleteRequest(string resourceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/template/resources/", false);
+            uri.AppendPath(resourceId, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Delete resource. </summary>
+        /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string resourceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceId == null)
+            {
+                throw new ArgumentNullException(nameof(resourceId));
+            }
+
+            using var message = CreateDeleteRequest(resourceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 204:
+                    return message.Response;
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
+        /// <summary> Delete resource. </summary>
+        /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
+        public Response Delete(string resourceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceId == null)
+            {
+                throw new ArgumentNullException(nameof(resourceId));
+            }
+
+            using var message = CreateDeleteRequest(resourceId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 204:
+                    return message.Response;
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateGetRequest(string resourceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/template/resources/", false);
+            uri.AppendPath(resourceId, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <summary> Retrieves information about the resource. </summary>
+        /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
+        public async Task<Response<Resource>> GetAsync(string resourceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceId == null)
+            {
+                throw new ArgumentNullException(nameof(resourceId));
+            }
+
+            using var message = CreateGetRequest(resourceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        Resource value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = Resource.DeserializeResource(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw new RequestFailedException(message.Response);
+            }
+        }
+
+        /// <summary> Retrieves information about the resource. </summary>
+        /// <param name="resourceId"> The id of the resource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
+        public Response<Resource> Get(string resourceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceId == null)
+            {
+                throw new ArgumentNullException(nameof(resourceId));
+            }
+
+            using var message = CreateGetRequest(resourceId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -180,63 +306,6 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        internal HttpMessage CreateDeleteRequest(string resourceId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Delete;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/template/resources/", false);
-            uri.AppendPath(resourceId, true);
-            request.Uri = uri;
-            return message;
-        }
-
-        /// <summary> Delete resource. </summary>
-        /// <param name="resourceId"> The id of the resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceId == null)
-            {
-                throw new ArgumentNullException(nameof(resourceId));
-            }
-
-            using var message = CreateDeleteRequest(resourceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 204:
-                    return message.Response;
-                default:
-                    throw new RequestFailedException(message.Response);
-            }
-        }
-
-        /// <summary> Delete resource. </summary>
-        /// <param name="resourceId"> The id of the resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
-        public Response Delete(string resourceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceId == null)
-            {
-                throw new ArgumentNullException(nameof(resourceId));
-            }
-
-            using var message = CreateDeleteRequest(resourceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 204:
-                    return message.Response;
-                default:
-                    throw new RequestFailedException(message.Response);
-            }
-        }
-
         internal HttpMessage CreateDeleteRequest(string resourceId, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -293,74 +362,6 @@ namespace ProtocolMethodsInRestClient
             {
                 scope.Failed(e);
                 throw;
-            }
-        }
-
-        internal HttpMessage CreateGetRequest(string resourceId)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/template/resources/", false);
-            uri.AppendPath(resourceId, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Retrieves information about the resource. </summary>
-        /// <param name="resourceId"> The id of the resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
-        public async Task<Response<Resource>> GetAsync(string resourceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceId == null)
-            {
-                throw new ArgumentNullException(nameof(resourceId));
-            }
-
-            using var message = CreateGetRequest(resourceId);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        Resource value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Resource.DeserializeResource(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw new RequestFailedException(message.Response);
-            }
-        }
-
-        /// <summary> Retrieves information about the resource. </summary>
-        /// <param name="resourceId"> The id of the resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
-        public Response<Resource> Get(string resourceId, CancellationToken cancellationToken = default)
-        {
-            if (resourceId == null)
-            {
-                throw new ArgumentNullException(nameof(resourceId));
-            }
-
-            using var message = CreateGetRequest(resourceId);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        Resource value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Resource.DeserializeResource(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw new RequestFailedException(message.Response);
             }
         }
 

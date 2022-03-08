@@ -24,22 +24,17 @@ namespace MgmtSubscriptionNameParameter
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of SubscriptionsRestOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public SubscriptionsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        public SubscriptionsRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2021-06-01-preview";
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
             _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
@@ -77,16 +72,11 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="top"> May be used to limit the number of results to the most recent N usageDetails. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SBSubscriptionListResult>> ListByTopicAsync(string subscriptionId, string resourceGroupName, int? skip = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListByTopicRequest(subscriptionId, resourceGroupName, skip, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -103,7 +93,6 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> List all the subscriptions under a specified topic. </summary>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
@@ -111,16 +100,11 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="top"> May be used to limit the number of results to the most recent N usageDetails. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SBSubscriptionListResult> ListByTopic(string subscriptionId, string resourceGroupName, int? skip = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListByTopicRequest(subscriptionId, resourceGroupName, skip, top);
             _pipeline.Send(message, cancellationToken);
@@ -137,7 +121,6 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -169,24 +152,13 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="parameters"> Parameters supplied to create a subscription resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SBSubscriptionData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (subscriptionName == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, subscriptionName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -203,7 +175,6 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Creates a topic subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
@@ -211,24 +182,13 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="parameters"> Parameters supplied to create a subscription resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SBSubscriptionData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (subscriptionName == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, subscriptionName, parameters);
             _pipeline.Send(message, cancellationToken);
@@ -245,7 +205,6 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string subscriptionName)
         {
             var message = _pipeline.CreateMessage();
@@ -272,20 +231,12 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (subscriptionName == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, subscriptionName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -298,27 +249,18 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Deletes a subscription from the specified topic. </summary>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (subscriptionName == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, subscriptionName);
             _pipeline.Send(message, cancellationToken);
@@ -331,7 +273,6 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string subscriptionName)
         {
             var message = _pipeline.CreateMessage();
@@ -358,20 +299,12 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SBSubscriptionData>> GetAsync(string subscriptionId, string resourceGroupName, string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (subscriptionName == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, subscriptionName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -390,27 +323,18 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Returns a subscription description for the specified topic. </summary>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SBSubscriptionData> Get(string subscriptionId, string resourceGroupName, string subscriptionName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (subscriptionName == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, subscriptionName);
             _pipeline.Send(message, cancellationToken);
@@ -429,7 +353,6 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateListByTopicNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, int? skip, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -452,20 +375,12 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="top"> May be used to limit the number of results to the most recent N usageDetails. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SBSubscriptionListResult>> ListByTopicNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, int? skip = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListByTopicNextPageRequest(nextLink, subscriptionId, resourceGroupName, skip, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -482,7 +397,6 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> List all the subscriptions under a specified topic. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -491,20 +405,12 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="top"> May be used to limit the number of results to the most recent N usageDetails. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SBSubscriptionListResult> ListByTopicNextPage(string nextLink, string subscriptionId, string resourceGroupName, int? skip = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListByTopicNextPageRequest(nextLink, subscriptionId, resourceGroupName, skip, top);
             _pipeline.Send(message, cancellationToken);

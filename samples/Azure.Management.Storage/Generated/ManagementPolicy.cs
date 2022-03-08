@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         {
             _managementPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string managementPolicyApiVersion);
-            _managementPolicyRestClient = new ManagementPoliciesRestOperations(_managementPolicyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementPolicyApiVersion);
+            _managementPolicyRestClient = new ManagementPoliciesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

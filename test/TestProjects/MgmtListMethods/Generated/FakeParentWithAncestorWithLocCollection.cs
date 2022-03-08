@@ -38,7 +38,7 @@ namespace MgmtListMethods
         {
             _fakeParentWithAncestorWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestorWithLoc.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(FakeParentWithAncestorWithLoc.ResourceType, out string fakeParentWithAncestorWithLocApiVersion);
-            _fakeParentWithAncestorWithLocRestClient = new FakeParentWithAncestorWithLocsRestOperations(_fakeParentWithAncestorWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithAncestorWithLocApiVersion);
+            _fakeParentWithAncestorWithLocRestClient = new FakeParentWithAncestorWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentWithAncestorWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

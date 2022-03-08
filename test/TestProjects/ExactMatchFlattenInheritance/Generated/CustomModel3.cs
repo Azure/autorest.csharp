@@ -52,7 +52,7 @@ namespace ExactMatchFlattenInheritance
         {
             _customModel3ClientDiagnostics = new ClientDiagnostics("ExactMatchFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string customModel3ApiVersion);
-            _customModel3RestClient = new CustomModel3SRestOperations(_customModel3ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel3ApiVersion);
+            _customModel3RestClient = new CustomModel3SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, customModel3ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

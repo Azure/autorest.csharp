@@ -53,7 +53,7 @@ namespace TenantOnly
         {
             _agreementClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string agreementApiVersion);
-            _agreementRestClient = new AgreementsRestOperations(_agreementClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
+            _agreementRestClient = new AgreementsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, agreementApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

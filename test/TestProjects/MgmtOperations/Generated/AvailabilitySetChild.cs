@@ -53,7 +53,7 @@ namespace MgmtOperations
         {
             _availabilitySetChildavailabilitySetChildClientDiagnostics = new ClientDiagnostics("MgmtOperations", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string availabilitySetChildavailabilitySetChildApiVersion);
-            _availabilitySetChildavailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_availabilitySetChildavailabilitySetChildClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetChildavailabilitySetChildApiVersion);
+            _availabilitySetChildavailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetChildavailabilitySetChildApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

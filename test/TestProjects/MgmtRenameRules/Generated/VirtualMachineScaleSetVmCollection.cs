@@ -38,7 +38,7 @@ namespace MgmtRenameRules
         {
             _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", VirtualMachineScaleSetVm.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(VirtualMachineScaleSetVm.ResourceType, out string virtualMachineScaleSetVmVirtualMachineScaleSetVMsApiVersion);
-            _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient = new VirtualMachineScaleSetVMsRestOperations(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetVmVirtualMachineScaleSetVMsApiVersion);
+            _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient = new VirtualMachineScaleSetVMsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetVmVirtualMachineScaleSetVMsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

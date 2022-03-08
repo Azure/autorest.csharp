@@ -54,7 +54,7 @@ namespace MgmtListMethods
         {
             _tenantParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string tenantParentWithNonResChApiVersion);
-            _tenantParentWithNonResChRestClient = new TenantParentWithNonResChesRestOperations(_tenantParentWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithNonResChApiVersion);
+            _tenantParentWithNonResChRestClient = new TenantParentWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

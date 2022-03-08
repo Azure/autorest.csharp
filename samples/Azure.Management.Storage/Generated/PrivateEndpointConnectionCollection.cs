@@ -38,7 +38,7 @@ namespace Azure.Management.Storage
         {
             _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", PrivateEndpointConnection.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(PrivateEndpointConnection.ResourceType, out string privateEndpointConnectionApiVersion);
-            _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(_privateEndpointConnectionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionApiVersion);
+            _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

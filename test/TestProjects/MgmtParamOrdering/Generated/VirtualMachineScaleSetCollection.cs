@@ -40,7 +40,7 @@ namespace MgmtParamOrdering
         {
             _virtualMachineScaleSetClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", VirtualMachineScaleSet.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(VirtualMachineScaleSet.ResourceType, out string virtualMachineScaleSetApiVersion);
-            _virtualMachineScaleSetRestClient = new VirtualMachineScaleSetsRestOperations(_virtualMachineScaleSetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetApiVersion);
+            _virtualMachineScaleSetRestClient = new VirtualMachineScaleSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

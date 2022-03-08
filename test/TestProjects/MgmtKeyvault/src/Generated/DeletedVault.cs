@@ -52,7 +52,7 @@ namespace MgmtKeyvault
         {
             _deletedVaultVaultsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string deletedVaultVaultsApiVersion);
-            _deletedVaultVaultsRestClient = new VaultsRestOperations(_deletedVaultVaultsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedVaultVaultsApiVersion);
+            _deletedVaultVaultsRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedVaultVaultsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

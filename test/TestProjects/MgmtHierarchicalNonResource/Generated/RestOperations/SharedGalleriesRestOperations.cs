@@ -24,22 +24,17 @@ namespace MgmtHierarchicalNonResource
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of SharedGalleriesRestOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public SharedGalleriesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        public SharedGalleriesRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-06-01";
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
             _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
@@ -72,16 +67,11 @@ namespace MgmtHierarchicalNonResource
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SharedGalleryList>> ListAsync(string subscriptionId, string location, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListRequest(subscriptionId, location, sharedTo);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -98,23 +88,17 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> List shared galleries by subscription id or tenant id. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SharedGalleryList> List(string subscriptionId, string location, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListRequest(subscriptionId, location, sharedTo);
             _pipeline.Send(message, cancellationToken);
@@ -131,7 +115,6 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string location, string galleryUniqueName)
         {
             var message = _pipeline.CreateMessage();
@@ -158,20 +141,12 @@ namespace MgmtHierarchicalNonResource
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SharedGalleryData>> GetAsync(string subscriptionId, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-            if (galleryUniqueName == null)
-            {
-                throw new ArgumentNullException(nameof(galleryUniqueName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
             using var message = CreateGetRequest(subscriptionId, location, galleryUniqueName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -190,27 +165,18 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Get a shared gallery by subscription id or tenant id. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SharedGalleryData> Get(string subscriptionId, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-            if (galleryUniqueName == null)
-            {
-                throw new ArgumentNullException(nameof(galleryUniqueName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
             using var message = CreateGetRequest(subscriptionId, location, galleryUniqueName);
             _pipeline.Send(message, cancellationToken);
@@ -229,7 +195,6 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string location, SharedToValues? sharedTo)
         {
             var message = _pipeline.CreateMessage();
@@ -251,20 +216,12 @@ namespace MgmtHierarchicalNonResource
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<SharedGalleryList>> ListNextPageAsync(string nextLink, string subscriptionId, string location, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, location, sharedTo);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -281,7 +238,6 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> List shared galleries by subscription id or tenant id. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -289,20 +245,12 @@ namespace MgmtHierarchicalNonResource
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="location"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<SharedGalleryList> ListNextPage(string nextLink, string subscriptionId, string location, SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, location, sharedTo);
             _pipeline.Send(message, cancellationToken);

@@ -24,22 +24,17 @@ namespace MgmtScopeResource
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of ResourceLinksRestOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public ResourceLinksRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        public ResourceLinksRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2016-09-01";
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
             _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
@@ -64,10 +59,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public async Task<Response> DeleteAsync(string linkId, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
 
             using var message = CreateDeleteRequest(linkId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -80,17 +72,13 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Deletes a resource link with the specified ID. </summary>
         /// <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public Response Delete(string linkId, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
 
             using var message = CreateDeleteRequest(linkId);
             _pipeline.Send(message, cancellationToken);
@@ -103,7 +91,6 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal Azure.Core.HttpMessage CreateCreateOrUpdateRequest(string linkId, ResourceLinkData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -131,14 +118,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<ResourceLinkData>> CreateOrUpdateAsync(string linkId, ResourceLinkData parameters, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreateCreateOrUpdateRequest(linkId, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -156,7 +137,6 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Creates or updates a resource link between the specified resources. </summary>
         /// <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
@@ -164,14 +144,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
         public Response<ResourceLinkData> CreateOrUpdate(string linkId, ResourceLinkData parameters, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreateCreateOrUpdateRequest(linkId, parameters);
             _pipeline.Send(message, cancellationToken);
@@ -189,7 +163,6 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal Azure.Core.HttpMessage CreateGetRequest(string linkId)
         {
             var message = _pipeline.CreateMessage();
@@ -212,10 +185,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public async Task<Response<ResourceLinkData>> GetAsync(string linkId, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
 
             using var message = CreateGetRequest(linkId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -234,17 +204,13 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Gets a resource link with the specified ID. </summary>
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
         public Response<ResourceLinkData> Get(string linkId, CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
+            Argument.AssertNotNull(linkId, nameof(linkId));
 
             using var message = CreateGetRequest(linkId);
             _pipeline.Send(message, cancellationToken);
@@ -263,7 +229,6 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal Azure.Core.HttpMessage CreateListAtSubscriptionRequest(string subscriptionId, string filter)
         {
             var message = _pipeline.CreateMessage();
@@ -290,12 +255,10 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ResourceLinkResult>> ListAtSubscriptionAsync(string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListAtSubscriptionRequest(subscriptionId, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -312,18 +275,15 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Gets all the linked resources for the subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ResourceLinkResult> ListAtSubscription(string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListAtSubscriptionRequest(subscriptionId, filter);
             _pipeline.Send(message, cancellationToken);
@@ -340,7 +300,6 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal Azure.Core.HttpMessage CreateListAtSourceScopeRequest(string scope)
         {
             var message = _pipeline.CreateMessage();
@@ -365,10 +324,7 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         public async Task<Response<ResourceLinkResult>> ListAtSourceScopeAsync(string scope, CancellationToken cancellationToken = default)
         {
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(scope, nameof(scope));
 
             using var message = CreateListAtSourceScopeRequest(scope);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -385,17 +341,13 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         public Response<ResourceLinkResult> ListAtSourceScope(string scope, CancellationToken cancellationToken = default)
         {
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(scope, nameof(scope));
 
             using var message = CreateListAtSourceScopeRequest(scope);
             _pipeline.Send(message, cancellationToken);
@@ -412,7 +364,6 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal Azure.Core.HttpMessage CreateListAtSubscriptionNextPageRequest(string nextLink, string subscriptionId, string filter)
         {
             var message = _pipeline.CreateMessage();
@@ -433,16 +384,11 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ResourceLinkResult>> ListAtSubscriptionNextPageAsync(string nextLink, string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListAtSubscriptionNextPageRequest(nextLink, subscriptionId, filter);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -459,23 +405,17 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Gets all the linked resources for the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ResourceLinkResult> ListAtSubscriptionNextPage(string nextLink, string subscriptionId, string filter = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
             using var message = CreateListAtSubscriptionNextPageRequest(nextLink, subscriptionId, filter);
             _pipeline.Send(message, cancellationToken);
@@ -492,7 +432,6 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal Azure.Core.HttpMessage CreateListAtSourceScopeNextPageRequest(string nextLink, string scope)
         {
             var message = _pipeline.CreateMessage();
@@ -514,14 +453,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
         public async Task<Response<ResourceLinkResult>> ListAtSourceScopeNextPageAsync(string nextLink, string scope, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(scope, nameof(scope));
 
             using var message = CreateListAtSourceScopeNextPageRequest(nextLink, scope);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -538,7 +471,6 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
@@ -546,14 +478,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="scope"/> is null. </exception>
         public Response<ResourceLinkResult> ListAtSourceScopeNextPage(string nextLink, string scope, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNull(scope, nameof(scope));
 
             using var message = CreateListAtSourceScopeNextPageRequest(nextLink, scope);
             _pipeline.Send(message, cancellationToken);

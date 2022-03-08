@@ -39,7 +39,7 @@ namespace SubscriptionExtensions
         {
             _toasterClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", Toaster.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(Toaster.ResourceType, out string toasterApiVersion);
-            _toasterRestClient = new ToastersRestOperations(_toasterClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterApiVersion);
+            _toasterRestClient = new ToastersRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, toasterApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

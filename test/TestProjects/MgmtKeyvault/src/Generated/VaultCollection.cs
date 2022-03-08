@@ -40,7 +40,7 @@ namespace MgmtKeyvault
         {
             _vaultClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", Vault.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(Vault.ResourceType, out string vaultApiVersion);
-            _vaultRestClient = new VaultsRestOperations(_vaultClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, vaultApiVersion);
+            _vaultRestClient = new VaultsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, vaultApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

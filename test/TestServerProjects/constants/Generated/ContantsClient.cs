@@ -33,9 +33,10 @@ namespace constants
         /// <param name="queryConstant"> Constant query property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="pathConstant"> Constant path property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal ContantsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Enum8 headerConstant, Enum9 queryConstant, Enum10 pathConstant, Uri endpoint = null)
         {
-            RestClient = new ContantsRestClient(clientDiagnostics, pipeline, headerConstant, queryConstant, pathConstant, endpoint);
+            RestClient = new ContantsRestClient(pipeline, headerConstant, queryConstant, pathConstant, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

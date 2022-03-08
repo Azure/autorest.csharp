@@ -53,7 +53,7 @@ namespace SupersetFlattenInheritance
         {
             _trackedResourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string trackedResourceModel1ApiVersion);
-            _trackedResourceModel1RestClient = new TrackedResourceModel1SRestOperations(_trackedResourceModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, trackedResourceModel1ApiVersion);
+            _trackedResourceModel1RestClient = new TrackedResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, trackedResourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -39,7 +39,7 @@ namespace MgmtKeyvault
         {
             _managedHsmClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ManagedHsm.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ManagedHsm.ResourceType, out string managedHsmApiVersion);
-            _managedHsmRestClient = new ManagedHsmsRestOperations(_managedHsmClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managedHsmApiVersion);
+            _managedHsmRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managedHsmApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

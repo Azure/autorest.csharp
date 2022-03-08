@@ -38,7 +38,7 @@ namespace MgmtKeyvault
         {
             _privateEndpointConnectionClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", PrivateEndpointConnection.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(PrivateEndpointConnection.ResourceType, out string privateEndpointConnectionApiVersion);
-            _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(_privateEndpointConnectionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionApiVersion);
+            _privateEndpointConnectionRestClient = new PrivateEndpointConnectionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, privateEndpointConnectionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

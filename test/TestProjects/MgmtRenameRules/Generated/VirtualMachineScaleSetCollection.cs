@@ -39,7 +39,7 @@ namespace MgmtRenameRules
         {
             _virtualMachineScaleSetClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", VirtualMachineScaleSet.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(VirtualMachineScaleSet.ResourceType, out string virtualMachineScaleSetApiVersion);
-            _virtualMachineScaleSetRestClient = new VirtualMachineScaleSetsRestOperations(_virtualMachineScaleSetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetApiVersion);
+            _virtualMachineScaleSetRestClient = new VirtualMachineScaleSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineScaleSetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

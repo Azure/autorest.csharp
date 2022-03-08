@@ -52,7 +52,7 @@ namespace MgmtDiscriminator
         {
             _deliveryRuleClientDiagnostics = new ClientDiagnostics("MgmtDiscriminator", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string deliveryRuleApiVersion);
-            _deliveryRuleRestClient = new DeliveryRulesRestOperations(_deliveryRuleClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deliveryRuleApiVersion);
+            _deliveryRuleRestClient = new DeliveryRulesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deliveryRuleApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -88,7 +88,7 @@ namespace MgmtDiscriminator
         /// Operation Id: DeliveryRules_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeliveryRule>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeliveryRule>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRule.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace MgmtDiscriminator
             {
                 var response = await _deliveryRuleRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _deliveryRuleClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeliveryRule(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace MgmtDiscriminator
             {
                 var response = _deliveryRuleRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _deliveryRuleClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeliveryRule(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -137,7 +137,7 @@ namespace MgmtDiscriminator
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _deliveryRuleClientDiagnostics.CreateScope("DeliveryRule.Delete");
             scope.Start();

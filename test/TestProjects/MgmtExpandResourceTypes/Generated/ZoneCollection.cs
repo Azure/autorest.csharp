@@ -39,7 +39,7 @@ namespace MgmtExpandResourceTypes
         {
             _zoneClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(Zone.ResourceType, out string zoneApiVersion);
-            _zoneRestClient = new ZonesRestOperations(_zoneClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneApiVersion);
+            _zoneRestClient = new ZonesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, zoneApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

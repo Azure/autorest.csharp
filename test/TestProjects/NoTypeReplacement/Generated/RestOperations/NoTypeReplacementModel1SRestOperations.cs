@@ -24,22 +24,17 @@ namespace NoTypeReplacement
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of NoTypeReplacementModel1SRestOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public NoTypeReplacementModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        public NoTypeReplacementModel1SRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-06-01";
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
             _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
@@ -66,16 +61,11 @@ namespace NoTypeReplacement
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NoTypeReplacementModel1ListResult>> ListAsync(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -92,21 +82,15 @@ namespace NoTypeReplacement
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NoTypeReplacementModel1ListResult> List(string subscriptionId, string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
@@ -123,7 +107,6 @@ namespace NoTypeReplacement
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, NoTypeReplacementModel1Data parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -154,24 +137,13 @@ namespace NoTypeReplacement
         /// <param name="parameters"> The NoTypeReplacementModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NoTypeReplacementModel1Data>> PutAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, NoTypeReplacementModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (noTypeReplacementModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel1SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, noTypeReplacementModel1SName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -188,31 +160,19 @@ namespace NoTypeReplacement
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NoTypeReplacementModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NoTypeReplacementModel1Data> Put(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, NoTypeReplacementModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (noTypeReplacementModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel1SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreatePutRequest(subscriptionId, resourceGroupName, noTypeReplacementModel1SName, parameters);
             _pipeline.Send(message, cancellationToken);
@@ -229,7 +189,6 @@ namespace NoTypeReplacement
                     throw new RequestFailedException(message.Response);
             }
         }
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName)
         {
             var message = _pipeline.CreateMessage();
@@ -255,20 +214,12 @@ namespace NoTypeReplacement
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NoTypeReplacementModel1Data>> GetAsync(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (noTypeReplacementModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, noTypeReplacementModel1SName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -287,26 +238,17 @@ namespace NoTypeReplacement
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NoTypeReplacementModel1Data> Get(string subscriptionId, string resourceGroupName, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (noTypeReplacementModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(noTypeReplacementModel1SName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, noTypeReplacementModel1SName);
             _pipeline.Send(message, cancellationToken);

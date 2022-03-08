@@ -52,7 +52,7 @@ namespace MgmtKeyvault
         {
             _deletedManagedHsmManagedHsmsClientDiagnostics = new ClientDiagnostics("MgmtKeyvault", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string deletedManagedHsmManagedHsmsApiVersion);
-            _deletedManagedHsmManagedHsmsRestClient = new ManagedHsmsRestOperations(_deletedManagedHsmManagedHsmsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmManagedHsmsApiVersion);
+            _deletedManagedHsmManagedHsmsRestClient = new ManagedHsmsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deletedManagedHsmManagedHsmsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

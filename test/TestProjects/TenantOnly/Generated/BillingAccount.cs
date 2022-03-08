@@ -53,7 +53,7 @@ namespace TenantOnly
         {
             _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string billingAccountApiVersion);
-            _billingAccountRestClient = new BillingAccountsRestOperations(_billingAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
+            _billingAccountRestClient = new BillingAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

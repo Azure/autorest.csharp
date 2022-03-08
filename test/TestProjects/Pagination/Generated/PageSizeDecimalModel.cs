@@ -52,7 +52,7 @@ namespace Pagination
         {
             _pageSizeDecimalModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string pageSizeDecimalModelApiVersion);
-            _pageSizeDecimalModelRestClient = new PageSizeDecimalModelsRestOperations(_pageSizeDecimalModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDecimalModelApiVersion);
+            _pageSizeDecimalModelRestClient = new PageSizeDecimalModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDecimalModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Sample
         {
             _virtualMachineExtensionClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string virtualMachineExtensionApiVersion);
-            _virtualMachineExtensionRestClient = new VirtualMachineExtensionsRestOperations(_virtualMachineExtensionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionApiVersion);
+            _virtualMachineExtensionRestClient = new VirtualMachineExtensionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

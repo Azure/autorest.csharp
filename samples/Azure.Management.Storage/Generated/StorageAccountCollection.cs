@@ -40,7 +40,7 @@ namespace Azure.Management.Storage
         {
             _storageAccountClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", StorageAccount.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(StorageAccount.ResourceType, out string storageAccountApiVersion);
-            _storageAccountRestClient = new StorageAccountsRestOperations(_storageAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, storageAccountApiVersion);
+            _storageAccountRestClient = new StorageAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, storageAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

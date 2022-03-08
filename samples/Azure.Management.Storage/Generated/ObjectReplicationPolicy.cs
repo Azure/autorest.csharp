@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         {
             _objectReplicationPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string objectReplicationPolicyApiVersion);
-            _objectReplicationPolicyRestClient = new ObjectReplicationPoliciesRestOperations(_objectReplicationPolicyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, objectReplicationPolicyApiVersion);
+            _objectReplicationPolicyRestClient = new ObjectReplicationPoliciesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, objectReplicationPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

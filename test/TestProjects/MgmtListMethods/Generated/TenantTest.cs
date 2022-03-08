@@ -53,7 +53,7 @@ namespace MgmtListMethods
         {
             _tenantTestClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string tenantTestApiVersion);
-            _tenantTestRestClient = new TenantTestsRestOperations(_tenantTestClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantTestApiVersion);
+            _tenantTestRestClient = new TenantTestsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantTestApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -36,7 +36,7 @@ namespace OmitOperationGroups
         }
 
         private ClientDiagnostics Model5sClientDiagnostics => _model5sClientDiagnostics ??= new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private Model5SRestOperations Model5sRestClient => _model5sRestClient ??= new Model5SRestOperations(Model5sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private Model5SRestOperations Model5sRestClient => _model5sRestClient ??= new Model5SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {

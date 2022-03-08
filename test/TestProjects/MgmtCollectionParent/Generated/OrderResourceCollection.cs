@@ -39,7 +39,7 @@ namespace MgmtCollectionParent
         {
             _orderResourceClientDiagnostics = new ClientDiagnostics("MgmtCollectionParent", OrderResource.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(OrderResource.ResourceType, out string orderResourceApiVersion);
-            _orderResourceRestClient = new ComputeManagementRestOperations(_orderResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
+            _orderResourceRestClient = new ComputeManagementRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, orderResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

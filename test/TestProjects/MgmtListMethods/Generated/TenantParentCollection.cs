@@ -38,7 +38,7 @@ namespace MgmtListMethods
         {
             _tenantParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", TenantParent.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(TenantParent.ResourceType, out string tenantParentApiVersion);
-            _tenantParentRestClient = new TenantParentsRestOperations(_tenantParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentApiVersion);
+            _tenantParentRestClient = new TenantParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, tenantParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

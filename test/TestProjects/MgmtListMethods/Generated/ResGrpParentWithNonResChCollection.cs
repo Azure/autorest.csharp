@@ -39,7 +39,7 @@ namespace MgmtListMethods
         {
             _resGrpParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResGrpParentWithNonResCh.ResourceType, out string resGrpParentWithNonResChApiVersion);
-            _resGrpParentWithNonResChRestClient = new ResGrpParentWithNonResChesRestOperations(_resGrpParentWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithNonResChApiVersion);
+            _resGrpParentWithNonResChRestClient = new ResGrpParentWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -53,7 +53,7 @@ namespace MgmtParamOrdering
         {
             _workspaceClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string workspaceApiVersion);
-            _workspaceRestClient = new WorkspacesRestOperations(_workspaceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceApiVersion);
+            _workspaceRestClient = new WorkspacesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, workspaceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

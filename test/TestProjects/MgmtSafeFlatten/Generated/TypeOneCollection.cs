@@ -39,7 +39,7 @@ namespace MgmtSafeFlatten
         {
             _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", TypeOne.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
-            _typeOneCommonRestClient = new CommonRestOperations(_typeOneCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
+            _typeOneCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -19,19 +19,14 @@ namespace lro_parameterized_endpoints
         private readonly HttpPipeline _pipeline;
         private readonly string _host;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. Pass in &apos;host:3000&apos; to pass test. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="host"/> is null. </exception>
-        public LROWithParamaterizedEndpointsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
+        public LROWithParamaterizedEndpointsRestClient(HttpPipeline pipeline, string host = "host")
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _host = host ?? throw new ArgumentNullException(nameof(host));
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreatePollWithParameterizedEndpointsRequest(string accountName)

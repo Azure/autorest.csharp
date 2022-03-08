@@ -24,22 +24,17 @@ namespace MgmtExtensionResource
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of PolicyRestOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public PolicyRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        public PolicyRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-09-01";
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
             _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
@@ -69,20 +64,12 @@ namespace MgmtExtensionResource
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(string subscriptionId, string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-            if (domainNameLabel == null)
-            {
-                throw new ArgumentNullException(nameof(domainNameLabel));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
 
             using var message = CreateCheckDnsNameAvailabilityRequest(subscriptionId, location, domainNameLabel);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -99,27 +86,18 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
-
         /// <summary> Checks whether a domain name in the cloudapp.azure.com zone is available for use. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<DnsNameAvailabilityResult> CheckDnsNameAvailability(string subscriptionId, string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-            if (domainNameLabel == null)
-            {
-                throw new ArgumentNullException(nameof(domainNameLabel));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
 
             using var message = CreateCheckDnsNameAvailabilityRequest(subscriptionId, location, domainNameLabel);
             _pipeline.Send(message, cancellationToken);

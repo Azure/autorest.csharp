@@ -53,7 +53,7 @@ namespace MgmtParent
         {
             _virtualMachineExtensionImageClientDiagnostics = new ClientDiagnostics("MgmtParent", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string virtualMachineExtensionImageApiVersion);
-            _virtualMachineExtensionImageRestClient = new VirtualMachineExtensionImagesRestOperations(_virtualMachineExtensionImageClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageApiVersion);
+            _virtualMachineExtensionImageRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

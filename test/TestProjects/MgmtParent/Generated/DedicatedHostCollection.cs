@@ -38,7 +38,7 @@ namespace MgmtParent
         {
             _dedicatedHostClientDiagnostics = new ClientDiagnostics("MgmtParent", DedicatedHost.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(DedicatedHost.ResourceType, out string dedicatedHostApiVersion);
-            _dedicatedHostRestClient = new DedicatedHostsRestOperations(_dedicatedHostClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostApiVersion);
+            _dedicatedHostRestClient = new DedicatedHostsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -39,7 +39,7 @@ namespace OmitOperationGroups
         {
             _model2ClientDiagnostics = new ClientDiagnostics("OmitOperationGroups", Model2.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(Model2.ResourceType, out string model2ApiVersion);
-            _model2RestClient = new Model2SRestOperations(_model2ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
+            _model2RestClient = new Model2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, model2ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

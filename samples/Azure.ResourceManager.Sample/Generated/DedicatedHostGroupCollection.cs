@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample
         {
             _dedicatedHostGroupClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", DedicatedHostGroup.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(DedicatedHostGroup.ResourceType, out string dedicatedHostGroupApiVersion);
-            _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(_dedicatedHostGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostGroupApiVersion);
+            _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostGroupApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

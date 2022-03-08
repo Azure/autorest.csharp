@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample
         {
             _proximityPlacementGroupClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string proximityPlacementGroupApiVersion);
-            _proximityPlacementGroupRestClient = new ProximityPlacementGroupsRestOperations(_proximityPlacementGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, proximityPlacementGroupApiVersion);
+            _proximityPlacementGroupRestClient = new ProximityPlacementGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, proximityPlacementGroupApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

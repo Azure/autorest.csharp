@@ -52,7 +52,7 @@ namespace MgmtScopeResource
         {
             _fakePolicyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string fakePolicyAssignmentApiVersion);
-            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(_fakePolicyAssignmentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakePolicyAssignmentApiVersion);
+            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakePolicyAssignmentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -88,7 +88,7 @@ namespace MgmtScopeResource
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<FakePolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakePolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignment.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace MgmtScopeResource
             {
                 var response = await _fakePolicyAssignmentRestClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _fakePolicyAssignmentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakePolicyAssignment(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace MgmtScopeResource
             {
                 var response = _fakePolicyAssignmentRestClient.Get(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _fakePolicyAssignmentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakePolicyAssignment(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -137,7 +137,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation<FakePolicyAssignment>> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakePolicyAssignment>> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignment.Delete");
             scope.Start();

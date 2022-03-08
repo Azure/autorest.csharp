@@ -23,25 +23,21 @@ namespace required_optional
         private readonly Uri _endpoint;
         private readonly int? _optionalGlobalQuery;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of ImplicitRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="requiredGlobalPath"> number of items to skip. </param>
         /// <param name="requiredGlobalQuery"> number of items to skip. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="optionalGlobalQuery"> number of items to skip. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredGlobalPath"/> or <paramref name="requiredGlobalQuery"/> is null. </exception>
-        public ImplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/>, <paramref name="requiredGlobalPath"/> or <paramref name="requiredGlobalQuery"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="requiredGlobalPath"/> is an empty string, and was expected to be non-empty. </exception>
+        public ImplicitRestClient(HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _requiredGlobalPath = requiredGlobalPath ?? throw new ArgumentNullException(nameof(requiredGlobalPath));
             _requiredGlobalQuery = requiredGlobalQuery ?? throw new ArgumentNullException(nameof(requiredGlobalQuery));
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
             _optionalGlobalQuery = optionalGlobalQuery;
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetRequiredPathRequest(string pathParameter)

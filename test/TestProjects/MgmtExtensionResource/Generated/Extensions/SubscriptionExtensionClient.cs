@@ -38,9 +38,9 @@ namespace MgmtExtensionResource
         }
 
         private ClientDiagnostics DefaultClientDiagnostics => _defaultClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private PolicyRestOperations DefaultRestClient => _defaultRestClient ??= new PolicyRestOperations(DefaultClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private PolicyRestOperations DefaultRestClient => _defaultRestClient ??= new PolicyRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics OrphanedPostClientDiagnostics => _orphanedPostClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private OrphanedPostRestOperations OrphanedPostRestClient => _orphanedPostRestClient ??= new OrphanedPostRestOperations(OrphanedPostClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private OrphanedPostRestOperations OrphanedPostRestClient => _orphanedPostRestClient ??= new OrphanedPostRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {

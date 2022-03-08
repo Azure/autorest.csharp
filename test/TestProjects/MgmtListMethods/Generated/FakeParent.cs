@@ -53,7 +53,7 @@ namespace MgmtListMethods
         {
             _fakeParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string fakeParentApiVersion);
-            _fakeParentRestClient = new FakeParentsRestOperations(_fakeParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentApiVersion);
+            _fakeParentRestClient = new FakeParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

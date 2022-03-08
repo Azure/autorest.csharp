@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         {
             _blobInventoryPolicyClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", BlobInventoryPolicy.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(BlobInventoryPolicy.ResourceType, out string blobInventoryPolicyApiVersion);
-            _blobInventoryPolicyRestClient = new BlobInventoryPoliciesRestOperations(_blobInventoryPolicyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobInventoryPolicyApiVersion);
+            _blobInventoryPolicyRestClient = new BlobInventoryPoliciesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobInventoryPolicyApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

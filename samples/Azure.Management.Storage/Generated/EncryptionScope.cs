@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         {
             _encryptionScopeClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string encryptionScopeApiVersion);
-            _encryptionScopeRestClient = new EncryptionScopesRestOperations(_encryptionScopeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, encryptionScopeApiVersion);
+            _encryptionScopeRestClient = new EncryptionScopesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, encryptionScopeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

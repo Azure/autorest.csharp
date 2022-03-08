@@ -39,7 +39,7 @@ namespace MgmtMultipleParentResource
         {
             _anotherParentClientDiagnostics = new ClientDiagnostics("MgmtMultipleParentResource", AnotherParent.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(AnotherParent.ResourceType, out string anotherParentApiVersion);
-            _anotherParentRestClient = new AnotherParentsRestOperations(_anotherParentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, anotherParentApiVersion);
+            _anotherParentRestClient = new AnotherParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, anotherParentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -38,9 +38,9 @@ namespace SupersetInheritance
         }
 
         private ClientDiagnostics SupersetModel2sClientDiagnostics => _supersetModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private SupersetModel2SRestOperations SupersetModel2sRestClient => _supersetModel2sRestClient ??= new SupersetModel2SRestOperations(SupersetModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private SupersetModel2SRestOperations SupersetModel2sRestClient => _supersetModel2sRestClient ??= new SupersetModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics SupersetModel3sClientDiagnostics => _supersetModel3sClientDiagnostics ??= new ClientDiagnostics("SupersetInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private SupersetModel3SRestOperations SupersetModel3sRestClient => _supersetModel3sRestClient ??= new SupersetModel3SRestOperations(SupersetModel3sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private SupersetModel3SRestOperations SupersetModel3sRestClient => _supersetModel3sRestClient ??= new SupersetModel3SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {

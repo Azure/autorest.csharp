@@ -38,7 +38,7 @@ namespace MgmtParamOrdering
         {
             _environmentContainerResourceEnvironmentContainersClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", EnvironmentContainerResource.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(EnvironmentContainerResource.ResourceType, out string environmentContainerResourceEnvironmentContainersApiVersion);
-            _environmentContainerResourceEnvironmentContainersRestClient = new EnvironmentContainersRestOperations(_environmentContainerResourceEnvironmentContainersClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, environmentContainerResourceEnvironmentContainersApiVersion);
+            _environmentContainerResourceEnvironmentContainersRestClient = new EnvironmentContainersRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, environmentContainerResourceEnvironmentContainersApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

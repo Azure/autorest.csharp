@@ -39,7 +39,7 @@ namespace NoTypeReplacement
         {
             _noTypeReplacementModel1ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", NoTypeReplacementModel1.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(NoTypeReplacementModel1.ResourceType, out string noTypeReplacementModel1ApiVersion);
-            _noTypeReplacementModel1RestClient = new NoTypeReplacementModel1SRestOperations(_noTypeReplacementModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel1ApiVersion);
+            _noTypeReplacementModel1RestClient = new NoTypeReplacementModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

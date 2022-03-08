@@ -39,7 +39,7 @@ namespace ExactMatchInheritance
         {
             _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ExactMatchModel1.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ExactMatchModel1.ResourceType, out string exactMatchModel1ApiVersion);
-            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(_exactMatchModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
+            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

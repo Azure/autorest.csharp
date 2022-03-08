@@ -53,7 +53,7 @@ namespace SingletonResource
         {
             _parentResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string parentResourceApiVersion);
-            _parentResourceRestClient = new ParentResourcesRestOperations(_parentResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, parentResourceApiVersion);
+            _parentResourceRestClient = new ParentResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, parentResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -36,7 +36,7 @@ namespace MgmtNonStringPathVariable
         {
             _barClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", Bar.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(Bar.ResourceType, out string barApiVersion);
-            _barRestClient = new BarsRestOperations(_barClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
+            _barRestClient = new BarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

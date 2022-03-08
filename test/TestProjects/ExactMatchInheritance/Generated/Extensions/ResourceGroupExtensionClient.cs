@@ -40,11 +40,11 @@ namespace ExactMatchInheritance
         }
 
         private ClientDiagnostics ExactMatchModel2sClientDiagnostics => _exactMatchModel2sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private ExactMatchModel2SRestOperations ExactMatchModel2sRestClient => _exactMatchModel2sRestClient ??= new ExactMatchModel2SRestOperations(ExactMatchModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private ExactMatchModel2SRestOperations ExactMatchModel2sRestClient => _exactMatchModel2sRestClient ??= new ExactMatchModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics ExactMatchModel3sClientDiagnostics => _exactMatchModel3sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private ExactMatchModel3SRestOperations ExactMatchModel3sRestClient => _exactMatchModel3sRestClient ??= new ExactMatchModel3SRestOperations(ExactMatchModel3sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private ExactMatchModel3SRestOperations ExactMatchModel3sRestClient => _exactMatchModel3sRestClient ??= new ExactMatchModel3SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics ExactMatchModel4sClientDiagnostics => _exactMatchModel4sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private ExactMatchModel4SRestOperations ExactMatchModel4sRestClient => _exactMatchModel4sRestClient ??= new ExactMatchModel4SRestOperations(ExactMatchModel4sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private ExactMatchModel4SRestOperations ExactMatchModel4sRestClient => _exactMatchModel4sRestClient ??= new ExactMatchModel4SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {

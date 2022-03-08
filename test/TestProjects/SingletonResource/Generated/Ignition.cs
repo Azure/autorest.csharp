@@ -52,7 +52,7 @@ namespace SingletonResource
         {
             _ignitionClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string ignitionApiVersion);
-            _ignitionRestClient = new IgnitionsRestOperations(_ignitionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
+            _ignitionRestClient = new IgnitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -52,7 +52,7 @@ namespace Pagination
         {
             _pageSizeIntegerModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string pageSizeIntegerModelApiVersion);
-            _pageSizeIntegerModelRestClient = new PageSizeIntegerModelsRestOperations(_pageSizeIntegerModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeIntegerModelApiVersion);
+            _pageSizeIntegerModelRestClient = new PageSizeIntegerModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeIntegerModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

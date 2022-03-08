@@ -39,7 +39,7 @@ namespace MgmtOperations
         {
             _unpatchableResourceClientDiagnostics = new ClientDiagnostics("MgmtOperations", UnpatchableResource.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(UnpatchableResource.ResourceType, out string unpatchableResourceApiVersion);
-            _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(_unpatchableResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, unpatchableResourceApiVersion);
+            _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, unpatchableResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

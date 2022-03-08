@@ -52,7 +52,7 @@ namespace SingletonResource
         {
             _carClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string carApiVersion);
-            _carRestClient = new CarsRestOperations(_carClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
+            _carRestClient = new CarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

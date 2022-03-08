@@ -39,7 +39,7 @@ namespace MgmtExpandResourceTypes
         {
             _recordSetSrvRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetSrv.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(RecordSetSrv.ResourceType, out string recordSetSrvRecordSetsApiVersion);
-            _recordSetSrvRecordSetsRestClient = new RecordSetsRestOperations(_recordSetSrvRecordSetsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetSrvRecordSetsApiVersion);
+            _recordSetSrvRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetSrvRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

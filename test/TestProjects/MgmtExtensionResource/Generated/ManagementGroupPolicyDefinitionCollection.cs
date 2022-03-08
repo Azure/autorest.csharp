@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         {
             _managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics = new ClientDiagnostics("MgmtExtensionResource", ManagementGroupPolicyDefinition.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ManagementGroupPolicyDefinition.ResourceType, out string managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
-            _managementGroupPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(_managementGroupPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
+            _managementGroupPolicyDefinitionPolicyDefinitionsRestClient = new PolicyDefinitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, managementGroupPolicyDefinitionPolicyDefinitionsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

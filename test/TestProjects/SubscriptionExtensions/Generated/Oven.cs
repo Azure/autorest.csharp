@@ -53,7 +53,7 @@ namespace SubscriptionExtensions
         {
             _ovenClientDiagnostics = new ClientDiagnostics("SubscriptionExtensions", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string ovenApiVersion);
-            _ovenRestClient = new OvensRestOperations(_ovenClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ovenApiVersion);
+            _ovenRestClient = new OvensRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ovenApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

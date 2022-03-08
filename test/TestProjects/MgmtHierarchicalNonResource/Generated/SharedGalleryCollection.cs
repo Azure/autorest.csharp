@@ -45,7 +45,7 @@ namespace MgmtHierarchicalNonResource
             _location = location;
             _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", SharedGallery.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(SharedGallery.ResourceType, out string sharedGalleryApiVersion);
-            _sharedGalleryRestClient = new SharedGalleriesRestOperations(_sharedGalleryClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
+            _sharedGalleryRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

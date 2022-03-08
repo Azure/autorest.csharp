@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         {
             _fileServiceClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string fileServiceApiVersion);
-            _fileServiceRestClient = new FileServicesRestOperations(_fileServiceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileServiceApiVersion);
+            _fileServiceRestClient = new FileServicesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileServiceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

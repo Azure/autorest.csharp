@@ -58,9 +58,9 @@ namespace MgmtScopeResource
         {
             _deploymentExtendedDeploymentsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string deploymentExtendedDeploymentsApiVersion);
-            _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedDeploymentsApiVersion);
+            _deploymentExtendedDeploymentsRestClient = new DeploymentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, deploymentExtendedDeploymentsApiVersion);
             _deploymentOperationsClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-            _deploymentOperationsRestClient = new DeploymentRestOperations(_deploymentOperationsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _deploymentOperationsRestClient = new DeploymentRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

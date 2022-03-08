@@ -53,7 +53,7 @@ namespace MgmtListMethods
         {
             _subParentWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string subParentWithLocApiVersion);
-            _subParentWithLocRestClient = new SubParentWithLocsRestOperations(_subParentWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentWithLocApiVersion);
+            _subParentWithLocRestClient = new SubParentWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         {
             _blobServiceClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string blobServiceApiVersion);
-            _blobServiceRestClient = new BlobServicesRestOperations(_blobServiceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobServiceApiVersion);
+            _blobServiceRestClient = new BlobServicesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, blobServiceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif

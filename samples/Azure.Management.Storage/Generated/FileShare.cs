@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         {
             _fileShareClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string fileShareApiVersion);
-            _fileShareRestClient = new FileSharesRestOperations(_fileShareClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileShareApiVersion);
+            _fileShareRestClient = new FileSharesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileShareApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
