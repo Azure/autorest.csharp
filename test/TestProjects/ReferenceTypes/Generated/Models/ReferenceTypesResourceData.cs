@@ -25,7 +25,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="name"> The name of the resource. </param>
         /// <param name="resourceType"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
         [SerializationConstructor]
-        protected ReferenceTypesResourceData(ResourceIdentifier id, string name, string resourceType)
+        protected ReferenceTypesResourceData(ResourceIdentifier id, string name, ResourceType resourceType)
         {
             Id = id;
             Name = name;
@@ -37,6 +37,6 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> The name of the resource. </summary>
         public string Name { get; }
         /// <summary> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </summary>
-        public string ResourceType { get; }
+        public ResourceType ResourceType { get; }
     }
 }

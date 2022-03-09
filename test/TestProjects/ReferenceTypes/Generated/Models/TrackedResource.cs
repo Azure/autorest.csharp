@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
         [SerializationConstructor]
-        protected TrackedResource(ResourceIdentifier id, string name, string resourceType, IDictionary<string, string> tags, AzureLocation location) : base(id, name, resourceType)
+        protected TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, IDictionary<string, string> tags, AzureLocation location) : base(id, name, resourceType)
         {
             Tags = tags;
             Location = location;

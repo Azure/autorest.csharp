@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (originalType.Declaration.Name == "Location" && (isString || frameworkType.Name == _locationType.Name))
                 return GetObjectTypeProperty(originalType, _locationType, context);
 
-            if (originalType.Declaration.Name == "Type" && (isString || frameworkType.Name == _resourceTypeType.Name))
+            if (originalType.Declaration.Name == "ResourceType" && (isString || frameworkType.Name == _resourceTypeType.Name))
                 return GetObjectTypeProperty(originalType, _resourceTypeType, context);
 
             if (originalType.Declaration.Name == "Id" && (isString || frameworkType.Name == _resourceIdentifierType.Name))
