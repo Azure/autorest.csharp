@@ -181,10 +181,7 @@ function  MockTestInit {
         $Script:RPMapping = [ordered]@{ }
     }
     process {
-        # Launch Mock-service-host
-        $LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
-        $task = { & $LaunchScript }
-        Invoke-Command  -ScriptBlock $task
+
 
         # Install npm and autorest
         if ($NpmInit) {
@@ -381,8 +378,15 @@ function  MockTestInit {
     }
 }
 
+# Launch Mock-service-host
+$LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
+$task1 = { & $LaunchScript }
+Invoke-Command  -ScriptBlock $task1
+        
+# Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $false
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
-MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
+$task2 = { MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri }
+Invoke-Command  -ScriptBlock $task2
