@@ -50,5 +50,7 @@ directive:
   - remove-operation: FakePolicyAssignments_GetById
   - from: Links.json
     where: $.definitions.ResourceLink.properties.type
-    transform: $["x-ms-client-name"] = "ResourceLinkType"
+    transform: >
+       $["x-ms-client-name"] = "ResourceType";
+       $["type"] = "string";
 ```
