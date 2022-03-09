@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             "Sku",
             "SkuName",
             "SkuTier",
+            "SkuFamily",
             "SkuInformation",
             "Plan",
             "Usage",
