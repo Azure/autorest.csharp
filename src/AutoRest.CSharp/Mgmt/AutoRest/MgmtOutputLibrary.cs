@@ -105,9 +105,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             MgmtContext.CodeModel.UpdateAcronyms();
             _allSchemas = MgmtContext.CodeModel.AllSchemas;
-            _allSchemas.UpdateFrameworkTypes();
-
-            SinglePropertyHider.HideModels(_allSchemas);
+            MgmtContext.CodeModel.UpdatePatchOperations();
+            _allSchemas.VerifyAndUpdateFrameworkTypes();
+            _allSchemas.UpdateSealChoiceTypes();
+            CommonSingleWordModels.Update(_allSchemas);
 
             // We can only manipulate objects from the code model, not RestClientMethod
             ReorderOperationParameters();
@@ -178,8 +179,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataModelName.Key, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema.Language.Default.Name, bodyParam.Schema);
-                            bodyParam.Schema.Language.Default.Name = $"{name}UpdateOptions";
-                            bodyParam.Language.Default.Name = "options";
+                            bodyParam.Schema.Language.Default.Name = $"Patchable{name}Data";
+                            bodyParam.Language.Default.Name = "data";
                         }
                     }
                 }

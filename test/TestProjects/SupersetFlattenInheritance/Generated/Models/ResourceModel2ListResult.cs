@@ -11,7 +11,7 @@ using Azure.Core;
 namespace SupersetFlattenInheritance.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class ResourceModel2ListResult
+    internal partial class ResourceModel2ListResult
     {
         /// <summary> Initializes a new instance of ResourceModel2ListResult. </summary>
         internal ResourceModel2ListResult()

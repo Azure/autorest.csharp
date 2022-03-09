@@ -8,7 +8,7 @@
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> The RecordType. </summary>
-    public enum RecordType
+    internal enum RecordType
     {
         /// <summary> A. </summary>
         A,

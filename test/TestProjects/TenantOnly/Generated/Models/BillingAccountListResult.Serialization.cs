@@ -12,7 +12,7 @@ using TenantOnly;
 
 namespace TenantOnly.Models
 {
-    public partial class BillingAccountListResult
+    internal partial class BillingAccountListResult
     {
         internal static BillingAccountListResult DeserializeBillingAccountListResult(JsonElement element)
         {

@@ -12,7 +12,7 @@ using ExactMatchInheritance;
 
 namespace ExactMatchInheritance.Models
 {
-    public partial class ExactMatchModel1ListResult
+    internal partial class ExactMatchModel1ListResult
     {
         internal static ExactMatchModel1ListResult DeserializeExactMatchModel1ListResult(JsonElement element)
         {

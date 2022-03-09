@@ -12,7 +12,7 @@ using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
-    public partial class ResGrpParentListResult
+    internal partial class ResGrpParentListResult
     {
         internal static ResGrpParentListResult DeserializeResGrpParentListResult(JsonElement element)
         {

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtListMethods.Models
 {
     /// <summary> The List of Non Resource Child operation response. </summary>
-    public partial class NonResourceChildListResult
+    internal partial class NonResourceChildListResult
     {
         /// <summary> Initializes a new instance of NonResourceChildListResult. </summary>
         internal NonResourceChildListResult()

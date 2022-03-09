@@ -735,10 +735,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Usage> GetUsagesAsync(string location, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="SampleUsage" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<SampleUsage> GetUsagesAsync(string location, CancellationToken cancellationToken = default)
         {
-            async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<SampleUsage>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = UsageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
                 scope.Start();
@@ -753,7 +753,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<SampleUsage>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = UsageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
                 scope.Start();
@@ -778,10 +778,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Usage> GetUsages(string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="SampleUsage" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<SampleUsage> GetUsages(string location, CancellationToken cancellationToken = default)
         {
-            Page<Usage> FirstPageFunc(int? pageSizeHint)
+            Page<SampleUsage> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = UsageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
                 scope.Start();
@@ -796,7 +796,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<SampleUsage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
                 using var scope = UsageClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
                 scope.Start();

@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSubscriptionNameParameter.Models
 {
-    public partial class TrackedResource : IUtf8JsonSerializable
+    internal partial class TrackedResource : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

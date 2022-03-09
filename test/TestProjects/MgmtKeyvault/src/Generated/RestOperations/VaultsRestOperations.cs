@@ -142,7 +142,7 @@ namespace MgmtKeyvault
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vaultName, VaultUpdateOptions options)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vaultName, PatchableVaultData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -160,7 +160,7 @@ namespace MgmtKeyvault
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(options);
+            content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
             message.SetUserAgentString(_userAgent);
             return message;
@@ -170,10 +170,10 @@ namespace MgmtKeyvault
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the Resource Group to which the server belongs. </param>
         /// <param name="vaultName"> Name of the vault. </param>
-        /// <param name="options"> Parameters to patch the vault. </param>
+        /// <param name="data"> Parameters to patch the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="options"/> is null. </exception>
-        public async Task<Response<VaultData>> UpdateAsync(string subscriptionId, string resourceGroupName, string vaultName, VaultUpdateOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="data"/> is null. </exception>
+        public async Task<Response<VaultData>> UpdateAsync(string subscriptionId, string resourceGroupName, string vaultName, PatchableVaultData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -187,12 +187,12 @@ namespace MgmtKeyvault
             {
                 throw new ArgumentNullException(nameof(vaultName));
             }
-            if (options == null)
+            if (data == null)
             {
-                throw new ArgumentNullException(nameof(options));
+                throw new ArgumentNullException(nameof(data));
             }
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vaultName, options);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vaultName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -213,10 +213,10 @@ namespace MgmtKeyvault
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the Resource Group to which the server belongs. </param>
         /// <param name="vaultName"> Name of the vault. </param>
-        /// <param name="options"> Parameters to patch the vault. </param>
+        /// <param name="data"> Parameters to patch the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="options"/> is null. </exception>
-        public Response<VaultData> Update(string subscriptionId, string resourceGroupName, string vaultName, VaultUpdateOptions options, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="data"/> is null. </exception>
+        public Response<VaultData> Update(string subscriptionId, string resourceGroupName, string vaultName, PatchableVaultData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -230,12 +230,12 @@ namespace MgmtKeyvault
             {
                 throw new ArgumentNullException(nameof(vaultName));
             }
-            if (options == null)
+            if (data == null)
             {
-                throw new ArgumentNullException(nameof(options));
+                throw new ArgumentNullException(nameof(data));
             }
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vaultName, options);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, vaultName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -17,9 +17,6 @@ namespace Azure.Core
         private readonly ClientDiagnostics _diagnostics;
         private readonly string _updateStatusScopeName;
         private readonly IReadOnlyDictionary<string, string>? _scopeAttributes;
-        private const string RetryAfterHeaderName = "Retry-After";
-        private const string RetryAfterMsHeaderName = "retry-after-ms";
-        private const string XRetryAfterMsHeaderName = "x-ms-retry-after-ms";
         private readonly DelayStrategy? _fallbackStrategy;
 
         protected OperationInternalBase(ClientDiagnostics clientDiagnostics, Response rawResponse, string operationTypeName, IEnumerable<KeyValuePair<string, string>>? scopeAttributes = null, DelayStrategy? fallbackStrategy = null)
@@ -28,7 +25,6 @@ namespace Azure.Core
             _updateStatusScopeName = $"{operationTypeName}.UpdateStatus";
             _scopeAttributes = scopeAttributes?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             RawResponse = rawResponse;
-            DefaultPollingInterval = TimeSpan.FromSeconds(1);
             _fallbackStrategy = fallbackStrategy;
         }
 
@@ -53,12 +49,6 @@ namespace Azure.Core
         /// </example>
         /// </summary>
         public bool HasCompleted { get; protected set; }
-
-        /// <summary>
-        /// Can be set to control the default interval used between service calls in <see cref="WaitForCompletionResponseAsync(CancellationToken)"/>.
-        /// Defaults to 1 second.
-        /// </summary>
-        public TimeSpan DefaultPollingInterval { get; set; }
 
         protected RequestFailedException? OperationFailedException { get; private set; }
 
@@ -103,8 +93,8 @@ namespace Azure.Core
         /// Periodically calls <see cref="UpdateStatusAsync(CancellationToken)"/> until the long-running operation completes.
         /// After each service call, a retry-after header may be returned to communicate that there is no reason to poll
         /// for status change until the specified time has passed.  The maximum of the retry after value and the fallback <see cref="DelayStrategy"/>
-        /// is then use as the wait interval.
-        /// Headers supported are: "Retry-After", "retry-after-ms", and "x-ms-retry-after-ms".
+        /// is then used as the wait interval.
+        /// Headers supported are: "Retry-After", "retry-after-ms", and "x-ms-retry-after-ms",
         /// <example>Usage example:
         /// <code>
         ///   public async ValueTask&lt;Response&lt;T&gt;&gt; WaitForCompletionAsync(CancellationToken cancellationToken) =>
@@ -115,8 +105,11 @@ namespace Azure.Core
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
         /// <exception cref="RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
-        public virtual async ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken) =>
-            await WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+        public virtual async ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken)
+        {
+            OperationPoller poller = new OperationPoller(_fallbackStrategy);
+            return await poller.WaitForCompletionResponseAsync(UpdateStatusAsync, () => HasCompleted, () => RawResponse, null, cancellationToken).ConfigureAwait(false);
+        }
 
         /// <summary>
         /// Periodically calls <see cref="UpdateStatusAsync(CancellationToken)"/> until the long-running operation completes. The interval
@@ -132,32 +125,22 @@ namespace Azure.Core
         /// </code>
         /// </example>
         /// </summary>
-        /// <param name="pollingInterval">The interval between status requests to the server.</param>
+        /// <param name="pollingInterval">The interval between status requests to the server. <strong></strong></param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> controlling the request lifetime.</param>
         /// <returns>The last HTTP response received from the server, including the final result of the long-running operation.</returns>
         /// <exception cref="RequestFailedException">Thrown if there's been any issues during the connection, or if the operation has completed with failures.</exception>
         public virtual async ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
         {
-            while (true)
-            {
-                Response response = await UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
-
-                if (HasCompleted)
-                {
-                    return response;
-                }
-
-                TimeSpan delay = GetServerDelay(response, pollingInterval);
-                await WaitAsync(delay, cancellationToken).ConfigureAwait(false);
-            }
+            OperationPoller poller = new OperationPoller(_fallbackStrategy);
+            return await poller.WaitForCompletionResponseAsync(UpdateStatusAsync, () => HasCompleted, () => RawResponse, pollingInterval, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Periodically calls <see cref="UpdateStatus(CancellationToken)"/> until the long-running operation completes.
         /// After each service call, a retry-after header may be returned to communicate that there is no reason to poll
         /// for status change until the specified time has passed.  The maximum of the retry after value and the fallback <see cref="DelayStrategy"/>
-        /// is then use as the wait interval.
-        /// Headers supported are: "Retry-After", "retry-after-ms", and "x-ms-retry-after-ms".
+        /// is then used as the wait interval.
+        /// Headers supported are: "Retry-After", "retry-after-ms", and "x-ms-retry-after-ms",
         /// and "x-ms-retry-after-ms".
         /// <example>Usage example:
         /// <code>
@@ -198,9 +181,6 @@ namespace Azure.Core
             OperationPoller poller = new OperationPoller(_fallbackStrategy);
             return poller.WaitForCompletionResponse(UpdateStatus, () => HasCompleted, () => RawResponse, pollingInterval, cancellationToken);
         }
-
-        protected virtual async Task WaitAsync(TimeSpan delay, CancellationToken cancellationToken) =>
-            await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
 
         private async ValueTask<Response> UpdateStatusAsync(bool async, CancellationToken cancellationToken)
         {
@@ -253,30 +233,6 @@ namespace Azure.Core
             }
 
             return response;
-        }
-
-        protected static TimeSpan GetServerDelay(Response response, TimeSpan pollingInterval)
-        {
-            TimeSpan serverDelay = pollingInterval;
-            if (response.Headers.TryGetValue(RetryAfterMsHeaderName, out string? retryAfterValue) ||
-                response.Headers.TryGetValue(XRetryAfterMsHeaderName, out retryAfterValue))
-            {
-                if (int.TryParse(retryAfterValue, out int serverDelayInMilliseconds))
-                {
-                    serverDelay = TimeSpan.FromMilliseconds(serverDelayInMilliseconds);
-                }
-            }
-            else if (response.Headers.TryGetValue(RetryAfterHeaderName, out retryAfterValue))
-            {
-                if (int.TryParse(retryAfterValue, out int serverDelayInSeconds))
-                {
-                    serverDelay = TimeSpan.FromSeconds(serverDelayInSeconds);
-                }
-            }
-
-            return serverDelay > pollingInterval
-                ? serverDelay
-                : pollingInterval;
         }
 
         protected abstract ValueTask<Response> UpdateStateAsync(bool async, CancellationToken cancellationToken);

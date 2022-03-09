@@ -12,7 +12,7 @@ using OmitOperationGroups;
 namespace OmitOperationGroups.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class Model2ListResult
+    internal partial class Model2ListResult
     {
         /// <summary> Initializes a new instance of Model2ListResult. </summary>
         internal Model2ListResult()

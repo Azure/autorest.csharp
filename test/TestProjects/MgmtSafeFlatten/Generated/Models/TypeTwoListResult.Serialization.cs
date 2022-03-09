@@ -12,7 +12,7 @@ using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Models
 {
-    public partial class TypeTwoListResult
+    internal partial class TypeTwoListResult
     {
         internal static TypeTwoListResult DeserializeTypeTwoListResult(JsonElement element)
         {
