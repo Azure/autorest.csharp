@@ -38,9 +38,9 @@ namespace MgmtExtensionResource
         }
 
         private ClientDiagnostics DefaultClientDiagnostics => _defaultClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private PolicyRestOperations DefaultRestClient => _defaultRestClient ??= new PolicyRestOperations(DefaultClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private PolicyRestOperations DefaultRestClient => _defaultRestClient ??= new PolicyRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics OrphanedPostClientDiagnostics => _orphanedPostClientDiagnostics ??= new ClientDiagnostics("MgmtExtensionResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private OrphanedPostRestOperations OrphanedPostRestClient => _orphanedPostRestClient ??= new OrphanedPostRestOperations(OrphanedPostClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private OrphanedPostRestOperations OrphanedPostRestClient => _orphanedPostRestClient ??= new OrphanedPostRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -70,7 +70,7 @@ namespace MgmtExtensionResource
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(string location, string domainNameLabel, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
             using var scope = DefaultClientDiagnostics.CreateScope("SubscriptionExtensionClient.CheckDnsNameAvailability");
             scope.Start();
@@ -117,7 +117,7 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="validateSomethingOptions"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> ValidateSomethingOrphanedPostAsync(ValidateSomethingOptions validateSomethingOptions, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ValidateSomethingOrphanedPostAsync(ValidateSomethingOptions validateSomethingOptions, CancellationToken cancellationToken = default)
         {
             using var scope = OrphanedPostClientDiagnostics.CreateScope("SubscriptionExtensionClient.ValidateSomethingOrphanedPost");
             scope.Start();

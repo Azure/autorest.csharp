@@ -52,23 +52,23 @@ namespace SupersetFlattenInheritance
         }
 
         private ClientDiagnostics CustomModel1sClientDiagnostics => _customModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private CustomModel1SRestOperations CustomModel1sRestClient => _customModel1sRestClient ??= new CustomModel1SRestOperations(CustomModel1sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private CustomModel1SRestOperations CustomModel1sRestClient => _customModel1sRestClient ??= new CustomModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics CustomModel2sClientDiagnostics => _customModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private CustomModel2SRestOperations CustomModel2sRestClient => _customModel2sRestClient ??= new CustomModel2SRestOperations(CustomModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private CustomModel2SRestOperations CustomModel2sRestClient => _customModel2sRestClient ??= new CustomModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics SubResourceModel1sClientDiagnostics => _subResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private SubResourceModel1SRestOperations SubResourceModel1sRestClient => _subResourceModel1sRestClient ??= new SubResourceModel1SRestOperations(SubResourceModel1sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private SubResourceModel1SRestOperations SubResourceModel1sRestClient => _subResourceModel1sRestClient ??= new SubResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics SubResourceModel2sClientDiagnostics => _subResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private SubResourceModel2SRestOperations SubResourceModel2sRestClient => _subResourceModel2sRestClient ??= new SubResourceModel2SRestOperations(SubResourceModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private SubResourceModel2SRestOperations SubResourceModel2sRestClient => _subResourceModel2sRestClient ??= new SubResourceModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics WritableSubResourceModel1sClientDiagnostics => _writableSubResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private WritableSubResourceModel1SRestOperations WritableSubResourceModel1sRestClient => _writableSubResourceModel1sRestClient ??= new WritableSubResourceModel1SRestOperations(WritableSubResourceModel1sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private WritableSubResourceModel1SRestOperations WritableSubResourceModel1sRestClient => _writableSubResourceModel1sRestClient ??= new WritableSubResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics WritableSubResourceModel2sClientDiagnostics => _writableSubResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private WritableSubResourceModel2SRestOperations WritableSubResourceModel2sRestClient => _writableSubResourceModel2sRestClient ??= new WritableSubResourceModel2SRestOperations(WritableSubResourceModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private WritableSubResourceModel2SRestOperations WritableSubResourceModel2sRestClient => _writableSubResourceModel2sRestClient ??= new WritableSubResourceModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics ResourceModel2sClientDiagnostics => _resourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private ResourceModel2SRestOperations ResourceModel2sRestClient => _resourceModel2sRestClient ??= new ResourceModel2SRestOperations(ResourceModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private ResourceModel2SRestOperations ResourceModel2sRestClient => _resourceModel2sRestClient ??= new ResourceModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics TrackedResourceModel2sClientDiagnostics => _trackedResourceModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private TrackedResourceModel2SRestOperations TrackedResourceModel2sRestClient => _trackedResourceModel2sRestClient ??= new TrackedResourceModel2SRestOperations(TrackedResourceModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private TrackedResourceModel2SRestOperations TrackedResourceModel2sRestClient => _trackedResourceModel2sRestClient ??= new TrackedResourceModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics NonResourceModel1sClientDiagnostics => _nonResourceModel1sClientDiagnostics ??= new ClientDiagnostics("SupersetFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private NonResourceModel1SRestOperations NonResourceModel1sRestClient => _nonResourceModel1sRestClient ??= new NonResourceModel1SRestOperations(NonResourceModel1sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private NonResourceModel1SRestOperations NonResourceModel1sRestClient => _nonResourceModel1sRestClient ??= new NonResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -149,7 +149,7 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<CustomModel1>> PutCustomModel1Async(string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel1>> PutCustomModel1Async(string customModel1SName, CustomModel1 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel1");
             scope.Start();
@@ -194,7 +194,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="customModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<CustomModel1>> GetCustomModel1Async(string customModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel1>> GetCustomModel1Async(string customModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = CustomModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel1");
             scope.Start();
@@ -291,7 +291,7 @@ namespace SupersetFlattenInheritance
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<CustomModel2>> PutCustomModel2Async(string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel2>> PutCustomModel2Async(string customModel2SName, CustomModel2 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutCustomModel2");
             scope.Start();
@@ -336,7 +336,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<CustomModel2>> GetCustomModel2Async(string customModel2SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CustomModel2>> GetCustomModel2Async(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = CustomModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetCustomModel2");
             scope.Start();
@@ -433,7 +433,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SubResourceModel1>> PutSubResourceModel1Async(string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(string subResourceModel1SName, SubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel1");
             scope.Start();
@@ -478,7 +478,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SubResourceModel1>> GetSubResourceModel1Async(string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubResourceModel1>> GetSubResourceModel1Async(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = SubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel1");
             scope.Start();
@@ -575,7 +575,7 @@ namespace SupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SubResourceModel2>> PutSubResourceModel2Async(string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(string subResourceModel2SName, SubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutSubResourceModel2");
             scope.Start();
@@ -620,7 +620,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SubResourceModel2>> GetSubResourceModel2Async(string subResourceModel2SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubResourceModel2>> GetSubResourceModel2Async(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = SubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetSubResourceModel2");
             scope.Start();
@@ -717,7 +717,7 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(string writableSubResourceModel1SName, WritableSubResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel1");
             scope.Start();
@@ -762,7 +762,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = WritableSubResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel1");
             scope.Start();
@@ -859,7 +859,7 @@ namespace SupersetFlattenInheritance
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(string writableSubResourceModel2SName, WritableSubResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutWritableSubResourceModel2");
             scope.Start();
@@ -904,7 +904,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="writableSubResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = WritableSubResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetWritableSubResourceModel2");
             scope.Start();
@@ -1001,7 +1001,7 @@ namespace SupersetFlattenInheritance
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ResourceModel2>> PutResourceModel2Async(string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResourceModel2>> PutResourceModel2Async(string resourceModel2SName, ResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutResourceModel2");
             scope.Start();
@@ -1046,7 +1046,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ResourceModel2>> GetResourceModel2Async(string resourceModel2SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResourceModel2>> GetResourceModel2Async(string resourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = ResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetResourceModel2");
             scope.Start();
@@ -1143,7 +1143,7 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(string trackedResourceModel2SName, TrackedResourceModel2 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutTrackedResourceModel2");
             scope.Start();
@@ -1188,7 +1188,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = TrackedResourceModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetTrackedResourceModel2");
             scope.Start();
@@ -1233,7 +1233,7 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<NonResourceModel1>> PutNonResourceModel1Async(string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutNonResourceModel1");
             scope.Start();
@@ -1278,7 +1278,7 @@ namespace SupersetFlattenInheritance
         /// </summary>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<NonResourceModel1>> GetNonResourceModel1Async(string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = NonResourceModel1sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetNonResourceModel1");
             scope.Start();

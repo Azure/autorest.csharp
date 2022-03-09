@@ -32,9 +32,10 @@ namespace Azure.Storage.Tables
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="url"> The URL of the service account or table that is the targe of the desired operation. </param>
         /// <param name="version"> Specifies the version of the operation to use for this request. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="url"/> is null. </exception>
         internal TableInternalClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, Enum0 version)
         {
-            RestClient = new TableInternalRestClient(clientDiagnostics, pipeline, url, version);
+            RestClient = new TableInternalRestClient(pipeline, url, version);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

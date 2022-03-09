@@ -22,7 +22,6 @@
     <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220216.3" />
     <PackageReference Include="Humanizer.Core" Version="2.13.14" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.0.1" />
-    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
 

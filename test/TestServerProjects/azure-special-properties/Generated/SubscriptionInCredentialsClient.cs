@@ -31,9 +31,11 @@ namespace azure_special_properties
         /// <param name="subscriptionId"> The subscription id, which appears in the path, always modeled in credentials. The value is always &apos;1234-5678-9012-3456&apos;. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         internal SubscriptionInCredentialsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
-            RestClient = new SubscriptionInCredentialsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new SubscriptionInCredentialsRestClient(pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

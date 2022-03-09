@@ -40,7 +40,7 @@ namespace MgmtNonStringPathVariable
         {
             _fakeClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", Fake.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(Fake.ResourceType, out string fakeApiVersion);
-            _fakeRestClient = new FakesRestOperations(_fakeClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
+            _fakeRestClient = new FakesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakeApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,7 +62,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<Fake>> CreateOrUpdateAsync(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<Fake>> CreateOrUpdateAsync(bool waitForCompletion, FakeNameAsEnum fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -122,7 +122,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Fake>> GetAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fake>> GetAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Get");
             scope.Start();
@@ -130,7 +130,7 @@ namespace MgmtNonStringPathVariable
             {
                 var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _fakeClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -156,7 +156,7 @@ namespace MgmtNonStringPathVariable
             {
                 var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _fakeClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Fake(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -230,7 +230,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<bool>> ExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.Exists");
             scope.Start();
@@ -278,7 +278,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Fake>> GetIfExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fake>> GetIfExistsAsync(FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _fakeClientDiagnostics.CreateScope("FakeCollection.GetIfExists");
             scope.Start();
