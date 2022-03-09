@@ -269,6 +269,10 @@ function  MockTestInit {
         $FinalStatics = @{}
         $ErrorTypeStatic = @()
         $RunRpList = @()
+        $TotalPassed = 0
+        $TotalFailed = 0
+        $TotalSkipped = 0
+        $Total = 0
         $sdkFolder  | ForEach-Object {
             $curFolderPRs = Get-ChildItem($_)
             foreach ($item in $curFolderPRs) {
@@ -291,6 +295,12 @@ function  MockTestInit {
             foreach ($item in $response) {
                 if ($item.Tostring().Contains("Failed!  - Failed:") -or ($item.Tostring().Contains("Passed!  - Failed:"))) {
                     $FinalStatics += @{ $RPName = $item.Substring(0, $item.IndexOf(", Duration")) }
+                    # Get UT number of each type
+                    $str = $item.Substring(0, $item.IndexOf(", Duration"))
+                    $TotalPassed += $str.Substring($str.IndexOf("Passed:"), $str.IndexOf(", Skipped:") - $str.IndexOf("Passed:")).Replace("Passed:", "").Trim()
+                    $TotalFailed += $str.Substring($str.IndexOf("Skipped:"), $str.IndexOf(", Total:") - $str.IndexOf("Skipped:")).Replace("Skipped:", "").Trim()
+                    $TotalSkipped += $str.Substring($str.IndexOf("Failed:"), $str.IndexOf(", Passed:") - $str.IndexOf("Failed:")).Replace("Failed:", "").Trim()
+                    $Total += $str.Substring($str.IndexOf("Total:")).Replace("Total:", "").Trim()
                     break
                 }
                 if ($item.Tostring().Contains("Error Message:")) {
@@ -354,6 +364,13 @@ function  MockTestInit {
         Write-Host "srcBuildSuccessedRps:   " $Script:srcBuildSuccessedRps.Count 
         Write-Host "testGenerateSuccesseddRps:  "$Script:testGenerateSuccessedRps.Count 
         Write-Host "testBuildSuccessedRps:  "$Script:testBuildSuccessedRps.Count 
+        Write-Host "Unit tests:"
+        Write-Host "Total: $Total"
+        Write-Host "Passed: $TotalPassed  |  Failed: $TotalFailed  |  Skipped: $TotalSkipped"
+        $PassRate = "{0:N2}" -f ($TotalPassed/$Total)
+        $FailRate = "{0:N2}" -f ($TotalFailed/$Total)
+        Write-Host "Pass rate: $PassRate"
+        Write-Host "Fail rate: $FailRate"
         Write-Host ""
         Write-Host ""
     }
