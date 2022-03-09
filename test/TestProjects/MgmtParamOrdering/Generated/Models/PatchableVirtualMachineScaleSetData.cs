@@ -16,6 +16,6 @@ namespace MgmtParamOrdering.Models
         }
 
         /// <summary> The virtual machine scale set sku. </summary>
-        public Sku Sku { get; set; }
+        public MgmtParamOrderingSku Sku { get; set; }
     }
 }

@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class Usage
+    public partial class SampleUsage
     {
-        internal static Usage DeserializeUsage(JsonElement element)
+        internal static SampleUsage DeserializeSampleUsage(JsonElement element)
         {
             string unit = default;
             int currentValue = default;
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample.Models
                     continue;
                 }
             }
-            return new Usage(unit, currentValue, limit, name);
+            return new SampleUsage(unit, currentValue, limit, name);
         }
     }
 }

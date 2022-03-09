@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class Plan : IUtf8JsonSerializable
+    public partial class MgmtRenameRulesPlan : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -38,7 +38,7 @@ namespace MgmtRenameRules.Models
             writer.WriteEndObject();
         }
 
-        internal static Plan DeserializePlan(JsonElement element)
+        internal static MgmtRenameRulesPlan DeserializeMgmtRenameRulesPlan(JsonElement element)
         {
             Optional<string> name = default;
             Optional<string> publisher = default;
@@ -67,7 +67,7 @@ namespace MgmtRenameRules.Models
                     continue;
                 }
             }
-            return new Plan(name.Value, publisher.Value, product.Value, promotionCode.Value);
+            return new MgmtRenameRulesPlan(name.Value, publisher.Value, product.Value, promotionCode.Value);
         }
     }
 }

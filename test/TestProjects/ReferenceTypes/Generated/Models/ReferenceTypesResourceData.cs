@@ -12,20 +12,20 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> Common fields that are returned in the response for all Azure Resource Manager resources. </summary>
     [ReferenceType]
-    public abstract partial class Resource
+    public abstract partial class ReferenceTypesResourceData
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of ReferenceTypesResourceData. </summary>
         [InitializationConstructor]
-        protected Resource()
+        protected ReferenceTypesResourceData()
         {
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of ReferenceTypesResourceData. </summary>
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="resourceType"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
         [SerializationConstructor]
-        protected Resource(ResourceIdentifier id, string name, string resourceType)
+        protected ReferenceTypesResourceData(ResourceIdentifier id, string name, string resourceType)
         {
             Id = id;
             Name = name;

@@ -71,7 +71,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             // Resource in the test swagger will be replaced by TrackedResource when used as the base class for inheritance,
             // but is not replaced when used as a property.
             Assert.AreEqual(virtualMachineData.BaseType, typeof(TrackedResourceData));
-            Assert.AreEqual(properties.First(p => p.Name == "FakeResources").PropertyType.GetGenericArguments().First(), typeof(MgmtPropertyChooser.Models.Resource));
+            Assert.AreEqual(properties.First(p => p.Name == "FakeResources").PropertyType.GetGenericArguments().First(), typeof(MgmtPropertyChooser.Models.MgmtPropertyChooserResourceData));
             // VirtualMachineIdentity is replaced by ManagedServiceIdentity, property name is unchanged, still called Identity.
             Assert.IsFalse(properties.Any(p => p.Name == "ManagedServiceIdentity"));
             Assert.IsTrue(properties.Any(p => p.Name == "Identity" && p.PropertyType == typeof(ManagedServiceIdentity)));

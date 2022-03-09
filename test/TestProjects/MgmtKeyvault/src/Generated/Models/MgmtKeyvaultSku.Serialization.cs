@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtKeyvault.Models
 {
-    public partial class Sku : IUtf8JsonSerializable
+    public partial class MgmtKeyvaultSku : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -22,7 +22,7 @@ namespace MgmtKeyvault.Models
             writer.WriteEndObject();
         }
 
-        internal static Sku DeserializeSku(JsonElement element)
+        internal static MgmtKeyvaultSku DeserializeMgmtKeyvaultSku(JsonElement element)
         {
             SkuFamily family = default;
             SkuName name = default;
@@ -39,7 +39,7 @@ namespace MgmtKeyvault.Models
                     continue;
                 }
             }
-            return new Sku(family, name);
+            return new MgmtKeyvaultSku(family, name);
         }
     }
 }
