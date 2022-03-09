@@ -12,7 +12,7 @@ using TenantOnly;
 
 namespace TenantOnly.Models
 {
-    public partial class AgreementListResult
+    internal partial class AgreementListResult
     {
         internal static AgreementListResult DeserializeAgreementListResult(JsonElement element)
         {

@@ -35,7 +35,7 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName).Internal)
+            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName, new ExponentialDelayStrategy()).Internal)
         {
             _operation = Operation as OperationInternal<T>;
         }
@@ -50,15 +50,28 @@ namespace Azure.Core
 
         public bool HasValue => DoesWrapOperation ? _operation!.HasValue : true;
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(
-            CancellationToken cancellationToken = default)
+        public Response<T> WaitForCompletion(CancellationToken cancellationToken)
         {
-            return await WaitForCompletionAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return DoesWrapOperation
+                ? _operation!.WaitForCompletion(cancellationToken)
+                : _valueResponse!;
         }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(
-            TimeSpan pollingInterval,
-            CancellationToken cancellationToken)
+        public Response<T> WaitForCompletion(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        {
+            return DoesWrapOperation
+                ? _operation!.WaitForCompletion(pollingInterval, cancellationToken)
+                : _valueResponse!;
+        }
+
+        public async ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
+        {
+            return DoesWrapOperation
+                ? await _operation!.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false)
+                : _valueResponse!;
+        }
+
+        public async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
         {
             return DoesWrapOperation
                 ? await _operation!.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false)

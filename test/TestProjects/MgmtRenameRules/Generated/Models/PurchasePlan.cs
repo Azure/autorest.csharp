@@ -10,7 +10,7 @@ using System;
 namespace MgmtRenameRules.Models
 {
     /// <summary> Used for establishing the purchase context of any 3rd Party artifact through MarketPlace. </summary>
-    public partial class PurchasePlan
+    internal partial class PurchasePlan
     {
         /// <summary> Initializes a new instance of PurchasePlan. </summary>
         /// <param name="publisher"> The publisher ID. </param>

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ExactMatchInheritance.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class ExactMatchModel3ListResult
+    internal partial class ExactMatchModel3ListResult
     {
         /// <summary> Initializes a new instance of ExactMatchModel3ListResult. </summary>
         internal ExactMatchModel3ListResult()

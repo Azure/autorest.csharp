@@ -3,6 +3,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -146,10 +148,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (!MgmtContext.Library.ArmResourceExtensions.IsEmpty)
             {
-                var armResourceExt = MgmtContext.Library.ArmResourceExtensions;
-                var armResourceExtensionsCodeWriter = new ArmResourceExtensionsWriter(armResourceExt);
-                armResourceExtensionsCodeWriter.Write();
-                AddGeneratedFile(project, $"Extensions/{armResourceExtensionsCodeWriter.FileName}.cs", armResourceExtensionsCodeWriter.ToString());
+                WriteExtensionPair(project, MgmtContext.Library.ArmResourceExtensionsClient);
             }
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
@@ -168,6 +167,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+
+            if (!isArmCore)
+            {
+                var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+                project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
+            }
         }
 
         private static void WriteExtensionPair(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)

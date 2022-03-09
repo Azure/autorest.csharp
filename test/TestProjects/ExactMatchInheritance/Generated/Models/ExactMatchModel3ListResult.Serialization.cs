@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace ExactMatchInheritance.Models
 {
-    public partial class ExactMatchModel3ListResult
+    internal partial class ExactMatchModel3ListResult
     {
         internal static ExactMatchModel3ListResult DeserializeExactMatchModel3ListResult(JsonElement element)
         {

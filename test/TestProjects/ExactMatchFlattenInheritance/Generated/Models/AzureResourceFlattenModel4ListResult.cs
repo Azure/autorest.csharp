@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class AzureResourceFlattenModel4ListResult
+    internal partial class AzureResourceFlattenModel4ListResult
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel4ListResult. </summary>
         internal AzureResourceFlattenModel4ListResult()

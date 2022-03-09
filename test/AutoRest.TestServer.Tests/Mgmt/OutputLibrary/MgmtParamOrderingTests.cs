@@ -47,7 +47,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 
         [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "parameters", "quick" }, new[] { true, true, false })]
         [TestCase(typeof(VirtualMachineScaleSetCollection), "Get", false, new[]{ "vmScaleSetName", "expand"}, new[] { true, false })]
-        [TestCase(typeof(VirtualMachineScaleSet), "Update", true, new[]{ "options"}, new[] { false })]
+        [TestCase(typeof(VirtualMachineScaleSet), "Update", true, new[]{ "data"}, new[] { true })]
         [TestCase(typeof(VirtualMachineScaleSet), "Delete", true, new[]{ "forceDeletion"}, new[] { true })]
         [TestCase(typeof(VirtualMachineScaleSet), "Get", false, new[]{ "expand"}, new[] { false })]
         [TestCase(typeof(VirtualMachineScaleSet), "Deallocate", true, new[]{ "vmInstanceIDs", "expand" }, new[] { false, false })]

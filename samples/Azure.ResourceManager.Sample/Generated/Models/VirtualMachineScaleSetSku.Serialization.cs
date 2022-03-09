@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
         internal static VirtualMachineScaleSetSku DeserializeVirtualMachineScaleSetSku(JsonElement element)
         {
             Optional<string> resourceType = default;
-            Optional<Sku> sku = default;
+            Optional<SampleSku> sku = default;
             Optional<VirtualMachineScaleSetSkuCapacity> capacity = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = SampleSku.DeserializeSampleSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("capacity"))

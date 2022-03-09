@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtKeyvault.Models
 {
     /// <summary> A private link resource. </summary>
-    public partial class PrivateLinkResource : Resource
+    public partial class PrivateLinkResource : MgmtKeyvaultResourceData
     {
         /// <summary> Initializes a new instance of PrivateLinkResource. </summary>
         public PrivateLinkResource()

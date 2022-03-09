@@ -12,7 +12,7 @@ using SingletonResource;
 
 namespace SingletonResource.Models
 {
-    public partial class CarListResult
+    internal partial class CarListResult
     {
         internal static CarListResult DeserializeCarListResult(JsonElement element)
         {

@@ -142,7 +142,7 @@ namespace MgmtRenameRules
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            Optional<Models.Plan> plan = default;
+            Optional<MgmtRenameRulesPlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
@@ -180,7 +180,7 @@ namespace MgmtRenameRules
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Models.Plan.DeserializePlan(property.Value);
+                    plan = MgmtRenameRulesPlan.DeserializeMgmtRenameRulesPlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"))

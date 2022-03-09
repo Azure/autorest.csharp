@@ -98,8 +98,8 @@ namespace MgmtRenameRules
         internal static VirtualMachineScaleSetVmData DeserializeVirtualMachineScaleSetVmData(JsonElement element)
         {
             Optional<string> instanceId = default;
-            Optional<Models.Sku> sku = default;
-            Optional<Models.Plan> plan = default;
+            Optional<MgmtRenameRulesSku> sku = default;
+            Optional<MgmtRenameRulesPlan> plan = default;
             Optional<IReadOnlyList<string>> zones = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
@@ -137,7 +137,7 @@ namespace MgmtRenameRules
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Models.Sku.DeserializeSku(property.Value);
+                    sku = MgmtRenameRulesSku.DeserializeMgmtRenameRulesSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("plan"))
@@ -147,7 +147,7 @@ namespace MgmtRenameRules
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Models.Plan.DeserializePlan(property.Value);
+                    plan = MgmtRenameRulesPlan.DeserializeMgmtRenameRulesPlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("zones"))

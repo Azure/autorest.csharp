@@ -12,7 +12,7 @@ using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class EnvironmentContainerResourceListResult
+    internal partial class EnvironmentContainerResourceListResult
     {
         internal static EnvironmentContainerResourceListResult DeserializeEnvironmentContainerResourceListResult(JsonElement element)
         {
