@@ -87,6 +87,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -115,6 +116,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateSetServicePropertiesRequest(string subscriptionId, string resourceGroupName, string accountName, BlobServiceData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -171,6 +173,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
@@ -201,6 +204,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetServicePropertiesRequest(string subscriptionId, string resourceGroupName, string accountName)
         {
             var message = _pipeline.CreateMessage();
@@ -253,6 +257,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>

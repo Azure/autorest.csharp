@@ -84,6 +84,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Export logs that show Api requests made by this subscription in the given time window to show throttling activities. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
@@ -108,6 +109,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateExportThrottledRequestsRequest(string subscriptionId, string location, ThrottledRequestsInput parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -155,6 +157,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Export logs that show total throttled Api requests for this subscription in the given time window. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>

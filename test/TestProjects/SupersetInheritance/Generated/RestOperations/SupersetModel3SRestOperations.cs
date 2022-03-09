@@ -91,6 +91,7 @@ namespace SupersetInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
@@ -120,6 +121,7 @@ namespace SupersetInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string supersetModel3SName)
         {
             var message = _pipeline.CreateMessage();
@@ -167,6 +169,7 @@ namespace SupersetInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>

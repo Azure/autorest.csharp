@@ -77,6 +77,7 @@ namespace TenantOnly
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -97,6 +98,7 @@ namespace TenantOnly
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string billingAccountName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -144,6 +146,7 @@ namespace TenantOnly
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -171,6 +174,7 @@ namespace TenantOnly
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateRequest(string billingAccountName, BillingAccountData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -213,6 +217,7 @@ namespace TenantOnly
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>

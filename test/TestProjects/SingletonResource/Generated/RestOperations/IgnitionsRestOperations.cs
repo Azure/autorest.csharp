@@ -87,6 +87,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="carName"> The String to use. </param>

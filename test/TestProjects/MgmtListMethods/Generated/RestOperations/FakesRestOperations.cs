@@ -88,6 +88,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -116,6 +117,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string fakeName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -167,6 +169,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> The name of the fake. </param>
@@ -196,6 +199,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
@@ -242,6 +246,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
@@ -267,6 +272,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
@@ -308,6 +314,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

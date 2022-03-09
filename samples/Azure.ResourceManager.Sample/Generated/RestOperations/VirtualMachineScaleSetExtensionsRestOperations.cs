@@ -92,6 +92,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to create or update an extension. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -120,6 +121,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, PatchableVirtualMachineScaleSetExtensionData data)
         {
             var message = _pipeline.CreateMessage();
@@ -174,6 +176,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to update an extension. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -202,6 +205,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName)
         {
             var message = _pipeline.CreateMessage();
@@ -250,6 +254,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to delete the extension. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -277,6 +282,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -336,6 +342,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to get the extension. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -369,6 +376,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -418,6 +426,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of all extensions in a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -446,6 +455,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -490,6 +500,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of all extensions in a VM scale set. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

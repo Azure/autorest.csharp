@@ -91,6 +91,7 @@ namespace SupersetFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
@@ -120,6 +121,7 @@ namespace SupersetFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string nonResourceModel1SName)
         {
             var message = _pipeline.CreateMessage();
@@ -167,6 +169,7 @@ namespace SupersetFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>

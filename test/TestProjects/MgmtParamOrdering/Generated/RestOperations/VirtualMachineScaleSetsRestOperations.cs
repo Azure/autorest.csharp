@@ -93,6 +93,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> required body, required header;Create or update a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -120,6 +121,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data)
         {
             var message = _pipeline.CreateMessage();
@@ -169,6 +171,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> optional body, no query; Update a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -194,6 +197,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion)
         {
             var message = _pipeline.CreateMessage();
@@ -240,6 +244,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -266,6 +271,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, ExpandTypesForGetVMScaleSets? expand)
         {
             var message = _pipeline.CreateMessage();
@@ -321,6 +327,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Display information about a virtual machine scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -352,6 +359,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeallocateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -409,6 +417,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> optional body, optional query; Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -435,6 +444,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteInstancesRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion)
         {
             var message = _pipeline.CreateMessage();
@@ -490,6 +500,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> required body, optional query; Deletes virtual machines in a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -517,6 +528,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetInstanceViewRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string filter, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -574,6 +586,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> No body, mixed parameters; Gets the status of a VM scale set instance. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -605,6 +618,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -650,6 +664,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of all VM scale sets under a resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -676,6 +691,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -718,6 +734,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of all VM scale sets under a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

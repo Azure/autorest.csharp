@@ -84,6 +84,7 @@ namespace TenantOnly
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
@@ -109,6 +110,7 @@ namespace TenantOnly
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string billingAccountName, string agreementName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -160,6 +162,7 @@ namespace TenantOnly
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>

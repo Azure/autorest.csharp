@@ -93,6 +93,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
@@ -123,6 +124,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string parentName)
         {
             var message = _pipeline.CreateMessage();
@@ -175,6 +177,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Singleton non-resource test example with a single-value enum name parameter. </summary>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>

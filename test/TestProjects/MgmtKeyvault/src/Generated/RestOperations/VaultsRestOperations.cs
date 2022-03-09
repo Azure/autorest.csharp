@@ -88,6 +88,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update a key vault in the specified subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the Resource Group to which the server belongs. </param>
@@ -114,6 +115,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vaultName, PatchableVaultData data)
         {
             var message = _pipeline.CreateMessage();
@@ -169,6 +171,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update a key vault in the specified subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the Resource Group to which the server belongs. </param>
@@ -200,6 +203,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vaultName)
         {
             var message = _pipeline.CreateMessage();
@@ -244,6 +248,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes the specified Azure key vault. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the Resource Group to which the vault belongs. </param>
@@ -268,6 +273,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vaultName)
         {
             var message = _pipeline.CreateMessage();
@@ -318,6 +324,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the specified Azure key vault. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the Resource Group to which the vault belongs. </param>
@@ -348,6 +355,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateAccessPolicyRequest(string subscriptionId, string resourceGroupName, string vaultName, AccessPolicyUpdateKind operationKind, VaultAccessPolicyParameters parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -406,6 +414,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update access policies in a key vault in the specified subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the Resource Group to which the vault belongs. </param>
@@ -438,6 +447,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -488,6 +498,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the vaults associated with the subscription and within the specified resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the Resource Group to which the vault belongs. </param>
@@ -515,6 +526,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBySubscriptionRequest(string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -561,6 +573,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the vaults associated with the subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="top"> Maximum number of results to return. </param>
@@ -586,6 +599,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListDeletedRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -627,6 +641,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets information about the deleted vaults in a subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -651,6 +666,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetDeletedRequest(string subscriptionId, string location, string vaultName)
         {
             var message = _pipeline.CreateMessage();
@@ -701,6 +717,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the deleted Azure key vault. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location of the deleted vault. </param>
@@ -731,6 +748,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePurgeDeletedRequest(string subscriptionId, string location, string vaultName)
         {
             var message = _pipeline.CreateMessage();
@@ -776,6 +794,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Permanently deletes the specified vault. aka Purges the deleted Azure key vault. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location of the soft-deleted vault. </param>
@@ -800,6 +819,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCheckNameAvailabilityRequest(string subscriptionId, VaultCheckNameAvailabilityParameters vaultName)
         {
             var message = _pipeline.CreateMessage();
@@ -847,6 +867,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Checks that the vault name is valid and is not already in use. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="vaultName"> The name of the vault. </param>
@@ -873,6 +894,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -916,6 +938,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the vaults associated with the subscription and within the specified resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -945,6 +968,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -986,6 +1010,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the vaults associated with the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -1013,6 +1038,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListDeletedNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -1053,6 +1079,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets information about the deleted vaults in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

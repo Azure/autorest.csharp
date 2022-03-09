@@ -92,6 +92,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -122,6 +123,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -176,6 +178,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -206,6 +209,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string availabilitySetName)
         {
             var message = _pipeline.CreateMessage();
@@ -249,6 +253,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Delete an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -273,6 +278,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -328,6 +334,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -359,6 +366,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateTestSetSharedKeyRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -409,6 +417,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Testing description. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -434,6 +443,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -484,6 +494,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -511,6 +522,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateTestLROMethodRequest(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -557,6 +569,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

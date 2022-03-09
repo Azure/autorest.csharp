@@ -87,6 +87,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Get container. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -115,6 +116,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string workspaceName, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -163,6 +165,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Delete container. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -189,6 +192,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string workspaceName, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -243,6 +247,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Get container. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -275,6 +280,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string workspaceName, string name, EnvironmentContainerResourceData body)
         {
             var message = _pipeline.CreateMessage();
@@ -334,6 +340,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update container. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>

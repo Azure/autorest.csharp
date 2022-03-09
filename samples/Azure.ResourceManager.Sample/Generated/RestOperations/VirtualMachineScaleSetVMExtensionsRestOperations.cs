@@ -96,6 +96,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to create or update the VMSS VM extension. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -126,6 +127,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, string vmExtensionName, VirtualMachineExtensionUpdate extensionParameters)
         {
             var message = _pipeline.CreateMessage();
@@ -183,6 +185,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to update the VMSS VM extension. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -212,6 +215,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, string vmExtensionName)
         {
             var message = _pipeline.CreateMessage();
@@ -265,6 +269,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -294,6 +299,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, string vmExtensionName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -357,6 +363,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to get the VMSS VM extension. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -392,6 +399,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string instanceId, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -450,6 +458,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

@@ -93,6 +93,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update a proximity placement group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -124,6 +125,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, PatchableProximityPlacementGroupData data)
         {
             var message = _pipeline.CreateMessage();
@@ -178,6 +180,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update a proximity placement group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -208,6 +211,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -250,6 +254,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Delete a proximity placement group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -273,6 +278,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus)
         {
             var message = _pipeline.CreateMessage();
@@ -328,6 +334,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about a proximity placement group . </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -359,6 +366,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -400,6 +408,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all proximity placement groups in a subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -424,6 +433,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -469,6 +479,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all proximity placement groups in a resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -495,6 +506,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -535,6 +547,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all proximity placement groups in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -561,6 +574,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -603,6 +617,7 @@ namespace Azure.ResourceManager.Sample
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all proximity placement groups in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

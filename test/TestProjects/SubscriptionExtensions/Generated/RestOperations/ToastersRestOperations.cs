@@ -78,6 +78,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
@@ -101,6 +102,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string toasterName, ToasterData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -151,6 +153,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="toasterName"> The name of the availability set. </param>
@@ -179,6 +182,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string toasterName)
         {
             var message = _pipeline.CreateMessage();
@@ -224,6 +228,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="toasterName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

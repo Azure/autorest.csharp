@@ -84,6 +84,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists order at subscription level. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
@@ -109,6 +110,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListOrderAtResourceGroupLevelRequest(string subscriptionId, string resourceGroupName, string skipToken)
         {
             var message = _pipeline.CreateMessage();
@@ -159,6 +161,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists order at resource group level. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -186,6 +189,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetOrderByNameRequest(string subscriptionId, string resourceGroupName, string location, string orderName)
         {
             var message = _pipeline.CreateMessage();
@@ -240,6 +244,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets an order. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -272,6 +277,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListOrderAtSubscriptionLevelNextPageRequest(string nextLink, string subscriptionId, string skipToken)
         {
             var message = _pipeline.CreateMessage();
@@ -313,6 +319,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists order at subscription level. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -340,6 +347,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListOrderAtResourceGroupLevelNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string skipToken)
         {
             var message = _pipeline.CreateMessage();
@@ -383,6 +391,7 @@ namespace MgmtCollectionParent
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists order at resource group level. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

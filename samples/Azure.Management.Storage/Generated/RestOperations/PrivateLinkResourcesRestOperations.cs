@@ -87,6 +87,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>

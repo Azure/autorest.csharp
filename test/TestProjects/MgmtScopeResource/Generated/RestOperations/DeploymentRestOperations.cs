@@ -86,6 +86,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -114,6 +115,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateListAtScopeRequest(string scope, string deploymentName, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -164,6 +166,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets all deployments operations for a deployment. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -191,6 +194,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateListAtScopeNextPageRequest(string nextLink, string scope, string deploymentName, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -234,6 +238,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets all deployments operations for a deployment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="scope"> The resource scope. </param>

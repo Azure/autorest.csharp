@@ -87,6 +87,7 @@ namespace Pagination
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
@@ -113,6 +114,7 @@ namespace Pagination
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, PageSizeFloatModelData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -166,6 +168,7 @@ namespace Pagination
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
@@ -195,6 +198,7 @@ namespace Pagination
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -244,6 +248,7 @@ namespace Pagination
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The String to use. </param>
@@ -273,6 +278,7 @@ namespace Pagination
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, float? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
@@ -315,6 +321,7 @@ namespace Pagination
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

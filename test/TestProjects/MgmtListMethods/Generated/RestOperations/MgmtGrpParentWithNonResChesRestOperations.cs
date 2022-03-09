@@ -88,6 +88,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update. </summary>
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
@@ -116,6 +117,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string groupId, string mgmtGrpParentWithNonResChName)
         {
             var message = _pipeline.CreateMessage();
@@ -162,6 +164,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information. </summary>
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
@@ -190,6 +193,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string groupId)
         {
             var message = _pipeline.CreateMessage();
@@ -231,6 +235,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -255,6 +260,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNonResourceChildRequest(string groupId, string mgmtGrpParentWithNonResChName)
         {
             var message = _pipeline.CreateMessage();
@@ -300,6 +306,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all. </summary>
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
@@ -326,6 +333,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string groupId)
         {
             var message = _pipeline.CreateMessage();
@@ -366,6 +374,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="groupId"> Management Group ID. </param>

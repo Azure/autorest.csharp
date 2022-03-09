@@ -88,6 +88,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -115,6 +116,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -165,6 +167,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -191,6 +194,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string ovenName)
         {
             var message = _pipeline.CreateMessage();
@@ -240,6 +244,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="ovenName"> The name of the virtual machine. </param>
@@ -269,6 +274,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListAllNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
@@ -312,6 +318,7 @@ namespace SubscriptionExtensions
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

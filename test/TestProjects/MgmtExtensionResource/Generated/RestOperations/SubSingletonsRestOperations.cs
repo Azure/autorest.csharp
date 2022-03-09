@@ -80,6 +80,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Singleton that belongs to a subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -106,6 +107,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateExecuteRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -142,6 +144,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Singleton that belongs to a subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

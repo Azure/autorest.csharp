@@ -88,6 +88,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update an image. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -114,6 +115,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string imageName, PatchableImageData data)
         {
             var message = _pipeline.CreateMessage();
@@ -164,6 +166,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update an image. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -190,6 +193,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string imageName)
         {
             var message = _pipeline.CreateMessage();
@@ -234,6 +238,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes an Image. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -259,6 +264,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string imageName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -314,6 +320,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets an image. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -345,6 +352,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -390,6 +398,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the list of images under a resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -416,6 +425,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -457,6 +467,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -481,6 +492,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -523,6 +535,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the list of images under a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -551,6 +564,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -591,6 +605,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

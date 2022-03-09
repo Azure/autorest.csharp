@@ -85,6 +85,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Returns the DNS records specified by the referencing targetResourceIds. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="parameters"> Properties for dns resource reference request. </param>

@@ -85,6 +85,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
@@ -112,6 +113,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateRequest(string tenantTestName, TenantTestData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -153,6 +155,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
@@ -174,6 +177,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string optionalParam)
         {
             var message = _pipeline.CreateMessage();
@@ -213,6 +217,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -233,6 +238,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
@@ -271,6 +277,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>

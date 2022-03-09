@@ -104,6 +104,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Updates a record set within a DNS zone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -138,6 +139,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData parameters, string ifMatch, string ifNoneMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -210,6 +212,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Creates or updates a record set within a DNS zone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -246,6 +249,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -302,6 +306,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes a record set from a DNS zone. This operation cannot be undone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -330,6 +335,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -387,6 +393,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a record set. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -420,6 +427,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByTypeRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, int? top, string recordsetnamesuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -481,6 +489,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists the record sets of a specified type in a DNS zone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -512,6 +521,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByDnsZoneRequest(string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordsetnamesuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -571,6 +581,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all record sets in a DNS zone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -601,6 +612,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListAllByDnsZoneRequest(string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordSetNameSuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -660,6 +672,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all record sets in a DNS zone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -690,6 +703,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByTypeNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, int? top, string recordsetnamesuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -737,6 +751,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists the record sets of a specified type in a DNS zone. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
@@ -770,6 +785,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByDnsZoneNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordsetnamesuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -816,6 +832,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all record sets in a DNS zone. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
@@ -848,6 +865,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListAllByDnsZoneNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string zoneName, int? top, string recordSetNameSuffix)
         {
             var message = _pipeline.CreateMessage();
@@ -894,6 +912,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all record sets in a DNS zone. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>

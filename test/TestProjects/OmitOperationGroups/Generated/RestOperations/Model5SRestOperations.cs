@@ -82,6 +82,7 @@ namespace OmitOperationGroups
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -107,6 +108,7 @@ namespace OmitOperationGroups
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string model5SName, Model5 parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -160,6 +162,7 @@ namespace OmitOperationGroups
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="model5SName"> The String to use. </param>
@@ -189,6 +192,7 @@ namespace OmitOperationGroups
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string model5SName)
         {
             var message = _pipeline.CreateMessage();
@@ -236,6 +240,7 @@ namespace OmitOperationGroups
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="model5SName"> The String to use. </param>

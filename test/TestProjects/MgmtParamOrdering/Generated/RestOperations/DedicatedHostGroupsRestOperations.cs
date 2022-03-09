@@ -84,6 +84,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about a dedicated host group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -110,6 +111,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -165,6 +167,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -196,6 +199,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, PatchableDedicatedHostGroupData data)
         {
             var message = _pipeline.CreateMessage();
@@ -250,6 +254,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update an dedicated host group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -280,6 +285,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string hostGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -323,6 +329,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Delete a dedicated host group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -347,6 +354,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string hostGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -398,6 +406,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about a dedicated host group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

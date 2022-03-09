@@ -92,6 +92,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
@@ -122,6 +123,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string fakeName, string fakeParentWithAncestorName)
         {
             var message = _pipeline.CreateMessage();
@@ -172,6 +174,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
@@ -202,6 +205,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string fakeName)
         {
             var message = _pipeline.CreateMessage();
@@ -247,6 +251,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="fakeName"> Name. </param>
@@ -273,6 +278,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -314,6 +320,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -338,6 +345,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string fakeName)
         {
             var message = _pipeline.CreateMessage();
@@ -380,6 +388,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -408,6 +417,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -448,6 +458,7 @@ namespace MgmtListMethods
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

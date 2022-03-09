@@ -103,6 +103,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Creates or updates a DNS zone. Does not modify DNS records within the zone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -136,6 +137,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string zoneName, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -186,6 +188,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes a DNS zone. WARNING: All DNS records in the zone will also be deleted. This operation cannot be undone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -212,6 +215,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string zoneName)
         {
             var message = _pipeline.CreateMessage();
@@ -262,6 +266,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -292,6 +297,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, PatchableZoneData data, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -351,6 +357,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Updates a DNS zone. Does not modify DNS records within the zone. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -382,6 +389,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -432,6 +440,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists the DNS zones within a resource group. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -459,6 +468,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -505,6 +515,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists the DNS zones in all resource groups in a subscription. </summary>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
@@ -530,6 +541,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -573,6 +585,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists the DNS zones within a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>
@@ -602,6 +615,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -643,6 +657,7 @@ namespace MgmtExpandResourceTypes
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists the DNS zones in all resource groups in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription. </param>

@@ -87,6 +87,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the private endpoint connections associated with the managed HSM Pool. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -115,6 +116,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName)
         {
             var message = _pipeline.CreateMessage();
@@ -169,6 +171,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the specified private endpoint connection associated with the managed HSM Pool. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -201,6 +204,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionData properties)
         {
             var message = _pipeline.CreateMessage();
@@ -259,6 +263,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Updates the specified private endpoint connection associated with the managed hsm pool. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -291,6 +296,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName)
         {
             var message = _pipeline.CreateMessage();
@@ -340,6 +346,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes the specified private endpoint connection associated with the managed hsm pool. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -367,6 +374,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -411,6 +419,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the private endpoint connections associated with the managed HSM Pool. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

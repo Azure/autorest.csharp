@@ -98,6 +98,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists a collection of Xmls in the specified resource group instance. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -127,6 +128,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetEntityTagRequest(string subscriptionId, string resourceGroupName, string xmlName)
         {
             var message = _pipeline.CreateMessage();
@@ -178,6 +180,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the entity state (Etag) version of the Xml specified by its identifier. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -209,6 +212,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string xmlName)
         {
             var message = _pipeline.CreateMessage();
@@ -259,6 +263,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the details of the Xml specified by its identifier. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -289,6 +294,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string xmlName, XmlInstanceData parameters, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -349,6 +355,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Creates or Updates a Xml. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -381,6 +388,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string xmlName, string ifMatch)
         {
             var message = _pipeline.CreateMessage();
@@ -428,6 +436,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes specific Xml. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -454,6 +463,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string filter, int? top, int? skip)
         {
             var message = _pipeline.CreateMessage();
@@ -499,6 +509,7 @@ namespace XmlDeserialization
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists a collection of Xmls in the specified resource group instance. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

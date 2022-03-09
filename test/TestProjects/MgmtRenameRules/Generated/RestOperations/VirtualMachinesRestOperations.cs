@@ -83,6 +83,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets all the virtual machines under the specified subscription for the specified location. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
@@ -109,6 +110,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCaptureRequest(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineCaptureParameters parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -160,6 +162,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -186,6 +189,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -236,6 +240,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -262,6 +267,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmName, PatchableVirtualMachineData data)
         {
             var message = _pipeline.CreateMessage();
@@ -312,6 +318,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to update a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -338,6 +345,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vmName, bool? forceDeletion)
         {
             var message = _pipeline.CreateMessage();
@@ -387,6 +395,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to delete a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -413,6 +422,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -464,6 +474,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -494,6 +505,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateInstanceViewRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -543,6 +555,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about the run-time state of a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -571,6 +584,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -616,6 +630,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -642,6 +657,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListAllRequest(string subscriptionId, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
@@ -688,6 +704,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
@@ -713,6 +730,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListAvailableSizesRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -762,6 +780,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all available virtual machine sizes to which the specified virtual machine can be resized. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -790,6 +809,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePowerOffRequest(string subscriptionId, string resourceGroupName, string vmName, bool? skipShutdown)
         {
             var message = _pipeline.CreateMessage();
@@ -839,6 +859,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -864,6 +885,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateReapplyRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -909,6 +931,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -933,6 +956,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateRestartRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -977,6 +1001,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1001,6 +1026,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateStartRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -1045,6 +1071,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1069,6 +1096,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateRedeployRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -1113,6 +1141,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1137,6 +1166,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateReimageRequest(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineReimageParameters parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -1189,6 +1219,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1214,6 +1245,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateRetrieveBootDiagnosticsDataRequest(string subscriptionId, string resourceGroupName, string vmName, int? sasUriExpirationTimeInMinutes)
         {
             var message = _pipeline.CreateMessage();
@@ -1268,6 +1300,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to retrieve SAS URIs for a virtual machine&apos;s boot diagnostic logs. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1297,6 +1330,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePerformMaintenanceRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -1341,6 +1375,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1365,6 +1400,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateSimulateEvictionRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -1408,6 +1444,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to simulate the eviction of spot virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1431,6 +1468,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateAssessPatchesRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -1476,6 +1514,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Assess patches on the VM. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1500,6 +1539,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByLocationNextPageRequest(string nextLink, string subscriptionId, string location)
         {
             var message = _pipeline.CreateMessage();
@@ -1542,6 +1582,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets all the virtual machines under the specified subscription for the specified location. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -1570,6 +1611,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -1612,6 +1654,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -1640,6 +1683,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListAllNextPageRequest(string nextLink, string subscriptionId, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
@@ -1681,6 +1725,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

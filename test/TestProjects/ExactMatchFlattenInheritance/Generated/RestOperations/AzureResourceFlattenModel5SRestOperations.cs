@@ -83,6 +83,7 @@ namespace ExactMatchFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Get an AzureResourceFlattenModel5. </summary>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -109,6 +110,7 @@ namespace ExactMatchFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, int? foo)
         {
             var message = _pipeline.CreateMessage();
@@ -166,6 +168,7 @@ namespace ExactMatchFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update an AzureResourceFlattenModel5. </summary>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
@@ -195,6 +198,7 @@ namespace ExactMatchFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -243,6 +247,7 @@ namespace ExactMatchFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Get an AzureResourceFlattenModel5. </summary>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

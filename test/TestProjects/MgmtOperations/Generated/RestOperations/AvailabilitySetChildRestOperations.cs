@@ -87,6 +87,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -115,6 +116,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
         {
             var message = _pipeline.CreateMessage();
@@ -169,6 +171,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -201,6 +204,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, AvailabilitySetChildData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -259,6 +263,7 @@ namespace MgmtOperations
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update an availability set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

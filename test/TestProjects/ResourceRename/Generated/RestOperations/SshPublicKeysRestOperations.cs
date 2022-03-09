@@ -83,6 +83,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -109,6 +110,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName, SshPublicKeyProperties properties)
         {
             var message = _pipeline.CreateMessage();
@@ -167,6 +169,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -197,6 +200,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
         {
             var message = _pipeline.CreateMessage();
@@ -240,6 +244,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Delete an SSH public key. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -264,6 +269,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string sshPublicKeyName)
         {
             var message = _pipeline.CreateMessage();
@@ -314,6 +320,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an SSH public key. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -344,6 +351,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -386,6 +394,7 @@ namespace ResourceRename
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

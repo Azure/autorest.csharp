@@ -72,6 +72,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes a resource link with the specified ID. </summary>
         /// <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -91,6 +92,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateCreateOrUpdateRequest(string linkId, ResourceLinkData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -137,6 +139,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Creates or updates a resource link between the specified resources. </summary>
         /// <param name="linkId"> The fully qualified ID of the resource link. Use the format, /subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/{provider-namespace}/{resource-type}/{resource-name}/Microsoft.Resources/links/{link-name}. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
@@ -163,6 +166,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateGetRequest(string linkId)
         {
             var message = _pipeline.CreateMessage();
@@ -204,6 +208,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a resource link with the specified ID. </summary>
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -229,6 +234,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateListAtSubscriptionRequest(string subscriptionId, string filter)
         {
             var message = _pipeline.CreateMessage();
@@ -275,6 +281,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets all the linked resources for the subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
@@ -300,6 +307,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateListAtSourceScopeRequest(string scope)
         {
             var message = _pipeline.CreateMessage();
@@ -341,6 +349,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -364,6 +373,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateListAtSubscriptionNextPageRequest(string nextLink, string subscriptionId, string filter)
         {
             var message = _pipeline.CreateMessage();
@@ -405,6 +415,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets all the linked resources for the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
@@ -432,6 +443,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateListAtSourceScopeNextPageRequest(string nextLink, string scope)
         {
             var message = _pipeline.CreateMessage();
@@ -471,6 +483,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of resource links at and below the specified source scope. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>

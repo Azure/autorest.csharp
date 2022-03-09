@@ -96,6 +96,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a virtual machine extension image. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -130,6 +131,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListTypesRequest(string subscriptionId, string location, string publisherName)
         {
             var message = _pipeline.CreateMessage();
@@ -184,6 +186,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of virtual machine extension image types. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
@@ -217,6 +220,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListVersionsRequest(string subscriptionId, string location, string publisherName, string type, string filter, int? top, string orderby)
         {
             var message = _pipeline.CreateMessage();
@@ -290,6 +294,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of virtual machine extension image versions. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The name of a supported Azure region. </param>

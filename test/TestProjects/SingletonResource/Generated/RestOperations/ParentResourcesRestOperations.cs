@@ -83,6 +83,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
@@ -109,6 +110,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string parentName)
         {
             var message = _pipeline.CreateMessage();
@@ -159,6 +161,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
@@ -189,6 +192,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string parentName, ParentResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -242,6 +246,7 @@ namespace SingletonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="parentName"> The String to use. </param>

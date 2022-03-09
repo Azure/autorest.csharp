@@ -79,6 +79,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -103,6 +104,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListTypeTwosBySubscriptionRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -144,6 +146,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -168,6 +171,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListTypeOnesRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -213,6 +217,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -239,6 +244,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListTypeTwosRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -284,6 +290,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -310,6 +317,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetTypeOneRequest(string subscriptionId, string resourceGroupName, string typeOneName)
         {
             var message = _pipeline.CreateMessage();
@@ -360,6 +368,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -390,6 +399,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateTypeOneRequest(string subscriptionId, string resourceGroupName, string typeOneName, TypeOneData typeOne)
         {
             var message = _pipeline.CreateMessage();
@@ -444,6 +454,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -474,6 +485,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetTypeTwoRequest(string subscriptionId, string resourceGroupName, string typeTwoName)
         {
             var message = _pipeline.CreateMessage();
@@ -524,6 +536,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -554,6 +567,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateTypeTwoRequest(string subscriptionId, string resourceGroupName, string typeTwoName, TypeTwoData typeTwo)
         {
             var message = _pipeline.CreateMessage();
@@ -608,6 +622,7 @@ namespace MgmtSafeFlatten
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

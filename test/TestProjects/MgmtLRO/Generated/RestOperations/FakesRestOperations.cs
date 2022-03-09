@@ -88,6 +88,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -114,6 +115,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string fakeName, PatchableFakeData data)
         {
             var message = _pipeline.CreateMessage();
@@ -164,6 +166,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -190,6 +193,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
@@ -234,6 +238,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Delete an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -259,6 +264,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string fakeName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -314,6 +320,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -345,6 +352,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
@@ -395,6 +403,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -422,6 +431,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDoSomethingLRORequest(string subscriptionId, string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
@@ -466,6 +476,7 @@ namespace MgmtLRO
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

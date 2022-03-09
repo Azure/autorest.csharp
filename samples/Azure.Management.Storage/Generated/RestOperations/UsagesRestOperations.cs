@@ -83,6 +83,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>

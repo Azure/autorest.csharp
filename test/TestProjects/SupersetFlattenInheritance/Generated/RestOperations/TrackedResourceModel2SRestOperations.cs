@@ -82,6 +82,7 @@ namespace SupersetFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -107,6 +108,7 @@ namespace SupersetFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string trackedResourceModel2SName, TrackedResourceModel2 parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -160,6 +162,7 @@ namespace SupersetFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
@@ -189,6 +192,7 @@ namespace SupersetFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string trackedResourceModel2SName)
         {
             var message = _pipeline.CreateMessage();
@@ -236,6 +240,7 @@ namespace SupersetFlattenInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>

@@ -88,6 +88,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -114,6 +115,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data)
         {
             var message = _pipeline.CreateMessage();
@@ -163,6 +165,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -188,6 +191,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -232,6 +236,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -257,6 +262,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -307,6 +313,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Display information about a virtual machine scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -337,6 +344,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeallocateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
@@ -389,6 +397,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -414,6 +423,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteInstancesRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
@@ -464,6 +474,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes virtual machines in a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -490,6 +501,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetInstanceViewRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -539,6 +551,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the status of a VM scale set instance. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -567,6 +580,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -612,6 +626,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of all VM scale sets under a resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -638,6 +653,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListAllRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -679,6 +695,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -703,6 +720,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListSkusRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -752,6 +770,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -780,6 +799,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetOSUpgradeHistoryRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -829,6 +849,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets list of OS upgrades on a VM scale set instance. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -857,6 +878,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePowerOffRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds, bool? skipShutdown)
         {
             var message = _pipeline.CreateMessage();
@@ -914,6 +936,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -940,6 +963,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateRestartRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
@@ -992,6 +1016,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Restarts one or more virtual machines in a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1017,6 +1042,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateStartRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
@@ -1069,6 +1095,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Starts one or more virtual machines in a VM scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1094,6 +1121,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateRedeployRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
@@ -1146,6 +1174,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1171,6 +1200,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePerformMaintenanceRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
@@ -1223,6 +1253,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1248,6 +1279,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateInstancesRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceRequiredIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
@@ -1298,6 +1330,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Upgrades one or more virtual machines to the latest SKU set in the VM scale set model. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1324,6 +1357,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateReimageRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetReimageParameters vmScaleSetReimageInput)
         {
             var message = _pipeline.CreateMessage();
@@ -1376,6 +1410,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don&apos;t have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1401,6 +1436,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateReimageAllRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVmInstanceIds vmInstanceIds)
         {
             var message = _pipeline.CreateMessage();
@@ -1453,6 +1489,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1478,6 +1515,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateForceRecoveryServiceFabricPlatformUpdateDomainWalkRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, int platformUpdateDomain)
         {
             var message = _pipeline.CreateMessage();
@@ -1529,6 +1567,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1558,6 +1597,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateConvertToSinglePlacementGroupRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VmScaleSetConvertToSinglePlacementGroupInput parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -1607,6 +1647,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Converts SinglePlacementGroup property to false for a existing virtual machine scale set. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1632,6 +1673,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateSetOrchestrationServiceStateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, OrchestrationServiceStateInput parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -1682,6 +1724,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Changes ServiceState property for a given service. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -1708,6 +1751,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
@@ -1750,6 +1794,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of all VM scale sets under a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -1778,6 +1823,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListAllNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -1818,6 +1864,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -1844,6 +1891,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListSkusNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -1888,6 +1936,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -1918,6 +1967,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetOSUpgradeHistoryNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -1962,6 +2012,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets list of OS upgrades on a VM scale set instance. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

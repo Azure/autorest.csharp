@@ -79,6 +79,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists deleted accounts under the subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -103,6 +104,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string location, string deletedAccountName)
         {
             var message = _pipeline.CreateMessage();
@@ -153,6 +155,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Get properties of specified deleted account resource. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="location"> The location of the deleted storage account. </param>
@@ -183,6 +186,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -223,6 +227,7 @@ namespace Azure.Management.Storage
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Lists deleted accounts under the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>

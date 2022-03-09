@@ -87,6 +87,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 ResponseWriterHelpers.WriteStatusCodeSwitch(writer, messageVariable.ActualName, operation, async);
             }
+            writer.Line();
         }
     }
 }

@@ -87,6 +87,7 @@ namespace MgmtNonStringPathVariable
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -112,6 +113,7 @@ namespace MgmtNonStringPathVariable
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, int barName, PatchableBarData data)
         {
             var message = _pipeline.CreateMessage();
@@ -161,6 +163,7 @@ namespace MgmtNonStringPathVariable
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update an Bars. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -186,6 +189,7 @@ namespace MgmtNonStringPathVariable
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, int barName)
         {
             var message = _pipeline.CreateMessage();
@@ -235,6 +239,7 @@ namespace MgmtNonStringPathVariable
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -264,6 +269,7 @@ namespace MgmtNonStringPathVariable
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, int barName)
         {
             var message = _pipeline.CreateMessage();
@@ -307,6 +313,7 @@ namespace MgmtNonStringPathVariable
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

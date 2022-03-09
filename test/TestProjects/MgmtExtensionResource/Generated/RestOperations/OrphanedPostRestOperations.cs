@@ -79,6 +79,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Description for Validate information for a certificate order. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="validateSomethingOptions"> Information to validate. </param>

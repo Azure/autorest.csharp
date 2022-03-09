@@ -87,6 +87,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the private link resources supported for the managed hsm pool. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>

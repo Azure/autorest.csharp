@@ -93,6 +93,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> List all the subscriptions under a specified topic. </summary>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
@@ -121,6 +122,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string subscriptionName, SBSubscriptionData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -175,6 +177,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Creates a topic subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
@@ -205,6 +208,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string subscriptionName)
         {
             var message = _pipeline.CreateMessage();
@@ -249,6 +253,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes a subscription from the specified topic. </summary>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
@@ -273,6 +278,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string subscriptionName)
         {
             var message = _pipeline.CreateMessage();
@@ -323,6 +329,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Returns a subscription description for the specified topic. </summary>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the Resource group within the Azure subscription. </param>
@@ -353,6 +360,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByTopicNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, int? skip, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -397,6 +405,7 @@ namespace MgmtSubscriptionNameParameter
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> List all the subscriptions under a specified topic. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

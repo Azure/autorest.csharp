@@ -88,6 +88,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to create or update the run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -114,6 +115,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string anotherName, PatchableAnotherParentData data)
         {
             var message = _pipeline.CreateMessage();
@@ -163,6 +165,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to update the run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -188,6 +191,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string anotherName)
         {
             var message = _pipeline.CreateMessage();
@@ -233,6 +237,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to delete the run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -258,6 +263,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string anotherName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -313,6 +319,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to get the run command. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -344,6 +351,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -394,6 +402,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -421,6 +430,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -464,6 +474,7 @@ namespace MgmtMultipleParentResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to get all run commands of a Virtual Machine. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

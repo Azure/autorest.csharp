@@ -88,6 +88,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Create or update a managed HSM Pool in the specified subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -114,6 +115,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -164,6 +166,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Update a managed HSM Pool in the specified subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -190,6 +193,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -235,6 +239,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes the specified managed HSM Pool. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -260,6 +265,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -312,6 +318,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the specified managed HSM Pool. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -344,6 +351,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupRequest(string subscriptionId, string resourceGroupName, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -394,6 +402,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the managed HSM Pools associated with the subscription and within the specified resource group. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the managed HSM pool. </param>
@@ -421,6 +430,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBySubscriptionRequest(string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -467,6 +477,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the managed HSM Pools associated with the subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="top"> Maximum number of results to return. </param>
@@ -492,6 +503,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListDeletedRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -533,6 +545,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the deleted managed HSMs associated with the subscription. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -557,6 +570,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetDeletedRequest(string subscriptionId, string location, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -607,6 +621,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the specified deleted managed HSM. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location of the deleted managed HSM. </param>
@@ -637,6 +652,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePurgeDeletedRequest(string subscriptionId, string location, string name)
         {
             var message = _pipeline.CreateMessage();
@@ -681,6 +697,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Permanently deletes the specified managed HSM. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> The location of the soft-deleted managed HSM. </param>
@@ -704,6 +721,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -747,6 +765,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the managed HSM Pools associated with the subscription and within the specified resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -776,6 +795,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -817,6 +837,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the managed HSM Pools associated with the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
@@ -844,6 +865,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListDeletedNextPageRequest(string nextLink, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
@@ -884,6 +906,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the deleted managed HSMs associated with the subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

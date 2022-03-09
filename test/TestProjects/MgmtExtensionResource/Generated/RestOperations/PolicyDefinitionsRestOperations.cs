@@ -88,6 +88,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation creates or updates a policy definition in the given subscription with the given name. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
@@ -116,6 +117,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string policyDefinitionName)
         {
             var message = _pipeline.CreateMessage();
@@ -156,6 +158,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
@@ -178,6 +181,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string policyDefinitionName)
         {
             var message = _pipeline.CreateMessage();
@@ -224,6 +228,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves the policy definition in the given subscription with the given name. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -252,6 +257,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetBuiltInRequest(string policyDefinitionName)
         {
             var message = _pipeline.CreateMessage();
@@ -294,6 +300,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves the built-in policy definition with the given name. </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -320,6 +327,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateAtManagementGroupRequest(string managementGroupId, string policyDefinitionName, PolicyDefinitionData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -370,6 +378,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation creates or updates a policy definition in the given management group with the given name. </summary>
         /// <param name="managementGroupId"> The ID of the management group. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
@@ -398,6 +407,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteAtManagementGroupRequest(string managementGroupId, string policyDefinitionName)
         {
             var message = _pipeline.CreateMessage();
@@ -438,6 +448,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation deletes the policy definition in the given management group with the given name. </summary>
         /// <param name="managementGroupId"> The ID of the management group. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
@@ -460,6 +471,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetAtManagementGroupRequest(string managementGroupId, string policyDefinitionName)
         {
             var message = _pipeline.CreateMessage();
@@ -506,6 +518,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves the policy definition in the given management group with the given name. </summary>
         /// <param name="managementGroupId"> The ID of the management group. </param>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
@@ -534,6 +547,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListRequest(string subscriptionId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -585,6 +599,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves a list of all the policy definitions in a given subscription that match the optional given $filter. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given subscription. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
@@ -611,6 +626,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBuiltInRequest(string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -655,6 +671,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves a list of all the built-in policy definitions that match the optional given $filter. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose category match the {value}. </summary>
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
@@ -676,6 +693,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByManagementGroupRequest(string managementGroupId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -727,6 +745,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves a list of all the policy definitions in a given management group that match the optional given $filter. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy definitions associated with the management group, including those that apply directly or from management groups that contain the given management group. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given management group. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </summary>
         /// <param name="managementGroupId"> The ID of the management group. </param>
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
@@ -753,6 +772,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -795,6 +815,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves a list of all the policy definitions in a given subscription that match the optional given $filter. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given subscription. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
@@ -823,6 +844,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListBuiltInNextPageRequest(string nextLink, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -862,6 +884,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves a list of all the built-in policy definitions that match the optional given $filter. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all built-in policy definitions whose category match the {value}. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
@@ -887,6 +910,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByManagementGroupNextPageRequest(string nextLink, string managementGroupId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -929,6 +953,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> This operation retrieves a list of all the policy definitions in a given management group that match the optional given $filter. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, the unfiltered list includes all policy definitions associated with the management group, including those that apply directly or from management groups that contain the given management group. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given management group. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="managementGroupId"> The ID of the management group. </param>

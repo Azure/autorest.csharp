@@ -86,6 +86,7 @@ namespace MgmtExtensionResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Checks whether a domain name in the cloudapp.azure.com zone is available for use. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="location"> The location of the domain name. </param>

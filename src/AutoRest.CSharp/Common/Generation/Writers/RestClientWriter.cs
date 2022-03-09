@@ -19,6 +19,8 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public void WriteClient(CodeWriter writer, DataPlaneRestClient restClient)
         {
+            var responseClassifierTypes = new List<LowLevelClientWriter.ResponseClassifierType>();
+
             using (writer.Namespace(restClient.Type.Namespace))
             {
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {restClient.Type:D}"))
@@ -30,39 +32,37 @@ namespace AutoRest.CSharp.Generation.Writers
                         RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, false, restClient.Parameters);
                         WriteOperation(writer, restClient, method, true);
                         WriteOperation(writer, restClient, method, false);
+                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Equals(method.Operation));
+                        if (protocolMethod != null)
+                        {
+                            WriteProtocolMethods(writer, restClient, protocolMethod, responseClassifierTypes);
+                        }
                     }
 
-                    WriteProtocolMethods(writer, restClient);
+                    LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
                 }
             }
         }
 
-        private static void WriteProtocolMethods(CodeWriter writer, DataPlaneRestClient restClient)
+        private static void WriteProtocolMethods(CodeWriter writer, DataPlaneRestClient restClient, LowLevelClientMethod protocolMethod, List<LowLevelClientWriter.ResponseClassifierType> responseClassifierTypes)
         {
-            var responseClassifierTypes = new List<LowLevelClientWriter.ResponseClassifierType>();
+            LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
 
-            foreach (var protocolMethod in restClient.ProtocolMethods)
+            if (protocolMethod.IsLongRunning)
             {
-                LowLevelClientWriter.WriteRequestCreationMethod(writer, protocolMethod.RequestMethod, restClient.Fields, responseClassifierTypes);
-
-                if (protocolMethod.IsLongRunning)
-                {
-                    LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, true);
-                    LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, false);
-                }
-                else if (protocolMethod.PagingInfo != null)
-                {
-                    LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
-                    LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);
-                }
-                else
-                {
-                    LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
-                    LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
-                }
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, true);
+                LowLevelClientWriter.WriteLongRunningOperationMethod(writer, protocolMethod, restClient.Fields, false);
             }
-
-            LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes);
+            else if (protocolMethod.PagingInfo != null)
+            {
+                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, true);
+                LowLevelClientWriter.WritePagingMethod(writer, protocolMethod, restClient.Fields, false);
+            }
+            else
+            {
+                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, true);
+                LowLevelClientWriter.WriteClientMethod(writer, protocolMethod, restClient.Fields, false);
+            }
         }
 
         private static void WriteClientCtor(CodeWriter writer, DataPlaneRestClient restClient)

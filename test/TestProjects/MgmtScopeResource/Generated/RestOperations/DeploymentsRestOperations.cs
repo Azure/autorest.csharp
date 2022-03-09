@@ -78,6 +78,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -100,6 +101,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateCheckExistenceAtScopeRequest(string scope, string deploymentName)
         {
             var message = _pipeline.CreateMessage();
@@ -147,6 +149,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Checks whether the deployment exists. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -176,6 +179,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateCreateOrUpdateAtScopeRequest(string scope, string deploymentName, Deployment parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -222,6 +226,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -246,6 +251,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateGetAtScopeRequest(string scope, string deploymentName)
         {
             var message = _pipeline.CreateMessage();
@@ -292,6 +298,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets a deployment. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -320,6 +327,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateCancelAtScopeRequest(string scope, string deploymentName)
         {
             var message = _pipeline.CreateMessage();
@@ -360,6 +368,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -381,6 +390,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateValidateAtScopeRequest(string scope, string deploymentName, Deployment parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -429,6 +439,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager.. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -454,6 +465,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateExportTemplateAtScopeRequest(string scope, string deploymentName)
         {
             var message = _pipeline.CreateMessage();
@@ -499,6 +511,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Exports the template used for specified deployment. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -525,6 +538,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateListAtScopeRequest(string scope, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -575,6 +589,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Get all the deployments at the given scope. </summary>
         /// <param name="scope"> The resource scope. </param>
         /// <param name="filter"> The filter to apply on the operation. For example, you can use $filter=provisioningState eq &apos;{state}&apos;. </param>
@@ -600,6 +615,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateWhatIfAtTenantScopeRequest(string deploymentName, DeploymentWhatIf parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -643,6 +659,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the tenant group. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Parameters to validate. </param>
@@ -665,6 +682,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateWhatIfAtManagementGroupScopeRequest(string groupId, string deploymentName, DeploymentWhatIf parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -712,6 +730,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the management group. </summary>
         /// <param name="groupId"> The management group ID. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -736,6 +755,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateWhatIfAtSubscriptionScopeRequest(string subscriptionId, string deploymentName, DeploymentWhatIf parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -783,6 +803,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
@@ -807,6 +828,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateWhatIfRequest(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -858,6 +880,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. </param>
         /// <param name="resourceGroupName"> The name of the resource group the template will be deployed to. The name is case insensitive. </param>
@@ -884,6 +907,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateCalculateTemplateHashRequest(object template)
         {
             var message = _pipeline.CreateMessage();
@@ -926,6 +950,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Calculate the hash of the given template. </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -949,6 +974,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal Azure.Core.HttpMessage CreateListAtScopeNextPageRequest(string nextLink, string scope, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
@@ -990,6 +1016,7 @@ namespace MgmtScopeResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Get all the deployments at the given scope. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="scope"> The resource scope. </param>

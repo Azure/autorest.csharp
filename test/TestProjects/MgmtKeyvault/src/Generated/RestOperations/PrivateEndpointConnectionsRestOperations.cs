@@ -93,6 +93,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the specified private endpoint connection associated with the key vault. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the key vault. </param>
@@ -126,6 +127,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string vaultName, string privateEndpointConnectionName, PrivateEndpointConnectionData properties)
         {
             var message = _pipeline.CreateMessage();
@@ -184,6 +186,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Updates the specified private endpoint connection associated with the key vault. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the key vault. </param>
@@ -216,6 +219,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vaultName, string privateEndpointConnectionName)
         {
             var message = _pipeline.CreateMessage();
@@ -265,6 +269,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes the specified private endpoint connection associated with the key vault. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the key vault. </param>
@@ -292,6 +297,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceRequest(string subscriptionId, string resourceGroupName, string vaultName)
         {
             var message = _pipeline.CreateMessage();
@@ -341,6 +347,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the private endpoint connections associated with the vault. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> Name of the resource group that contains the key vault. </param>
@@ -369,6 +376,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListByResourceNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string vaultName)
         {
             var message = _pipeline.CreateMessage();
@@ -413,6 +421,7 @@ namespace MgmtKeyvault
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The List operation gets information about the private endpoint connections associated with the vault. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>

@@ -83,6 +83,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -109,6 +110,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string workspaceName)
         {
             var message = _pipeline.CreateMessage();
@@ -159,6 +161,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the properties of the specified machine learning workspace. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -189,6 +192,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string workspaceName, WorkspaceData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -240,6 +244,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Creates or updates a workspace with the specified parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -267,6 +272,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string workspaceName)
         {
             var message = _pipeline.CreateMessage();
@@ -312,6 +318,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Deletes a machine learning workspace. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
@@ -337,6 +344,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string workspaceName, PatchableWorkspaceData data)
         {
             var message = _pipeline.CreateMessage();
@@ -391,6 +399,7 @@ namespace MgmtParamOrdering
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Updates a machine learning workspace with the specified parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>

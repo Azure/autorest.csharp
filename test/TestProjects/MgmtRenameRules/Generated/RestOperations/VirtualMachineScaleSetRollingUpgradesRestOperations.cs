@@ -81,6 +81,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Cancels the current virtual machine scale set rolling upgrade. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -105,6 +106,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateStartOSUpgradeRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -149,6 +151,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -173,6 +176,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateStartExtensionUpgradeRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -217,6 +221,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -241,6 +246,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetLatestRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
@@ -292,6 +298,7 @@ namespace MgmtRenameRules
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Gets the status of the latest virtual machine scale set rolling upgrade. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

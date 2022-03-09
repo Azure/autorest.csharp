@@ -84,6 +84,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -110,6 +111,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -160,6 +162,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -186,6 +189,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string vmName, PatchableVirtualMachineData data)
         {
             var message = _pipeline.CreateMessage();
@@ -236,6 +240,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to update a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -262,6 +267,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string vmName, bool? forceDeletion)
         {
             var message = _pipeline.CreateMessage();
@@ -311,6 +317,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> The operation to delete a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
@@ -337,6 +344,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string vmName)
         {
             var message = _pipeline.CreateMessage();
@@ -388,6 +396,7 @@ namespace MgmtPropertyChooser
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Retrieves information about the model view or the instance view of a virtual machine. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>

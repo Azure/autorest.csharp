@@ -82,6 +82,7 @@ namespace SupersetInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -107,6 +108,7 @@ namespace SupersetInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string supersetModel4SName, SupersetModel4Data parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -160,6 +162,7 @@ namespace SupersetInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel4SName"> The String to use. </param>
@@ -189,6 +192,7 @@ namespace SupersetInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string supersetModel4SName)
         {
             var message = _pipeline.CreateMessage();
@@ -238,6 +242,7 @@ namespace SupersetInheritance
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="supersetModel4SName"> The String to use. </param>

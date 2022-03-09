@@ -96,6 +96,7 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> List shared gallery image versions by subscription id or tenant id. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> Resource location. </param>
@@ -127,6 +128,7 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateGetRequest(string subscriptionId, string location, string galleryUniqueName, string galleryImageName, string galleryImageVersionName)
         {
             var message = _pipeline.CreateMessage();
@@ -183,6 +185,7 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> Get a shared gallery image version by subscription id or tenant id. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="location"> Resource location. </param>
@@ -215,6 +218,7 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string subscriptionId, string location, string galleryUniqueName, string galleryImageName, SharedToValues? sharedTo)
         {
             var message = _pipeline.CreateMessage();
@@ -262,6 +266,7 @@ namespace MgmtHierarchicalNonResource
                     throw new RequestFailedException(message.Response);
             }
         }
+
         /// <summary> List shared gallery image versions by subscription id or tenant id. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
