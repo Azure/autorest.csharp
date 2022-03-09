@@ -154,27 +154,6 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     }
 }
 
-function StartMockServer($specName, $commitID)
-{
-    # change .env file to use the specific swagger file
-    $envFile = Join-Path $mockServerFolder .env
-    New-Item -Path $envFile -ItemType File -Value '' -Force | Out-Null
-    if ($localSwagger) {
-        $relativeLocalSwagger = [System.IO.Path]::GetRelativePath($mockServerFolder, $localSwagger)
-        Add-Content $envFile "specRetrievalMethod=filesystem
-specRetrievalLocalRelativePath=$relativeLocalSwagger
-validationPathsPattern=specification/$rpName/resource-manager/**/*.json"
-    }
-    else {
-        Add-Content $envFile "specRetrievalGitUrl=https://github.com/Azure/azure-rest-api-specs
-specRetrievalGitBranch=main
-validationPathsPattern=specification/$rpName/resource-manager/**/*.json"
-    }
-
-    $mainApp = Join-Path "node_modules" "@azure-tools" "mock-service-host" "dist" "src" "main.js"
-    node $mainApp
-}
-
 function  MockTestInit {
     param(
         [Parameter()]
@@ -203,11 +182,9 @@ function  MockTestInit {
     }
     process {
         # Launch Mock-service-host
-        # $task = {
-            StartMockServer
-            Pop-Location
-        # }
-        # Start-Job -ScriptBlock $task
+        $LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
+        $task = { & $LaunchScript }
+        Invoke-Command  -ScriptBlock $task
 
         # Install npm and autorest
         if ($NpmInit) {
@@ -395,8 +372,8 @@ function  MockTestInit {
         Write-Host "Unit tests:"
         Write-Host "Total: $Total"
         Write-Host "Passed: $TotalPassed  |  Failed: $TotalFailed  |  Skipped: $TotalSkipped"
-        $PassRate = "{0:N2}" -f ($TotalPassed/$Total)
-        $FailRate = "{0:N2}" -f ($TotalFailed/$Total)
+        $PassRate = "{0:N2}" -f ($TotalPassed / $Total)
+        $FailRate = "{0:N2}" -f ($TotalFailed / $Total)
         Write-Host "Pass rate: $PassRate"
         Write-Host "Fail rate: $FailRate"
         Write-Host ""

@@ -118,8 +118,5 @@ function Test-Administrator
 & git config --system core.longpaths true
 PrepareMockServer
 TrustMockServerCertificate
-# $task = {
-#     StartMockServer
-#     Pop-Location
-# }
-# Start-Job -ScriptBlock $task
+StartMockServer
+Pop-Location
