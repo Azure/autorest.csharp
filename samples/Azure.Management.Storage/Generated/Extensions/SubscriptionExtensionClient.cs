@@ -66,10 +66,10 @@ namespace Azure.Management.Storage
         /// Operation Id: Skus_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<SkuInformation> GetSkusAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<StorageSkuInformation> GetSkusAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<StorageSkuInformation>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = SkusClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSkus");
                 scope.Start();
@@ -93,10 +93,10 @@ namespace Azure.Management.Storage
         /// Operation Id: Skus_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<SkuInformation> GetSkus(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<StorageSkuInformation> GetSkus(CancellationToken cancellationToken = default)
         {
-            Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
+            Page<StorageSkuInformation> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = SkusClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSkus");
                 scope.Start();

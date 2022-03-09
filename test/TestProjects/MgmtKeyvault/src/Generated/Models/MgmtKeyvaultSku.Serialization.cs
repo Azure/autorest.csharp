@@ -25,7 +25,7 @@ namespace MgmtKeyvault.Models
         internal static MgmtKeyvaultSku DeserializeMgmtKeyvaultSku(JsonElement element)
         {
             SkuFamily family = default;
-            SkuName name = default;
+            MgmtKeyvaultSkuName name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("family"))
@@ -35,7 +35,7 @@ namespace MgmtKeyvault.Models
                 }
                 if (property.NameEquals("name"))
                 {
-                    name = property.Value.GetString().ToSkuName();
+                    name = property.Value.GetString().ToMgmtKeyvaultSkuName();
                     continue;
                 }
             }
