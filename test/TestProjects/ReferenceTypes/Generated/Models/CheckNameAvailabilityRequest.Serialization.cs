@@ -23,10 +23,10 @@ namespace Azure.ResourceManager.Fake.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(CheckNameAvailabilityRequestType))
+            if (Optional.IsDefined(ResourceType))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(CheckNameAvailabilityRequestType);
+                writer.WriteStringValue(ResourceType);
             }
             writer.WriteEndObject();
         }
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Fake.Models
         internal static CheckNameAvailabilityRequest DeserializeCheckNameAvailabilityRequest(JsonElement element)
         {
             Optional<string> name = default;
-            Optional<string> type = default;
+            Optional<ResourceType> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -44,11 +44,16 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type = (ResourceType)property.Value.GetString();
                     continue;
                 }
             }
-            return new CheckNameAvailabilityRequest(name.Value, type.Value);
+            return new CheckNameAvailabilityRequest(name.Value, type);
         }
 
         internal partial class CheckNameAvailabilityRequestConverter : JsonConverter<CheckNameAvailabilityRequest>
