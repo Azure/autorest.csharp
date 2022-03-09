@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.Core.Serialization;
 using dpg_customization_LowLevel.Models;
 
 namespace dpg_customization_LowLevel
@@ -54,16 +55,15 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            // TO-DO: how to convert from model Input to requestContent
-            using var stream = new MemoryStream();
-            using var writer = new Utf8JsonWriter(stream);
-            (input as IUtf8JsonSerializable).Write(writer);
-            writer.Flush();
-
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            Response response = await PostModelAsync("model", RequestContent.Create(stream.ToArray()), requestContext);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
+
+            Response response = await PostModelAsync("model", RequestContent.Create(input, new JsonObjectSerializer(options)), requestContext);
             return Response.FromValue((Product)response, response);
         }
 
@@ -76,16 +76,15 @@ namespace dpg_customization_LowLevel
         {
             Argument.AssertNotNull(input, nameof(input));
 
-            // TO-DO: how to convert from model Input to requestContent
-            using var stream = new MemoryStream();
-            using var writer = new Utf8JsonWriter(stream);
-            (input as IUtf8JsonSerializable).Write(writer);
-            writer.Flush();
-
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            Response result = PostModel("model", RequestContent.Create(stream.ToArray()), requestContext);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
+
+            Response result = PostModel("model", RequestContent.Create(input, new JsonObjectSerializer(options)), requestContext);
             return Response.FromValue((Product)result, result);
         }
 
@@ -93,7 +92,7 @@ namespace dpg_customization_LowLevel
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
-        public virtual AsyncPageable<Product> GetPagesValueAsync(string mode, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Product> GetPageValuesAsync(string mode, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -119,7 +118,7 @@ namespace dpg_customization_LowLevel
         /// <param name="mode"> The mode with which you&apos;ll be handling your returned body. &apos;raw&apos; for just dealing with the raw body, and &apos;model&apos; if you are going to convert the raw body to a customized body before returning to users. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mode"/> is null. </exception>
-        public virtual Pageable<Product> GetPagesValue(string mode, CancellationToken cancellationToken = default)
+        public virtual Pageable<Product> GetPageValues(string mode, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
