@@ -305,7 +305,7 @@ function  MockTestInit {
                 }
             }
             foreach ($item in $allResult) {
-                $ErrorTypeStatic += $RPName + ": " + $item
+                $ErrorTypeStatic += $RPName + ":`t" + $item
             }
             Write-Host "[$RPName] has been recorded"
         }
@@ -344,23 +344,23 @@ function  MockTestInit {
         }
         Write-Host "`n"
         foreach ($item in $FinalStatics.Keys) {
-            $show = $item.ToString() + ": " + $FinalStatics[$item]
+            $show = $item.ToString() + ":`t`t" + $FinalStatics[$item]
             Write-Host  $show
         }
         Write-Host "`n`n================================================================================="
-        Write-Host "Track2 SDK Total: $Script:allTrack2Sdk"
-        Write-Host "New generated track2 RPs: $Script:newGenerateSdk" 
-        Write-Host "srcGenerateSuccessedRps: "$Script:srcGenerateSuccessedRps.Count
-        Write-Host "srcBuildSuccessedRps: "$Script:srcBuildSuccessedRps.Count 
-        Write-Host "testGenerateSuccesseddRps: "$Script:testGenerateSuccessedRps.Count 
-        Write-Host "testBuildSuccessedRps: "$Script:testBuildSuccessedRps.Count 
+        Write-Host "Track2 SDK Total:   $Script:allTrack2Sdk"
+        Write-Host "New generated track2 RPs:   $Script:newGenerateSdk" 
+        Write-Host "srcGenerateSuccessedRps:    "$Script:srcGenerateSuccessedRps.Count
+        Write-Host "srcBuildSuccessedRps:   " $Script:srcBuildSuccessedRps.Count 
+        Write-Host "testGenerateSuccesseddRps:  "$Script:testGenerateSuccessedRps.Count 
+        Write-Host "testBuildSuccessedRps:  "$Script:testBuildSuccessedRps.Count 
         Write-Host ""
         Write-Host ""
     }
 }
 
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
-$GenerateNewSDKs = $true
+$GenerateNewSDKs = $false
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
