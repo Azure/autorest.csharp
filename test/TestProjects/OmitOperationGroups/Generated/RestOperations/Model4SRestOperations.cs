@@ -18,7 +18,7 @@ namespace OmitOperationGroups
 {
     internal partial class Model4SRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace OmitOperationGroups
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<Model4SRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateGetDefaultRequest(string subscriptionId, string resourceGroupName, string model2SName)
@@ -59,7 +59,7 @@ namespace OmitOperationGroups
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

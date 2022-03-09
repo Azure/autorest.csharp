@@ -17,7 +17,7 @@ namespace MgmtExtensionResource
 {
     internal partial class OrphanedPostRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -38,7 +38,7 @@ namespace MgmtExtensionResource
             _apiVersion = apiVersion ?? "2020-09-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<OrphanedPostRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateValidateSomethingRequest(string subscriptionId, ValidateSomethingOptions validateSomethingOptions)
@@ -58,7 +58,7 @@ namespace MgmtExtensionResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(validateSomethingOptions);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

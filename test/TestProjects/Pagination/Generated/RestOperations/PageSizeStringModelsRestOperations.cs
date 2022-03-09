@@ -18,7 +18,7 @@ namespace Pagination
 {
     internal partial class PageSizeStringModelsRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace Pagination
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<PageSizeStringModelsRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string maxpagesize)
@@ -61,7 +61,7 @@ namespace Pagination
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -149,7 +149,7 @@ namespace Pagination
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -251,7 +251,7 @@ namespace Pagination
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -341,7 +341,7 @@ namespace Pagination
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

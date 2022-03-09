@@ -4,6 +4,7 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
@@ -17,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteAdditionalFields(CodeWriter writer)
         {
-            writer.Line($"private readonly {typeof(UserAgentValue)} {UserAgentField};");
+            writer.Line($"private readonly {typeof(TelemetryDetails)} {UserAgentField};");
         }
 
         protected override void WriteAdditionalParameters(CodeWriter writer)
@@ -37,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteAdditionalCtorBody(CodeWriter writer, RestClient restClient)
         {
-            writer.Line($"_userAgent = {typeof(UserAgentValue)}.FromType<{restClient.Type.Name}>({ApplicationIdVariable});");
+            writer.Line($"_userAgent = new {typeof(TelemetryDetails)}(GetType().Assembly, {ApplicationIdVariable});");
         }
 
         protected override void WriteAdditionalXmlDocumentationParameters(CodeWriter writer)

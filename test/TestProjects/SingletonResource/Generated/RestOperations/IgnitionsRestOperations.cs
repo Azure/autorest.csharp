@@ -17,7 +17,7 @@ namespace SingletonResource
 {
     internal partial class IgnitionsRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -38,7 +38,7 @@ namespace SingletonResource
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<IgnitionsRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string carName)
@@ -58,7 +58,7 @@ namespace SingletonResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

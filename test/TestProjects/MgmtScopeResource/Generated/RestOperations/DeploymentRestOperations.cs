@@ -18,7 +18,7 @@ namespace MgmtScopeResource
 {
     internal partial class DeploymentRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace MgmtScopeResource
             _apiVersion = apiVersion ?? "2021-04-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<DeploymentRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal Azure.Core.HttpMessage CreateGetAtScopeRequest(string scope, string deploymentName, string operationId)
@@ -58,7 +58,7 @@ namespace MgmtScopeResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -155,7 +155,7 @@ namespace MgmtScopeResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -235,7 +235,7 @@ namespace MgmtScopeResource
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

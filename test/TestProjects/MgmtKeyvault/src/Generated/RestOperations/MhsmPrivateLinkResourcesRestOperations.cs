@@ -18,7 +18,7 @@ namespace MgmtKeyvault
 {
     internal partial class MhsmPrivateLinkResourcesRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace MgmtKeyvault
             _apiVersion = apiVersion ?? "2021-04-01-preview";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<MhsmPrivateLinkResourcesRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateListByMhsmResourceRequest(string subscriptionId, string resourceGroupName, string name)
@@ -59,7 +59,7 @@ namespace MgmtKeyvault
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

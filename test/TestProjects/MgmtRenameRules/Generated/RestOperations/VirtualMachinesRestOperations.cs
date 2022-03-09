@@ -18,7 +18,7 @@ namespace MgmtRenameRules
 {
     internal partial class VirtualMachinesRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace MgmtRenameRules
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<VirtualMachinesRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateListByLocationRequest(string subscriptionId, string location)
@@ -57,7 +57,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -146,7 +146,7 @@ namespace MgmtRenameRules
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -246,7 +246,7 @@ namespace MgmtRenameRules
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -346,7 +346,7 @@ namespace MgmtRenameRules
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -356,13 +356,8 @@ namespace MgmtRenameRules
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Update Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/> or <paramref name="options"/> is null. </exception>
-        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineUpdateOptions options, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmName, PatchableVirtualMachineData data, CancellationToken cancellationToken = default)
->>>>>>> upstream/feature/v3
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string vmName, PatchableVirtualMachineData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -399,13 +394,8 @@ namespace MgmtRenameRules
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Update Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/> or <paramref name="options"/> is null. </exception>
-        public HttpMessage Update(string subscriptionId, string resourceGroupName, string vmName, VirtualMachineUpdateOptions options, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmName"/> or <paramref name="data"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string vmName, PatchableVirtualMachineData data, CancellationToken cancellationToken = default)
->>>>>>> upstream/feature/v3
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string vmName, PatchableVirtualMachineData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -455,7 +445,7 @@ namespace MgmtRenameRules
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -546,7 +536,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -645,7 +635,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -738,7 +728,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -823,7 +813,7 @@ namespace MgmtRenameRules
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -900,7 +890,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -998,7 +988,7 @@ namespace MgmtRenameRules
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1087,7 +1077,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1173,7 +1163,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/restart", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1259,7 +1249,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/start", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1345,7 +1335,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/redeploy", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1438,7 +1428,7 @@ namespace MgmtRenameRules
                 content.JsonWriter.WriteObjectValue(parameters);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1531,7 +1521,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1627,7 +1617,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/performMaintenance", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1713,7 +1703,7 @@ namespace MgmtRenameRules
             uri.AppendPath("/simulateEviction", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1798,7 +1788,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1878,7 +1868,7 @@ namespace MgmtRenameRules
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1966,7 +1956,7 @@ namespace MgmtRenameRules
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -2054,7 +2044,7 @@ namespace MgmtRenameRules
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

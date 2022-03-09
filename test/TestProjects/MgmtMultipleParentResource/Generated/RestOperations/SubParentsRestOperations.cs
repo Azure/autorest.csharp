@@ -18,7 +18,7 @@ namespace MgmtMultipleParentResource
 {
     internal partial class SubParentsRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace MgmtMultipleParentResource
             _apiVersion = apiVersion ?? "2021-03-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<SubParentsRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentData subBody)
@@ -64,7 +64,7 @@ namespace MgmtMultipleParentResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(subBody);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -176,7 +176,7 @@ namespace MgmtMultipleParentResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -187,13 +187,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="options"/> is null. </exception>
-        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentUpdateOptions options, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, PatchableSubParentData data, CancellationToken cancellationToken = default)
->>>>>>> upstream/feature/v3
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, PatchableSubParentData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -234,13 +229,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="options"/> is null. </exception>
-        public HttpMessage Update(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, SubParentUpdateOptions options, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="theParentName"/>, <paramref name="instanceId"/> or <paramref name="data"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, PatchableSubParentData data, CancellationToken cancellationToken = default)
->>>>>>> upstream/feature/v3
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string theParentName, string instanceId, PatchableSubParentData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -292,7 +282,7 @@ namespace MgmtMultipleParentResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -396,7 +386,7 @@ namespace MgmtMultipleParentResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -511,7 +501,7 @@ namespace MgmtMultipleParentResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -601,7 +591,7 @@ namespace MgmtMultipleParentResource
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

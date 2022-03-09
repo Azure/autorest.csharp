@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtLRO.Models;
 
 namespace MgmtLRO
 {
     internal partial class BarsRestOperations
     {
-        private readonly string _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -40,7 +39,7 @@ namespace MgmtLRO
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
@@ -58,7 +57,7 @@ namespace MgmtLRO
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -146,7 +145,7 @@ namespace MgmtLRO
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(body);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -157,7 +156,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async Task<Response> CreateAsync(string subscriptionId, string resourceGroupName, string barName, BarData body, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> CreateAsync(string subscriptionId, string resourceGroupName, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -182,7 +181,7 @@ namespace MgmtLRO
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -195,7 +194,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public Response Create(string subscriptionId, string resourceGroupName, string barName, BarData body, CancellationToken cancellationToken = default)
+        public HttpMessage Create(string subscriptionId, string resourceGroupName, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -220,7 +219,7 @@ namespace MgmtLRO
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -246,7 +245,7 @@ namespace MgmtLRO
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -257,7 +256,7 @@ namespace MgmtLRO
         /// <param name="data"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string barName, PatchableBarData data, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string barName, PatchableBarData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -282,7 +281,7 @@ namespace MgmtLRO
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -295,7 +294,7 @@ namespace MgmtLRO
         /// <param name="data"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="barName"/> or <paramref name="data"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string barName, PatchableBarData data, CancellationToken cancellationToken = default)
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string barName, PatchableBarData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -320,7 +319,7 @@ namespace MgmtLRO
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -342,7 +341,7 @@ namespace MgmtLRO
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -439,7 +438,7 @@ namespace MgmtLRO
             uri.AppendPath(barName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -449,7 +448,7 @@ namespace MgmtLRO
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="barName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string barName, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> DeleteAsync(string subscriptionId, string resourceGroupName, string barName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -471,7 +470,7 @@ namespace MgmtLRO
                 case 200:
                 case 201:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -483,7 +482,7 @@ namespace MgmtLRO
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="barName"/> is null. </exception>
-        public Response Delete(string subscriptionId, string resourceGroupName, string barName, CancellationToken cancellationToken = default)
+        public HttpMessage Delete(string subscriptionId, string resourceGroupName, string barName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -505,7 +504,7 @@ namespace MgmtLRO
                 case 200:
                 case 201:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
 {
     internal partial class VirtualMachineScaleSetRollingUpgradesRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Sample
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<VirtualMachineScaleSetRollingUpgradesRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateCancelRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName)
@@ -57,7 +57,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/rollingUpgrades/cancel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/osRollingUpgrade", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -229,7 +229,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/extensionRollingUpgrade", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -316,7 +316,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

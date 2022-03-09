@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample
 {
     internal partial class VirtualMachineScaleSetsRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<VirtualMachineScaleSetsRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters)
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Sample
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -162,7 +162,7 @@ namespace Azure.ResourceManager.Sample
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -172,13 +172,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="data"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="options"/> is null. </exception>
-        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data, CancellationToken cancellationToken = default)
->>>>>>> upstream/feature/v3
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -214,13 +209,8 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="data"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="options"/> is null. </exception>
-        public HttpMessage Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="data"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data, CancellationToken cancellationToken = default)
->>>>>>> upstream/feature/v3
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, PatchableVirtualMachineScaleSetData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -265,7 +255,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(vmScaleSetName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -353,7 +343,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -458,7 +448,7 @@ namespace Azure.ResourceManager.Sample
                 content.JsonWriter.WriteObjectValue(vmInstanceIDs);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -550,7 +540,7 @@ namespace Azure.ResourceManager.Sample
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(vmInstanceIDs);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -647,7 +637,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -740,7 +730,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -821,7 +811,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -896,7 +886,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -991,7 +981,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1096,7 +1086,7 @@ namespace Azure.ResourceManager.Sample
                 content.JsonWriter.WriteObjectValue(vmInstanceIDs);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1193,7 +1183,7 @@ namespace Azure.ResourceManager.Sample
                 content.JsonWriter.WriteObjectValue(vmInstanceIDs);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1288,7 +1278,7 @@ namespace Azure.ResourceManager.Sample
                 content.JsonWriter.WriteObjectValue(vmInstanceIDs);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1383,7 +1373,7 @@ namespace Azure.ResourceManager.Sample
                 content.JsonWriter.WriteObjectValue(vmInstanceIDs);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1478,7 +1468,7 @@ namespace Azure.ResourceManager.Sample
                 content.JsonWriter.WriteObjectValue(vmInstanceIDs);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1570,7 +1560,7 @@ namespace Azure.ResourceManager.Sample
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(vmInstanceIDs);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1673,7 +1663,7 @@ namespace Azure.ResourceManager.Sample
                 content.JsonWriter.WriteObjectValue(vmScaleSetReimageInput);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1768,7 +1758,7 @@ namespace Azure.ResourceManager.Sample
                 content.JsonWriter.WriteObjectValue(vmInstanceIDs);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1858,7 +1848,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("platformUpdateDomain", platformUpdateDomain, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1958,7 +1948,7 @@ namespace Azure.ResourceManager.Sample
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -2056,7 +2046,7 @@ namespace Azure.ResourceManager.Sample
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -2146,7 +2136,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -2234,7 +2224,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -2312,7 +2302,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -2410,7 +2400,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

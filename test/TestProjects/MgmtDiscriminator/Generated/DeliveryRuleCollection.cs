@@ -71,8 +71,8 @@ namespace MgmtDiscriminator
             scope.Start();
             try
             {
-                var response = await _deliveryRuleRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, body, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtDiscriminatorArmOperation<DeliveryRule>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, body).Request, response, OperationFinalStateVia.Location);
+                var message = await _deliveryRuleRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, body, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtDiscriminatorArmOperation<DeliveryRule>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -104,8 +104,8 @@ namespace MgmtDiscriminator
             scope.Start();
             try
             {
-                var response = _deliveryRuleRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, name, body, cancellationToken);
-                var operation = new MgmtDiscriminatorArmOperation<DeliveryRule>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, body).Request, response, OperationFinalStateVia.Location);
+                var message = _deliveryRuleRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, name, body, cancellationToken);
+                var operation = new MgmtDiscriminatorArmOperation<DeliveryRule>(new DeliveryRuleOperationSource(Client), _deliveryRuleClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

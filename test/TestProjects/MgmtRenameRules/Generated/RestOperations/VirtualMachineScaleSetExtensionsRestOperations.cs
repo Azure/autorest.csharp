@@ -18,7 +18,7 @@ namespace MgmtRenameRules
 {
     internal partial class VirtualMachineScaleSetExtensionsRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace MgmtRenameRules
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<VirtualMachineScaleSetExtensionsRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionData extensionParameters)
@@ -64,7 +64,7 @@ namespace MgmtRenameRules
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(extensionParameters);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -176,7 +176,7 @@ namespace MgmtRenameRules
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -187,13 +187,8 @@ namespace MgmtRenameRules
         /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
         /// <param name="data"> Parameters supplied to the Update VM scale set Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="vmssExtensionName"/> or <paramref name="options"/> is null. </exception>
-        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionUpdateOptions options, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="vmssExtensionName"/> or <paramref name="data"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, PatchableVirtualMachineScaleSetExtensionData data, CancellationToken cancellationToken = default)
->>>>>>> upstream/feature/v3
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, PatchableVirtualMachineScaleSetExtensionData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -235,13 +230,8 @@ namespace MgmtRenameRules
         /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
         /// <param name="data"> Parameters supplied to the Update VM scale set Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="vmssExtensionName"/> or <paramref name="options"/> is null. </exception>
-        public HttpMessage Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, VirtualMachineScaleSetExtensionUpdateOptions options, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, <paramref name="vmssExtensionName"/> or <paramref name="data"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, PatchableVirtualMachineScaleSetExtensionData data, CancellationToken cancellationToken = default)
->>>>>>> upstream/feature/v3
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, string vmssExtensionName, PatchableVirtualMachineScaleSetExtensionData data, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -293,7 +283,7 @@ namespace MgmtRenameRules
             uri.AppendPath(vmssExtensionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -397,7 +387,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -508,7 +498,7 @@ namespace MgmtRenameRules
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -596,7 +586,7 @@ namespace MgmtRenameRules
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

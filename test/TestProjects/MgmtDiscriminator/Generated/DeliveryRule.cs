@@ -143,8 +143,8 @@ namespace MgmtDiscriminator
             scope.Start();
             try
             {
-                var response = await _deliveryRuleRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtDiscriminatorArmOperation(_deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var message = await _deliveryRuleRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtDiscriminatorArmOperation(_deliveryRuleClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -169,8 +169,8 @@ namespace MgmtDiscriminator
             scope.Start();
             try
             {
-                var response = _deliveryRuleRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new MgmtDiscriminatorArmOperation(_deliveryRuleClientDiagnostics, Pipeline, _deliveryRuleRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
+                var message = _deliveryRuleRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new MgmtDiscriminatorArmOperation(_deliveryRuleClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;

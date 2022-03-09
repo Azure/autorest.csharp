@@ -18,7 +18,7 @@ namespace Azure.Management.Storage
 {
     internal partial class BlobContainersRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
             _apiVersion = apiVersion ?? "2021-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = UserAgentValue.FromType<BlobContainersRestOperations>(applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize, string filter, ListContainersInclude? include)
@@ -71,7 +71,7 @@ namespace Azure.Management.Storage
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -177,7 +177,7 @@ namespace Azure.Management.Storage
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(blobContainer);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -299,7 +299,7 @@ namespace Azure.Management.Storage
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(blobContainer);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -415,7 +415,7 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -524,7 +524,7 @@ namespace Azure.Management.Storage
             uri.AppendPath(containerName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -627,7 +627,7 @@ namespace Azure.Management.Storage
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(legalHold);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -748,7 +748,7 @@ namespace Azure.Management.Storage
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(legalHold);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -877,7 +877,7 @@ namespace Azure.Management.Storage
                 content.JsonWriter.WriteObjectValue(parameters);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -993,7 +993,7 @@ namespace Azure.Management.Storage
                 request.Headers.Add("If-Match", ifMatch);
             }
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1108,7 +1108,7 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("If-Match", ifMatch);
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1226,7 +1226,7 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("If-Match", ifMatch);
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1351,7 +1351,7 @@ namespace Azure.Management.Storage
                 content.JsonWriter.WriteObjectValue(parameters);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1477,7 +1477,7 @@ namespace Azure.Management.Storage
                 content.JsonWriter.WriteObjectValue(parameters);
                 request.Content = content;
             }
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1586,7 +1586,7 @@ namespace Azure.Management.Storage
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -1676,7 +1676,7 @@ namespace Azure.Management.Storage
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 

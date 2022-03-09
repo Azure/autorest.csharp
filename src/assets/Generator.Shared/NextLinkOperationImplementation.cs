@@ -29,7 +29,8 @@ namespace Azure.Core
         private readonly HttpPipeline _pipeline;
         private readonly string? _apiVersion;
         private readonly string? _userAgent;
-        private bool _isArmOperation => !string.IsNullOrEmpty(_userAgent);
+        private readonly bool _isArmOperation;
+
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
@@ -63,7 +64,8 @@ namespace Azure.Core
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
             _apiVersion = apiVersion;
-            _userAgent = request.Headers.TryGetValues(HttpHeader.Names.UserAgent, out IEnumerable<string>? userAgent) ? string.Join(" ", userAgent) : null;
+            _isArmOperation = ArmOperationHelpers(request, out string? userAgent);
+            _userAgent = userAgent;
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
@@ -243,9 +245,9 @@ namespace Azure.Core
             HttpMessage message = _pipeline.CreateMessage();
             Request request = message.Request;
             request.Method = RequestMethod.Get;
-            if (!string.IsNullOrEmpty(_userAgent))
+            if (_isArmOperation)
             {
-                message.SetUserAgentString(new UserAgentValue(GetType()));
+                message.SetProperty("UserAgentOverride", _userAgent!);
             }
             if (Uri.TryCreate(uri, UriKind.Absolute, out var nextLink) && nextLink.Scheme != "file")
             {
@@ -362,6 +364,21 @@ namespace Azure.Core
             }
 
             public ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken) => new(_operationState);
+        }
+
+        private static bool ArmOperationHelpers(Request request, out string? userAgent)
+        {
+            userAgent = null;
+            if (request.Headers.TryGetValues(HttpHeader.Names.UserAgent, out IEnumerable<string>? userAgentHeader))
+            {
+                string userAgentString = string.Join(" ", userAgentHeader);
+                if (userAgentString.IndexOf("azsdk-net-ResourceManager", StringComparison.Ordinal) >= 0)
+                {
+                    userAgent = userAgentString;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

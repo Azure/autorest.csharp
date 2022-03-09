@@ -12,14 +12,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 using MgmtDiscriminator.Models;
 
 namespace MgmtDiscriminator
 {
     internal partial class DeliveryRulesRestOperations
     {
-        private readonly string _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
@@ -40,7 +39,7 @@ namespace MgmtDiscriminator
             _apiVersion = apiVersion ?? "2020-06-01";
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
@@ -58,7 +57,7 @@ namespace MgmtDiscriminator
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -142,7 +141,7 @@ namespace MgmtDiscriminator
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -244,7 +243,7 @@ namespace MgmtDiscriminator
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(body);
             request.Content = content;
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -255,7 +254,7 @@ namespace MgmtDiscriminator
         /// <param name="body"> Endpoint properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public async Task<Response> CreateAsync(string subscriptionId, string resourceGroupName, string name, DeliveryRuleData body, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> CreateAsync(string subscriptionId, string resourceGroupName, string name, DeliveryRuleData body, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -281,7 +280,7 @@ namespace MgmtDiscriminator
                 case 200:
                 case 201:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -294,7 +293,7 @@ namespace MgmtDiscriminator
         /// <param name="body"> Endpoint properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public Response Create(string subscriptionId, string resourceGroupName, string name, DeliveryRuleData body, CancellationToken cancellationToken = default)
+        public HttpMessage Create(string subscriptionId, string resourceGroupName, string name, DeliveryRuleData body, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -320,7 +319,7 @@ namespace MgmtDiscriminator
                 case 200:
                 case 201:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -342,7 +341,7 @@ namespace MgmtDiscriminator
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetProperty("SDKUserAgent", _userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -352,7 +351,7 @@ namespace MgmtDiscriminator
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> DeleteAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -374,7 +373,7 @@ namespace MgmtDiscriminator
                 case 200:
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -386,7 +385,7 @@ namespace MgmtDiscriminator
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
-        public Response Delete(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public HttpMessage Delete(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -408,7 +407,7 @@ namespace MgmtDiscriminator
                 case 200:
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
