@@ -181,6 +181,16 @@ function  MockTestInit {
         $Script:RPMapping = [ordered]@{ }
     }
     process {
+        # Launch Mock-service-host
+        & git config --system core.longpaths true
+        PrepareMockServer
+        TrustMockServerCertificate
+        $task = {
+            StartMockServer
+            Pop-Location
+        }
+        Start-Job -ScriptBlock $task
+
         # Install npm and autorest
         if ($NpmInit) {
             & npm install -g autorest
