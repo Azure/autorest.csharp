@@ -13,7 +13,7 @@ namespace MgmtKeyvault.Models
         /// <summary> Initializes a new instance of MgmtKeyvaultSku. </summary>
         /// <param name="family"> SKU family name. </param>
         /// <param name="name"> SKU name to specify whether the key vault is a standard vault or a premium vault. </param>
-        public MgmtKeyvaultSku(SkuFamily family, SkuName name)
+        public MgmtKeyvaultSku(SkuFamily family, MgmtKeyvaultSkuName name)
         {
             Family = family;
             Name = name;
@@ -22,6 +22,6 @@ namespace MgmtKeyvault.Models
         /// <summary> SKU family name. </summary>
         public SkuFamily Family { get; set; }
         /// <summary> SKU name to specify whether the key vault is a standard vault or a premium vault. </summary>
-        public SkuName Name { get; set; }
+        public MgmtKeyvaultSkuName Name { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace MgmtPropertyChooser.Models
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan");
-                writer.WriteObjectValue(Plan);
+                JsonSerializer.Serialize(writer, Plan);
             }
             if (Optional.IsDefined(Identity))
             {

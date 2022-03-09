@@ -114,7 +114,7 @@ namespace Azure.Management.Storage
         internal static StorageAccountData DeserializeStorageAccountData(JsonElement element)
         {
             Optional<StorageSku> sku = default;
-            Optional<Kind> kind = default;
+            Optional<StorageKind> kind = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<ExtendedLocation> extendedLocation = default;
             IDictionary<string, string> tags = default;
@@ -175,7 +175,7 @@ namespace Azure.Management.Storage
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    kind = new Kind(property.Value.GetString());
+                    kind = new StorageKind(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("identity"))
