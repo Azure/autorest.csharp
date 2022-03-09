@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         protected virtual void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType lroType, CSharpType helperType)
         {
-            writer.Append($"internal {lroType.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(HttpMessage)} message, {typeof(Response)} response");
+            writer.Append($"internal {lroType.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
             if (pagingResponse != null)
             {
@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Append($"this, ");
                 }
-                writer.Line($"clientDiagnostics, pipeline, message, response, { typeof(OperationFinalStateVia)}.{ operation.FinalStateVia}, { operation.Diagnostics.ScopeName:L});");
+                writer.Line($"clientDiagnostics, pipeline, request, response, { typeof(OperationFinalStateVia)}.{ operation.FinalStateVia}, { operation.Diagnostics.ScopeName:L});");
 
                 if (pagingResponse != null)
                 {

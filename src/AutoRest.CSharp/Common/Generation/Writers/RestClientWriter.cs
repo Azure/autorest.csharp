@@ -34,8 +34,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     WriteClientCtor(writer, restClient, cs);
 
-                    WriteHelperMethod(writer);
-
                     var responseClassifierTypes = new List<LowLevelClientWriter.ResponseClassifierType>();
                     foreach (var method in restClient.Methods)
                     {
@@ -115,8 +113,9 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        protected virtual void WriteHelperMethod(CodeWriter writer)
+        protected virtual bool IsMgmtPlaneLRO(RestClientMethod operation)
         {
+            return false;
         }
 
         private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
@@ -177,7 +176,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 null when headerModelType != null => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
                 { } when headerModelType == null => new CSharpType(typeof(Response<>), bodyType),
                 { } => new CSharpType(typeof(ResponseWithHeaders<>), bodyType, headerModelType),
-                _ => new CSharpType(typeof(Response)),
+                _ => IsMgmtPlaneLRO(operation) ? new CSharpType(typeof(HttpMessage)) : new CSharpType(typeof(Response)),
             };
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
             var parameters = operation.Parameters;
@@ -336,7 +335,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         switch (kind)
                         {
                             case ReturnKind.Response:
-                                writer.Append($"return {responseVariable};");
+                                writer.Append($"return {(IsMgmtPlaneLRO(operation) ? message.ActualName : responseVariable)};");
                                 break;
                             case ReturnKind.Headers:
                                 writer.Append($"return {typeof(ResponseWithHeaders)}.FromValue(headers, {responseVariable});");

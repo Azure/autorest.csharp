@@ -71,8 +71,8 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = await _workspaceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtParamOrderingArmOperation<Workspace>(new WorkspaceOperationSource(Client), _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters), response, OperationFinalStateVia.Location, _workspaceRestClient.GetUserAgent());
+                var message = await _workspaceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtParamOrderingArmOperation<Workspace>(new WorkspaceOperationSource(Client), _workspaceClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -104,8 +104,8 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var response = _workspaceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
-                var operation = new MgmtParamOrderingArmOperation<Workspace>(new WorkspaceOperationSource(Client), _workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters), response, OperationFinalStateVia.Location, _workspaceRestClient.GetUserAgent());
+                var message = _workspaceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, parameters, cancellationToken);
+                var operation = new MgmtParamOrderingArmOperation<Workspace>(new WorkspaceOperationSource(Client), _workspaceClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

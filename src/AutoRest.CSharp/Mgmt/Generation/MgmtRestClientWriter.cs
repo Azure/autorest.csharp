@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
@@ -29,6 +30,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return true;
         }
 
+        protected override bool IsMgmtPlaneLRO(RestClientMethod operation)
+        {
+            return operation.Operation.IsLongRunning;
+        }
+
         protected override void WriteAdditionalCtorBody(CodeWriter writer, RestClient restClient)
         {
             writer.Line($"_userAgent = {typeof(UserAgentValue)}.FromType<{restClient.Type.Name}>({ApplicationIdVariable});");
@@ -37,12 +43,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override void WriteAdditionalXmlDocumentationParameters(CodeWriter writer)
         {
             writer.WriteXmlDocumentationParameter(ApplicationIdVariable, $"The application id to use for user agent.");
-        }
-
-        protected override void WriteHelperMethod(CodeWriter writer)
-        {
-            writer.Line($"internal string GetUserAgent() => {UserAgentField}.ToString();");
-            writer.Line();
         }
     }
 }

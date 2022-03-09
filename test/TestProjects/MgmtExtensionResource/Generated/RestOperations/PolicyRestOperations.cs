@@ -42,8 +42,6 @@ namespace MgmtExtensionResource
             _userAgent = UserAgentValue.FromType<PolicyRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCheckDnsNameAvailabilityRequest(string subscriptionId, string location, string domainNameLabel)
         {
             var message = _pipeline.CreateMessage();

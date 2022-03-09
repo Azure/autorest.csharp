@@ -24,11 +24,11 @@ namespace Azure.Core
         public OperationOrResponseInternals(
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
-            HttpMessage message,
+            Request originalRequest,
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, message, originalResponse, finalStateVia), originalResponse, scopeName, null, new ExponentialDelayStrategy()))
+            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest, originalResponse, finalStateVia), originalResponse, scopeName, null, new ExponentialDelayStrategy()))
         {
         }
 

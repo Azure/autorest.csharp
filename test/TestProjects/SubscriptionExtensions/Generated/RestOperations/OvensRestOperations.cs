@@ -42,8 +42,6 @@ namespace SubscriptionExtensions
             _userAgent = UserAgentValue.FromType<OvensRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListAllRequest(string subscriptionId, string resourceGroupName, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
@@ -164,7 +162,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -189,7 +187,7 @@ namespace SubscriptionExtensions
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -202,7 +200,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
+        public HttpMessage CreateOrUpdate(string subscriptionId, string resourceGroupName, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -227,7 +225,7 @@ namespace SubscriptionExtensions
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

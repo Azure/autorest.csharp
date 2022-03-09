@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsPutAsyncRetryFailedOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LROsPutAsyncRetryFailedOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsPutAsyncRetryFailedOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncRetryFailedOperation");
         }
 
         /// <inheritdoc />

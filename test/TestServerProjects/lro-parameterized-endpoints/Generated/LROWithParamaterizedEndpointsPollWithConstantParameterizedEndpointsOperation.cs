@@ -25,9 +25,9 @@ namespace lro_parameterized_endpoints
         {
         }
 
-        internal LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<string>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation");
+            _operation = new OperationInternals<string>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation");
         }
 
         /// <inheritdoc />

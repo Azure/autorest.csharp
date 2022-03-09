@@ -42,8 +42,6 @@ namespace SupersetInheritance
             _userAgent = UserAgentValue.FromType<SupersetModel2SRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters)
         {
             var message = _pipeline.CreateMessage();

@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LROsDeleteAsyncRetrycanceledOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LROsDeleteAsyncRetrycanceledOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsDeleteAsyncRetrycanceledOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncRetrycanceledOperation");
         }
 
         /// <inheritdoc />

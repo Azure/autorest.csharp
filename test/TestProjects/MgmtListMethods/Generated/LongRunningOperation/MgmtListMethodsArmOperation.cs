@@ -31,9 +31,9 @@ namespace MgmtListMethods
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtListMethodsArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
+        internal MgmtListMethodsArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtListMethodsArmOperation", userAgent);
+            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtListMethodsArmOperation");
         }
 
         /// <inheritdoc />

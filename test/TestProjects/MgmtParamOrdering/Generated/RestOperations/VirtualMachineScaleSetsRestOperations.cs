@@ -42,8 +42,6 @@ namespace MgmtParamOrdering
             _userAgent = UserAgentValue.FromType<VirtualMachineScaleSetsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters, string quick)
         {
             var message = _pipeline.CreateMessage();
@@ -80,7 +78,7 @@ namespace MgmtParamOrdering
         /// <param name="quick"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters, string quick = null, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters, string quick = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -105,7 +103,7 @@ namespace MgmtParamOrdering
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -119,7 +117,7 @@ namespace MgmtParamOrdering
         /// <param name="quick"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters, string quick = null, CancellationToken cancellationToken = default)
+        public HttpMessage CreateOrUpdate(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetData parameters, string quick = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -144,7 +142,7 @@ namespace MgmtParamOrdering
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -184,7 +182,7 @@ namespace MgmtParamOrdering
         /// <param name="options"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options = null, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -204,7 +202,7 @@ namespace MgmtParamOrdering
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -217,7 +215,7 @@ namespace MgmtParamOrdering
         /// <param name="options"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options = null, CancellationToken cancellationToken = default)
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetUpdateOptions options = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -237,7 +235,7 @@ namespace MgmtParamOrdering
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -270,7 +268,7 @@ namespace MgmtParamOrdering
         /// <param name="forceDeletion"> Optional parameter to force delete a VM scale set. (Feature in Preview). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> DeleteAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -292,7 +290,7 @@ namespace MgmtParamOrdering
                 case 200:
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -305,7 +303,7 @@ namespace MgmtParamOrdering
         /// <param name="forceDeletion"> Optional parameter to force delete a VM scale set. (Feature in Preview). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response Delete(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion, CancellationToken cancellationToken = default)
+        public HttpMessage Delete(string subscriptionId, string resourceGroupName, string vmScaleSetName, bool forceDeletion, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -327,7 +325,7 @@ namespace MgmtParamOrdering
                 case 200:
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -476,7 +474,7 @@ namespace MgmtParamOrdering
         /// <param name="expand"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response> DeallocateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> DeallocateAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -497,7 +495,7 @@ namespace MgmtParamOrdering
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -511,7 +509,7 @@ namespace MgmtParamOrdering
         /// <param name="expand"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response Deallocate(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, string expand = null, CancellationToken cancellationToken = default)
+        public HttpMessage Deallocate(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceIDs vmInstanceIDs = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -532,7 +530,7 @@ namespace MgmtParamOrdering
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -574,7 +572,7 @@ namespace MgmtParamOrdering
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIDs"/> is null. </exception>
-        public async Task<Response> DeleteInstancesAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> DeleteInstancesAsync(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -599,7 +597,7 @@ namespace MgmtParamOrdering
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -613,7 +611,7 @@ namespace MgmtParamOrdering
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/> or <paramref name="vmInstanceIDs"/> is null. </exception>
-        public Response DeleteInstances(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public HttpMessage DeleteInstances(string subscriptionId, string resourceGroupName, string vmScaleSetName, VirtualMachineScaleSetVMInstanceRequiredIDs vmInstanceIDs, bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -638,7 +636,7 @@ namespace MgmtParamOrdering
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

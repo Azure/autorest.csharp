@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsPutNonRetry201Creating400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LrosaDsPutNonRetry201Creating400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsPutNonRetry201Creating400Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutNonRetry201Creating400Operation");
         }
 
         /// <inheritdoc />

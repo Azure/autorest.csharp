@@ -42,8 +42,6 @@ namespace MgmtListMethods
             _userAgent = UserAgentValue.FromType<TenantTestsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateGetRequest(string tenantTestName, string expand)
         {
             var message = _pipeline.CreateMessage();
@@ -149,7 +147,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateAsync(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> CreateAsync(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
@@ -165,7 +163,7 @@ namespace MgmtListMethods
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -176,7 +174,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response Create(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public HttpMessage Create(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
@@ -192,7 +190,7 @@ namespace MgmtListMethods
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

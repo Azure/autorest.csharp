@@ -42,8 +42,6 @@ namespace MgmtKeyvault
             _userAgent = UserAgentValue.FromType<ManagedHsmsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -75,7 +73,7 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to create or update the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -100,7 +98,7 @@ namespace MgmtKeyvault
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -113,7 +111,7 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to create or update the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
+        public HttpMessage CreateOrUpdate(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -138,7 +136,7 @@ namespace MgmtKeyvault
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -175,7 +173,7 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -200,7 +198,7 @@ namespace MgmtKeyvault
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -213,7 +211,7 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string name, ManagedHsmData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -238,7 +236,7 @@ namespace MgmtKeyvault
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -270,7 +268,7 @@ namespace MgmtKeyvault
         /// <param name="name"> The name of the managed HSM Pool to delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> DeleteAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -292,7 +290,7 @@ namespace MgmtKeyvault
                 case 200:
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -304,7 +302,7 @@ namespace MgmtKeyvault
         /// <param name="name"> The name of the managed HSM Pool to delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
-        public Response Delete(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public HttpMessage Delete(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -326,7 +324,7 @@ namespace MgmtKeyvault
                 case 200:
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -796,7 +794,7 @@ namespace MgmtKeyvault
         /// <param name="name"> The name of the soft-deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="name"/> is null. </exception>
-        public async Task<Response> PurgeDeletedAsync(string subscriptionId, string location, string name, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> PurgeDeletedAsync(string subscriptionId, string location, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -816,7 +814,7 @@ namespace MgmtKeyvault
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -828,7 +826,7 @@ namespace MgmtKeyvault
         /// <param name="name"> The name of the soft-deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="name"/> is null. </exception>
-        public Response PurgeDeleted(string subscriptionId, string location, string name, CancellationToken cancellationToken = default)
+        public HttpMessage PurgeDeleted(string subscriptionId, string location, string name, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -848,7 +846,7 @@ namespace MgmtKeyvault
             switch (message.Response.Status)
             {
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

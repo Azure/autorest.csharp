@@ -41,8 +41,6 @@ namespace SingletonResource
             _userAgent = UserAgentValue.FromType<SingletonResourcesRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string parentName, SingletonResourceData parameters)
         {
             var message = _pipeline.CreateMessage();

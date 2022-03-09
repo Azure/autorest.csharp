@@ -42,8 +42,6 @@ namespace MgmtExpandResourceTypes
             _userAgent = UserAgentValue.FromType<RecordSetsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, RecordType recordType, string relativeRecordSetName, RecordSetData parameters, string ifMatch)
         {
             var message = _pipeline.CreateMessage();

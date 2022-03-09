@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsPutAsyncSubResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LROsPutAsyncSubResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<SubProduct>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsPutAsyncSubResourceOperation");
+            _operation = new OperationInternals<SubProduct>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncSubResourceOperation");
         }
 
         /// <inheritdoc />

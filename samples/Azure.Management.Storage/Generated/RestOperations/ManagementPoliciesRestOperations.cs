@@ -42,8 +42,6 @@ namespace Azure.Management.Storage
             _userAgent = UserAgentValue.FromType<ManagementPoliciesRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName)
         {
             var message = _pipeline.CreateMessage();

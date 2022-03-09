@@ -42,8 +42,6 @@ namespace MgmtScopeResource
             _userAgent = UserAgentValue.FromType<DeploymentsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal Azure.Core.HttpMessage CreateDeleteAtScopeRequest(string scope, string deploymentName)
         {
             var message = _pipeline.CreateMessage();
@@ -67,7 +65,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="deploymentName"/> is null. </exception>
-        public async Task<Response> DeleteAtScopeAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
+        public async Task<Azure.Core.HttpMessage> DeleteAtScopeAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -84,7 +82,7 @@ namespace MgmtScopeResource
             {
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -95,7 +93,7 @@ namespace MgmtScopeResource
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="deploymentName"/> is null. </exception>
-        public Response DeleteAtScope(string scope, string deploymentName, CancellationToken cancellationToken = default)
+        public Azure.Core.HttpMessage DeleteAtScope(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -112,7 +110,7 @@ namespace MgmtScopeResource
             {
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -234,7 +232,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAtScopeAsync(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
+        public async Task<Azure.Core.HttpMessage> CreateOrUpdateAtScopeAsync(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -255,7 +253,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -267,7 +265,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdateAtScope(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
+        public Azure.Core.HttpMessage CreateOrUpdateAtScope(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -288,7 +286,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -482,7 +480,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> ValidateAtScopeAsync(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
+        public async Task<Azure.Core.HttpMessage> ValidateAtScopeAsync(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -504,7 +502,7 @@ namespace MgmtScopeResource
                 case 200:
                 case 202:
                 case 400:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -516,7 +514,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response ValidateAtScope(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
+        public Azure.Core.HttpMessage ValidateAtScope(string scope, string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (scope == null)
             {
@@ -538,7 +536,7 @@ namespace MgmtScopeResource
                 case 200:
                 case 202:
                 case 400:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -736,7 +734,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> WhatIfAtTenantScopeAsync(string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public async Task<Azure.Core.HttpMessage> WhatIfAtTenantScopeAsync(string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
@@ -753,7 +751,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -764,7 +762,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response WhatIfAtTenantScope(string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public Azure.Core.HttpMessage WhatIfAtTenantScope(string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
@@ -781,7 +779,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -816,7 +814,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> WhatIfAtManagementGroupScopeAsync(string groupId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public async Task<Azure.Core.HttpMessage> WhatIfAtManagementGroupScopeAsync(string groupId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
@@ -837,7 +835,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -849,7 +847,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response WhatIfAtManagementGroupScope(string groupId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public Azure.Core.HttpMessage WhatIfAtManagementGroupScope(string groupId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
@@ -870,7 +868,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -905,7 +903,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to What If. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> WhatIfAtSubscriptionScopeAsync(string subscriptionId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public async Task<Azure.Core.HttpMessage> WhatIfAtSubscriptionScopeAsync(string subscriptionId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -926,7 +924,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -938,7 +936,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to What If. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response WhatIfAtSubscriptionScope(string subscriptionId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public Azure.Core.HttpMessage WhatIfAtSubscriptionScope(string subscriptionId, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -959,7 +957,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -997,7 +995,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> WhatIfAsync(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public async Task<Azure.Core.HttpMessage> WhatIfAsync(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1022,7 +1020,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1035,7 +1033,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response WhatIf(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public Azure.Core.HttpMessage WhatIf(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1060,7 +1058,7 @@ namespace MgmtScopeResource
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

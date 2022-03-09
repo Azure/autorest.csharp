@@ -42,8 +42,6 @@ namespace Azure.Management.Storage
             _userAgent = UserAgentValue.FromType<BlobContainersRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string accountName, int? maxpagesize, string filter, ListContainersInclude? include)
         {
             var message = _pipeline.CreateMessage();
@@ -1599,7 +1597,7 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is null. </exception>
-        public async Task<Response> ObjectLevelWormAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> ObjectLevelWormAsync(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1624,7 +1622,7 @@ namespace Azure.Management.Storage
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -1637,7 +1635,7 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="containerName"/> is null. </exception>
-        public Response ObjectLevelWorm(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
+        public HttpMessage ObjectLevelWorm(string subscriptionId, string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1662,7 +1660,7 @@ namespace Azure.Management.Storage
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

@@ -8,7 +8,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using MgmtRenameRules.Models;
@@ -41,8 +40,6 @@ namespace MgmtRenameRules
             _userAgent = UserAgentValue.FromType<LogAnalyticsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateExportRequestRateByIntervalRequest(string subscriptionId, string location, RequestRateByIntervalInput parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -72,7 +69,7 @@ namespace MgmtRenameRules
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> ExportRequestRateByIntervalAsync(string subscriptionId, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> ExportRequestRateByIntervalAsync(string subscriptionId, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -93,7 +90,7 @@ namespace MgmtRenameRules
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -105,7 +102,7 @@ namespace MgmtRenameRules
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public Response ExportRequestRateByInterval(string subscriptionId, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
+        public HttpMessage ExportRequestRateByInterval(string subscriptionId, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -126,7 +123,7 @@ namespace MgmtRenameRules
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -161,7 +158,7 @@ namespace MgmtRenameRules
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> ExportThrottledRequestsAsync(string subscriptionId, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> ExportThrottledRequestsAsync(string subscriptionId, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -182,7 +179,7 @@ namespace MgmtRenameRules
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -194,7 +191,7 @@ namespace MgmtRenameRules
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public Response ExportThrottledRequests(string subscriptionId, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
+        public HttpMessage ExportThrottledRequests(string subscriptionId, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -215,7 +212,7 @@ namespace MgmtRenameRules
             {
                 case 200:
                 case 202:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

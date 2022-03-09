@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation");
         }
 
         /// <inheritdoc />

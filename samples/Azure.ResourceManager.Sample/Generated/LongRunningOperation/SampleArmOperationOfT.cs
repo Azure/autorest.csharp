@@ -31,9 +31,9 @@ namespace Azure.ResourceManager.Sample
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal SampleArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
+        internal SampleArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "SampleArmOperation", userAgent);
+            _operation = new OperationOrResponseInternals<T>(source, clientDiagnostics, pipeline, request, response, finalStateVia, "SampleArmOperation");
         }
 
         /// <inheritdoc />

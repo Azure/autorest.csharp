@@ -42,8 +42,6 @@ namespace Azure.Management.Storage
             _userAgent = UserAgentValue.FromType<PrivateEndpointConnectionsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string accountName)
         {
             var message = _pipeline.CreateMessage();

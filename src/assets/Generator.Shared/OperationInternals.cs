@@ -25,9 +25,9 @@ namespace Azure.Core
 
         private readonly OperationInternal _operationInternal;
 
-        public OperationInternals(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response originalResponse, OperationFinalStateVia finalStateVia, string scopeName)
+        public OperationInternals(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request originalRequest, Response originalResponse, OperationFinalStateVia finalStateVia, string scopeName)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, message, originalResponse, finalStateVia);
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, originalRequest, originalResponse, finalStateVia);
             _operationInternal = new OperationInternal(clientDiagnostics, nextLinkOperation, originalResponse, scopeName);
         }
 

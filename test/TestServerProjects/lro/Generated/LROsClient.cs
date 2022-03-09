@@ -46,7 +46,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put200SucceededAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPut200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut200SucceededRequest(product), originalResponse);
+                return new LROsPut200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut200SucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -65,7 +65,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put200Succeeded(product, cancellationToken);
-                return new LROsPut200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut200SucceededRequest(product), originalResponse);
+                return new LROsPut200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut200SucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Patch200SucceededIgnoreHeadersAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPatch200SucceededIgnoreHeadersOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededIgnoreHeadersRequest(product), originalResponse);
+                return new LROsPatch200SucceededIgnoreHeadersOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededIgnoreHeadersRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -103,7 +103,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Patch200SucceededIgnoreHeaders(product, cancellationToken);
-                return new LROsPatch200SucceededIgnoreHeadersOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededIgnoreHeadersRequest(product), originalResponse);
+                return new LROsPatch200SucceededIgnoreHeadersOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededIgnoreHeadersRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -122,7 +122,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Patch201RetryWithAsyncHeaderAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPatch201RetryWithAsyncHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch201RetryWithAsyncHeaderRequest(product), originalResponse);
+                return new LROsPatch201RetryWithAsyncHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch201RetryWithAsyncHeaderRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -141,7 +141,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Patch201RetryWithAsyncHeader(product, cancellationToken);
-                return new LROsPatch201RetryWithAsyncHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch201RetryWithAsyncHeaderRequest(product), originalResponse);
+                return new LROsPatch201RetryWithAsyncHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch201RetryWithAsyncHeaderRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -160,7 +160,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Patch202RetryWithAsyncAndLocationHeaderAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPatch202RetryWithAsyncAndLocationHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch202RetryWithAsyncAndLocationHeaderRequest(product), originalResponse);
+                return new LROsPatch202RetryWithAsyncAndLocationHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch202RetryWithAsyncAndLocationHeaderRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -179,7 +179,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Patch202RetryWithAsyncAndLocationHeader(product, cancellationToken);
-                return new LROsPatch202RetryWithAsyncAndLocationHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch202RetryWithAsyncAndLocationHeaderRequest(product), originalResponse);
+                return new LROsPatch202RetryWithAsyncAndLocationHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch202RetryWithAsyncAndLocationHeaderRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put201SucceededAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPut201SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut201SucceededRequest(product), originalResponse);
+                return new LROsPut201SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut201SucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -217,7 +217,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put201Succeeded(product, cancellationToken);
-                return new LROsPut201SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut201SucceededRequest(product), originalResponse);
+                return new LROsPut201SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut201SucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -235,7 +235,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Post202ListAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsPost202ListOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost202ListRequest(), originalResponse);
+                return new LROsPost202ListOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost202ListRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -253,7 +253,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Post202List(cancellationToken);
-                return new LROsPost202ListOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost202ListRequest(), originalResponse);
+                return new LROsPost202ListOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost202ListRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -272,7 +272,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put200SucceededNoStateAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPut200SucceededNoStateOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut200SucceededNoStateRequest(product), originalResponse);
+                return new LROsPut200SucceededNoStateOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut200SucceededNoStateRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -291,7 +291,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put200SucceededNoState(product, cancellationToken);
-                return new LROsPut200SucceededNoStateOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut200SucceededNoStateRequest(product), originalResponse);
+                return new LROsPut200SucceededNoStateOperation(_clientDiagnostics, _pipeline, RestClient.CreatePut200SucceededNoStateRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -310,7 +310,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put202Retry200Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPut202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut202Retry200Request(product), originalResponse);
+                return new LROsPut202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut202Retry200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -329,7 +329,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put202Retry200(product, cancellationToken);
-                return new LROsPut202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut202Retry200Request(product), originalResponse);
+                return new LROsPut202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut202Retry200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -348,7 +348,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put201CreatingSucceeded200Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPut201CreatingSucceeded200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingSucceeded200Request(product), originalResponse);
+                return new LROsPut201CreatingSucceeded200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingSucceeded200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -367,7 +367,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put201CreatingSucceeded200(product, cancellationToken);
-                return new LROsPut201CreatingSucceeded200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingSucceeded200Request(product), originalResponse);
+                return new LROsPut201CreatingSucceeded200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingSucceeded200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -386,7 +386,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put200UpdatingSucceeded204Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPut200UpdatingSucceeded204Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut200UpdatingSucceeded204Request(product), originalResponse);
+                return new LROsPut200UpdatingSucceeded204Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut200UpdatingSucceeded204Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -405,7 +405,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put200UpdatingSucceeded204(product, cancellationToken);
-                return new LROsPut200UpdatingSucceeded204Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut200UpdatingSucceeded204Request(product), originalResponse);
+                return new LROsPut200UpdatingSucceeded204Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut200UpdatingSucceeded204Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -424,7 +424,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put201CreatingFailed200Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPut201CreatingFailed200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingFailed200Request(product), originalResponse);
+                return new LROsPut201CreatingFailed200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingFailed200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -443,7 +443,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put201CreatingFailed200(product, cancellationToken);
-                return new LROsPut201CreatingFailed200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingFailed200Request(product), originalResponse);
+                return new LROsPut201CreatingFailed200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut201CreatingFailed200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -462,7 +462,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Put200Acceptedcanceled200Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPut200Acceptedcanceled200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut200Acceptedcanceled200Request(product), originalResponse);
+                return new LROsPut200Acceptedcanceled200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut200Acceptedcanceled200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -481,7 +481,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Put200Acceptedcanceled200(product, cancellationToken);
-                return new LROsPut200Acceptedcanceled200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut200Acceptedcanceled200Request(product), originalResponse);
+                return new LROsPut200Acceptedcanceled200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePut200Acceptedcanceled200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -500,7 +500,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutNoHeaderInRetryAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPutNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutNoHeaderInRetryRequest(product), originalResponse);
+                return new LROsPutNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutNoHeaderInRetryRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -519,7 +519,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutNoHeaderInRetry(product, cancellationToken);
-                return new LROsPutNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutNoHeaderInRetryRequest(product), originalResponse);
+                return new LROsPutNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutNoHeaderInRetryRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -538,7 +538,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPutAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetrySucceededRequest(product), originalResponse);
+                return new LROsPutAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetrySucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -557,7 +557,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutAsyncRetrySucceeded(product, cancellationToken);
-                return new LROsPutAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetrySucceededRequest(product), originalResponse);
+                return new LROsPutAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetrySucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -576,7 +576,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutAsyncNoRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPutAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoRetrySucceededRequest(product), originalResponse);
+                return new LROsPutAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoRetrySucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -595,7 +595,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutAsyncNoRetrySucceeded(product, cancellationToken);
-                return new LROsPutAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoRetrySucceededRequest(product), originalResponse);
+                return new LROsPutAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoRetrySucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -614,7 +614,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutAsyncRetryFailedAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPutAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetryFailedRequest(product), originalResponse);
+                return new LROsPutAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetryFailedRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -633,7 +633,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutAsyncRetryFailed(product, cancellationToken);
-                return new LROsPutAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetryFailedRequest(product), originalResponse);
+                return new LROsPutAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncRetryFailedRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -652,7 +652,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutAsyncNoRetrycanceledAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPutAsyncNoRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoRetrycanceledRequest(product), originalResponse);
+                return new LROsPutAsyncNoRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoRetrycanceledRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -671,7 +671,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutAsyncNoRetrycanceled(product, cancellationToken);
-                return new LROsPutAsyncNoRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoRetrycanceledRequest(product), originalResponse);
+                return new LROsPutAsyncNoRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoRetrycanceledRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -690,7 +690,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutAsyncNoHeaderInRetryAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPutAsyncNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoHeaderInRetryRequest(product), originalResponse);
+                return new LROsPutAsyncNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoHeaderInRetryRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -709,7 +709,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutAsyncNoHeaderInRetry(product, cancellationToken);
-                return new LROsPutAsyncNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoHeaderInRetryRequest(product), originalResponse);
+                return new LROsPutAsyncNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNoHeaderInRetryRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -728,7 +728,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutNonResourceAsync(sku, cancellationToken).ConfigureAwait(false);
-                return new LROsPutNonResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutNonResourceRequest(sku), originalResponse);
+                return new LROsPutNonResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutNonResourceRequest(sku).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -747,7 +747,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutNonResource(sku, cancellationToken);
-                return new LROsPutNonResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutNonResourceRequest(sku), originalResponse);
+                return new LROsPutNonResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutNonResourceRequest(sku).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -766,7 +766,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutAsyncNonResourceAsync(sku, cancellationToken).ConfigureAwait(false);
-                return new LROsPutAsyncNonResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNonResourceRequest(sku), originalResponse);
+                return new LROsPutAsyncNonResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNonResourceRequest(sku).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -785,7 +785,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutAsyncNonResource(sku, cancellationToken);
-                return new LROsPutAsyncNonResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNonResourceRequest(sku), originalResponse);
+                return new LROsPutAsyncNonResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncNonResourceRequest(sku).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -804,7 +804,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutSubResourceAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPutSubResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutSubResourceRequest(product), originalResponse);
+                return new LROsPutSubResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutSubResourceRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -823,7 +823,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutSubResource(product, cancellationToken);
-                return new LROsPutSubResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutSubResourceRequest(product), originalResponse);
+                return new LROsPutSubResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutSubResourceRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -842,7 +842,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PutAsyncSubResourceAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPutAsyncSubResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncSubResourceRequest(product), originalResponse);
+                return new LROsPutAsyncSubResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncSubResourceRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -861,7 +861,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PutAsyncSubResource(product, cancellationToken);
-                return new LROsPutAsyncSubResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncSubResourceRequest(product), originalResponse);
+                return new LROsPutAsyncSubResourceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePutAsyncSubResourceRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -879,7 +879,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteProvisioning202Accepted200SucceededAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteProvisioning202Accepted200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202Accepted200SucceededRequest(), originalResponse);
+                return new LROsDeleteProvisioning202Accepted200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202Accepted200SucceededRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -897,7 +897,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteProvisioning202Accepted200Succeeded(cancellationToken);
-                return new LROsDeleteProvisioning202Accepted200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202Accepted200SucceededRequest(), originalResponse);
+                return new LROsDeleteProvisioning202Accepted200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202Accepted200SucceededRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -915,7 +915,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteProvisioning202DeletingFailed200Async(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteProvisioning202DeletingFailed200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202DeletingFailed200Request(), originalResponse);
+                return new LROsDeleteProvisioning202DeletingFailed200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202DeletingFailed200Request().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -933,7 +933,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteProvisioning202DeletingFailed200(cancellationToken);
-                return new LROsDeleteProvisioning202DeletingFailed200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202DeletingFailed200Request(), originalResponse);
+                return new LROsDeleteProvisioning202DeletingFailed200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202DeletingFailed200Request().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -951,7 +951,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteProvisioning202Deletingcanceled200Async(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteProvisioning202Deletingcanceled200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202Deletingcanceled200Request(), originalResponse);
+                return new LROsDeleteProvisioning202Deletingcanceled200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202Deletingcanceled200Request().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -969,7 +969,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteProvisioning202Deletingcanceled200(cancellationToken);
-                return new LROsDeleteProvisioning202Deletingcanceled200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202Deletingcanceled200Request(), originalResponse);
+                return new LROsDeleteProvisioning202Deletingcanceled200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteProvisioning202Deletingcanceled200Request().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -987,7 +987,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Delete204SucceededAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsDelete204SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDelete204SucceededRequest(), originalResponse);
+                return new LROsDelete204SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDelete204SucceededRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1005,7 +1005,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Delete204Succeeded(cancellationToken);
-                return new LROsDelete204SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDelete204SucceededRequest(), originalResponse);
+                return new LROsDelete204SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDelete204SucceededRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1023,7 +1023,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Delete202Retry200Async(cancellationToken).ConfigureAwait(false);
-                return new LROsDelete202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDelete202Retry200Request(), originalResponse);
+                return new LROsDelete202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDelete202Retry200Request().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1041,7 +1041,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Delete202Retry200(cancellationToken);
-                return new LROsDelete202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDelete202Retry200Request(), originalResponse);
+                return new LROsDelete202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreateDelete202Retry200Request().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1059,7 +1059,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Delete202NoRetry204Async(cancellationToken).ConfigureAwait(false);
-                return new LROsDelete202NoRetry204Operation(_clientDiagnostics, _pipeline, RestClient.CreateDelete202NoRetry204Request(), originalResponse);
+                return new LROsDelete202NoRetry204Operation(_clientDiagnostics, _pipeline, RestClient.CreateDelete202NoRetry204Request().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1077,7 +1077,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Delete202NoRetry204(cancellationToken);
-                return new LROsDelete202NoRetry204Operation(_clientDiagnostics, _pipeline, RestClient.CreateDelete202NoRetry204Request(), originalResponse);
+                return new LROsDelete202NoRetry204Operation(_clientDiagnostics, _pipeline, RestClient.CreateDelete202NoRetry204Request().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1095,7 +1095,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteNoHeaderInRetryAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteNoHeaderInRetryRequest(), originalResponse);
+                return new LROsDeleteNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteNoHeaderInRetryRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1113,7 +1113,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteNoHeaderInRetry(cancellationToken);
-                return new LROsDeleteNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteNoHeaderInRetryRequest(), originalResponse);
+                return new LROsDeleteNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteNoHeaderInRetryRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1131,7 +1131,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteAsyncNoHeaderInRetryAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteAsyncNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncNoHeaderInRetryRequest(), originalResponse);
+                return new LROsDeleteAsyncNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncNoHeaderInRetryRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1149,7 +1149,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteAsyncNoHeaderInRetry(cancellationToken);
-                return new LROsDeleteAsyncNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncNoHeaderInRetryRequest(), originalResponse);
+                return new LROsDeleteAsyncNoHeaderInRetryOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncNoHeaderInRetryRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1167,7 +1167,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteAsyncRetrySucceededAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetrySucceededRequest(), originalResponse);
+                return new LROsDeleteAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetrySucceededRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1185,7 +1185,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteAsyncRetrySucceeded(cancellationToken);
-                return new LROsDeleteAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetrySucceededRequest(), originalResponse);
+                return new LROsDeleteAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetrySucceededRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1203,7 +1203,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteAsyncNoRetrySucceededAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncNoRetrySucceededRequest(), originalResponse);
+                return new LROsDeleteAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncNoRetrySucceededRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1221,7 +1221,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteAsyncNoRetrySucceeded(cancellationToken);
-                return new LROsDeleteAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncNoRetrySucceededRequest(), originalResponse);
+                return new LROsDeleteAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncNoRetrySucceededRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1239,7 +1239,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteAsyncRetryFailedAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetryFailedRequest(), originalResponse);
+                return new LROsDeleteAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetryFailedRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1257,7 +1257,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteAsyncRetryFailed(cancellationToken);
-                return new LROsDeleteAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetryFailedRequest(), originalResponse);
+                return new LROsDeleteAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetryFailedRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1275,7 +1275,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.DeleteAsyncRetrycanceledAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsDeleteAsyncRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetrycanceledRequest(), originalResponse);
+                return new LROsDeleteAsyncRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetrycanceledRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1293,7 +1293,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.DeleteAsyncRetrycanceled(cancellationToken);
-                return new LROsDeleteAsyncRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetrycanceledRequest(), originalResponse);
+                return new LROsDeleteAsyncRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteAsyncRetrycanceledRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1311,7 +1311,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Post200WithPayloadAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsPost200WithPayloadOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost200WithPayloadRequest(), originalResponse);
+                return new LROsPost200WithPayloadOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost200WithPayloadRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1329,7 +1329,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Post200WithPayload(cancellationToken);
-                return new LROsPost200WithPayloadOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost200WithPayloadRequest(), originalResponse);
+                return new LROsPost200WithPayloadOperation(_clientDiagnostics, _pipeline, RestClient.CreatePost200WithPayloadRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1348,7 +1348,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Post202Retry200Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPost202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202Retry200Request(product), originalResponse);
+                return new LROsPost202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202Retry200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1367,7 +1367,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Post202Retry200(product, cancellationToken);
-                return new LROsPost202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202Retry200Request(product), originalResponse);
+                return new LROsPost202Retry200Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202Retry200Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1386,7 +1386,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.Post202NoRetry204Async(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPost202NoRetry204Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202NoRetry204Request(product), originalResponse);
+                return new LROsPost202NoRetry204Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202NoRetry204Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1405,7 +1405,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.Post202NoRetry204(product, cancellationToken);
-                return new LROsPost202NoRetry204Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202NoRetry204Request(product), originalResponse);
+                return new LROsPost202NoRetry204Operation(_clientDiagnostics, _pipeline, RestClient.CreatePost202NoRetry204Request(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1423,7 +1423,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PostDoubleHeadersFinalLocationGetAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsPostDoubleHeadersFinalLocationGetOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalLocationGetRequest(), originalResponse);
+                return new LROsPostDoubleHeadersFinalLocationGetOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalLocationGetRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1441,7 +1441,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PostDoubleHeadersFinalLocationGet(cancellationToken);
-                return new LROsPostDoubleHeadersFinalLocationGetOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalLocationGetRequest(), originalResponse);
+                return new LROsPostDoubleHeadersFinalLocationGetOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalLocationGetRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1459,7 +1459,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PostDoubleHeadersFinalAzureHeaderGetAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsPostDoubleHeadersFinalAzureHeaderGetOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalAzureHeaderGetRequest(), originalResponse);
+                return new LROsPostDoubleHeadersFinalAzureHeaderGetOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalAzureHeaderGetRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1477,7 +1477,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PostDoubleHeadersFinalAzureHeaderGet(cancellationToken);
-                return new LROsPostDoubleHeadersFinalAzureHeaderGetOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalAzureHeaderGetRequest(), originalResponse);
+                return new LROsPostDoubleHeadersFinalAzureHeaderGetOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalAzureHeaderGetRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1495,7 +1495,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(cancellationToken).ConfigureAwait(false);
-                return new LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(), originalResponse);
+                return new LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1513,7 +1513,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PostDoubleHeadersFinalAzureHeaderGetDefault(cancellationToken);
-                return new LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(), originalResponse);
+                return new LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest().Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1532,7 +1532,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PostAsyncRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPostAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrySucceededRequest(product), originalResponse);
+                return new LROsPostAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrySucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1551,7 +1551,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PostAsyncRetrySucceeded(product, cancellationToken);
-                return new LROsPostAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrySucceededRequest(product), originalResponse);
+                return new LROsPostAsyncRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrySucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1570,7 +1570,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PostAsyncNoRetrySucceededAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPostAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncNoRetrySucceededRequest(product), originalResponse);
+                return new LROsPostAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncNoRetrySucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1589,7 +1589,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PostAsyncNoRetrySucceeded(product, cancellationToken);
-                return new LROsPostAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncNoRetrySucceededRequest(product), originalResponse);
+                return new LROsPostAsyncNoRetrySucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncNoRetrySucceededRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1608,7 +1608,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PostAsyncRetryFailedAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPostAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetryFailedRequest(product), originalResponse);
+                return new LROsPostAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetryFailedRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1627,7 +1627,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PostAsyncRetryFailed(product, cancellationToken);
-                return new LROsPostAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetryFailedRequest(product), originalResponse);
+                return new LROsPostAsyncRetryFailedOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetryFailedRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1646,7 +1646,7 @@ namespace lro
             try
             {
                 var originalResponse = await RestClient.PostAsyncRetrycanceledAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPostAsyncRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrycanceledRequest(product), originalResponse);
+                return new LROsPostAsyncRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrycanceledRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -1665,7 +1665,7 @@ namespace lro
             try
             {
                 var originalResponse = RestClient.PostAsyncRetrycanceled(product, cancellationToken);
-                return new LROsPostAsyncRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrycanceledRequest(product), originalResponse);
+                return new LROsPostAsyncRetrycanceledOperation(_clientDiagnostics, _pipeline, RestClient.CreatePostAsyncRetrycanceledRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {

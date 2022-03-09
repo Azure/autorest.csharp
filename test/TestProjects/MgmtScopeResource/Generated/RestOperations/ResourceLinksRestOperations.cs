@@ -42,8 +42,6 @@ namespace MgmtScopeResource
             _userAgent = UserAgentValue.FromType<ResourceLinksRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal Azure.Core.HttpMessage CreateDeleteRequest(string linkId)
         {
             var message = _pipeline.CreateMessage();

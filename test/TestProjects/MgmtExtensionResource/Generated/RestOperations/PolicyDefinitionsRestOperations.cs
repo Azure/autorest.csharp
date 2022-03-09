@@ -42,8 +42,6 @@ namespace MgmtExtensionResource
             _userAgent = UserAgentValue.FromType<PolicyDefinitionsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string policyDefinitionName, PolicyDefinitionData parameters)
         {
             var message = _pipeline.CreateMessage();

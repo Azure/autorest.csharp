@@ -42,8 +42,6 @@ namespace Azure.Management.Storage
             _userAgent = UserAgentValue.FromType<BlobInventoryPoliciesRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string accountName, BlobInventoryPolicyName blobInventoryPolicyName)
         {
             var message = _pipeline.CreateMessage();

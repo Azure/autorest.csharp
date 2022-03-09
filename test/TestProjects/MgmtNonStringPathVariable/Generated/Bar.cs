@@ -145,8 +145,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _barRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtNonStringPathVariableArmOperation(_barClientDiagnostics, Pipeline, _barRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name)), response, OperationFinalStateVia.Location, _barRestClient.GetUserAgent());
+                var message = await _barRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtNonStringPathVariableArmOperation(_barClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -171,8 +171,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _barRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
-                var operation = new MgmtNonStringPathVariableArmOperation(_barClientDiagnostics, Pipeline, _barRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name)), response, OperationFinalStateVia.Location, _barRestClient.GetUserAgent());
+                var message = _barRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), cancellationToken);
+                var operation = new MgmtNonStringPathVariableArmOperation(_barClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
@@ -201,8 +201,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = await _barRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), options, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtNonStringPathVariableArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), options), response, OperationFinalStateVia.Location, _barRestClient.GetUserAgent());
+                var message = await _barRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), options, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtNonStringPathVariableArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -231,8 +231,8 @@ namespace MgmtNonStringPathVariable
             scope.Start();
             try
             {
-                var response = _barRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), options, cancellationToken);
-                var operation = new MgmtNonStringPathVariableArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), options), response, OperationFinalStateVia.Location, _barRestClient.GetUserAgent());
+                var message = _barRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, int.Parse(Id.Name), options, cancellationToken);
+                var operation = new MgmtNonStringPathVariableArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

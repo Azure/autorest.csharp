@@ -42,8 +42,6 @@ namespace ExactMatchInheritance
             _userAgent = UserAgentValue.FromType<ExactMatchModel2SRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters)
         {
             var message = _pipeline.CreateMessage();

@@ -27,9 +27,9 @@ namespace paging
         {
         }
 
-        internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, Func<string, Task<Response>> nextPageFunc)
+        internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, Func<string, Task<Response>> nextPageFunc)
         {
-            _operation = new OperationInternals<AsyncPageable<Product>>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");
+            _operation = new OperationInternals<AsyncPageable<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");
             _nextPageFunc = nextPageFunc;
         }
 

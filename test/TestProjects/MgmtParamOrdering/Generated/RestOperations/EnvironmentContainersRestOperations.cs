@@ -42,8 +42,6 @@ namespace MgmtParamOrdering
             _userAgent = UserAgentValue.FromType<EnvironmentContainersRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string workspaceName)
         {
             var message = _pipeline.CreateMessage();

@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsPost202RetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LrosaDsPost202RetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsPost202RetryInvalidHeaderOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPost202RetryInvalidHeaderOperation");
         }
 
         /// <inheritdoc />

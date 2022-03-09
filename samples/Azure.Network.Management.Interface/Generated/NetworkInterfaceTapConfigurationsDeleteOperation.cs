@@ -24,9 +24,9 @@ namespace Azure.Network.Management.Interface
         {
         }
 
-        internal NetworkInterfaceTapConfigurationsDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal NetworkInterfaceTapConfigurationsDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "NetworkInterfaceTapConfigurationsDeleteOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfaceTapConfigurationsDeleteOperation");
         }
 
         /// <inheritdoc />

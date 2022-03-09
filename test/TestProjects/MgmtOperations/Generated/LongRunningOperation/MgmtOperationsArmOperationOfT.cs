@@ -31,9 +31,9 @@ namespace MgmtOperations
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal MgmtOperationsArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
+        internal MgmtOperationsArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtOperationsArmOperation", userAgent);
+            _operation = new OperationOrResponseInternals<T>(source, clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtOperationsArmOperation");
         }
 
         /// <inheritdoc />

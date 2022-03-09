@@ -24,9 +24,9 @@ namespace NameConflicts
         {
         }
 
-        internal AutoRestParameterFlatteningAnalyzeBodyOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal AutoRestParameterFlatteningAnalyzeBodyOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "AutoRestParameterFlatteningAnalyzeBodyOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "AutoRestParameterFlatteningAnalyzeBodyOperation");
         }
 
         /// <inheritdoc />

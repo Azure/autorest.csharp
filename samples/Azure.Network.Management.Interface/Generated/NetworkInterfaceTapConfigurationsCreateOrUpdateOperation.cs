@@ -26,9 +26,9 @@ namespace Azure.Network.Management.Interface
         {
         }
 
-        internal NetworkInterfaceTapConfigurationsCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal NetworkInterfaceTapConfigurationsCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<NetworkInterfaceTapConfiguration>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfaceTapConfigurationsCreateOrUpdateOperation");
+            _operation = new OperationInternals<NetworkInterfaceTapConfiguration>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfaceTapConfigurationsCreateOrUpdateOperation");
         }
 
         /// <inheritdoc />

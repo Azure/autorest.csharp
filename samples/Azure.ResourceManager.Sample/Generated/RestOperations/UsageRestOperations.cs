@@ -42,8 +42,6 @@ namespace Azure.ResourceManager.Sample
             _userAgent = UserAgentValue.FromType<UsageRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListRequest(string subscriptionId, string location)
         {
             var message = _pipeline.CreateMessage();

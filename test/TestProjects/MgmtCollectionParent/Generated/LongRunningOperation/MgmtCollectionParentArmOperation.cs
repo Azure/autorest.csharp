@@ -31,9 +31,9 @@ namespace MgmtCollectionParent
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtCollectionParentArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
+        internal MgmtCollectionParentArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtCollectionParentArmOperation", userAgent);
+            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtCollectionParentArmOperation");
         }
 
         /// <inheritdoc />

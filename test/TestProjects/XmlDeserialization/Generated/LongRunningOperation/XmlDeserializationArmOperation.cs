@@ -31,9 +31,9 @@ namespace XmlDeserialization
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal XmlDeserializationArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
+        internal XmlDeserializationArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "XmlDeserializationArmOperation", userAgent);
+            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "XmlDeserializationArmOperation");
         }
 
         /// <inheritdoc />

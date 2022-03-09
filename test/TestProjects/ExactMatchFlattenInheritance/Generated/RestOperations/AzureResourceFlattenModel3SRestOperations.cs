@@ -42,8 +42,6 @@ namespace ExactMatchFlattenInheritance
             _userAgent = UserAgentValue.FromType<AzureResourceFlattenModel3SRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();

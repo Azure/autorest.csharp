@@ -31,9 +31,9 @@ namespace MgmtHierarchicalNonResource
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal MgmtHierarchicalNonResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
+        internal MgmtHierarchicalNonResourceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtHierarchicalNonResourceArmOperation", userAgent);
+            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtHierarchicalNonResourceArmOperation");
         }
 
         /// <inheritdoc />

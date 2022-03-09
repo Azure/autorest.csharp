@@ -31,9 +31,9 @@ namespace MgmtParamOrdering
             _operation = new OperationOrResponseInternals<T>(response);
         }
 
-        internal MgmtParamOrderingArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
+        internal MgmtParamOrderingArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = ArmOperationHelpers.CreateOperation(source, clientDiagnostics, pipeline, message, response, finalStateVia, "MgmtParamOrderingArmOperation", userAgent);
+            _operation = new OperationOrResponseInternals<T>(source, clientDiagnostics, pipeline, request, response, finalStateVia, "MgmtParamOrderingArmOperation");
         }
 
         /// <inheritdoc />

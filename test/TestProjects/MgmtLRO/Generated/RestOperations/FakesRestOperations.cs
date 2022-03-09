@@ -42,8 +42,6 @@ namespace MgmtLRO
             _userAgent = UserAgentValue.FromType<FakesRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -75,7 +73,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -100,7 +98,7 @@ namespace MgmtLRO
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -113,7 +111,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public HttpMessage CreateOrUpdate(string subscriptionId, string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -138,7 +136,7 @@ namespace MgmtLRO
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -175,7 +173,7 @@ namespace MgmtLRO
         /// <param name="options"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/> or <paramref name="options"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string fakeName, FakeUpdateOptions options, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string fakeName, FakeUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -200,7 +198,7 @@ namespace MgmtLRO
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -213,7 +211,7 @@ namespace MgmtLRO
         /// <param name="options"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fakeName"/> or <paramref name="options"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string fakeName, FakeUpdateOptions options, CancellationToken cancellationToken = default)
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string fakeName, FakeUpdateOptions options, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -238,7 +236,7 @@ namespace MgmtLRO
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -551,7 +549,7 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response> DoSomethingLROAsync(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> DoSomethingLROAsync(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -571,7 +569,7 @@ namespace MgmtLRO
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -583,7 +581,7 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response DoSomethingLRO(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        public HttpMessage DoSomethingLRO(string subscriptionId, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -603,7 +601,7 @@ namespace MgmtLRO
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

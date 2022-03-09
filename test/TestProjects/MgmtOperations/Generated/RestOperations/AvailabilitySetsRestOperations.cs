@@ -42,8 +42,6 @@ namespace MgmtOperations
             _userAgent = UserAgentValue.FromType<AvailabilitySetsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters)
         {
             var message = _pipeline.CreateMessage();
@@ -481,7 +479,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> TestSetSharedKeyAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> TestSetSharedKeyAsync(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -505,7 +503,7 @@ namespace MgmtOperations
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -518,7 +516,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response TestSetSharedKey(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public HttpMessage TestSetSharedKey(string subscriptionId, string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -542,7 +540,7 @@ namespace MgmtOperations
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -666,7 +664,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> TestLROMethodAsync(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> TestLROMethodAsync(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -686,7 +684,7 @@ namespace MgmtOperations
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -698,7 +696,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response TestLROMethod(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public HttpMessage TestLROMethod(string subscriptionId, string resourceGroupName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -718,7 +716,7 @@ namespace MgmtOperations
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

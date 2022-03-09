@@ -42,8 +42,6 @@ namespace Azure.ResourceManager.Sample
             _userAgent = UserAgentValue.FromType<ProximityPlacementGroupsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters)
         {
             var message = _pipeline.CreateMessage();

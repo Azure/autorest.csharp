@@ -31,9 +31,9 @@ namespace SupersetFlattenInheritance
             _operation = new OperationOrResponseInternals(response);
         }
 
-        internal SupersetFlattenInheritanceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia, string userAgent)
+        internal SupersetFlattenInheritanceArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            _operation = ArmOperationHelpers.CreateOperation(clientDiagnostics, pipeline, message, response, finalStateVia, "SupersetFlattenInheritanceArmOperation", userAgent);
+            _operation = new OperationOrResponseInternals(clientDiagnostics, pipeline, request, response, finalStateVia, "SupersetFlattenInheritanceArmOperation");
         }
 
         /// <inheritdoc />

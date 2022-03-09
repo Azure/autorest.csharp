@@ -42,8 +42,6 @@ namespace MgmtOperations
             _userAgent = UserAgentValue.FromType<UnpatchableResourcesRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string name, UnpatchableResourceData parameters)
         {
             var message = _pipeline.CreateMessage();

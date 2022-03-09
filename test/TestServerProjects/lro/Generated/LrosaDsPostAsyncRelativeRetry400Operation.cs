@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LrosaDsPostAsyncRelativeRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LrosaDsPostAsyncRelativeRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LrosaDsPostAsyncRelativeRetry400Operation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostAsyncRelativeRetry400Operation");
         }
 
         /// <inheritdoc />

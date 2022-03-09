@@ -42,8 +42,6 @@ namespace XmlDeserialization
             _userAgent = UserAgentValue.FromType<XmlDeserializationRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string filter, int? top, int? skip)
         {
             var message = _pipeline.CreateMessage();

@@ -42,8 +42,6 @@ namespace MgmtOperations
             _userAgent = UserAgentValue.FromType<AvailabilitySetGrandChildRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListRequest(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
         {
             var message = _pipeline.CreateMessage();

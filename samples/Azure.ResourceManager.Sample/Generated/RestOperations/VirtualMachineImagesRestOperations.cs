@@ -43,8 +43,6 @@ namespace Azure.ResourceManager.Sample
             _userAgent = UserAgentValue.FromType<VirtualMachineImagesRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateGetRequest(string subscriptionId, string location, string publisherName, string offer, string skus, string version)
         {
             var message = _pipeline.CreateMessage();

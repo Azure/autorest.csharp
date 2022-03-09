@@ -42,8 +42,6 @@ namespace MgmtMultipleParentResource
             _userAgent = UserAgentValue.FromType<AnotherChildrenRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData childBody)
         {
             var message = _pipeline.CreateMessage();
@@ -78,7 +76,7 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -107,7 +105,7 @@ namespace MgmtMultipleParentResource
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -121,7 +119,7 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
+        public HttpMessage CreateOrUpdate(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -150,7 +148,7 @@ namespace MgmtMultipleParentResource
             {
                 case 200:
                 case 201:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -190,7 +188,7 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> UpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -218,7 +216,7 @@ namespace MgmtMultipleParentResource
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -232,7 +230,7 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        public HttpMessage Update(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -260,7 +258,7 @@ namespace MgmtMultipleParentResource
             switch (message.Response.Status)
             {
                 case 200:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -295,7 +293,7 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, CancellationToken cancellationToken = default)
+        public async Task<HttpMessage> DeleteAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -321,7 +319,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -334,7 +332,7 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is null. </exception>
-        public Response Delete(string subscriptionId, string resourceGroupName, string anotherName, string childName, CancellationToken cancellationToken = default)
+        public HttpMessage Delete(string subscriptionId, string resourceGroupName, string anotherName, string childName, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -360,7 +358,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                 case 202:
                 case 204:
-                    return message.Response;
+                    return message;
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

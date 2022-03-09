@@ -24,9 +24,9 @@ namespace lro
         {
         }
 
-        internal LROsDeleteAsyncNoHeaderInRetryOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LROsDeleteAsyncNoHeaderInRetryOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsDeleteAsyncNoHeaderInRetryOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncNoHeaderInRetryOperation");
         }
 
         /// <inheritdoc />

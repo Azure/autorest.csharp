@@ -42,8 +42,6 @@ namespace SubscriptionExtensions
             _userAgent = UserAgentValue.FromType<ToastersRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListRequest(string subscriptionId)
         {
             var message = _pipeline.CreateMessage();

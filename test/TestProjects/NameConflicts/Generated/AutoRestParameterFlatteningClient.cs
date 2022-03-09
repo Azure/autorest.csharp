@@ -196,7 +196,7 @@ namespace NameConflicts
             try
             {
                 var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
-                return new AutoRestParameterFlatteningAnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody), originalResponse);
+                return new AutoRestParameterFlatteningAnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -215,7 +215,7 @@ namespace NameConflicts
             try
             {
                 var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
-                return new AutoRestParameterFlatteningAnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody), originalResponse);
+                return new AutoRestParameterFlatteningAnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -234,7 +234,7 @@ namespace NameConflicts
             try
             {
                 var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
-                return new AutoRestParameterFlatteningAnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody), originalResponse);
+                return new AutoRestParameterFlatteningAnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -253,7 +253,7 @@ namespace NameConflicts
             try
             {
                 var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
-                return new AutoRestParameterFlatteningAnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody), originalResponse);
+                return new AutoRestParameterFlatteningAnalyzeBodyOperation(_clientDiagnostics, _pipeline, RestClient.CreateAnalyzeBodyRequest(stringBody).Request, originalResponse);
             }
             catch (Exception e)
             {

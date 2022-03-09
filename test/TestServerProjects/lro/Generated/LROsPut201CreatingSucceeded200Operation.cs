@@ -26,9 +26,9 @@ namespace lro
         {
         }
 
-        internal LROsPut201CreatingSucceeded200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, HttpMessage message, Response response)
+        internal LROsPut201CreatingSucceeded200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, message, response, OperationFinalStateVia.Location, "LROsPut201CreatingSucceeded200Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPut201CreatingSucceeded200Operation");
         }
 
         /// <inheritdoc />

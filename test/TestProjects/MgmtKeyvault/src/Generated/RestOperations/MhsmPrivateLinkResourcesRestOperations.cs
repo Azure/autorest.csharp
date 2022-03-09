@@ -42,8 +42,6 @@ namespace MgmtKeyvault
             _userAgent = UserAgentValue.FromType<MhsmPrivateLinkResourcesRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateListByMhsmResourceRequest(string subscriptionId, string resourceGroupName, string name)
         {
             var message = _pipeline.CreateMessage();

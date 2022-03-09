@@ -42,8 +42,6 @@ namespace MgmtListMethods
             _userAgent = UserAgentValue.FromType<MgmtGroupParentsRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal HttpMessage CreateCreateOrUpdateRequest(string groupId, string mgmtGroupParentName, MgmtGroupParentData parameters)
         {
             var message = _pipeline.CreateMessage();

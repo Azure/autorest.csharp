@@ -42,8 +42,6 @@ namespace MgmtScopeResource
             _userAgent = UserAgentValue.FromType<DeploymentRestOperations>(applicationId);
         }
 
-        internal string GetUserAgent() => _userAgent.ToString();
-
         internal Azure.Core.HttpMessage CreateGetAtScopeRequest(string scope, string deploymentName, string operationId)
         {
             var message = _pipeline.CreateMessage();

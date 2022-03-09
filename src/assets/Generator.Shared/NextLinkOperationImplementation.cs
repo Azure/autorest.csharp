@@ -4,6 +4,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text.Json;
@@ -32,14 +33,14 @@ namespace Azure.Core
         private string? _lastKnownLocation;
         private string _nextRequestUri;
 
-        public static IOperation Create(HttpPipeline pipeline, HttpMessage message, Response response, OperationFinalStateVia finalStateVia)
+        public static IOperation Create(HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
-            TryGetApiVersion(message.Request.Uri.ToUri(), out ReadOnlySpan<char> apiVersion);
+            TryGetApiVersion(request.Uri.ToUri(), out ReadOnlySpan<char> apiVersion);
             string? apiVersionStr = (apiVersion == null ? null : apiVersion.ToString());
-            var headerSource = GetHeaderSource(message.Request.Method, message.Request.Uri.ToUri(), response, apiVersionStr, out var nextRequestUri);
+            var headerSource = GetHeaderSource(request.Method, request.Uri.ToUri(), response, apiVersionStr, out var nextRequestUri);
             if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
             {
-                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(message.Request.Method, response));
+                return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(request.Method, response));
             }
 
             var (originalResponseHasLocation, lastKnownLocation) = headerSource == HeaderSource.Location
@@ -48,21 +49,21 @@ namespace Azure.Core
                     ? (true, locationUri)
                     : (false, null);
 
-            return new NextLinkOperationImplementation(pipeline, message, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
+            return new NextLinkOperationImplementation(pipeline, request, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
-        private NextLinkOperationImplementation(HttpPipeline pipeline, HttpMessage message, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia, string? apiVersion)
+        private NextLinkOperationImplementation(HttpPipeline pipeline, Request request, string nextRequestUri, HeaderSource headerSource, bool originalResponseHasLocation, string? lastKnownLocation, OperationFinalStateVia finalStateVia, string? apiVersion)
         {
-            _requestMethod = message.Request.Method;
+            _requestMethod = request.Method;
             _headerSource = headerSource;
-            _startRequestUri = message.Request.Uri.ToUri();
+            _startRequestUri = request.Uri.ToUri();
             _nextRequestUri = nextRequestUri;
             _originalResponseHasLocation = originalResponseHasLocation;
             _lastKnownLocation = lastKnownLocation;
             _finalStateVia = finalStateVia;
             _pipeline = pipeline;
             _apiVersion = apiVersion;
-            _userAgent = message.TryGetProperty("ArmUserAgent", out Object? userAgentValue) && userAgentValue is string userAgent ? userAgent : null;
+            _userAgent = request.Headers.TryGetValues(HttpHeader.Names.UserAgent, out IEnumerable<string>? userAgent) ? string.Join(" ", userAgent) : null;
         }
 
         public async ValueTask<OperationState> UpdateStateAsync(bool async, CancellationToken cancellationToken)
@@ -244,7 +245,7 @@ namespace Azure.Core
             request.Method = RequestMethod.Get;
             if (!string.IsNullOrEmpty(_userAgent))
             {
-                message.SetProperty("SDKUserAgent", _userAgent!);
+                message.SetUserAgentString(new UserAgentValue(GetType()));
             }
             if (Uri.TryCreate(uri, UriKind.Absolute, out var nextLink) && nextLink.Scheme != "file")
             {

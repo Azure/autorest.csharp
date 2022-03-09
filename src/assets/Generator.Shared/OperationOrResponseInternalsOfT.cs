@@ -31,11 +31,11 @@ namespace Azure.Core
             IOperationSource<T> source,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
-            HttpMessage message,
+            Request originalRequest,
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, message, originalResponse, finalStateVia, scopeName, new ExponentialDelayStrategy()).Internal)
+            : base(new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName, new ExponentialDelayStrategy()).Internal)
         {
             _operation = Operation as OperationInternal<T>;
         }
