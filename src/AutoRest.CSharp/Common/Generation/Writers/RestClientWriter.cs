@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
         }
 
-        protected virtual void WriteAdditionalCtorBody(CodeWriter writer, RestClient restClient)
+        protected virtual void WriteAdditionalCtorBody(CodeWriter writer)
         {
         }
 
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
                 writer.Line($"{PipelineField} = {PipelineVariable};");
-                WriteAdditionalCtorBody(writer, restClient);
+                WriteAdditionalCtorBody(writer);
             }
             writer.Line();
         }

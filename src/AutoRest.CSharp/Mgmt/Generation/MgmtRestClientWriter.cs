@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return operation.Operation.IsLongRunning;
         }
 
-        protected override void WriteAdditionalCtorBody(CodeWriter writer, RestClient restClient)
+        protected override void WriteAdditionalCtorBody(CodeWriter writer)
         {
             writer.Line($"_userAgent = new {typeof(TelemetryDetails)}(GetType().Assembly, {ApplicationIdVariable});");
         }
