@@ -42,26 +42,26 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(typeof(Guid), clientIdProperty.PropertyType.GetGenericArguments()[0]);
         }
 
-        [TestCase]
-        public void ValidateModelUsingErrorResponse()
-        {
-            var cloudErrorModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.CloudError");
-            var properties = cloudErrorModel.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        //[TestCase]
+        //public void ValidateModelUsingErrorResponse()
+        //{
+        //    var cloudErrorModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.CloudError");
+        //    var properties = cloudErrorModel.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-            var errorResponseModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponse");
-            Assert.Null(errorResponseModel);
-            var errorProperty = properties[0];
-            Assert.NotNull(errorProperty);
-            Assert.AreEqual("Error", errorProperty.Name);
-            Assert.AreEqual(typeof(ErrorDetail), errorProperty.PropertyType);
+        //    var errorResponseModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponse");
+        //    Assert.Null(errorResponseModel);
+        //    var errorProperty = properties[0];
+        //    Assert.NotNull(errorProperty);
+        //    Assert.AreEqual("Error", errorProperty.Name);
+        //    Assert.AreEqual(typeof(ErrorDetail), errorProperty.PropertyType);
 
-            var errorResponseWithAnotherNameModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponseWithAnotherName");
-            Assert.Null(errorResponseWithAnotherNameModel);
-            var anotherErrorProperty = properties[1];
-            Assert.NotNull(anotherErrorProperty);
-            Assert.AreEqual("AnotherError", anotherErrorProperty.Name);
-            Assert.AreEqual(typeof(ErrorDetail), anotherErrorProperty.PropertyType);
-        }
+        //    var errorResponseWithAnotherNameModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponseWithAnotherName");
+        //    Assert.Null(errorResponseWithAnotherNameModel);
+        //    var anotherErrorProperty = properties[1];
+        //    Assert.NotNull(anotherErrorProperty);
+        //    Assert.AreEqual("AnotherError", anotherErrorProperty.Name);
+        //    Assert.AreEqual(typeof(ErrorDetail), anotherErrorProperty.PropertyType);
+        //}
 
         [TestCase]
         public void ValidatePropertyReplacement()

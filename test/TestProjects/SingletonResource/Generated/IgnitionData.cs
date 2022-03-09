@@ -21,10 +21,10 @@ namespace SingletonResource
         /// <summary> Initializes a new instance of IgnitionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="pushButton"></param>
-        internal IgnitionData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, bool? pushButton) : base(id, name, type, systemData)
+        internal IgnitionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, bool? pushButton) : base(id, name, resourceType, systemData)
         {
             PushButton = pushButton;
         }

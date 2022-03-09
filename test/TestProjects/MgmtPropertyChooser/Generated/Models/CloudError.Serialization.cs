@@ -7,7 +7,6 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
@@ -15,8 +14,8 @@ namespace MgmtPropertyChooser.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
-            Optional<ErrorDetail> error = default;
-            Optional<ErrorDetail> anotherError = default;
+            Optional<ErrorResponse> error = default;
+            Optional<ErrorResponseWithAnotherName> anotherError = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))
@@ -26,7 +25,7 @@ namespace MgmtPropertyChooser.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = JsonSerializer.Deserialize<ErrorDetail>(property.Value.ToString());
+                    error = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
                 if (property.NameEquals("anotherError"))
@@ -36,11 +35,11 @@ namespace MgmtPropertyChooser.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    anotherError = JsonSerializer.Deserialize<ErrorDetail>(property.Value.ToString());
+                    anotherError = ErrorResponseWithAnotherName.DeserializeErrorResponseWithAnotherName(property.Value);
                     continue;
                 }
             }
-            return new CloudError(error, anotherError);
+            return new CloudError(error.Value, anotherError.Value);
         }
     }
 }

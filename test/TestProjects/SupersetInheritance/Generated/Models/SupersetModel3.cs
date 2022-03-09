@@ -18,13 +18,13 @@ namespace SupersetInheritance.Models
         /// <summary> Initializes a new instance of SupersetModel3. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="type"></param>
+        /// <param name="resourceType"></param>
         /// <param name="new"></param>
-        internal SupersetModel3(int? id, string name, string type, string @new)
+        internal SupersetModel3(int? id, string name, string resourceType, string @new)
         {
             Id = id;
             Name = name;
-            Type = type;
+            ResourceType = resourceType;
             New = @new;
         }
 
@@ -32,8 +32,8 @@ namespace SupersetInheritance.Models
         public int? Id { get; set; }
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the type. </summary>
-        public string Type { get; set; }
+        /// <summary> Gets or sets the resource type. </summary>
+        public string ResourceType { get; set; }
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
     }

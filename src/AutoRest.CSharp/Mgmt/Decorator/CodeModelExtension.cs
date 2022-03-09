@@ -72,9 +72,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         property.Schema.Type = AllSchemaTypes.Uri;
                     if (property.Language.Default.Name.SplitByCamelCase().Last().Equals("Duration") && property.Schema.Type == AllSchemaTypes.String)
                         throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add both \"format\": \"duration\" and \"x-ms-format\": \"duration-constant\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to a TimeSpan format, please use \"x-ms-client-name\" to rename the property for the client.");
-                    if (property.Language.Default.Name.Equals("type", StringComparison.Ordinal))
+                    if (property.Language.Default.Name.Equals("type", StringComparison.OrdinalIgnoreCase))
                     {
-                        if (objSchema.Properties.Any(p => p.Language.Default.Name.Equals("id", StringComparison.Ordinal)) && objSchema.Properties.Any(p => p.Language.Default.Name.Equals("name", StringComparison.Ordinal))
+                        if (objSchema.Properties.Any(p => p.Language.Default.Name.Equals("id", StringComparison.OrdinalIgnoreCase) || objSchema.Parents?.All.Any(pt => pt is ObjectSchema ps && ps.Properties.Any(pp => pp.Language.Default.Name.Equals("id", StringComparison.OrdinalIgnoreCase))) == true)
+                            && objSchema.Properties.Any(p => p.Language.Default.Name.Equals("name", StringComparison.OrdinalIgnoreCase))
                             && !objSchema.Name.Equals("ResourceLink", StringComparison.Ordinal))
                         {
                             property.Language.Default.Name = "resourceType";

@@ -14199,7 +14199,7 @@ schemas: !Schemas
                   serializedName: type
                   language: !Languages 
                     default:
-                      name: type
+                      name: resourceType
                       description: Resource type
                   protocol: !Protocols {}
                 - !Property 
