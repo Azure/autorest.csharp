@@ -154,6 +154,27 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     }
 }
 
+function StartMockServer($specName, $commitID)
+{
+    # change .env file to use the specific swagger file
+    $envFile = Join-Path $mockServerFolder .env
+    New-Item -Path $envFile -ItemType File -Value '' -Force | Out-Null
+    if ($localSwagger) {
+        $relativeLocalSwagger = [System.IO.Path]::GetRelativePath($mockServerFolder, $localSwagger)
+        Add-Content $envFile "specRetrievalMethod=filesystem
+specRetrievalLocalRelativePath=$relativeLocalSwagger
+validationPathsPattern=specification/$rpName/resource-manager/**/*.json"
+    }
+    else {
+        Add-Content $envFile "specRetrievalGitUrl=https://github.com/Azure/azure-rest-api-specs
+specRetrievalGitBranch=main
+validationPathsPattern=specification/$rpName/resource-manager/**/*.json"
+    }
+
+    $mainApp = Join-Path "node_modules" "@azure-tools" "mock-service-host" "dist" "src" "main.js"
+    node $mainApp
+}
+
 function  MockTestInit {
     param(
         [Parameter()]
@@ -182,14 +203,11 @@ function  MockTestInit {
     }
     process {
         # Launch Mock-service-host
-        & git config --system core.longpaths true
-        PrepareMockServer
-        TrustMockServerCertificate
-        $task = {
+        # $task = {
             StartMockServer
             Pop-Location
-        }
-        Start-Job -ScriptBlock $task
+        # }
+        # Start-Job -ScriptBlock $task
 
         # Install npm and autorest
         if ($NpmInit) {
