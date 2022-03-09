@@ -117,5 +117,5 @@ function Test-Administrator
 & git config --system core.longpaths true
 PrepareMockServer
 TrustMockServerCertificate
-$info = StartMockServer
+StartMockServer
 Pop-Location
