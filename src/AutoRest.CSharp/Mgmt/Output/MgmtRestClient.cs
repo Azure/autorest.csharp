@@ -8,6 +8,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -18,12 +19,12 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public static readonly Parameter ApplicationIdParameter = new("applicationId", "The application id to use for user agent", new CSharpType(typeof(string)), null, false);
 
-        private readonly RestClientBuilder _clientBuilder;
+        private readonly MgmtRestClientBuilder _clientBuilder;
         private IReadOnlyList<Resource>? _resources;
 
         public ClientFields Fields { get; }
 
-        public MgmtRestClient(OperationGroup operationGroup, RestClientBuilder clientBuilder)
+        public MgmtRestClient(OperationGroup operationGroup, MgmtRestClientBuilder clientBuilder)
             : base(operationGroup, MgmtContext.Context, operationGroup.Language.Default.Name, GetOrderedParameters(clientBuilder))
         {
             _clientBuilder = clientBuilder;
