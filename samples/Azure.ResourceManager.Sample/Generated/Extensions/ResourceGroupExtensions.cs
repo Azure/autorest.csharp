@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace Azure.ResourceManager.Sample
@@ -28,6 +32,34 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// Operation Id: AvailabilitySets_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public async static Task<Response<AvailabilitySet>> GetAvailabilitySetAsync(this ResourceGroup resourceGroup, string availabilitySetName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// Operation Id: AvailabilitySets_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public static Response<AvailabilitySet> GetAvailabilitySet(this ResourceGroup resourceGroup, string availabilitySetName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetAvailabilitySets().Get(availabilitySetName, cancellationToken);
+        }
 
         /// <summary> Gets a collection of ProximityPlacementGroups in the ProximityPlacementGroup. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -35,6 +67,36 @@ namespace Azure.ResourceManager.Sample
         public static ProximityPlacementGroupCollection GetProximityPlacementGroups(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetProximityPlacementGroups();
+        }
+        /// <summary>
+        /// Retrieves information about a proximity placement group .
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
+        /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public async static Task<Response<ProximityPlacementGroup>> GetProximityPlacementGroupAsync(this ResourceGroup resourceGroup, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetProximityPlacementGroups().GetAsync(proximityPlacementGroupName, includeColocationStatus, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about a proximity placement group .
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
+        /// Operation Id: ProximityPlacementGroups_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
+        /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public static Response<ProximityPlacementGroup> GetProximityPlacementGroup(this ResourceGroup resourceGroup, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetProximityPlacementGroups().Get(proximityPlacementGroupName, includeColocationStatus, cancellationToken);
         }
 
         /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
@@ -44,6 +106,34 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetDedicatedHostGroups();
         }
+        /// <summary>
+        /// Retrieves information about a dedicated host group.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
+        /// Operation Id: DedicatedHostGroups_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
+        public async static Task<Response<DedicatedHostGroup>> GetDedicatedHostGroupAsync(this ResourceGroup resourceGroup, string hostGroupName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetDedicatedHostGroups().GetAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about a dedicated host group.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
+        /// Operation Id: DedicatedHostGroups_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
+        public static Response<DedicatedHostGroup> GetDedicatedHostGroup(this ResourceGroup resourceGroup, string hostGroupName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetDedicatedHostGroups().Get(hostGroupName, cancellationToken);
+        }
 
         /// <summary> Gets a collection of SshPublicKeys in the SshPublicKey. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -51,6 +141,34 @@ namespace Azure.ResourceManager.Sample
         public static SshPublicKeyCollection GetSshPublicKeys(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetSshPublicKeys();
+        }
+        /// <summary>
+        /// Retrieves information about an SSH public key.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
+        /// Operation Id: SshPublicKeys_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        public async static Task<Response<SshPublicKey>> GetSshPublicKeyAsync(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetSshPublicKeys().GetAsync(sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about an SSH public key.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
+        /// Operation Id: SshPublicKeys_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        public static Response<SshPublicKey> GetSshPublicKey(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetSshPublicKeys().Get(sshPublicKeyName, cancellationToken);
         }
 
         /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
@@ -60,6 +178,34 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetVirtualMachines();
         }
+        /// <summary>
+        /// Retrieves information about the model view or the instance view of a virtual machine.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// Operation Id: VirtualMachines_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        public async static Task<Response<VirtualMachine>> GetVirtualMachineAsync(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetVirtualMachines().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about the model view or the instance view of a virtual machine.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+        /// Operation Id: VirtualMachines_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        public static Response<VirtualMachine> GetVirtualMachine(this ResourceGroup resourceGroup, string vmName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetVirtualMachines().Get(vmName, cancellationToken);
+        }
 
         /// <summary> Gets a collection of Images in the Image. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -68,6 +214,36 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetImages();
         }
+        /// <summary>
+        /// Gets an image.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}
+        /// Operation Id: Images_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="imageName"> The name of the image. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
+        public async static Task<Response<Image>> GetImageAsync(this ResourceGroup resourceGroup, string imageName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetImages().GetAsync(imageName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Gets an image.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}
+        /// Operation Id: Images_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="imageName"> The name of the image. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
+        public static Response<Image> GetImage(this ResourceGroup resourceGroup, string imageName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetImages().Get(imageName, expand, cancellationToken);
+        }
 
         /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -75,6 +251,34 @@ namespace Azure.ResourceManager.Sample
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSets();
+        }
+        /// <summary>
+        /// Display information about a virtual machine scale set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
+        /// Operation Id: VirtualMachineScaleSets_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
+        public async static Task<Response<VirtualMachineScaleSet>> GetVirtualMachineScaleSetAsync(this ResourceGroup resourceGroup, string vmScaleSetName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetVirtualMachineScaleSets().GetAsync(vmScaleSetName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Display information about a virtual machine scale set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
+        /// Operation Id: VirtualMachineScaleSets_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
+        public static Response<VirtualMachineScaleSet> GetVirtualMachineScaleSet(this ResourceGroup resourceGroup, string vmScaleSetName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetVirtualMachineScaleSets().Get(vmScaleSetName, cancellationToken);
         }
     }
 }

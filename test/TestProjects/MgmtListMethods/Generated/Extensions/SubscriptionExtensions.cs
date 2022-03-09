@@ -7,6 +7,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Resources;
@@ -33,6 +34,36 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(subscription).GetFakes();
         }
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// Operation Id: Fakes_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public async static Task<Response<Fake>> GetFakeAsync(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// Operation Id: Fakes_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public static Response<Fake> GetFake(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetFakes().Get(fakeName, expand, cancellationToken);
+        }
 
         /// <summary> Gets a collection of SubParentWithNonResChWithLocs in the SubParentWithNonResChWithLoc. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
@@ -40,6 +71,34 @@ namespace MgmtListMethods
         public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this Subscription subscription)
         {
             return GetExtensionClient(subscription).GetSubParentWithNonResChWithLocs();
+        }
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subParentWithNonResChWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
+        public async static Task<Response<SubParentWithNonResChWithLoc>> GetSubParentWithNonResChWithLocAsync(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetSubParentWithNonResChWithLocs().GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subParentWithNonResChWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
+        public static Response<SubParentWithNonResChWithLoc> GetSubParentWithNonResChWithLoc(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetSubParentWithNonResChWithLocs().Get(subParentWithNonResChWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of SubParentWithNonResChes in the SubParentWithNonResCh. </summary>
@@ -49,6 +108,34 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(subscription).GetSubParentWithNonResChes();
         }
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
+        /// Operation Id: SubParentWithNonResChes_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subParentWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
+        public async static Task<Response<SubParentWithNonResCh>> GetSubParentWithNonResChAsync(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetSubParentWithNonResChes().GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
+        /// Operation Id: SubParentWithNonResChes_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subParentWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
+        public static Response<SubParentWithNonResCh> GetSubParentWithNonResCh(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetSubParentWithNonResChes().Get(subParentWithNonResChName, cancellationToken);
+        }
 
         /// <summary> Gets a collection of SubParentWithLocs in the SubParentWithLoc. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
@@ -57,6 +144,34 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(subscription).GetSubParentWithLocs();
         }
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
+        /// Operation Id: SubParentWithLocs_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subParentWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
+        public async static Task<Response<SubParentWithLoc>> GetSubParentWithLocAsync(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetSubParentWithLocs().GetAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
+        /// Operation Id: SubParentWithLocs_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subParentWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
+        public static Response<SubParentWithLoc> GetSubParentWithLoc(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetSubParentWithLocs().Get(subParentWithLocName, cancellationToken);
+        }
 
         /// <summary> Gets a collection of SubParents in the SubParent. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
@@ -64,6 +179,34 @@ namespace MgmtListMethods
         public static SubParentCollection GetSubParents(this Subscription subscription)
         {
             return GetExtensionClient(subscription).GetSubParents();
+        }
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
+        /// Operation Id: SubParents_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
+        public async static Task<Response<SubParent>> GetSubParentAsync(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetSubParents().GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
+        /// Operation Id: SubParents_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="subParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
+        public static Response<SubParent> GetSubParent(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetSubParents().Get(subParentName, cancellationToken);
         }
 
         /// <summary>

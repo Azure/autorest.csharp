@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtListMethods
@@ -27,6 +31,36 @@ namespace MgmtListMethods
         public static TenantTestCollection GetTenantTests(this Tenant tenant)
         {
             return GetExtensionClient(tenant).GetTenantTests();
+        }
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public async static Task<Response<TenantTest>> GetTenantTestAsync(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await tenant.GetTenantTests().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public static Response<TenantTest> GetTenantTest(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return tenant.GetTenantTests().Get(tenantTestName, expand, cancellationToken);
         }
     }
 }

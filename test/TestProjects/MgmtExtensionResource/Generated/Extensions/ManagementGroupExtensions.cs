@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Management;
 
 namespace MgmtExtensionResource
@@ -27,6 +31,34 @@ namespace MgmtExtensionResource
         public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroup managementGroup)
         {
             return GetExtensionClient(managementGroup).GetManagementGroupPolicyDefinitions();
+        }
+        /// <summary>
+        /// This operation retrieves the policy definition in the given management group with the given name.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_GetAtManagementGroup
+        /// </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public async static Task<Response<ManagementGroupPolicyDefinition>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return await GetManagementGroupPolicyDefinitions(managementGroup).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// This operation retrieves the policy definition in the given management group with the given name.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_GetAtManagementGroup
+        /// </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public static Response<ManagementGroupPolicyDefinition> GetManagementGroupPolicyDefinition(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return GetManagementGroupPolicyDefinitions(managementGroup).Get(policyDefinitionName, cancellationToken);
         }
     }
 }

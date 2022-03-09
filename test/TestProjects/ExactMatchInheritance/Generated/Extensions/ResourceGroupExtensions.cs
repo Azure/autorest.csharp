@@ -34,6 +34,32 @@ namespace ExactMatchInheritance
         {
             return GetExtensionClient(resourceGroup).GetExactMatchModel1s();
         }
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Operation Id: ExactMatchModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="exactMatchModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
+        public async static Task<Response<ExactMatchModel1>> GetExactMatchModel1Async(this ResourceGroup resourceGroup, string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetExactMatchModel1s().GetAsync(exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
+        /// Operation Id: ExactMatchModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="exactMatchModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
+        public static Response<ExactMatchModel1> GetExactMatchModel1(this ResourceGroup resourceGroup, string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetExactMatchModel1s().Get(exactMatchModel1SName, cancellationToken);
+        }
 
         /// <summary> Gets a collection of ExactMatchModel5s in the ExactMatchModel5. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -41,6 +67,32 @@ namespace ExactMatchInheritance
         public static ExactMatchModel5Collection GetExactMatchModel5s(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetExactMatchModel5s();
+        }
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Operation Id: ExactMatchModel5s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        public async static Task<Response<ExactMatchModel5>> GetExactMatchModel5Async(this ResourceGroup resourceGroup, string exactMatchModel5SName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetExactMatchModel5s().GetAsync(exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
+        /// Operation Id: ExactMatchModel5s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
+        public static Response<ExactMatchModel5> GetExactMatchModel5(this ResourceGroup resourceGroup, string exactMatchModel5SName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetExactMatchModel5s().Get(exactMatchModel5SName, cancellationToken);
         }
 
         /// <summary>

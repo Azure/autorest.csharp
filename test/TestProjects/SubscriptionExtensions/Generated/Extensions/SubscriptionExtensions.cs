@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace SubscriptionExtensions
@@ -27,6 +31,32 @@ namespace SubscriptionExtensions
         public static ToasterCollection GetToasters(this Subscription subscription)
         {
             return GetExtensionClient(subscription).GetToasters();
+        }
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
+        /// Operation Id: Toasters_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="toasterName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
+        public async static Task<Response<Toaster>> GetToasterAsync(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetToasters().GetAsync(toasterName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
+        /// Operation Id: Toasters_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="toasterName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
+        public static Response<Toaster> GetToaster(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetToasters().Get(toasterName, cancellationToken);
         }
     }
 }

@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtLRO
@@ -28,6 +32,36 @@ namespace MgmtLRO
         {
             return GetExtensionClient(resourceGroup).GetFakes();
         }
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// Operation Id: Fakes_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public async static Task<Response<Fake>> GetFakeAsync(this ResourceGroup resourceGroup, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
+        /// Operation Id: Fakes_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public static Response<Fake> GetFake(this ResourceGroup resourceGroup, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetFakes().Get(fakeName, expand, cancellationToken);
+        }
 
         /// <summary> Gets a collection of Bars in the Bar. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -35,6 +69,34 @@ namespace MgmtLRO
         public static BarCollection GetBars(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetBars();
+        }
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        public async static Task<Response<Bar>> GetBarAsync(this ResourceGroup resourceGroup, string barName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about an fake.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+        /// Operation Id: Bars_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        public static Response<Bar> GetBar(this ResourceGroup resourceGroup, string barName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetBars().Get(barName, cancellationToken);
         }
     }
 }

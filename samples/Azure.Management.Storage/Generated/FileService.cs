@@ -88,6 +88,36 @@ namespace Azure.Management.Storage
         {
             return new FileShareCollection(Client, Id);
         }
+        /// <summary>
+        /// Gets properties of a specified share.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// Operation Id: FileShares_Get
+        /// </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
+        /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
+        public async virtual Task<Response<FileShare>> GetFileShareAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        {
+            return await GetFileShares().GetAsync(shareName, expand, xMsSnapshot, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Gets properties of a specified share.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
+        /// Operation Id: FileShares_Get
+        /// </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: stats. Should be passed as a string with delimiter &apos;,&apos;. </param>
+        /// <param name="xMsSnapshot"> Optional, used to retrieve properties of a snapshot. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
+        public virtual Response<FileShare> GetFileShare(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        {
+            return GetFileShares().Get(shareName, expand, xMsSnapshot, cancellationToken);
+        }
 
         /// <summary>
         /// Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules.

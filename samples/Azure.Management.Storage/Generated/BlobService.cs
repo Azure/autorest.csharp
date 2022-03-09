@@ -88,6 +88,32 @@ namespace Azure.Management.Storage
         {
             return new BlobContainerCollection(Client, Id);
         }
+        /// <summary>
+        /// Gets properties of a specified container. 
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
+        /// Operation Id: BlobContainers_Get
+        /// </summary>
+        /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
+        public async virtual Task<Response<BlobContainer>> GetBlobContainerAsync(string containerName, CancellationToken cancellationToken = default)
+        {
+            return await GetBlobContainers().GetAsync(containerName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Gets properties of a specified container. 
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
+        /// Operation Id: BlobContainers_Get
+        /// </summary>
+        /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="containerName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> is null. </exception>
+        public virtual Response<BlobContainer> GetBlobContainer(string containerName, CancellationToken cancellationToken = default)
+        {
+            return GetBlobContainers().Get(containerName, cancellationToken);
+        }
 
         /// <summary>
         /// Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.

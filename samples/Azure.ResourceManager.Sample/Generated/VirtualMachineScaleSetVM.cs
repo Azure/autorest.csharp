@@ -90,6 +90,34 @@ namespace Azure.ResourceManager.Sample
         {
             return new VirtualMachineScaleSetVirtualMachineExtensionCollection(Client, Id);
         }
+        /// <summary>
+        /// The operation to get the VMSS VM extension.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}
+        /// Operation Id: VirtualMachineScaleSetVMExtensions_Get
+        /// </summary>
+        /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
+        public async virtual Task<Response<VirtualMachineScaleSetVirtualMachineExtension>> GetVirtualMachineScaleSetVirtualMachineExtensionAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await GetVirtualMachineScaleSetVirtualMachineExtensions().GetAsync(vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// The operation to get the VMSS VM extension.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}
+        /// Operation Id: VirtualMachineScaleSetVMExtensions_Get
+        /// </summary>
+        /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
+        public virtual Response<VirtualMachineScaleSetVirtualMachineExtension> GetVirtualMachineScaleSetVirtualMachineExtension(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return GetVirtualMachineScaleSetVirtualMachineExtensions().Get(vmExtensionName, expand, cancellationToken);
+        }
 
         /// <summary>
         /// Gets a virtual machine from a VM scale set.

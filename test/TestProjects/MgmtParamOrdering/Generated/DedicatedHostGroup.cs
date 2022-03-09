@@ -90,6 +90,32 @@ namespace MgmtParamOrdering
         {
             return new DedicatedHostCollection(Client, Id);
         }
+        /// <summary>
+        /// Retrieves information about a dedicated host.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}
+        /// Operation Id: DedicatedHosts_Get
+        /// </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        public async virtual Task<Response<DedicatedHost>> GetDedicatedHostAsync(string hostName, CancellationToken cancellationToken = default)
+        {
+            return await GetDedicatedHosts().GetAsync(hostName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about a dedicated host.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}
+        /// Operation Id: DedicatedHosts_Get
+        /// </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        public virtual Response<DedicatedHost> GetDedicatedHost(string hostName, CancellationToken cancellationToken = default)
+        {
+            return GetDedicatedHosts().Get(hostName, cancellationToken);
+        }
 
         /// <summary>
         /// Retrieves information about a dedicated host group.

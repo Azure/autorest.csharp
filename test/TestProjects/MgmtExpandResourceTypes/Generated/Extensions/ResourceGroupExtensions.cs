@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtExpandResourceTypes
@@ -27,6 +31,34 @@ namespace MgmtExpandResourceTypes
         public static ZoneCollection GetZones(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetZones();
+        }
+        /// <summary>
+        /// Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
+        /// Operation Id: Zones_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
+        public async static Task<Response<Zone>> GetZoneAsync(this ResourceGroup resourceGroup, string zoneName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetZones().GetAsync(zoneName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
+        /// Operation Id: Zones_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
+        public static Response<Zone> GetZone(this ResourceGroup resourceGroup, string zoneName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetZones().Get(zoneName, cancellationToken);
         }
     }
 }

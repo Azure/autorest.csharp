@@ -34,6 +34,34 @@ namespace ExactMatchFlattenInheritance
         {
             return GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel1s();
         }
+        /// <summary>
+        /// Get an AzureResourceFlattenModel1.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public async static Task<Response<AzureResourceFlattenModel1>> GetAzureResourceFlattenModel1Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetAzureResourceFlattenModel1s().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Get an AzureResourceFlattenModel1.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
+        /// Operation Id: AzureResourceFlattenModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<AzureResourceFlattenModel1> GetAzureResourceFlattenModel1(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetAzureResourceFlattenModel1s().Get(name, cancellationToken);
+        }
 
         /// <summary> Gets a collection of CustomModel2s in the CustomModel2. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -42,6 +70,34 @@ namespace ExactMatchFlattenInheritance
         {
             return GetExtensionClient(resourceGroup).GetCustomModel2s();
         }
+        /// <summary>
+        /// Get an CustomModel2.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
+        /// Operation Id: CustomModel2s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public async static Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetCustomModel2s().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Get an CustomModel2.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
+        /// Operation Id: CustomModel2s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<CustomModel2> GetCustomModel2(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetCustomModel2s().Get(name, cancellationToken);
+        }
 
         /// <summary> Gets a collection of CustomModel3s in the CustomModel3. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -49,6 +105,34 @@ namespace ExactMatchFlattenInheritance
         public static CustomModel3Collection GetCustomModel3s(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetCustomModel3s();
+        }
+        /// <summary>
+        /// Get an CustomModel3.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}
+        /// Operation Id: CustomModel3s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public async static Task<Response<CustomModel3>> GetCustomModel3Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetCustomModel3s().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Get an CustomModel3.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}
+        /// Operation Id: CustomModel3s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<CustomModel3> GetCustomModel3(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetCustomModel3s().Get(name, cancellationToken);
         }
 
         /// <summary>

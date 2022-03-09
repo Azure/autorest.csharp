@@ -244,7 +244,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     var collection = resource.ResourceCollection;
                     var signature = new MethodSignature(
-                        $"Get{resource.Type.Name.ResourceNameToPlural()}",
+                        $"{GetResourceCollectionMethodName(collection)}",
                         $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.",
                         GetMethodModifiers(),
                         collection.Type,
@@ -254,9 +254,53 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         WriteResourceCollectionEntry(resource.ResourceCollection, signature);
                     }
+
+                    if (!(This is MgmtExtensionClient)) // we don't need to generate `Get{Resource}` methods in ExtensionClient
+                    {
+                        WriteChildResourceGetMethod(resource.ResourceCollection, true);
+                        WriteChildResourceGetMethod(resource.ResourceCollection, false);
+                    }
                 }
             }
             _writer.Line();
+        }
+
+        protected void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
+        {
+            var getOperation = resourceCollection.GetOperation;
+            // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
+            var methodSignature = getOperation.MethodSignature with
+            {
+                // name after `Get{ResourceType}`
+                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.Type.Name}",
+                Modifiers = GetMethodModifiers(),
+                // There could be parameters to get resource collection
+                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
+            };
+
+            using (WriteCommonMethodCommentsAndSignature(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync))
+            {
+                WriteResourceEntry(resourceCollection, isAsync);
+            }
+        }
+
+        protected virtual void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
+        {
+            var operation = resourceCollection.GetOperation;
+            string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
+            string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
+            var arguments = string.Join(", ", operation.MethodSignature.Parameters.Select(p => p.Name));
+            _writer.Line($"return{awaitText} {GetResourceCollectionMethodName(resourceCollection)}({GetResourceCollectionMethodArgumentList(resourceCollection)}).{operation.MethodSignature.WithAsync(isAsync).Name}({arguments}){configureAwait};");
+        }
+
+        protected string GetResourceCollectionMethodName(ResourceCollection resourceCollection)
+        {
+            return $"Get{resourceCollection.Resource.Type.Name.ResourceNameToPlural()}";
+        }
+
+        protected string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)
+        {
+            return string.Join(", ", GetParametersForCollectionEntry(resourceCollection).Select(p => p.Name));
         }
 
         protected virtual void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
@@ -273,6 +317,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
         {
             return resourceCollection.ExtraConstructorParameters.ToArray();
+        }
+
+        protected Parameter[] GetParametersForResourceEntry(ResourceCollection resourceCollection)
+        {
+            return resourceCollection.GetOperation.MethodSignature.Parameters;
         }
 
         protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
@@ -454,6 +503,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected CodeWriter.CodeWriterScope WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
         {
+            var scope = WriteCommonMethodCommentsAndSignature(signature, returnDescription, isAsync);
+            if (This.Accessibility == "public")
+                _writer.WriteParametersValidation(signature.Parameters);
+
+            return scope;
+        }
+
+        protected CodeWriter.CodeWriterScope WriteCommonMethodCommentsAndSignature(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
+        {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);
             if (This.Accessibility == "public")
@@ -466,11 +524,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (returnDesc is not null)
                 _writer.WriteXmlDocumentationReturns(returnDesc);
 
-            var scope = _writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
-            if (This.Accessibility == "public")
-                _writer.WriteParametersValidation(signature.Parameters);
-
-            return scope;
+            return _writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
         }
 
         #region PagingMethod

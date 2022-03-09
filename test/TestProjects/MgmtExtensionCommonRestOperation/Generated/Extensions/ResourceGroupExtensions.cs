@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionCommonRestOperation
@@ -28,6 +32,34 @@ namespace MgmtExtensionCommonRestOperation
         {
             return GetExtensionClient(resourceGroup).GetTypeOnes();
         }
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
+        /// Operation Id: Common_GetTypeOne
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="typeOneName"> The name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        public async static Task<Response<TypeOne>> GetTypeOneAsync(this ResourceGroup resourceGroup, string typeOneName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetTypeOnes().GetAsync(typeOneName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
+        /// Operation Id: Common_GetTypeOne
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="typeOneName"> The name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        public static Response<TypeOne> GetTypeOne(this ResourceGroup resourceGroup, string typeOneName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetTypeOnes().Get(typeOneName, cancellationToken);
+        }
 
         /// <summary> Gets a collection of TypeTwos in the TypeTwo. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -35,6 +67,34 @@ namespace MgmtExtensionCommonRestOperation
         public static TypeTwoCollection GetTypeTwos(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetTypeTwos();
+        }
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_GetTypeTwo
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="typeTwoName"> The name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
+        public async static Task<Response<TypeTwo>> GetTypeTwoAsync(this ResourceGroup resourceGroup, string typeTwoName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetTypeTwos().GetAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
+        /// Operation Id: Common_GetTypeTwo
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="typeTwoName"> The name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
+        public static Response<TypeTwo> GetTypeTwo(this ResourceGroup resourceGroup, string typeTwoName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetTypeTwos().Get(typeTwoName, cancellationToken);
         }
     }
 }

@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace SingletonResource
@@ -28,6 +32,32 @@ namespace SingletonResource
         {
             return GetExtensionClient(resourceGroup).GetCars();
         }
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="carName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        public async static Task<Response<Car>> GetCarAsync(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetCars().GetAsync(carName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="carName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        public static Response<Car> GetCar(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetCars().Get(carName, cancellationToken);
+        }
 
         /// <summary> Gets a collection of ParentResources in the ParentResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -35,6 +65,34 @@ namespace SingletonResource
         public static ParentResourceCollection GetParentResources(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetParentResources();
+        }
+        /// <summary>
+        /// Singleton Test Parent Example.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
+        /// Operation Id: ParentResources_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        public async static Task<Response<ParentResource>> GetParentResourceAsync(this ResourceGroup resourceGroup, string parentName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetParentResources().GetAsync(parentName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Singleton Test Parent Example.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
+        /// Operation Id: ParentResources_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        public static Response<ParentResource> GetParentResource(this ResourceGroup resourceGroup, string parentName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetParentResources().Get(parentName, cancellationToken);
         }
     }
 }

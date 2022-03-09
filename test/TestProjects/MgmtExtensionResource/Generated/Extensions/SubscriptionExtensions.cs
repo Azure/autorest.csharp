@@ -42,6 +42,34 @@ namespace MgmtExtensionResource
         {
             return GetExtensionClient(subscription).GetSubscriptionPolicyDefinitions();
         }
+        /// <summary>
+        /// This operation retrieves the policy definition in the given subscription with the given name.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public async static Task<Response<SubscriptionPolicyDefinition>> GetSubscriptionPolicyDefinitionAsync(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return await GetSubscriptionPolicyDefinitions(subscription).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// This operation retrieves the policy definition in the given subscription with the given name.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public static Response<SubscriptionPolicyDefinition> GetSubscriptionPolicyDefinition(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return GetSubscriptionPolicyDefinitions(subscription).Get(policyDefinitionName, cancellationToken);
+        }
 
         /// <summary>
         /// Checks whether a domain name in the cloudapp.azure.com zone is available for use.

@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace MgmtScopeResource
@@ -27,6 +31,34 @@ namespace MgmtScopeResource
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
         {
             return GetExtensionClient(armResource).GetFakePolicyAssignments();
+        }
+        /// <summary>
+        /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
+        /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+        /// Operation Id: FakePolicyAssignments_Get
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public async static Task<Response<FakePolicyAssignment>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return await armResource.GetFakePolicyAssignments().GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
+        /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+        /// Operation Id: FakePolicyAssignments_Get
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public static Response<FakePolicyAssignment> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        {
+            return armResource.GetFakePolicyAssignments().Get(policyAssignmentName, cancellationToken);
         }
     }
 }

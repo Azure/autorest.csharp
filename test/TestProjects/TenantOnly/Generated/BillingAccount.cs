@@ -89,6 +89,34 @@ namespace TenantOnly
         {
             return new AgreementCollection(Client, Id);
         }
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
+        /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
+        public async virtual Task<Response<Agreement>> GetAgreementAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await GetAgreements().GetAsync(agreementName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
+        /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
+        public virtual Response<Agreement> GetAgreement(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return GetAgreements().Get(agreementName, expand, cancellationToken);
+        }
 
         /// <summary>
         /// Gets a billing account by its ID.

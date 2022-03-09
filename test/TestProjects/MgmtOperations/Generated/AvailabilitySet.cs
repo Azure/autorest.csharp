@@ -90,6 +90,32 @@ namespace MgmtOperations
         {
             return new AvailabilitySetChildCollection(Client, Id);
         }
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+        /// Operation Id: availabilitySetChild_Get
+        /// </summary>
+        /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        public async virtual Task<Response<AvailabilitySetChild>> GetAvailabilitySetChildAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        {
+            return await GetAvailabilitySetChildren().GetAsync(availabilitySetChildName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
+        /// Operation Id: availabilitySetChild_Get
+        /// </summary>
+        /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        public virtual Response<AvailabilitySetChild> GetAvailabilitySetChild(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        {
+            return GetAvailabilitySetChildren().Get(availabilitySetChildName, cancellationToken);
+        }
 
         /// <summary>
         /// Retrieves information about an availability set.

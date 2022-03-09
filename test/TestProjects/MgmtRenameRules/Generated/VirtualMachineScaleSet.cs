@@ -95,6 +95,34 @@ namespace MgmtRenameRules
         {
             return new VirtualMachineScaleSetExtensionCollection(Client, Id);
         }
+        /// <summary>
+        /// The operation to get the extension.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
+        /// Operation Id: VirtualMachineScaleSetExtensions_Get
+        /// </summary>
+        /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
+        public async virtual Task<Response<VirtualMachineScaleSetExtension>> GetVirtualMachineScaleSetExtensionAsync(string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await GetVirtualMachineScaleSetExtensions().GetAsync(vmssExtensionName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// The operation to get the extension.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
+        /// Operation Id: VirtualMachineScaleSetExtensions_Get
+        /// </summary>
+        /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
+        public virtual Response<VirtualMachineScaleSetExtension> GetVirtualMachineScaleSetExtension(string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return GetVirtualMachineScaleSetExtensions().Get(vmssExtensionName, expand, cancellationToken);
+        }
 
         /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it in the VirtualMachineScaleSet. </summary>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
@@ -108,6 +136,32 @@ namespace MgmtRenameRules
         public virtual VirtualMachineScaleSetVmCollection GetVirtualMachineScaleSetVms()
         {
             return new VirtualMachineScaleSetVmCollection(Client, Id);
+        }
+        /// <summary>
+        /// Gets a virtual machine from a VM scale set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
+        /// Operation Id: VirtualMachineScaleSetVMs_Get
+        /// </summary>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        public async virtual Task<Response<VirtualMachineScaleSetVm>> GetVirtualMachineScaleSetVmAsync(string instanceId, CancellationToken cancellationToken = default)
+        {
+            return await GetVirtualMachineScaleSetVms().GetAsync(instanceId, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Gets a virtual machine from a VM scale set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
+        /// Operation Id: VirtualMachineScaleSetVMs_Get
+        /// </summary>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        public virtual Response<VirtualMachineScaleSetVm> GetVirtualMachineScaleSetVm(string instanceId, CancellationToken cancellationToken = default)
+        {
+            return GetVirtualMachineScaleSetVms().Get(instanceId, cancellationToken);
         }
 
         /// <summary>

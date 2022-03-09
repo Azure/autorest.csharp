@@ -90,6 +90,34 @@ namespace MgmtMultipleParentResource
         {
             return new AnotherParentChildCollection(Client, Id);
         }
+        /// <summary>
+        /// The operation to get the run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
+        /// Operation Id: AnotherChildren_Get
+        /// </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public async virtual Task<Response<AnotherParentChild>> GetAnotherParentChildAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await GetAnotherParentChildren().GetAsync(childName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// The operation to get the run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
+        /// Operation Id: AnotherChildren_Get
+        /// </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public virtual Response<AnotherParentChild> GetAnotherParentChild(string childName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return GetAnotherParentChildren().Get(childName, expand, cancellationToken);
+        }
 
         /// <summary>
         /// The operation to get the run command.

@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtDiscriminator
@@ -27,6 +31,34 @@ namespace MgmtDiscriminator
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetDeliveryRules();
+        }
+        /// <summary>
+        /// Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}
+        /// Operation Id: DeliveryRules_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public async static Task<Response<DeliveryRule>> GetDeliveryRuleAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetDeliveryRules().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}
+        /// Operation Id: DeliveryRules_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<DeliveryRule> GetDeliveryRule(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetDeliveryRules().Get(name, cancellationToken);
         }
     }
 }

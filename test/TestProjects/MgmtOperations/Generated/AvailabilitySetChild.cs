@@ -89,6 +89,32 @@ namespace MgmtOperations
         {
             return new AvailabilitySetGrandChildCollection(Client, Id);
         }
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+        /// Operation Id: availabilitySetGrandChild_Get
+        /// </summary>
+        /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        public async virtual Task<Response<AvailabilitySetGrandChild>> GetAvailabilitySetGrandChildAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        {
+            return await GetAvailabilitySetGrandChildren().GetAsync(availabilitySetGrandChildName, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+        /// Operation Id: availabilitySetGrandChild_Get
+        /// </summary>
+        /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        public virtual Response<AvailabilitySetGrandChild> GetAvailabilitySetGrandChild(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        {
+            return GetAvailabilitySetGrandChildren().Get(availabilitySetGrandChildName, cancellationToken);
+        }
 
         /// <summary>
         /// Retrieves information about an availability set.

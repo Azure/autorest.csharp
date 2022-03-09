@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtMultipleParentResource
@@ -28,6 +32,36 @@ namespace MgmtMultipleParentResource
         {
             return GetExtensionClient(resourceGroup).GetAnotherParents();
         }
+        /// <summary>
+        /// The operation to get the run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
+        public async static Task<Response<AnotherParent>> GetAnotherParentAsync(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetAnotherParents().GetAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// The operation to get the run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
+        /// Operation Id: AnotherParents_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
+        public static Response<AnotherParent> GetAnotherParent(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetAnotherParents().Get(anotherName, expand, cancellationToken);
+        }
 
         /// <summary> Gets a collection of TheParents in the TheParent. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -35,6 +69,36 @@ namespace MgmtMultipleParentResource
         public static TheParentCollection GetTheParents(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetTheParents();
+        }
+        /// <summary>
+        /// The operation to get the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
+        /// Operation Id: TheParents_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
+        public async static Task<Response<TheParent>> GetTheParentAsync(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetTheParents().GetAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
+        }
+        /// <summary>
+        /// The operation to get the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
+        /// Operation Id: TheParents_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
+        public static Response<TheParent> GetTheParent(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetTheParents().Get(theParentName, expand, cancellationToken);
         }
     }
 }
