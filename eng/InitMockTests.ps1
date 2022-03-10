@@ -379,19 +379,17 @@ function  MockTestInit {
         Write-Host ""
     }
 }
-     
+
+# Launch Mock-service-host
+$LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
+$launchTask = { & start /B pwsh $LaunchScript }
+Invoke-Command  -ScriptBlock $launchTask
+
 # Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $false
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
-# $task1 = { MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri }
-# Invoke-Command  -ScriptBlock $task1
-# $null = Wait-Job -Job $job1
-# $result = Receive-Job -Job $job1
-
-# Launch Mock-service-host
-# $LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
-# $task2 = { & $LaunchScript }
-# Invoke-Command  -ScriptBlock $task2
+$buildTask = { MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri }
+Invoke-Command  -ScriptBlock $buildTask
