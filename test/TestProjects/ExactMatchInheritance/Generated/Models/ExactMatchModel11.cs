@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.Core;
+
 namespace ExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel11. </summary>
@@ -18,7 +20,7 @@ namespace ExactMatchInheritance.Models
         /// <summary> Initializes a new instance of ExactMatchModel11. </summary>
         /// <param name="name"></param>
         /// <param name="type"></param>
-        internal ExactMatchModel11(string name, string type)
+        internal ExactMatchModel11(string name, ResourceType? type)
         {
             Name = name;
             Type = type;
@@ -27,6 +29,6 @@ namespace ExactMatchInheritance.Models
         /// <summary> Gets the name. </summary>
         public string Name { get; }
         /// <summary> Gets the type. </summary>
-        public string Type { get; }
+        public ResourceType? Type { get; }
     }
 }

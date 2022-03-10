@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.Core;
+
 namespace ExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel8. </summary>
@@ -19,7 +21,7 @@ namespace ExactMatchInheritance.Models
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="bar"></param>
-        internal ExactMatchModel8(string id, string name, string bar)
+        internal ExactMatchModel8(ResourceIdentifier id, string name, string bar)
         {
             Id = id;
             Name = name;
@@ -27,7 +29,7 @@ namespace ExactMatchInheritance.Models
         }
 
         /// <summary> Gets or sets the id. </summary>
-        public string Id { get; set; }
+        public ResourceIdentifier Id { get; set; }
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
         /// <summary> Gets or sets the bar. </summary>

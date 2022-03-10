@@ -607,7 +607,8 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "type": "string"
+                    "type": "string",
+                    "x-ms-format": "armId"
                 },
                 "name": {
                     "type": "string"

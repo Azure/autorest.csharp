@@ -133,6 +133,13 @@ namespace AutoRest.CSharp.Input
         public string? Format => TryGetValue("x-ms-format", out object? value) ? value?.ToString() : null;
     }
 
+    internal static class XMsFormat
+    {
+        public const string ArmId = "armId";
+        public const string ResourceType = "resourceType";
+        public const string DurationConstant = "duration-constant";
+    }
+
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
