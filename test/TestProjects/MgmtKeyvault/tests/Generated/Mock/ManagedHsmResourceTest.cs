@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
@@ -27,7 +26,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async System.Threading.Tasks.Task Get()
         {
             // Example: Retrieve a managed HSM Pool
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
@@ -37,7 +36,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Delete()
+        public async System.Threading.Tasks.Task Delete()
         {
             // Example: Delete a managed HSM Pool
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
@@ -47,7 +46,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Update()
+        public async System.Threading.Tasks.Task Update()
         {
             // Example: Update an existing managed HSM Pool
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
@@ -66,7 +65,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetMHSMPrivateLinkResourcesByMhsmResource()
+        public async System.Threading.Tasks.Task GetMHSMPrivateLinkResourcesByMhsmResource()
         {
             // Example: KeyVaultListPrivateLinkResources
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");

@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
@@ -26,7 +24,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async System.Threading.Tasks.Task Get()
         {
             // Example: Retrieve a deleted vault
             var deletedVaultResourceId = MgmtKeyvault.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");
@@ -36,7 +34,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task PurgeDeleted()
+        public async System.Threading.Tasks.Task PurgeDeleted()
         {
             // Example: Purge a deleted vault
             var deletedVaultResourceId = MgmtKeyvault.DeletedVaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "sample-vault");

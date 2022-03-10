@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtSignalR;
@@ -26,7 +25,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async System.Threading.Tasks.Task Get()
         {
             // Example: SignalR_Get
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
@@ -36,7 +35,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Delete()
+        public async System.Threading.Tasks.Task Delete()
         {
             // Example: SignalR_Delete
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
@@ -46,7 +45,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Update()
+        public async System.Threading.Tasks.Task Update()
         {
             // Example: SignalR_Update
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
@@ -84,7 +83,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetKeys()
+        public async System.Threading.Tasks.Task GetKeys()
         {
             // Example: SignalR_ListKeys
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
@@ -94,7 +93,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task RegenerateKey()
+        public async System.Threading.Tasks.Task RegenerateKey()
         {
             // Example: SignalR_RegenerateKey
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
@@ -108,7 +107,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Restart()
+        public async System.Threading.Tasks.Task Restart()
         {
             // Example: SignalR_Restart
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
@@ -118,7 +117,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetSignalRPrivateLinkResources()
+        public async System.Threading.Tasks.Task GetSignalRPrivateLinkResources()
         {
             // Example: SignalRPrivateLinkResources_List
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");

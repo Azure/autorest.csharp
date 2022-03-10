@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtSignalR;
@@ -25,7 +23,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async System.Threading.Tasks.Task Get()
         {
             // Example: SignalRPrivateEndpointConnections_Get
             var privateEndpointConnectionId = MgmtSignalR.PrivateEndpointConnection.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService", "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e");
@@ -35,7 +33,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Delete()
+        public async System.Threading.Tasks.Task Delete()
         {
             // Example: SignalRPrivateEndpointConnections_Delete
             var privateEndpointConnectionId = MgmtSignalR.PrivateEndpointConnection.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService", "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e");

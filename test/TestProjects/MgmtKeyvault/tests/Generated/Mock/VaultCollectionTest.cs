@@ -6,9 +6,7 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
@@ -27,7 +25,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CreateOrUpdate()
+        public async System.Threading.Tasks.Task CreateOrUpdate()
         {
             // Example: Create a new vault or update an existing vault
             string vaultName = "sample-vault";
@@ -82,7 +80,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CreateOrUpdate2()
+        public async System.Threading.Tasks.Task CreateOrUpdate2()
         {
             // Example: Create or update a vault with network acls
             string vaultName = "sample-vault";
@@ -106,7 +104,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async System.Threading.Tasks.Task Get()
         {
             // Example: Retrieve a vault
             string vaultName = "sample-vault";
@@ -116,7 +114,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetAll()
+        public async System.Threading.Tasks.Task GetAll()
         {
             // Example: List vaults in the specified resource group
             int? top = 1;
