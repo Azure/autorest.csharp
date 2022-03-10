@@ -262,13 +262,12 @@ function  MockTestInit {
                 if ($item.Name.Contains("Azure.ResourceManager.")) {
                     # Create mocktests folder if it not exist
                     $Script:allTrack2Sdk++
-                    $task = { Update-AllGeneratedCode -path $item.FullName -autorestVersion $AutorestVersion }
-                    Start-Job -ScriptBlock $task
+                    Update-AllGeneratedCode -path $item.FullName -autorestVersion $AutorestVersion 
                 }
             }
         }
         Start-Sleep 120
-        
+
         # Run build successed mock unit tests
         $FinalStatics = @{}
         $ErrorTypeStatic = @()
@@ -388,11 +387,11 @@ $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
 # $task1 = { MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri }
-# $job1 =  Start-Job -ScriptBlock $task1
+# Invoke-Command  -ScriptBlock $task1
 # $null = Wait-Job -Job $job1
 # $result = Receive-Job -Job $job1
 
 # Launch Mock-service-host
-$LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
-$task2 = { & $LaunchScript }
+# $LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
+# $task2 = { & $LaunchScript }
 # Invoke-Command  -ScriptBlock $task2
