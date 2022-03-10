@@ -2481,7 +2481,7 @@ schemas: !Schemas
         - !ApiVersion 
           version: '2020-06-01'
       extensions:
-        x-ms-format: resourceType
+        x-ms-format: resource-type
       language: !Languages 
         default:
           name: UpgradeOperationHistoricalStatusInfoType
@@ -14200,7 +14200,7 @@ schemas: !Schemas
                   readOnly: true
                   serializedName: type
                   extensions:
-                    x-ms-format: resourceType
+                    x-ms-format: resource-type
                   language: !Languages 
                     default:
                       name: type

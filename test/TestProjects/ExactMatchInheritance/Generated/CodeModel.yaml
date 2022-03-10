@@ -138,7 +138,7 @@ schemas: !Schemas
         - !ApiVersion 
           version: '2020-06-01'
       extensions:
-        x-ms-format: armId
+        x-ms-format: arm-id
       language: !Languages 
         default:
           name: ExactMatchModel8Id
@@ -250,7 +250,7 @@ schemas: !Schemas
         - !ApiVersion 
           version: '2020-06-01'
       extensions:
-        x-ms-format: resourceType
+        x-ms-format: resource-type
       language: !Languages 
         default:
           name: ExactMatchModel11Type
@@ -540,7 +540,7 @@ schemas: !Schemas
                         schema: *ref_16
                         serializedName: id
                         extensions:
-                          x-ms-format: armId
+                          x-ms-format: arm-id
                         language: !Languages 
                           default:
                             name: id
@@ -761,7 +761,7 @@ schemas: !Schemas
                               readOnly: true
                               serializedName: type
                               extensions:
-                                x-ms-format: resourceType
+                                x-ms-format: resource-type
                               language: !Languages 
                                 default:
                                   name: type

@@ -608,7 +608,7 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "x-ms-format": "armId"
+                    "x-ms-format": "arm-id"
                 },
                 "name": {
                     "type": "string"

@@ -49,7 +49,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("Id", "ExactMatchModel3", typeof(ResourceIdentifier))]
         [TestCase("Id", "ExactMatchModel8", typeof(ResourceIdentifier))]
-        [TestCase("Type", "ExactMatchModel11", typeof(Optional<ResourceType>))]
+        [TestCase("Type", "ExactMatchModel11", typeof(ResourceType?))]
         [TestCase("ID", "ExactMatchModel7", typeof(string))]
         [TestCase("Type", "ExactMatchModel7", typeof(string))]
         [TestCase("Id", "ExactMatchModel1Data", typeof(ResourceIdentifier))]

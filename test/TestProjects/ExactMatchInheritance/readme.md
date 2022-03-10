@@ -15,5 +15,5 @@ directive:
   - from: ExactMatchInheritance.json
     where: $.definitions.ExactMatchModel11.properties.type
     transform: >
-       $["x-ms-format"] = "resourceType";
+       $["x-ms-format"] = "resource-type";
 ```
