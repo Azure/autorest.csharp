@@ -26,7 +26,7 @@ namespace MgmtSignalR
         /// <summary> Initializes a new instance of SignalRResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
@@ -52,7 +52,7 @@ namespace MgmtSignalR
         /// <param name="version"> Version of the resource. Probably you need the same or higher version of client SDKs. </param>
         /// <param name="privateEndpointConnections"> Private endpoint connections to the resource. </param>
         /// <param name="tls"> TLS settings. </param>
-        internal SignalRResourceData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ResourceSku sku, ServiceKind? kind, ManagedIdentity identity, IList<SignalRFeature> features, SignalRCorsSettings cors, ServerlessUpstreamSettings upstream, SignalRNetworkACLs networkACLs, ProvisioningState? provisioningState, string externalIP, string hostName, int? publicPort, int? serverPort, string version, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, SignalRTlsSettings tls) : base(id, name, type, systemData, tags, location)
+        internal SignalRResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ResourceSku sku, ServiceKind? kind, ManagedIdentity identity, IList<SignalRFeature> features, SignalRCorsSettings cors, ServerlessUpstreamSettings upstream, SignalRNetworkACLs networkACLs, ProvisioningState? provisioningState, string externalIP, string hostName, int? publicPort, int? serverPort, string version, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, SignalRTlsSettings tls) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Kind = kind;
