@@ -381,7 +381,7 @@ function  MockTestInit {
 }
 
 # Launch Mock-service-host
-$LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
+$LaunchScript = Join-Path $PSScriptRoot  "Launch-MockServiceHost.ps1"
 $launchTask = { & start /B pwsh $LaunchScript }
 Invoke-Command  -ScriptBlock $launchTask
 
