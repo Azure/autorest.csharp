@@ -53,7 +53,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async static Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroup resourceGroup, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroup resourceGroup, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -113,7 +113,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async static Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, ExactMatchModel3 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -148,7 +148,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
-        public async static Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(this ResourceGroup resourceGroup, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
@@ -181,7 +181,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async static Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroup resourceGroup, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroup resourceGroup, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
             Argument.AssertNotNull(parameters, nameof(parameters));

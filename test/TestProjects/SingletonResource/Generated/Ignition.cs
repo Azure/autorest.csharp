@@ -52,7 +52,7 @@ namespace SingletonResource
         {
             _ignitionClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string ignitionApiVersion);
-            _ignitionRestClient = new IgnitionsRestOperations(_ignitionClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
+            _ignitionRestClient = new IgnitionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, ignitionApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,7 +87,7 @@ namespace SingletonResource
         /// Operation Id: Ignitions_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Ignition>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Ignition>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _ignitionClientDiagnostics.CreateScope("Ignition.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace SingletonResource
             {
                 var response = await _ignitionRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _ignitionClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Ignition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace SingletonResource
             {
                 var response = _ignitionRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _ignitionClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Ignition(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

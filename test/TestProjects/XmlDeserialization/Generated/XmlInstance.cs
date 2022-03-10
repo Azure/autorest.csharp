@@ -52,7 +52,7 @@ namespace XmlDeserialization
         {
             _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
-            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(_xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
+            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -88,7 +88,7 @@ namespace XmlDeserialization
         /// Operation Id: XmlDeserialization_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<XmlInstance>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<XmlInstance>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstance.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace XmlDeserialization
             {
                 var response = await _xmlInstanceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new XmlInstance(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace XmlDeserialization
             {
                 var response = _xmlInstanceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new XmlInstance(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -139,7 +139,7 @@ namespace XmlDeserialization
         /// <param name="ifMatch"> ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public async virtual Task<ArmOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, string ifMatch, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
@@ -196,7 +196,7 @@ namespace XmlDeserialization
         /// Operation Id: XmlDeserialization_GetEntityTag
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<bool>> GetEntityTagAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> GetEntityTagAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _xmlInstanceXmlDeserializationClientDiagnostics.CreateScope("XmlInstance.GetEntityTag");
             scope.Start();

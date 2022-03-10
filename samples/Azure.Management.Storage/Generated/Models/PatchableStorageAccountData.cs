@@ -27,7 +27,7 @@ namespace Azure.Management.Storage.Models
         /// <summary> The identity of the resource. </summary>
         public ManagedServiceIdentity Identity { get; set; }
         /// <summary> Optional. Indicates the type of storage account. Currently only StorageV2 value supported by server. </summary>
-        public Kind? Kind { get; set; }
+        public StorageKind? Kind { get; set; }
         /// <summary> Custom domain assigned to the storage account by the user. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property. </summary>
         public CustomDomain CustomDomain { get; set; }
         /// <summary> Provides the encryption settings on the account. The default setting is unencrypted. </summary>

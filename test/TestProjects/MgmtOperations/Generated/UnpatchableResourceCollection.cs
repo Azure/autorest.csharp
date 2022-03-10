@@ -39,7 +39,7 @@ namespace MgmtOperations
         {
             _unpatchableResourceClientDiagnostics = new ClientDiagnostics("MgmtOperations", UnpatchableResource.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(UnpatchableResource.ResourceType, out string unpatchableResourceApiVersion);
-            _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(_unpatchableResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, unpatchableResourceApiVersion);
+            _unpatchableResourceRestClient = new UnpatchableResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, unpatchableResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,7 +62,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<UnpatchableResource>> CreateOrUpdateAsync(bool waitForCompletion, string name, UnpatchableResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<UnpatchableResource>> CreateOrUpdateAsync(bool waitForCompletion, string name, UnpatchableResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -127,7 +127,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<Response<UnpatchableResource>> GetAsync(string name, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<UnpatchableResource>> GetAsync(string name, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -137,7 +137,7 @@ namespace MgmtOperations
             {
                 var response = await _unpatchableResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _unpatchableResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new UnpatchableResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -167,7 +167,7 @@ namespace MgmtOperations
             {
                 var response = _unpatchableResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _unpatchableResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new UnpatchableResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -243,7 +243,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string name, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string name, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -299,7 +299,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<Response<UnpatchableResource>> GetIfExistsAsync(string name, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<UnpatchableResource>> GetIfExistsAsync(string name, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 

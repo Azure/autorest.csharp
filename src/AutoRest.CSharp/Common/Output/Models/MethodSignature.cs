@@ -12,7 +12,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record MethodSignature(string Name, string? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, Parameter[] Parameters) : MethodSignatureBase(Name, Description, Modifiers, Parameters)
+    internal record MethodSignature(string Name, string? Description, MethodSignatureModifiers Modifiers, CSharpType? ReturnType, FormattableString? ReturnDescription, IReadOnlyList<Parameter> Parameters) : MethodSignatureBase(Name, Description, Modifiers, Parameters)
     {
         public MethodSignature WithAsync(bool isAsync)
             => isAsync && !Modifiers.HasFlag(Async)

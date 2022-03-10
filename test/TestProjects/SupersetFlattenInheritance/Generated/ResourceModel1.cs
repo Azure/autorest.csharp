@@ -52,7 +52,7 @@ namespace SupersetFlattenInheritance
         {
             _resourceModel1ClientDiagnostics = new ClientDiagnostics("SupersetFlattenInheritance", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string resourceModel1ApiVersion);
-            _resourceModel1RestClient = new ResourceModel1SRestOperations(_resourceModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ApiVersion);
+            _resourceModel1RestClient = new ResourceModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resourceModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,7 +87,7 @@ namespace SupersetFlattenInheritance
         /// Operation Id: ResourceModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _resourceModel1ClientDiagnostics.CreateScope("ResourceModel1.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace SupersetFlattenInheritance
             {
                 var response = await _resourceModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _resourceModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace SupersetFlattenInheritance
             {
                 var response = _resourceModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _resourceModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

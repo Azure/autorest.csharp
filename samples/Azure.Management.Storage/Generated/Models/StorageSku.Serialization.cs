@@ -22,13 +22,13 @@ namespace Azure.Management.Storage.Models
 
         internal static StorageSku DeserializeStorageSku(JsonElement element)
         {
-            SkuName name = default;
-            Optional<SkuTier> tier = default;
+            StorageSkuName name = default;
+            Optional<StorageSkuTier> tier = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
                 {
-                    name = new SkuName(property.Value.GetString());
+                    name = new StorageSkuName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tier"))
@@ -38,7 +38,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    tier = property.Value.GetString().ToSkuTier();
+                    tier = property.Value.GetString().ToStorageSkuTier();
                     continue;
                 }
             }
