@@ -7,6 +7,8 @@
 
 using System;
 using System.Net;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtSignalR;
@@ -24,11 +26,11 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task CreateOrUpdate()
+        public async Task CreateOrUpdate()
         {
             // Example: SignalRPrivateEndpointConnections_Update
             string privateEndpointConnectionName = "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e";
-            MgmtSignalR.PrivateEndpointConnectionData parameters = new MgmtSignalR.PrivateEndpointConnectionData()
+            MgmtSignalR.PrivateEndpointConnectionData data = new MgmtSignalR.PrivateEndpointConnectionData()
             {
                 PrivateLinkServiceConnectionState = new MgmtSignalR.Models.PrivateLinkServiceConnectionState()
                 {
@@ -40,11 +42,11 @@ namespace MgmtSignalR.Tests.Mock
 
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
             var collection = GetArmClient().GetSignalRResource(signalRResourceId).GetPrivateEndpointConnections();
-            await collection.CreateOrUpdateAsync(true, privateEndpointConnectionName, parameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, privateEndpointConnectionName, data);
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Get()
+        public async Task Get()
         {
             // Example: SignalRPrivateEndpointConnections_Get
             string privateEndpointConnectionName = "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e";

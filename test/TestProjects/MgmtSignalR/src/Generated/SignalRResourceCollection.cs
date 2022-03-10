@@ -16,12 +16,15 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtSignalR
 {
-    /// <summary> A class representing collection of SignalRResource and their operations over its parent. </summary>
+    /// <summary>
+    /// A class representing a collection of <see cref="SignalRResource" /> and their operations.
+    /// Each <see cref="SignalRResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
+    /// To get a <see cref="SignalRResourceCollection" /> instance call the GetSignalRResources method from an instance of <see cref="ResourceGroupResource" />.
+    /// </summary>
     public partial class SignalRResourceCollection : ArmCollection, IEnumerable<SignalRResource>, IAsyncEnumerable<SignalRResource>
     {
         private readonly ClientDiagnostics _signalRResourceSignalRClientDiagnostics;
@@ -37,9 +40,9 @@ namespace MgmtSignalR
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal SignalRResourceCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _signalRResourceSignalRClientDiagnostics = new ClientDiagnostics("MgmtSignalR", SignalRResource.ResourceType.Namespace, DiagnosticOptions);
+            _signalRResourceSignalRClientDiagnostics = new ClientDiagnostics("MgmtSignalR", SignalRResource.ResourceType.Namespace, Diagnostics);
             TryGetApiVersion(SignalRResource.ResourceType, out string signalRResourceSignalRApiVersion);
-            _signalRResourceSignalRRestClient = new SignalRRestOperations(_signalRResourceSignalRClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, signalRResourceSignalRApiVersion);
+            _signalRResourceSignalRRestClient = new SignalRRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, signalRResourceSignalRApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -47,8 +50,8 @@ namespace MgmtSignalR
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != ResourceGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+            if (id.ResourceType != ResourceGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -56,13 +59,13 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}
         /// Operation Id: SignalR_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="resourceName"> The name of the SignalR resource. </param>
-        /// <param name="parameters"> Parameters for the create or update operation. </param>
+        /// <param name="data"> Parameters for the create or update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
-        public async virtual Task<ArmOperation<SignalRResource>> CreateOrUpdateAsync(bool waitForCompletion, string resourceName, SignalRResourceData parameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SignalRResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string resourceName, SignalRResourceData data = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceName, nameof(resourceName));
 
@@ -70,9 +73,9 @@ namespace MgmtSignalR
             scope.Start();
             try
             {
-                var response = await _signalRResourceSignalRRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSignalRArmOperation<SignalRResource>(new SignalRResourceOperationSource(Client), _signalRResourceSignalRClientDiagnostics, Pipeline, _signalRResourceSignalRRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, resourceName, parameters).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                var response = await _signalRResourceSignalRRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceName, data, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtSignalRArmOperation<SignalRResource>(new SignalRResourceOperationSource(Client), _signalRResourceSignalRClientDiagnostics, Pipeline, _signalRResourceSignalRRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, resourceName, data).Request, response, OperationFinalStateVia.Location);
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -88,13 +91,13 @@ namespace MgmtSignalR
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}
         /// Operation Id: SignalR_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="resourceName"> The name of the SignalR resource. </param>
-        /// <param name="parameters"> Parameters for the create or update operation. </param>
+        /// <param name="data"> Parameters for the create or update operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
-        public virtual ArmOperation<SignalRResource> CreateOrUpdate(bool waitForCompletion, string resourceName, SignalRResourceData parameters = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SignalRResource> CreateOrUpdate(WaitUntil waitUntil, string resourceName, SignalRResourceData data = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceName, nameof(resourceName));
 
@@ -102,9 +105,9 @@ namespace MgmtSignalR
             scope.Start();
             try
             {
-                var response = _signalRResourceSignalRRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resourceName, parameters, cancellationToken);
-                var operation = new MgmtSignalRArmOperation<SignalRResource>(new SignalRResourceOperationSource(Client), _signalRResourceSignalRClientDiagnostics, Pipeline, _signalRResourceSignalRRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, resourceName, parameters).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                var response = _signalRResourceSignalRRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resourceName, data, cancellationToken);
+                var operation = new MgmtSignalRArmOperation<SignalRResource>(new SignalRResourceOperationSource(Client), _signalRResourceSignalRClientDiagnostics, Pipeline, _signalRResourceSignalRRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, resourceName, data).Request, response, OperationFinalStateVia.Location);
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }
@@ -124,7 +127,7 @@ namespace MgmtSignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
-        public async virtual Task<Response<SignalRResource>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SignalRResource>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceName, nameof(resourceName));
 
@@ -134,7 +137,7 @@ namespace MgmtSignalR
             {
                 var response = await _signalRResourceSignalRRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _signalRResourceSignalRClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SignalRResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -163,7 +166,7 @@ namespace MgmtSignalR
             {
                 var response = _signalRResourceSignalRRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceName, cancellationToken);
                 if (response.Value == null)
-                    throw _signalRResourceSignalRClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SignalRResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -266,7 +269,7 @@ namespace MgmtSignalR
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string resourceName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string resourceName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resourceName, nameof(resourceName));
 
@@ -274,7 +277,7 @@ namespace MgmtSignalR
             scope.Start();
             try
             {
-                var response = await GetIfExistsAsync(resourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _signalRResourceSignalRRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -301,66 +304,8 @@ namespace MgmtSignalR
             scope.Start();
             try
             {
-                var response = GetIfExists(resourceName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}
-        /// Operation Id: SignalR_Get
-        /// </summary>
-        /// <param name="resourceName"> The name of the SignalR resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
-        public async virtual Task<Response<SignalRResource>> GetIfExistsAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(resourceName, nameof(resourceName));
-
-            using var scope = _signalRResourceSignalRClientDiagnostics.CreateScope("SignalRResourceCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = await _signalRResourceSignalRRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resourceName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    return Response.FromValue<SignalRResource>(null, response.GetRawResponse());
-                return Response.FromValue(new SignalRResource(Client, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get details for this resource from the service.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}
-        /// Operation Id: SignalR_Get
-        /// </summary>
-        /// <param name="resourceName"> The name of the SignalR resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
-        public virtual Response<SignalRResource> GetIfExists(string resourceName, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(resourceName, nameof(resourceName));
-
-            using var scope = _signalRResourceSignalRClientDiagnostics.CreateScope("SignalRResourceCollection.GetIfExists");
-            scope.Start();
-            try
-            {
                 var response = _signalRResourceSignalRRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resourceName, cancellationToken: cancellationToken);
-                if (response.Value == null)
-                    return Response.FromValue<SignalRResource>(null, response.GetRawResponse());
-                return Response.FromValue(new SignalRResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

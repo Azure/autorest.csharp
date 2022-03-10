@@ -13,35 +13,34 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 using MgmtSignalR.Models;
 
 namespace MgmtSignalR
 {
-    /// <summary> A class to add extension methods to Subscription. </summary>
-    internal partial class SubscriptionExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    internal partial class SubscriptionResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _signalRResourceSignalRClientDiagnostics;
         private SignalRRestOperations _signalRResourceSignalRRestClient;
         private ClientDiagnostics _usagesClientDiagnostics;
         private UsagesRestOperations _usagesRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class for mocking. </summary>
-        protected SubscriptionExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
+        protected SubscriptionResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal SubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
-        private ClientDiagnostics SignalRResourceSignalRClientDiagnostics => _signalRResourceSignalRClientDiagnostics ??= new ClientDiagnostics("MgmtSignalR", SignalRResource.ResourceType.Namespace, DiagnosticOptions);
-        private SignalRRestOperations SignalRResourceSignalRRestClient => _signalRResourceSignalRRestClient ??= new SignalRRestOperations(SignalRResourceSignalRClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(SignalRResource.ResourceType));
-        private ClientDiagnostics UsagesClientDiagnostics => _usagesClientDiagnostics ??= new ClientDiagnostics("MgmtSignalR", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private UsagesRestOperations UsagesRestClient => _usagesRestClient ??= new UsagesRestOperations(UsagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private ClientDiagnostics SignalRResourceSignalRClientDiagnostics => _signalRResourceSignalRClientDiagnostics ??= new ClientDiagnostics("MgmtSignalR", SignalRResource.ResourceType.Namespace, Diagnostics);
+        private SignalRRestOperations SignalRResourceSignalRRestClient => _signalRResourceSignalRRestClient ??= new SignalRRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(SignalRResource.ResourceType));
+        private ClientDiagnostics UsagesClientDiagnostics => _usagesClientDiagnostics ??= new ClientDiagnostics("MgmtSignalR", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private UsagesRestOperations UsagesRestClient => _usagesRestClient ??= new UsagesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -55,15 +54,15 @@ namespace MgmtSignalR
         /// Operation Id: SignalR_CheckNameAvailability
         /// </summary>
         /// <param name="location"> the region. </param>
-        /// <param name="parameters"> Parameters supplied to the operation. </param>
+        /// <param name="nameAvailabilityParameters"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<NameAvailability>> CheckNameAvailabilitySignalRAsync(string location, NameAvailabilityParameters parameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NameAvailability>> CheckNameAvailabilitySignalRAsync(string location, NameAvailabilityParameters nameAvailabilityParameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionExtensionClient.CheckNameAvailabilitySignalR");
+            using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.CheckNameAvailabilitySignalR");
             scope.Start();
             try
             {
-                var response = await SignalRResourceSignalRRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, location, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await SignalRResourceSignalRRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, location, nameAvailabilityParameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -79,15 +78,15 @@ namespace MgmtSignalR
         /// Operation Id: SignalR_CheckNameAvailability
         /// </summary>
         /// <param name="location"> the region. </param>
-        /// <param name="parameters"> Parameters supplied to the operation. </param>
+        /// <param name="nameAvailabilityParameters"> Parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<NameAvailability> CheckNameAvailabilitySignalR(string location, NameAvailabilityParameters parameters = null, CancellationToken cancellationToken = default)
+        public virtual Response<NameAvailability> CheckNameAvailabilitySignalR(string location, NameAvailabilityParameters nameAvailabilityParameters = null, CancellationToken cancellationToken = default)
         {
-            using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionExtensionClient.CheckNameAvailabilitySignalR");
+            using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.CheckNameAvailabilitySignalR");
             scope.Start();
             try
             {
-                var response = SignalRResourceSignalRRestClient.CheckNameAvailability(Id.SubscriptionId, location, parameters, cancellationToken);
+                var response = SignalRResourceSignalRRestClient.CheckNameAvailability(Id.SubscriptionId, location, nameAvailabilityParameters, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -108,7 +107,7 @@ namespace MgmtSignalR
         {
             async Task<Page<SignalRResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSignalRResources");
+                using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSignalRResources");
                 scope.Start();
                 try
                 {
@@ -123,7 +122,7 @@ namespace MgmtSignalR
             }
             async Task<Page<SignalRResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSignalRResources");
+                using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSignalRResources");
                 scope.Start();
                 try
                 {
@@ -150,7 +149,7 @@ namespace MgmtSignalR
         {
             Page<SignalRResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSignalRResources");
+                using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSignalRResources");
                 scope.Start();
                 try
                 {
@@ -165,7 +164,7 @@ namespace MgmtSignalR
             }
             Page<SignalRResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSignalRResources");
+                using var scope = SignalRResourceSignalRClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetSignalRResources");
                 scope.Start();
                 try
                 {
@@ -193,7 +192,7 @@ namespace MgmtSignalR
         {
             async Task<Page<SignalRUsage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
+                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsages");
                 scope.Start();
                 try
                 {
@@ -208,7 +207,7 @@ namespace MgmtSignalR
             }
             async Task<Page<SignalRUsage>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
+                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsages");
                 scope.Start();
                 try
                 {
@@ -236,7 +235,7 @@ namespace MgmtSignalR
         {
             Page<SignalRUsage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
+                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsages");
                 scope.Start();
                 try
                 {
@@ -251,7 +250,7 @@ namespace MgmtSignalR
             }
             Page<SignalRUsage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsages");
+                using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionResourceExtensionClient.GetUsages");
                 scope.Start();
                 try
                 {
