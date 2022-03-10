@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
@@ -27,7 +26,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CreateOrUpdate()
+        public async System.Threading.Tasks.Task CreateOrUpdate()
         {
             // Example: SignalR_CreateOrUpdate
             string resourceName = "mySignalRService";
@@ -65,7 +64,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async System.Threading.Tasks.Task Get()
         {
             // Example: SignalR_Get
             string resourceName = "mySignalRService";
@@ -75,7 +74,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetAll()
+        public async System.Threading.Tasks.Task GetAll()
         {
             // Example: SignalR_ListByResourceGroup
 

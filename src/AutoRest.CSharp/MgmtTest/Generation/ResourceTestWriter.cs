@@ -5,16 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
+using System.Net;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
-using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -64,10 +60,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         private void WriteUsings(CodeWriter writer)
         {
-            writer.UseNamespace("System");
-            writer.UseNamespace("System.Threading.Tasks");
-            writer.UseNamespace("System.Net");
-            writer.UseNamespace("System.Collections.Generic");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
         }
@@ -77,22 +69,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (resource.GetOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(resource, resource.GetOperation, true, false);
+                WriteTestMethod(resource, resource.GetOperation, true, false);
             }
             if (resource.DeleteOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(resource, resource.DeleteOperation, true, true);
+                WriteTestMethod(resource, resource.DeleteOperation, true, true);
             }
             if (resource.UpdateOperation != null)
             {
                 _writer.Line();
-                WriteMethodTest(resource, resource.UpdateOperation, true, false);
+                WriteTestMethod(resource, resource.UpdateOperation, true, false);
             }
             foreach (var clientOperation in resource.ClientOperations)
             {
                 _writer.Line();
-                WriteMethodTest(resource, clientOperation, true, false);
+                WriteTestMethod(resource, clientOperation, true, false);
             }
         }
 
@@ -102,8 +94,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line();
             using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
             {
-                _writer.Line($"ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
-                _writer.Line($"System.Environment.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
+                _writer.Line($"{typeof(ServicePointManager)}.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
+                _writer.Line($"{typeof(Environment)}.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
             }
         }
 
@@ -116,7 +108,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             return $"{resourceVariableName}";
         }
 
-        protected void WriteMethodTest(Resource resource, MgmtClientOperation clientOperation, bool async, bool isLroOperation)
+        protected void WriteTestMethod(Resource resource, MgmtClientOperation clientOperation, bool async, bool isLroOperation)
         {
             Debug.Assert(clientOperation != null);
             var methodName = clientOperation.Name;

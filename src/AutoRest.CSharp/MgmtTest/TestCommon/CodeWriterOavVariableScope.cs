@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using Newtonsoft.Json;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
 {
@@ -23,8 +22,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             this.writer = writer;
             this.ovs = ovs;
             this.existedVariables = existedVariables;
-            var variables = ovs.Variables ?? new Dictionary<string, object?>();
-            foreach (var variable in variables.Keys)
+            foreach (var variable in ovs.Variables.Keys)
             {
                 if (existedVariables.Contains(variable))
                 {
@@ -37,8 +35,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void Dispose()
         {
-            var variables = ovs.Variables ?? new Dictionary<string, object?>();
-            foreach (var variable in variables.Keys)
+            foreach (var variable in ovs.Variables.Keys)
             {
                 if (existedVariables.Contains(variable))
                 {
