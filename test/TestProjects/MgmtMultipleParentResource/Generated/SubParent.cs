@@ -93,6 +93,36 @@ namespace MgmtMultipleParentResource
 
         /// <summary>
         /// The operation to get the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
+        /// Operation Id: Children_Get
+        /// </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public virtual async Task<Response<TheParentSubParentChild>> GetTheParentSubParentChildAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await GetTheParentSubParentChildren().GetAsync(childName, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// The operation to get the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}/children/{childName}
+        /// Operation Id: Children_Get
+        /// </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public virtual Response<TheParentSubParentChild> GetTheParentSubParentChild(string childName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return GetTheParentSubParentChildren().Get(childName, expand, cancellationToken);
+        }
+
+        /// <summary>
+        /// The operation to get the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
         /// Operation Id: SubParents_Get
         /// </summary>

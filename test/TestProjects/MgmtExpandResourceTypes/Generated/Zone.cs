@@ -95,11 +95,63 @@ namespace MgmtExpandResourceTypes
             return new RecordSetACollection(Client, Id);
         }
 
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetA>> GetRecordSetAAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetAs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetA> GetRecordSetA(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetAs().Get(relativeRecordSetName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of RecordSetAaaas in the RecordSetAaaa. </summary>
         /// <returns> An object representing collection of RecordSetAaaas and their operations over a RecordSetAaaa. </returns>
         public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
             return new RecordSetAaaaCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetAaaa>> GetRecordSetAaaaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetAaaas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetAaaa> GetRecordSetAaaa(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetAaaas().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetCaas in the RecordSetCaa. </summary>
@@ -109,11 +161,63 @@ namespace MgmtExpandResourceTypes
             return new RecordSetCaaCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetCaa>> GetRecordSetCaaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetCaas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetCaa> GetRecordSetCaa(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetCaas().Get(relativeRecordSetName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of RecordSetCNames in the RecordSetCName. </summary>
         /// <returns> An object representing collection of RecordSetCNames and their operations over a RecordSetCName. </returns>
         public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
             return new RecordSetCNameCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetCName>> GetRecordSetCNameAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetCNames().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetCName> GetRecordSetCName(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetCNames().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetMxes in the RecordSetMx. </summary>
@@ -123,11 +227,63 @@ namespace MgmtExpandResourceTypes
             return new RecordSetMxCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetMx>> GetRecordSetMxAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetMxes().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetMx> GetRecordSetMx(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetMxes().Get(relativeRecordSetName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of RecordSetNs in the RecordSetNs. </summary>
         /// <returns> An object representing collection of RecordSetNs and their operations over a RecordSetNs. </returns>
         public virtual RecordSetNsCollection GetRecordSetNs()
         {
             return new RecordSetNsCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetNs>> GetRecordSetNsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetNs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetNs> GetRecordSetNs(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetNs().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetPtrs in the RecordSetPtr. </summary>
@@ -137,11 +293,63 @@ namespace MgmtExpandResourceTypes
             return new RecordSetPtrCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetPtr>> GetRecordSetPtrAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetPtrs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetPtr> GetRecordSetPtr(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetPtrs().Get(relativeRecordSetName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of RecordSetSoas in the RecordSetSoa. </summary>
         /// <returns> An object representing collection of RecordSetSoas and their operations over a RecordSetSoa. </returns>
         public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
             return new RecordSetSoaCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetSoa>> GetRecordSetSoaAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetSoas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetSoa> GetRecordSetSoa(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetSoas().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of RecordSetSrvs in the RecordSetSrv. </summary>
@@ -151,11 +359,63 @@ namespace MgmtExpandResourceTypes
             return new RecordSetSrvCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetSrv>> GetRecordSetSrvAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetSrvs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetSrv> GetRecordSetSrv(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetSrvs().Get(relativeRecordSetName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of RecordSetTxts in the RecordSetTxt. </summary>
         /// <returns> An object representing collection of RecordSetTxts and their operations over a RecordSetTxt. </returns>
         public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
             return new RecordSetTxtCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual async Task<Response<RecordSetTxt>> GetRecordSetTxtAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return await GetRecordSetTxts().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a record set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}
+        /// Operation Id: RecordSets_Get
+        /// </summary>
+        /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
+        public virtual Response<RecordSetTxt> GetRecordSetTxt(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        {
+            return GetRecordSetTxts().Get(relativeRecordSetName, cancellationToken);
         }
 
         /// <summary>

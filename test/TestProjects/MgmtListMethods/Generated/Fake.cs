@@ -90,11 +90,67 @@ namespace MgmtListMethods
             return new FakeParentWithAncestorWithNonResChWithLocCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithNonResChWithLocs/{fakeParentWithAncestorWithNonResChWithLocName}
+        /// Operation Id: FakeParentWithAncestorWithNonResChWithLocs_Get
+        /// </summary>
+        /// <param name="fakeParentWithAncestorWithNonResChWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
+        public virtual async Task<Response<FakeParentWithAncestorWithNonResChWithLoc>> GetFakeParentWithAncestorWithNonResChWithLocAsync(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        {
+            return await GetFakeParentWithAncestorWithNonResChWithLocs().GetAsync(fakeParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithNonResChWithLocs/{fakeParentWithAncestorWithNonResChWithLocName}
+        /// Operation Id: FakeParentWithAncestorWithNonResChWithLocs_Get
+        /// </summary>
+        /// <param name="fakeParentWithAncestorWithNonResChWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
+        public virtual Response<FakeParentWithAncestorWithNonResChWithLoc> GetFakeParentWithAncestorWithNonResChWithLoc(string fakeParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        {
+            return GetFakeParentWithAncestorWithNonResChWithLocs().Get(fakeParentWithAncestorWithNonResChWithLocName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of FakeParentWithAncestorWithNonResChes in the FakeParentWithAncestorWithNonResCh. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a FakeParentWithAncestorWithNonResCh. </returns>
         public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
             return new FakeParentWithAncestorWithNonResChCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithNonResChes/{fakeParentWithAncestorWithNonResChName}
+        /// Operation Id: FakeParentWithAncestorWithNonResChes_Get
+        /// </summary>
+        /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is null. </exception>
+        public virtual async Task<Response<FakeParentWithAncestorWithNonResCh>> GetFakeParentWithAncestorWithNonResChAsync(string fakeParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
+        {
+            return await GetFakeParentWithAncestorWithNonResChes().GetAsync(fakeParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithNonResChes/{fakeParentWithAncestorWithNonResChName}
+        /// Operation Id: FakeParentWithAncestorWithNonResChes_Get
+        /// </summary>
+        /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> is null. </exception>
+        public virtual Response<FakeParentWithAncestorWithNonResCh> GetFakeParentWithAncestorWithNonResCh(string fakeParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
+        {
+            return GetFakeParentWithAncestorWithNonResChes().Get(fakeParentWithAncestorWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of FakeParentWithAncestorWithLocs in the FakeParentWithAncestorWithLoc. </summary>
@@ -104,11 +160,67 @@ namespace MgmtListMethods
             return new FakeParentWithAncestorWithLocCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithLocs/{fakeParentWithAncestorWithLocName}
+        /// Operation Id: FakeParentWithAncestorWithLocs_Get
+        /// </summary>
+        /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
+        public virtual async Task<Response<FakeParentWithAncestorWithLoc>> GetFakeParentWithAncestorWithLocAsync(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        {
+            return await GetFakeParentWithAncestorWithLocs().GetAsync(fakeParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithLocs/{fakeParentWithAncestorWithLocName}
+        /// Operation Id: FakeParentWithAncestorWithLocs_Get
+        /// </summary>
+        /// <param name="fakeParentWithAncestorWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithLocName"/> is null. </exception>
+        public virtual Response<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLoc(string fakeParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        {
+            return GetFakeParentWithAncestorWithLocs().Get(fakeParentWithAncestorWithLocName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of FakeParentWithAncestors in the FakeParentWithAncestor. </summary>
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a FakeParentWithAncestor. </returns>
         public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
             return new FakeParentWithAncestorCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestors/{fakeParentWithAncestorName}
+        /// Operation Id: FakeParentWithAncestors_Get
+        /// </summary>
+        /// <param name="fakeParentWithAncestorName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
+        public virtual async Task<Response<FakeParentWithAncestor>> GetFakeParentWithAncestorAsync(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
+        {
+            return await GetFakeParentWithAncestors().GetAsync(fakeParentWithAncestorName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestors/{fakeParentWithAncestorName}
+        /// Operation Id: FakeParentWithAncestors_Get
+        /// </summary>
+        /// <param name="fakeParentWithAncestorName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> is null. </exception>
+        public virtual Response<FakeParentWithAncestor> GetFakeParentWithAncestor(string fakeParentWithAncestorName, CancellationToken cancellationToken = default)
+        {
+            return GetFakeParentWithAncestors().Get(fakeParentWithAncestorName, cancellationToken);
         }
 
         /// <summary> Gets a collection of FakeParentWithNonResChes in the FakeParentWithNonResCh. </summary>
@@ -118,11 +230,67 @@ namespace MgmtListMethods
             return new FakeParentWithNonResChCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// Operation Id: FakeParentWithNonResChes_Get
+        /// </summary>
+        /// <param name="fakeParentWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
+        public virtual async Task<Response<FakeParentWithNonResCh>> GetFakeParentWithNonResChAsync(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        {
+            return await GetFakeParentWithNonResChes().GetAsync(fakeParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}
+        /// Operation Id: FakeParentWithNonResChes_Get
+        /// </summary>
+        /// <param name="fakeParentWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithNonResChName"/> is null. </exception>
+        public virtual Response<FakeParentWithNonResCh> GetFakeParentWithNonResCh(string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        {
+            return GetFakeParentWithNonResChes().Get(fakeParentWithNonResChName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of FakeParents in the FakeParent. </summary>
         /// <returns> An object representing collection of FakeParents and their operations over a FakeParent. </returns>
         public virtual FakeParentCollection GetFakeParents()
         {
             return new FakeParentCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParents/{fakeParentName}
+        /// Operation Id: FakeParents_Get
+        /// </summary>
+        /// <param name="fakeParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
+        public virtual async Task<Response<FakeParent>> GetFakeParentAsync(string fakeParentName, CancellationToken cancellationToken = default)
+        {
+            return await GetFakeParents().GetAsync(fakeParentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParents/{fakeParentName}
+        /// Operation Id: FakeParents_Get
+        /// </summary>
+        /// <param name="fakeParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="fakeParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> is null. </exception>
+        public virtual Response<FakeParent> GetFakeParent(string fakeParentName, CancellationToken cancellationToken = default)
+        {
+            return GetFakeParents().Get(fakeParentName, cancellationToken);
         }
 
         /// <summary>

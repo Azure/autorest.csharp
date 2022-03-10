@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
@@ -35,12 +36,76 @@ namespace MgmtOperations
             return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
 
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// Operation Id: AvailabilitySets_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public static async Task<Response<AvailabilitySet>> GetAvailabilitySetAsync(this ResourceGroup resourceGroup, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+        /// Operation Id: AvailabilitySets_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public static Response<AvailabilitySet> GetAvailabilitySet(this ResourceGroup resourceGroup, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetAvailabilitySets().Get(availabilitySetName, expand, cancellationToken);
+        }
+
         /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetUnpatchableResources();
+        }
+
+        /// <summary>
+        /// Retrieves information about an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The name of the UnpatchableResource. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<UnpatchableResource>> GetUnpatchableResourceAsync(this ResourceGroup resourceGroup, string name, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetUnpatchableResources().GetAsync(name, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information about an UnpatchableResource.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
+        /// Operation Id: UnpatchableResources_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The name of the UnpatchableResource. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<UnpatchableResource> GetUnpatchableResource(this ResourceGroup resourceGroup, string name, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetUnpatchableResources().Get(name, expand, cancellationToken);
         }
 
         /// <summary>

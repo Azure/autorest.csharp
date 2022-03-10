@@ -116,11 +116,63 @@ namespace Azure.Management.Storage
             return new BlobInventoryPolicyCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Gets the blob inventory policy associated with the specified storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}
+        /// Operation Id: BlobInventoryPolicies_Get
+        /// </summary>
+        /// <param name="blobInventoryPolicyName"> The name of the storage account blob inventory policy. It should always be &apos;default&apos;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<BlobInventoryPolicy>> GetBlobInventoryPolicyAsync(BlobInventoryPolicyName blobInventoryPolicyName, CancellationToken cancellationToken = default)
+        {
+            return await GetBlobInventoryPolicies().GetAsync(blobInventoryPolicyName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets the blob inventory policy associated with the specified storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}
+        /// Operation Id: BlobInventoryPolicies_Get
+        /// </summary>
+        /// <param name="blobInventoryPolicyName"> The name of the storage account blob inventory policy. It should always be &apos;default&apos;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<BlobInventoryPolicy> GetBlobInventoryPolicy(BlobInventoryPolicyName blobInventoryPolicyName, CancellationToken cancellationToken = default)
+        {
+            return GetBlobInventoryPolicies().Get(blobInventoryPolicyName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of PrivateEndpointConnections in the PrivateEndpointConnection. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a PrivateEndpointConnection. </returns>
         public virtual PrivateEndpointConnectionCollection GetPrivateEndpointConnections()
         {
             return new PrivateEndpointConnectionCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Gets the specified private endpoint connection associated with the storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}
+        /// Operation Id: PrivateEndpointConnections_Get
+        /// </summary>
+        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Azure resource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
+        public virtual async Task<Response<PrivateEndpointConnection>> GetPrivateEndpointConnectionAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        {
+            return await GetPrivateEndpointConnections().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets the specified private endpoint connection associated with the storage account.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}
+        /// Operation Id: PrivateEndpointConnections_Get
+        /// </summary>
+        /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Azure resource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> is null. </exception>
+        public virtual Response<PrivateEndpointConnection> GetPrivateEndpointConnection(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        {
+            return GetPrivateEndpointConnections().Get(privateEndpointConnectionName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ObjectReplicationPolicies in the ObjectReplicationPolicy. </summary>
@@ -130,11 +182,67 @@ namespace Azure.Management.Storage
             return new ObjectReplicationPolicyCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Get the object replication policy of the storage account by policy ID.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}
+        /// Operation Id: ObjectReplicationPolicies_Get
+        /// </summary>
+        /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
+        public virtual async Task<Response<ObjectReplicationPolicy>> GetObjectReplicationPolicyAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        {
+            return await GetObjectReplicationPolicies().GetAsync(objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get the object replication policy of the storage account by policy ID.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}
+        /// Operation Id: ObjectReplicationPolicies_Get
+        /// </summary>
+        /// <param name="objectReplicationPolicyId"> For the destination account, provide the value &apos;default&apos;. Configure the policy on the destination account first. For the source account, provide the value of the policy ID that is returned when you download the policy that was defined on the destination account. The policy is downloaded as a JSON file. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="objectReplicationPolicyId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
+        public virtual Response<ObjectReplicationPolicy> GetObjectReplicationPolicy(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        {
+            return GetObjectReplicationPolicies().Get(objectReplicationPolicyId, cancellationToken);
+        }
+
         /// <summary> Gets a collection of EncryptionScopes in the EncryptionScope. </summary>
         /// <returns> An object representing collection of EncryptionScopes and their operations over a EncryptionScope. </returns>
         public virtual EncryptionScopeCollection GetEncryptionScopes()
         {
             return new EncryptionScopeCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Returns the properties for the specified encryption scope.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}
+        /// Operation Id: EncryptionScopes_Get
+        /// </summary>
+        /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="encryptionScopeName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> is null. </exception>
+        public virtual async Task<Response<EncryptionScope>> GetEncryptionScopeAsync(string encryptionScopeName, CancellationToken cancellationToken = default)
+        {
+            return await GetEncryptionScopes().GetAsync(encryptionScopeName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns the properties for the specified encryption scope.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}
+        /// Operation Id: EncryptionScopes_Get
+        /// </summary>
+        /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="encryptionScopeName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> is null. </exception>
+        public virtual Response<EncryptionScope> GetEncryptionScope(string encryptionScopeName, CancellationToken cancellationToken = default)
+        {
+            return GetEncryptionScopes().Get(encryptionScopeName, cancellationToken);
         }
 
         /// <summary>

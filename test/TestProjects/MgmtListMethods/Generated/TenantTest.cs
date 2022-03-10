@@ -90,11 +90,67 @@ namespace MgmtListMethods
             return new TenantParentWithNonResChWithLocCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChWithLocs/{tenantParentWithNonResChWithLocName}
+        /// Operation Id: TenantParentWithNonResChWithLocs_Get
+        /// </summary>
+        /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
+        public virtual async Task<Response<TenantParentWithNonResChWithLoc>> GetTenantParentWithNonResChWithLocAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        {
+            return await GetTenantParentWithNonResChWithLocs().GetAsync(tenantParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChWithLocs/{tenantParentWithNonResChWithLocName}
+        /// Operation Id: TenantParentWithNonResChWithLocs_Get
+        /// </summary>
+        /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
+        public virtual Response<TenantParentWithNonResChWithLoc> GetTenantParentWithNonResChWithLoc(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        {
+            return GetTenantParentWithNonResChWithLocs().Get(tenantParentWithNonResChWithLocName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of TenantParentWithNonResChes in the TenantParentWithNonResCh. </summary>
         /// <returns> An object representing collection of TenantParentWithNonResChes and their operations over a TenantParentWithNonResCh. </returns>
         public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
             return new TenantParentWithNonResChCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_Get
+        /// </summary>
+        /// <param name="tenantParentWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
+        public virtual async Task<Response<TenantParentWithNonResCh>> GetTenantParentWithNonResChAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
+        {
+            return await GetTenantParentWithNonResChes().GetAsync(tenantParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
+        /// Operation Id: TenantParentWithNonResChes_Get
+        /// </summary>
+        /// <param name="tenantParentWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
+        public virtual Response<TenantParentWithNonResCh> GetTenantParentWithNonResCh(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
+        {
+            return GetTenantParentWithNonResChes().Get(tenantParentWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TenantParentWithLocs in the TenantParentWithLoc. </summary>
@@ -104,11 +160,67 @@ namespace MgmtListMethods
             return new TenantParentWithLocCollection(Client, Id);
         }
 
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_Get
+        /// </summary>
+        /// <param name="tenantParentWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
+        public virtual async Task<Response<TenantParentWithLoc>> GetTenantParentWithLocAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        {
+            return await GetTenantParentWithLocs().GetAsync(tenantParentWithLocName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
+        /// Operation Id: TenantParentWithLocs_Get
+        /// </summary>
+        /// <param name="tenantParentWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
+        public virtual Response<TenantParentWithLoc> GetTenantParentWithLoc(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        {
+            return GetTenantParentWithLocs().Get(tenantParentWithLocName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of TenantParents in the TenantParent. </summary>
         /// <returns> An object representing collection of TenantParents and their operations over a TenantParent. </returns>
         public virtual TenantParentCollection GetTenantParents()
         {
             return new TenantParentCollection(Client, Id);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
+        /// Operation Id: TenantParents_Get
+        /// </summary>
+        /// <param name="tenantParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
+        public virtual async Task<Response<TenantParent>> GetTenantParentAsync(string tenantParentName, CancellationToken cancellationToken = default)
+        {
+            return await GetTenantParents().GetAsync(tenantParentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
+        /// Operation Id: TenantParents_Get
+        /// </summary>
+        /// <param name="tenantParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
+        public virtual Response<TenantParent> GetTenantParent(string tenantParentName, CancellationToken cancellationToken = default)
+        {
+            return GetTenantParents().Get(tenantParentName, cancellationToken);
         }
 
         /// <summary>

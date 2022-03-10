@@ -93,6 +93,36 @@ namespace MgmtMultipleParentResource
 
         /// <summary>
         /// The operation to get the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
+        /// Operation Id: SubParents_Get
+        /// </summary>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        public virtual async Task<Response<SubParent>> GetSubParentAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await GetSubParents().GetAsync(instanceId, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// The operation to get the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
+        /// Operation Id: SubParents_Get
+        /// </summary>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        public virtual Response<SubParent> GetSubParent(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return GetSubParents().Get(instanceId, expand, cancellationToken);
+        }
+
+        /// <summary>
+        /// The operation to get the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
         /// Operation Id: TheParents_Get
         /// </summary>

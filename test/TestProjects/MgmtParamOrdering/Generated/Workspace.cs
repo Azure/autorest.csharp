@@ -91,6 +91,34 @@ namespace MgmtParamOrdering
         }
 
         /// <summary>
+        /// Get container.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+        /// Operation Id: EnvironmentContainers_Get
+        /// </summary>
+        /// <param name="name"> Container name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<EnvironmentContainerResource>> GetEnvironmentContainerResourceAsync(string name, CancellationToken cancellationToken = default)
+        {
+            return await GetEnvironmentContainerResources().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get container.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+        /// Operation Id: EnvironmentContainers_Get
+        /// </summary>
+        /// <param name="name"> Container name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<EnvironmentContainerResource> GetEnvironmentContainerResource(string name, CancellationToken cancellationToken = default)
+        {
+            return GetEnvironmentContainerResources().Get(name, cancellationToken);
+        }
+
+        /// <summary>
         /// Gets the properties of the specified machine learning workspace.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// Operation Id: Workspaces_Get
