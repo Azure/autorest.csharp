@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -16,6 +17,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
+            if (codeModel.TestModel is null)
+            {
+                throw new NotSupportedException("The codeModel.TestModel is required for test Generation!");
+            }
+
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
 
             // force trigger the model initialization
@@ -59,7 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             bool hasScenarioTest = false;
-            foreach (var scenarioTestDefinition in codeModel.TestModel?.ScenarioTests ?? new List<TestDefinitionModel>())
+            foreach (var scenarioTestDefinition in codeModel.TestModel.ScenarioTests)
             {
                 var codeWriter = new CodeWriter();
                 var scenarioTestWriter = new ScenarioTestWriter(codeWriter, scenarioTestDefinition);

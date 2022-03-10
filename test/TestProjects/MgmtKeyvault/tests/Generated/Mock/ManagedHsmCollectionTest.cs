@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
@@ -28,7 +27,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task CreateOrUpdate()
+        public async System.Threading.Tasks.Task CreateOrUpdate()
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
             string name = "hsm1";
@@ -55,7 +54,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async System.Threading.Tasks.Task Get()
         {
             // Example: Retrieve a managed HSM Pool
             string name = "hsm1";
@@ -65,7 +64,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetAll()
+        public async System.Threading.Tasks.Task GetAll()
         {
             // Example: List managed HSM Pools in a resource group
             int? top = default;

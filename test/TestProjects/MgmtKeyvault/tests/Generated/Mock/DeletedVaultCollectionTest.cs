@@ -7,7 +7,6 @@
 
 using System;
 using System.Net;
-using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
@@ -24,7 +23,7 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task Get()
+        public async System.Threading.Tasks.Task Get()
         {
             // Example: Retrieve a deleted vault
             string location = "westus";
