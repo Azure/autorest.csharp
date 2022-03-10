@@ -89,6 +89,7 @@ namespace MgmtParamOrdering
         {
             return new EnvironmentContainerResourceCollection(Client, Id);
         }
+
         /// <summary>
         /// Get container.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
@@ -102,6 +103,7 @@ namespace MgmtParamOrdering
         {
             return await GetEnvironmentContainerResources().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Get container.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}

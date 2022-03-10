@@ -32,6 +32,7 @@ namespace MgmtLRO
         {
             return GetExtensionClient(resourceGroup).GetFakes();
         }
+
         /// <summary>
         /// Retrieves information about an fake.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
@@ -47,6 +48,7 @@ namespace MgmtLRO
         {
             return await resourceGroup.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an fake.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}
@@ -70,6 +72,7 @@ namespace MgmtLRO
         {
             return GetExtensionClient(resourceGroup).GetBars();
         }
+
         /// <summary>
         /// Retrieves information about an fake.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
@@ -84,6 +87,7 @@ namespace MgmtLRO
         {
             return await resourceGroup.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an fake.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}

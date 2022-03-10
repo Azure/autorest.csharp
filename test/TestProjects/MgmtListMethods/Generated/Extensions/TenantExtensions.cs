@@ -32,6 +32,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(tenant).GetTenantTests();
         }
+
         /// <summary>
         /// Gets a billing account by its ID.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
@@ -47,6 +48,7 @@ namespace MgmtListMethods
         {
             return await tenant.GetTenantTests().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a billing account by its ID.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}

@@ -34,6 +34,7 @@ namespace ExactMatchFlattenInheritance
         {
             return GetExtensionClient(resourceGroup).GetAzureResourceFlattenModel1s();
         }
+
         /// <summary>
         /// Get an AzureResourceFlattenModel1.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
@@ -48,6 +49,7 @@ namespace ExactMatchFlattenInheritance
         {
             return await resourceGroup.GetAzureResourceFlattenModel1s().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Get an AzureResourceFlattenModel1.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}
@@ -70,6 +72,7 @@ namespace ExactMatchFlattenInheritance
         {
             return GetExtensionClient(resourceGroup).GetCustomModel2s();
         }
+
         /// <summary>
         /// Get an CustomModel2.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
@@ -84,6 +87,7 @@ namespace ExactMatchFlattenInheritance
         {
             return await resourceGroup.GetCustomModel2s().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Get an CustomModel2.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}
@@ -106,6 +110,7 @@ namespace ExactMatchFlattenInheritance
         {
             return GetExtensionClient(resourceGroup).GetCustomModel3s();
         }
+
         /// <summary>
         /// Get an CustomModel3.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}
@@ -120,6 +125,7 @@ namespace ExactMatchFlattenInheritance
         {
             return await resourceGroup.GetCustomModel3s().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Get an CustomModel3.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel3s/{name}

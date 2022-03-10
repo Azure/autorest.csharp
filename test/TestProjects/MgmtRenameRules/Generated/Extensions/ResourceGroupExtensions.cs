@@ -32,6 +32,7 @@ namespace MgmtRenameRules
         {
             return GetExtensionClient(resourceGroup).GetVirtualMachines();
         }
+
         /// <summary>
         /// Retrieves information about the model view or the instance view of a virtual machine.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
@@ -46,6 +47,7 @@ namespace MgmtRenameRules
         {
             return await resourceGroup.GetVirtualMachines().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about the model view or the instance view of a virtual machine.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
@@ -68,6 +70,7 @@ namespace MgmtRenameRules
         {
             return GetExtensionClient(resourceGroup).GetImages();
         }
+
         /// <summary>
         /// Gets an image.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}
@@ -83,6 +86,7 @@ namespace MgmtRenameRules
         {
             return await resourceGroup.GetImages().GetAsync(imageName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets an image.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}
@@ -106,6 +110,7 @@ namespace MgmtRenameRules
         {
             return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSets();
         }
+
         /// <summary>
         /// Display information about a virtual machine scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
@@ -120,6 +125,7 @@ namespace MgmtRenameRules
         {
             return await resourceGroup.GetVirtualMachineScaleSets().GetAsync(vmScaleSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Display information about a virtual machine scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}

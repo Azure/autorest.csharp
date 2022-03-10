@@ -32,6 +32,7 @@ namespace MgmtKeyvault
         {
             return GetExtensionClient(resourceGroup).GetVaults();
         }
+
         /// <summary>
         /// Gets the specified Azure key vault.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}
@@ -46,6 +47,7 @@ namespace MgmtKeyvault
         {
             return await resourceGroup.GetVaults().GetAsync(vaultName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the specified Azure key vault.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}
@@ -68,6 +70,7 @@ namespace MgmtKeyvault
         {
             return GetExtensionClient(resourceGroup).GetManagedHsms();
         }
+
         /// <summary>
         /// Gets the specified managed HSM Pool.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}
@@ -82,6 +85,7 @@ namespace MgmtKeyvault
         {
             return await resourceGroup.GetManagedHsms().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the specified managed HSM Pool.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}

@@ -228,32 +228,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
                 if (resource.IsSingleton)
                 {
-                    var signature = new MethodSignature(
-                        $"Get{resource.Type.Name}",
-                        $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.",
-                        GetMethodModifiers(),
-                        resource.Type,
-                        $"Returns a <see cref=\"{resource.Type}\" /> object.",
-                        GetParametersForSingletonEntry());
-                    using (WriteCommonMethod(signature, null, false))
-                    {
-                        WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
-                    }
+                    WriteSingletonResourceGetMethod(resource);
                 }
                 else if (resource.ResourceCollection is not null)
                 {
-                    var collection = resource.ResourceCollection;
-                    var signature = new MethodSignature(
-                        $"{GetResourceCollectionMethodName(collection)}",
-                        $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.",
-                        GetMethodModifiers(),
-                        collection.Type,
-                        $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
-                        GetParametersForCollectionEntry(collection));
-                    using (WriteCommonMethod(signature, null, false))
-                    {
-                        WriteResourceCollectionEntry(resource.ResourceCollection, signature);
-                    }
+                    WriteResourceCollectionGetMethod(resource);
 
                     if (!(This is MgmtExtensionClient)) // we don't need to generate `Get{Resource}` methods in ExtensionClient
                     {
@@ -265,7 +244,38 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
-        protected void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
+        private void WriteSingletonResourceGetMethod(Resource resource)
+        {
+            var signature = new MethodSignature(
+                $"Get{resource.Type.Name}",
+                $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.Type.Name}.",
+                GetMethodModifiers(),
+                resource.Type,
+                $"Returns a <see cref=\"{resource.Type}\" /> object.",
+                GetParametersForSingletonEntry());
+            using (WriteCommonMethod(signature, null, false))
+            {
+                WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
+            }
+        }
+
+        private void WriteResourceCollectionGetMethod(Resource resource)
+        {
+            var resourceCollection = resource.ResourceCollection!;
+            var signature = new MethodSignature(
+                $"{GetResourceCollectionMethodName(resourceCollection)}",
+                $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {resource.Type.Name}.",
+                GetMethodModifiers(),
+                resourceCollection.Type,
+                $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
+                GetParametersForCollectionEntry(resourceCollection));
+            using (WriteCommonMethod(signature, null, false))
+            {
+                WriteResourceCollectionEntry(resourceCollection, signature);
+            }
+        }
+
+        private void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
         {
             var getOperation = resourceCollection.GetOperation;
             // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
@@ -278,7 +288,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
             };
 
-            using (WriteCommonMethodCommentsAndSignature(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync))
+            _writer.Line();
+            using (WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync))
             {
                 WriteResourceEntry(resourceCollection, isAsync);
             }
@@ -503,14 +514,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected CodeWriter.CodeWriterScope WriteCommonMethod(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
         {
-            var scope = WriteCommonMethodCommentsAndSignature(signature, returnDescription, isAsync);
+            var scope = WriteCommonMethodWithoutValidation(signature, returnDescription, isAsync);
             if (This.Accessibility == "public")
                 _writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
         }
 
-        protected CodeWriter.CodeWriterScope WriteCommonMethodCommentsAndSignature(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
+        private CodeWriter.CodeWriterScope WriteCommonMethodWithoutValidation(MethodSignature signature, FormattableString? returnDescription, bool isAsync)
         {
             _writer.WriteXmlDocumentationSummary($"{signature.Description}");
             _writer.WriteXmlDocumentationParameters(signature.Parameters);

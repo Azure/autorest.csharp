@@ -32,6 +32,7 @@ namespace MgmtParent
         {
             return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
@@ -46,6 +47,7 @@ namespace MgmtParent
         {
             return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
@@ -68,6 +70,7 @@ namespace MgmtParent
         {
             return GetExtensionClient(resourceGroup).GetDedicatedHostGroups();
         }
+
         /// <summary>
         /// Retrieves information about a dedicated host group.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
@@ -82,6 +85,7 @@ namespace MgmtParent
         {
             return await resourceGroup.GetDedicatedHostGroups().GetAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about a dedicated host group.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}

@@ -95,6 +95,7 @@ namespace MgmtRenameRules
         {
             return new VirtualMachineScaleSetExtensionCollection(Client, Id);
         }
+
         /// <summary>
         /// The operation to get the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
@@ -109,6 +110,7 @@ namespace MgmtRenameRules
         {
             return await GetVirtualMachineScaleSetExtensions().GetAsync(vmssExtensionName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// The operation to get the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}
@@ -137,6 +139,7 @@ namespace MgmtRenameRules
         {
             return new VirtualMachineScaleSetVmCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a virtual machine from a VM scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
@@ -150,6 +153,7 @@ namespace MgmtRenameRules
         {
             return await GetVirtualMachineScaleSetVms().GetAsync(instanceId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a virtual machine from a VM scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}

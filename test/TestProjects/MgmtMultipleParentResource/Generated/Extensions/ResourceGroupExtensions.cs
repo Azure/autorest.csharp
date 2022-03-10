@@ -32,6 +32,7 @@ namespace MgmtMultipleParentResource
         {
             return GetExtensionClient(resourceGroup).GetAnotherParents();
         }
+
         /// <summary>
         /// The operation to get the run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
@@ -47,6 +48,7 @@ namespace MgmtMultipleParentResource
         {
             return await resourceGroup.GetAnotherParents().GetAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// The operation to get the run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
@@ -70,6 +72,7 @@ namespace MgmtMultipleParentResource
         {
             return GetExtensionClient(resourceGroup).GetTheParents();
         }
+
         /// <summary>
         /// The operation to get the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
@@ -85,6 +88,7 @@ namespace MgmtMultipleParentResource
         {
             return await resourceGroup.GetTheParents().GetAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// The operation to get the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}

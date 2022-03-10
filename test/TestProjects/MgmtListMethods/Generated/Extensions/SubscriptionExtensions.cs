@@ -34,6 +34,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(subscription).GetFakes();
         }
+
         /// <summary>
         /// Retrieves information about an fake.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
@@ -49,6 +50,7 @@ namespace MgmtListMethods
         {
             return await subscription.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an fake.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
@@ -72,6 +74,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(subscription).GetSubParentWithNonResChWithLocs();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
@@ -86,6 +89,7 @@ namespace MgmtListMethods
         {
             return await subscription.GetSubParentWithNonResChWithLocs().GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
@@ -108,6 +112,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(subscription).GetSubParentWithNonResChes();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
@@ -122,6 +127,7 @@ namespace MgmtListMethods
         {
             return await subscription.GetSubParentWithNonResChes().GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChes/{subParentWithNonResChName}
@@ -144,6 +150,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(subscription).GetSubParentWithLocs();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
@@ -158,6 +165,7 @@ namespace MgmtListMethods
         {
             return await subscription.GetSubParentWithLocs().GetAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
@@ -180,6 +188,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(subscription).GetSubParents();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}
@@ -194,6 +203,7 @@ namespace MgmtListMethods
         {
             return await subscription.GetSubParents().GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}

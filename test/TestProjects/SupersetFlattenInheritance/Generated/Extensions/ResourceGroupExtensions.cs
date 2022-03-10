@@ -34,6 +34,7 @@ namespace SupersetFlattenInheritance
         {
             return GetExtensionClient(resourceGroup).GetResourceModel1s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
         /// Operation Id: ResourceModel1s_Get
@@ -47,6 +48,7 @@ namespace SupersetFlattenInheritance
         {
             return await resourceGroup.GetResourceModel1s().GetAsync(resourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
         /// Operation Id: ResourceModel1s_Get
@@ -68,6 +70,7 @@ namespace SupersetFlattenInheritance
         {
             return GetExtensionClient(resourceGroup).GetTrackedResourceModel1s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
         /// Operation Id: TrackedResourceModel1s_Get
@@ -81,6 +84,7 @@ namespace SupersetFlattenInheritance
         {
             return await resourceGroup.GetTrackedResourceModel1s().GetAsync(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
         /// Operation Id: TrackedResourceModel1s_Get

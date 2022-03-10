@@ -90,6 +90,7 @@ namespace Azure.ResourceManager.Sample
         {
             return new VirtualMachineExtensionCollection(Client, Id);
         }
+
         /// <summary>
         /// The operation to get the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}
@@ -104,6 +105,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await GetVirtualMachineExtensions().GetAsync(vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// The operation to get the extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}

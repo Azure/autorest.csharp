@@ -32,6 +32,7 @@ namespace MgmtSubscriptionNameParameter
         {
             return GetExtensionClient(resourceGroup).GetSBSubscriptions();
         }
+
         /// <summary>
         /// Returns a subscription description for the specified topic.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
@@ -46,6 +47,7 @@ namespace MgmtSubscriptionNameParameter
         {
             return await resourceGroup.GetSBSubscriptions().GetAsync(subscriptionName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Returns a subscription description for the specified topic.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}

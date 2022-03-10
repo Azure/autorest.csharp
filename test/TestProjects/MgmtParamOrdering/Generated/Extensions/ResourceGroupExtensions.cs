@@ -33,6 +33,7 @@ namespace MgmtParamOrdering
         {
             return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
@@ -47,6 +48,7 @@ namespace MgmtParamOrdering
         {
             return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
@@ -69,6 +71,7 @@ namespace MgmtParamOrdering
         {
             return GetExtensionClient(resourceGroup).GetDedicatedHostGroups();
         }
+
         /// <summary>
         /// Retrieves information about a dedicated host group.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
@@ -83,6 +86,7 @@ namespace MgmtParamOrdering
         {
             return await resourceGroup.GetDedicatedHostGroups().GetAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about a dedicated host group.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
@@ -105,6 +109,7 @@ namespace MgmtParamOrdering
         {
             return GetExtensionClient(resourceGroup).GetWorkspaces();
         }
+
         /// <summary>
         /// Gets the properties of the specified machine learning workspace.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
@@ -119,6 +124,7 @@ namespace MgmtParamOrdering
         {
             return await resourceGroup.GetWorkspaces().GetAsync(workspaceName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the properties of the specified machine learning workspace.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
@@ -141,6 +147,7 @@ namespace MgmtParamOrdering
         {
             return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSets();
         }
+
         /// <summary>
         /// Display information about a virtual machine scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
@@ -156,6 +163,7 @@ namespace MgmtParamOrdering
         {
             return await resourceGroup.GetVirtualMachineScaleSets().GetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Display information about a virtual machine scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}

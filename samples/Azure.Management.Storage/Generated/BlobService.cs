@@ -88,6 +88,7 @@ namespace Azure.Management.Storage
         {
             return new BlobContainerCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets properties of a specified container. 
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}
@@ -101,6 +102,7 @@ namespace Azure.Management.Storage
         {
             return await GetBlobContainers().GetAsync(containerName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets properties of a specified container. 
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}

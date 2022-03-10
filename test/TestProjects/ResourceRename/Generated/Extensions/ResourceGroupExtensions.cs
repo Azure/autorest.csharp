@@ -32,6 +32,7 @@ namespace ResourceRename
         {
             return GetExtensionClient(resourceGroup).GetSshPublicKeyInfos();
         }
+
         /// <summary>
         /// Retrieves information about an SSH public key.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
@@ -46,6 +47,7 @@ namespace ResourceRename
         {
             return await resourceGroup.GetSshPublicKeyInfos().GetAsync(sshPublicKeyName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an SSH public key.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}

@@ -88,6 +88,7 @@ namespace Azure.Management.Storage
         {
             return new FileShareCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets properties of a specified share.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}
@@ -103,6 +104,7 @@ namespace Azure.Management.Storage
         {
             return await GetFileShares().GetAsync(shareName, expand, xMsSnapshot, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets properties of a specified share.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}

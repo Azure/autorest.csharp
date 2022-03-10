@@ -34,6 +34,7 @@ namespace MgmtScopeResource
         {
             return GetExtensionClient(tenant).GetDeploymentExtendeds();
         }
+
         /// <summary>
         /// Gets a deployment.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
@@ -48,6 +49,7 @@ namespace MgmtScopeResource
         {
             return await tenant.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a deployment.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
@@ -74,6 +76,7 @@ namespace MgmtScopeResource
 
             return GetExtensionClient(tenant).GetResourceLinks(scope);
         }
+
         /// <summary>
         /// Gets a resource link with the specified ID.
         /// Request Path: /{linkId}
@@ -87,6 +90,7 @@ namespace MgmtScopeResource
         {
             return await GetResourceLinks(tenant, scope).GetAsync(cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a resource link with the specified ID.
         /// Request Path: /{linkId}

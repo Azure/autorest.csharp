@@ -35,6 +35,7 @@ namespace MgmtOperations
         {
             return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
@@ -50,6 +51,7 @@ namespace MgmtOperations
         {
             return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
@@ -73,6 +75,7 @@ namespace MgmtOperations
         {
             return GetExtensionClient(resourceGroup).GetUnpatchableResources();
         }
+
         /// <summary>
         /// Retrieves information about an UnpatchableResource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}
@@ -88,6 +91,7 @@ namespace MgmtOperations
         {
             return await resourceGroup.GetUnpatchableResources().GetAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an UnpatchableResource.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}

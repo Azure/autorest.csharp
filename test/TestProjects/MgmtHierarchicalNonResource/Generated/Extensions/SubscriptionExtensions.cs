@@ -38,6 +38,7 @@ namespace MgmtHierarchicalNonResource
 
             return GetExtensionClient(subscription).GetSharedGalleries(location);
         }
+
         /// <summary>
         /// Get a shared gallery by subscription id or tenant id.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}
@@ -53,6 +54,7 @@ namespace MgmtHierarchicalNonResource
         {
             return await subscription.GetSharedGalleries(location).GetAsync(galleryUniqueName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Get a shared gallery by subscription id or tenant id.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}

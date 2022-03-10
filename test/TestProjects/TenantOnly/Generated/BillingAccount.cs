@@ -89,6 +89,7 @@ namespace TenantOnly
         {
             return new AgreementCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets an agreement by ID.
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
@@ -103,6 +104,7 @@ namespace TenantOnly
         {
             return await GetAgreements().GetAsync(agreementName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets an agreement by ID.
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}

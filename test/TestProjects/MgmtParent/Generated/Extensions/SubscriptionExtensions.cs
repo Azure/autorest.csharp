@@ -40,6 +40,7 @@ namespace MgmtParent
 
             return GetExtensionClient(subscription).GetVirtualMachineExtensionImages(location, publisherName);
         }
+
         /// <summary>
         /// Gets a virtual machine extension image.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
@@ -57,6 +58,7 @@ namespace MgmtParent
         {
             return await subscription.GetVirtualMachineExtensionImages(location, publisherName).GetAsync(type, version, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a virtual machine extension image.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}

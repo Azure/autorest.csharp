@@ -32,6 +32,7 @@ namespace MgmtScopeResource
         {
             return GetExtensionClient(subscription).GetDeploymentExtendeds();
         }
+
         /// <summary>
         /// Gets a deployment.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
@@ -46,6 +47,7 @@ namespace MgmtScopeResource
         {
             return await subscription.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a deployment.
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}

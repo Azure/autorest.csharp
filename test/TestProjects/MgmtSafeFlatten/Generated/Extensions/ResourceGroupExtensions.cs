@@ -32,6 +32,7 @@ namespace MgmtSafeFlatten
         {
             return GetExtensionClient(resourceGroup).GetTypeOnes();
         }
+
         /// <summary>
         /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
@@ -46,6 +47,7 @@ namespace MgmtSafeFlatten
         {
             return await resourceGroup.GetTypeOnes().GetAsync(typeOneName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
@@ -68,6 +70,7 @@ namespace MgmtSafeFlatten
         {
             return GetExtensionClient(resourceGroup).GetTypeTwos();
         }
+
         /// <summary>
         /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}
@@ -82,6 +85,7 @@ namespace MgmtSafeFlatten
         {
             return await resourceGroup.GetTypeTwos().GetAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Description for Validate information for a certificate order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}

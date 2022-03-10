@@ -32,6 +32,7 @@ namespace NoTypeReplacement
         {
             return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel1s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}
         /// Operation Id: NoTypeReplacementModel1s_Get
@@ -45,6 +46,7 @@ namespace NoTypeReplacement
         {
             return await resourceGroup.GetNoTypeReplacementModel1s().GetAsync(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}
         /// Operation Id: NoTypeReplacementModel1s_Get
@@ -66,6 +68,7 @@ namespace NoTypeReplacement
         {
             return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel2s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2SName}
         /// Operation Id: NoTypeReplacementModel2s_Get
@@ -79,6 +82,7 @@ namespace NoTypeReplacement
         {
             return await resourceGroup.GetNoTypeReplacementModel2s().GetAsync(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2SName}
         /// Operation Id: NoTypeReplacementModel2s_Get
@@ -100,6 +104,7 @@ namespace NoTypeReplacement
         {
             return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel3s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
         /// Operation Id: NoTypeReplacementModel3s_Get
@@ -113,6 +118,7 @@ namespace NoTypeReplacement
         {
             return await resourceGroup.GetNoTypeReplacementModel3s().GetAsync(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
         /// Operation Id: NoTypeReplacementModel3s_Get

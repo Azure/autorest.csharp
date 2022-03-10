@@ -32,6 +32,7 @@ namespace XmlDeserialization
         {
             return GetExtensionClient(resourceGroup).GetXmlInstances();
         }
+
         /// <summary>
         /// Gets the details of the Xml specified by its identifier.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls/{xmlName}
@@ -46,6 +47,7 @@ namespace XmlDeserialization
         {
             return await resourceGroup.GetXmlInstances().GetAsync(xmlName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the details of the Xml specified by its identifier.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls/{xmlName}

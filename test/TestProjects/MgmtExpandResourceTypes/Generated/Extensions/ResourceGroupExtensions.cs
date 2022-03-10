@@ -32,6 +32,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetExtensionClient(resourceGroup).GetZones();
         }
+
         /// <summary>
         /// Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}
@@ -46,6 +47,7 @@ namespace MgmtExpandResourceTypes
         {
             return await resourceGroup.GetZones().GetAsync(zoneName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}

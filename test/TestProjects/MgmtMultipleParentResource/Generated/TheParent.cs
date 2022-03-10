@@ -90,6 +90,7 @@ namespace MgmtMultipleParentResource
         {
             return new SubParentCollection(Client, Id);
         }
+
         /// <summary>
         /// The operation to get the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}
@@ -104,6 +105,7 @@ namespace MgmtMultipleParentResource
         {
             return await GetSubParents().GetAsync(instanceId, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// The operation to get the VMSS VM run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}/subParents/{instanceId}

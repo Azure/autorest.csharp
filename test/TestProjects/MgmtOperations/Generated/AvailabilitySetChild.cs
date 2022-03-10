@@ -89,6 +89,7 @@ namespace MgmtOperations
         {
             return new AvailabilitySetGrandChildCollection(Client, Id);
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
@@ -102,6 +103,7 @@ namespace MgmtOperations
         {
             return await GetAvailabilitySetGrandChildren().GetAsync(availabilitySetGrandChildName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}

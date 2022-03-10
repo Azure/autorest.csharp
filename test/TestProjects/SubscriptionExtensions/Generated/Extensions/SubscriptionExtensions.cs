@@ -32,6 +32,7 @@ namespace SubscriptionExtensions
         {
             return GetExtensionClient(subscription).GetToasters();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
         /// Operation Id: Toasters_Get
@@ -45,6 +46,7 @@ namespace SubscriptionExtensions
         {
             return await subscription.GetToasters().GetAsync(toasterName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
         /// Operation Id: Toasters_Get

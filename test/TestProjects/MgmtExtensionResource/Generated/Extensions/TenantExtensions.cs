@@ -32,6 +32,7 @@ namespace MgmtExtensionResource
         {
             return GetExtensionClient(tenant).GetBuiltInPolicyDefinitions();
         }
+
         /// <summary>
         /// This operation retrieves the built-in policy definition with the given name.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
@@ -46,6 +47,7 @@ namespace MgmtExtensionResource
         {
             return await tenant.GetBuiltInPolicyDefinitions().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// This operation retrieves the built-in policy definition with the given name.
         /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}

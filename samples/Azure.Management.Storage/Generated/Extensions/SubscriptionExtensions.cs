@@ -34,6 +34,7 @@ namespace Azure.Management.Storage
         {
             return GetExtensionClient(subscription).GetDeletedAccounts();
         }
+
         /// <summary>
         /// Get properties of specified deleted account resource.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}
@@ -49,6 +50,7 @@ namespace Azure.Management.Storage
         {
             return await subscription.GetDeletedAccounts().GetAsync(location, deletedAccountName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Get properties of specified deleted account resource.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}

@@ -32,6 +32,7 @@ namespace TenantOnly
         {
             return GetExtensionClient(tenant).GetBillingAccounts();
         }
+
         /// <summary>
         /// Gets a billing account by its ID.
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
@@ -47,6 +48,7 @@ namespace TenantOnly
         {
             return await tenant.GetBillingAccounts().GetAsync(billingAccountName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a billing account by its ID.
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}

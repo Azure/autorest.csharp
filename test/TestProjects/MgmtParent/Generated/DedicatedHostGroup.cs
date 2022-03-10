@@ -90,6 +90,7 @@ namespace MgmtParent
         {
             return new DedicatedHostCollection(Client, Id);
         }
+
         /// <summary>
         /// Retrieves information about a dedicated host.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}
@@ -103,6 +104,7 @@ namespace MgmtParent
         {
             return await GetDedicatedHosts().GetAsync(hostName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about a dedicated host.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}

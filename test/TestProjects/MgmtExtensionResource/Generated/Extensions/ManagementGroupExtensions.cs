@@ -32,6 +32,7 @@ namespace MgmtExtensionResource
         {
             return GetExtensionClient(managementGroup).GetManagementGroupPolicyDefinitions();
         }
+
         /// <summary>
         /// This operation retrieves the policy definition in the given management group with the given name.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
@@ -46,6 +47,7 @@ namespace MgmtExtensionResource
         {
             return await GetManagementGroupPolicyDefinitions(managementGroup).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// This operation retrieves the policy definition in the given management group with the given name.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}

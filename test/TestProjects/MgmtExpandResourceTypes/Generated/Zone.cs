@@ -94,6 +94,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetACollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A/{relativeRecordSetName}
@@ -106,6 +107,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetAs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/A/{relativeRecordSetName}
@@ -125,6 +127,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetAaaaCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA/{relativeRecordSetName}
@@ -137,6 +140,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetAaaas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/AAAA/{relativeRecordSetName}
@@ -156,6 +160,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetCaaCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
@@ -168,6 +173,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetCaas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CAA/{relativeRecordSetName}
@@ -187,6 +193,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetCNameCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME/{relativeRecordSetName}
@@ -199,6 +206,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetCNames().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/CNAME/{relativeRecordSetName}
@@ -218,6 +226,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetMxCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}
@@ -230,6 +239,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetMxes().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}
@@ -249,6 +259,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetNsCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS/{relativeRecordSetName}
@@ -261,6 +272,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetNs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/NS/{relativeRecordSetName}
@@ -280,6 +292,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetPtrCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR/{relativeRecordSetName}
@@ -292,6 +305,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetPtrs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/PTR/{relativeRecordSetName}
@@ -311,6 +325,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetSoaCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA/{relativeRecordSetName}
@@ -323,6 +338,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetSoas().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SOA/{relativeRecordSetName}
@@ -342,6 +358,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetSrvCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV/{relativeRecordSetName}
@@ -354,6 +371,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetSrvs().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/SRV/{relativeRecordSetName}
@@ -373,6 +391,7 @@ namespace MgmtExpandResourceTypes
         {
             return new RecordSetTxtCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}
@@ -385,6 +404,7 @@ namespace MgmtExpandResourceTypes
         {
             return await GetRecordSetTxts().GetAsync(relativeRecordSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets a record set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/TXT/{relativeRecordSetName}

@@ -94,6 +94,7 @@ namespace MgmtKeyvault
         {
             return new MhsmPrivateEndpointConnectionCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets the specified private endpoint connection associated with the managed HSM Pool.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections/{privateEndpointConnectionName}
@@ -107,6 +108,7 @@ namespace MgmtKeyvault
         {
             return await GetMhsmPrivateEndpointConnections().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the specified private endpoint connection associated with the managed HSM Pool.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections/{privateEndpointConnectionName}

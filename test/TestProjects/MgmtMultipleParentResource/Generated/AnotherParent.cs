@@ -90,6 +90,7 @@ namespace MgmtMultipleParentResource
         {
             return new AnotherParentChildCollection(Client, Id);
         }
+
         /// <summary>
         /// The operation to get the run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}
@@ -104,6 +105,7 @@ namespace MgmtMultipleParentResource
         {
             return await GetAnotherParentChildren().GetAsync(childName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// The operation to get the run command.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}

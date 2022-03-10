@@ -32,6 +32,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithNonResChWithLocs();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs/{resGrpParentWithAncestorWithNonResChWithLocName}
@@ -46,6 +47,7 @@ namespace MgmtListMethods
         {
             return await resourceGroup.GetResGrpParentWithAncestorWithNonResChWithLocs().GetAsync(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChWithLocs/{resGrpParentWithAncestorWithNonResChWithLocName}
@@ -68,6 +70,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithNonResChes();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}
@@ -82,6 +85,7 @@ namespace MgmtListMethods
         {
             return await resourceGroup.GetResGrpParentWithAncestorWithNonResChes().GetAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}
@@ -104,6 +108,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestorWithLocs();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs/{resGrpParentWithAncestorWithLocName}
@@ -118,6 +123,7 @@ namespace MgmtListMethods
         {
             return await resourceGroup.GetResGrpParentWithAncestorWithLocs().GetAsync(resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithLocs/{resGrpParentWithAncestorWithLocName}
@@ -140,6 +146,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(resourceGroup).GetResGrpParentWithAncestors();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/{resGrpParentWithAncestorName}
@@ -154,6 +161,7 @@ namespace MgmtListMethods
         {
             return await resourceGroup.GetResGrpParentWithAncestors().GetAsync(resGrpParentWithAncestorName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestors/{resGrpParentWithAncestorName}
@@ -176,6 +184,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(resourceGroup).GetResGrpParentWithNonResChes();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithNonResChes/{resGrpParentWithNonResChName}
@@ -190,6 +199,7 @@ namespace MgmtListMethods
         {
             return await resourceGroup.GetResGrpParentWithNonResChes().GetAsync(resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithNonResChes/{resGrpParentWithNonResChName}
@@ -212,6 +222,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(resourceGroup).GetResGrpParents();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}
@@ -226,6 +237,7 @@ namespace MgmtListMethods
         {
             return await resourceGroup.GetResGrpParents().GetAsync(resGrpParentName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}

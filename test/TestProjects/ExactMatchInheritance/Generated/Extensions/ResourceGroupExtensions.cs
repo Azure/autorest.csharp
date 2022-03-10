@@ -34,6 +34,7 @@ namespace ExactMatchInheritance
         {
             return GetExtensionClient(resourceGroup).GetExactMatchModel1s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
         /// Operation Id: ExactMatchModel1s_Get
@@ -47,6 +48,7 @@ namespace ExactMatchInheritance
         {
             return await resourceGroup.GetExactMatchModel1s().GetAsync(exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1SName}
         /// Operation Id: ExactMatchModel1s_Get
@@ -68,6 +70,7 @@ namespace ExactMatchInheritance
         {
             return GetExtensionClient(resourceGroup).GetExactMatchModel5s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
         /// Operation Id: ExactMatchModel5s_Get
@@ -81,6 +84,7 @@ namespace ExactMatchInheritance
         {
             return await resourceGroup.GetExactMatchModel5s().GetAsync(exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5SName}
         /// Operation Id: ExactMatchModel5s_Get

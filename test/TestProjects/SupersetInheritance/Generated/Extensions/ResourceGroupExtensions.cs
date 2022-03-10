@@ -34,6 +34,7 @@ namespace SupersetInheritance
         {
             return GetExtensionClient(resourceGroup).GetSupersetModel1s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1SName}
         /// Operation Id: SupersetModel1s_Get
@@ -47,6 +48,7 @@ namespace SupersetInheritance
         {
             return await resourceGroup.GetSupersetModel1s().GetAsync(supersetModel1SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1SName}
         /// Operation Id: SupersetModel1s_Get
@@ -68,6 +70,7 @@ namespace SupersetInheritance
         {
             return GetExtensionClient(resourceGroup).GetSupersetModel4s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
         /// Operation Id: SupersetModel4s_Get
@@ -81,6 +84,7 @@ namespace SupersetInheritance
         {
             return await resourceGroup.GetSupersetModel4s().GetAsync(supersetModel4SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
         /// Operation Id: SupersetModel4s_Get
@@ -102,6 +106,7 @@ namespace SupersetInheritance
         {
             return GetExtensionClient(resourceGroup).GetSupersetModel6s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel6s/{supersetModel6SName}
         /// Operation Id: SupersetModel6s_Get
@@ -115,6 +120,7 @@ namespace SupersetInheritance
         {
             return await resourceGroup.GetSupersetModel6s().GetAsync(supersetModel6SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel6s/{supersetModel6SName}
         /// Operation Id: SupersetModel6s_Get
@@ -136,6 +142,7 @@ namespace SupersetInheritance
         {
             return GetExtensionClient(resourceGroup).GetSupersetModel7s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
         /// Operation Id: SupersetModel7s_Get
@@ -149,6 +156,7 @@ namespace SupersetInheritance
         {
             return await resourceGroup.GetSupersetModel7s().GetAsync(supersetModel7SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel7s/{supersetModel7SName}
         /// Operation Id: SupersetModel7s_Get

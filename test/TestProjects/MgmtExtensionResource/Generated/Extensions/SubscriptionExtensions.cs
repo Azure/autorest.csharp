@@ -42,6 +42,7 @@ namespace MgmtExtensionResource
         {
             return GetExtensionClient(subscription).GetSubscriptionPolicyDefinitions();
         }
+
         /// <summary>
         /// This operation retrieves the policy definition in the given subscription with the given name.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
@@ -56,6 +57,7 @@ namespace MgmtExtensionResource
         {
             return await GetSubscriptionPolicyDefinitions(subscription).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// This operation retrieves the policy definition in the given subscription with the given name.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}

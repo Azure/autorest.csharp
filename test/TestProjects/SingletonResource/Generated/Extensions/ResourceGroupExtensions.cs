@@ -32,6 +32,7 @@ namespace SingletonResource
         {
             return GetExtensionClient(resourceGroup).GetCars();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
         /// Operation Id: Cars_Get
@@ -45,6 +46,7 @@ namespace SingletonResource
         {
             return await resourceGroup.GetCars().GetAsync(carName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
         /// Operation Id: Cars_Get
@@ -66,6 +68,7 @@ namespace SingletonResource
         {
             return GetExtensionClient(resourceGroup).GetParentResources();
         }
+
         /// <summary>
         /// Singleton Test Parent Example.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}
@@ -80,6 +83,7 @@ namespace SingletonResource
         {
             return await resourceGroup.GetParentResources().GetAsync(parentName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Singleton Test Parent Example.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}

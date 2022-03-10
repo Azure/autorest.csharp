@@ -94,6 +94,7 @@ namespace MgmtKeyvault
         {
             return new PrivateEndpointConnectionCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets the specified private endpoint connection associated with the key vault.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}
@@ -107,6 +108,7 @@ namespace MgmtKeyvault
         {
             return await GetPrivateEndpointConnections().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the specified private endpoint connection associated with the key vault.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/privateEndpointConnections/{privateEndpointConnectionName}

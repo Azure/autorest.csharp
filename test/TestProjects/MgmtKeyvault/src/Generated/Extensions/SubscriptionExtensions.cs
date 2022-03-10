@@ -34,6 +34,7 @@ namespace MgmtKeyvault
         {
             return GetExtensionClient(subscription).GetDeletedVaults();
         }
+
         /// <summary>
         /// Gets the deleted Azure key vault.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}
@@ -49,6 +50,7 @@ namespace MgmtKeyvault
         {
             return await subscription.GetDeletedVaults().GetAsync(location, vaultName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the deleted Azure key vault.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}
@@ -72,6 +74,7 @@ namespace MgmtKeyvault
         {
             return GetExtensionClient(subscription).GetDeletedManagedHsms();
         }
+
         /// <summary>
         /// Gets the specified deleted managed HSM.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}
@@ -87,6 +90,7 @@ namespace MgmtKeyvault
         {
             return await subscription.GetDeletedManagedHsms().GetAsync(location, name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the specified deleted managed HSM.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}

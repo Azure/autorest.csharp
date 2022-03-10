@@ -32,6 +32,7 @@ namespace MgmtScopeResource
         {
             return GetExtensionClient(armResource).GetFakePolicyAssignments();
         }
+
         /// <summary>
         /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
@@ -46,6 +47,7 @@ namespace MgmtScopeResource
         {
             return await armResource.GetFakePolicyAssignments().GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// This operation retrieves a single policy assignment, given its name and the scope it was created at.
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}

@@ -32,6 +32,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChWithLocs();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
@@ -46,6 +47,7 @@ namespace MgmtListMethods
         {
             return await managementGroup.GetMgmtGrpParentWithNonResChWithLocs().GetAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChWithLocs/{mgmtGrpParentWithNonResChWithLocName}
@@ -68,6 +70,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChes();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
@@ -82,6 +85,7 @@ namespace MgmtListMethods
         {
             return await managementGroup.GetMgmtGrpParentWithNonResChes().GetAsync(mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
@@ -104,6 +108,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(managementGroup).GetMgmtGrpParentWithLocs();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
@@ -118,6 +123,7 @@ namespace MgmtListMethods
         {
             return await managementGroup.GetMgmtGrpParentWithLocs().GetAsync(mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithLocs/{mgmtGrpParentWithLocName}
@@ -140,6 +146,7 @@ namespace MgmtListMethods
         {
             return GetExtensionClient(managementGroup).GetMgmtGroupParents();
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
@@ -154,6 +161,7 @@ namespace MgmtListMethods
         {
             return await managementGroup.GetMgmtGroupParents().GetAsync(mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}

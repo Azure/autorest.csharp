@@ -34,6 +34,7 @@ namespace OmitOperationGroups
         {
             return GetExtensionClient(resourceGroup).GetModel2s();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
         /// Operation Id: Model2s_Get
@@ -47,6 +48,7 @@ namespace OmitOperationGroups
         {
             return await resourceGroup.GetModel2s().GetAsync(model2SName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
         /// Operation Id: Model2s_Get

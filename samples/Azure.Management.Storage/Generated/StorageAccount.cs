@@ -115,6 +115,7 @@ namespace Azure.Management.Storage
         {
             return new BlobInventoryPolicyCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets the blob inventory policy associated with the specified storage account.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}
@@ -126,6 +127,7 @@ namespace Azure.Management.Storage
         {
             return await GetBlobInventoryPolicies().GetAsync(blobInventoryPolicyName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the blob inventory policy associated with the specified storage account.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/inventoryPolicies/{blobInventoryPolicyName}
@@ -144,6 +146,7 @@ namespace Azure.Management.Storage
         {
             return new PrivateEndpointConnectionCollection(Client, Id);
         }
+
         /// <summary>
         /// Gets the specified private endpoint connection associated with the storage account.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}
@@ -157,6 +160,7 @@ namespace Azure.Management.Storage
         {
             return await GetPrivateEndpointConnections().GetAsync(privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets the specified private endpoint connection associated with the storage account.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}
@@ -177,6 +181,7 @@ namespace Azure.Management.Storage
         {
             return new ObjectReplicationPolicyCollection(Client, Id);
         }
+
         /// <summary>
         /// Get the object replication policy of the storage account by policy ID.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}
@@ -190,6 +195,7 @@ namespace Azure.Management.Storage
         {
             return await GetObjectReplicationPolicies().GetAsync(objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Get the object replication policy of the storage account by policy ID.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/objectReplicationPolicies/{objectReplicationPolicyId}
@@ -210,6 +216,7 @@ namespace Azure.Management.Storage
         {
             return new EncryptionScopeCollection(Client, Id);
         }
+
         /// <summary>
         /// Returns the properties for the specified encryption scope.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}
@@ -223,6 +230,7 @@ namespace Azure.Management.Storage
         {
             return await GetEncryptionScopes().GetAsync(encryptionScopeName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Returns the properties for the specified encryption scope.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}

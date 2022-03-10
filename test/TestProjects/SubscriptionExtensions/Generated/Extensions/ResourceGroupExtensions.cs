@@ -32,6 +32,7 @@ namespace SubscriptionExtensions
         {
             return GetExtensionClient(resourceGroup).GetOvens();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
         /// Operation Id: Ovens_Get
@@ -45,6 +46,7 @@ namespace SubscriptionExtensions
         {
             return await resourceGroup.GetOvens().GetAsync(ovenName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
         /// Operation Id: Ovens_Get

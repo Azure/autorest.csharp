@@ -32,6 +32,7 @@ namespace MgmtCollectionParent
         {
             return GetExtensionClient(resourceGroup).GetOrderResources();
         }
+
         /// <summary>
         /// Gets an order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}
@@ -47,6 +48,7 @@ namespace MgmtCollectionParent
         {
             return await resourceGroup.GetOrderResources().GetAsync(location, orderName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets an order.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}

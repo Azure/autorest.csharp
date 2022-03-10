@@ -32,6 +32,7 @@ namespace MgmtPropertyChooser
         {
             return GetExtensionClient(resourceGroup).GetVirtualMachines();
         }
+
         /// <summary>
         /// Retrieves information about the model view or the instance view of a virtual machine.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
@@ -46,6 +47,7 @@ namespace MgmtPropertyChooser
         {
             return await resourceGroup.GetVirtualMachines().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about the model view or the instance view of a virtual machine.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}

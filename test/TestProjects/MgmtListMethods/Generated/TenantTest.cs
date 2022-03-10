@@ -89,6 +89,7 @@ namespace MgmtListMethods
         {
             return new TenantParentWithNonResChWithLocCollection(Client, Id);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChWithLocs/{tenantParentWithNonResChWithLocName}
@@ -102,6 +103,7 @@ namespace MgmtListMethods
         {
             return await GetTenantParentWithNonResChWithLocs().GetAsync(tenantParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChWithLocs/{tenantParentWithNonResChWithLocName}
@@ -122,6 +124,7 @@ namespace MgmtListMethods
         {
             return new TenantParentWithNonResChCollection(Client, Id);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
@@ -135,6 +138,7 @@ namespace MgmtListMethods
         {
             return await GetTenantParentWithNonResChes().GetAsync(tenantParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithNonResChes/{tenantParentWithNonResChName}
@@ -155,6 +159,7 @@ namespace MgmtListMethods
         {
             return new TenantParentWithLocCollection(Client, Id);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
@@ -168,6 +173,7 @@ namespace MgmtListMethods
         {
             return await GetTenantParentWithLocs().GetAsync(tenantParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParentWithLocs/{tenantParentWithLocName}
@@ -188,6 +194,7 @@ namespace MgmtListMethods
         {
             return new TenantParentCollection(Client, Id);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}
@@ -201,6 +208,7 @@ namespace MgmtListMethods
         {
             return await GetTenantParents().GetAsync(tenantParentName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information.
         /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}

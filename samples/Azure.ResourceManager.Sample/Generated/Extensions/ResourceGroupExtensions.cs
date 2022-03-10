@@ -32,6 +32,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetAvailabilitySets();
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
@@ -46,6 +47,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
@@ -68,6 +70,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetProximityPlacementGroups();
         }
+
         /// <summary>
         /// Retrieves information about a proximity placement group .
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
@@ -83,6 +86,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await resourceGroup.GetProximityPlacementGroups().GetAsync(proximityPlacementGroupName, includeColocationStatus, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about a proximity placement group .
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}
@@ -106,6 +110,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetDedicatedHostGroups();
         }
+
         /// <summary>
         /// Retrieves information about a dedicated host group.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
@@ -120,6 +125,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await resourceGroup.GetDedicatedHostGroups().GetAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about a dedicated host group.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}
@@ -142,6 +148,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetSshPublicKeys();
         }
+
         /// <summary>
         /// Retrieves information about an SSH public key.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
@@ -156,6 +163,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await resourceGroup.GetSshPublicKeys().GetAsync(sshPublicKeyName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about an SSH public key.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}
@@ -178,6 +186,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetVirtualMachines();
         }
+
         /// <summary>
         /// Retrieves information about the model view or the instance view of a virtual machine.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
@@ -192,6 +201,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await resourceGroup.GetVirtualMachines().GetAsync(vmName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Retrieves information about the model view or the instance view of a virtual machine.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
@@ -214,6 +224,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetImages();
         }
+
         /// <summary>
         /// Gets an image.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}
@@ -229,6 +240,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await resourceGroup.GetImages().GetAsync(imageName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Gets an image.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}
@@ -252,6 +264,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetExtensionClient(resourceGroup).GetVirtualMachineScaleSets();
         }
+
         /// <summary>
         /// Display information about a virtual machine scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}
@@ -266,6 +279,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await resourceGroup.GetVirtualMachineScaleSets().GetAsync(vmScaleSetName, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Display information about a virtual machine scale set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}

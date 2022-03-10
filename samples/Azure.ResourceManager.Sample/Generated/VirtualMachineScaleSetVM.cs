@@ -90,6 +90,7 @@ namespace Azure.ResourceManager.Sample
         {
             return new VirtualMachineScaleSetVirtualMachineExtensionCollection(Client, Id);
         }
+
         /// <summary>
         /// The operation to get the VMSS VM extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}
@@ -104,6 +105,7 @@ namespace Azure.ResourceManager.Sample
         {
             return await GetVirtualMachineScaleSetVirtualMachineExtensions().GetAsync(vmExtensionName, expand, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// The operation to get the VMSS VM extension.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}

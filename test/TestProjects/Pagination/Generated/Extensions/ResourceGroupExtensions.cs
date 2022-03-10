@@ -32,6 +32,7 @@ namespace Pagination
         {
             return GetExtensionClient(resourceGroup).GetPageSizeIntegerModels();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeIntegerModel/{name}
         /// Operation Id: PageSizeIntegerModels_Get
@@ -45,6 +46,7 @@ namespace Pagination
         {
             return await resourceGroup.GetPageSizeIntegerModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeIntegerModel/{name}
         /// Operation Id: PageSizeIntegerModels_Get
@@ -66,6 +68,7 @@ namespace Pagination
         {
             return GetExtensionClient(resourceGroup).GetPageSizeInt64Models();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt64Model/{name}
         /// Operation Id: PageSizeInt64Models_Get
@@ -79,6 +82,7 @@ namespace Pagination
         {
             return await resourceGroup.GetPageSizeInt64Models().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt64Model/{name}
         /// Operation Id: PageSizeInt64Models_Get
@@ -100,6 +104,7 @@ namespace Pagination
         {
             return GetExtensionClient(resourceGroup).GetPageSizeInt32Models();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt32Model/{name}
         /// Operation Id: PageSizeInt32Models_Get
@@ -113,6 +118,7 @@ namespace Pagination
         {
             return await resourceGroup.GetPageSizeInt32Models().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt32Model/{name}
         /// Operation Id: PageSizeInt32Models_Get
@@ -134,6 +140,7 @@ namespace Pagination
         {
             return GetExtensionClient(resourceGroup).GetPageSizeNumericModels();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeNumericModel/{name}
         /// Operation Id: PageSizeNumericModels_Get
@@ -147,6 +154,7 @@ namespace Pagination
         {
             return await resourceGroup.GetPageSizeNumericModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeNumericModel/{name}
         /// Operation Id: PageSizeNumericModels_Get
@@ -168,6 +176,7 @@ namespace Pagination
         {
             return GetExtensionClient(resourceGroup).GetPageSizeFloatModels();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeFloatModel/{name}
         /// Operation Id: PageSizeFloatModels_Get
@@ -181,6 +190,7 @@ namespace Pagination
         {
             return await resourceGroup.GetPageSizeFloatModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeFloatModel/{name}
         /// Operation Id: PageSizeFloatModels_Get
@@ -202,6 +212,7 @@ namespace Pagination
         {
             return GetExtensionClient(resourceGroup).GetPageSizeDoubleModels();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDoubleModel/{name}
         /// Operation Id: PageSizeDoubleModels_Get
@@ -215,6 +226,7 @@ namespace Pagination
         {
             return await resourceGroup.GetPageSizeDoubleModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDoubleModel/{name}
         /// Operation Id: PageSizeDoubleModels_Get
@@ -236,6 +248,7 @@ namespace Pagination
         {
             return GetExtensionClient(resourceGroup).GetPageSizeDecimalModels();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
         /// Operation Id: PageSizeDecimalModels_Get
@@ -249,6 +262,7 @@ namespace Pagination
         {
             return await resourceGroup.GetPageSizeDecimalModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
         /// Operation Id: PageSizeDecimalModels_Get
@@ -270,6 +284,7 @@ namespace Pagination
         {
             return GetExtensionClient(resourceGroup).GetPageSizeStringModels();
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeStringModel/{name}
         /// Operation Id: PageSizeStringModels_Get
@@ -283,6 +298,7 @@ namespace Pagination
         {
             return await resourceGroup.GetPageSizeStringModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
+
         /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeStringModel/{name}
         /// Operation Id: PageSizeStringModels_Get
