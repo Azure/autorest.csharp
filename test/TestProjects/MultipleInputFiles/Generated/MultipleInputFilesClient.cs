@@ -43,7 +43,7 @@ namespace MultipleInputFiles
             _clientDiagnostics = new ClientDiagnostics(options);
             string[] scopes = { "https://fakeendpoint.azure.com/.default" };
             _pipeline = HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scopes));
-            RestClient = new MultipleInputFilesRestClient(_pipeline, source);
+            RestClient = new MultipleInputFilesRestClient(_clientDiagnostics, _pipeline, source);
         }
 
         /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
@@ -61,7 +61,7 @@ namespace MultipleInputFiles
             options ??= new MultipleInputFilesClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             _pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, "subscription-key"));
-            RestClient = new MultipleInputFilesRestClient(_pipeline, source);
+            RestClient = new MultipleInputFilesRestClient(_clientDiagnostics, _pipeline, source);
         }
 
         /// <summary> Initializes a new instance of MultipleInputFilesClient. </summary>
@@ -71,7 +71,7 @@ namespace MultipleInputFiles
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = default)
         {
-            RestClient = new MultipleInputFilesRestClient(pipeline, source);
+            RestClient = new MultipleInputFilesRestClient(clientDiagnostics, pipeline, source);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

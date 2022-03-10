@@ -33,7 +33,7 @@ namespace body_formdata_urlencoded
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal FormdataurlencodedClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new FormdataurlencodedRestClient(pipeline, endpoint);
+            RestClient = new FormdataurlencodedRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

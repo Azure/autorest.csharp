@@ -3,17 +3,19 @@
 
 using System;
 using System.IO;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class ResponseWriterHelpers
     {
-        public static void WriteStatusCodeSwitch(CodeWriter writer, string messageVariableName, RestClientMethod operation, bool async)
+        public static void WriteStatusCodeSwitch(CodeWriter writer, string messageVariableName, RestClientMethod operation, bool async, FieldDeclaration? clientDiagnosticsField)
         {
             string responseVariable = $"{messageVariableName}.Response";
 
@@ -148,9 +150,24 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                writer
-                    .Line($"default:")
-                    .Line($"throw new {typeof(RequestFailedException)}({responseVariable});");
+                if (clientDiagnosticsField != null)
+                {
+                    writer.Line($"default:");
+                    if (async)
+                    {
+                        writer.Line($"throw await {clientDiagnosticsField.Name}.{nameof(ClientDiagnostics.CreateRequestFailedExceptionAsync)}({responseVariable}).ConfigureAwait(false);");
+                    }
+                    else
+                    {
+                        writer.Line($"throw {clientDiagnosticsField.Name}.{nameof(ClientDiagnostics.CreateRequestFailedException)}({responseVariable});");
+                    }
+                }
+                else
+                {
+                    writer
+                        .Line($"default:")
+                        .Line($"throw new {typeof(RequestFailedException)}({responseVariable});");
+                }
             }
         }
 

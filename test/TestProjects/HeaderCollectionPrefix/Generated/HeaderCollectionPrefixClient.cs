@@ -33,7 +33,7 @@ namespace HeaderCollectionPrefix
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal HeaderCollectionPrefixClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new HeaderCollectionPrefixRestClient(pipeline, endpoint);
+            RestClient = new HeaderCollectionPrefixRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

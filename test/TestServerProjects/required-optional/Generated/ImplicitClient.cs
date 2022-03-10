@@ -37,7 +37,7 @@ namespace required_optional
         /// <exception cref="ArgumentException"> <paramref name="requiredGlobalPath"/> is an empty string, and was expected to be non-empty. </exception>
         internal ImplicitClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
-            RestClient = new ImplicitRestClient(pipeline, requiredGlobalPath, requiredGlobalQuery, endpoint, optionalGlobalQuery);
+            RestClient = new ImplicitRestClient(clientDiagnostics, pipeline, requiredGlobalPath, requiredGlobalQuery, endpoint, optionalGlobalQuery);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

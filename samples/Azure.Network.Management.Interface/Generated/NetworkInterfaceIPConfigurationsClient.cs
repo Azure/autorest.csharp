@@ -37,7 +37,7 @@ namespace Azure.Network.Management.Interface
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         internal NetworkInterfaceIPConfigurationsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2019-11-01")
         {
-            RestClient = new NetworkInterfaceIPConfigurationsRestClient(pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new NetworkInterfaceIPConfigurationsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

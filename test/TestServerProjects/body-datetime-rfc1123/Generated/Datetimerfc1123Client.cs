@@ -32,7 +32,7 @@ namespace body_datetime_rfc1123
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal Datetimerfc1123Client(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new Datetimerfc1123RestClient(pipeline, endpoint);
+            RestClient = new Datetimerfc1123RestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
