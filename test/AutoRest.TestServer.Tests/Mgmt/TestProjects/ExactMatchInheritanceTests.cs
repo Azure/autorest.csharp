@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Linq;
+using System.Reflection;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using ExactMatchInheritance;
@@ -44,5 +46,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel9), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel11), new string[] { }, new Type[] { })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
+
+        [TestCase("Id", "ExactMatchModel3", typeof(ResourceIdentifier))]
+        [TestCase("Id", "ExactMatchModel8", typeof(ResourceIdentifier))]
+        [TestCase("Type", "ExactMatchModel11", typeof(Optional<ResourceType>))]
+        [TestCase("ID", "ExactMatchModel7", typeof(string))]
+        [TestCase("Type", "ExactMatchModel7", typeof(string))]
+        [TestCase("Id", "ExactMatchModel1Data", typeof(ResourceIdentifier))]
+        [TestCase("Type", "ExactMatchModel1Data", typeof(ResourceType))]
+        public void ValidatePropertyType(string propertyName, string className, Type expectedType)
+        {
+            var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == className);
+            Assert.NotNull(type, $"Type {className} should exist");
+            var property = type.GetProperty(propertyName);
+            Assert.AreEqual(property.PropertyType, expectedType);
+        }
     }
 }
