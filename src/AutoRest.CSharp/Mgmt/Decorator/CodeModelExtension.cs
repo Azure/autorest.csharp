@@ -90,8 +90,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             property.Language.Default.Name = property.Schema.Name.TrimEnd('s');
                         }
-                        else if (!objSchema.Name.Equals("ExtendedLocation", StringComparison.Ordinal))
+                        else
+                        {
                             throw new InvalidOperationException($"{objSchema.Name} has a property named \"Type\" which is not allowed. Please use \"x-ms-client-name\" to rename the property for the client.");
+                        }
                     }
                 }
             }
