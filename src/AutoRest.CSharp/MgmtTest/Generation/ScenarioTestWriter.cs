@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Input;
@@ -11,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Common.Generation.Writers;
+using Azure.Core;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
@@ -20,35 +22,35 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     /// </summary>
     internal class ScenarioTestWriter: ClientWriter
     {
-        protected TestDefinitionModel testDef;
-        protected CodeWriter writer;
+        private TestDefinitionModel _testDef;
+        private CodeWriter _writer;
         protected string TestNamespace => MgmtContext.Context.DefaultNamespace + ".Tests.Scenario";
-        public string TypeName => System.IO.Path.GetFileNameWithoutExtension(testDef.FilePath).ToCleanName();
+        public string TypeName => System.IO.Path.GetFileNameWithoutExtension(_testDef.FilePath).ToCleanName();
         protected string TestBaseName => $"ManagementRecordedTestBase<{MgmtContext.Context.DefaultLibraryName}TestEnvironment>";
 
         public ScenarioTestWriter(CodeWriter writer, TestDefinitionModel testDef)
         {
-            this.testDef = testDef;
-            this.writer = writer;
+            this._testDef = testDef;
+            this._writer = writer;
         }
 
         public void WriteScenarioTest()
         {
-            WriteUsings(writer);
+            WriteUsings(_writer);
 
-            using (writer.Namespace(TestNamespace))
+            using (_writer.Namespace(TestNamespace))
             {
-                writer.WriteXmlDocumentationSummary($"Test generated from Api Scenario {testDef.FilePath}");
-                writer.Append($"public partial class {TypeName:D} : ");
-                writer.Line($"{TestBaseName}");
-                using (writer.Scope())
+                _writer.WriteXmlDocumentationSummary($"Test generated from Api Scenario {_testDef.FilePath}");
+                _writer.Append($"public partial class {TypeName:D} : ");
+                _writer.Line($"{TestBaseName}");
+                using (_writer.Scope())
                 {
                     WriteTesterCtors();
 
                     WritePrepareMethod();
                     WriteCleanUpMethod();
 
-                    foreach (var scenario in testDef.Scenarios)
+                    foreach (var scenario in _testDef.Scenarios)
                     {
                         WriteScenarioMethod(scenario);
                     }
@@ -58,126 +60,23 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected void WriteUsings(CodeWriter writer)
         {
-            writer.UseNamespace("System");
-            writer.UseNamespace("System.Threading.Tasks");
-            writer.UseNamespace("System.Net");
-            writer.UseNamespace("System.Collections.Generic");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
         }
 
-        protected void WritePrepareMethod() {
-
+        protected void WritePrepareMethod()
+        {
+            // TODO: generate prepare step
         }
 
         protected void WriteCleanUpMethod()
         {
-
+            // TODO: generate cleanUp step
         }
-
-        protected void FindResourceOrCollectionFromOperation(Operation operation, out Resource? resource, out ResourceCollection? collection, out MgmtClientOperation? clientOperation, out MgmtRestOperation? restOperation)
-        {
-            resource = null;
-            collection = null;
-            clientOperation = null;
-            restOperation = null;
-            foreach (var r in MgmtContext.Library.ArmResources) {
-                foreach (var co in r.AllOperations) {
-                    foreach (var ro in co) {
-                        if (ro.Operation == operation) {
-                            resource = r;
-                            clientOperation = co;
-                            restOperation = ro;
-                            return;
-                        }
-                    }
-                }
-            }
-            foreach (var c in MgmtContext.Library.ResourceCollections) {
-                foreach (var co in c.AllOperations) {
-                    foreach (var ro in co) {
-                        if (ro.Operation == operation) {
-                            collection = c;
-                            clientOperation = co;
-                            restOperation = ro;
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-
-        protected bool IsCollectionOperation(Operation operation, out ResourceCollection? collection, out MgmtClientOperation? clientOperation, out MgmtRestOperation? restOperation)
-        {
-            collection = null;
-            clientOperation = null;
-            restOperation = null;
-            foreach (var c in MgmtContext.Library.ResourceCollections)
-            {
-                foreach (var co in c.AllOperations)
-                {
-                    foreach (var ro in co)
-                    {
-                        if (ro.Operation == operation)
-                        {
-                            collection = c;
-                            clientOperation = co;
-                            restOperation = ro;
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        protected bool IsResourceOperation(Operation operation, out Resource? resource, out MgmtClientOperation? clientOperation, out MgmtRestOperation? restOperation)
-        {
-            resource = null;
-            clientOperation = null;
-            restOperation = null;
-            foreach (var r in MgmtContext.Library.ArmResources)
-            {
-                foreach (var co in r.AllOperations)
-                {
-                    foreach (var ro in co)
-                    {
-                        if (ro.Operation == operation)
-                        {
-                            resource = r;
-                            clientOperation = co;
-                            restOperation = ro;
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        protected bool IsSubscriptionOperation(Operation operation, out MgmtClientOperation? clientOperation, out MgmtRestOperation? restOperation)
-        {
-            clientOperation = null;
-            restOperation = null;
-            foreach (var co in MgmtContext.Library.SubscriptionExtensions.ClientOperations)
-            {
-                foreach (var ro in co)
-                {
-                    if (ro.Operation == operation)
-                    {
-                        clientOperation = co;
-                        restOperation = ro;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
 
         protected IEnumerable<string> GetAllScenarioDefinedVariables(Scenario? scenario, TestStep step)
         {
-            HashSet<string> scenarioDefinedVariables = testDef.GetAllVariableNames();
+            HashSet<string> scenarioDefinedVariables = _testDef.GetAllVariableNames();
             if (scenario is not null)
             {
                 scenarioDefinedVariables.UnionWith(scenario.GetAllVariableNames());
@@ -188,160 +87,161 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected void WriteStep(Scenario? scenario, TestStep step)
         {
-            writer.Line($"// Step: {step.Step}");
-            var existedVariables = testDef.GetAllVariableNames();
+            _writer.Line($"// Step: {step.Step}");
+            var existedVariables = _testDef.GetAllVariableNames();
             if (scenario is not null)
             {
                 existedVariables.UnionWith(scenario.GetAllVariableNames());
             }
-            using (new CodeWriterOavVariableScope(writer, step, existedVariables))
+            using (new CodeWriterOavVariableScope(_writer, step, existedVariables))
             {
                 WriteVariableInitializations(step, existedVariables);
                 IEnumerable<string> scenarioDefinedVariables = this.GetAllScenarioDefinedVariables(scenario, step);
-                if (step.Type == TestStep.StepType_RestCall && step.ExampleModel is not null)
+                if (step.Type == TestStepType.RestCall && step.ExampleModel is not null)
                 {
-                    if (IsResourceOperation(step.ExampleModel.Operation, out Resource? resource, out MgmtClientOperation? clientOperation, out MgmtRestOperation? restOperation))
+                    if (step.ExampleModel.Operation.IsResourceOperation(out Resource? resource, out MgmtClientOperation? clientOperation, out MgmtRestOperation? restOperation))
                     {
-                        ResourceTestWriter testWriter = new ResourceTestWriter(writer, resource!, scenarioDefinedVariables);
+                        ResourceTestWriter testWriter = new ResourceTestWriter(_writer, resource!, scenarioDefinedVariables);
                         testWriter.WriteOperationInvocation(resource!, clientOperation!, restOperation!, step.ExampleModel, true, resource!.DeleteOperation == clientOperation);
                     }
-                    else if (IsCollectionOperation(step.ExampleModel.Operation, out ResourceCollection? collection, out clientOperation, out restOperation))
+                    else if (step.ExampleModel.Operation.IsCollectionOperation(out ResourceCollection? collection, out clientOperation, out restOperation))
                     {
-                        ResourceCollectionTestWriter testWriter = new ResourceCollectionTestWriter(writer, collection!, scenarioDefinedVariables);
+                        ResourceCollectionTestWriter testWriter = new ResourceCollectionTestWriter(_writer, collection!, scenarioDefinedVariables);
                         testWriter.WriteOperationInvocation(collection!, clientOperation!, restOperation!, step.ExampleModel, true, collection!.CreateOperation == clientOperation);
                     }
-                    else if (IsSubscriptionOperation(step.ExampleModel.Operation, out clientOperation, out restOperation))
+                    else if (step.ExampleModel.Operation.IsSubscriptionOperation(out clientOperation, out restOperation))
                     {
-                        MgmtExtensionTestWriter testWriter = new MgmtExtensionTestWriter(writer, MgmtContext.Library.SubscriptionExtensions, scenarioDefinedVariables);
+                        MgmtExtensionTestWriter testWriter = new MgmtExtensionTestWriter(_writer, MgmtContext.Library.SubscriptionExtensions, scenarioDefinedVariables);
                         testWriter.WriteOperationInvocation(clientOperation!, restOperation!, step.ExampleModel, true, false);
                     }
                     else
                     {
-                        writer.Line($"// Operation is not implemented for this Step!");
+                        _writer.Line($"// Operation is not implemented for this Step!");
                     }
                 }
-                else if (step.Type == TestStep.StepType_ArmTemplateDeployment && step.ArmTemplatePayload is not null)
+                else if (step.Type == TestStepType.ArmTemplateDeployment && step.ArmTemplatePayload is not null)
                 {
                     var templatePayload = new CodeWriterDeclaration("templatePayload");
-                    writer.Line($"var {templatePayload:D} = {Newtonsoft.Json.JsonConvert.SerializeObject(step.ArmTemplatePayload).RefScenariDefinedVariables(scenarioDefinedVariables)};");
+                    _writer.Line($"var {templatePayload:D} = {Newtonsoft.Json.JsonConvert.SerializeObject(step.ArmTemplatePayload).RefScenarioDefinedVariables(scenarioDefinedVariables)};");
+                    // writer.Line($"var {templatePayload:D} = {System.Text.Json.JsonDocument.ParseValue(new System.Text.Json.Utf8JsonReader( step.ArmTemplatePayload)).RefScenarioDefinedVariables(scenarioDefinedVariables)};");
                     var deploymentOperation = new CodeWriterDeclaration("deploymentOperation");
-                    using (writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetDeployments().CreateOrUpdateAsync(true, {step.Step:L}, new Resources.Models.DeploymentInput(new Resources.Models.DeploymentProperties(Resources.Models.DeploymentMode.Complete)", "{", "}));"))
+                    using (_writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetDeployments().CreateOrUpdateAsync(true, {step.Step:L}, new Resources.Models.DeploymentInput(new Resources.Models.DeploymentProperties(Resources.Models.DeploymentMode.Complete)", "{", "}));"))
                     {
-                        writer.Append($"Template = {typeof(System.Text.Json.JsonDocument)}.Parse({templatePayload}).RootElement");
-                        writer.Line($",");
+                        _writer.Append($"Template = {typeof(System.Text.Json.JsonDocument)}.Parse({templatePayload}).RootElement");
+                        _writer.Line($",");
                     }
 
                     var outputs = new CodeWriterDeclaration("deployOutputs");
-                    using (writer.Scope($"if ({deploymentOperation}.Value.Data.Properties.Outputs is Dictionary<string, object> {outputs:D})"))
+                    using (_writer.Scope($"if ({deploymentOperation}.Value.Data.Properties.Outputs is Dictionary<string, object> {outputs:D})"))
                     {
-                        foreach (var variableName in step.OutputVariableNames ?? new List<string>())
+                        foreach (var variableName in step.OutputVariableNames)
                         {
                             var element = new CodeWriterDeclaration("outputVariable");
-                            using (writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is Dictionary<string, object> {element:D})"))
+                            using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is Dictionary<string, object> {element:D})"))
                             {
-                                writer.Line($"{variableName} = {element}[\"value\"].ToString();");
+                                _writer.Line($"{variableName} = {element}[\"value\"].ToString();");
                             }
                         }
                     }
                 }
             }
-            writer.Line();
+            _writer.Line();
         }
 
         protected void WriteScenarioMethod(Scenario scenario)
         {
-            writer.Line($"[RecordedTest]");
-            using (writer.Scope($"public async Task {(scenario.ScenarioName ?? scenario.Description).ToCleanName()}()"))
+            _writer.Line($"[RecordedTest]");
+            using (_writer.Scope($"public async {typeof(Task)} {(scenario.ScenarioName ?? scenario.Description).ToCleanName()}()"))
             {
-                writer.Line($"// API Scenario: {scenario.Description}");
+                _writer.Line($"// API Scenario: {scenario.Description}");
 
-                var existedVariables = testDef.GetAllVariableNames();
-                using (new CodeWriterOavVariableScope(writer, scenario, existedVariables))
+                var existedVariables = _testDef.GetAllVariableNames();
+                using (new CodeWriterOavVariableScope(_writer, scenario, existedVariables))
                 {
                     WriteVariableInitializations(scenario, existedVariables);
-                    writer.Line($"resourceGroupName = Recording.GenerateAssetName(resourceGroupName);");
-                    writer.Line($"resourceGroup = (await GetArmClient().GetSubscription(new ResourceIdentifier($\"/subscriptions/{{subscriptionId}}\")).GetResourceGroups().CreateOrUpdateAsync(true, resourceGroupName, new ResourceGroupData(new AzureLocation(location)))).Value;");
+                    _writer.Line($"resourceGroupName = Recording.GenerateAssetName(resourceGroupName);");
+                    _writer.Line($"resourceGroup = (await GetArmClient().GetSubscription(new {typeof(ResourceIdentifier)}($\"/subscriptions/{{subscriptionId}}\")).GetResourceGroups().CreateOrUpdateAsync(true, resourceGroupName, new {typeof(ResourceGroupData)}(new {typeof(AzureLocation)}(location)))).Value;");
 
                     foreach (var step in scenario.Steps)
                     {
-                        using (writer.Scope())
+                        using (_writer.Scope())
                         {
                             WriteStep(scenario, step);
                         }
-                        writer.Line();
+                        _writer.Line();
                     }
                 }
             }
-            writer.Line();
+            _writer.Line();
         }
 
         protected void WriteVariableInitializations(OavVariableScope ovs, IEnumerable<string> existedVarialbes)
         {
-            IEnumerable<string> requiredVariables = ovs.RequiredVariables ?? new List<string>();
-            Dictionary<string, string> requiredVariableDefault = ovs.RequiredVariablesDefault ?? new Dictionary<string, string>();
-            var variables = ovs.Variables ?? new Dictionary<string, object?>();
+            IEnumerable<string> requiredVariables = ovs.RequiredVariables;
+            IReadOnlyDictionary<string, string> requiredVariableDefault = ovs.RequiredVariablesDefault;
+            var variables = ovs.Variables;
 
             if (ovs is TestDefinitionModel)
             foreach (var requiredVariable in requiredVariables)
             {
                 if (!existedVarialbes.Contains(requiredVariable))
                 {
-                    writer.Append($"string {new CodeWriterDeclaration(requiredVariable):D} = Environment.GetEnvironmentVariable(\"{requiredVariable.ToSnakeCase().ToUpper()}\")");
+                    _writer.Append($"string {new CodeWriterDeclaration(requiredVariable):D} = {typeof(Environment)}.GetEnvironmentVariable(\"{requiredVariable.ToSnakeCase().ToUpper()}\")");
                 }
                 else
                 {
-                    writer.Append($"{requiredVariable} = Environment.GetEnvironmentVariable(\"{requiredVariable.ToSnakeCase().ToUpper()}\")");
+                    _writer.Append($"{requiredVariable} = {typeof(Environment)}.GetEnvironmentVariable(\"{requiredVariable.ToSnakeCase().ToUpper()}\")");
                 }
                 if (requiredVariableDefault.ContainsKey(requiredVariable))
                 {
-                    writer.Append($" ?? {requiredVariableDefault[requiredVariable]:L}");
+                    _writer.Append($" ?? {requiredVariableDefault[requiredVariable]:L}");
                 }
-                writer.Line($";");
+                _writer.Line($";");
             }
 
             foreach (var variable in variables.Keys)
             {
-                var defaultValue = ovs.GetVariableDefaultValue(variable).RefScenariDefinedVariables(existedVarialbes);
+                var defaultValue = ovs.GetVariableDefaultValue(variable).RefScenarioDefinedVariables(existedVarialbes);
                 if (!requiredVariables.Contains(variable) && !existedVarialbes.Contains(variable))
                 {
-                    writer.Line($"string {new CodeWriterDeclaration(variable):D} = {defaultValue};");
+                    _writer.Line($"string {new CodeWriterDeclaration(variable):D} = {defaultValue};");
                 }
                 else
                 {
-                    writer.Line($"{variable} = {defaultValue};");
+                    _writer.Line($"{variable} = {defaultValue};");
                 }
             }
 
-            if (ovs is not TestDefinitionModel && variables.Count()>0)
+            if (ovs is not TestDefinitionModel && variables.Count>0)
             {
-                writer.Append($"Console.WriteLine($\"{(ovs is Scenario? "Scenario": "Step")} variables: ");
+                _writer.Append($"{typeof(Console)}.WriteLine($\"{(ovs is Scenario ? "Scenario": "Step")} variables: ");
                 foreach (var variable in variables.Keys)
                 {
-                    writer.Append($"{variable} -> $\\\"{{{variable}}}\\\", ");
+                    _writer.Append($"{variable} -> $\\\"{{{variable}}}\\\", ");
                 }
-                writer.Line($"\");");
+                _writer.Line($"\");");
             }
-            writer.Line();
+            _writer.Line();
         }
 
         protected void WriteTesterCtors()
         {
             // write protected default constructor
-            if (testDef.Scope == TestDefinitionModel.Scope_ResourceGroup)
+            if (_testDef.Scope == TestDefinitionScope.ResourceGroup)
             {
-                writer.Line($"{typeof(ResourceGroup)} resourceGroup;");
+                _writer.Line($"{typeof(ResourceGroup)} resourceGroup;");
             }
 
-            if (!(testDef.RequiredVariables?.Contains("resourceGroupName") is true))
+            if (!_testDef.RequiredVariables.Contains("resourceGroupName"))
             {
-                testDef.RequiredVariables?.Add("resourceGroupName");
+                _testDef.RequiredVariables.Add("resourceGroupName");
             }
-            WriteVariableInitializations(testDef, Enumerable.Empty<string>());
+            WriteVariableInitializations(_testDef, Enumerable.Empty<string>());
 
-            using (writer.Scope($"public {TypeName}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
+            using (_writer.Scope($"public {TypeName}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
             {
             }
-            writer.Line();
+            _writer.Line();
         }
     }
 }

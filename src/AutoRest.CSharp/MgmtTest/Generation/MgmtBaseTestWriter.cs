@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -28,13 +29,13 @@ namespace AutoRest.CSharp.MgmtTest.Generation
     {
         public Queue<CodeWriterDelegate> assignmentWriterDelegates = new Queue<CodeWriterDelegate>();
 
-        protected IEnumerable<string>? scenarioVariables;
+        protected IEnumerable<string>? _scenarioVariables;
 
-        protected bool inScenario => scenarioVariables is not null;
+        protected bool InScenario => _scenarioVariables is not null;
 
         public MgmtBaseTestWriter(CodeWriter writer, MgmtTypeProvider provider, IEnumerable<string>? scenarioVariables) : base(writer, provider)
         {
-            this.scenarioVariables = scenarioVariables;
+            this._scenarioVariables = scenarioVariables;
         }
 
         public void WriteTestDecorator()
@@ -52,11 +53,17 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public string FormatResourceId(string resourceId)
         {
+            // Two purpose of this function:
+            // 1. correct wrong sample values
+            // 2. make a resource identifier string can be used in a string interpolation $"", for instance:
+            // "/subscriptions/{subscriptionId}/resourceGroups/{myResourceGroup}"  --> "/subscriptions/{{subscriptionId}}/resourceGroups/{{myResourceGroup}}"
+            // After the interpolation, the output will come back to it's original value.
+
             if (resourceId.Length == 0)
             {
                 return "/subscriptions/00000000-0000-0000-0000-000000000000";   // provide a fake resourceId to fullfill the ResourceIdentifier check
             }
-            if (!resourceId.StartsWith('/'))
+            if (!resourceId.StartsWith('/'))    // to correct incorrect sample value
             {
                 resourceId = '/' + resourceId;
             }
@@ -64,8 +71,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var elements = resourceId.Split("/");
             for (int i = 2; i< elements.Length; i+=2)
             {
-                if (elements[i-1].ToLower()== "subscriptions" && !inScenario)
-                {
+                if (elements[i-1].ToLower()== "subscriptions" && !InScenario)
+                {   // to correct subscription value
                     Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
                     Match match = regex.Match(elements[i]);
                     if (!match.Success)
@@ -79,7 +86,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public static string GetTaskOrVoid(bool isAsync)
         {
-            return isAsync ? "Task" : "void";
+            return isAsync ? $"{typeof(Task)}" : "void";
         }
 
         public static ExampleGroup? FindExampleGroup(MgmtRestOperation restOperation)
@@ -160,7 +167,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             if (ot is SchemaObjectType sot)
             {
                 var obj = (JsonSerialization)sot.Serializations.Single(x => typeof(JsonSerialization).IsInstanceOfType(x));
-                foreach (var exampleProperty in ev.Properties ?? new DictionaryOfExamplValue())
+                foreach (var exampleProperty in ev.Properties)
                 {
                     var property = FindPropertyThroughSerialization(exampleProperty.Value.FlattenedNames is not null ? exampleProperty.Value.FlattenedNames.ToList()! : new List<string> { exampleProperty.Key }, obj);
                     if (property == targetProperty)
@@ -171,7 +178,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else
             {
-                foreach (var exampleProperty in ev.Properties ?? new DictionaryOfExamplValue())
+                foreach (var exampleProperty in ev.Properties)
                 {
                     foreach (var property in ot.Properties)
                     {
@@ -267,7 +274,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 writer.Append($"{p.Name:D}: ");
                 if (paramValue is not null)
                 {
-                    WriteExampleValue(writer, p.Type, paramValue!, $"{PropertyVaraibleName(variableName, targetProperty)}");
+                    WriteExampleValue(writer, p.Type, paramValue, $"{PropertyVaraibleName(variableName, targetProperty)}");
                 }
                 else
                 {
@@ -324,13 +331,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public CodeWriterDelegate CreateAssignmentWriterDelegate(CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
-            return new CodeWriterDelegate(writer =>
+            return writer =>
             {
-                if (cst.Name == "IList" || cst.Name == "IEnumerable")
+                if (cst.IsFrameworkType && cst.FrameworkType == typeof(IList<>))
                 {
-                    writer.UseNamespace("System.Collections.Generic");
                     var idx = 0;
-                    foreach (var element in exampleValue.Elements ?? new List<ExampleValue>())
+                    foreach (var element in exampleValue.Elements)
                     {
                         writer.Append($"{variableName}.Add(");
                         WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]");
@@ -338,28 +344,27 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         idx++;
                     }
                 }
-                else if (cst.Name == "IDictionary")
+                else if (cst.IsFrameworkType && cst.FrameworkType == typeof(IDictionary<,>))
                 {
-                    writer.UseNamespace("System.Collections.Generic");
-                    foreach (var entry in exampleValue.Properties ?? new DictionaryOfExamplValue() { })
+                    foreach (var entry in exampleValue.Properties)
                     {
-                        var k = entry.Key.RefScenariDefinedVariables(scenarioVariables);
+                        var k = entry.Key.RefScenarioDefinedVariables(_scenarioVariables);
                         writer.Append($"${variableName}[{k}] = ");
                         WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
                         writer.Line($";");
                     }
                 }
-            });
+            };
         }
 
         protected void AddTagWriterDelegate(FormattableString newVariableName, CSharpType valueType, ExampleValue ev)
         {
-            assignmentWriterDelegates.Enqueue(new CodeWriterDelegate(writer =>
+            assignmentWriterDelegates.Enqueue(writer =>
             {
                 writer.Append($"{newVariableName}.ReplaceWith(");
                 WriteExampleValue(writer, valueType, ev, newVariableName);
                 writer.Line($");");
-            }));
+            });
         }
 
         private void WriteSchemaObjectExampleProperties(CodeWriter writer, ObjectType sot, ExampleValue ev, FormattableString variableName, HashSet<ObjectTypeProperty> consumedProperties)
@@ -409,14 +414,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 {
                     foreach (var entry in jsonRawValue.AsDictionary())
                     {
-                        writer.Append($"[{entry.Key.RefScenariDefinedVariables(scenarioVariables)}] = ");
+                        writer.Append($"[{entry.Key.RefScenarioDefinedVariables(_scenarioVariables)}] = ");
                         WriteJsonRawValue(writer, new JsonRawValue(entry.Value));
                         writer.Line($",");
                     }
                 }
             }
             else if (jsonRawValue.IsString()) {
-                writer.Append($"{jsonRawValue.AsString().RefScenariDefinedVariables(scenarioVariables)}");
+                writer.Append($"{jsonRawValue.AsString()!.RefScenarioDefinedVariables(_scenarioVariables)}");
             }
             else if (jsonRawValue.IsNull())
             {
@@ -429,28 +434,30 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         public void WriteFrameworkTypeExampleValue(CodeWriter writer, CSharpType cst, ExampleValue exampleValue, FormattableString variableName)
         {
-            if (cst.Name == "IList" || cst.Name == "IEnumerable")
+            if (cst.IsFrameworkType && (cst.FrameworkType == typeof(IList<>) || cst.FrameworkType == typeof(IReadOnlyList<>)))
             {
-                writer.UseNamespace("System.Collections.Generic");
-                using (writer.Scope($"new List<{cst.Arguments[0]}>()", newLine: false))
+                using (writer.Scope($"new {new CSharpType(typeof(List<>), cst.Arguments)}()", newLine: false))
                 {
                     var idx = 0;
-                    foreach (var element in exampleValue.Elements ?? new List<ExampleValue>())
+                    foreach (var element in exampleValue.Elements)
                     {
                         WriteExampleValue(writer, cst.Arguments[0], element, $"{variableName}[{idx}]");
                         writer.Append($",");
                         idx++;
                     }
                 }
+                if (cst.FrameworkType == typeof(IReadOnlyList<>))
+                {
+                    writer.Append($"AsReadOnly()");
+                }
             }
-            else if (cst.Name == "IDictionary")
+            else if (cst.IsFrameworkType && cst.FrameworkType == typeof(IDictionary<,>))
             {
-                writer.UseNamespace("System.Collections.Generic");
                 using (writer.Scope($"new {new CSharpType(typeof(Dictionary<,>), cst.Arguments)}()", newLine: false))
                 {
-                    foreach (var entry in exampleValue.Properties ?? new DictionaryOfExamplValue() { })
+                    foreach (var entry in exampleValue.Properties)
                     {
-                        var k = entry.Key.RefScenariDefinedVariables(scenarioVariables);
+                        var k = entry.Key.RefScenarioDefinedVariables(_scenarioVariables);
                         writer.Append($"[{k}] = ");
                         WriteExampleValue(writer, cst.Arguments[1], entry.Value, $"{variableName}[{k}]");
                         writer.Append($",");
@@ -463,25 +470,25 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             }
             else if (cst.Name == "ResourceIdentifier" || cst.Name == "ResourceType")
             {
-                writer.Append($"new {cst}(${FormatResourceId(exampleValue.RawValue!.ToString()!).RefScenariDefinedVariables(scenarioVariables):L})");
+                writer.Append($"new {cst}(${FormatResourceId(exampleValue.RawValue!.ToString()!).RefScenarioDefinedVariables(_scenarioVariables):L})");
             }
             else if (cst.Name == "DateTimeOffset" && exampleValue.RawValue is string dtValue)
             {
-                writer.Append($"{typeof(DateTimeOffset)}.Parse({dtValue.RefScenariDefinedVariables(scenarioVariables)})");
+                writer.Append($"{typeof(DateTimeOffset)}.Parse({dtValue.RefScenarioDefinedVariables(_scenarioVariables)})");
             }
             else if (cst.Name == "Guid" && exampleValue.RawValue is string guidValue)
             {
-                writer.Append($"System.Guid.Parse({guidValue.RefScenariDefinedVariables(scenarioVariables)})");
+                writer.Append($"System.Guid.Parse({guidValue.RefScenarioDefinedVariables(_scenarioVariables)})");
             }
             else if (cst.Name == "TimeSpan" && exampleValue.RawValue is string tsValue)
             {
-                writer.Append($"System.TimeSpan.Parse({tsValue.RefScenariDefinedVariables(scenarioVariables)})");
+                writer.Append($"System.TimeSpan.Parse({tsValue.RefScenarioDefinedVariables(_scenarioVariables)})");
             }
             else if (exampleValue.RawValue is not null && exampleValue.RawValue is string strValue)
             {
                 if (new string[] { "String", "AzureLocation" }.Contains(cst.FrameworkType.Name))
                 {
-                    writer.Append($"{strValue.RefScenariDefinedVariables(scenarioVariables)}");
+                    writer.Append($"{strValue.RefScenarioDefinedVariables(_scenarioVariables)}");
                 }
                 else
                 {
@@ -495,14 +502,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 }
             }
-            else if (exampleValue.Elements is not null)
-            {
-                writer.Append($"{exampleValue.Elements}");
-            }
-            else if (exampleValue.Properties is not null)
-            {
-                writer.Append($"{exampleValue.Properties}");
-            }
             else
             {
                 writer.Append($"null");
@@ -513,9 +512,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             if (enumType.IsExtendable)
             {
-                if (new string[] { "String" }.Contains(enumType.BaseType.FrameworkType.Name) && exampleValue.RawValue is string strValue)
+                if (enumType.BaseType.FrameworkType == typeof(String) && exampleValue.RawValue is string strValue)
                 {
-                    writer.AppendEnumFromString(enumType, w => w.Append($"{strValue.RefScenariDefinedVariables(scenarioVariables)}"));
+                    writer.AppendEnumFromString(enumType, w => w.Append($"{strValue.RefScenarioDefinedVariables(_scenarioVariables)}"));
                 }
                 else
                 {
@@ -715,7 +714,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     }
                 }
 
-                if (segment.ReferenceName == "subscriptionId" && !inScenario)
+                if (segment.ReferenceName == "subscriptionId" && !InScenario)
                 {
                     Regex regex = new Regex("^{[A-Z0-9]{8}-([A-Z0-9]{4}-){3}[A-Z0-9]{12}}$");
                     Match match = regex.Match(value);
@@ -724,7 +723,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         value = "\"00000000-0000-0000-0000-000000000000\"";
                     }
                 }
-                return value.RefScenariDefinedVariables(scenarioVariables);
+                return value.RefScenarioDefinedVariables(_scenarioVariables);
             }));
             return $"{identifierParams}";
         }
@@ -743,7 +742,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected static CodeWriterDelegate WriteMethodInvocation(FormattableString methodName, IEnumerable<FormattableString> paramNames)
         {
-            return new CodeWriterDelegate(writer =>
+            return writer =>
             {
                 writer.Append($"{methodName}(");
                 foreach (var paramName in paramNames)
@@ -752,7 +751,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 writer.RemoveTrailingComma();
                 writer.Append($")");
-            });
+            };
         }
 
         protected void WriteMethodTestInvocation(bool async, MgmtClientOperation clientOperation, bool isLroOperation, FormattableString methodName, IEnumerable<FormattableString> paramNames)

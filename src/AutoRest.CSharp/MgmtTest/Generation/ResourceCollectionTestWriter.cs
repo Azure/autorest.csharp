@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -69,9 +70,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         private void WriteUsings(CodeWriter writer)
         {
-            writer.UseNamespace("System");
-            writer.UseNamespace("System.Threading.Tasks");
-            writer.UseNamespace("System.Net");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
         }
@@ -82,8 +80,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line();
             using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync, RecordedTestMode.Record)"))
             {
-                _writer.Line($"ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
-                _writer.Line($"System.Environment.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
+                _writer.Line($"{typeof(ServicePointManager)}.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;");
+                _writer.Line($"{typeof(Environment)}.SetEnvironmentVariable(\"RESOURCE_MANAGER_URL\", $\"https://localhost:8443\");");
             }
         }
 
@@ -130,10 +128,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 case MgmtExtensions extension:
                     {
                         if (extension == MgmtContext.Library.TenantExtensions) {
-                            _writer.Append($"var collection = GetArmClient().GetTenants().GetAll().GetEnumerator().Current");
+                            _writer.UseNamespace("System.Linq");
+                            _writer.Append($"var collection = GetArmClient().GetTenants().First()");
                         }
                         else {
-                            _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(realRequestPath).RefScenariDefinedVariables(scenarioVariables)}))");
+                            _writer.Append($"var collection = GetArmClient().Get{extension.ArmCoreType.Name}(new {typeof(Azure.Core.ResourceIdentifier)}({FormatResourceId(realRequestPath).RefScenarioDefinedVariables(_scenarioVariables)}))");
                         }
                         break;
                     }
