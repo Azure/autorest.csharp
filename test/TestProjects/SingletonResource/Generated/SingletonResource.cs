@@ -52,7 +52,7 @@ namespace SingletonResource
         {
             _singletonResourceClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string singletonResourceApiVersion);
-            _singletonResourceRestClient = new SingletonResourcesRestOperations(_singletonResourceClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, singletonResourceApiVersion);
+            _singletonResourceRestClient = new SingletonResourcesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, singletonResourceApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -88,7 +88,7 @@ namespace SingletonResource
         /// Operation Id: SingletonResources_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _singletonResourceClientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace SingletonResource
             {
                 var response = await _singletonResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _singletonResourceClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SingletonResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace SingletonResource
             {
                 var response = _singletonResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _singletonResourceClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SingletonResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -139,7 +139,7 @@ namespace SingletonResource
         /// <param name="parameters"> The SingletonResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<SingletonResource>> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SingletonResource>> CreateOrUpdateAsync(bool waitForCompletion, SingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 

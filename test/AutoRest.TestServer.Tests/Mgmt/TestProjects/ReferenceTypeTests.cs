@@ -54,7 +54,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ReferenceTypesResourceData), ReferenceNamespace)]
         [TestCase(typeof(TrackedResource), ReferenceNamespace)]
         [TestCase(typeof(ReferenceTypesSku), ReferenceNamespace)]
-        [TestCase(typeof(SkuTier), ReferenceNamespace)]
+        [TestCase(typeof(ReferenceTypesSkuTier), ReferenceNamespace)]
         [TestCase(typeof(CreatedByType), ReferenceNamespace)]
         [TestCase(typeof(ResourceNon), ProjectNamespace)]
         [TestCase(typeof(PrivateLinkResourceData), ReferenceNamespace)]

@@ -39,7 +39,7 @@ namespace MgmtListMethods
         {
             _subParentWithNonResChClientDiagnostics = new ClientDiagnostics("MgmtListMethods", SubParentWithNonResCh.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(SubParentWithNonResCh.ResourceType, out string subParentWithNonResChApiVersion);
-            _subParentWithNonResChRestClient = new SubParentWithNonResChesRestOperations(_subParentWithNonResChClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentWithNonResChApiVersion);
+            _subParentWithNonResChRestClient = new SubParentWithNonResChesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, subParentWithNonResChApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,7 +62,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<SubParentWithNonResCh>> CreateOrUpdateAsync(bool waitForCompletion, string subParentWithNonResChName, SubParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SubParentWithNonResCh>> CreateOrUpdateAsync(bool waitForCompletion, string subParentWithNonResChName, SubParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -126,7 +126,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public async virtual Task<Response<SubParentWithNonResCh>> GetAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubParentWithNonResCh>> GetAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 
@@ -136,7 +136,7 @@ namespace MgmtListMethods
             {
                 var response = await _subParentWithNonResChRestClient.GetAsync(Id.SubscriptionId, subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _subParentWithNonResChClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParentWithNonResCh(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -165,7 +165,7 @@ namespace MgmtListMethods
             {
                 var response = _subParentWithNonResChRestClient.Get(Id.SubscriptionId, subParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
-                    throw _subParentWithNonResChClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubParentWithNonResCh(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -268,7 +268,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 
@@ -322,7 +322,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public async virtual Task<Response<SubParentWithNonResCh>> GetIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubParentWithNonResCh>> GetIfExistsAsync(string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subParentWithNonResChName, nameof(subParentWithNonResChName));
 

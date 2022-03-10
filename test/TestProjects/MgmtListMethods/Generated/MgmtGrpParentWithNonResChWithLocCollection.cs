@@ -39,7 +39,7 @@ namespace MgmtListMethods
         {
             _mgmtGrpParentWithNonResChWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", MgmtGrpParentWithNonResChWithLoc.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(MgmtGrpParentWithNonResChWithLoc.ResourceType, out string mgmtGrpParentWithNonResChWithLocApiVersion);
-            _mgmtGrpParentWithNonResChWithLocRestClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_mgmtGrpParentWithNonResChWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGrpParentWithNonResChWithLocApiVersion);
+            _mgmtGrpParentWithNonResChWithLocRestClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, mgmtGrpParentWithNonResChWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,7 +62,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<MgmtGrpParentWithNonResChWithLoc>> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<MgmtGrpParentWithNonResChWithLoc>> CreateOrUpdateAsync(bool waitForCompletion, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -126,7 +126,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
 
@@ -136,7 +136,7 @@ namespace MgmtListMethods
             {
                 var response = await _mgmtGrpParentWithNonResChWithLocRestClient.GetAsync(Id.Name, mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -165,7 +165,7 @@ namespace MgmtListMethods
             {
                 var response = _mgmtGrpParentWithNonResChWithLocRestClient.Get(Id.Name, mgmtGrpParentWithNonResChWithLocName, cancellationToken);
                 if (response.Value == null)
-                    throw _mgmtGrpParentWithNonResChWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new MgmtGrpParentWithNonResChWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -268,7 +268,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
 
@@ -322,7 +322,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetIfExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetIfExistsAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
 

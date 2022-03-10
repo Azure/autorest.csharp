@@ -39,7 +39,7 @@ namespace MgmtExtensionCommonRestOperation
         {
             _typeTwoCommonClientDiagnostics = new ClientDiagnostics("MgmtExtensionCommonRestOperation", TypeTwo.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(TypeTwo.ResourceType, out string typeTwoCommonApiVersion);
-            _typeTwoCommonRestClient = new CommonRestOperations(_typeTwoCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
+            _typeTwoCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeTwoCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,7 +62,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> or <paramref name="typeTwo"/> is null. </exception>
-        public async virtual Task<ArmOperation<TypeTwo>> CreateOrUpdateAsync(bool waitForCompletion, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<TypeTwo>> CreateOrUpdateAsync(bool waitForCompletion, string typeTwoName, TypeTwoData typeTwo, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
             Argument.AssertNotNull(typeTwo, nameof(typeTwo));
@@ -126,7 +126,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public async virtual Task<Response<TypeTwo>> GetAsync(string typeTwoName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TypeTwo>> GetAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
@@ -136,7 +136,7 @@ namespace MgmtExtensionCommonRestOperation
             {
                 var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _typeTwoCommonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -165,7 +165,7 @@ namespace MgmtExtensionCommonRestOperation
             {
                 var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken);
                 if (response.Value == null)
-                    throw _typeTwoCommonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeTwo(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -238,7 +238,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 
@@ -292,7 +292,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public async virtual Task<Response<TypeTwo>> GetIfExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TypeTwo>> GetIfExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
 

@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests
                 await content.Response.Body.FlushAsync();
             });
 
-            var client = new HeaderCollectionPrefixRestClient(ClientDiagnostics, HttpPipeline, testServer.Address);
+            var client = new HeaderCollectionPrefixRestClient(HttpPipeline, testServer.Address);
 
             var responseHeaders = await client.OperationAsync(new Dictionary<string, string>()
             {

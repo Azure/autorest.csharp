@@ -39,7 +39,7 @@ namespace MgmtOperations
         {
             _availabilitySetClientDiagnostics = new ClientDiagnostics("MgmtOperations", AvailabilitySet.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(AvailabilitySet.ResourceType, out string availabilitySetApiVersion);
-            _availabilitySetRestClient = new AvailabilitySetsRestOperations(_availabilitySetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetApiVersion);
+            _availabilitySetRestClient = new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, availabilitySetApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,7 +62,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<AvailabilitySet>> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<AvailabilitySet>> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -127,7 +127,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public async virtual Task<Response<AvailabilitySet>> GetAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AvailabilitySet>> GetAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
@@ -137,7 +137,7 @@ namespace MgmtOperations
             {
                 var response = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _availabilitySetClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -167,7 +167,7 @@ namespace MgmtOperations
             {
                 var response = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, availabilitySetName, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _availabilitySetClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySet(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -243,7 +243,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 
@@ -299,7 +299,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public async virtual Task<Response<AvailabilitySet>> GetIfExistsAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AvailabilitySet>> GetIfExistsAsync(string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetName, nameof(availabilitySetName));
 

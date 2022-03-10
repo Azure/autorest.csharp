@@ -39,7 +39,7 @@ namespace MgmtListMethods
         {
             _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType, out string resGrpParentWithAncestorWithNonResChWithLocApiVersion);
-            _resGrpParentWithAncestorWithNonResChWithLocRestClient = new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(_resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithNonResChWithLocApiVersion);
+            _resGrpParentWithAncestorWithNonResChWithLocRestClient = new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentWithAncestorWithNonResChWithLocApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,7 +62,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<ResGrpParentWithAncestorWithNonResChWithLoc>> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentWithAncestorWithNonResChWithLocName, ResGrpParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ResGrpParentWithAncestorWithNonResChWithLoc>> CreateOrUpdateAsync(bool waitForCompletion, string resGrpParentWithAncestorWithNonResChWithLocName, ResGrpParentWithAncestorWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -126,7 +126,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
@@ -136,7 +136,7 @@ namespace MgmtListMethods
             {
                 var response = await _resGrpParentWithAncestorWithNonResChWithLocRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -165,7 +165,7 @@ namespace MgmtListMethods
             {
                 var response = _resGrpParentWithAncestorWithNonResChWithLocRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
                 if (response.Value == null)
-                    throw _resGrpParentWithAncestorWithNonResChWithLocClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResGrpParentWithAncestorWithNonResChWithLoc(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -268,7 +268,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 
@@ -322,7 +322,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetIfExistsAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetIfExistsAsync(string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentWithAncestorWithNonResChWithLocName, nameof(resGrpParentWithAncestorWithNonResChWithLocName));
 

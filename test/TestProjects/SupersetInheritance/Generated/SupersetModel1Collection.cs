@@ -39,7 +39,7 @@ namespace SupersetInheritance
         {
             _supersetModel1ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel1.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(SupersetModel1.ResourceType, out string supersetModel1ApiVersion);
-            _supersetModel1RestClient = new SupersetModel1SRestOperations(_supersetModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel1ApiVersion);
+            _supersetModel1RestClient = new SupersetModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,7 +61,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<SupersetModel1>> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SupersetModel1>> CreateOrUpdateAsync(bool waitForCompletion, string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -123,7 +123,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
-        public async virtual Task<Response<SupersetModel1>> GetAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel1>> GetAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
@@ -133,7 +133,7 @@ namespace SupersetInheritance
             {
                 var response = await _supersetModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _supersetModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -161,7 +161,7 @@ namespace SupersetInheritance
             {
                 var response = _supersetModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel1SName, cancellationToken);
                 if (response.Value == null)
-                    throw _supersetModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -232,7 +232,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 
@@ -286,7 +286,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
-        public async virtual Task<Response<SupersetModel1>> GetIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel1>> GetIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel1SName, nameof(supersetModel1SName));
 

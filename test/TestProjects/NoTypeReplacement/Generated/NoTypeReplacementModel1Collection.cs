@@ -39,7 +39,7 @@ namespace NoTypeReplacement
         {
             _noTypeReplacementModel1ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", NoTypeReplacementModel1.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(NoTypeReplacementModel1.ResourceType, out string noTypeReplacementModel1ApiVersion);
-            _noTypeReplacementModel1RestClient = new NoTypeReplacementModel1SRestOperations(_noTypeReplacementModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel1ApiVersion);
+            _noTypeReplacementModel1RestClient = new NoTypeReplacementModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,7 +61,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<NoTypeReplacementModel1>> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel1SName, NoTypeReplacementModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<NoTypeReplacementModel1>> CreateOrUpdateAsync(bool waitForCompletion, string noTypeReplacementModel1SName, NoTypeReplacementModel1Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -123,7 +123,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
-        public async virtual Task<Response<NoTypeReplacementModel1>> GetAsync(string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NoTypeReplacementModel1>> GetAsync(string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
 
@@ -133,7 +133,7 @@ namespace NoTypeReplacement
             {
                 var response = await _noTypeReplacementModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _noTypeReplacementModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -161,7 +161,7 @@ namespace NoTypeReplacement
             {
                 var response = _noTypeReplacementModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel1SName, cancellationToken);
                 if (response.Value == null)
-                    throw _noTypeReplacementModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new NoTypeReplacementModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -232,7 +232,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
 
@@ -286,7 +286,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
-        public async virtual Task<Response<NoTypeReplacementModel1>> GetIfExistsAsync(string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NoTypeReplacementModel1>> GetIfExistsAsync(string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel1SName, nameof(noTypeReplacementModel1SName));
 

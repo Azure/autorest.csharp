@@ -21,23 +21,19 @@ namespace url
         private readonly Uri _endpoint;
         private readonly string _globalStringQuery;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of PathItemsRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="globalStringPath"> A string value &apos;globalItemStringPath&apos; that appears in the path. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="globalStringQuery"> should contain value null. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/> is null. </exception>
-        public PathItemsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, Uri endpoint = null, string globalStringQuery = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="globalStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="globalStringPath"/> is an empty string, and was expected to be non-empty. </exception>
+        public PathItemsRestClient(HttpPipeline pipeline, string globalStringPath, Uri endpoint = null, string globalStringQuery = null)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _globalStringPath = globalStringPath ?? throw new ArgumentNullException(nameof(globalStringPath));
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
             _globalStringQuery = globalStringQuery;
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery)
@@ -96,7 +92,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -125,7 +121,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -185,7 +181,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -214,7 +210,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -274,7 +270,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -303,7 +299,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -363,7 +359,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -392,7 +388,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

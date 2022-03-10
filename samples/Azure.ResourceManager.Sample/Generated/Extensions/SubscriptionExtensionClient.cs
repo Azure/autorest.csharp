@@ -57,27 +57,27 @@ namespace Azure.ResourceManager.Sample
         }
 
         private ClientDiagnostics AvailabilitySetClientDiagnostics => _availabilitySetClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", AvailabilitySet.ResourceType.Namespace, DiagnosticOptions);
-        private AvailabilitySetsRestOperations AvailabilitySetRestClient => _availabilitySetRestClient ??= new AvailabilitySetsRestOperations(AvailabilitySetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySet.ResourceType));
+        private AvailabilitySetsRestOperations AvailabilitySetRestClient => _availabilitySetRestClient ??= new AvailabilitySetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(AvailabilitySet.ResourceType));
         private ClientDiagnostics ProximityPlacementGroupClientDiagnostics => _proximityPlacementGroupClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProximityPlacementGroup.ResourceType.Namespace, DiagnosticOptions);
-        private ProximityPlacementGroupsRestOperations ProximityPlacementGroupRestClient => _proximityPlacementGroupRestClient ??= new ProximityPlacementGroupsRestOperations(ProximityPlacementGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ProximityPlacementGroup.ResourceType));
+        private ProximityPlacementGroupsRestOperations ProximityPlacementGroupRestClient => _proximityPlacementGroupRestClient ??= new ProximityPlacementGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ProximityPlacementGroup.ResourceType));
         private ClientDiagnostics DedicatedHostGroupClientDiagnostics => _dedicatedHostGroupClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", DedicatedHostGroup.ResourceType.Namespace, DiagnosticOptions);
-        private DedicatedHostGroupsRestOperations DedicatedHostGroupRestClient => _dedicatedHostGroupRestClient ??= new DedicatedHostGroupsRestOperations(DedicatedHostGroupClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DedicatedHostGroup.ResourceType));
+        private DedicatedHostGroupsRestOperations DedicatedHostGroupRestClient => _dedicatedHostGroupRestClient ??= new DedicatedHostGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(DedicatedHostGroup.ResourceType));
         private ClientDiagnostics SshPublicKeyClientDiagnostics => _sshPublicKeyClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", SshPublicKey.ResourceType.Namespace, DiagnosticOptions);
-        private SshPublicKeysRestOperations SshPublicKeyRestClient => _sshPublicKeyRestClient ??= new SshPublicKeysRestOperations(SshPublicKeyClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(SshPublicKey.ResourceType));
+        private SshPublicKeysRestOperations SshPublicKeyRestClient => _sshPublicKeyRestClient ??= new SshPublicKeysRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(SshPublicKey.ResourceType));
         private ClientDiagnostics VirtualMachineImagesClientDiagnostics => _virtualMachineImagesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private VirtualMachineImagesRestOperations VirtualMachineImagesRestClient => _virtualMachineImagesRestClient ??= new VirtualMachineImagesRestOperations(VirtualMachineImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private VirtualMachineImagesRestOperations VirtualMachineImagesRestClient => _virtualMachineImagesRestClient ??= new VirtualMachineImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics UsageClientDiagnostics => _usageClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private UsageRestOperations UsageRestClient => _usageRestClient ??= new UsageRestOperations(UsageClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private UsageRestOperations UsageRestClient => _usageRestClient ??= new UsageRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics VirtualMachineClientDiagnostics => _virtualMachineClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachine.ResourceType.Namespace, DiagnosticOptions);
-        private VirtualMachinesRestOperations VirtualMachineRestClient => _virtualMachineRestClient ??= new VirtualMachinesRestOperations(VirtualMachineClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(VirtualMachine.ResourceType));
+        private VirtualMachinesRestOperations VirtualMachineRestClient => _virtualMachineRestClient ??= new VirtualMachinesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(VirtualMachine.ResourceType));
         private ClientDiagnostics VirtualMachineSizesClientDiagnostics => _virtualMachineSizesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private VirtualMachineSizesRestOperations VirtualMachineSizesRestClient => _virtualMachineSizesRestClient ??= new VirtualMachineSizesRestOperations(VirtualMachineSizesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private VirtualMachineSizesRestOperations VirtualMachineSizesRestClient => _virtualMachineSizesRestClient ??= new VirtualMachineSizesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics ImageClientDiagnostics => _imageClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", Image.ResourceType.Namespace, DiagnosticOptions);
-        private ImagesRestOperations ImageRestClient => _imageRestClient ??= new ImagesRestOperations(ImageClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Image.ResourceType));
+        private ImagesRestOperations ImageRestClient => _imageRestClient ??= new ImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Image.ResourceType));
         private ClientDiagnostics VirtualMachineScaleSetClientDiagnostics => _virtualMachineScaleSetClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineScaleSet.ResourceType.Namespace, DiagnosticOptions);
-        private VirtualMachineScaleSetsRestOperations VirtualMachineScaleSetRestClient => _virtualMachineScaleSetRestClient ??= new VirtualMachineScaleSetsRestOperations(VirtualMachineScaleSetClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(VirtualMachineScaleSet.ResourceType));
+        private VirtualMachineScaleSetsRestOperations VirtualMachineScaleSetRestClient => _virtualMachineScaleSetRestClient ??= new VirtualMachineScaleSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(VirtualMachineScaleSet.ResourceType));
         private ClientDiagnostics LogAnalyticsClientDiagnostics => _logAnalyticsClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private LogAnalyticsRestOperations LogAnalyticsRestClient => _logAnalyticsRestClient ??= new LogAnalyticsRestOperations(LogAnalyticsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private LogAnalyticsRestOperations LogAnalyticsRestClient => _logAnalyticsRestClient ??= new LogAnalyticsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -443,7 +443,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="skus"> A valid image SKU. </param>
         /// <param name="version"> A valid image SKU version. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
             using var scope = VirtualMachineImagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetVirtualMachineImage");
             scope.Start();
@@ -1219,7 +1219,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionExtensionClient.ExportRequestRateByIntervalLogAnalytic");
             scope.Start();
@@ -1275,7 +1275,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("SubscriptionExtensionClient.ExportThrottledRequestsLogAnalytic");
             scope.Start();
