@@ -8,6 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtSignalR;
@@ -25,7 +28,7 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Get()
+        public async Task Get()
         {
             // Example: SignalR_Get
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
@@ -35,22 +38,22 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Delete()
+        public async Task Delete()
         {
             // Example: SignalR_Delete
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
             var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
 
-            await signalRResource.DeleteAsync(true);
+            await signalRResource.DeleteAsync(WaitUntil.Completed);
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Update()
+        public async Task Update()
         {
             // Example: SignalR_Update
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
             var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
-            MgmtSignalR.SignalRResourceData parameters = new MgmtSignalR.SignalRResourceData(location: "eastus")
+            MgmtSignalR.SignalRResourceData data = new MgmtSignalR.SignalRResourceData(location: new AzureLocation("eastus"))
             {
                 Sku = new MgmtSignalR.Models.ResourceSku(name: "Standard_S1")
                 {
@@ -60,7 +63,7 @@ namespace MgmtSignalR.Tests.Mock
                 Kind = new MgmtSignalR.Models.ServiceKind("SignalR"),
                 Identity = new MgmtSignalR.Models.ManagedIdentity()
                 {
-                    Type = new MgmtSignalR.Models.ManagedIdentityType("SystemAssigned"),
+                    ManagedIdentityType = new MgmtSignalR.Models.ManagedIdentityType("SystemAssigned"),
                 },
                 NetworkACLs = new MgmtSignalR.Models.SignalRNetworkACLs()
                 {
@@ -68,22 +71,22 @@ namespace MgmtSignalR.Tests.Mock
                     PublicNetwork = new MgmtSignalR.Models.NetworkACL(),
                 },
             };
-            parameters.NetworkACLs.PublicNetwork.Allow.Add(new MgmtSignalR.Models.SignalRRequestType("ClientConnection"));
-            parameters.NetworkACLs.PrivateEndpoints.Add(new MgmtSignalR.Models.PrivateEndpointACL(name: "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e"));
-            parameters.Tags.ReplaceWith(new Dictionary<string, string>()
+            data.NetworkACLs.PublicNetwork.Allow.Add(new MgmtSignalR.Models.SignalRRequestType("ClientConnection"));
+            data.NetworkACLs.PrivateEndpoints.Add(new MgmtSignalR.Models.PrivateEndpointACL(name: "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e"));
+            data.Tags.ReplaceWith(new Dictionary<string, string>()
             {
                 ["key1"] = "value1",
             });
-            parameters.Features.Add(new MgmtSignalR.Models.SignalRFeature(flag: new MgmtSignalR.Models.FeatureFlags("ServiceMode"), value: "Serverless"));
-            parameters.Features.Add(new MgmtSignalR.Models.SignalRFeature(flag: new MgmtSignalR.Models.FeatureFlags("EnableConnectivityLogs"), value: "True"));
-            parameters.Features.Add(new MgmtSignalR.Models.SignalRFeature(flag: new MgmtSignalR.Models.FeatureFlags("EnableMessagingLogs"), value: "False"));
-            parameters.NetworkACLs.PrivateEndpoints[0].Allow.Add(new MgmtSignalR.Models.SignalRRequestType("ServerConnection"));
+            data.Features.Add(new MgmtSignalR.Models.SignalRFeature(flag: new MgmtSignalR.Models.FeatureFlags("ServiceMode"), value: "Serverless"));
+            data.Features.Add(new MgmtSignalR.Models.SignalRFeature(flag: new MgmtSignalR.Models.FeatureFlags("EnableConnectivityLogs"), value: "True"));
+            data.Features.Add(new MgmtSignalR.Models.SignalRFeature(flag: new MgmtSignalR.Models.FeatureFlags("EnableMessagingLogs"), value: "False"));
+            data.NetworkACLs.PrivateEndpoints[0].Allow.Add(new MgmtSignalR.Models.SignalRRequestType("ServerConnection"));
 
-            await signalRResource.UpdateAsync(true, parameters);
+            await signalRResource.UpdateAsync(WaitUntil.Completed, data);
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task GetKeys()
+        public async Task GetKeys()
         {
             // Example: SignalR_ListKeys
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
@@ -93,31 +96,31 @@ namespace MgmtSignalR.Tests.Mock
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task RegenerateKey()
+        public async Task RegenerateKey()
         {
             // Example: SignalR_RegenerateKey
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
             var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
-            MgmtSignalR.Models.RegenerateKeyParameters parameters = new MgmtSignalR.Models.RegenerateKeyParameters()
+            MgmtSignalR.Models.RegenerateKeyParameters regenerateKeyParameters = new MgmtSignalR.Models.RegenerateKeyParameters()
             {
                 KeyType = new MgmtSignalR.Models.KeyType("Primary"),
             };
 
-            await signalRResource.RegenerateKeyAsync(true, parameters);
+            await signalRResource.RegenerateKeyAsync(WaitUntil.Completed, regenerateKeyParameters);
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task Restart()
+        public async Task Restart()
         {
             // Example: SignalR_Restart
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
             var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
 
-            await signalRResource.RestartAsync(true);
+            await signalRResource.RestartAsync(WaitUntil.Completed);
         }
 
         [RecordedTest]
-        public async System.Threading.Tasks.Task GetSignalRPrivateLinkResources()
+        public async Task GetSignalRPrivateLinkResources()
         {
             // Example: SignalRPrivateLinkResources_List
             var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "myResourceGroup", "mySignalRService");
