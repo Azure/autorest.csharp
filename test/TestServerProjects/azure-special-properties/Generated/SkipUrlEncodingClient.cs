@@ -32,7 +32,7 @@ namespace azure_special_properties
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal SkipUrlEncodingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new SkipUrlEncodingRestClient(pipeline, endpoint);
+            RestClient = new SkipUrlEncodingRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

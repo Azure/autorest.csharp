@@ -33,7 +33,7 @@ namespace multiple_inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal MultipleInheritanceServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new MultipleInheritanceServiceRestClient(pipeline, endpoint);
+            RestClient = new MultipleInheritanceServiceRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

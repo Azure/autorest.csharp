@@ -34,7 +34,7 @@ namespace Azure.Storage.Tables
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="url"/> is null. </exception>
         internal ServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, Enum0 version)
         {
-            RestClient = new ServiceRestClient(pipeline, url, version);
+            RestClient = new ServiceRestClient(clientDiagnostics, pipeline, url, version);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

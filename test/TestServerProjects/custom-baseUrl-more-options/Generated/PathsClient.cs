@@ -34,7 +34,7 @@ namespace custom_baseUrl_more_options
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         internal PathsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
         {
-            RestClient = new PathsRestClient(pipeline, subscriptionId, dnsSuffix);
+            RestClient = new PathsRestClient(clientDiagnostics, pipeline, subscriptionId, dnsSuffix);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
