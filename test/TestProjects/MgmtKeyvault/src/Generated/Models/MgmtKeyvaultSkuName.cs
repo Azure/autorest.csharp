@@ -8,7 +8,7 @@
 namespace MgmtKeyvault.Models
 {
     /// <summary> SKU name to specify whether the key vault is a standard vault or a premium vault. </summary>
-    public enum SkuName
+    public enum MgmtKeyvaultSkuName
     {
         /// <summary> standard. </summary>
         Standard,

@@ -39,7 +39,7 @@ namespace MgmtSafeFlatten
         {
             _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", TypeOne.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
-            _typeOneCommonRestClient = new CommonRestOperations(_typeOneCommonClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
+            _typeOneCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -56,13 +56,13 @@ namespace MgmtSafeFlatten
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_CreateOrUpdateTypeOne
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="typeOne"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
-        public async virtual Task<ArmOperation<TypeOne>> CreateOrUpdateAsync(bool waitForCompletion, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<TypeOne>> CreateOrUpdateAsync(WaitUntil waitUntil, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
             Argument.AssertNotNull(typeOne, nameof(typeOne));
@@ -73,7 +73,7 @@ namespace MgmtSafeFlatten
             {
                 var response = await _typeOneCommonRestClient.CreateOrUpdateTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtSafeFlattenArmOperation<TypeOne>(Response.FromValue(new TypeOne(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -89,13 +89,13 @@ namespace MgmtSafeFlatten
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}
         /// Operation Id: Common_CreateOrUpdateTypeOne
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="typeOne"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
-        public virtual ArmOperation<TypeOne> CreateOrUpdate(bool waitForCompletion, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TypeOne> CreateOrUpdate(WaitUntil waitUntil, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
             Argument.AssertNotNull(typeOne, nameof(typeOne));
@@ -106,7 +106,7 @@ namespace MgmtSafeFlatten
             {
                 var response = _typeOneCommonRestClient.CreateOrUpdateTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken);
                 var operation = new MgmtSafeFlattenArmOperation<TypeOne>(Response.FromValue(new TypeOne(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }
@@ -126,7 +126,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public async virtual Task<Response<TypeOne>> GetAsync(string typeOneName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TypeOne>> GetAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
@@ -136,7 +136,7 @@ namespace MgmtSafeFlatten
             {
                 var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _typeOneCommonClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -165,7 +165,7 @@ namespace MgmtSafeFlatten
             {
                 var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken);
                 if (response.Value == null)
-                    throw _typeOneCommonClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -238,7 +238,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
@@ -292,7 +292,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public async virtual Task<Response<TypeOne>> GetIfExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TypeOne>> GetIfExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 

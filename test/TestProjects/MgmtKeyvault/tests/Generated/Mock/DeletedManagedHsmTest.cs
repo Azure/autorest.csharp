@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
@@ -41,7 +43,7 @@ namespace MgmtKeyvault.Tests.Mock
             var deletedManagedHsmId = MgmtKeyvault.DeletedManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "westus", "hsm1");
             var deletedManagedHsm = GetArmClient().GetDeletedManagedHsm(deletedManagedHsmId);
 
-            await deletedManagedHsm.PurgeDeletedAsync(true);
+            await deletedManagedHsm.PurgeDeletedAsync(WaitUntil.Completed);
         }
     }
 }

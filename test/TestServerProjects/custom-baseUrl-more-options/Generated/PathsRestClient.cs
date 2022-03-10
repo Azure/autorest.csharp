@@ -20,21 +20,17 @@ namespace custom_baseUrl_more_options
         private readonly string _subscriptionId;
         private readonly string _dnsSuffix;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of PathsRestClient. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
         /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="dnsSuffix"/> is null. </exception>
-        public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="dnsSuffix"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        public PathsRestClient(HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
             _dnsSuffix = dnsSuffix ?? throw new ArgumentNullException(nameof(dnsSuffix));
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion)
@@ -88,7 +84,7 @@ namespace custom_baseUrl_more_options
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -121,7 +117,7 @@ namespace custom_baseUrl_more_options
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

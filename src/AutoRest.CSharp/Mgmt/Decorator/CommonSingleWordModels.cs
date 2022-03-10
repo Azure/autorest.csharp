@@ -17,9 +17,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static readonly HashSet<string> _schemasToChange = new HashSet<string>()
         {
             "Sku",
+            "SkuName",
+            "SkuTier",
+            "SkuFamily",
+            "SkuInformation",
             "Plan",
             "Usage",
-            "Resource"
+            "Resource",
+            "Kind"
         };
 
         public static void Update(IEnumerable<Schema> allSchemas)

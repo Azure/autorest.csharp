@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Threading;
+using AutoRest.CSharp.Output.Models.Shared;
 using MgmtOperations.Models;
 using NUnit.Framework;
 
@@ -21,9 +22,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var param1 = TypeAsserts.HasParameter(method, "parameters");
             Assert.AreEqual(typeof(ConnectionSharedKey), param1.ParameterType);
             Assert.False(param1.IsOptional);
-            var param2 = TypeAsserts.HasParameter(method, "waitForCompletion");
+            var param2 = TypeAsserts.HasParameter(method, KnownParameters.WaitForCompletion.Name);
             Assert.AreEqual(typeof(bool), param2.ParameterType);
-            var param3 = TypeAsserts.HasParameter(method, "cancellationToken");
+            var param3 = TypeAsserts.HasParameter(method, KnownParameters.CancellationTokenParameter.Name);
             Assert.AreEqual(typeof(CancellationToken), param3.ParameterType);
         }
 

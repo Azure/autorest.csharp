@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var constructor = sot.Constructors[0];
             foreach (var c in sot.Constructors)
             {
-                if (c.Signature.Parameters.Length < constructor.Signature.Parameters.Length)
+                if (c.Signature.Parameters.Count < constructor.Signature.Parameters.Count)
                     constructor = c;
             }
 
@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 }
                 if (!missAnyRequiredParameter)
                 {
-                    if (c.Signature.Parameters.Length > constructor.Signature.Parameters.Length)
+                    if (c.Signature.Parameters.Count > constructor.Signature.Parameters.Count)
                         constructor = c;
                 }
             }
@@ -579,7 +579,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             var parameterValues = new List<KeyValuePair<string, FormattableString>>();
             foreach (var passThruParameter in methodParameters)
             {
-                if (passThruParameter.Name == MgmtClientOperation.WaitForCompletionParameter.Name ||
+                if (passThruParameter.Name == KnownParameters.WaitForCompletion.Name ||
                     passThruParameter.Name == MgmtClientBaseWriter.CancellationTokenParameter.Name)
                     continue;
                 FormattableString? paramName = null;
@@ -742,7 +742,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             _writer.Append($"{GetAwait(async)}");
             if (isLroOperation || clientOperation.IsLongRunningOperation && !clientOperation.IsPagingOperation) {
-                paramNames = new List<FormattableString>().Append<FormattableString>($"true").Concat(paramNames);   // assign  waitForCompletion = true
+                paramNames = new List<FormattableString>().Append<FormattableString>($"WaitUntil.Completed").Concat(paramNames);   // assign  waitUntil = WaitUntil.Completed
             }
 
             if (clientOperation.IsPagingOperation)

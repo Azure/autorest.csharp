@@ -14,6 +14,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
@@ -148,9 +149,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                     Assert.NotNull(method, $"{generatedResourceType.Name} does not implement the {methodName} method.");
 
                     Assert.GreaterOrEqual(method.GetParameters().Length, 2);
-                    var param1 = TypeAsserts.HasParameter(method, "waitForCompletion");
+                    var param1 = TypeAsserts.HasParameter(method, KnownParameters.WaitForCompletion.Name);
                     Assert.AreEqual(typeof(bool), param1.ParameterType);
-                    var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
+                    var param2 = TypeAsserts.HasParameter(method, KnownParameters.CancellationTokenParameter.Name);
                     Assert.AreEqual(typeof(CancellationToken), param2.ParameterType);
                 }
             }

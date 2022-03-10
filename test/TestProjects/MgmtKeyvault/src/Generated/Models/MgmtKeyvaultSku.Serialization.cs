@@ -24,18 +24,18 @@ namespace MgmtKeyvault.Models
 
         internal static MgmtKeyvaultSku DeserializeMgmtKeyvaultSku(JsonElement element)
         {
-            SkuFamily family = default;
-            SkuName name = default;
+            MgmtKeyvaultSkuFamily family = default;
+            MgmtKeyvaultSkuName name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("family"))
                 {
-                    family = new SkuFamily(property.Value.GetString());
+                    family = new MgmtKeyvaultSkuFamily(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
                 {
-                    name = property.Value.GetString().ToSkuName();
+                    name = property.Value.GetString().ToMgmtKeyvaultSkuName();
                     continue;
                 }
             }

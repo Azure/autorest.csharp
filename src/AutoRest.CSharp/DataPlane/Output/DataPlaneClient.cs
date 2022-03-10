@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
         {
-            return RestClientBuilder.GetConstructorParameters(RestClient.Parameters, credentialType, false);
+            return RestClientBuilder.GetConstructorParameters(RestClient.ClientBuilder.GetOrderedParametersByRequired(), credentialType, false);
         }
     }
 }
