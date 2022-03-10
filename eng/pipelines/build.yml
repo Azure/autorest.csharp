@@ -137,7 +137,12 @@ stages:
           #     start /B pwsh eng\scripts\Launch-MockServiceHost.ps1
           #   displayName: "Launch-MockServiceHost"
           #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - pwsh: ./eng/InitMockTests.ps1
+          # - pwsh: ./eng/InitMockTests.ps1
+          #   displayName: "Generate All SDK"
+          #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              start /B pwsh eng\scripts\Launch-MockServiceHost.ps1
+              pwsh ./eng/InitMockTests.ps1
             displayName: "Generate All SDK"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: smoke-test.yml
