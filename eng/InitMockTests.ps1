@@ -381,7 +381,7 @@ function  MockTestInit {
 # Launch Mock-service-host
 $LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
 $task1 = { & $LaunchScript }
-Invoke-Command  -ScriptBlock $task1
+# Invoke-Command  -ScriptBlock $task1
         
 # Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
