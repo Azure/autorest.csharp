@@ -100,7 +100,7 @@ namespace TenantOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
-        public async virtual Task<Response<Agreement>> GetAgreementAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Agreement>> GetAgreementAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await GetAgreements().GetAsync(agreementName, expand, cancellationToken).ConfigureAwait(false);
         }

@@ -43,7 +43,7 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async static Task<Response<SshPublicKeyInfo>> GetSshPublicKeyInfoAsync(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SshPublicKeyInfo>> GetSshPublicKeyInfoAsync(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetSshPublicKeyInfos().GetAsync(sshPublicKeyName, cancellationToken).ConfigureAwait(false);
         }

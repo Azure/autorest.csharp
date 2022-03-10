@@ -45,7 +45,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public async static Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
         {
             return await tenant.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
@@ -86,7 +86,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public async static Task<Response<ResourceLink>> GetResourceLinkAsync(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResourceLink>> GetResourceLinkAsync(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
         {
             return await GetResourceLinks(tenant, scope).GetAsync(cancellationToken).ConfigureAwait(false);
         }

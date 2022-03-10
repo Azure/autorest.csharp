@@ -44,7 +44,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public async static Task<Response<Fake>> GetFakeAsync(this ResourceGroup resourceGroup, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<Fake>> GetFakeAsync(this ResourceGroup resourceGroup, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -83,7 +83,7 @@ namespace MgmtLRO
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
-        public async static Task<Response<Bar>> GetBarAsync(this ResourceGroup resourceGroup, string barName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Bar>> GetBarAsync(this ResourceGroup resourceGroup, string barName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
         }

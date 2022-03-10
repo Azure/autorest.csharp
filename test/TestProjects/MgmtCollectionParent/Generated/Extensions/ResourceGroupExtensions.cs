@@ -44,7 +44,7 @@ namespace MgmtCollectionParent
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
-        public async static Task<Response<OrderResource>> GetOrderResourceAsync(this ResourceGroup resourceGroup, string location, string orderName, CancellationToken cancellationToken = default)
+        public static async Task<Response<OrderResource>> GetOrderResourceAsync(this ResourceGroup resourceGroup, string location, string orderName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetOrderResources().GetAsync(location, orderName, cancellationToken).ConfigureAwait(false);
         }

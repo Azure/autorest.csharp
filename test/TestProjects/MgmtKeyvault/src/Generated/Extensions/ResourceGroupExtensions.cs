@@ -43,7 +43,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
-        public async static Task<Response<Vault>> GetVaultAsync(this ResourceGroup resourceGroup, string vaultName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Vault>> GetVaultAsync(this ResourceGroup resourceGroup, string vaultName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetVaults().GetAsync(vaultName, cancellationToken).ConfigureAwait(false);
         }
@@ -81,7 +81,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<ManagedHsm>> GetManagedHsmAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<ManagedHsm>> GetManagedHsmAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetManagedHsms().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }

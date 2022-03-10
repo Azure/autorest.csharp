@@ -43,7 +43,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChWithLocName"/> is null. </exception>
-        public async static Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetResGrpParentWithAncestorWithNonResChWithLocAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithNonResChWithLoc>> GetResGrpParentWithAncestorWithNonResChWithLocAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetResGrpParentWithAncestorWithNonResChWithLocs().GetAsync(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
@@ -81,7 +81,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithNonResChName"/> is null. </exception>
-        public async static Task<Response<ResGrpParentWithAncestorWithNonResCh>> GetResGrpParentWithAncestorWithNonResChAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithNonResCh>> GetResGrpParentWithAncestorWithNonResChAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetResGrpParentWithAncestorWithNonResChes().GetAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
@@ -119,7 +119,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorWithLocName"/> is null. </exception>
-        public async static Task<Response<ResGrpParentWithAncestorWithLoc>> GetResGrpParentWithAncestorWithLocAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestorWithLoc>> GetResGrpParentWithAncestorWithLocAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetResGrpParentWithAncestorWithLocs().GetAsync(resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
         }
@@ -157,7 +157,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithAncestorName"/> is null. </exception>
-        public async static Task<Response<ResGrpParentWithAncestor>> GetResGrpParentWithAncestorAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithAncestor>> GetResGrpParentWithAncestorAsync(this ResourceGroup resourceGroup, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetResGrpParentWithAncestors().GetAsync(resGrpParentWithAncestorName, cancellationToken).ConfigureAwait(false);
         }
@@ -195,7 +195,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentWithNonResChName"/> is null. </exception>
-        public async static Task<Response<ResGrpParentWithNonResCh>> GetResGrpParentWithNonResChAsync(this ResourceGroup resourceGroup, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParentWithNonResCh>> GetResGrpParentWithNonResChAsync(this ResourceGroup resourceGroup, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetResGrpParentWithNonResChes().GetAsync(resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
@@ -233,7 +233,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public async static Task<Response<ResGrpParent>> GetResGrpParentAsync(this ResourceGroup resourceGroup, string resGrpParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResGrpParent>> GetResGrpParentAsync(this ResourceGroup resourceGroup, string resGrpParentName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetResGrpParents().GetAsync(resGrpParentName, cancellationToken).ConfigureAwait(false);
         }

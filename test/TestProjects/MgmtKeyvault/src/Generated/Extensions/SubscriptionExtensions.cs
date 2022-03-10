@@ -46,7 +46,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
-        public async static Task<Response<DeletedVault>> GetDeletedVaultAsync(this Subscription subscription, string location, string vaultName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeletedVault>> GetDeletedVaultAsync(this Subscription subscription, string location, string vaultName, CancellationToken cancellationToken = default)
         {
             return await subscription.GetDeletedVaults().GetAsync(location, vaultName, cancellationToken).ConfigureAwait(false);
         }
@@ -86,7 +86,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
-        public async static Task<Response<DeletedManagedHsm>> GetDeletedManagedHsmAsync(this Subscription subscription, string location, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeletedManagedHsm>> GetDeletedManagedHsmAsync(this Subscription subscription, string location, string name, CancellationToken cancellationToken = default)
         {
             return await subscription.GetDeletedManagedHsms().GetAsync(location, name, cancellationToken).ConfigureAwait(false);
         }

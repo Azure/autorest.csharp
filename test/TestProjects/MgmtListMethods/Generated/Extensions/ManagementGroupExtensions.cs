@@ -43,7 +43,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public async static Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetMgmtGrpParentWithNonResChWithLocAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetMgmtGrpParentWithNonResChWithLocAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             return await managementGroup.GetMgmtGrpParentWithNonResChWithLocs().GetAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
@@ -81,7 +81,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
-        public async static Task<Response<MgmtGrpParentWithNonResCh>> GetMgmtGrpParentWithNonResChAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithNonResCh>> GetMgmtGrpParentWithNonResChAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             return await managementGroup.GetMgmtGrpParentWithNonResChes().GetAsync(mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
@@ -119,7 +119,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
-        public async static Task<Response<MgmtGrpParentWithLoc>> GetMgmtGrpParentWithLocAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithLoc>> GetMgmtGrpParentWithLocAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
             return await managementGroup.GetMgmtGrpParentWithLocs().GetAsync(mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
@@ -157,7 +157,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public async static Task<Response<MgmtGroupParent>> GetMgmtGroupParentAsync(this ManagementGroup managementGroup, string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGroupParent>> GetMgmtGroupParentAsync(this ManagementGroup managementGroup, string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
             return await managementGroup.GetMgmtGroupParents().GetAsync(mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
         }

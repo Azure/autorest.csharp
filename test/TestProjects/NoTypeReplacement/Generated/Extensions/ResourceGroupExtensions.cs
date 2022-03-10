@@ -42,7 +42,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
-        public async static Task<Response<NoTypeReplacementModel1>> GetNoTypeReplacementModel1Async(this ResourceGroup resourceGroup, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NoTypeReplacementModel1>> GetNoTypeReplacementModel1Async(this ResourceGroup resourceGroup, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetNoTypeReplacementModel1s().GetAsync(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
         }
@@ -78,7 +78,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public async static Task<Response<NoTypeReplacementModel2>> GetNoTypeReplacementModel2Async(this ResourceGroup resourceGroup, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NoTypeReplacementModel2>> GetNoTypeReplacementModel2Async(this ResourceGroup resourceGroup, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetNoTypeReplacementModel2s().GetAsync(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
         }
@@ -114,7 +114,7 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
-        public async static Task<Response<NoTypeReplacementModel3>> GetNoTypeReplacementModel3Async(this ResourceGroup resourceGroup, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NoTypeReplacementModel3>> GetNoTypeReplacementModel3Async(this ResourceGroup resourceGroup, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetNoTypeReplacementModel3s().GetAsync(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
         }

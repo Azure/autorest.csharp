@@ -43,7 +43,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public async static Task<Response<TypeOne>> GetTypeOneAsync(this ResourceGroup resourceGroup, string typeOneName, CancellationToken cancellationToken = default)
+        public static async Task<Response<TypeOne>> GetTypeOneAsync(this ResourceGroup resourceGroup, string typeOneName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetTypeOnes().GetAsync(typeOneName, cancellationToken).ConfigureAwait(false);
         }
@@ -81,7 +81,7 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
-        public async static Task<Response<TypeTwo>> GetTypeTwoAsync(this ResourceGroup resourceGroup, string typeTwoName, CancellationToken cancellationToken = default)
+        public static async Task<Response<TypeTwo>> GetTypeTwoAsync(this ResourceGroup resourceGroup, string typeTwoName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetTypeTwos().GetAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
         }

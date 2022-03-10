@@ -44,7 +44,7 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
-        public async static Task<Response<Model2>> GetModel2Async(this ResourceGroup resourceGroup, string model2SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Model2>> GetModel2Async(this ResourceGroup resourceGroup, string model2SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetModel2s().GetAsync(model2SName, cancellationToken).ConfigureAwait(false);
         }

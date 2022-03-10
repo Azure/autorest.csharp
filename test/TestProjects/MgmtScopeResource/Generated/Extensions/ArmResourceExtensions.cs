@@ -43,7 +43,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        public async static Task<Response<FakePolicyAssignment>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakePolicyAssignment>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             return await armResource.GetFakePolicyAssignments().GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }

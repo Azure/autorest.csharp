@@ -46,7 +46,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public async static Task<Response<Fake>> GetFakeAsync(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<Fake>> GetFakeAsync(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await subscription.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -85,7 +85,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
-        public async static Task<Response<SubParentWithNonResChWithLoc>> GetSubParentWithNonResChWithLocAsync(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithNonResChWithLoc>> GetSubParentWithNonResChWithLocAsync(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             return await subscription.GetSubParentWithNonResChWithLocs().GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
@@ -123,7 +123,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public async static Task<Response<SubParentWithNonResCh>> GetSubParentWithNonResChAsync(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithNonResCh>> GetSubParentWithNonResChAsync(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             return await subscription.GetSubParentWithNonResChes().GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
@@ -161,7 +161,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
-        public async static Task<Response<SubParentWithLoc>> GetSubParentWithLocAsync(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithLoc>> GetSubParentWithLocAsync(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
             return await subscription.GetSubParentWithLocs().GetAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
@@ -199,7 +199,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
-        public async static Task<Response<SubParent>> GetSubParentAsync(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParent>> GetSubParentAsync(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
         {
             return await subscription.GetSubParents().GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
         }

@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="vmssExtensionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
-        public async virtual Task<Response<VirtualMachineScaleSetExtension>> GetVirtualMachineScaleSetExtensionAsync(string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineScaleSetExtension>> GetVirtualMachineScaleSetExtensionAsync(string vmssExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await GetVirtualMachineScaleSetExtensions().GetAsync(vmssExtensionName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -149,7 +149,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
-        public async virtual Task<Response<VirtualMachineScaleSetVM>> GetVirtualMachineScaleSetVMAsync(string instanceId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineScaleSetVM>> GetVirtualMachineScaleSetVMAsync(string instanceId, CancellationToken cancellationToken = default)
         {
             return await GetVirtualMachineScaleSetVMs().GetAsync(instanceId, cancellationToken).ConfigureAwait(false);
         }

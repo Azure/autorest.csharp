@@ -99,7 +99,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
-        public async virtual Task<Response<TenantParentWithNonResChWithLoc>> GetTenantParentWithNonResChWithLocAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TenantParentWithNonResChWithLoc>> GetTenantParentWithNonResChWithLocAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             return await GetTenantParentWithNonResChWithLocs().GetAsync(tenantParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
@@ -134,7 +134,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
-        public async virtual Task<Response<TenantParentWithNonResCh>> GetTenantParentWithNonResChAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TenantParentWithNonResCh>> GetTenantParentWithNonResChAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             return await GetTenantParentWithNonResChes().GetAsync(tenantParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
@@ -169,7 +169,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
-        public async virtual Task<Response<TenantParentWithLoc>> GetTenantParentWithLocAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TenantParentWithLoc>> GetTenantParentWithLocAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             return await GetTenantParentWithLocs().GetAsync(tenantParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
@@ -204,7 +204,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
-        public async virtual Task<Response<TenantParent>> GetTenantParentAsync(string tenantParentName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TenantParent>> GetTenantParentAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
             return await GetTenantParents().GetAsync(tenantParentName, cancellationToken).ConfigureAwait(false);
         }

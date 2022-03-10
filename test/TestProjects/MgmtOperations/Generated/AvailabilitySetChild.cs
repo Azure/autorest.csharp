@@ -99,7 +99,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
-        public async virtual Task<Response<AvailabilitySetGrandChild>> GetAvailabilitySetGrandChildAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AvailabilitySetGrandChild>> GetAvailabilitySetGrandChildAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
             return await GetAvailabilitySetGrandChildren().GetAsync(availabilitySetGrandChildName, cancellationToken).ConfigureAwait(false);
         }

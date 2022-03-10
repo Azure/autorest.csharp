@@ -42,7 +42,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<PageSizeIntegerModel>> GetPageSizeIntegerModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<PageSizeIntegerModel>> GetPageSizeIntegerModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetPageSizeIntegerModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -78,7 +78,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<PageSizeInt64Model>> GetPageSizeInt64ModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<PageSizeInt64Model>> GetPageSizeInt64ModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetPageSizeInt64Models().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -114,7 +114,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<PageSizeInt32Model>> GetPageSizeInt32ModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<PageSizeInt32Model>> GetPageSizeInt32ModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetPageSizeInt32Models().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -150,7 +150,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<PageSizeNumericModel>> GetPageSizeNumericModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<PageSizeNumericModel>> GetPageSizeNumericModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetPageSizeNumericModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -186,7 +186,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<PageSizeFloatModel>> GetPageSizeFloatModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<PageSizeFloatModel>> GetPageSizeFloatModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetPageSizeFloatModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -222,7 +222,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<PageSizeDoubleModel>> GetPageSizeDoubleModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<PageSizeDoubleModel>> GetPageSizeDoubleModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetPageSizeDoubleModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -258,7 +258,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<PageSizeDecimalModel>> GetPageSizeDecimalModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<PageSizeDecimalModel>> GetPageSizeDecimalModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetPageSizeDecimalModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -294,7 +294,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<PageSizeStringModel>> GetPageSizeStringModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<PageSizeStringModel>> GetPageSizeStringModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetPageSizeStringModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }

@@ -50,7 +50,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
-        public async static Task<Response<SharedGallery>> GetSharedGalleryAsync(this Subscription subscription, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SharedGallery>> GetSharedGalleryAsync(this Subscription subscription, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             return await subscription.GetSharedGalleries(location).GetAsync(galleryUniqueName, cancellationToken).ConfigureAwait(false);
         }

@@ -42,7 +42,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async static Task<Response<Fake>> GetFakeAsync(this ResourceGroup resourceGroup, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<Fake>> GetFakeAsync(this ResourceGroup resourceGroup, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -77,7 +77,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async static Task<Response<Bar>> GetBarAsync(this ResourceGroup resourceGroup, int barName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Bar>> GetBarAsync(this ResourceGroup resourceGroup, int barName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
         }

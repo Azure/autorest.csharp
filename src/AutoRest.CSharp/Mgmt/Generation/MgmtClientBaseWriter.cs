@@ -332,7 +332,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected Parameter[] GetParametersForResourceEntry(ResourceCollection resourceCollection)
         {
-            return resourceCollection.GetOperation.MethodSignature.Parameters;
+            return resourceCollection.GetOperation.MethodSignature.Parameters.ToArray();
         }
 
         protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)

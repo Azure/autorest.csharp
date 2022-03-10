@@ -43,7 +43,7 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<DeliveryRule>> GetDeliveryRuleAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeliveryRule>> GetDeliveryRuleAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetDeliveryRules().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }

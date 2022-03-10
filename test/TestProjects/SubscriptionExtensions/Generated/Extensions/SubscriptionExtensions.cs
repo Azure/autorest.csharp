@@ -42,7 +42,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> is null. </exception>
-        public async static Task<Response<Toaster>> GetToasterAsync(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Toaster>> GetToasterAsync(this Subscription subscription, string toasterName, CancellationToken cancellationToken = default)
         {
             return await subscription.GetToasters().GetAsync(toasterName, cancellationToken).ConfigureAwait(false);
         }

@@ -42,7 +42,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async static Task<Response<Car>> GetCarAsync(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Car>> GetCarAsync(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetCars().GetAsync(carName, cancellationToken).ConfigureAwait(false);
         }
@@ -79,7 +79,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
-        public async static Task<Response<ParentResource>> GetParentResourceAsync(this ResourceGroup resourceGroup, string parentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ParentResource>> GetParentResourceAsync(this ResourceGroup resourceGroup, string parentName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetParentResources().GetAsync(parentName, cancellationToken).ConfigureAwait(false);
         }

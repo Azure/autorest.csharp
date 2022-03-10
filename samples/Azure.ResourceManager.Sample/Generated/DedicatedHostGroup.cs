@@ -100,7 +100,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public async virtual Task<Response<DedicatedHost>> GetDedicatedHostAsync(string hostName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHost>> GetDedicatedHostAsync(string hostName, CancellationToken cancellationToken = default)
         {
             return await GetDedicatedHosts().GetAsync(hostName, cancellationToken).ConfigureAwait(false);
         }

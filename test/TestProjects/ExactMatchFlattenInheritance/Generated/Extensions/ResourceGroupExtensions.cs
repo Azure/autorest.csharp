@@ -45,7 +45,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<AzureResourceFlattenModel1>> GetAzureResourceFlattenModel1Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<AzureResourceFlattenModel1>> GetAzureResourceFlattenModel1Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetAzureResourceFlattenModel1s().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -83,7 +83,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetCustomModel2s().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
@@ -121,7 +121,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async static Task<Response<CustomModel3>> GetCustomModel3Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<CustomModel3>> GetCustomModel3Async(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetCustomModel3s().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }

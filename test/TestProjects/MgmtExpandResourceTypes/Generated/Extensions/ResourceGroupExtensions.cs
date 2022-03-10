@@ -43,7 +43,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
-        public async static Task<Response<Zone>> GetZoneAsync(this ResourceGroup resourceGroup, string zoneName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Zone>> GetZoneAsync(this ResourceGroup resourceGroup, string zoneName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetZones().GetAsync(zoneName, cancellationToken).ConfigureAwait(false);
         }

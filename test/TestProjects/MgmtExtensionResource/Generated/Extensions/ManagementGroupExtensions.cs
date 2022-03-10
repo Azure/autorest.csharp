@@ -43,7 +43,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public async static Task<Response<ManagementGroupPolicyDefinition>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ManagementGroupPolicyDefinition>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             return await GetManagementGroupPolicyDefinitions(managementGroup).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }

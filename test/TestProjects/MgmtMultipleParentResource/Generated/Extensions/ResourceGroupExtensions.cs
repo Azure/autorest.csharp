@@ -44,7 +44,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public async static Task<Response<AnotherParent>> GetAnotherParentAsync(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<AnotherParent>> GetAnotherParentAsync(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetAnotherParents().GetAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
         }
@@ -84,7 +84,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
-        public async static Task<Response<TheParent>> GetTheParentAsync(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<TheParent>> GetTheParentAsync(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetTheParents().GetAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
         }

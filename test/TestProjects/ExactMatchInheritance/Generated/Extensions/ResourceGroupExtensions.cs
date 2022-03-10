@@ -44,7 +44,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
-        public async static Task<Response<ExactMatchModel1>> GetExactMatchModel1Async(this ResourceGroup resourceGroup, string exactMatchModel1SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel1>> GetExactMatchModel1Async(this ResourceGroup resourceGroup, string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetExactMatchModel1s().GetAsync(exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
         }
@@ -80,7 +80,7 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
-        public async static Task<Response<ExactMatchModel5>> GetExactMatchModel5Async(this ResourceGroup resourceGroup, string exactMatchModel5SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel5>> GetExactMatchModel5Async(this ResourceGroup resourceGroup, string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
             return await resourceGroup.GetExactMatchModel5s().GetAsync(exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
         }

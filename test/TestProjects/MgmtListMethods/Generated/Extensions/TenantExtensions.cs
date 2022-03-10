@@ -44,7 +44,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public async static Task<Response<TenantTest>> GetTenantTestAsync(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<TenantTest>> GetTenantTestAsync(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
             return await tenant.GetTenantTests().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
         }
