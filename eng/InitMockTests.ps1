@@ -262,11 +262,13 @@ function  MockTestInit {
                 if ($item.Name.Contains("Azure.ResourceManager.")) {
                     # Create mocktests folder if it not exist
                     $Script:allTrack2Sdk++
-                    Update-AllGeneratedCode -path $item.FullName -autorestVersion $AutorestVersion
+                    $task = { Update-AllGeneratedCode -path $item.FullName -autorestVersion $AutorestVersion }
+                    Start-Job -ScriptBlock $task
                 }
             }
         }
-
+        Start-Sleep 120
+        
         # Run build successed mock unit tests
         $FinalStatics = @{}
         $ErrorTypeStatic = @()
@@ -300,8 +302,8 @@ function  MockTestInit {
                     # Get UT number of each type
                     $str = $item.Substring(0, $item.IndexOf(", Duration"))
                     $TotalPassed += $str.Substring($str.IndexOf("Passed:"), $str.IndexOf(", Skipped:") - $str.IndexOf("Passed:")).Replace("Passed:", "").Trim()
-                    $TotalFailed += $str.Substring($str.IndexOf("Skipped:"), $str.IndexOf(", Total:") - $str.IndexOf("Skipped:")).Replace("Skipped:", "").Trim()
-                    $TotalSkipped += $str.Substring($str.IndexOf("Failed:"), $str.IndexOf(", Passed:") - $str.IndexOf("Failed:")).Replace("Failed:", "").Trim()
+                    $TotalSkipped += $str.Substring($str.IndexOf("Skipped:"), $str.IndexOf(", Total:") - $str.IndexOf("Skipped:")).Replace("Skipped:", "").Trim()
+                    $TotalFailed += $str.Substring($str.IndexOf("Failed:"), $str.IndexOf(", Passed:") - $str.IndexOf("Failed:")).Replace("Failed:", "").Trim()
                     $Total += $str.Substring($str.IndexOf("Total:")).Replace("Total:", "").Trim()
                     break
                 }
@@ -324,6 +326,7 @@ function  MockTestInit {
         return
     }
     end {
+        Start-Sleep 30
         # All Successed Output statistical results
         Write-Host "`n`n"
         Write-Host "================================================================================="
@@ -366,7 +369,7 @@ function  MockTestInit {
         Write-Host "srcBuildSuccessedRps:   " $Script:srcBuildSuccessedRps.Count 
         Write-Host "testGenerateSuccesseddRps:  "$Script:testGenerateSuccessedRps.Count 
         Write-Host "testBuildSuccessedRps:  "$Script:testBuildSuccessedRps.Count 
-        Write-Host "Unit tests:"
+        Write-Host "`nUnit tests:"
         Write-Host "Total: $Total"
         Write-Host "Passed: $TotalPassed  |  Failed: $TotalFailed  |  Skipped: $TotalSkipped"
         $PassRate = "{0:N2}" -f ($TotalPassed / $Total)
@@ -377,16 +380,19 @@ function  MockTestInit {
         Write-Host ""
     }
 }
-
-# Launch Mock-service-host
-$LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
-$task1 = { & $LaunchScript }
-# Invoke-Command  -ScriptBlock $task1
-        
+     
 # Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $false
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
-$task2 = { MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri }
-Invoke-Command  -ScriptBlock $task2
+MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
+# $task1 = { MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri }
+# $job1 =  Start-Job -ScriptBlock $task1
+# $null = Wait-Job -Job $job1
+# $result = Receive-Job -Job $job1
+
+# Launch Mock-service-host
+$LaunchScript = $PSScriptRoot + "\Launch-MockServiceHost.ps1"
+$task2 = { & $LaunchScript }
+# Invoke-Command  -ScriptBlock $task2
