@@ -87,7 +87,7 @@ namespace TenantOnly
         /// <returns> An object representing collection of Agreements and their operations over a Agreement. </returns>
         public virtual AgreementCollection GetAgreements()
         {
-            return new AgreementCollection(Client, Id);
+            return GetCachedClient((Client) => new AgreementCollection(Client, Id));
         }
 
         /// <summary>

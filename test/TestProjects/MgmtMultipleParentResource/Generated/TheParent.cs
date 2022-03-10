@@ -88,7 +88,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of SubParents and their operations over a SubParent. </returns>
         public virtual SubParentCollection GetSubParents()
         {
-            return new SubParentCollection(Client, Id);
+            return GetCachedClient((Client) => new SubParentCollection(Client, Id));
         }
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of Zones and their operations over a Zone. </returns>
         public virtual ZoneCollection GetZones()
         {
-            return new ZoneCollection(Client, Id);
+            return GetCachedClient((Client) => new ZoneCollection(Client, Id));
         }
     }
 }

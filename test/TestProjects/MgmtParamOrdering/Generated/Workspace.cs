@@ -87,7 +87,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of EnvironmentContainerResources and their operations over a EnvironmentContainerResource. </returns>
         public virtual EnvironmentContainerResourceCollection GetEnvironmentContainerResources()
         {
-            return new EnvironmentContainerResourceCollection(Client, Id);
+            return GetCachedClient((Client) => new EnvironmentContainerResourceCollection(Client, Id));
         }
 
         /// <summary>

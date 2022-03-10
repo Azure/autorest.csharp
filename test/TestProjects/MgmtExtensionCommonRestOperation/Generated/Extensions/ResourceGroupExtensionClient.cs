@@ -36,14 +36,14 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An object representing collection of TypeOnes and their operations over a TypeOne. </returns>
         public virtual TypeOneCollection GetTypeOnes()
         {
-            return new TypeOneCollection(Client, Id);
+            return GetCachedClient((Client) => new TypeOneCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of TypeTwos in the TypeTwo. </summary>
         /// <returns> An object representing collection of TypeTwos and their operations over a TypeTwo. </returns>
         public virtual TypeTwoCollection GetTypeTwos()
         {
-            return new TypeTwoCollection(Client, Id);
+            return GetCachedClient((Client) => new TypeTwoCollection(Client, Id));
         }
     }
 }

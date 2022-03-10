@@ -335,13 +335,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
         {
-            _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
-            foreach (var parameter in resourceCollection.ExtraConstructorParameters)
+            if (resourceCollection.ExtraConstructorParameters.Count() > 0)
             {
-                _writer.Append($"{parameter.Name}, ");
+                _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
+                foreach (var parameter in resourceCollection.ExtraConstructorParameters)
+                {
+                    _writer.Append($"{parameter.Name}, ");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
             }
-            _writer.RemoveTrailingComma();
-            _writer.Line($");");
+            else
+            {
+                // for collections without extra constructor parameter, we can return a cached instance
+                _writer.Line($"return GetCachedClient(({ArmClientReference}) => new {resourceCollection.Type.Name}({ArmClientReference}, Id));");
+            }
         }
 
         protected void WriteStaticValidate(FormattableString validResourceType, CodeWriter writer)

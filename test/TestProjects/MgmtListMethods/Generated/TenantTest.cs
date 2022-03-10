@@ -87,7 +87,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocs and their operations over a TenantParentWithNonResChWithLoc. </returns>
         public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
-            return new TenantParentWithNonResChWithLocCollection(Client, Id);
+            return GetCachedClient((Client) => new TenantParentWithNonResChWithLocCollection(Client, Id));
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParentWithNonResChes and their operations over a TenantParentWithNonResCh. </returns>
         public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
-            return new TenantParentWithNonResChCollection(Client, Id);
+            return GetCachedClient((Client) => new TenantParentWithNonResChCollection(Client, Id));
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParentWithLocs and their operations over a TenantParentWithLoc. </returns>
         public virtual TenantParentWithLocCollection GetTenantParentWithLocs()
         {
-            return new TenantParentWithLocCollection(Client, Id);
+            return GetCachedClient((Client) => new TenantParentWithLocCollection(Client, Id));
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParents and their operations over a TenantParent. </returns>
         public virtual TenantParentCollection GetTenantParents()
         {
-            return new TenantParentCollection(Client, Id);
+            return GetCachedClient((Client) => new TenantParentCollection(Client, Id));
         }
 
         /// <summary>

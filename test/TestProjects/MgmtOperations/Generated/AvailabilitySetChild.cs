@@ -87,7 +87,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetGrandChildren and their operations over a AvailabilitySetGrandChild. </returns>
         public virtual AvailabilitySetGrandChildCollection GetAvailabilitySetGrandChildren()
         {
-            return new AvailabilitySetGrandChildCollection(Client, Id);
+            return GetCachedClient((Client) => new AvailabilitySetGrandChildCollection(Client, Id));
         }
 
         /// <summary>

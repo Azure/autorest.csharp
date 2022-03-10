@@ -80,14 +80,14 @@ namespace SupersetFlattenInheritance
         /// <returns> An object representing collection of ResourceModel1s and their operations over a ResourceModel1. </returns>
         public virtual ResourceModel1Collection GetResourceModel1s()
         {
-            return new ResourceModel1Collection(Client, Id);
+            return GetCachedClient((Client) => new ResourceModel1Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of TrackedResourceModel1s in the TrackedResourceModel1. </summary>
         /// <returns> An object representing collection of TrackedResourceModel1s and their operations over a TrackedResourceModel1. </returns>
         public virtual TrackedResourceModel1Collection GetTrackedResourceModel1s()
         {
-            return new TrackedResourceModel1Collection(Client, Id);
+            return GetCachedClient((Client) => new TrackedResourceModel1Collection(Client, Id));
         }
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace ResourceRename
         /// <returns> An object representing collection of SshPublicKeyInfos and their operations over a SshPublicKeyInfo. </returns>
         public virtual SshPublicKeyInfoCollection GetSshPublicKeyInfos()
         {
-            return new SshPublicKeyInfoCollection(Client, Id);
+            return GetCachedClient((Client) => new SshPublicKeyInfoCollection(Client, Id));
         }
     }
 }

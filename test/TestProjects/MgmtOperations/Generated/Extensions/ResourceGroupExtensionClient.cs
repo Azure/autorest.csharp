@@ -48,14 +48,14 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
         public virtual AvailabilitySetCollection GetAvailabilitySets()
         {
-            return new AvailabilitySetCollection(Client, Id);
+            return GetCachedClient((Client) => new AvailabilitySetCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public virtual UnpatchableResourceCollection GetUnpatchableResources()
         {
-            return new UnpatchableResourceCollection(Client, Id);
+            return GetCachedClient((Client) => new UnpatchableResourceCollection(Client, Id));
         }
 
         /// <summary>

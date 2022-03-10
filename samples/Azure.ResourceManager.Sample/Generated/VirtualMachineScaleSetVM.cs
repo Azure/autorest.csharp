@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of VirtualMachineScaleSetVirtualMachineExtensions and their operations over a VirtualMachineScaleSetVirtualMachineExtension. </returns>
         public virtual VirtualMachineScaleSetVirtualMachineExtensionCollection GetVirtualMachineScaleSetVirtualMachineExtensions()
         {
-            return new VirtualMachineScaleSetVirtualMachineExtensionCollection(Client, Id);
+            return GetCachedClient((Client) => new VirtualMachineScaleSetVirtualMachineExtensionCollection(Client, Id));
         }
 
         /// <summary>

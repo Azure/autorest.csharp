@@ -88,7 +88,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of AnotherParentChildren and their operations over a AnotherParentChild. </returns>
         public virtual AnotherParentChildCollection GetAnotherParentChildren()
         {
-            return new AnotherParentChildCollection(Client, Id);
+            return GetCachedClient((Client) => new AnotherParentChildCollection(Client, Id));
         }
 
         /// <summary>
