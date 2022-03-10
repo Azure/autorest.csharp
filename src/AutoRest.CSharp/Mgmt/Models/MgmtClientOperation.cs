@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters());
             }
-            parameters.Add(MgmtClientBaseWriter.CancellationTokenParameter);
+            parameters.Add(KnownParameters.CancellationTokenParameter);
             return parameters;
         }
     }

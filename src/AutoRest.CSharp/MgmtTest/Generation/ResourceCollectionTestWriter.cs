@@ -72,8 +72,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             writer.UseNamespace("System");
             writer.UseNamespace("System.Threading.Tasks");
             writer.UseNamespace("System.Net");
-            writer.UseNamespace("Azure");
-            writer.UseNamespace("Azure.Core");
             writer.UseNamespace("Azure.Core.TestFramework");
             writer.UseNamespace("Azure.ResourceManager.TestFramework");
         }

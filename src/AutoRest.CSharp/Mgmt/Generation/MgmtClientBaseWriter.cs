@@ -38,13 +38,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CodeWriter _writer;
         protected override string RestClientAccessibility => "private";
 
-        internal static readonly Parameter CancellationTokenParameter = new Parameter(
-            "cancellationToken",
-            "The cancellation token to use.",
-            typeof(CancellationToken),
-            Constant.NewInstanceOf(typeof(CancellationToken)),
-            false);
-
         private MgmtTypeProvider This { get; }
 
         protected virtual string ArmClientReference { get; } = "Client";
@@ -187,10 +180,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             var enumeratorType = new CSharpType(typeof(IAsyncEnumerator<>), type.Arguments);
-            _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({CancellationTokenParameter.Type:I} {CancellationTokenParameter.Name})");
+            _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Type:I} {KnownParameters.CancellationTokenParameter.Name})");
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAllAsync({CancellationTokenParameter.Name}: {CancellationTokenParameter.Name}).GetAsyncEnumerator({CancellationTokenParameter.Name});");
+                _writer.Line($"return GetAllAsync({KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
             }
         }
 
@@ -789,7 +782,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var waitForCompletionMethod = operation.MgmtReturnType is null ?
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
-            _writer.Line($"if (waitUntil == WaitUntil.Completed)");
+            _writer.Line($"if (waitUntil == {typeof(WaitUntil)}.Completed)");
             _writer.Line($"{GetAwait(async)} operation.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken){GetConfigureAwait(async)};");
             _writer.Line($"return operation;");
         }
