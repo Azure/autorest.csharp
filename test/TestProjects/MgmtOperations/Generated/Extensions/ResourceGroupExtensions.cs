@@ -114,15 +114,15 @@ namespace MgmtOperations
         /// Operation Id: AvailabilitySets_TestLROMethod
         /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public static async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroup resourceGroup, WaitUntil waitUntil, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return await GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySetAsync(waitForCompletion, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySetAsync(waitUntil, parameters, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -131,15 +131,15 @@ namespace MgmtOperations
         /// Operation Id: AvailabilitySets_TestLROMethod
         /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, bool waitForCompletion, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroup resourceGroup, WaitUntil waitUntil, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySet(waitForCompletion, parameters, cancellationToken);
+            return GetExtensionClient(resourceGroup).TestLROMethodAvailabilitySet(waitUntil, parameters, cancellationToken);
         }
     }
 }
