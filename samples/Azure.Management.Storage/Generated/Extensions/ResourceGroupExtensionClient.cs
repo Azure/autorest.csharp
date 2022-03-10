@@ -36,7 +36,7 @@ namespace Azure.Management.Storage
         /// <returns> An object representing collection of StorageAccounts and their operations over a StorageAccount. </returns>
         public virtual StorageAccountCollection GetStorageAccounts()
         {
-            return GetCachedClient((Client) => new StorageAccountCollection(Client, Id));
+            return GetCachedClient(Client => new StorageAccountCollection(Client, Id));
         }
     }
 }

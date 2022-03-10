@@ -52,28 +52,28 @@ namespace SupersetInheritance
         /// <returns> An object representing collection of SupersetModel1s and their operations over a SupersetModel1. </returns>
         public virtual SupersetModel1Collection GetSupersetModel1s()
         {
-            return GetCachedClient((Client) => new SupersetModel1Collection(Client, Id));
+            return GetCachedClient(Client => new SupersetModel1Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of SupersetModel4s in the SupersetModel4. </summary>
         /// <returns> An object representing collection of SupersetModel4s and their operations over a SupersetModel4. </returns>
         public virtual SupersetModel4Collection GetSupersetModel4s()
         {
-            return GetCachedClient((Client) => new SupersetModel4Collection(Client, Id));
+            return GetCachedClient(Client => new SupersetModel4Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of SupersetModel6s in the SupersetModel6. </summary>
         /// <returns> An object representing collection of SupersetModel6s and their operations over a SupersetModel6. </returns>
         public virtual SupersetModel6Collection GetSupersetModel6s()
         {
-            return GetCachedClient((Client) => new SupersetModel6Collection(Client, Id));
+            return GetCachedClient(Client => new SupersetModel6Collection(Client, Id));
         }
 
         /// <summary> Gets a collection of SupersetModel7s in the SupersetModel7. </summary>
         /// <returns> An object representing collection of SupersetModel7s and their operations over a SupersetModel7. </returns>
         public virtual SupersetModel7Collection GetSupersetModel7s()
         {
-            return GetCachedClient((Client) => new SupersetModel7Collection(Client, Id));
+            return GetCachedClient(Client => new SupersetModel7Collection(Client, Id));
         }
 
         /// <summary>

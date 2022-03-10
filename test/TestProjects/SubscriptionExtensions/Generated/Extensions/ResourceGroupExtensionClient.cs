@@ -36,7 +36,7 @@ namespace SubscriptionExtensions
         /// <returns> An object representing collection of Ovens and their operations over a Oven. </returns>
         public virtual OvenCollection GetOvens()
         {
-            return GetCachedClient((Client) => new OvenCollection(Client, Id));
+            return GetCachedClient(Client => new OvenCollection(Client, Id));
         }
     }
 }

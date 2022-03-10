@@ -36,28 +36,28 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocs and their operations over a MgmtGrpParentWithNonResChWithLoc. </returns>
         public virtual MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs()
         {
-            return GetCachedClient((Client) => new MgmtGrpParentWithNonResChWithLocCollection(Client, Id));
+            return GetCachedClient(Client => new MgmtGrpParentWithNonResChWithLocCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of MgmtGrpParentWithNonResChes in the MgmtGrpParentWithNonResCh. </summary>
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChes and their operations over a MgmtGrpParentWithNonResCh. </returns>
         public virtual MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes()
         {
-            return GetCachedClient((Client) => new MgmtGrpParentWithNonResChCollection(Client, Id));
+            return GetCachedClient(Client => new MgmtGrpParentWithNonResChCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of MgmtGrpParentWithLocs in the MgmtGrpParentWithLoc. </summary>
         /// <returns> An object representing collection of MgmtGrpParentWithLocs and their operations over a MgmtGrpParentWithLoc. </returns>
         public virtual MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs()
         {
-            return GetCachedClient((Client) => new MgmtGrpParentWithLocCollection(Client, Id));
+            return GetCachedClient(Client => new MgmtGrpParentWithLocCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of MgmtGroupParents in the MgmtGroupParent. </summary>
         /// <returns> An object representing collection of MgmtGroupParents and their operations over a MgmtGroupParent. </returns>
         public virtual MgmtGroupParentCollection GetMgmtGroupParents()
         {
-            return GetCachedClient((Client) => new MgmtGroupParentCollection(Client, Id));
+            return GetCachedClient(Client => new MgmtGroupParentCollection(Client, Id));
         }
     }
 }

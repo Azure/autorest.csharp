@@ -59,7 +59,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of SubscriptionPolicyDefinitions and their operations over a SubscriptionPolicyDefinition. </returns>
         public virtual SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions()
         {
-            return GetCachedClient((Client) => new SubscriptionPolicyDefinitionCollection(Client, Id));
+            return GetCachedClient(Client => new SubscriptionPolicyDefinitionCollection(Client, Id));
         }
 
         /// <summary>

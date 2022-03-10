@@ -36,7 +36,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of BuiltInPolicyDefinitions and their operations over a BuiltInPolicyDefinition. </returns>
         public virtual BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions()
         {
-            return GetCachedClient((Client) => new BuiltInPolicyDefinitionCollection(Client, Id));
+            return GetCachedClient(Client => new BuiltInPolicyDefinitionCollection(Client, Id));
         }
     }
 }

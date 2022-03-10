@@ -87,7 +87,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a FakeParentWithAncestorWithNonResChWithLoc. </returns>
         public virtual FakeParentWithAncestorWithNonResChWithLocCollection GetFakeParentWithAncestorWithNonResChWithLocs()
         {
-            return GetCachedClient((Client) => new FakeParentWithAncestorWithNonResChWithLocCollection(Client, Id));
+            return GetCachedClient(Client => new FakeParentWithAncestorWithNonResChWithLocCollection(Client, Id));
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a FakeParentWithAncestorWithNonResCh. </returns>
         public virtual FakeParentWithAncestorWithNonResChCollection GetFakeParentWithAncestorWithNonResChes()
         {
-            return GetCachedClient((Client) => new FakeParentWithAncestorWithNonResChCollection(Client, Id));
+            return GetCachedClient(Client => new FakeParentWithAncestorWithNonResChCollection(Client, Id));
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a FakeParentWithAncestorWithLoc. </returns>
         public virtual FakeParentWithAncestorWithLocCollection GetFakeParentWithAncestorWithLocs()
         {
-            return GetCachedClient((Client) => new FakeParentWithAncestorWithLocCollection(Client, Id));
+            return GetCachedClient(Client => new FakeParentWithAncestorWithLocCollection(Client, Id));
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a FakeParentWithAncestor. </returns>
         public virtual FakeParentWithAncestorCollection GetFakeParentWithAncestors()
         {
-            return GetCachedClient((Client) => new FakeParentWithAncestorCollection(Client, Id));
+            return GetCachedClient(Client => new FakeParentWithAncestorCollection(Client, Id));
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a FakeParentWithNonResCh. </returns>
         public virtual FakeParentWithNonResChCollection GetFakeParentWithNonResChes()
         {
-            return GetCachedClient((Client) => new FakeParentWithNonResChCollection(Client, Id));
+            return GetCachedClient(Client => new FakeParentWithNonResChCollection(Client, Id));
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeParents and their operations over a FakeParent. </returns>
         public virtual FakeParentCollection GetFakeParents()
         {
-            return GetCachedClient((Client) => new FakeParentCollection(Client, Id));
+            return GetCachedClient(Client => new FakeParentCollection(Client, Id));
         }
 
         /// <summary>

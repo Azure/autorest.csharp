@@ -92,7 +92,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetAs and their operations over a RecordSetA. </returns>
         public virtual RecordSetACollection GetRecordSetAs()
         {
-            return GetCachedClient((Client) => new RecordSetACollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetACollection(Client, Id));
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetAaaas and their operations over a RecordSetAaaa. </returns>
         public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
-            return GetCachedClient((Client) => new RecordSetAaaaCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetAaaaCollection(Client, Id));
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetCaas and their operations over a RecordSetCaa. </returns>
         public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
-            return GetCachedClient((Client) => new RecordSetCaaCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetCaaCollection(Client, Id));
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetCNames and their operations over a RecordSetCName. </returns>
         public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
-            return GetCachedClient((Client) => new RecordSetCNameCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetCNameCollection(Client, Id));
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetMxes and their operations over a RecordSetMx. </returns>
         public virtual RecordSetMxCollection GetRecordSetMxes()
         {
-            return GetCachedClient((Client) => new RecordSetMxCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetMxCollection(Client, Id));
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetNs and their operations over a RecordSetNs. </returns>
         public virtual RecordSetNsCollection GetRecordSetNs()
         {
-            return GetCachedClient((Client) => new RecordSetNsCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetNsCollection(Client, Id));
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetPtrs and their operations over a RecordSetPtr. </returns>
         public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
-            return GetCachedClient((Client) => new RecordSetPtrCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetPtrCollection(Client, Id));
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetSoas and their operations over a RecordSetSoa. </returns>
         public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
-            return GetCachedClient((Client) => new RecordSetSoaCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetSoaCollection(Client, Id));
         }
 
         /// <summary>
@@ -356,7 +356,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetSrvs and their operations over a RecordSetSrv. </returns>
         public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
-            return GetCachedClient((Client) => new RecordSetSrvCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetSrvCollection(Client, Id));
         }
 
         /// <summary>
@@ -389,7 +389,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetTxts and their operations over a RecordSetTxt. </returns>
         public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
-            return GetCachedClient((Client) => new RecordSetTxtCollection(Client, Id));
+            return GetCachedClient(Client => new RecordSetTxtCollection(Client, Id));
         }
 
         /// <summary>

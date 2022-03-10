@@ -92,7 +92,7 @@ namespace MgmtKeyvault
         /// <returns> An object representing collection of MhsmPrivateEndpointConnections and their operations over a MhsmPrivateEndpointConnection. </returns>
         public virtual MhsmPrivateEndpointConnectionCollection GetMhsmPrivateEndpointConnections()
         {
-            return GetCachedClient((Client) => new MhsmPrivateEndpointConnectionCollection(Client, Id));
+            return GetCachedClient(Client => new MhsmPrivateEndpointConnectionCollection(Client, Id));
         }
 
         /// <summary>

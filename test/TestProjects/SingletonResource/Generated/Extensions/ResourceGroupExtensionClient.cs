@@ -36,14 +36,14 @@ namespace SingletonResource
         /// <returns> An object representing collection of Cars and their operations over a Car. </returns>
         public virtual CarCollection GetCars()
         {
-            return GetCachedClient((Client) => new CarCollection(Client, Id));
+            return GetCachedClient(Client => new CarCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of ParentResources in the ParentResource. </summary>
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public virtual ParentResourceCollection GetParentResources()
         {
-            return GetCachedClient((Client) => new ParentResourceCollection(Client, Id));
+            return GetCachedClient(Client => new ParentResourceCollection(Client, Id));
         }
     }
 }

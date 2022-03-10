@@ -36,7 +36,7 @@ namespace SubscriptionExtensions
         /// <returns> An object representing collection of Toasters and their operations over a Toaster. </returns>
         public virtual ToasterCollection GetToasters()
         {
-            return GetCachedClient((Client) => new ToasterCollection(Client, Id));
+            return GetCachedClient(Client => new ToasterCollection(Client, Id));
         }
     }
 }

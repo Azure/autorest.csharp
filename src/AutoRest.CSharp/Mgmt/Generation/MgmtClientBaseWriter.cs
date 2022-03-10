@@ -335,6 +335,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
         {
+            // TODO: can we cache collection with extra constructor parameters
             if (resourceCollection.ExtraConstructorParameters.Count() > 0)
             {
                 _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
@@ -348,7 +349,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             else
             {
                 // for collections without extra constructor parameter, we can return a cached instance
-                _writer.Line($"return GetCachedClient(({ArmClientReference}) => new {resourceCollection.Type.Name}({ArmClientReference}, Id));");
+                _writer.Line($"return GetCachedClient({ArmClientReference} => new {resourceCollection.Type.Name}({ArmClientReference}, Id));");
             }
         }
 

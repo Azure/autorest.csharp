@@ -36,7 +36,7 @@ namespace MgmtSubscriptionNameParameter
         /// <returns> An object representing collection of SBSubscriptions and their operations over a SBSubscription. </returns>
         public virtual SBSubscriptionCollection GetSBSubscriptions()
         {
-            return GetCachedClient((Client) => new SBSubscriptionCollection(Client, Id));
+            return GetCachedClient(Client => new SBSubscriptionCollection(Client, Id));
         }
     }
 }

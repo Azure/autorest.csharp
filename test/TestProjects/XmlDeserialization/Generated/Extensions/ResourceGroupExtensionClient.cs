@@ -36,7 +36,7 @@ namespace XmlDeserialization
         /// <returns> An object representing collection of XmlInstances and their operations over a XmlInstance. </returns>
         public virtual XmlInstanceCollection GetXmlInstances()
         {
-            return GetCachedClient((Client) => new XmlInstanceCollection(Client, Id));
+            return GetCachedClient(Client => new XmlInstanceCollection(Client, Id));
         }
     }
 }

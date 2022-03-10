@@ -57,7 +57,7 @@ namespace Azure.Management.Storage
         /// <returns> An object representing collection of DeletedAccounts and their operations over a DeletedAccount. </returns>
         public virtual DeletedAccountCollection GetDeletedAccounts()
         {
-            return GetCachedClient((Client) => new DeletedAccountCollection(Client, Id));
+            return GetCachedClient(Client => new DeletedAccountCollection(Client, Id));
         }
 
         /// <summary>

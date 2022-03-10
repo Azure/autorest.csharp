@@ -36,7 +36,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitions and their operations over a ManagementGroupPolicyDefinition. </returns>
         public virtual ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions()
         {
-            return GetCachedClient((Client) => new ManagementGroupPolicyDefinitionCollection(Client, Id));
+            return GetCachedClient(Client => new ManagementGroupPolicyDefinitionCollection(Client, Id));
         }
     }
 }

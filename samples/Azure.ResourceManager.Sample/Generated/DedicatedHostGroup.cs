@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of DedicatedHosts and their operations over a DedicatedHost. </returns>
         public virtual DedicatedHostCollection GetDedicatedHosts()
         {
-            return GetCachedClient((Client) => new DedicatedHostCollection(Client, Id));
+            return GetCachedClient(Client => new DedicatedHostCollection(Client, Id));
         }
 
         /// <summary>

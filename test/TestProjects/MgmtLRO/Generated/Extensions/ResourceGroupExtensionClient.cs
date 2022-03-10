@@ -36,14 +36,14 @@ namespace MgmtLRO
         /// <returns> An object representing collection of Fakes and their operations over a Fake. </returns>
         public virtual FakeCollection GetFakes()
         {
-            return GetCachedClient((Client) => new FakeCollection(Client, Id));
+            return GetCachedClient(Client => new FakeCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of Bars in the Bar. </summary>
         /// <returns> An object representing collection of Bars and their operations over a Bar. </returns>
         public virtual BarCollection GetBars()
         {
-            return GetCachedClient((Client) => new BarCollection(Client, Id));
+            return GetCachedClient(Client => new BarCollection(Client, Id));
         }
     }
 }
