@@ -44,6 +44,42 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary>
+        /// Gets a virtual machine extension image.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
+        public static async Task<Response<VirtualMachineExtensionImage>> GetVirtualMachineExtensionImageAsync(this Subscription subscription, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetVirtualMachineExtensionImages(location, publisherName).GetAsync(type, version, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a virtual machine extension image.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+        /// Operation Id: VirtualMachineExtensionImages_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
+        public static Response<VirtualMachineExtensionImage> GetVirtualMachineExtensionImage(this Subscription subscription, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetVirtualMachineExtensionImages(location, publisherName).Get(type, version, cancellationToken);
+        }
+
+        /// <summary>
         /// Lists all availability sets in a subscription.
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
         /// Operation Id: AvailabilitySets_ListBySubscription
@@ -163,7 +199,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/> or <paramref name="version"/> is null. </exception>
-        public async static Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(this Subscription subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(this Subscription subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
@@ -567,18 +603,18 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: LogAnalytics_ExportRequestRateByInterval
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public async static Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(this Subscription subscription, bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
+        public static async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(this Subscription subscription, WaitUntil waitUntil, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return await GetExtensionClient(subscription).ExportRequestRateByIntervalLogAnalyticAsync(waitForCompletion, location, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(subscription).ExportRequestRateByIntervalLogAnalyticAsync(waitUntil, location, parameters, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -587,18 +623,18 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: LogAnalytics_ExportRequestRateByInterval
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static ArmOperation<LogAnalytics> ExportRequestRateByIntervalLogAnalytic(this Subscription subscription, bool waitForCompletion, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
+        public static ArmOperation<LogAnalytics> ExportRequestRateByIntervalLogAnalytic(this Subscription subscription, WaitUntil waitUntil, string location, RequestRateByIntervalInput parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return GetExtensionClient(subscription).ExportRequestRateByIntervalLogAnalytic(waitForCompletion, location, parameters, cancellationToken);
+            return GetExtensionClient(subscription).ExportRequestRateByIntervalLogAnalytic(waitUntil, location, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -607,18 +643,18 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: LogAnalytics_ExportThrottledRequests
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public async static Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(this Subscription subscription, bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
+        public static async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(this Subscription subscription, WaitUntil waitUntil, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return await GetExtensionClient(subscription).ExportThrottledRequestsLogAnalyticAsync(waitForCompletion, location, parameters, cancellationToken).ConfigureAwait(false);
+            return await GetExtensionClient(subscription).ExportThrottledRequestsLogAnalyticAsync(waitUntil, location, parameters, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -627,18 +663,18 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: LogAnalytics_ExportThrottledRequests
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="parameters"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="parameters"/> is null. </exception>
-        public static ArmOperation<LogAnalytics> ExportThrottledRequestsLogAnalytic(this Subscription subscription, bool waitForCompletion, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
+        public static ArmOperation<LogAnalytics> ExportThrottledRequestsLogAnalytic(this Subscription subscription, WaitUntil waitUntil, string location, ThrottledRequestsInput parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            return GetExtensionClient(subscription).ExportThrottledRequestsLogAnalytic(waitForCompletion, location, parameters, cancellationToken);
+            return GetExtensionClient(subscription).ExportThrottledRequestsLogAnalytic(waitUntil, location, parameters, cancellationToken);
         }
     }
 }

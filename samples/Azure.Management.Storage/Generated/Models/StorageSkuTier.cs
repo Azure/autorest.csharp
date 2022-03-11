@@ -8,7 +8,7 @@
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The SKU tier. This is based on the SKU name. </summary>
-    public enum SkuTier
+    public enum StorageSkuTier
     {
         /// <summary> Standard. </summary>
         Standard,

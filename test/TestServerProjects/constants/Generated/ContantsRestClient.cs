@@ -33,14 +33,15 @@ namespace constants
         /// <param name="queryConstant"> Constant query property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="pathConstant"> Constant path property on the client that is a required parameter for operation &apos;constants_putClientConstants&apos;. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public ContantsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Enum8 headerConstant, Enum9 queryConstant, Enum10 pathConstant, Uri endpoint = null)
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _headerConstant = headerConstant;
             _queryConstant = queryConstant;
             _pathConstant = pathConstant;
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreatePutNoModelAsStringNoRequiredTwoValueNoDefaultRequest(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input)

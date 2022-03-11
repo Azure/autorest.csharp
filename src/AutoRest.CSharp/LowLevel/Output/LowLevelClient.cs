@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models
 
             Parameters = builder.GetOrderedParametersByRequired();
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
-            Fields = new ClientFields(Parameters, context);
+            Fields = ClientFields.CreateForClient(Parameters, context);
 
             PublicConstructors = BuildPublicConstructors().ToArray();
 

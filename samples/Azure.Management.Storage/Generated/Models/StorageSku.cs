@@ -12,7 +12,7 @@ namespace Azure.Management.Storage.Models
     {
         /// <summary> Initializes a new instance of StorageSku. </summary>
         /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
-        public StorageSku(SkuName name)
+        public StorageSku(StorageSkuName name)
         {
             Name = name;
         }
@@ -20,15 +20,15 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of StorageSku. </summary>
         /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
         /// <param name="tier"> The SKU tier. This is based on the SKU name. </param>
-        internal StorageSku(SkuName name, SkuTier? tier)
+        internal StorageSku(StorageSkuName name, StorageSkuTier? tier)
         {
             Name = name;
             Tier = tier;
         }
 
         /// <summary> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </summary>
-        public SkuName Name { get; set; }
+        public StorageSkuName Name { get; set; }
         /// <summary> The SKU tier. This is based on the SKU name. </summary>
-        public SkuTier? Tier { get; }
+        public StorageSkuTier? Tier { get; }
     }
 }

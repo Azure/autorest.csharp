@@ -11,14 +11,14 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class SkuInformation
+    public partial class StorageSkuInformation
     {
-        internal static SkuInformation DeserializeSkuInformation(JsonElement element)
+        internal static StorageSkuInformation DeserializeStorageSkuInformation(JsonElement element)
         {
-            SkuName name = default;
-            Optional<SkuTier> tier = default;
+            StorageSkuName name = default;
+            Optional<StorageSkuTier> tier = default;
             Optional<string> resourceType = default;
-            Optional<Kind> kind = default;
+            Optional<StorageKind> kind = default;
             Optional<IReadOnlyList<string>> locations = default;
             Optional<IReadOnlyList<SKUCapability>> capabilities = default;
             Optional<IReadOnlyList<Restriction>> restrictions = default;
@@ -26,7 +26,7 @@ namespace Azure.Management.Storage.Models
             {
                 if (property.NameEquals("name"))
                 {
-                    name = new SkuName(property.Value.GetString());
+                    name = new StorageSkuName(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("tier"))
@@ -36,7 +36,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    tier = property.Value.GetString().ToSkuTier();
+                    tier = property.Value.GetString().ToStorageSkuTier();
                     continue;
                 }
                 if (property.NameEquals("resourceType"))
@@ -51,7 +51,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    kind = new Kind(property.Value.GetString());
+                    kind = new StorageKind(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("locations"))
@@ -100,7 +100,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new SkuInformation(name, Optional.ToNullable(tier), resourceType.Value, Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions));
+            return new StorageSkuInformation(name, Optional.ToNullable(tier), resourceType.Value, Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions));
         }
     }
 }

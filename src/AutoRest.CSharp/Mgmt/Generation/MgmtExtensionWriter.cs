@@ -89,6 +89,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected override void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
+        {
+            if (IsArmCore)
+            {
+                base.WriteResourceEntry(resourceCollection, isAsync);
+            }
+            else
+            {
+                var operation = resourceCollection.GetOperation;
+                string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
+                string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
+                _writer.Append($"return{awaitText} {GetResourceCollectionMethodName(resourceCollection)}({GetResourceCollectionMethodArgumentList(resourceCollection)}).{operation.MethodSignature.WithAsync(isAsync).Name}(");
+
+                foreach (var parameter in operation.MethodSignature.Parameters)
+                {
+                    _writer.Append($"{parameter.Name},");
+                }
+
+                _writer.RemoveTrailingComma();
+                _writer.Line($"){configureAwait};");
+            }
+        }
+
         protected override MethodSignatureModifiers GetMethodModifiers() => IsArmCore ? base.GetMethodModifiers() : Public | Static | Extension;
 
         protected override Parameter[] GetParametersForSingletonEntry() => IsArmCore ? base.GetParametersForSingletonEntry() : new[] { This.ExtensionParameter };

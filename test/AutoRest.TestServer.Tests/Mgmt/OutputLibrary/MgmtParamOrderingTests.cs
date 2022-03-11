@@ -56,12 +56,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         public void ValidateOperationMethodParameterList(Type type, string methodName, bool isLro, string[] parameterNames, bool[] isRequiredParameters)
         {
             var parameters = type.GetMethod(methodName).GetParameters();
-            Assert.That(parameters, Has.Length.EqualTo(parameterNames.Length + (isLro ? 2 : 1))); // need to exclude "waitForCompletion" and "cancellationToken"
+            Assert.That(parameters, Has.Length.EqualTo(parameterNames.Length + (isLro ? 2 : 1))); // need to exclude "waitUntil" and "cancellationToken"
 
             var customParameters = parameters.SkipLast(1);// skip "cancellationToken"
             if (isLro)
             {
-                customParameters = customParameters.Skip(1);// skip "waitForCompletion"
+                customParameters = customParameters.Skip(1);// skip "waitUntil"
             }
             Assert.AreEqual(parameterNames, customParameters.Select(p => p.Name).ToArray());
             Assert.AreEqual(isRequiredParameters, customParameters.Select(p => !p.HasDefaultValue).ToArray());

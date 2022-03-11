@@ -14,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -34,7 +35,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
-            return ReferenceClassFinder.ExternalTypes.Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
+            return ReferenceClassFinder.ExternalTypes.Where(t =>
+            {
+                return t.GetCustomAttributes(false).Any(a => a.GetType().Name == PropertyReferenceAttributeName) &&
+                    t.Name.SplitByCamelCase().Count() > 1; //this is needed while we have the backcompat Plan and ArmPlan inside Azure.ResourceManager
+            }).ToList();
         }
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)

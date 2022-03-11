@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Fake.Models
         internal static ReferenceTypesSku DeserializeReferenceTypesSku(JsonElement element)
         {
             string name = default;
-            Optional<SkuTier> tier = default;
+            Optional<ReferenceTypesSkuTier> tier = default;
             Optional<string> size = default;
             Optional<string> family = default;
             Optional<int> capacity = default;
@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Fake.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    tier = property.Value.GetString().ToSkuTier();
+                    tier = property.Value.GetString().ToReferenceTypesSkuTier();
                     continue;
                 }
                 if (property.NameEquals("size"))

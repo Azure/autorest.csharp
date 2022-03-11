@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
@@ -42,7 +43,7 @@ namespace MgmtKeyvault.Tests.Mock
             var managedHsmId = MgmtKeyvault.ManagedHsm.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
             var managedHsm = GetArmClient().GetManagedHsm(managedHsmId);
 
-            await managedHsm.DeleteAsync(true);
+            await managedHsm.DeleteAsync(WaitUntil.Completed);
         }
 
         [RecordedTest]
@@ -61,7 +62,7 @@ namespace MgmtKeyvault.Tests.Mock
                 ["Slice"] = "A",
             });
 
-            await managedHsm.UpdateAsync(true, parameters);
+            await managedHsm.UpdateAsync(WaitUntil.Completed, parameters);
         }
 
         [RecordedTest]

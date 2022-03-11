@@ -39,7 +39,7 @@ namespace XmlDeserialization
         {
             _xmlInstanceXmlDeserializationClientDiagnostics = new ClientDiagnostics("XmlDeserialization", XmlInstance.ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(XmlInstance.ResourceType, out string xmlInstanceXmlDeserializationApiVersion);
-            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(_xmlInstanceXmlDeserializationClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
+            _xmlInstanceXmlDeserializationRestClient = new XmlDeserializationRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, xmlInstanceXmlDeserializationApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -56,14 +56,14 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls/{xmlName}
         /// Operation Id: XmlDeserialization_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="parameters"> Create or update parameters. </param>
         /// <param name="ifMatch"> ETag of the Entity. Not required when creating an entity, but required when updating an entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ArmOperation<XmlInstance>> CreateOrUpdateAsync(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<XmlInstance>> CreateOrUpdateAsync(WaitUntil waitUntil, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -74,7 +74,7 @@ namespace XmlDeserialization
             {
                 var response = await _xmlInstanceXmlDeserializationRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken).ConfigureAwait(false);
                 var operation = new XmlDeserializationArmOperation<XmlInstance>(Response.FromValue(new XmlInstance(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -90,14 +90,14 @@ namespace XmlDeserialization
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.XmlDeserialization/xmls/{xmlName}
         /// Operation Id: XmlDeserialization_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="parameters"> Create or update parameters. </param>
         /// <param name="ifMatch"> ETag of the Entity. Not required when creating an entity, but required when updating an entity. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<XmlInstance> CreateOrUpdate(bool waitForCompletion, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<XmlInstance> CreateOrUpdate(WaitUntil waitUntil, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -108,7 +108,7 @@ namespace XmlDeserialization
             {
                 var response = _xmlInstanceXmlDeserializationRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, xmlName, parameters, ifMatch, cancellationToken);
                 var operation = new XmlDeserializationArmOperation<XmlInstance>(Response.FromValue(new XmlInstance(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }
@@ -128,7 +128,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public async virtual Task<Response<XmlInstance>> GetAsync(string xmlName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<XmlInstance>> GetAsync(string xmlName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
@@ -138,7 +138,7 @@ namespace XmlDeserialization
             {
                 var response = await _xmlInstanceXmlDeserializationRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new XmlInstance(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -167,7 +167,7 @@ namespace XmlDeserialization
             {
                 var response = _xmlInstanceXmlDeserializationRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, xmlName, cancellationToken);
                 if (response.Value == null)
-                    throw _xmlInstanceXmlDeserializationClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new XmlInstance(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -276,7 +276,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string xmlName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 
@@ -330,7 +330,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
-        public async virtual Task<Response<XmlInstance>> GetIfExistsAsync(string xmlName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<XmlInstance>> GetIfExistsAsync(string xmlName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
 

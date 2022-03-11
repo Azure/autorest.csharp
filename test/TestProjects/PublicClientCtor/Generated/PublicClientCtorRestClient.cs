@@ -33,15 +33,15 @@ namespace PublicClientCtor
         /// <param name="param1"> Tesing Param1. </param>
         /// <param name="param2"> Testing Param2. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public PublicClientCtorRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             _param1 = param1;
             _param2 = param2;
             _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
         }
 
         internal HttpMessage CreateOperationRequest(TestModel value)
