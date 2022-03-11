@@ -119,11 +119,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                         _writer.Line($"// Operation is not implemented for this Step!");
                     }
                 }
-                else if (step.Type == TestStepType.ArmTemplateDeployment && step.ArmTemplatePayload is not null)
+                else if (step.Type == TestStepType.ArmTemplateDeployment && step.ArmTemplatePayloadString is not null)
                 {
                     var templatePayload = new CodeWriterDeclaration("templatePayload");
-                    _writer.Line($"var {templatePayload:D} = {Newtonsoft.Json.JsonConvert.SerializeObject(step.ArmTemplatePayload).RefScenarioDefinedVariables(scenarioDefinedVariables)};");
-                    // writer.Line($"var {templatePayload:D} = {System.Text.Json.JsonDocument.ParseValue(new System.Text.Json.Utf8JsonReader( step.ArmTemplatePayload)).RefScenarioDefinedVariables(scenarioDefinedVariables)};");
+                    _writer.Line($"var {templatePayload:D} = {step.ArmTemplatePayloadString.RefScenarioDefinedVariables(scenarioDefinedVariables)};");
+                    // _writer.Line($"var {templatePayload:D} = {System.Text.Json.JsonSerializer.Serialize(step.ArmTemplatePayload).RefScenarioDefinedVariables(scenarioDefinedVariables)};");
                     var deploymentOperation = new CodeWriterDeclaration("deploymentOperation");
                     using (_writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetDeployments().CreateOrUpdateAsync(true, {step.Step:L}, new Resources.Models.DeploymentInput(new Resources.Models.DeploymentProperties(Resources.Models.DeploymentMode.Complete)", "{", "}));"))
                     {
@@ -134,12 +134,22 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     var outputs = new CodeWriterDeclaration("deployOutputs");
                     using (_writer.Scope($"if ({deploymentOperation}.Value.Data.Properties.Outputs is Dictionary<string, object> {outputs:D})"))
                     {
-                        foreach (var variableName in step.OutputVariableNames)
+                        var armTemplate = new JsonRawValue(step.ArmTemplatePayload);
+                        if (armTemplate.IsDictionary() && armTemplate.AsDictionary().TryGetValue("variables", out object? variables))
                         {
-                            var element = new CodeWriterDeclaration("outputVariable");
-                            using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is Dictionary<string, object> {element:D})"))
+                            var rawVariables = new JsonRawValue(variables);
+                            if (rawVariables.IsDictionary())
                             {
-                                _writer.Line($"{variableName} = {element}[\"value\"].ToString();");
+                                foreach (var variableName in rawVariables.AsDictionary().Keys)
+                                {
+                                    if (!existedVariables.Contains(variableName))
+                                        continue;
+                                    var element = new CodeWriterDeclaration("outputVariable");
+                                    using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is Dictionary<string, object> {element:D})"))
+                                    {
+                                        _writer.Line($"{variableName} = {element}[\"value\"].ToString();");
+                                    }
+                                }
                             }
                         }
                     }
