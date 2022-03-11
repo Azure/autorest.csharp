@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(Guid),
             AllSchemaTypes.Any => typeof(object),
-            AllSchemaTypes.AnyObject => typeof(object),
+            AllSchemaTypes.AnyObject => typeof(BinaryData),
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
         };

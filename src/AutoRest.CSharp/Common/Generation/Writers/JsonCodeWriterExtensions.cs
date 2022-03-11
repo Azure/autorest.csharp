@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -145,7 +146,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         bool writeFormat = false;
 
-                        writer.Append($"{writerName}.");
+                        if (frameworkType != typeof(BinaryData))
+                            writer.Append($"{writerName}.");
                         if (frameworkType == typeof(decimal) ||
                             frameworkType == typeof(double) ||
                             frameworkType == typeof(float) ||
@@ -196,6 +198,15 @@ namespace AutoRest.CSharp.Generation.Writers
                         else if (frameworkType == typeof(Uri))
                         {
                             writer.Line($"WriteStringValue({name}.{nameof(Uri.AbsoluteUri)});");
+                            return;
+                        }
+                        else if (frameworkType == typeof(BinaryData))
+                        {
+                            writer.Line($"#if NET6_0_OR_GREATER");
+                            writer.Line($"\t\t\t\twriter.WriteRawValue({name});");
+                            writer.Line($"#else");
+                            writer.Line($"{typeof(JsonSerializer)}.Serialize(writer, {typeof(JsonDocument)}.Parse({name}.ToString()).RootElement);");
+                            writer.Line($"#endif");
                             return;
                         }
 
@@ -541,6 +552,11 @@ namespace AutoRest.CSharp.Generation.Writers
             else if (frameworkType == typeof(Azure.ResourceManager.Models.SystemData))
             {
                 writer.Append($"JsonSerializer.Deserialize<{typeof(Azure.ResourceManager.Models.SystemData)}>({element}.ToString())");
+                return;
+            }
+            else if (frameworkType == typeof(BinaryData))
+            {
+                writer.Append($"{typeof(BinaryData)}.FromString(property.Value.GetRawText())");
                 return;
             }
             else
