@@ -133,15 +133,15 @@ stages:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
               DOTNET_MULTILEVEL_LOOKUP: 0
-          - script: |
-               pwsh ./eng/Launch-MockServiceHost.ps1
-            displayName: "Launch-MockServiceHost"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          # - script: |
+          #      pwsh ./eng/Launch-MockServiceHost.ps1
+          #   displayName: "Launch-MockServiceHost"
+          #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           # - pwsh: ./eng/InitMockTests.ps1
           #   displayName: "Generate All SDK"
           #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
-              start /B pwsh ./eng/Launch-MockServiceHost.ps1
+              Start-Process /B pwsh ./eng/Launch-MockServiceHost.ps1
               pwsh ./eng/InitMockTests.ps1
             displayName: "Generate All SDK"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
