@@ -52,7 +52,7 @@ namespace MgmtScopeResource
         {
             _fakePolicyAssignmentClientDiagnostics = new ClientDiagnostics("MgmtScopeResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string fakePolicyAssignmentApiVersion);
-            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(_fakePolicyAssignmentClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakePolicyAssignmentApiVersion);
+            _fakePolicyAssignmentRestClient = new FakePolicyAssignmentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fakePolicyAssignmentApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -88,7 +88,7 @@ namespace MgmtScopeResource
         /// Operation Id: FakePolicyAssignments_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<FakePolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FakePolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignment.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace MgmtScopeResource
             {
                 var response = await _fakePolicyAssignmentRestClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _fakePolicyAssignmentClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakePolicyAssignment(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -120,7 +120,7 @@ namespace MgmtScopeResource
             {
                 var response = _fakePolicyAssignmentRestClient.Get(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _fakePolicyAssignmentClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakePolicyAssignment(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -135,9 +135,9 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ArmOperation<FakePolicyAssignment>> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakePolicyAssignment>> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignment.Delete");
             scope.Start();
@@ -145,7 +145,7 @@ namespace MgmtScopeResource
             {
                 var response = await _fakePolicyAssignmentRestClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignment>(Response.FromValue(new FakePolicyAssignment(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -161,9 +161,9 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
         /// Operation Id: FakePolicyAssignments_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation<FakePolicyAssignment> Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakePolicyAssignment> Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _fakePolicyAssignmentClientDiagnostics.CreateScope("FakePolicyAssignment.Delete");
             scope.Start();
@@ -171,7 +171,7 @@ namespace MgmtScopeResource
             {
                 var response = _fakePolicyAssignmentRestClient.Delete(Id.Parent, Id.Name, cancellationToken);
                 var operation = new MgmtScopeResourceArmOperation<FakePolicyAssignment>(Response.FromValue(new FakePolicyAssignment(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }

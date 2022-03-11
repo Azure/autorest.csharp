@@ -176,33 +176,40 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private class PublicDefinitionVisitor : CSharpSyntaxRewriter
         {
-            private List<SyntaxNode> _declarations = new();
-            internal IReadOnlyList<SyntaxNode> ModelDeclarations => _declarations;
-            private ImmutableHashSet<string> _modelsToKeep;
+            public ImmutableHashSet<SyntaxNode> ModelDeclarations { get; private set; }
+            private readonly ImmutableHashSet<string> _modelsToKeep;
 
             public PublicDefinitionVisitor(ImmutableHashSet<string> modelsToKeep)
             {
                 _modelsToKeep = modelsToKeep;
+                ModelDeclarations = ImmutableHashSet<SyntaxNode>.Empty;
             }
 
             public PublicDefinitionVisitor()
             {
                 _modelsToKeep = ImmutableHashSet<string>.Empty;
+                ModelDeclarations = ImmutableHashSet<SyntaxNode>.Empty;
             }
 
             public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node)!;
                 if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                    _declarations.Add(node);
+                {
+                    ModelDeclarations = ModelDeclarations.Add(node);
+                }
+
                 return node;
             }
 
             public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)
             {
                 node = (StructDeclarationSyntax)base.VisitStructDeclaration(node)!;
+
                 if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                    _declarations.Add(node);
+                {
+                    ModelDeclarations = ModelDeclarations.Add(node);
+                }
                 return node;
             }
 
@@ -210,7 +217,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node)!;
                 if (IsPublic(node.Modifiers) && !_modelsToKeep.Contains(node.Identifier.ToString()))
-                    _declarations.Add(node);
+                {
+                    ModelDeclarations = ModelDeclarations.Add(node);
+                }
                 return node;
             }
         }
@@ -264,7 +273,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static bool IsStatic(SyntaxTokenList tokenList)
             => tokenList.Any(token => token.IsKind(SyntaxKind.StaticKeyword));
 
-        private async Task<IEnumerable<SyntaxNode>> GetAllDeclaredModels(ImmutableHashSet<string> modelsToKeep)
+        private async Task<ImmutableHashSet<SyntaxNode>> GetAllDeclaredModels(ImmutableHashSet<string> modelsToKeep)
         {
             var classVisitor = new PublicDefinitionVisitor(modelsToKeep);
 
@@ -280,7 +289,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return classVisitor.ModelDeclarations;
         }
 
-        private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModels()
+        private async IAsyncEnumerable<SyntaxNode> TraverseAllPublicModelsAsync()
         {
             var compilation = await _project.GetCompilationAsync();
             if (compilation == null)
@@ -417,10 +426,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             // first get all the declared models
             var definitions = await GetAllDeclaredModels(modelsToKeep);
             // traverse all the root and recursively add all the things we met
-            var publicModels = TraverseAllPublicModels().ToEnumerable();
+            var publicModels = TraverseAllPublicModelsAsync();
+            await foreach (var model in publicModels)
+            {
+                definitions = definitions.Remove(model);
+            }
             // get the models we need to mark internal
-            var internalModels = definitions.Except(publicModels);
-            foreach (var model in internalModels)
+            foreach (var model in definitions)
             {
                 MarkInternal(model);
             }

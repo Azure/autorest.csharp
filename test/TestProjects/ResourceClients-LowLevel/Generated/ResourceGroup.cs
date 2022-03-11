@@ -39,8 +39,8 @@ namespace ResourceClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of ResourceGroup. </summary>
-        /// <param name="clientDiagnostics"> The ClientDiagnostics instance to use. </param>
-        /// <param name="pipeline"> The pipeline instance to use. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="groupId"> Group identifier. </param>
         /// <param name="endpoint"> server parameter. </param>

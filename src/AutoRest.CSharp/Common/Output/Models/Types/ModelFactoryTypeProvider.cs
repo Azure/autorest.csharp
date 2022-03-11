@@ -43,9 +43,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static MethodSignature CreateMethod(SchemaObjectType modelType)
         {
             var ctor = modelType.SerializationConstructor.Signature;
-            var methodParameters = new Parameter[ctor.Parameters.Length];
+            var methodParameters = new Parameter[ctor.Parameters.Count];
 
-            for (var i = 0; i < ctor.Parameters.Length; i++)
+            for (var i = 0; i < ctor.Parameters.Count; i++)
             {
                 var ctorParameter = ctor.Parameters[i];
                 var inputType = TypeFactory.GetInputType(ctorParameter.Type);
