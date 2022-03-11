@@ -33,7 +33,7 @@ namespace body_complex
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal DictionaryClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new DictionaryRestClient(pipeline, endpoint);
+            RestClient = new DictionaryRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

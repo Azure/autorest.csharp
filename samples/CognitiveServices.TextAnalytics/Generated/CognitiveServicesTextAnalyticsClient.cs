@@ -33,7 +33,7 @@ namespace CognitiveServices.TextAnalytics
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="endpoint"/> is null. </exception>
         internal CognitiveServicesTextAnalyticsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
-            RestClient = new CognitiveServicesTextAnalyticsRestClient(pipeline, endpoint);
+            RestClient = new CognitiveServicesTextAnalyticsRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

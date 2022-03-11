@@ -34,7 +34,7 @@ namespace model_flattening
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal AutoRestResourceFlatteningTestServiceClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new AutoRestResourceFlatteningTestServiceRestClient(pipeline, endpoint);
+            RestClient = new AutoRestResourceFlatteningTestServiceRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

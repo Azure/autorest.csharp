@@ -36,7 +36,7 @@ namespace validation
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         internal AutoRestValidationTestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "1.0.0")
         {
-            RestClient = new AutoRestValidationTestRestClient(pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new AutoRestValidationTestRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

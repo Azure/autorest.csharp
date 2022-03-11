@@ -8,6 +8,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
@@ -37,7 +38,7 @@ namespace MgmtKeyvault.Tests.Mock
             });
 
             var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
-            await collection.CreateOrUpdateAsync(true, vaultName, parameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, parameters);
         }
 
         [RecordedTest]
@@ -58,7 +59,7 @@ namespace MgmtKeyvault.Tests.Mock
             });
 
             var collection = GetArmClient().GetResourceGroup(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group")).GetVaults();
-            await collection.CreateOrUpdateAsync(true, vaultName, parameters);
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, vaultName, parameters);
         }
 
         [RecordedTest]

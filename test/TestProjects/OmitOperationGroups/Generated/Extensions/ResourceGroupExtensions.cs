@@ -36,6 +36,34 @@ namespace OmitOperationGroups
         }
 
         /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="model2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        public static async Task<Response<Model2>> GetModel2Async(this ResourceGroup resourceGroup, string model2SName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetModel2s().GetAsync(model2SName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}
+        /// Operation Id: Model2s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="model2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        public static Response<Model2> GetModel2(this ResourceGroup resourceGroup, string model2SName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetModel2s().Get(model2SName, cancellationToken);
+        }
+
+        /// <summary>
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s
         /// Operation Id: Model5s_List
         /// </summary>

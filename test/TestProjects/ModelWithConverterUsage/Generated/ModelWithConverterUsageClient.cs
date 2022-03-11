@@ -33,7 +33,7 @@ namespace ModelWithConverterUsage
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal ModelWithConverterUsageClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new ModelWithConverterUsageRestClient(pipeline, endpoint);
+            RestClient = new ModelWithConverterUsageRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

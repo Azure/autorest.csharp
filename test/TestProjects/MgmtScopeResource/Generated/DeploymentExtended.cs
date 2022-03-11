@@ -143,9 +143,9 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_DeleteAtScope
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.Delete");
             scope.Start();
@@ -153,7 +153,7 @@ namespace MgmtScopeResource
             {
                 var response = await _deploymentExtendedDeploymentsRestClient.DeleteAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtScopeResourceArmOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateDeleteAtScopeRequest(Id.Parent, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -169,9 +169,9 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
         /// Operation Id: Deployments_DeleteAtScope
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _deploymentExtendedDeploymentsClientDiagnostics.CreateScope("DeploymentExtended.Delete");
             scope.Start();
@@ -179,7 +179,7 @@ namespace MgmtScopeResource
             {
                 var response = _deploymentExtendedDeploymentsRestClient.DeleteAtScope(Id.Parent, Id.Name, cancellationToken);
                 var operation = new MgmtScopeResourceArmOperation(_deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateDeleteAtScopeRequest(Id.Parent, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -239,11 +239,11 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/validate
         /// Operation Id: Deployments_ValidateAtScope
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<DeploymentValidateResult>> ValidateAtScopeAsync(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<DeploymentValidateResult>> ValidateAtScopeAsync(WaitUntil waitUntil, Deployment parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -253,7 +253,7 @@ namespace MgmtScopeResource
             {
                 var response = await _deploymentExtendedDeploymentsRestClient.ValidateAtScopeAsync(Id.Parent, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtScopeResourceArmOperation<DeploymentValidateResult>(new DeploymentValidateResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -269,11 +269,11 @@ namespace MgmtScopeResource
         /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/validate
         /// Operation Id: Deployments_ValidateAtScope
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<DeploymentValidateResult> ValidateAtScope(bool waitForCompletion, Deployment parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<DeploymentValidateResult> ValidateAtScope(WaitUntil waitUntil, Deployment parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -283,7 +283,7 @@ namespace MgmtScopeResource
             {
                 var response = _deploymentExtendedDeploymentsRestClient.ValidateAtScope(Id.Parent, Id.Name, parameters, cancellationToken);
                 var operation = new MgmtScopeResourceArmOperation<DeploymentValidateResult>(new DeploymentValidateResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateValidateAtScopeRequest(Id.Parent, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }
@@ -349,11 +349,11 @@ namespace MgmtScopeResource
         /// Request Path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
         /// Operation Id: Deployments_WhatIfAtTenantScope
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<WhatIfOperationResult>> WhatIfAsync(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<WhatIfOperationResult>> WhatIfAsync(WaitUntil waitUntil, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -365,7 +365,7 @@ namespace MgmtScopeResource
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                    if (waitForCompletion)
+                    if (waitUntil == WaitUntil.Completed)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
@@ -373,7 +373,7 @@ namespace MgmtScopeResource
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                    if (waitForCompletion)
+                    if (waitUntil == WaitUntil.Completed)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
@@ -381,7 +381,7 @@ namespace MgmtScopeResource
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtSubscriptionScopeAsync(Id.SubscriptionId, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                    if (waitForCompletion)
+                    if (waitUntil == WaitUntil.Completed)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
@@ -389,7 +389,7 @@ namespace MgmtScopeResource
                 {
                     var response = await _deploymentExtendedDeploymentsRestClient.WhatIfAtTenantScopeAsync(Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                    if (waitForCompletion)
+                    if (waitUntil == WaitUntil.Completed)
                         await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                     return operation;
                 }
@@ -416,11 +416,11 @@ namespace MgmtScopeResource
         /// Request Path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
         /// Operation Id: Deployments_WhatIfAtTenantScope
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<WhatIfOperationResult> WhatIf(bool waitForCompletion, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<WhatIfOperationResult> WhatIf(WaitUntil waitUntil, DeploymentWhatIf parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -432,7 +432,7 @@ namespace MgmtScopeResource
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIf(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                    if (waitForCompletion)
+                    if (waitUntil == WaitUntil.Completed)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
@@ -440,7 +440,7 @@ namespace MgmtScopeResource
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, parameters, cancellationToken);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                    if (waitForCompletion)
+                    if (waitUntil == WaitUntil.Completed)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
@@ -448,7 +448,7 @@ namespace MgmtScopeResource
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtSubscriptionScope(Id.SubscriptionId, Id.Name, parameters, cancellationToken);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                    if (waitForCompletion)
+                    if (waitUntil == WaitUntil.Completed)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
@@ -456,7 +456,7 @@ namespace MgmtScopeResource
                 {
                     var response = _deploymentExtendedDeploymentsRestClient.WhatIfAtTenantScope(Id.Name, parameters, cancellationToken);
                     var operation = new MgmtScopeResourceArmOperation<WhatIfOperationResult>(new WhatIfOperationResultOperationSource(), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, _deploymentExtendedDeploymentsRestClient.CreateWhatIfAtTenantScopeRequest(Id.Name, parameters).Request, response, OperationFinalStateVia.Location);
-                    if (waitForCompletion)
+                    if (waitUntil == WaitUntil.Completed)
                         operation.WaitForCompletion(cancellationToken);
                     return operation;
                 }
@@ -676,7 +676,7 @@ namespace MgmtScopeResource
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -707,7 +707,7 @@ namespace MgmtScopeResource
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -734,10 +734,10 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -764,10 +764,10 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -796,7 +796,7 @@ namespace MgmtScopeResource
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -825,7 +825,7 @@ namespace MgmtScopeResource
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 return Response.FromValue(new DeploymentExtended(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

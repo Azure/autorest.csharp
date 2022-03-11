@@ -91,6 +91,34 @@ namespace MgmtParamOrdering
         }
 
         /// <summary>
+        /// Get container.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+        /// Operation Id: EnvironmentContainers_Get
+        /// </summary>
+        /// <param name="name"> Container name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual async Task<Response<EnvironmentContainerResource>> GetEnvironmentContainerResourceAsync(string name, CancellationToken cancellationToken = default)
+        {
+            return await GetEnvironmentContainerResources().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get container.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+        /// Operation Id: EnvironmentContainers_Get
+        /// </summary>
+        /// <param name="name"> Container name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public virtual Response<EnvironmentContainerResource> GetEnvironmentContainerResource(string name, CancellationToken cancellationToken = default)
+        {
+            return GetEnvironmentContainerResources().Get(name, cancellationToken);
+        }
+
+        /// <summary>
         /// Gets the properties of the specified machine learning workspace.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// Operation Id: Workspaces_Get
@@ -143,9 +171,9 @@ namespace MgmtParamOrdering
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// Operation Id: Workspaces_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _workspaceClientDiagnostics.CreateScope("Workspace.Delete");
             scope.Start();
@@ -153,7 +181,7 @@ namespace MgmtParamOrdering
             {
                 var response = await _workspaceRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtParamOrderingArmOperation(_workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -169,9 +197,9 @@ namespace MgmtParamOrdering
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
         /// Operation Id: Workspaces_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _workspaceClientDiagnostics.CreateScope("Workspace.Delete");
             scope.Start();
@@ -179,7 +207,7 @@ namespace MgmtParamOrdering
             {
                 var response = _workspaceRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new MgmtParamOrderingArmOperation(_workspaceClientDiagnostics, Pipeline, _workspaceRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -210,7 +238,7 @@ namespace MgmtParamOrdering
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -241,7 +269,7 @@ namespace MgmtParamOrdering
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -268,10 +296,10 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -298,10 +326,10 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -330,7 +358,7 @@ namespace MgmtParamOrdering
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Workspace(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -359,7 +387,7 @@ namespace MgmtParamOrdering
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Workspace(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

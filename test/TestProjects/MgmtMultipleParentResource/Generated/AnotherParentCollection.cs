@@ -56,13 +56,13 @@ namespace MgmtMultipleParentResource
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
         /// Operation Id: AnotherParents_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public virtual async Task<ArmOperation<AnotherParent>> CreateOrUpdateAsync(bool waitForCompletion, string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<AnotherParent>> CreateOrUpdateAsync(WaitUntil waitUntil, string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
             Argument.AssertNotNull(anotherBody, nameof(anotherBody));
@@ -73,7 +73,7 @@ namespace MgmtMultipleParentResource
             {
                 var response = await _anotherParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, anotherName, anotherBody, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtMultipleParentResourceArmOperation<AnotherParent>(new AnotherParentOperationSource(Client), _anotherParentClientDiagnostics, Pipeline, _anotherParentRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, anotherName, anotherBody).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -89,13 +89,13 @@ namespace MgmtMultipleParentResource
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}
         /// Operation Id: AnotherParents_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public virtual ArmOperation<AnotherParent> CreateOrUpdate(bool waitForCompletion, string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<AnotherParent> CreateOrUpdate(WaitUntil waitUntil, string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
             Argument.AssertNotNull(anotherBody, nameof(anotherBody));
@@ -106,7 +106,7 @@ namespace MgmtMultipleParentResource
             {
                 var response = _anotherParentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, anotherName, anotherBody, cancellationToken);
                 var operation = new MgmtMultipleParentResourceArmOperation<AnotherParent>(new AnotherParentOperationSource(Client), _anotherParentClientDiagnostics, Pipeline, _anotherParentRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, anotherName, anotherBody).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }

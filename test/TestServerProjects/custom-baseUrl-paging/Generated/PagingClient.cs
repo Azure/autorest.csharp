@@ -34,7 +34,7 @@ namespace custom_baseUrl_paging
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
         internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
-            RestClient = new PagingRestClient(pipeline, host);
+            RestClient = new PagingRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

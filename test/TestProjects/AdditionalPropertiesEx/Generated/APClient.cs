@@ -33,7 +33,7 @@ namespace AdditionalPropertiesEx
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal APClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new APRestClient(pipeline, endpoint);
+            RestClient = new APRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

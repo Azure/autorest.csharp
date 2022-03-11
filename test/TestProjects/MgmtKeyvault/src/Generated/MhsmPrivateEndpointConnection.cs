@@ -136,9 +136,9 @@ namespace MgmtKeyvault
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections/{privateEndpointConnectionName}
         /// Operation Id: MHSMPrivateEndpointConnections_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation<MhsmPrivateEndpointConnection>> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<MhsmPrivateEndpointConnection>> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsClientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Delete");
             scope.Start();
@@ -146,7 +146,7 @@ namespace MgmtKeyvault
             {
                 var response = await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtKeyvaultArmOperation<MhsmPrivateEndpointConnection>(new MhsmPrivateEndpointConnectionOperationSource(Client), _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsClientDiagnostics, Pipeline, _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -162,9 +162,9 @@ namespace MgmtKeyvault
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections/{privateEndpointConnectionName}
         /// Operation Id: MHSMPrivateEndpointConnections_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation<MhsmPrivateEndpointConnection> Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<MhsmPrivateEndpointConnection> Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsClientDiagnostics.CreateScope("MhsmPrivateEndpointConnection.Delete");
             scope.Start();
@@ -172,7 +172,7 @@ namespace MgmtKeyvault
             {
                 var response = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtKeyvaultArmOperation<MhsmPrivateEndpointConnection>(new MhsmPrivateEndpointConnectionOperationSource(Client), _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsClientDiagnostics, Pipeline, _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }
@@ -203,7 +203,7 @@ namespace MgmtKeyvault
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -234,7 +234,7 @@ namespace MgmtKeyvault
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -261,10 +261,10 @@ namespace MgmtKeyvault
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -291,10 +291,10 @@ namespace MgmtKeyvault
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -323,7 +323,7 @@ namespace MgmtKeyvault
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -352,7 +352,7 @@ namespace MgmtKeyvault
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new MhsmPrivateEndpointConnection(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

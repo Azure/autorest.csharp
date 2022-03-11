@@ -137,9 +137,9 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
         /// Operation Id: AvailabilitySets_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.Delete");
             scope.Start();
@@ -147,7 +147,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var response = await _availabilitySetRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new SampleArmOperation(response);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -163,9 +163,9 @@ namespace Azure.ResourceManager.Sample
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
         /// Operation Id: AvailabilitySets_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _availabilitySetClientDiagnostics.CreateScope("AvailabilitySet.Delete");
             scope.Start();
@@ -173,7 +173,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var response = _availabilitySetRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new SampleArmOperation(response);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -310,7 +310,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -341,7 +341,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -368,10 +368,10 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -398,10 +398,10 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -430,7 +430,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -459,7 +459,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

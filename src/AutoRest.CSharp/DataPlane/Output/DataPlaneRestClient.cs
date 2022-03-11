@@ -52,10 +52,7 @@ namespace AutoRest.CSharp.Output.Models
         private static IReadOnlyList<Parameter> GetOrderedParameters(RestClientBuilder clientBuilder, IReadOnlyList<LowLevelClientMethod> protocolMethods)
         {
             var parameters = new List<Parameter>();
-            if (protocolMethods.Any())
-            {
-                parameters.Add(KnownParameters.ClientDiagnostics);
-            }
+            parameters.Add(KnownParameters.ClientDiagnostics);
             parameters.Add(KnownParameters.Pipeline);
             parameters.AddRange(clientBuilder.GetOrderedParametersByRequired());
             return parameters;

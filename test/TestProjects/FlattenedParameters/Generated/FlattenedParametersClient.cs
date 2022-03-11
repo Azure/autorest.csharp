@@ -33,7 +33,7 @@ namespace FlattenedParameters
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal FlattenedParametersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new FlattenedParametersRestClient(pipeline, endpoint);
+            RestClient = new FlattenedParametersRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

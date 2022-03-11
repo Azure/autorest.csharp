@@ -137,9 +137,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
         /// Operation Id: VirtualMachineScaleSetVMs_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> DeleteAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeleteAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Delete");
             scope.Start();
@@ -147,7 +147,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.DeleteAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -163,9 +163,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}
         /// Operation Id: VirtualMachineScaleSetVMs_Delete
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Delete(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Delete(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Delete");
             scope.Start();
@@ -173,7 +173,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Delete(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateDeleteRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -189,10 +189,10 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage
         /// Operation Id: VirtualMachineScaleSetVMs_Reimage
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmScaleSetVmReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> ReimageAsync(bool waitForCompletion, VirtualMachineScaleSetVmReimageParameters vmScaleSetVmReimageInput = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> ReimageAsync(WaitUntil waitUntil, VirtualMachineScaleSetVmReimageParameters vmScaleSetVmReimageInput = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Reimage");
             scope.Start();
@@ -200,7 +200,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ReimageAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmScaleSetVmReimageInput, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmScaleSetVmReimageInput).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -216,10 +216,10 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage
         /// Operation Id: VirtualMachineScaleSetVMs_Reimage
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="vmScaleSetVmReimageInput"> Parameters for the Reimaging Virtual machine in ScaleSet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Reimage(bool waitForCompletion, VirtualMachineScaleSetVmReimageParameters vmScaleSetVmReimageInput = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Reimage(WaitUntil waitUntil, VirtualMachineScaleSetVmReimageParameters vmScaleSetVmReimageInput = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Reimage");
             scope.Start();
@@ -227,7 +227,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Reimage(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmScaleSetVmReimageInput, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateReimageRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmScaleSetVmReimageInput).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -243,9 +243,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall
         /// Operation Id: VirtualMachineScaleSetVMs_ReimageAll
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> ReimageAllAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> ReimageAllAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.ReimageAll");
             scope.Start();
@@ -253,7 +253,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ReimageAllAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateReimageAllRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -269,9 +269,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall
         /// Operation Id: VirtualMachineScaleSetVMs_ReimageAll
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation ReimageAll(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation ReimageAll(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.ReimageAll");
             scope.Start();
@@ -279,7 +279,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.ReimageAll(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateReimageAllRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -295,9 +295,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate
         /// Operation Id: VirtualMachineScaleSetVMs_Deallocate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> DeallocateAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> DeallocateAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Deallocate");
             scope.Start();
@@ -305,7 +305,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.DeallocateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -321,9 +321,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate
         /// Operation Id: VirtualMachineScaleSetVMs_Deallocate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Deallocate(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Deallocate(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Deallocate");
             scope.Start();
@@ -331,7 +331,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Deallocate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateDeallocateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -391,10 +391,10 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff
         /// Operation Id: VirtualMachineScaleSetVMs_PowerOff
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> PowerOffAsync(bool waitForCompletion, bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> PowerOffAsync(WaitUntil waitUntil, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.PowerOff");
             scope.Start();
@@ -402,7 +402,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.PowerOffAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, skipShutdown, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, skipShutdown).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -418,10 +418,10 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff
         /// Operation Id: VirtualMachineScaleSetVMs_PowerOff
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation PowerOff(bool waitForCompletion, bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation PowerOff(WaitUntil waitUntil, bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.PowerOff");
             scope.Start();
@@ -429,7 +429,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.PowerOff(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, skipShutdown, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreatePowerOffRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, skipShutdown).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -445,9 +445,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart
         /// Operation Id: VirtualMachineScaleSetVMs_Restart
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> RestartAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> RestartAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Restart");
             scope.Start();
@@ -455,7 +455,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.RestartAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -471,9 +471,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart
         /// Operation Id: VirtualMachineScaleSetVMs_Restart
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Restart(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Restart(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Restart");
             scope.Start();
@@ -481,7 +481,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Restart(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateRestartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -497,9 +497,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start
         /// Operation Id: VirtualMachineScaleSetVMs_Start
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> StartAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> StartAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Start");
             scope.Start();
@@ -507,7 +507,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.StartAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -523,9 +523,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start
         /// Operation Id: VirtualMachineScaleSetVMs_Start
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Start(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Start(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Start");
             scope.Start();
@@ -533,7 +533,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Start(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateStartRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -549,9 +549,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy
         /// Operation Id: VirtualMachineScaleSetVMs_Redeploy
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> RedeployAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> RedeployAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Redeploy");
             scope.Start();
@@ -559,7 +559,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.RedeployAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -575,9 +575,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy
         /// Operation Id: VirtualMachineScaleSetVMs_Redeploy
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation Redeploy(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation Redeploy(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.Redeploy");
             scope.Start();
@@ -585,7 +585,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Redeploy(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreateRedeployRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -647,9 +647,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/performMaintenance
         /// Operation Id: VirtualMachineScaleSetVMs_PerformMaintenance
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation> PerformMaintenanceAsync(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation> PerformMaintenanceAsync(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.PerformMaintenance");
             scope.Start();
@@ -657,7 +657,7 @@ namespace MgmtRenameRules
             {
                 var response = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.PerformMaintenanceAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -673,9 +673,9 @@ namespace MgmtRenameRules
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/performMaintenance
         /// Operation Id: VirtualMachineScaleSetVMs_PerformMaintenance
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation PerformMaintenance(bool waitForCompletion, CancellationToken cancellationToken = default)
+        public virtual ArmOperation PerformMaintenance(WaitUntil waitUntil, CancellationToken cancellationToken = default)
         {
             using var scope = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics.CreateScope("VirtualMachineScaleSetVm.PerformMaintenance");
             scope.Start();
@@ -683,7 +683,7 @@ namespace MgmtRenameRules
             {
                 var response = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.PerformMaintenance(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 var operation = new MgmtRenameRulesArmOperation(_virtualMachineScaleSetVmVirtualMachineScaleSetVMsClientDiagnostics, Pipeline, _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.CreatePerformMaintenanceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;
             }
@@ -758,7 +758,7 @@ namespace MgmtRenameRules
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetVm(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -789,7 +789,7 @@ namespace MgmtRenameRules
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetVm(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -816,10 +816,10 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetVm(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -846,10 +846,10 @@ namespace MgmtRenameRules
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetVm(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -878,7 +878,7 @@ namespace MgmtRenameRules
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetVm(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -907,7 +907,7 @@ namespace MgmtRenameRules
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _virtualMachineScaleSetVmVirtualMachineScaleSetVMsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetVm(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

@@ -37,7 +37,7 @@ namespace AppConfiguration
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         internal AppConfigurationClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string syncToken = null, string apiVersion = "1.0")
         {
-            RestClient = new AppConfigurationRestClient(pipeline, endpoint, syncToken, apiVersion);
+            RestClient = new AppConfigurationRestClient(clientDiagnostics, pipeline, endpoint, syncToken, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

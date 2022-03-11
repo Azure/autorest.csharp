@@ -32,7 +32,7 @@ namespace custom_baseUrl
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
         internal PathsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
-            RestClient = new PathsRestClient(pipeline, host);
+            RestClient = new PathsRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

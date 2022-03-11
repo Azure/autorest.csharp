@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.TestFramework;
 using MgmtKeyvault;
@@ -42,7 +43,7 @@ namespace MgmtKeyvault.Tests.Mock
             var vaultId = MgmtKeyvault.Vault.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
             var vault = GetArmClient().GetVault(vaultId);
 
-            await vault.DeleteAsync(true);
+            await vault.DeleteAsync(WaitUntil.Completed);
         }
 
         [RecordedTest]

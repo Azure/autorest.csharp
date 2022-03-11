@@ -35,12 +35,68 @@ namespace SupersetFlattenInheritance
             return GetExtensionClient(resourceGroup).GetResourceModel1s();
         }
 
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        public static async Task<Response<ResourceModel1>> GetResourceModel1Async(this ResourceGroup resourceGroup, string resourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetResourceModel1s().GetAsync(resourceModel1SName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}
+        /// Operation Id: ResourceModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="resourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        public static Response<ResourceModel1> GetResourceModel1(this ResourceGroup resourceGroup, string resourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetResourceModel1s().Get(resourceModel1SName, cancellationToken);
+        }
+
         /// <summary> Gets a collection of TrackedResourceModel1s in the TrackedResourceModel1. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of TrackedResourceModel1s and their operations over a TrackedResourceModel1. </returns>
         public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetTrackedResourceModel1s();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Operation Id: TrackedResourceModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="trackedResourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        public static async Task<Response<TrackedResourceModel1>> GetTrackedResourceModel1Async(this ResourceGroup resourceGroup, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetTrackedResourceModel1s().GetAsync(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/trackedResourceModel1s/{trackedResourceModel1SName}
+        /// Operation Id: TrackedResourceModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="trackedResourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        public static Response<TrackedResourceModel1> GetTrackedResourceModel1(this ResourceGroup resourceGroup, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetTrackedResourceModel1s().Get(trackedResourceModel1SName, cancellationToken);
         }
 
         /// <summary>
