@@ -386,6 +386,9 @@ $LaunchScript = Join-Path $PSScriptRoot  "Launch-MockServiceHost.ps1"
 # Invoke-Command  -ScriptBlock $launchTask
 Start-Process powershell $LaunchScript -WindowStyle Hidden
 
+$task = { & $LaunchScript }
+Start-Job $task
+
 # Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $false
