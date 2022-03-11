@@ -22,10 +22,10 @@ using Azure.ResourceManager.Resources;
 namespace MgmtSafeFlatten
 {
     /// <summary> A class representing collection of TypeOne and their operations over its parent. </summary>
-    public partial class TypeOneCollection : ArmCollection, IEnumerable<TypeOne>, IAsyncEnumerable<TypeOne>
+    public partial class TypeOneCollection : ArmCollection, IEnumerable<TypeOneResource>, IAsyncEnumerable<TypeOneResource>
     {
-        private readonly ClientDiagnostics _typeOneCommonClientDiagnostics;
-        private readonly CommonRestOperations _typeOneCommonRestClient;
+        private readonly ClientDiagnostics _typeOneResourceCommonClientDiagnostics;
+        private readonly CommonRestOperations _typeOneResourceCommonRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="TypeOneCollection"/> class for mocking. </summary>
         protected TypeOneCollection()
@@ -37,9 +37,9 @@ namespace MgmtSafeFlatten
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal TypeOneCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _typeOneCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", TypeOne.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(TypeOne.ResourceType, out string typeOneCommonApiVersion);
-            _typeOneCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneCommonApiVersion);
+            _typeOneResourceCommonClientDiagnostics = new ClientDiagnostics("MgmtSafeFlatten", TypeOneResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(TypeOneResource.ResourceType, out string typeOneResourceCommonApiVersion);
+            _typeOneResourceCommonRestClient = new CommonRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, typeOneResourceCommonApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,17 +62,17 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
-        public virtual async Task<ArmOperation<TypeOne>> CreateOrUpdateAsync(WaitUntil waitUntil, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<TypeOneResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
             Argument.AssertNotNull(typeOne, nameof(typeOne));
 
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
+            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _typeOneCommonRestClient.CreateOrUpdateTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSafeFlattenArmOperation<TypeOne>(Response.FromValue(new TypeOne(Client, response), response.GetRawResponse()));
+                var response = await _typeOneResourceCommonRestClient.CreateOrUpdateTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtSafeFlattenArmOperation<TypeOneResource>(Response.FromValue(new TypeOneResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,17 +95,17 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> or <paramref name="typeOne"/> is null. </exception>
-        public virtual ArmOperation<TypeOne> CreateOrUpdate(WaitUntil waitUntil, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<TypeOneResource> CreateOrUpdate(WaitUntil waitUntil, string typeOneName, TypeOneData typeOne, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
             Argument.AssertNotNull(typeOne, nameof(typeOne));
 
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
+            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _typeOneCommonRestClient.CreateOrUpdateTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken);
-                var operation = new MgmtSafeFlattenArmOperation<TypeOne>(Response.FromValue(new TypeOne(Client, response), response.GetRawResponse()));
+                var response = _typeOneResourceCommonRestClient.CreateOrUpdateTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, typeOne, cancellationToken);
+                var operation = new MgmtSafeFlattenArmOperation<TypeOneResource>(Response.FromValue(new TypeOneResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -126,18 +126,18 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public virtual async Task<Response<TypeOne>> GetAsync(string typeOneName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TypeOneResource>> GetAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Get");
+            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.Get");
             scope.Start();
             try
             {
-                var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken).ConfigureAwait(false);
+                var response = await _typeOneResourceCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,18 +155,18 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public virtual Response<TypeOne> Get(string typeOneName, CancellationToken cancellationToken = default)
+        public virtual Response<TypeOneResource> Get(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Get");
+            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.Get");
             scope.Start();
             try
             {
-                var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken);
+                var response = _typeOneResourceCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -181,17 +181,17 @@ namespace MgmtSafeFlatten
         /// Operation Id: Common_ListTypeOnes
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<TypeOne> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<TypeOneResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<TypeOne>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<TypeOneResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
+                using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _typeOneCommonRestClient.ListTypeOnesAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(Client, value)), null, response.GetRawResponse());
+                    var response = await _typeOneResourceCommonRestClient.ListTypeOnesAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeOneResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,17 +208,17 @@ namespace MgmtSafeFlatten
         /// Operation Id: Common_ListTypeOnes
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<TypeOne> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<TypeOneResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<TypeOne> FirstPageFunc(int? pageSizeHint)
+            Page<TypeOneResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
+                using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _typeOneCommonRestClient.ListTypeOnes(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new TypeOne(Client, value)), null, response.GetRawResponse());
+                    var response = _typeOneResourceCommonRestClient.ListTypeOnes(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new TypeOneResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -242,7 +242,7 @@ namespace MgmtSafeFlatten
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Exists");
+            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.Exists");
             scope.Start();
             try
             {
@@ -269,7 +269,7 @@ namespace MgmtSafeFlatten
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.Exists");
+            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.Exists");
             scope.Start();
             try
             {
@@ -292,18 +292,18 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public virtual async Task<Response<TypeOne>> GetIfExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TypeOneResource>> GetIfExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
+            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _typeOneResourceCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<TypeOne>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<TypeOneResource>(null, response.GetRawResponse());
+                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -321,18 +321,18 @@ namespace MgmtSafeFlatten
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
-        public virtual Response<TypeOne> GetIfExists(string typeOneName, CancellationToken cancellationToken = default)
+        public virtual Response<TypeOneResource> GetIfExists(string typeOneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
 
-            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
+            using var scope = _typeOneResourceCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken);
+                var response = _typeOneResourceCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<TypeOne>(null, response.GetRawResponse());
-                return Response.FromValue(new TypeOne(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<TypeOneResource>(null, response.GetRawResponse());
+                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -341,7 +341,7 @@ namespace MgmtSafeFlatten
             }
         }
 
-        IEnumerator<TypeOne> IEnumerable<TypeOne>.GetEnumerator()
+        IEnumerator<TypeOneResource> IEnumerable<TypeOneResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -351,7 +351,7 @@ namespace MgmtSafeFlatten
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<TypeOne> IAsyncEnumerable<TypeOne>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<TypeOneResource> IAsyncEnumerable<TypeOneResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

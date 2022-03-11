@@ -25,12 +25,12 @@ namespace MgmtListMethods
             );
         }
 
-        /// <summary> Gets a collection of TenantTests in the TenantTest. </summary>
+        /// <summary> Gets a collection of TenantTestResources in the TenantTestResource. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of TenantTests and their operations over a TenantTest. </returns>
-        public static TenantTestCollection GetTenantTests(this Tenant tenant)
+        /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
+        public static TenantTestCollection GetTenantTestResources(this Tenant tenant)
         {
-            return GetExtensionClient(tenant).GetTenantTests();
+            return GetExtensionClient(tenant).GetTenantTestResources();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public static async Task<Response<TenantTest>> GetTenantTestAsync(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<TenantTestResource>> GetTenantTestResourceAsync(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await tenant.GetTenantTests().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
+            return await tenant.GetTenantTestResources().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
-        public static Response<TenantTest> GetTenantTest(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<TenantTestResource> GetTenantTestResource(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return tenant.GetTenantTests().Get(tenantTestName, expand, cancellationToken);
+            return tenant.GetTenantTestResources().Get(tenantTestName, expand, cancellationToken);
         }
     }
 }

@@ -22,10 +22,10 @@ using Azure.ResourceManager.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineExtensionImage and their operations over its parent. </summary>
-    public partial class VirtualMachineExtensionImageCollection : ArmCollection, IEnumerable<VirtualMachineExtensionImage>, IAsyncEnumerable<VirtualMachineExtensionImage>
+    public partial class VirtualMachineExtensionImageCollection : ArmCollection, IEnumerable<VirtualMachineExtensionImageResource>, IAsyncEnumerable<VirtualMachineExtensionImageResource>
     {
-        private readonly ClientDiagnostics _virtualMachineExtensionImageClientDiagnostics;
-        private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImageRestClient;
+        private readonly ClientDiagnostics _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics;
+        private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient;
         private readonly string _location;
         private readonly string _publisherName;
 
@@ -45,9 +45,9 @@ namespace Azure.ResourceManager.Sample
         {
             _location = location;
             _publisherName = publisherName;
-            _virtualMachineExtensionImageClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtensionImage.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(VirtualMachineExtensionImage.ResourceType, out string virtualMachineExtensionImageApiVersion);
-            _virtualMachineExtensionImageRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageApiVersion);
+            _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineExtensionImageResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(VirtualMachineExtensionImageResource.ResourceType, out string virtualMachineExtensionImageResourceVirtualMachineExtensionImagesApiVersion);
+            _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient = new VirtualMachineExtensionImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, virtualMachineExtensionImageResourceVirtualMachineExtensionImagesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -69,19 +69,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
-        public virtual async Task<Response<VirtualMachineExtensionImage>> GetAsync(string type, string version, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineExtensionImageResource>> GetAsync(string type, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
+            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImage(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -100,19 +100,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
-        public virtual Response<VirtualMachineExtensionImage> Get(string type, string version, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtensionImageResource> Get(string type, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
+            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Get");
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken);
+                var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImage(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -127,17 +127,17 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachineExtensionImages_ListTypes
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VirtualMachineExtensionImageResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<VirtualMachineExtensionImageResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<VirtualMachineExtensionImage>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<VirtualMachineExtensionImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineExtensionImageRestClient.ListTypesAsync(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(Client, value)), null, response.GetRawResponse());
+                    var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.ListTypesAsync(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImageResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -154,17 +154,17 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: VirtualMachineExtensionImages_ListTypes
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineExtensionImage> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VirtualMachineExtensionImageResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<VirtualMachineExtensionImageResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<VirtualMachineExtensionImage> FirstPageFunc(int? pageSizeHint)
+            Page<VirtualMachineExtensionImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineExtensionImageRestClient.ListTypes(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(Client, value)), null, response.GetRawResponse());
+                    var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.ListTypes(Id.SubscriptionId, _location, _publisherName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImageResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -187,19 +187,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<VirtualMachineExtensionImage> GetAllAsync(string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VirtualMachineExtensionImageResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<VirtualMachineExtensionImageResource> GetAllAsync(string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(type, nameof(type));
 
-            async Task<Page<VirtualMachineExtensionImage>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<VirtualMachineExtensionImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _virtualMachineExtensionImageRestClient.ListVersionsAsync(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(Client, value)), null, response.GetRawResponse());
+                    var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.ListVersionsAsync(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImageResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -222,19 +222,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<VirtualMachineExtensionImage> GetAll(string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VirtualMachineExtensionImageResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<VirtualMachineExtensionImageResource> GetAll(string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(type, nameof(type));
 
-            Page<VirtualMachineExtensionImage> FirstPageFunc(int? pageSizeHint)
+            Page<VirtualMachineExtensionImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
+                using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _virtualMachineExtensionImageRestClient.ListVersions(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImage(Client, value)), null, response.GetRawResponse());
+                    var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.ListVersions(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Select(value => new VirtualMachineExtensionImageResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -260,7 +260,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
+            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
             scope.Start();
             try
             {
@@ -289,7 +289,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
+            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.Exists");
             scope.Start();
             try
             {
@@ -313,19 +313,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
-        public virtual async Task<Response<VirtualMachineExtensionImage>> GetIfExistsAsync(string type, string version, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<VirtualMachineExtensionImageResource>> GetIfExistsAsync(string type, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
+            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<VirtualMachineExtensionImage>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImage(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<VirtualMachineExtensionImageResource>(null, response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -344,19 +344,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="type"/> or <paramref name="version"/> is null. </exception>
-        public virtual Response<VirtualMachineExtensionImage> GetIfExists(string type, string version, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtensionImageResource> GetIfExists(string type, string version, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(type, nameof(type));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            using var scope = _virtualMachineExtensionImageClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
+            using var scope = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics.CreateScope("VirtualMachineExtensionImageCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken);
+                var response = _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<VirtualMachineExtensionImage>(null, response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImage(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<VirtualMachineExtensionImageResource>(null, response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -365,7 +365,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        IEnumerator<VirtualMachineExtensionImage> IEnumerable<VirtualMachineExtensionImage>.GetEnumerator()
+        IEnumerator<VirtualMachineExtensionImageResource> IEnumerable<VirtualMachineExtensionImageResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -375,7 +375,7 @@ namespace Azure.ResourceManager.Sample
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<VirtualMachineExtensionImage> IAsyncEnumerable<VirtualMachineExtensionImage>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<VirtualMachineExtensionImageResource> IAsyncEnumerable<VirtualMachineExtensionImageResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

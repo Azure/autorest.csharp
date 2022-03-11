@@ -22,10 +22,10 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes
 {
     /// <summary> A class representing collection of RecordSetPtr and their operations over its parent. </summary>
-    public partial class RecordSetPtrCollection : ArmCollection, IEnumerable<RecordSetPtr>, IAsyncEnumerable<RecordSetPtr>
+    public partial class RecordSetPtrCollection : ArmCollection, IEnumerable<RecordSetPtrResource>, IAsyncEnumerable<RecordSetPtrResource>
     {
-        private readonly ClientDiagnostics _recordSetPtrRecordSetsClientDiagnostics;
-        private readonly RecordSetsRestOperations _recordSetPtrRecordSetsRestClient;
+        private readonly ClientDiagnostics _recordSetPtrResourceRecordSetsClientDiagnostics;
+        private readonly RecordSetsRestOperations _recordSetPtrResourceRecordSetsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetPtrCollection"/> class for mocking. </summary>
         protected RecordSetPtrCollection()
@@ -37,9 +37,9 @@ namespace MgmtExpandResourceTypes
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal RecordSetPtrCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _recordSetPtrRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetPtr.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(RecordSetPtr.ResourceType, out string recordSetPtrRecordSetsApiVersion);
-            _recordSetPtrRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetPtrRecordSetsApiVersion);
+            _recordSetPtrResourceRecordSetsClientDiagnostics = new ClientDiagnostics("MgmtExpandResourceTypes", RecordSetPtrResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(RecordSetPtrResource.ResourceType, out string recordSetPtrResourceRecordSetsApiVersion);
+            _recordSetPtrResourceRecordSetsRestClient = new RecordSetsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, recordSetPtrResourceRecordSetsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -47,8 +47,8 @@ namespace MgmtExpandResourceTypes
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != Zone.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, Zone.ResourceType), nameof(id));
+            if (id.ResourceType != ZoneResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ZoneResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -63,17 +63,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<RecordSetPtr>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<RecordSetPtrResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
+            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _recordSetPtrRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetPtr>(Response.FromValue(new RecordSetPtr(Client, response), response.GetRawResponse()));
+                var response = await _recordSetPtrResourceRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetPtrResource>(Response.FromValue(new RecordSetPtrResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -97,17 +97,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifNoneMatch"> Set to &apos;*&apos; to allow a new record set to be created, but to prevent updating an existing record set. Other values will be ignored. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<RecordSetPtr> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<RecordSetPtrResource> CreateOrUpdate(WaitUntil waitUntil, string relativeRecordSetName, RecordSetData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
+            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _recordSetPtrRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetPtr>(Response.FromValue(new RecordSetPtr(Client, response), response.GetRawResponse()));
+                var response = _recordSetPtrResourceRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, parameters, ifMatch, ifNoneMatch, cancellationToken);
+                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetPtrResource>(Response.FromValue(new RecordSetPtrResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -127,18 +127,18 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetPtr>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetPtrResource>> GetAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
+            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
             scope.Start();
             try
             {
-                var response = await _recordSetPtrRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetPtrResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetPtr(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,18 +155,18 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetPtr> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetPtrResource> Get(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
+            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Get");
             scope.Start();
             try
             {
-                var response = _recordSetPtrRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken);
+                var response = _recordSetPtrResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetPtr(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -183,17 +183,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetPtr" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<RecordSetPtr> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="RecordSetPtrResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<RecordSetPtrResource> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<RecordSetPtr>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<RecordSetPtrResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
+                using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetPtrRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtr(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _recordSetPtrResourceRecordSetsRestClient.ListByTypeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtrResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -201,14 +201,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            async Task<Page<RecordSetPtr>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<RecordSetPtrResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
+                using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _recordSetPtrRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtr(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _recordSetPtrResourceRecordSetsRestClient.ListByTypeNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtrResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -227,17 +227,17 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetPtr" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<RecordSetPtr> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="RecordSetPtrResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<RecordSetPtrResource> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
-            Page<RecordSetPtr> FirstPageFunc(int? pageSizeHint)
+            Page<RecordSetPtrResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
+                using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetPtrRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtr(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _recordSetPtrResourceRecordSetsRestClient.ListByType(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtrResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -245,14 +245,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            Page<RecordSetPtr> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<RecordSetPtrResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
+                using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _recordSetPtrRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtr(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _recordSetPtrResourceRecordSetsRestClient.ListByTypeNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new RecordSetPtrResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -275,7 +275,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
+            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
             scope.Start();
             try
             {
@@ -301,7 +301,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
+            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.Exists");
             scope.Start();
             try
             {
@@ -323,18 +323,18 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual async Task<Response<RecordSetPtr>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetPtrResource>> GetIfExistsAsync(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
+            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _recordSetPtrRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _recordSetPtrResourceRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<RecordSetPtr>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetPtr(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<RecordSetPtrResource>(null, response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -351,18 +351,18 @@ namespace MgmtExpandResourceTypes
         /// <param name="relativeRecordSetName"> The name of the record set, relative to the name of the zone. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="relativeRecordSetName"/> is null. </exception>
-        public virtual Response<RecordSetPtr> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetPtrResource> GetIfExists(string relativeRecordSetName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(relativeRecordSetName, nameof(relativeRecordSetName));
 
-            using var scope = _recordSetPtrRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
+            using var scope = _recordSetPtrResourceRecordSetsClientDiagnostics.CreateScope("RecordSetPtrCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _recordSetPtrRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
+                var response = _recordSetPtrResourceRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), relativeRecordSetName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<RecordSetPtr>(null, response.GetRawResponse());
-                return Response.FromValue(new RecordSetPtr(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<RecordSetPtrResource>(null, response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -371,7 +371,7 @@ namespace MgmtExpandResourceTypes
             }
         }
 
-        IEnumerator<RecordSetPtr> IEnumerable<RecordSetPtr>.GetEnumerator()
+        IEnumerator<RecordSetPtrResource> IEnumerable<RecordSetPtrResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -381,7 +381,7 @@ namespace MgmtExpandResourceTypes
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<RecordSetPtr> IAsyncEnumerable<RecordSetPtr>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<RecordSetPtrResource> IAsyncEnumerable<RecordSetPtrResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

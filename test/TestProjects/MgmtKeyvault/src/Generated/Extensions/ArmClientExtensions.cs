@@ -13,97 +13,97 @@ namespace MgmtKeyvault
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region Vault
-        /// <summary> Gets an object representing a Vault along with the instance operations that can be performed on it but with no data. </summary>
+        #region VaultResource
+        /// <summary> Gets an object representing a VaultResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Vault" /> object. </returns>
-        public static Vault GetVault(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="VaultResource" /> object. </returns>
+        public static VaultResource GetVaultResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                Vault.ValidateResourceId(id);
-                return new Vault(client, id);
+                VaultResource.ValidateResourceId(id);
+                return new VaultResource(client, id);
             }
             );
         }
         #endregion
 
-        #region DeletedVault
-        /// <summary> Gets an object representing a DeletedVault along with the instance operations that can be performed on it but with no data. </summary>
+        #region DeletedVaultResource
+        /// <summary> Gets an object representing a DeletedVaultResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedVault" /> object. </returns>
-        public static DeletedVault GetDeletedVault(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="DeletedVaultResource" /> object. </returns>
+        public static DeletedVaultResource GetDeletedVaultResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                DeletedVault.ValidateResourceId(id);
-                return new DeletedVault(client, id);
+                DeletedVaultResource.ValidateResourceId(id);
+                return new DeletedVaultResource(client, id);
             }
             );
         }
         #endregion
 
-        #region PrivateEndpointConnection
-        /// <summary> Gets an object representing a PrivateEndpointConnection along with the instance operations that can be performed on it but with no data. </summary>
+        #region PrivateEndpointConnectionResource
+        /// <summary> Gets an object representing a PrivateEndpointConnectionResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PrivateEndpointConnection" /> object. </returns>
-        public static PrivateEndpointConnection GetPrivateEndpointConnection(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PrivateEndpointConnectionResource" /> object. </returns>
+        public static PrivateEndpointConnectionResource GetPrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PrivateEndpointConnection.ValidateResourceId(id);
-                return new PrivateEndpointConnection(client, id);
+                PrivateEndpointConnectionResource.ValidateResourceId(id);
+                return new PrivateEndpointConnectionResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ManagedHsm
-        /// <summary> Gets an object representing a ManagedHsm along with the instance operations that can be performed on it but with no data. </summary>
+        #region ManagedHsmResource
+        /// <summary> Gets an object representing a ManagedHsmResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagedHsm" /> object. </returns>
-        public static ManagedHsm GetManagedHsm(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ManagedHsmResource" /> object. </returns>
+        public static ManagedHsmResource GetManagedHsmResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                ManagedHsm.ValidateResourceId(id);
-                return new ManagedHsm(client, id);
+                ManagedHsmResource.ValidateResourceId(id);
+                return new ManagedHsmResource(client, id);
             }
             );
         }
         #endregion
 
-        #region DeletedManagedHsm
-        /// <summary> Gets an object representing a DeletedManagedHsm along with the instance operations that can be performed on it but with no data. </summary>
+        #region DeletedManagedHsmResource
+        /// <summary> Gets an object representing a DeletedManagedHsmResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedManagedHsm" /> object. </returns>
-        public static DeletedManagedHsm GetDeletedManagedHsm(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="DeletedManagedHsmResource" /> object. </returns>
+        public static DeletedManagedHsmResource GetDeletedManagedHsmResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                DeletedManagedHsm.ValidateResourceId(id);
-                return new DeletedManagedHsm(client, id);
+                DeletedManagedHsmResource.ValidateResourceId(id);
+                return new DeletedManagedHsmResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MhsmPrivateEndpointConnection
-        /// <summary> Gets an object representing a MhsmPrivateEndpointConnection along with the instance operations that can be performed on it but with no data. </summary>
+        #region MhsmPrivateEndpointConnectionResource
+        /// <summary> Gets an object representing a MhsmPrivateEndpointConnectionResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MhsmPrivateEndpointConnection" /> object. </returns>
-        public static MhsmPrivateEndpointConnection GetMhsmPrivateEndpointConnection(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MhsmPrivateEndpointConnectionResource" /> object. </returns>
+        public static MhsmPrivateEndpointConnectionResource GetMhsmPrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                MhsmPrivateEndpointConnection.ValidateResourceId(id);
-                return new MhsmPrivateEndpointConnection(client, id);
+                MhsmPrivateEndpointConnectionResource.ValidateResourceId(id);
+                return new MhsmPrivateEndpointConnectionResource(client, id);
             }
             );
         }

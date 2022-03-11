@@ -21,10 +21,10 @@ using Azure.ResourceManager.Core;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing collection of DedicatedHost and their operations over its parent. </summary>
-    public partial class DedicatedHostCollection : ArmCollection, IEnumerable<DedicatedHost>, IAsyncEnumerable<DedicatedHost>
+    public partial class DedicatedHostCollection : ArmCollection, IEnumerable<DedicatedHostResource>, IAsyncEnumerable<DedicatedHostResource>
     {
-        private readonly ClientDiagnostics _dedicatedHostClientDiagnostics;
-        private readonly DedicatedHostsRestOperations _dedicatedHostRestClient;
+        private readonly ClientDiagnostics _dedicatedHostResourceDedicatedHostsClientDiagnostics;
+        private readonly DedicatedHostsRestOperations _dedicatedHostResourceDedicatedHostsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostCollection"/> class for mocking. </summary>
         protected DedicatedHostCollection()
@@ -36,9 +36,9 @@ namespace MgmtParamOrdering
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal DedicatedHostCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _dedicatedHostClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", DedicatedHost.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(DedicatedHost.ResourceType, out string dedicatedHostApiVersion);
-            _dedicatedHostRestClient = new DedicatedHostsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostApiVersion);
+            _dedicatedHostResourceDedicatedHostsClientDiagnostics = new ClientDiagnostics("MgmtParamOrdering", DedicatedHostResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(DedicatedHostResource.ResourceType, out string dedicatedHostResourceDedicatedHostsApiVersion);
+            _dedicatedHostResourceDedicatedHostsRestClient = new DedicatedHostsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, dedicatedHostResourceDedicatedHostsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -46,8 +46,8 @@ namespace MgmtParamOrdering
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != DedicatedHostGroup.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, DedicatedHostGroup.ResourceType), nameof(id));
+            if (id.ResourceType != DedicatedHostGroupResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, DedicatedHostGroupResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -61,17 +61,17 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<DedicatedHost>> CreateOrUpdateAsync(WaitUntil waitUntil, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<DedicatedHostResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.CreateOrUpdate");
+            using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtParamOrderingArmOperation<DedicatedHost>(new DedicatedHostOperationSource(Client), _dedicatedHostClientDiagnostics, Pipeline, _dedicatedHostRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _dedicatedHostResourceDedicatedHostsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtParamOrderingArmOperation<DedicatedHostResource>(new DedicatedHostResourceOperationSource(Client), _dedicatedHostResourceDedicatedHostsClientDiagnostics, Pipeline, _dedicatedHostResourceDedicatedHostsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -94,17 +94,17 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<DedicatedHost> CreateOrUpdate(WaitUntil waitUntil, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<DedicatedHostResource> CreateOrUpdate(WaitUntil waitUntil, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.CreateOrUpdate");
+            using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _dedicatedHostRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken);
-                var operation = new MgmtParamOrderingArmOperation<DedicatedHost>(new DedicatedHostOperationSource(Client), _dedicatedHostClientDiagnostics, Pipeline, _dedicatedHostRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _dedicatedHostResourceDedicatedHostsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken);
+                var operation = new MgmtParamOrderingArmOperation<DedicatedHostResource>(new DedicatedHostResourceOperationSource(Client), _dedicatedHostResourceDedicatedHostsClientDiagnostics, Pipeline, _dedicatedHostResourceDedicatedHostsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -125,18 +125,18 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual async Task<Response<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostResource>> GetAsync(string hostName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
-            using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.Get");
+            using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.Get");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostResourceDedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -154,18 +154,18 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual Response<DedicatedHost> Get(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostResource> Get(string hostName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
-            using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.Get");
+            using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.Get");
             scope.Start();
             try
             {
-                var response = _dedicatedHostRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken);
+                var response = _dedicatedHostResourceDedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -180,17 +180,17 @@ namespace MgmtParamOrdering
         /// Operation Id: DedicatedHosts_ListByHostGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<DedicatedHost> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="DedicatedHostResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<DedicatedHostResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<DedicatedHost>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<DedicatedHostResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.GetAll");
+                using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _dedicatedHostRestClient.ListByHostGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _dedicatedHostResourceDedicatedHostsRestClient.ListByHostGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -198,14 +198,14 @@ namespace MgmtParamOrdering
                     throw;
                 }
             }
-            async Task<Page<DedicatedHost>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<DedicatedHostResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.GetAll");
+                using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _dedicatedHostRestClient.ListByHostGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _dedicatedHostResourceDedicatedHostsRestClient.ListByHostGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -222,17 +222,17 @@ namespace MgmtParamOrdering
         /// Operation Id: DedicatedHosts_ListByHostGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<DedicatedHost> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="DedicatedHostResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<DedicatedHostResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<DedicatedHost> FirstPageFunc(int? pageSizeHint)
+            Page<DedicatedHostResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.GetAll");
+                using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _dedicatedHostRestClient.ListByHostGroup(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _dedicatedHostResourceDedicatedHostsRestClient.ListByHostGroup(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -240,14 +240,14 @@ namespace MgmtParamOrdering
                     throw;
                 }
             }
-            Page<DedicatedHost> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<DedicatedHostResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.GetAll");
+                using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _dedicatedHostRestClient.ListByHostGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _dedicatedHostResourceDedicatedHostsRestClient.ListByHostGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -271,7 +271,7 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
-            using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
+            using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
             scope.Start();
             try
             {
@@ -298,7 +298,7 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
-            using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
+            using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.Exists");
             scope.Start();
             try
             {
@@ -321,18 +321,18 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual async Task<Response<DedicatedHost>> GetIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostResource>> GetIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
-            using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
+            using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _dedicatedHostRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _dedicatedHostResourceDedicatedHostsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<DedicatedHostResource>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -350,18 +350,18 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="hostName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
-        public virtual Response<DedicatedHost> GetIfExists(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostResource> GetIfExists(string hostName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(hostName, nameof(hostName));
 
-            using var scope = _dedicatedHostClientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
+            using var scope = _dedicatedHostResourceDedicatedHostsClientDiagnostics.CreateScope("DedicatedHostCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _dedicatedHostRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                var response = _dedicatedHostResourceDedicatedHostsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<DedicatedHost>(null, response.GetRawResponse());
-                return Response.FromValue(new DedicatedHost(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<DedicatedHostResource>(null, response.GetRawResponse());
+                return Response.FromValue(new DedicatedHostResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -370,7 +370,7 @@ namespace MgmtParamOrdering
             }
         }
 
-        IEnumerator<DedicatedHost> IEnumerable<DedicatedHost>.GetEnumerator()
+        IEnumerator<DedicatedHostResource> IEnumerable<DedicatedHostResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -380,7 +380,7 @@ namespace MgmtParamOrdering
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<DedicatedHost> IAsyncEnumerable<DedicatedHost>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<DedicatedHostResource> IAsyncEnumerable<DedicatedHostResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

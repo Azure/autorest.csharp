@@ -13,33 +13,33 @@ namespace SingletonResource
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region Car
-        /// <summary> Gets an object representing a Car along with the instance operations that can be performed on it but with no data. </summary>
+        #region CarResource
+        /// <summary> Gets an object representing a CarResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Car" /> object. </returns>
-        public static Car GetCar(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="CarResource" /> object. </returns>
+        public static CarResource GetCarResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                Car.ValidateResourceId(id);
-                return new Car(client, id);
+                CarResource.ValidateResourceId(id);
+                return new CarResource(client, id);
             }
             );
         }
         #endregion
 
-        #region Ignition
-        /// <summary> Gets an object representing a Ignition along with the instance operations that can be performed on it but with no data. </summary>
+        #region IgnitionResource
+        /// <summary> Gets an object representing a IgnitionResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Ignition" /> object. </returns>
-        public static Ignition GetIgnition(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
+        public static IgnitionResource GetIgnitionResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                Ignition.ValidateResourceId(id);
-                return new Ignition(client, id);
+                IgnitionResource.ValidateResourceId(id);
+                return new IgnitionResource(client, id);
             }
             );
         }

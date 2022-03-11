@@ -32,58 +32,58 @@ namespace Pagination
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of PageSizeIntegerModels in the PageSizeIntegerModel. </summary>
-        /// <returns> An object representing collection of PageSizeIntegerModels and their operations over a PageSizeIntegerModel. </returns>
-        public virtual PageSizeIntegerModelCollection GetPageSizeIntegerModels()
+        /// <summary> Gets a collection of PageSizeIntegerModelResources in the PageSizeIntegerModelResource. </summary>
+        /// <returns> An object representing collection of PageSizeIntegerModelResources and their operations over a PageSizeIntegerModelResource. </returns>
+        public virtual PageSizeIntegerModelCollection GetPageSizeIntegerModelResources()
         {
             return GetCachedClient(Client => new PageSizeIntegerModelCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of PageSizeInt64Models in the PageSizeInt64Model. </summary>
-        /// <returns> An object representing collection of PageSizeInt64Models and their operations over a PageSizeInt64Model. </returns>
-        public virtual PageSizeInt64ModelCollection GetPageSizeInt64Models()
+        /// <summary> Gets a collection of PageSizeInt64ModelResources in the PageSizeInt64ModelResource. </summary>
+        /// <returns> An object representing collection of PageSizeInt64ModelResources and their operations over a PageSizeInt64ModelResource. </returns>
+        public virtual PageSizeInt64ModelCollection GetPageSizeInt64ModelResources()
         {
             return GetCachedClient(Client => new PageSizeInt64ModelCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of PageSizeInt32Models in the PageSizeInt32Model. </summary>
-        /// <returns> An object representing collection of PageSizeInt32Models and their operations over a PageSizeInt32Model. </returns>
-        public virtual PageSizeInt32ModelCollection GetPageSizeInt32Models()
+        /// <summary> Gets a collection of PageSizeInt32ModelResources in the PageSizeInt32ModelResource. </summary>
+        /// <returns> An object representing collection of PageSizeInt32ModelResources and their operations over a PageSizeInt32ModelResource. </returns>
+        public virtual PageSizeInt32ModelCollection GetPageSizeInt32ModelResources()
         {
             return GetCachedClient(Client => new PageSizeInt32ModelCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of PageSizeNumericModels in the PageSizeNumericModel. </summary>
-        /// <returns> An object representing collection of PageSizeNumericModels and their operations over a PageSizeNumericModel. </returns>
-        public virtual PageSizeNumericModelCollection GetPageSizeNumericModels()
+        /// <summary> Gets a collection of PageSizeNumericModelResources in the PageSizeNumericModelResource. </summary>
+        /// <returns> An object representing collection of PageSizeNumericModelResources and their operations over a PageSizeNumericModelResource. </returns>
+        public virtual PageSizeNumericModelCollection GetPageSizeNumericModelResources()
         {
             return GetCachedClient(Client => new PageSizeNumericModelCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of PageSizeFloatModels in the PageSizeFloatModel. </summary>
-        /// <returns> An object representing collection of PageSizeFloatModels and their operations over a PageSizeFloatModel. </returns>
-        public virtual PageSizeFloatModelCollection GetPageSizeFloatModels()
+        /// <summary> Gets a collection of PageSizeFloatModelResources in the PageSizeFloatModelResource. </summary>
+        /// <returns> An object representing collection of PageSizeFloatModelResources and their operations over a PageSizeFloatModelResource. </returns>
+        public virtual PageSizeFloatModelCollection GetPageSizeFloatModelResources()
         {
             return GetCachedClient(Client => new PageSizeFloatModelCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of PageSizeDoubleModels in the PageSizeDoubleModel. </summary>
-        /// <returns> An object representing collection of PageSizeDoubleModels and their operations over a PageSizeDoubleModel. </returns>
-        public virtual PageSizeDoubleModelCollection GetPageSizeDoubleModels()
+        /// <summary> Gets a collection of PageSizeDoubleModelResources in the PageSizeDoubleModelResource. </summary>
+        /// <returns> An object representing collection of PageSizeDoubleModelResources and their operations over a PageSizeDoubleModelResource. </returns>
+        public virtual PageSizeDoubleModelCollection GetPageSizeDoubleModelResources()
         {
             return GetCachedClient(Client => new PageSizeDoubleModelCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of PageSizeDecimalModels in the PageSizeDecimalModel. </summary>
-        /// <returns> An object representing collection of PageSizeDecimalModels and their operations over a PageSizeDecimalModel. </returns>
-        public virtual PageSizeDecimalModelCollection GetPageSizeDecimalModels()
+        /// <summary> Gets a collection of PageSizeDecimalModelResources in the PageSizeDecimalModelResource. </summary>
+        /// <returns> An object representing collection of PageSizeDecimalModelResources and their operations over a PageSizeDecimalModelResource. </returns>
+        public virtual PageSizeDecimalModelCollection GetPageSizeDecimalModelResources()
         {
             return GetCachedClient(Client => new PageSizeDecimalModelCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of PageSizeStringModels in the PageSizeStringModel. </summary>
-        /// <returns> An object representing collection of PageSizeStringModels and their operations over a PageSizeStringModel. </returns>
-        public virtual PageSizeStringModelCollection GetPageSizeStringModels()
+        /// <summary> Gets a collection of PageSizeStringModelResources in the PageSizeStringModelResource. </summary>
+        /// <returns> An object representing collection of PageSizeStringModelResources and their operations over a PageSizeStringModelResource. </returns>
+        public virtual PageSizeStringModelCollection GetPageSizeStringModelResources()
         {
             return GetCachedClient(Client => new PageSizeStringModelCollection(Client, Id));
         }

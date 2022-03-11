@@ -22,10 +22,10 @@ using Azure.ResourceManager.Resources;
 namespace MgmtRenameRules
 {
     /// <summary> A class representing collection of Image and their operations over its parent. </summary>
-    public partial class ImageCollection : ArmCollection, IEnumerable<Image>, IAsyncEnumerable<Image>
+    public partial class ImageCollection : ArmCollection, IEnumerable<ImageResource>, IAsyncEnumerable<ImageResource>
     {
-        private readonly ClientDiagnostics _imageClientDiagnostics;
-        private readonly ImagesRestOperations _imageRestClient;
+        private readonly ClientDiagnostics _imageResourceImagesClientDiagnostics;
+        private readonly ImagesRestOperations _imageResourceImagesRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ImageCollection"/> class for mocking. </summary>
         protected ImageCollection()
@@ -37,9 +37,9 @@ namespace MgmtRenameRules
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ImageCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _imageClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", Image.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(Image.ResourceType, out string imageApiVersion);
-            _imageRestClient = new ImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, imageApiVersion);
+            _imageResourceImagesClientDiagnostics = new ClientDiagnostics("MgmtRenameRules", ImageResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ImageResource.ResourceType, out string imageResourceImagesApiVersion);
+            _imageResourceImagesRestClient = new ImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, imageResourceImagesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,17 +62,17 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<Image>> CreateOrUpdateAsync(WaitUntil waitUntil, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ImageResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.CreateOrUpdate");
+            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _imageRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtRenameRulesArmOperation<Image>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = await _imageResourceImagesRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageResourceOperationSource(Client), _imageResourceImagesClientDiagnostics, Pipeline, _imageResourceImagesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,17 +95,17 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<Image> CreateOrUpdate(WaitUntil waitUntil, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ImageResource> CreateOrUpdate(WaitUntil waitUntil, string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.CreateOrUpdate");
+            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _imageRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken);
-                var operation = new MgmtRenameRulesArmOperation<Image>(new ImageOperationSource(Client), _imageClientDiagnostics, Pipeline, _imageRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response, OperationFinalStateVia.Location);
+                var response = _imageResourceImagesRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters, cancellationToken);
+                var operation = new MgmtRenameRulesArmOperation<ImageResource>(new ImageResourceOperationSource(Client), _imageResourceImagesClientDiagnostics, Pipeline, _imageResourceImagesRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, imageName, parameters).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -127,18 +127,18 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
-        public virtual async Task<Response<Image>> GetAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ImageResource>> GetAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
-            using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.Get");
+            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.Get");
             scope.Start();
             try
             {
-                var response = await _imageRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _imageResourceImagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Image(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -157,18 +157,18 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
-        public virtual Response<Image> Get(string imageName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<ImageResource> Get(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
-            using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.Get");
+            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.Get");
             scope.Start();
             try
             {
-                var response = _imageRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken);
+                var response = _imageResourceImagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Image(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -183,17 +183,17 @@ namespace MgmtRenameRules
         /// Operation Id: Images_ListByResourceGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Image> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ImageResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<Image>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ImageResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.GetAll");
+                using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _imageRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Image(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _imageResourceImagesRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ImageResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -201,14 +201,14 @@ namespace MgmtRenameRules
                     throw;
                 }
             }
-            async Task<Page<Image>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<ImageResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.GetAll");
+                using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _imageRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Image(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _imageResourceImagesRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ImageResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -225,17 +225,17 @@ namespace MgmtRenameRules
         /// Operation Id: Images_ListByResourceGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Image> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ImageResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<Image> FirstPageFunc(int? pageSizeHint)
+            Page<ImageResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.GetAll");
+                using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _imageRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Image(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _imageResourceImagesRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ImageResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -243,14 +243,14 @@ namespace MgmtRenameRules
                     throw;
                 }
             }
-            Page<Image> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<ImageResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.GetAll");
+                using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _imageRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Image(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _imageResourceImagesRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ImageResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -275,7 +275,7 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
-            using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.Exists");
+            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.Exists");
             scope.Start();
             try
             {
@@ -303,7 +303,7 @@ namespace MgmtRenameRules
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
-            using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.Exists");
+            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.Exists");
             scope.Start();
             try
             {
@@ -327,18 +327,18 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
-        public virtual async Task<Response<Image>> GetIfExistsAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ImageResource>> GetIfExistsAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
-            using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.GetIfExists");
+            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _imageRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _imageResourceImagesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<Image>(null, response.GetRawResponse());
-                return Response.FromValue(new Image(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<ImageResource>(null, response.GetRawResponse());
+                return Response.FromValue(new ImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -357,18 +357,18 @@ namespace MgmtRenameRules
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
-        public virtual Response<Image> GetIfExists(string imageName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<ImageResource> GetIfExists(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(imageName, nameof(imageName));
 
-            using var scope = _imageClientDiagnostics.CreateScope("ImageCollection.GetIfExists");
+            using var scope = _imageResourceImagesClientDiagnostics.CreateScope("ImageCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _imageRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken);
+                var response = _imageResourceImagesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<Image>(null, response.GetRawResponse());
-                return Response.FromValue(new Image(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<ImageResource>(null, response.GetRawResponse());
+                return Response.FromValue(new ImageResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -377,7 +377,7 @@ namespace MgmtRenameRules
             }
         }
 
-        IEnumerator<Image> IEnumerable<Image>.GetEnumerator()
+        IEnumerator<ImageResource> IEnumerable<ImageResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -387,7 +387,7 @@ namespace MgmtRenameRules
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<Image> IAsyncEnumerable<Image>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<ImageResource> IAsyncEnumerable<ImageResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

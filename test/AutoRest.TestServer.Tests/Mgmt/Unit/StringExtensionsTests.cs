@@ -17,5 +17,25 @@ namespace AutoRest.TestServer.Tests.Mgmt
             var result = resourceName.ResourceNameToPlural();
             Assert.AreEqual(expected, result);
         }
+
+        [TestCase("MetadataRole", "MetadataRoleResource")]
+        [TestCase("PrivateResource", "PrivateResource")]
+        [TestCase("PrivateResource2", "PrivateResource2Resource")]
+        public void ValidateAddResourceSuffixToResourceName(string resourceName, string expected)
+        {
+            var result = resourceName.AddResourceSuffixToResourceName();
+            Assert.AreEqual(expected, result);
+
+        }
+
+        [TestCase("MetadataRole", "MetadataRole")]
+        [TestCase("PrivateResource", "Private")]
+        [TestCase("PrivateResource2", "PrivateResource2")]
+        public void ValidateRemoveResourceSuffixFromResourceName(string resourceName, string expected)
+        {
+            var result = resourceName.TrimResourceSuffixFromResourceName();
+            Assert.AreEqual(expected, result);
+
+        }
     }
 }

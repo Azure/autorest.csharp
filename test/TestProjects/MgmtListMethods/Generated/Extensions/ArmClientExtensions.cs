@@ -13,417 +13,417 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region Fake
-        /// <summary> Gets an object representing a Fake along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeResource
+        /// <summary> Gets an object representing a FakeResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Fake" /> object. </returns>
-        public static Fake GetFake(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
+        public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                Fake.ValidateResourceId(id);
-                return new Fake(client, id);
+                FakeResource.ValidateResourceId(id);
+                return new FakeResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithAncestorWithNonResChWithLoc
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithAncestorWithNonResChWithLocResource
+        /// <summary> Gets an object representing a FakeParentWithAncestorWithNonResChWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> object. </returns>
-        public static FakeParentWithAncestorWithNonResChWithLoc GetFakeParentWithAncestorWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
+        public static FakeParentWithAncestorWithNonResChWithLocResource GetFakeParentWithAncestorWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                FakeParentWithAncestorWithNonResChWithLoc.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithNonResChWithLoc(client, id);
+                FakeParentWithAncestorWithNonResChWithLocResource.ValidateResourceId(id);
+                return new FakeParentWithAncestorWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithAncestorWithNonResCh
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithAncestorWithNonResChResource
+        /// <summary> Gets an object representing a FakeParentWithAncestorWithNonResChResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResCh" /> object. </returns>
-        public static FakeParentWithAncestorWithNonResCh GetFakeParentWithAncestorWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChResource" /> object. </returns>
+        public static FakeParentWithAncestorWithNonResChResource GetFakeParentWithAncestorWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                FakeParentWithAncestorWithNonResCh.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithNonResCh(client, id);
+                FakeParentWithAncestorWithNonResChResource.ValidateResourceId(id);
+                return new FakeParentWithAncestorWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithAncestorWithLoc
-        /// <summary> Gets an object representing a FakeParentWithAncestorWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithAncestorWithLocResource
+        /// <summary> Gets an object representing a FakeParentWithAncestorWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithLoc" /> object. </returns>
-        public static FakeParentWithAncestorWithLoc GetFakeParentWithAncestorWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithLocResource" /> object. </returns>
+        public static FakeParentWithAncestorWithLocResource GetFakeParentWithAncestorWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                FakeParentWithAncestorWithLoc.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithLoc(client, id);
+                FakeParentWithAncestorWithLocResource.ValidateResourceId(id);
+                return new FakeParentWithAncestorWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithAncestor
-        /// <summary> Gets an object representing a FakeParentWithAncestor along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithAncestorResource
+        /// <summary> Gets an object representing a FakeParentWithAncestorResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestor" /> object. </returns>
-        public static FakeParentWithAncestor GetFakeParentWithAncestor(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithAncestorResource" /> object. </returns>
+        public static FakeParentWithAncestorResource GetFakeParentWithAncestorResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                FakeParentWithAncestor.ValidateResourceId(id);
-                return new FakeParentWithAncestor(client, id);
+                FakeParentWithAncestorResource.ValidateResourceId(id);
+                return new FakeParentWithAncestorResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParentWithNonResCh
-        /// <summary> Gets an object representing a FakeParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentWithNonResChResource
+        /// <summary> Gets an object representing a FakeParentWithNonResChResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithNonResCh" /> object. </returns>
-        public static FakeParentWithNonResCh GetFakeParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentWithNonResChResource" /> object. </returns>
+        public static FakeParentWithNonResChResource GetFakeParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                FakeParentWithNonResCh.ValidateResourceId(id);
-                return new FakeParentWithNonResCh(client, id);
+                FakeParentWithNonResChResource.ValidateResourceId(id);
+                return new FakeParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region FakeParent
-        /// <summary> Gets an object representing a FakeParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeParentResource
+        /// <summary> Gets an object representing a FakeParentResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParent" /> object. </returns>
-        public static FakeParent GetFakeParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeParentResource" /> object. </returns>
+        public static FakeParentResource GetFakeParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                FakeParent.ValidateResourceId(id);
-                return new FakeParent(client, id);
+                FakeParentResource.ValidateResourceId(id);
+                return new FakeParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithAncestorWithNonResChWithLoc
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithAncestorWithNonResChWithLocResource
+        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResChWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> object. </returns>
-        public static ResGrpParentWithAncestorWithNonResChWithLoc GetResGrpParentWithAncestorWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
+        public static ResGrpParentWithAncestorWithNonResChWithLocResource GetResGrpParentWithAncestorWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                ResGrpParentWithAncestorWithNonResChWithLoc.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithNonResChWithLoc(client, id);
+                ResGrpParentWithAncestorWithNonResChWithLocResource.ValidateResourceId(id);
+                return new ResGrpParentWithAncestorWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithAncestorWithNonResCh
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithAncestorWithNonResChResource
+        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithNonResChResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResCh" /> object. </returns>
-        public static ResGrpParentWithAncestorWithNonResCh GetResGrpParentWithAncestorWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> object. </returns>
+        public static ResGrpParentWithAncestorWithNonResChResource GetResGrpParentWithAncestorWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                ResGrpParentWithAncestorWithNonResCh.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithNonResCh(client, id);
+                ResGrpParentWithAncestorWithNonResChResource.ValidateResourceId(id);
+                return new ResGrpParentWithAncestorWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithAncestorWithLoc
-        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithAncestorWithLocResource
+        /// <summary> Gets an object representing a ResGrpParentWithAncestorWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLoc" /> object. </returns>
-        public static ResGrpParentWithAncestorWithLoc GetResGrpParentWithAncestorWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLocResource" /> object. </returns>
+        public static ResGrpParentWithAncestorWithLocResource GetResGrpParentWithAncestorWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                ResGrpParentWithAncestorWithLoc.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithLoc(client, id);
+                ResGrpParentWithAncestorWithLocResource.ValidateResourceId(id);
+                return new ResGrpParentWithAncestorWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithAncestor
-        /// <summary> Gets an object representing a ResGrpParentWithAncestor along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithAncestorResource
+        /// <summary> Gets an object representing a ResGrpParentWithAncestorResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestor" /> object. </returns>
-        public static ResGrpParentWithAncestor GetResGrpParentWithAncestor(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorResource" /> object. </returns>
+        public static ResGrpParentWithAncestorResource GetResGrpParentWithAncestorResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                ResGrpParentWithAncestor.ValidateResourceId(id);
-                return new ResGrpParentWithAncestor(client, id);
+                ResGrpParentWithAncestorResource.ValidateResourceId(id);
+                return new ResGrpParentWithAncestorResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParentWithNonResCh
-        /// <summary> Gets an object representing a ResGrpParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentWithNonResChResource
+        /// <summary> Gets an object representing a ResGrpParentWithNonResChResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithNonResCh" /> object. </returns>
-        public static ResGrpParentWithNonResCh GetResGrpParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentWithNonResChResource" /> object. </returns>
+        public static ResGrpParentWithNonResChResource GetResGrpParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                ResGrpParentWithNonResCh.ValidateResourceId(id);
-                return new ResGrpParentWithNonResCh(client, id);
+                ResGrpParentWithNonResChResource.ValidateResourceId(id);
+                return new ResGrpParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region ResGrpParent
-        /// <summary> Gets an object representing a ResGrpParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region ResGrpParentResource
+        /// <summary> Gets an object representing a ResGrpParentResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParent" /> object. </returns>
-        public static ResGrpParent GetResGrpParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ResGrpParentResource" /> object. </returns>
+        public static ResGrpParentResource GetResGrpParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                ResGrpParent.ValidateResourceId(id);
-                return new ResGrpParent(client, id);
+                ResGrpParentResource.ValidateResourceId(id);
+                return new ResGrpParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a SubParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region SubParentWithNonResChWithLocResource
+        /// <summary> Gets an object representing a SubParentWithNonResChWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResChWithLoc" /> object. </returns>
-        public static SubParentWithNonResChWithLoc GetSubParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentWithNonResChWithLocResource" /> object. </returns>
+        public static SubParentWithNonResChWithLocResource GetSubParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SubParentWithNonResChWithLoc.ValidateResourceId(id);
-                return new SubParentWithNonResChWithLoc(client, id);
+                SubParentWithNonResChWithLocResource.ValidateResourceId(id);
+                return new SubParentWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParentWithNonResCh
-        /// <summary> Gets an object representing a SubParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region SubParentWithNonResChResource
+        /// <summary> Gets an object representing a SubParentWithNonResChResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResCh" /> object. </returns>
-        public static SubParentWithNonResCh GetSubParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentWithNonResChResource" /> object. </returns>
+        public static SubParentWithNonResChResource GetSubParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SubParentWithNonResCh.ValidateResourceId(id);
-                return new SubParentWithNonResCh(client, id);
+                SubParentWithNonResChResource.ValidateResourceId(id);
+                return new SubParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParentWithLoc
-        /// <summary> Gets an object representing a SubParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region SubParentWithLocResource
+        /// <summary> Gets an object representing a SubParentWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithLoc" /> object. </returns>
-        public static SubParentWithLoc GetSubParentWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentWithLocResource" /> object. </returns>
+        public static SubParentWithLocResource GetSubParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SubParentWithLoc.ValidateResourceId(id);
-                return new SubParentWithLoc(client, id);
+                SubParentWithLocResource.ValidateResourceId(id);
+                return new SubParentWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region SubParent
-        /// <summary> Gets an object representing a SubParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region SubParentResource
+        /// <summary> Gets an object representing a SubParentResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParent" /> object. </returns>
-        public static SubParent GetSubParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
+        public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SubParent.ValidateResourceId(id);
-                return new SubParent(client, id);
+                SubParentResource.ValidateResourceId(id);
+                return new SubParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MgmtGrpParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region MgmtGrpParentWithNonResChWithLocResource
+        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLoc" /> object. </returns>
-        public static MgmtGrpParentWithNonResChWithLoc GetMgmtGrpParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> object. </returns>
+        public static MgmtGrpParentWithNonResChWithLocResource GetMgmtGrpParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                MgmtGrpParentWithNonResChWithLoc.ValidateResourceId(id);
-                return new MgmtGrpParentWithNonResChWithLoc(client, id);
+                MgmtGrpParentWithNonResChWithLocResource.ValidateResourceId(id);
+                return new MgmtGrpParentWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MgmtGrpParentWithNonResCh
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region MgmtGrpParentWithNonResChResource
+        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResCh" /> object. </returns>
-        public static MgmtGrpParentWithNonResCh GetMgmtGrpParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChResource" /> object. </returns>
+        public static MgmtGrpParentWithNonResChResource GetMgmtGrpParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                MgmtGrpParentWithNonResCh.ValidateResourceId(id);
-                return new MgmtGrpParentWithNonResCh(client, id);
+                MgmtGrpParentWithNonResChResource.ValidateResourceId(id);
+                return new MgmtGrpParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MgmtGrpParentWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region MgmtGrpParentWithLocResource
+        /// <summary> Gets an object representing a MgmtGrpParentWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithLoc" /> object. </returns>
-        public static MgmtGrpParentWithLoc GetMgmtGrpParentWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MgmtGrpParentWithLocResource" /> object. </returns>
+        public static MgmtGrpParentWithLocResource GetMgmtGrpParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                MgmtGrpParentWithLoc.ValidateResourceId(id);
-                return new MgmtGrpParentWithLoc(client, id);
+                MgmtGrpParentWithLocResource.ValidateResourceId(id);
+                return new MgmtGrpParentWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region MgmtGroupParent
-        /// <summary> Gets an object representing a MgmtGroupParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region MgmtGroupParentResource
+        /// <summary> Gets an object representing a MgmtGroupParentResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGroupParent" /> object. </returns>
-        public static MgmtGroupParent GetMgmtGroupParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="MgmtGroupParentResource" /> object. </returns>
+        public static MgmtGroupParentResource GetMgmtGroupParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                MgmtGroupParent.ValidateResourceId(id);
-                return new MgmtGroupParent(client, id);
+                MgmtGroupParentResource.ValidateResourceId(id);
+                return new MgmtGroupParentResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantTest
-        /// <summary> Gets an object representing a TenantTest along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantTestResource
+        /// <summary> Gets an object representing a TenantTestResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantTest" /> object. </returns>
-        public static TenantTest GetTenantTest(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantTestResource" /> object. </returns>
+        public static TenantTestResource GetTenantTestResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                TenantTest.ValidateResourceId(id);
-                return new TenantTest(client, id);
+                TenantTestResource.ValidateResourceId(id);
+                return new TenantTestResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a TenantParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantParentWithNonResChWithLocResource
+        /// <summary> Gets an object representing a TenantParentWithNonResChWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLoc" /> object. </returns>
-        public static TenantParentWithNonResChWithLoc GetTenantParentWithNonResChWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLocResource" /> object. </returns>
+        public static TenantParentWithNonResChWithLocResource GetTenantParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                TenantParentWithNonResChWithLoc.ValidateResourceId(id);
-                return new TenantParentWithNonResChWithLoc(client, id);
+                TenantParentWithNonResChWithLocResource.ValidateResourceId(id);
+                return new TenantParentWithNonResChWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantParentWithNonResCh
-        /// <summary> Gets an object representing a TenantParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantParentWithNonResChResource
+        /// <summary> Gets an object representing a TenantParentWithNonResChResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResCh" /> object. </returns>
-        public static TenantParentWithNonResCh GetTenantParentWithNonResCh(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantParentWithNonResChResource" /> object. </returns>
+        public static TenantParentWithNonResChResource GetTenantParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                TenantParentWithNonResCh.ValidateResourceId(id);
-                return new TenantParentWithNonResCh(client, id);
+                TenantParentWithNonResChResource.ValidateResourceId(id);
+                return new TenantParentWithNonResChResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantParentWithLoc
-        /// <summary> Gets an object representing a TenantParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantParentWithLocResource
+        /// <summary> Gets an object representing a TenantParentWithLocResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithLoc" /> object. </returns>
-        public static TenantParentWithLoc GetTenantParentWithLoc(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantParentWithLocResource" /> object. </returns>
+        public static TenantParentWithLocResource GetTenantParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                TenantParentWithLoc.ValidateResourceId(id);
-                return new TenantParentWithLoc(client, id);
+                TenantParentWithLocResource.ValidateResourceId(id);
+                return new TenantParentWithLocResource(client, id);
             }
             );
         }
         #endregion
 
-        #region TenantParent
-        /// <summary> Gets an object representing a TenantParent along with the instance operations that can be performed on it but with no data. </summary>
+        #region TenantParentResource
+        /// <summary> Gets an object representing a TenantParentResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParent" /> object. </returns>
-        public static TenantParent GetTenantParent(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="TenantParentResource" /> object. </returns>
+        public static TenantParentResource GetTenantParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                TenantParent.ValidateResourceId(id);
-                return new TenantParent(client, id);
+                TenantParentResource.ValidateResourceId(id);
+                return new TenantParentResource(client, id);
             }
             );
         }

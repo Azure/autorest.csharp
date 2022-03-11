@@ -25,12 +25,12 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this Subscription subscription)
+        /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendedResources(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetDeploymentExtendeds();
+            return GetExtensionClient(subscription).GetDeploymentExtendedResources();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this Subscription subscription, string deploymentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedResourceAsync(this Subscription subscription, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetDeploymentExtendedResources().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static Response<DeploymentExtended> GetDeploymentExtended(this Subscription subscription, string deploymentName, CancellationToken cancellationToken = default)
+        public static Response<DeploymentExtendedResource> GetDeploymentExtendedResource(this Subscription subscription, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+            return subscription.GetDeploymentExtendedResources().Get(deploymentName, cancellationToken);
         }
 
         /// <summary>
@@ -71,10 +71,10 @@ namespace MgmtScopeResource
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResourceLink> GetResourceLinksAsync(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResourceLinkResource> GetResourceLinkResourcesAsync(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResourceLinksAsync(filter, cancellationToken);
+            return GetExtensionClient(subscription).GetResourceLinkResourcesAsync(filter, cancellationToken);
         }
 
         /// <summary>
@@ -85,10 +85,10 @@ namespace MgmtScopeResource
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResourceLink> GetResourceLinks(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResourceLinkResource> GetResourceLinkResources(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResourceLinks(filter, cancellationToken);
+            return GetExtensionClient(subscription).GetResourceLinkResources(filter, cancellationToken);
         }
     }
 }

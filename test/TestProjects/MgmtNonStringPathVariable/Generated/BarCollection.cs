@@ -21,8 +21,8 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class representing collection of Bar and their operations over its parent. </summary>
     public partial class BarCollection : ArmCollection
     {
-        private readonly ClientDiagnostics _barClientDiagnostics;
-        private readonly BarsRestOperations _barRestClient;
+        private readonly ClientDiagnostics _barResourceBarsClientDiagnostics;
+        private readonly BarsRestOperations _barResourceBarsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="BarCollection"/> class for mocking. </summary>
         protected BarCollection()
@@ -34,9 +34,9 @@ namespace MgmtNonStringPathVariable
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal BarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _barClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", Bar.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(Bar.ResourceType, out string barApiVersion);
-            _barRestClient = new BarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barApiVersion);
+            _barResourceBarsClientDiagnostics = new ClientDiagnostics("MgmtNonStringPathVariable", BarResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(BarResource.ResourceType, out string barResourceBarsApiVersion);
+            _barResourceBarsRestClient = new BarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, barResourceBarsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -58,16 +58,16 @@ namespace MgmtNonStringPathVariable
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<ArmOperation<Bar>> CreateOrUpdateAsync(WaitUntil waitUntil, int barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, int barName, BarData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
+            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtNonStringPathVariableArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
+                var response = await _barResourceBarsRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtNonStringPathVariableArmOperation<BarResource>(new BarResourceOperationSource(Client), _barResourceBarsClientDiagnostics, Pipeline, _barResourceBarsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -89,16 +89,16 @@ namespace MgmtNonStringPathVariable
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual ArmOperation<Bar> CreateOrUpdate(WaitUntil waitUntil, int barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BarResource> CreateOrUpdate(WaitUntil waitUntil, int barName, BarData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
+            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
-                var operation = new MgmtNonStringPathVariableArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
+                var response = _barResourceBarsRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
+                var operation = new MgmtNonStringPathVariableArmOperation<BarResource>(new BarResourceOperationSource(Client), _barResourceBarsClientDiagnostics, Pipeline, _barResourceBarsRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -117,16 +117,16 @@ namespace MgmtNonStringPathVariable
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Bar>> GetAsync(int barName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BarResource>> GetAsync(int barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.Get");
+            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
             try
             {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
+                var response = await _barResourceBarsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -142,16 +142,16 @@ namespace MgmtNonStringPathVariable
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Bar> Get(int barName, CancellationToken cancellationToken = default)
+        public virtual Response<BarResource> Get(int barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.Get");
+            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.Get");
             scope.Start();
             try
             {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
+                var response = _barResourceBarsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -169,7 +169,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> ExistsAsync(int barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.Exists");
+            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
@@ -192,7 +192,7 @@ namespace MgmtNonStringPathVariable
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> Exists(int barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.Exists");
+            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.Exists");
             scope.Start();
             try
             {
@@ -213,16 +213,16 @@ namespace MgmtNonStringPathVariable
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Bar>> GetIfExistsAsync(int barName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BarResource>> GetIfExistsAsync(int barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetIfExists");
+            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _barResourceBarsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<Bar>(null, response.GetRawResponse());
-                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<BarResource>(null, response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,16 +238,16 @@ namespace MgmtNonStringPathVariable
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Bar> GetIfExists(int barName, CancellationToken cancellationToken = default)
+        public virtual Response<BarResource> GetIfExists(int barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _barClientDiagnostics.CreateScope("BarCollection.GetIfExists");
+            using var scope = _barResourceBarsClientDiagnostics.CreateScope("BarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
+                var response = _barResourceBarsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<Bar>(null, response.GetRawResponse());
-                return Response.FromValue(new Bar(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<BarResource>(null, response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

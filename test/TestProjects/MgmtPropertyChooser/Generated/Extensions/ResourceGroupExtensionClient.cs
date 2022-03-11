@@ -32,9 +32,9 @@ namespace MgmtPropertyChooser
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
-        /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
-        public virtual VirtualMachineCollection GetVirtualMachines()
+        /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
+        /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
+        public virtual VirtualMachineCollection GetVirtualMachineResources()
         {
             return GetCachedClient(Client => new VirtualMachineCollection(Client, Id));
         }

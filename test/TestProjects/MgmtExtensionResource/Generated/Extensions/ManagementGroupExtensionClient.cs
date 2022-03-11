@@ -32,9 +32,9 @@ namespace MgmtExtensionResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of ManagementGroupPolicyDefinitions in the ManagementGroupPolicyDefinition. </summary>
-        /// <returns> An object representing collection of ManagementGroupPolicyDefinitions and their operations over a ManagementGroupPolicyDefinition. </returns>
-        public virtual ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions()
+        /// <summary> Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupPolicyDefinitionResource. </summary>
+        /// <returns> An object representing collection of ManagementGroupPolicyDefinitionResources and their operations over a ManagementGroupPolicyDefinitionResource. </returns>
+        public virtual ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitionResources()
         {
             return GetCachedClient(Client => new ManagementGroupPolicyDefinitionCollection(Client, Id));
         }

@@ -32,51 +32,51 @@ namespace Azure.ResourceManager.Sample
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
-        /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
-        public virtual AvailabilitySetCollection GetAvailabilitySets()
+        /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
+        /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
+        public virtual AvailabilitySetCollection GetAvailabilitySetResources()
         {
             return GetCachedClient(Client => new AvailabilitySetCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of ProximityPlacementGroups in the ProximityPlacementGroup. </summary>
-        /// <returns> An object representing collection of ProximityPlacementGroups and their operations over a ProximityPlacementGroup. </returns>
-        public virtual ProximityPlacementGroupCollection GetProximityPlacementGroups()
+        /// <summary> Gets a collection of ProximityPlacementGroupResources in the ProximityPlacementGroupResource. </summary>
+        /// <returns> An object representing collection of ProximityPlacementGroupResources and their operations over a ProximityPlacementGroupResource. </returns>
+        public virtual ProximityPlacementGroupCollection GetProximityPlacementGroupResources()
         {
             return GetCachedClient(Client => new ProximityPlacementGroupCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of DedicatedHostGroups in the DedicatedHostGroup. </summary>
-        /// <returns> An object representing collection of DedicatedHostGroups and their operations over a DedicatedHostGroup. </returns>
-        public virtual DedicatedHostGroupCollection GetDedicatedHostGroups()
+        /// <summary> Gets a collection of DedicatedHostGroupResources in the DedicatedHostGroupResource. </summary>
+        /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
+        public virtual DedicatedHostGroupCollection GetDedicatedHostGroupResources()
         {
             return GetCachedClient(Client => new DedicatedHostGroupCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of SshPublicKeys in the SshPublicKey. </summary>
-        /// <returns> An object representing collection of SshPublicKeys and their operations over a SshPublicKey. </returns>
-        public virtual SshPublicKeyCollection GetSshPublicKeys()
+        /// <summary> Gets a collection of SshPublicKeyResources in the SshPublicKeyResource. </summary>
+        /// <returns> An object representing collection of SshPublicKeyResources and their operations over a SshPublicKeyResource. </returns>
+        public virtual SshPublicKeyCollection GetSshPublicKeyResources()
         {
             return GetCachedClient(Client => new SshPublicKeyCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
-        /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
-        public virtual VirtualMachineCollection GetVirtualMachines()
+        /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
+        /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
+        public virtual VirtualMachineCollection GetVirtualMachineResources()
         {
             return GetCachedClient(Client => new VirtualMachineCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of Images in the Image. </summary>
-        /// <returns> An object representing collection of Images and their operations over a Image. </returns>
-        public virtual ImageCollection GetImages()
+        /// <summary> Gets a collection of ImageResources in the ImageResource. </summary>
+        /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
+        public virtual ImageCollection GetImageResources()
         {
             return GetCachedClient(Client => new ImageCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
-        /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
-        public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
+        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
+        public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSetResources()
         {
             return GetCachedClient(Client => new VirtualMachineScaleSetCollection(Client, Id));
         }

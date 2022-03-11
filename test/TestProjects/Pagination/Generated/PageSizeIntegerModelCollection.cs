@@ -22,10 +22,10 @@ using Azure.ResourceManager.Resources;
 namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeIntegerModel and their operations over its parent. </summary>
-    public partial class PageSizeIntegerModelCollection : ArmCollection, IEnumerable<PageSizeIntegerModel>, IAsyncEnumerable<PageSizeIntegerModel>
+    public partial class PageSizeIntegerModelCollection : ArmCollection, IEnumerable<PageSizeIntegerModelResource>, IAsyncEnumerable<PageSizeIntegerModelResource>
     {
-        private readonly ClientDiagnostics _pageSizeIntegerModelClientDiagnostics;
-        private readonly PageSizeIntegerModelsRestOperations _pageSizeIntegerModelRestClient;
+        private readonly ClientDiagnostics _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics;
+        private readonly PageSizeIntegerModelsRestOperations _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeIntegerModelCollection"/> class for mocking. </summary>
         protected PageSizeIntegerModelCollection()
@@ -37,9 +37,9 @@ namespace Pagination
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal PageSizeIntegerModelCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _pageSizeIntegerModelClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeIntegerModel.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(PageSizeIntegerModel.ResourceType, out string pageSizeIntegerModelApiVersion);
-            _pageSizeIntegerModelRestClient = new PageSizeIntegerModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeIntegerModelApiVersion);
+            _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics = new ClientDiagnostics("Pagination", PageSizeIntegerModelResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(PageSizeIntegerModelResource.ResourceType, out string pageSizeIntegerModelResourcePageSizeIntegerModelsApiVersion);
+            _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient = new PageSizeIntegerModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeIntegerModelResourcePageSizeIntegerModelsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,17 +61,17 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<PageSizeIntegerModel>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<PageSizeIntegerModelResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.CreateOrUpdate");
+            using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _pageSizeIntegerModelRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new PaginationArmOperation<PageSizeIntegerModel>(Response.FromValue(new PageSizeIntegerModel(Client, response), response.GetRawResponse()));
+                var response = await _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new PaginationArmOperation<PageSizeIntegerModelResource>(Response.FromValue(new PageSizeIntegerModelResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -93,17 +93,17 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<PageSizeIntegerModel> CreateOrUpdate(WaitUntil waitUntil, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<PageSizeIntegerModelResource> CreateOrUpdate(WaitUntil waitUntil, string name, PageSizeIntegerModelData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.CreateOrUpdate");
+            using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _pageSizeIntegerModelRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
-                var operation = new PaginationArmOperation<PageSizeIntegerModel>(Response.FromValue(new PageSizeIntegerModel(Client, response), response.GetRawResponse()));
+                var response = _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, name, parameters, cancellationToken);
+                var operation = new PaginationArmOperation<PageSizeIntegerModelResource>(Response.FromValue(new PageSizeIntegerModelResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -123,18 +123,18 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<PageSizeIntegerModel>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PageSizeIntegerModelResource>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.Get");
+            using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.Get");
             scope.Start();
             try
             {
-                var response = await _pageSizeIntegerModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeIntegerModel(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeIntegerModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -151,18 +151,18 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<PageSizeIntegerModel> Get(string name, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeIntegerModelResource> Get(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.Get");
+            using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.Get");
             scope.Start();
             try
             {
-                var response = _pageSizeIntegerModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
+                var response = _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PageSizeIntegerModel(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PageSizeIntegerModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -177,17 +177,17 @@ namespace Pagination
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PageSizeIntegerModel" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<PageSizeIntegerModel> GetAllAsync(int? maxpagesize = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="PageSizeIntegerModelResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<PageSizeIntegerModelResource> GetAllAsync(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<PageSizeIntegerModel>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<PageSizeIntegerModelResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
+                using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeIntegerModelRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -195,14 +195,14 @@ namespace Pagination
                     throw;
                 }
             }
-            async Task<Page<PageSizeIntegerModel>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<PageSizeIntegerModelResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
+                using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _pageSizeIntegerModelRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -219,17 +219,17 @@ namespace Pagination
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PageSizeIntegerModel" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<PageSizeIntegerModel> GetAll(int? maxpagesize = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="PageSizeIntegerModelResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<PageSizeIntegerModelResource> GetAll(int? maxpagesize = null, CancellationToken cancellationToken = default)
         {
-            Page<PageSizeIntegerModel> FirstPageFunc(int? pageSizeHint)
+            Page<PageSizeIntegerModelResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
+                using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeIntegerModelRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -237,14 +237,14 @@ namespace Pagination
                     throw;
                 }
             }
-            Page<PageSizeIntegerModel> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<PageSizeIntegerModelResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
+                using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _pageSizeIntegerModelRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModel(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new PageSizeIntegerModelResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -268,7 +268,7 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.Exists");
+            using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.Exists");
             scope.Start();
             try
             {
@@ -295,7 +295,7 @@ namespace Pagination
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.Exists");
+            using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.Exists");
             scope.Start();
             try
             {
@@ -318,18 +318,18 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual async Task<Response<PageSizeIntegerModel>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PageSizeIntegerModelResource>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetIfExists");
+            using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _pageSizeIntegerModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<PageSizeIntegerModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeIntegerModel(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<PageSizeIntegerModelResource>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeIntegerModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -347,18 +347,18 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<PageSizeIntegerModel> GetIfExists(string name, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeIntegerModelResource> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            using var scope = _pageSizeIntegerModelClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetIfExists");
+            using var scope = _pageSizeIntegerModelResourcePageSizeIntegerModelsClientDiagnostics.CreateScope("PageSizeIntegerModelCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _pageSizeIntegerModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                var response = _pageSizeIntegerModelResourcePageSizeIntegerModelsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<PageSizeIntegerModel>(null, response.GetRawResponse());
-                return Response.FromValue(new PageSizeIntegerModel(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<PageSizeIntegerModelResource>(null, response.GetRawResponse());
+                return Response.FromValue(new PageSizeIntegerModelResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -367,7 +367,7 @@ namespace Pagination
             }
         }
 
-        IEnumerator<PageSizeIntegerModel> IEnumerable<PageSizeIntegerModel>.GetEnumerator()
+        IEnumerator<PageSizeIntegerModelResource> IEnumerable<PageSizeIntegerModelResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -377,7 +377,7 @@ namespace Pagination
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<PageSizeIntegerModel> IAsyncEnumerable<PageSizeIntegerModel>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<PageSizeIntegerModelResource> IAsyncEnumerable<PageSizeIntegerModelResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

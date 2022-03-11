@@ -32,9 +32,9 @@ namespace SubscriptionExtensions
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of Ovens in the Oven. </summary>
-        /// <returns> An object representing collection of Ovens and their operations over a Oven. </returns>
-        public virtual OvenCollection GetOvens()
+        /// <summary> Gets a collection of OvenResources in the OvenResource. </summary>
+        /// <returns> An object representing collection of OvenResources and their operations over a OvenResource. </returns>
+        public virtual OvenCollection GetOvenResources()
         {
             return GetCachedClient(Client => new OvenCollection(Client, Id));
         }

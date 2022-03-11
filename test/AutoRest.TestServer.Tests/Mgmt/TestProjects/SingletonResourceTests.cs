@@ -11,19 +11,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public SingletonResourceTests() : base("SingletonResource") { }
 
-        [TestCase("Car", true)]
-        [TestCase("Ignition", true)]
+        [TestCase("CarResource", true)]
+        [TestCase("IgnitionResource", true)]
         [TestCase("ParentResource", true)]
         [TestCase("SingletonResource", true)]
-        [TestCase("SingletonResource2", false)]
+        [TestCase("SingletonResource2Resource", false)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
             Assert.AreEqual(isExists, resourceTypeExists);
         }
 
-        [TestCase("Ignition", "Get", true)]
-        [TestCase("Ignition", "GetAsync", true)]
+        [TestCase("IgnitionResource", "Get", true)]
+        [TestCase("IgnitionResource", "GetAsync", true)]
         [TestCase("SingletonResource", "Get", true)]
         [TestCase("SingletonResource", "GetAsync", true)]
         [TestCase("SingletonResource", "Delete", false)]
@@ -36,7 +36,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(isExists, method != null);
         }
 
-        [TestCase("ParentResourceCollection", true)]
+        [TestCase("ParentCollection", true)]
+        [TestCase("ParentResourceCollection", false)]
         [TestCase("SingletonResourceCollection", false)]
         [TestCase("SingletonResource2Collection", false)]
         public void ValidateCollections(string collection, bool isExists)
@@ -47,10 +48,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("ParentResource", "GetSingletonResource", true)]
         [TestCase("ParentResource", "GetSingletonResources", false)]
-        [TestCase("Car", "GetIgnition", true)]
-        [TestCase("Car", "GetIgnitions", false)]
-        [TestCase("ResourceGroupExtensions", "GetCars", true)]
-        [TestCase("ResourceGroupExtensions", "GetCar", true)]
+        [TestCase("CarResource", "GetIgnition", false)]
+        [TestCase("CarResource", "GetIgnitions", false)]
+        [TestCase("CarResource", "GetIgnitionResource", true)]
+        [TestCase("CarResource", "GetIgnitionResources", false)]
+        [TestCase("ResourceGroupExtensions", "GetCarResource", true)]
+        [TestCase("ResourceGroupExtensions", "GetCarResources", true)]
+        [TestCase("ResourceGroupExtensions", "GetCar", false)]
+        [TestCase("ResourceGroupExtensions", "GetCars", false)]
         [TestCase("ResourceGroupExtensions", "GetParentResources", true)]
         [TestCase("ResourceGroupExtensions", "GetParentResource", true)]
         [TestCase("ResourceGroupExtensions", "GetParentResourc", false)]

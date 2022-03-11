@@ -25,12 +25,12 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendedResources(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetDeploymentExtendeds();
+            return GetExtensionClient(resourceGroup).GetDeploymentExtendedResources();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this ResourceGroup resourceGroup, string deploymentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedResourceAsync(this ResourceGroup resourceGroup, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetDeploymentExtendedResources().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static Response<DeploymentExtended> GetDeploymentExtended(this ResourceGroup resourceGroup, string deploymentName, CancellationToken cancellationToken = default)
+        public static Response<DeploymentExtendedResource> GetDeploymentExtendedResource(this ResourceGroup resourceGroup, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+            return resourceGroup.GetDeploymentExtendedResources().Get(deploymentName, cancellationToken);
         }
     }
 }

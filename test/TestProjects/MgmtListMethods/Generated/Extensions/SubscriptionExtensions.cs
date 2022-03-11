@@ -27,12 +27,12 @@ namespace MgmtListMethods
             );
         }
 
-        /// <summary> Gets a collection of Fakes in the Fake. </summary>
+        /// <summary> Gets a collection of FakeResources in the FakeResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of Fakes and their operations over a Fake. </returns>
-        public static FakeCollection GetFakes(this Subscription subscription)
+        /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
+        public static FakeCollection GetFakeResources(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetFakes();
+            return GetExtensionClient(subscription).GetFakeResources();
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public static async Task<Response<Fake>> GetFakeAsync(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakeResource>> GetFakeResourceAsync(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetFakeResources().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -62,32 +62,17 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
-        public static Response<Fake> GetFake(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<FakeResource> GetFakeResource(this Subscription subscription, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return subscription.GetFakes().Get(fakeName, expand, cancellationToken);
+            return subscription.GetFakeResources().Get(fakeName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChWithLocs in the SubParentWithNonResChWithLoc. </summary>
+        /// <summary> Gets a collection of SubParentWithNonResChWithLocResources in the SubParentWithNonResChWithLocResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubParentWithNonResChWithLocs and their operations over a SubParentWithNonResChWithLoc. </returns>
-        public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this Subscription subscription)
+        /// <returns> An object representing collection of SubParentWithNonResChWithLocResources and their operations over a SubParentWithNonResChWithLocResource. </returns>
+        public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocResources(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetSubParentWithNonResChWithLocs();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
-        /// Operation Id: SubParentWithNonResChWithLocs_Get
-        /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="subParentWithNonResChWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
-        public static async Task<Response<SubParentWithNonResChWithLoc>> GetSubParentWithNonResChWithLocAsync(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
-        {
-            return await subscription.GetSubParentWithNonResChWithLocs().GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(subscription).GetSubParentWithNonResChWithLocResources();
         }
 
         /// <summary>
@@ -100,17 +85,32 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
-        public static Response<SubParentWithNonResChWithLoc> GetSubParentWithNonResChWithLoc(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithNonResChWithLocResource>> GetSubParentWithNonResChWithLocResourceAsync(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubParentWithNonResChWithLocs().Get(subParentWithNonResChWithLocName, cancellationToken);
+            return await subscription.GetSubParentWithNonResChWithLocResources().GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <summary> Gets a collection of SubParentWithNonResChes in the SubParentWithNonResCh. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithNonResChWithLocs/{subParentWithNonResChWithLocName}
+        /// Operation Id: SubParentWithNonResChWithLocs_Get
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubParentWithNonResChes and their operations over a SubParentWithNonResCh. </returns>
-        public static SubParentWithNonResChCollection GetSubParentWithNonResChes(this Subscription subscription)
+        /// <param name="subParentWithNonResChWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChWithLocName"/> is null. </exception>
+        public static Response<SubParentWithNonResChWithLocResource> GetSubParentWithNonResChWithLocResource(this Subscription subscription, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetSubParentWithNonResChes();
+            return subscription.GetSubParentWithNonResChWithLocResources().Get(subParentWithNonResChWithLocName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of SubParentWithNonResChResources in the SubParentWithNonResChResource. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of SubParentWithNonResChResources and their operations over a SubParentWithNonResChResource. </returns>
+        public static SubParentWithNonResChCollection GetSubParentWithNonResChResources(this Subscription subscription)
+        {
+            return GetExtensionClient(subscription).GetSubParentWithNonResChResources();
         }
 
         /// <summary>
@@ -123,9 +123,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public static async Task<Response<SubParentWithNonResCh>> GetSubParentWithNonResChAsync(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithNonResChResource>> GetSubParentWithNonResChResourceAsync(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetSubParentWithNonResChes().GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetSubParentWithNonResChResources().GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -138,32 +138,17 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithNonResChName"/> is null. </exception>
-        public static Response<SubParentWithNonResCh> GetSubParentWithNonResCh(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static Response<SubParentWithNonResChResource> GetSubParentWithNonResChResource(this Subscription subscription, string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubParentWithNonResChes().Get(subParentWithNonResChName, cancellationToken);
+            return subscription.GetSubParentWithNonResChResources().Get(subParentWithNonResChName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of SubParentWithLocs in the SubParentWithLoc. </summary>
+        /// <summary> Gets a collection of SubParentWithLocResources in the SubParentWithLocResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubParentWithLocs and their operations over a SubParentWithLoc. </returns>
-        public static SubParentWithLocCollection GetSubParentWithLocs(this Subscription subscription)
+        /// <returns> An object representing collection of SubParentWithLocResources and their operations over a SubParentWithLocResource. </returns>
+        public static SubParentWithLocCollection GetSubParentWithLocResources(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetSubParentWithLocs();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
-        /// Operation Id: SubParentWithLocs_Get
-        /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="subParentWithLocName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
-        public static async Task<Response<SubParentWithLoc>> GetSubParentWithLocAsync(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
-        {
-            return await subscription.GetSubParentWithLocs().GetAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(subscription).GetSubParentWithLocResources();
         }
 
         /// <summary>
@@ -176,17 +161,32 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
-        public static Response<SubParentWithLoc> GetSubParentWithLoc(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentWithLocResource>> GetSubParentWithLocResourceAsync(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubParentWithLocs().Get(subParentWithLocName, cancellationToken);
+            return await subscription.GetSubParentWithLocResources().GetAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <summary> Gets a collection of SubParents in the SubParent. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}
+        /// Operation Id: SubParentWithLocs_Get
+        /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubParents and their operations over a SubParent. </returns>
-        public static SubParentCollection GetSubParents(this Subscription subscription)
+        /// <param name="subParentWithLocName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subParentWithLocName"/> is null. </exception>
+        public static Response<SubParentWithLocResource> GetSubParentWithLocResource(this Subscription subscription, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetSubParents();
+            return subscription.GetSubParentWithLocResources().Get(subParentWithLocName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of SubParentResources in the SubParentResource. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
+        public static SubParentCollection GetSubParentResources(this Subscription subscription)
+        {
+            return GetExtensionClient(subscription).GetSubParentResources();
         }
 
         /// <summary>
@@ -199,9 +199,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
-        public static async Task<Response<SubParent>> GetSubParentAsync(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubParentResource>> GetSubParentResourceAsync(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetSubParents().GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetSubParentResources().GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -214,9 +214,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subParentName"/> is null. </exception>
-        public static Response<SubParent> GetSubParent(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
+        public static Response<SubParentResource> GetSubParentResource(this Subscription subscription, string subParentName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSubParents().Get(subParentName, cancellationToken);
+            return subscription.GetSubParentResources().Get(subParentName, cancellationToken);
         }
 
         /// <summary>
@@ -226,8 +226,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLoc> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResourceChWithLocAsync(cancellationToken);
         }
@@ -239,8 +239,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithNonResChWithLoc> GetFakeParentWithAncestorWithNonResourceChWithLoc(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLoc(this Subscription subscription, CancellationToken cancellationToken = default)
         {
             return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
         }
@@ -288,10 +288,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithNonResCh> GetFakeParentWithAncestorWithNonResChesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChesAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -301,10 +301,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithNonResCh> GetFakeParentWithAncestorWithNonResChes(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
+            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithNonResChResources(cancellationToken);
         }
 
         /// <summary>
@@ -314,10 +314,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -327,10 +327,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocs(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocs(cancellationToken);
+            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocResources(cancellationToken);
         }
 
         /// <summary>
@@ -343,12 +343,12 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocResourcesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
+            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocResourcesByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -361,12 +361,12 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestorWithLoc> GetFakeParentWithAncestorWithLocsByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocResourcesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
+            return GetExtensionClient(subscription).GetFakeParentWithAncestorWithLocResourcesByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -376,10 +376,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestor" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeParentWithAncestor> GetFakeParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FakeParentWithAncestorResource> GetFakeParentWithAncestorResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestorsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetFakeParentWithAncestorResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -389,10 +389,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestor" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeParentWithAncestor> GetFakeParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FakeParentWithAncestorResource> GetFakeParentWithAncestorResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetFakeParentWithAncestors(cancellationToken);
+            return GetExtensionClient(subscription).GetFakeParentWithAncestorResources(cancellationToken);
         }
 
         /// <summary>
@@ -403,10 +403,10 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocResourcesAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocsAsync(expand, cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocResourcesAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -417,10 +417,10 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocs(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocResources(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocResources(expand, cancellationToken);
         }
 
         /// <summary>
@@ -431,10 +431,10 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestorWithNonResCh> GetResGrpParentWithAncestorWithNonResChesAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChResourcesAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChesAsync(expand, cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChResourcesAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -445,10 +445,10 @@ namespace MgmtListMethods
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResCh" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestorWithNonResCh> GetResGrpParentWithAncestorWithNonResChes(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChResources(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChResources(expand, cancellationToken);
         }
 
         /// <summary>
@@ -458,10 +458,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestorWithLoc> GetResGrpParentWithAncestorWithLocsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -471,10 +471,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestorWithLoc> GetResGrpParentWithAncestorWithLocs(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocs(cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithLocResources(cancellationToken);
         }
 
         /// <summary>
@@ -487,12 +487,12 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocResourcesByLocationResGrpParentWithAncestorWithLocAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocResourcesByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -505,12 +505,12 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLoc" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLoc> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocResourcesByLocationResGrpParentWithAncestorWithLoc(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorWithNonResChWithLocResourcesByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
         }
 
         /// <summary>
@@ -520,10 +520,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestor" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ResGrpParentWithAncestor> GetResGrpParentWithAncestorsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestorResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestorsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -533,10 +533,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestor" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ResGrpParentWithAncestor> GetResGrpParentWithAncestors(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestorResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetResGrpParentWithAncestors(cancellationToken);
+            return GetExtensionClient(subscription).GetResGrpParentWithAncestorResources(cancellationToken);
         }
 
         /// <summary>

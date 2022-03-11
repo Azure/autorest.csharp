@@ -22,10 +22,10 @@ using Azure.ResourceManager.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of ProximityPlacementGroup and their operations over its parent. </summary>
-    public partial class ProximityPlacementGroupCollection : ArmCollection, IEnumerable<ProximityPlacementGroup>, IAsyncEnumerable<ProximityPlacementGroup>
+    public partial class ProximityPlacementGroupCollection : ArmCollection, IEnumerable<ProximityPlacementGroupResource>, IAsyncEnumerable<ProximityPlacementGroupResource>
     {
-        private readonly ClientDiagnostics _proximityPlacementGroupClientDiagnostics;
-        private readonly ProximityPlacementGroupsRestOperations _proximityPlacementGroupRestClient;
+        private readonly ClientDiagnostics _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics;
+        private readonly ProximityPlacementGroupsRestOperations _proximityPlacementGroupResourceProximityPlacementGroupsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupCollection"/> class for mocking. </summary>
         protected ProximityPlacementGroupCollection()
@@ -37,9 +37,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ProximityPlacementGroupCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _proximityPlacementGroupClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ProximityPlacementGroup.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ProximityPlacementGroup.ResourceType, out string proximityPlacementGroupApiVersion);
-            _proximityPlacementGroupRestClient = new ProximityPlacementGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, proximityPlacementGroupApiVersion);
+            _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample", ProximityPlacementGroupResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ProximityPlacementGroupResource.ResourceType, out string proximityPlacementGroupResourceProximityPlacementGroupsApiVersion);
+            _proximityPlacementGroupResourceProximityPlacementGroupsRestClient = new ProximityPlacementGroupsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, proximityPlacementGroupResourceProximityPlacementGroupsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,17 +62,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ProximityPlacementGroup>> CreateOrUpdateAsync(WaitUntil waitUntil, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ProximityPlacementGroupResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.CreateOrUpdate");
+            using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _proximityPlacementGroupRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SampleArmOperation<ProximityPlacementGroup>(Response.FromValue(new ProximityPlacementGroup(Client, response), response.GetRawResponse()));
+                var response = await _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SampleArmOperation<ProximityPlacementGroupResource>(Response.FromValue(new ProximityPlacementGroupResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,17 +95,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ProximityPlacementGroup> CreateOrUpdate(WaitUntil waitUntil, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ProximityPlacementGroupResource> CreateOrUpdate(WaitUntil waitUntil, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.CreateOrUpdate");
+            using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _proximityPlacementGroupRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken);
-                var operation = new SampleArmOperation<ProximityPlacementGroup>(Response.FromValue(new ProximityPlacementGroup(Client, response), response.GetRawResponse()));
+                var response = _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken);
+                var operation = new SampleArmOperation<ProximityPlacementGroupResource>(Response.FromValue(new ProximityPlacementGroupResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -127,18 +127,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public virtual async Task<Response<ProximityPlacementGroup>> GetAsync(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ProximityPlacementGroupResource>> GetAsync(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
 
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Get");
+            using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Get");
             scope.Start();
             try
             {
-                var response = await _proximityPlacementGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken).ConfigureAwait(false);
+                var response = await _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProximityPlacementGroupResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -157,18 +157,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public virtual Response<ProximityPlacementGroup> Get(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public virtual Response<ProximityPlacementGroupResource> Get(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
 
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Get");
+            using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Get");
             scope.Start();
             try
             {
-                var response = _proximityPlacementGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken);
+                var response = _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProximityPlacementGroupResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -183,17 +183,17 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: ProximityPlacementGroups_ListByResourceGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ProximityPlacementGroup> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ProximityPlacementGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ProximityPlacementGroupResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ProximityPlacementGroup>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ProximityPlacementGroupResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetAll");
+                using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _proximityPlacementGroupRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.ListByResourceGroupAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroupResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -201,14 +201,14 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            async Task<Page<ProximityPlacementGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<ProximityPlacementGroupResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetAll");
+                using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _proximityPlacementGroupRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.ListByResourceGroupNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroupResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -225,17 +225,17 @@ namespace Azure.ResourceManager.Sample
         /// Operation Id: ProximityPlacementGroups_ListByResourceGroup
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ProximityPlacementGroup> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ProximityPlacementGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ProximityPlacementGroupResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<ProximityPlacementGroup> FirstPageFunc(int? pageSizeHint)
+            Page<ProximityPlacementGroupResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetAll");
+                using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _proximityPlacementGroupRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.ListByResourceGroup(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroupResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -243,14 +243,14 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            Page<ProximityPlacementGroup> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<ProximityPlacementGroupResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetAll");
+                using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _proximityPlacementGroupRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.ListByResourceGroupNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroupResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -275,7 +275,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
 
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Exists");
+            using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Exists");
             scope.Start();
             try
             {
@@ -303,7 +303,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
 
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Exists");
+            using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.Exists");
             scope.Start();
             try
             {
@@ -327,18 +327,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public virtual async Task<Response<ProximityPlacementGroup>> GetIfExistsAsync(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ProximityPlacementGroupResource>> GetIfExistsAsync(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
 
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetIfExists");
+            using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _proximityPlacementGroupRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<ProximityPlacementGroup>(null, response.GetRawResponse());
-                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<ProximityPlacementGroupResource>(null, response.GetRawResponse());
+                return Response.FromValue(new ProximityPlacementGroupResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -357,18 +357,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public virtual Response<ProximityPlacementGroup> GetIfExists(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public virtual Response<ProximityPlacementGroupResource> GetIfExists(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(proximityPlacementGroupName, nameof(proximityPlacementGroupName));
 
-            using var scope = _proximityPlacementGroupClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetIfExists");
+            using var scope = _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics.CreateScope("ProximityPlacementGroupCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _proximityPlacementGroupRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken: cancellationToken);
+                var response = _proximityPlacementGroupResourceProximityPlacementGroupsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, proximityPlacementGroupName, includeColocationStatus, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<ProximityPlacementGroup>(null, response.GetRawResponse());
-                return Response.FromValue(new ProximityPlacementGroup(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<ProximityPlacementGroupResource>(null, response.GetRawResponse());
+                return Response.FromValue(new ProximityPlacementGroupResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -377,7 +377,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        IEnumerator<ProximityPlacementGroup> IEnumerable<ProximityPlacementGroup>.GetEnumerator()
+        IEnumerator<ProximityPlacementGroupResource> IEnumerable<ProximityPlacementGroupResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -387,7 +387,7 @@ namespace Azure.ResourceManager.Sample
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<ProximityPlacementGroup> IAsyncEnumerable<ProximityPlacementGroup>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<ProximityPlacementGroupResource> IAsyncEnumerable<ProximityPlacementGroupResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

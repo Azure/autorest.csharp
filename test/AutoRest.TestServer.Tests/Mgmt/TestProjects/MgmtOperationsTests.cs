@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("TestSetSharedKeyAsync")]
         public void ValidatePutMethod(string methodName)
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySet");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySetResource");
             var method = resourceOpreations.GetMethod(methodName);
             Assert.NotNull(method, $"{resourceOpreations.Name} does not implement the {methodName} method.");
 
@@ -29,8 +29,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(typeof(CancellationToken), param3.ParameterType);
         }
 
-        [TestCase(true, "AvailabilitySet", "Update")]
-        [TestCase(true, "AvailabilitySet", "UpdateAsync")]
+        [TestCase(true, "AvailabilitySetResource", "Update")]
+        [TestCase(true, "AvailabilitySetResource", "UpdateAsync")]
         [TestCase(false, "UnpatchableResource", "Update")]
         [TestCase(false, "UnpatchableResource", "UpdateAsync")]
         public void ValidateMethod(bool exist, string className, string methodName)

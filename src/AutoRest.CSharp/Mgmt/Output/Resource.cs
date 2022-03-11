@@ -170,8 +170,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual Resource GetResource() => this;
 
-        //private string? _defaultName;
-        protected override string DefaultName => ResourceName;
+        // name after `{ResourceName}Resource`, unless the `ResourceName` already ends with `Resource`
+        protected override string DefaultName => ResourceName.AddResourceSuffixToResourceName();
 
         public override string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
 

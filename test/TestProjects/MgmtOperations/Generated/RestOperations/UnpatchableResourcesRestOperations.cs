@@ -123,7 +123,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string name, PatchableUnpatchableResourceData data)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string name, PatchableUnpatchableData data)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -155,7 +155,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<UnpatchableResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string name, PatchableUnpatchableResourceData data, CancellationToken cancellationToken = default)
+        public async Task<Response<UnpatchableResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string name, PatchableUnpatchableData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -186,7 +186,7 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<UnpatchableResourceData> Update(string subscriptionId, string resourceGroupName, string name, PatchableUnpatchableResourceData data, CancellationToken cancellationToken = default)
+        public Response<UnpatchableResourceData> Update(string subscriptionId, string resourceGroupName, string name, PatchableUnpatchableData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));

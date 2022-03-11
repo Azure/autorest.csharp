@@ -28,12 +28,12 @@ namespace MgmtOperations
             );
         }
 
-        /// <summary> Gets a collection of AvailabilitySets in the AvailabilitySet. </summary>
+        /// <summary> Gets a collection of AvailabilitySetResources in the AvailabilitySetResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of AvailabilitySets and their operations over a AvailabilitySet. </returns>
-        public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
+        public static AvailabilitySetCollection GetAvailabilitySetResources(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetAvailabilitySets();
+            return GetExtensionClient(resourceGroup).GetAvailabilitySetResources();
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public static async Task<Response<AvailabilitySet>> GetAvailabilitySetAsync(this ResourceGroup resourceGroup, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetResourceAsync(this ResourceGroup resourceGroup, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetAvailabilitySets().GetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetAvailabilitySetResources().GetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -63,15 +63,15 @@ namespace MgmtOperations
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
-        public static Response<AvailabilitySet> GetAvailabilitySet(this ResourceGroup resourceGroup, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<AvailabilitySetResource> GetAvailabilitySetResource(this ResourceGroup resourceGroup, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetAvailabilitySets().Get(availabilitySetName, expand, cancellationToken);
+            return resourceGroup.GetAvailabilitySetResources().Get(availabilitySetName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of UnpatchableResources in the UnpatchableResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
-        public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroup resourceGroup)
+        public static UnpatchableCollection GetUnpatchableResources(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetUnpatchableResources();
         }

@@ -22,10 +22,10 @@ using Azure.ResourceManager.Resources;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of ResGrpParent and their operations over its parent. </summary>
-    public partial class ResGrpParentCollection : ArmCollection, IEnumerable<ResGrpParent>, IAsyncEnumerable<ResGrpParent>
+    public partial class ResGrpParentCollection : ArmCollection, IEnumerable<ResGrpParentResource>, IAsyncEnumerable<ResGrpParentResource>
     {
-        private readonly ClientDiagnostics _resGrpParentClientDiagnostics;
-        private readonly ResGrpParentsRestOperations _resGrpParentRestClient;
+        private readonly ClientDiagnostics _resGrpParentResourceResGrpParentsClientDiagnostics;
+        private readonly ResGrpParentsRestOperations _resGrpParentResourceResGrpParentsRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentCollection"/> class for mocking. </summary>
         protected ResGrpParentCollection()
@@ -37,9 +37,9 @@ namespace MgmtListMethods
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal ResGrpParentCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _resGrpParentClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParent.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(ResGrpParent.ResourceType, out string resGrpParentApiVersion);
-            _resGrpParentRestClient = new ResGrpParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentApiVersion);
+            _resGrpParentResourceResGrpParentsClientDiagnostics = new ClientDiagnostics("MgmtListMethods", ResGrpParentResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(ResGrpParentResource.ResourceType, out string resGrpParentResourceResGrpParentsApiVersion);
+            _resGrpParentResourceResGrpParentsRestClient = new ResGrpParentsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, resGrpParentResourceResGrpParentsApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -62,17 +62,17 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ResGrpParent>> CreateOrUpdateAsync(WaitUntil waitUntil, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ResGrpParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
+            using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _resGrpParentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<ResGrpParent>(Response.FromValue(new ResGrpParent(Client, response), response.GetRawResponse()));
+                var response = await _resGrpParentResourceResGrpParentsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtListMethodsArmOperation<ResGrpParentResource>(Response.FromValue(new ResGrpParentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -95,17 +95,17 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ResGrpParent> CreateOrUpdate(WaitUntil waitUntil, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ResGrpParentResource> CreateOrUpdate(WaitUntil waitUntil, string resGrpParentName, ResGrpParentData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
+            using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _resGrpParentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<ResGrpParent>(Response.FromValue(new ResGrpParent(Client, response), response.GetRawResponse()));
+                var response = _resGrpParentResourceResGrpParentsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, parameters, cancellationToken);
+                var operation = new MgmtListMethodsArmOperation<ResGrpParentResource>(Response.FromValue(new ResGrpParentResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -126,18 +126,18 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public virtual async Task<Response<ResGrpParent>> GetAsync(string resGrpParentName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResGrpParentResource>> GetAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.Get");
+            using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.Get");
             scope.Start();
             try
             {
-                var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentResourceResGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResGrpParent(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -155,18 +155,18 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public virtual Response<ResGrpParent> Get(string resGrpParentName, CancellationToken cancellationToken = default)
+        public virtual Response<ResGrpParentResource> Get(string resGrpParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.Get");
+            using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.Get");
             scope.Start();
             try
             {
-                var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken);
+                var response = _resGrpParentResourceResGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResGrpParent(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -181,17 +181,17 @@ namespace MgmtListMethods
         /// Operation Id: ResGrpParents_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParent" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<ResGrpParent> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResGrpParentResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ResGrpParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<ResGrpParent>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ResGrpParentResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
+                using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _resGrpParentRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Client, value)), null, response.GetRawResponse());
+                    var response = await _resGrpParentResourceResGrpParentsRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -208,17 +208,17 @@ namespace MgmtListMethods
         /// Operation Id: ResGrpParents_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParent" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<ResGrpParent> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResGrpParentResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ResGrpParentResource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<ResGrpParent> FirstPageFunc(int? pageSizeHint)
+            Page<ResGrpParentResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
+                using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _resGrpParentRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParent(Client, value)), null, response.GetRawResponse());
+                    var response = _resGrpParentResourceResGrpParentsRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ResGrpParentResource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -242,7 +242,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
+            using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
             scope.Start();
             try
             {
@@ -269,7 +269,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
+            using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.Exists");
             scope.Start();
             try
             {
@@ -292,18 +292,18 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public virtual async Task<Response<ResGrpParent>> GetIfExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResGrpParentResource>> GetIfExistsAsync(string resGrpParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
+            using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _resGrpParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _resGrpParentResourceResGrpParentsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
-                return Response.FromValue(new ResGrpParent(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<ResGrpParentResource>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -321,18 +321,18 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resGrpParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="resGrpParentName"/> is null. </exception>
-        public virtual Response<ResGrpParent> GetIfExists(string resGrpParentName, CancellationToken cancellationToken = default)
+        public virtual Response<ResGrpParentResource> GetIfExists(string resGrpParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resGrpParentName, nameof(resGrpParentName));
 
-            using var scope = _resGrpParentClientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
+            using var scope = _resGrpParentResourceResGrpParentsClientDiagnostics.CreateScope("ResGrpParentCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _resGrpParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
+                var response = _resGrpParentResourceResGrpParentsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, resGrpParentName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<ResGrpParent>(null, response.GetRawResponse());
-                return Response.FromValue(new ResGrpParent(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<ResGrpParentResource>(null, response.GetRawResponse());
+                return Response.FromValue(new ResGrpParentResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -341,7 +341,7 @@ namespace MgmtListMethods
             }
         }
 
-        IEnumerator<ResGrpParent> IEnumerable<ResGrpParent>.GetEnumerator()
+        IEnumerator<ResGrpParentResource> IEnumerable<ResGrpParentResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -351,7 +351,7 @@ namespace MgmtListMethods
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<ResGrpParent> IAsyncEnumerable<ResGrpParent>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<ResGrpParentResource> IAsyncEnumerable<ResGrpParentResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

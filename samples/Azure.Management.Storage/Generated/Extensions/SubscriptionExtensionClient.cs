@@ -23,8 +23,8 @@ namespace Azure.Management.Storage
     {
         private ClientDiagnostics _skusClientDiagnostics;
         private SkusRestOperations _skusRestClient;
-        private ClientDiagnostics _storageAccountClientDiagnostics;
-        private StorageAccountsRestOperations _storageAccountRestClient;
+        private ClientDiagnostics _storageAccountResourceStorageAccountsClientDiagnostics;
+        private StorageAccountsRestOperations _storageAccountResourceStorageAccountsRestClient;
         private ClientDiagnostics _usagesClientDiagnostics;
         private UsagesRestOperations _usagesRestClient;
 
@@ -42,8 +42,8 @@ namespace Azure.Management.Storage
 
         private ClientDiagnostics SkusClientDiagnostics => _skusClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private SkusRestOperations SkusRestClient => _skusRestClient ??= new SkusRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
-        private ClientDiagnostics StorageAccountClientDiagnostics => _storageAccountClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage", StorageAccount.ResourceType.Namespace, DiagnosticOptions);
-        private StorageAccountsRestOperations StorageAccountRestClient => _storageAccountRestClient ??= new StorageAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(StorageAccount.ResourceType));
+        private ClientDiagnostics StorageAccountResourceStorageAccountsClientDiagnostics => _storageAccountResourceStorageAccountsClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage", StorageAccountResource.ResourceType.Namespace, DiagnosticOptions);
+        private StorageAccountsRestOperations StorageAccountResourceStorageAccountsRestClient => _storageAccountResourceStorageAccountsRestClient ??= new StorageAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(StorageAccountResource.ResourceType));
         private ClientDiagnostics UsagesClientDiagnostics => _usagesClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private UsagesRestOperations UsagesRestClient => _usagesRestClient ??= new UsagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
@@ -53,9 +53,9 @@ namespace Azure.Management.Storage
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of DeletedAccounts in the DeletedAccount. </summary>
-        /// <returns> An object representing collection of DeletedAccounts and their operations over a DeletedAccount. </returns>
-        public virtual DeletedAccountCollection GetDeletedAccounts()
+        /// <summary> Gets a collection of DeletedAccountResources in the DeletedAccountResource. </summary>
+        /// <returns> An object representing collection of DeletedAccountResources and their operations over a DeletedAccountResource. </returns>
+        public virtual DeletedAccountCollection GetDeletedAccountResources()
         {
             return GetCachedClient(Client => new DeletedAccountCollection(Client, Id));
         }
@@ -120,17 +120,17 @@ namespace Azure.Management.Storage
         /// Operation Id: StorageAccounts_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<StorageAccount> GetStorageAccountsAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<StorageAccountResource> GetStorageAccountResourcesAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<StorageAccountResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccounts");
+                using var scope = StorageAccountResourceStorageAccountsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccountResources");
                 scope.Start();
                 try
                 {
-                    var response = await StorageAccountRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await StorageAccountResourceStorageAccountsRestClient.ListAsync(Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -138,14 +138,14 @@ namespace Azure.Management.Storage
                     throw;
                 }
             }
-            async Task<Page<StorageAccount>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<StorageAccountResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccounts");
+                using var scope = StorageAccountResourceStorageAccountsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccountResources");
                 scope.Start();
                 try
                 {
-                    var response = await StorageAccountRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await StorageAccountResourceStorageAccountsRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -162,17 +162,17 @@ namespace Azure.Management.Storage
         /// Operation Id: StorageAccounts_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<StorageAccount> GetStorageAccounts(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<StorageAccountResource> GetStorageAccountResources(CancellationToken cancellationToken = default)
         {
-            Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
+            Page<StorageAccountResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccounts");
+                using var scope = StorageAccountResourceStorageAccountsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccountResources");
                 scope.Start();
                 try
                 {
-                    var response = StorageAccountRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = StorageAccountResourceStorageAccountsRestClient.List(Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -180,14 +180,14 @@ namespace Azure.Management.Storage
                     throw;
                 }
             }
-            Page<StorageAccount> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<StorageAccountResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = StorageAccountClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccounts");
+                using var scope = StorageAccountResourceStorageAccountsClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetStorageAccountResources");
                 scope.Start();
                 try
                 {
-                    var response = StorageAccountRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = StorageAccountResourceStorageAccountsRestClient.ListNextPage(nextLink, Id.SubscriptionId, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccountResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

@@ -203,7 +203,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             return operationRequestPath.GetScopePath().Append(contextualPath.TrimScope());
         }
 
-        protected override string DefaultName => Resource.Type.Name + _suffixValue;
+        // name after `{ResourceName}Collection`
+        protected override string DefaultName => ResourceName + _suffixValue;
 
         protected override string CreateDescription(string clientPrefix)
         {

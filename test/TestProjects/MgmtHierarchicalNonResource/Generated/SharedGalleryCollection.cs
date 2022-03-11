@@ -23,10 +23,10 @@ using MgmtHierarchicalNonResource.Models;
 namespace MgmtHierarchicalNonResource
 {
     /// <summary> A class representing collection of SharedGallery and their operations over its parent. </summary>
-    public partial class SharedGalleryCollection : ArmCollection, IEnumerable<SharedGallery>, IAsyncEnumerable<SharedGallery>
+    public partial class SharedGalleryCollection : ArmCollection, IEnumerable<SharedGalleryResource>, IAsyncEnumerable<SharedGalleryResource>
     {
-        private readonly ClientDiagnostics _sharedGalleryClientDiagnostics;
-        private readonly SharedGalleriesRestOperations _sharedGalleryRestClient;
+        private readonly ClientDiagnostics _sharedGalleryResourceSharedGalleriesClientDiagnostics;
+        private readonly SharedGalleriesRestOperations _sharedGalleryResourceSharedGalleriesRestClient;
         private readonly string _location;
 
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryCollection"/> class for mocking. </summary>
@@ -43,9 +43,9 @@ namespace MgmtHierarchicalNonResource
         internal SharedGalleryCollection(ArmClient client, ResourceIdentifier id, string location) : base(client, id)
         {
             _location = location;
-            _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", SharedGallery.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(SharedGallery.ResourceType, out string sharedGalleryApiVersion);
-            _sharedGalleryRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
+            _sharedGalleryResourceSharedGalleriesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", SharedGalleryResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(SharedGalleryResource.ResourceType, out string sharedGalleryResourceSharedGalleriesApiVersion);
+            _sharedGalleryResourceSharedGalleriesRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryResourceSharedGalleriesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -66,19 +66,19 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
-        public virtual async Task<Response<SharedGallery>> GetAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SharedGalleryResource>> GetAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.Get");
+            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.Get");
             scope.Start();
             try
             {
-                var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryResourceSharedGalleriesRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
+                response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
+                return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -96,19 +96,19 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
-        public virtual Response<SharedGallery> Get(string galleryUniqueName, CancellationToken cancellationToken = default)
+        public virtual Response<SharedGalleryResource> Get(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.Get");
+            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.Get");
             scope.Start();
             try
             {
-                var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken);
+                var response = _sharedGalleryResourceSharedGalleriesRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
+                response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
+                return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -124,20 +124,20 @@ namespace MgmtHierarchicalNonResource
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SharedGallery" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<SharedGallery> GetAllAsync(SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="SharedGalleryResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<SharedGalleryResource> GetAllAsync(SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<SharedGallery>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<SharedGalleryResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
+                using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sharedGalleryRestClient.ListAsync(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sharedGalleryResourceSharedGalleriesRestClient.ListAsync(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
-                        value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(Client, value);
+                        value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
+                        return new SharedGalleryResource(Client, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -147,17 +147,17 @@ namespace MgmtHierarchicalNonResource
                     throw;
                 }
             }
-            async Task<Page<SharedGallery>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<SharedGalleryResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
+                using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _sharedGalleryRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _sharedGalleryResourceSharedGalleriesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
-                        value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(Client, value);
+                        value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
+                        return new SharedGalleryResource(Client, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -177,20 +177,20 @@ namespace MgmtHierarchicalNonResource
         /// </summary>
         /// <param name="sharedTo"> The query parameter to decide what shared galleries to fetch when doing listing operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SharedGallery" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<SharedGallery> GetAll(SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="SharedGalleryResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<SharedGalleryResource> GetAll(SharedToValues? sharedTo = null, CancellationToken cancellationToken = default)
         {
-            Page<SharedGallery> FirstPageFunc(int? pageSizeHint)
+            Page<SharedGalleryResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
+                using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sharedGalleryRestClient.List(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
+                    var response = _sharedGalleryResourceSharedGalleriesRestClient.List(Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
-                        value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(Client, value);
+                        value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
+                        return new SharedGalleryResource(Client, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -200,17 +200,17 @@ namespace MgmtHierarchicalNonResource
                     throw;
                 }
             }
-            Page<SharedGallery> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<SharedGalleryResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
+                using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _sharedGalleryRestClient.ListNextPage(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
+                    var response = _sharedGalleryResourceSharedGalleriesRestClient.ListNextPage(nextLink, Id.SubscriptionId, _location, sharedTo, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value =>
                     {
-                        value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
-                        return new SharedGallery(Client, value);
+                        value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, value.Name);
+                        return new SharedGalleryResource(Client, value);
                     }
                     ), response.Value.NextLink, response.GetRawResponse());
                 }
@@ -236,7 +236,7 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
+            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
+            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.Exists");
             scope.Start();
             try
             {
@@ -286,19 +286,19 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
-        public virtual async Task<Response<SharedGallery>> GetIfExistsAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SharedGalleryResource>> GetIfExistsAsync(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
+            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _sharedGalleryResourceSharedGalleriesRestClient.GetAsync(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<SharedGallery>(null, response.GetRawResponse());
-                response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<SharedGalleryResource>(null, response.GetRawResponse());
+                response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
+                return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -316,19 +316,19 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryUniqueName"/> is null. </exception>
-        public virtual Response<SharedGallery> GetIfExists(string galleryUniqueName, CancellationToken cancellationToken = default)
+        public virtual Response<SharedGalleryResource> GetIfExists(string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryUniqueName, nameof(galleryUniqueName));
 
-            using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
+            using var scope = _sharedGalleryResourceSharedGalleriesClientDiagnostics.CreateScope("SharedGalleryCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken);
+                var response = _sharedGalleryResourceSharedGalleriesRestClient.Get(Id.SubscriptionId, _location, galleryUniqueName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<SharedGallery>(null, response.GetRawResponse());
-                response.Value.Id = SharedGallery.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
-                return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<SharedGalleryResource>(null, response.GetRawResponse());
+                response.Value.Id = SharedGalleryResource.CreateResourceIdentifier(Id.SubscriptionId, _location, galleryUniqueName);
+                return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -337,7 +337,7 @@ namespace MgmtHierarchicalNonResource
             }
         }
 
-        IEnumerator<SharedGallery> IEnumerable<SharedGallery>.GetEnumerator()
+        IEnumerator<SharedGalleryResource> IEnumerable<SharedGalleryResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -347,7 +347,7 @@ namespace MgmtHierarchicalNonResource
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<SharedGallery> IAsyncEnumerable<SharedGallery>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<SharedGalleryResource> IAsyncEnumerable<SharedGalleryResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

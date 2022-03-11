@@ -13,33 +13,33 @@ namespace MgmtLRO
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region Fake
-        /// <summary> Gets an object representing a Fake along with the instance operations that can be performed on it but with no data. </summary>
+        #region FakeResource
+        /// <summary> Gets an object representing a FakeResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Fake" /> object. </returns>
-        public static Fake GetFake(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
+        public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                Fake.ValidateResourceId(id);
-                return new Fake(client, id);
+                FakeResource.ValidateResourceId(id);
+                return new FakeResource(client, id);
             }
             );
         }
         #endregion
 
-        #region Bar
-        /// <summary> Gets an object representing a Bar along with the instance operations that can be performed on it but with no data. </summary>
+        #region BarResource
+        /// <summary> Gets an object representing a BarResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Bar" /> object. </returns>
-        public static Bar GetBar(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
+        public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                Bar.ValidateResourceId(id);
-                return new Bar(client, id);
+                BarResource.ValidateResourceId(id);
+                return new BarResource(client, id);
             }
             );
         }

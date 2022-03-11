@@ -27,12 +27,12 @@ namespace Azure.Management.Storage
             );
         }
 
-        /// <summary> Gets a collection of DeletedAccounts in the DeletedAccount. </summary>
+        /// <summary> Gets a collection of DeletedAccountResources in the DeletedAccountResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeletedAccounts and their operations over a DeletedAccount. </returns>
-        public static DeletedAccountCollection GetDeletedAccounts(this Subscription subscription)
+        /// <returns> An object representing collection of DeletedAccountResources and their operations over a DeletedAccountResource. </returns>
+        public static DeletedAccountCollection GetDeletedAccountResources(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetDeletedAccounts();
+            return GetExtensionClient(subscription).GetDeletedAccountResources();
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
-        public static async Task<Response<DeletedAccount>> GetDeletedAccountAsync(this Subscription subscription, string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeletedAccountResource>> GetDeletedAccountResourceAsync(this Subscription subscription, string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetDeletedAccounts().GetAsync(location, deletedAccountName, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetDeletedAccountResources().GetAsync(location, deletedAccountName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -62,9 +62,9 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="deletedAccountName"/> is null. </exception>
-        public static Response<DeletedAccount> GetDeletedAccount(this Subscription subscription, string location, string deletedAccountName, CancellationToken cancellationToken = default)
+        public static Response<DeletedAccountResource> GetDeletedAccountResource(this Subscription subscription, string location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetDeletedAccounts().Get(location, deletedAccountName, cancellationToken);
+            return subscription.GetDeletedAccountResources().Get(location, deletedAccountName, cancellationToken);
         }
 
         /// <summary>
@@ -100,10 +100,10 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<StorageAccount> GetStorageAccountsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<StorageAccountResource> GetStorageAccountResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetStorageAccountsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetStorageAccountResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -113,10 +113,10 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<StorageAccount> GetStorageAccounts(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<StorageAccountResource> GetStorageAccountResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetStorageAccounts(cancellationToken);
+            return GetExtensionClient(subscription).GetStorageAccountResources(cancellationToken);
         }
 
         /// <summary>

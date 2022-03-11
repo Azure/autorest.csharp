@@ -348,6 +348,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtRenameRules\\Generated"
     },
+    "MgmtResourceName": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtResourceName\\Generated"
+    },
     "MgmtSafeFlatten": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSafeFlatten\\Generated"

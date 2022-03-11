@@ -56,23 +56,23 @@ namespace ExactMatchFlattenInheritance
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of AzureResourceFlattenModel1s in the AzureResourceFlattenModel1. </summary>
-        /// <returns> An object representing collection of AzureResourceFlattenModel1s and their operations over a AzureResourceFlattenModel1. </returns>
-        public virtual AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s()
+        /// <summary> Gets a collection of AzureResourceFlattenModel1Resources in the AzureResourceFlattenModel1Resource. </summary>
+        /// <returns> An object representing collection of AzureResourceFlattenModel1Resources and their operations over a AzureResourceFlattenModel1Resource. </returns>
+        public virtual AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1Resources()
         {
             return GetCachedClient(Client => new AzureResourceFlattenModel1Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of CustomModel2s in the CustomModel2. </summary>
-        /// <returns> An object representing collection of CustomModel2s and their operations over a CustomModel2. </returns>
-        public virtual CustomModel2Collection GetCustomModel2s()
+        /// <summary> Gets a collection of CustomModel2Resources in the CustomModel2Resource. </summary>
+        /// <returns> An object representing collection of CustomModel2Resources and their operations over a CustomModel2Resource. </returns>
+        public virtual CustomModel2Collection GetCustomModel2Resources()
         {
             return GetCachedClient(Client => new CustomModel2Collection(Client, Id));
         }
 
-        /// <summary> Gets a collection of CustomModel3s in the CustomModel3. </summary>
-        /// <returns> An object representing collection of CustomModel3s and their operations over a CustomModel3. </returns>
-        public virtual CustomModel3Collection GetCustomModel3s()
+        /// <summary> Gets a collection of CustomModel3Resources in the CustomModel3Resource. </summary>
+        /// <returns> An object representing collection of CustomModel3Resources and their operations over a CustomModel3Resource. </returns>
+        public virtual CustomModel3Collection GetCustomModel3Resources()
         {
             return GetCachedClient(Client => new CustomModel3Collection(Client, Id));
         }

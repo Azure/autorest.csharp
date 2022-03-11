@@ -25,12 +25,12 @@ namespace SingletonResource
             );
         }
 
-        /// <summary> Gets a collection of Cars in the Car. </summary>
+        /// <summary> Gets a collection of CarResources in the CarResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of Cars and their operations over a Car. </returns>
-        public static CarCollection GetCars(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
+        public static CarCollection GetCarResources(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetCars();
+            return GetExtensionClient(resourceGroup).GetCarResources();
         }
 
         /// <summary>
@@ -42,9 +42,9 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public static async Task<Response<Car>> GetCarAsync(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
+        public static async Task<Response<CarResource>> GetCarResourceAsync(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetCars().GetAsync(carName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetCarResources().GetAsync(carName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,15 +56,15 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public static Response<Car> GetCar(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
+        public static Response<CarResource> GetCarResource(this ResourceGroup resourceGroup, string carName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetCars().Get(carName, cancellationToken);
+            return resourceGroup.GetCarResources().Get(carName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ParentResources in the ParentResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
-        public static ParentResourceCollection GetParentResources(this ResourceGroup resourceGroup)
+        public static ParentCollection GetParentResources(this ResourceGroup resourceGroup)
         {
             return GetExtensionClient(resourceGroup).GetParentResources();
         }

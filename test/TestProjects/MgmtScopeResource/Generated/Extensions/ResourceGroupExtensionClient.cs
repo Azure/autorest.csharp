@@ -32,9 +32,9 @@ namespace MgmtScopeResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
-        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
-        public virtual DeploymentExtendedCollection GetDeploymentExtendeds()
+        /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
+        /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
+        public virtual DeploymentExtendedCollection GetDeploymentExtendedResources()
         {
             return GetCachedClient(Client => new DeploymentExtendedCollection(Client, Id));
         }

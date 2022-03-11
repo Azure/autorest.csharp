@@ -22,10 +22,10 @@ using Azure.ResourceManager.Resources;
 namespace NoTypeReplacement
 {
     /// <summary> A class representing collection of NoTypeReplacementModel2 and their operations over its parent. </summary>
-    public partial class NoTypeReplacementModel2Collection : ArmCollection, IEnumerable<NoTypeReplacementModel2>, IAsyncEnumerable<NoTypeReplacementModel2>
+    public partial class NoTypeReplacementModel2Collection : ArmCollection, IEnumerable<NoTypeReplacementModel2Resource>, IAsyncEnumerable<NoTypeReplacementModel2Resource>
     {
-        private readonly ClientDiagnostics _noTypeReplacementModel2ClientDiagnostics;
-        private readonly NoTypeReplacementModel2SRestOperations _noTypeReplacementModel2RestClient;
+        private readonly ClientDiagnostics _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics;
+        private readonly NoTypeReplacementModel2SRestOperations _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel2Collection"/> class for mocking. </summary>
         protected NoTypeReplacementModel2Collection()
@@ -37,9 +37,9 @@ namespace NoTypeReplacement
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal NoTypeReplacementModel2Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _noTypeReplacementModel2ClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", NoTypeReplacementModel2.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(NoTypeReplacementModel2.ResourceType, out string noTypeReplacementModel2ApiVersion);
-            _noTypeReplacementModel2RestClient = new NoTypeReplacementModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel2ApiVersion);
+            _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics = new ClientDiagnostics("NoTypeReplacement", NoTypeReplacementModel2Resource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(NoTypeReplacementModel2Resource.ResourceType, out string noTypeReplacementModel2ResourceNoTypeReplacementModel2sApiVersion);
+            _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient = new NoTypeReplacementModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, noTypeReplacementModel2ResourceNoTypeReplacementModel2sApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -61,17 +61,17 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<NoTypeReplacementModel2>> CreateOrUpdateAsync(WaitUntil waitUntil, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<NoTypeReplacementModel2Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.CreateOrUpdate");
+            using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel2RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel2>(Response.FromValue(new NoTypeReplacementModel2(Client, response), response.GetRawResponse()));
+                var response = await _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel2Resource>(Response.FromValue(new NoTypeReplacementModel2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -93,17 +93,17 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<NoTypeReplacementModel2> CreateOrUpdate(WaitUntil waitUntil, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<NoTypeReplacementModel2Resource> CreateOrUpdate(WaitUntil waitUntil, string noTypeReplacementModel2SName, NoTypeReplacementModel2Data parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.CreateOrUpdate");
+            using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel2RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, parameters, cancellationToken);
-                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel2>(Response.FromValue(new NoTypeReplacementModel2(Client, response), response.GetRawResponse()));
+                var response = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, parameters, cancellationToken);
+                var operation = new NoTypeReplacementArmOperation<NoTypeReplacementModel2Resource>(Response.FromValue(new NoTypeReplacementModel2Resource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -123,18 +123,18 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public virtual async Task<Response<NoTypeReplacementModel2>> GetAsync(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NoTypeReplacementModel2Resource>> GetAsync(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
 
-            using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Get");
+            using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Get");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel2(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel2Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -151,18 +151,18 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public virtual Response<NoTypeReplacementModel2> Get(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public virtual Response<NoTypeReplacementModel2Resource> Get(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
 
-            using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Get");
+            using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Get");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken);
+                var response = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel2(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel2Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -176,17 +176,17 @@ namespace NoTypeReplacement
         /// Operation Id: NoTypeReplacementModel2s_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="NoTypeReplacementModel2" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<NoTypeReplacementModel2> GetAllAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="NoTypeReplacementModel2Resource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<NoTypeReplacementModel2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<NoTypeReplacementModel2>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<NoTypeReplacementModel2Resource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetAll");
+                using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _noTypeReplacementModel2RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel2(Client, value)), null, response.GetRawResponse());
+                    var response = await _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel2Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -202,17 +202,17 @@ namespace NoTypeReplacement
         /// Operation Id: NoTypeReplacementModel2s_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="NoTypeReplacementModel2" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<NoTypeReplacementModel2> GetAll(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="NoTypeReplacementModel2Resource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<NoTypeReplacementModel2Resource> GetAll(CancellationToken cancellationToken = default)
         {
-            Page<NoTypeReplacementModel2> FirstPageFunc(int? pageSizeHint)
+            Page<NoTypeReplacementModel2Resource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetAll");
+                using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _noTypeReplacementModel2RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel2(Client, value)), null, response.GetRawResponse());
+                    var response = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new NoTypeReplacementModel2Resource(Client, value)), null, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -236,7 +236,7 @@ namespace NoTypeReplacement
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
 
-            using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Exists");
+            using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Exists");
             scope.Start();
             try
             {
@@ -263,7 +263,7 @@ namespace NoTypeReplacement
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
 
-            using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Exists");
+            using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.Exists");
             scope.Start();
             try
             {
@@ -286,18 +286,18 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public virtual async Task<Response<NoTypeReplacementModel2>> GetIfExistsAsync(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<NoTypeReplacementModel2Resource>> GetIfExistsAsync(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
 
-            using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetIfExists");
+            using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _noTypeReplacementModel2RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<NoTypeReplacementModel2>(null, response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel2(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<NoTypeReplacementModel2Resource>(null, response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel2Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -315,18 +315,18 @@ namespace NoTypeReplacement
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
-        public virtual Response<NoTypeReplacementModel2> GetIfExists(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        public virtual Response<NoTypeReplacementModel2Resource> GetIfExists(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(noTypeReplacementModel2SName, nameof(noTypeReplacementModel2SName));
 
-            using var scope = _noTypeReplacementModel2ClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetIfExists");
+            using var scope = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics.CreateScope("NoTypeReplacementModel2Collection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _noTypeReplacementModel2RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken);
+                var response = _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, noTypeReplacementModel2SName, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<NoTypeReplacementModel2>(null, response.GetRawResponse());
-                return Response.FromValue(new NoTypeReplacementModel2(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<NoTypeReplacementModel2Resource>(null, response.GetRawResponse());
+                return Response.FromValue(new NoTypeReplacementModel2Resource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -335,7 +335,7 @@ namespace NoTypeReplacement
             }
         }
 
-        IEnumerator<NoTypeReplacementModel2> IEnumerable<NoTypeReplacementModel2>.GetEnumerator()
+        IEnumerator<NoTypeReplacementModel2Resource> IEnumerable<NoTypeReplacementModel2Resource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -345,7 +345,7 @@ namespace NoTypeReplacement
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<NoTypeReplacementModel2> IAsyncEnumerable<NoTypeReplacementModel2>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<NoTypeReplacementModel2Resource> IAsyncEnumerable<NoTypeReplacementModel2Resource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

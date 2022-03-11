@@ -32,23 +32,23 @@ namespace MgmtRenameRules
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of VirtualMachines in the VirtualMachine. </summary>
-        /// <returns> An object representing collection of VirtualMachines and their operations over a VirtualMachine. </returns>
-        public virtual VirtualMachineCollection GetVirtualMachines()
+        /// <summary> Gets a collection of VirtualMachineResources in the VirtualMachineResource. </summary>
+        /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
+        public virtual VirtualMachineCollection GetVirtualMachineResources()
         {
             return GetCachedClient(Client => new VirtualMachineCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of Images in the Image. </summary>
-        /// <returns> An object representing collection of Images and their operations over a Image. </returns>
-        public virtual ImageCollection GetImages()
+        /// <summary> Gets a collection of ImageResources in the ImageResource. </summary>
+        /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
+        public virtual ImageCollection GetImageResources()
         {
             return GetCachedClient(Client => new ImageCollection(Client, Id));
         }
 
-        /// <summary> Gets a collection of VirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
-        /// <returns> An object representing collection of VirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
-        public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSets()
+        /// <summary> Gets a collection of VirtualMachineScaleSetResources in the VirtualMachineScaleSetResource. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
+        public virtual VirtualMachineScaleSetCollection GetVirtualMachineScaleSetResources()
         {
             return GetCachedClient(Client => new VirtualMachineScaleSetCollection(Client, Id));
         }

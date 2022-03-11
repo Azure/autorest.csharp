@@ -10,10 +10,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase("AvailabilitySet", true)]
-        [TestCase("DedicatedHostGroup", true)]
-        [TestCase("DedicatedHost", true)]
-        [TestCase("VirtualMachineExtensionImage", true)]
+        [TestCase("AvailabilitySetResource", true)]
+        [TestCase("DedicatedHostGroupResource", true)]
+        [TestCase("DedicatedHostResource", true)]
+        [TestCase("VirtualMachineExtensionImageResource", true)]
         public void ValidateResource(string operation, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == operation);
@@ -36,14 +36,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("DedicatedHostGroupCollection", "GetIfExistsAsync", "hostGroupName")]
         [TestCase("DedicatedHostGroupCollection", "Exists", "hostGroupName")]
         [TestCase("DedicatedHostGroupCollection", "ExistsAsync", "hostGroupName")]
-        [TestCase("EnvironmentContainerResourceCollection", "CreateOrUpdate", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "CreateOrUpdateAsync", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "Get", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "GetAsync", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "GetIfExists", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "GetIfExistsAsync", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "Exists", "name")]
-        [TestCase("EnvironmentContainerResourceCollection", "ExistsAsync", "name")]
+        [TestCase("EnvironmentContainerCollection", "CreateOrUpdate", "name")]
+        [TestCase("EnvironmentContainerCollection", "CreateOrUpdateAsync", "name")]
+        [TestCase("EnvironmentContainerCollection", "Get", "name")]
+        [TestCase("EnvironmentContainerCollection", "GetAsync", "name")]
+        [TestCase("EnvironmentContainerCollection", "GetIfExists", "name")]
+        [TestCase("EnvironmentContainerCollection", "GetIfExistsAsync", "name")]
+        [TestCase("EnvironmentContainerCollection", "Exists", "name")]
+        [TestCase("EnvironmentContainerCollection", "ExistsAsync", "name")]
         public void ValidateCollectionCorrectFirstParameter(string collectionName, string methodName, string parameterName)
         {
             var method = FindAllCollections().Single(o => o.Name == collectionName).GetMethod(methodName);

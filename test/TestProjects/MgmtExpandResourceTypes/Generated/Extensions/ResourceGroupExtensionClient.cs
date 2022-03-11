@@ -32,9 +32,9 @@ namespace MgmtExpandResourceTypes
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of Zones in the Zone. </summary>
-        /// <returns> An object representing collection of Zones and their operations over a Zone. </returns>
-        public virtual ZoneCollection GetZones()
+        /// <summary> Gets a collection of ZoneResources in the ZoneResource. </summary>
+        /// <returns> An object representing collection of ZoneResources and their operations over a ZoneResource. </returns>
+        public virtual ZoneCollection GetZoneResources()
         {
             return GetCachedClient(Client => new ZoneCollection(Client, Id));
         }

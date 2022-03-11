@@ -25,12 +25,12 @@ namespace MgmtListMethods
             );
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocs in the MgmtGrpParentWithNonResChWithLoc. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the MgmtGrpParentWithNonResChWithLocResource. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocs and their operations over a MgmtGrpParentWithNonResChWithLoc. </returns>
-        public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroup managementGroup)
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocResources and their operations over a MgmtGrpParentWithNonResChWithLocResource. </returns>
+        public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocResources(this ManagementGroup managementGroup)
         {
-            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChWithLocs();
+            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChWithLocResources();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public static async Task<Response<MgmtGrpParentWithNonResChWithLoc>> GetMgmtGrpParentWithNonResChWithLocAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithNonResChWithLocResource>> GetMgmtGrpParentWithNonResChWithLocResourceAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await managementGroup.GetMgmtGrpParentWithNonResChWithLocs().GetAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await managementGroup.GetMgmtGrpParentWithNonResChWithLocResources().GetAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,32 +58,17 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
-        public static Response<MgmtGrpParentWithNonResChWithLoc> GetMgmtGrpParentWithNonResChWithLoc(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public static Response<MgmtGrpParentWithNonResChWithLocResource> GetMgmtGrpParentWithNonResChWithLocResource(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetMgmtGrpParentWithNonResChWithLocs().Get(mgmtGrpParentWithNonResChWithLocName, cancellationToken);
+            return managementGroup.GetMgmtGrpParentWithNonResChWithLocResources().Get(mgmtGrpParentWithNonResChWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChes in the MgmtGrpParentWithNonResCh. </summary>
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the MgmtGrpParentWithNonResChResource. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of MgmtGrpParentWithNonResChes and their operations over a MgmtGrpParentWithNonResCh. </returns>
-        public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroup managementGroup)
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChResources and their operations over a MgmtGrpParentWithNonResChResource. </returns>
+        public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChResources(this ManagementGroup managementGroup)
         {
-            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChes();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
-        /// Operation Id: MgmtGrpParentWithNonResChes_Get
-        /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
-        public static async Task<Response<MgmtGrpParentWithNonResCh>> GetMgmtGrpParentWithNonResChAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
-        {
-            return await managementGroup.GetMgmtGrpParentWithNonResChes().GetAsync(mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithNonResChResources();
         }
 
         /// <summary>
@@ -96,17 +81,32 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
-        public static Response<MgmtGrpParentWithNonResCh> GetMgmtGrpParentWithNonResCh(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithNonResChResource>> GetMgmtGrpParentWithNonResChResourceAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetMgmtGrpParentWithNonResChes().Get(mgmtGrpParentWithNonResChName, cancellationToken);
+            return await managementGroup.GetMgmtGrpParentWithNonResChResources().GetAsync(mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithLocs in the MgmtGrpParentWithLoc. </summary>
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGrpParentWithNonResChes/{mgmtGrpParentWithNonResChName}
+        /// Operation Id: MgmtGrpParentWithNonResChes_Get
+        /// </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of MgmtGrpParentWithLocs and their operations over a MgmtGrpParentWithLoc. </returns>
-        public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroup managementGroup)
+        /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
+        public static Response<MgmtGrpParentWithNonResChResource> GetMgmtGrpParentWithNonResChResource(this ManagementGroup managementGroup, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithLocs();
+            return managementGroup.GetMgmtGrpParentWithNonResChResources().Get(mgmtGrpParentWithNonResChName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the MgmtGrpParentWithLocResource. </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of MgmtGrpParentWithLocResources and their operations over a MgmtGrpParentWithLocResource. </returns>
+        public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocResources(this ManagementGroup managementGroup)
+        {
+            return GetExtensionClient(managementGroup).GetMgmtGrpParentWithLocResources();
         }
 
         /// <summary>
@@ -119,9 +119,9 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
-        public static async Task<Response<MgmtGrpParentWithLoc>> GetMgmtGrpParentWithLocAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGrpParentWithLocResource>> GetMgmtGrpParentWithLocResourceAsync(this ManagementGroup managementGroup, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return await managementGroup.GetMgmtGrpParentWithLocs().GetAsync(mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
+            return await managementGroup.GetMgmtGrpParentWithLocResources().GetAsync(mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -134,32 +134,17 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
-        public static Response<MgmtGrpParentWithLoc> GetMgmtGrpParentWithLoc(this ManagementGroup managementGroup, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
+        public static Response<MgmtGrpParentWithLocResource> GetMgmtGrpParentWithLocResource(this ManagementGroup managementGroup, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetMgmtGrpParentWithLocs().Get(mgmtGrpParentWithLocName, cancellationToken);
+            return managementGroup.GetMgmtGrpParentWithLocResources().Get(mgmtGrpParentWithLocName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of MgmtGroupParents in the MgmtGroupParent. </summary>
+        /// <summary> Gets a collection of MgmtGroupParentResources in the MgmtGroupParentResource. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of MgmtGroupParents and their operations over a MgmtGroupParent. </returns>
-        public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroup managementGroup)
+        /// <returns> An object representing collection of MgmtGroupParentResources and their operations over a MgmtGroupParentResource. </returns>
+        public static MgmtGroupParentCollection GetMgmtGroupParentResources(this ManagementGroup managementGroup)
         {
-            return GetExtensionClient(managementGroup).GetMgmtGroupParents();
-        }
-
-        /// <summary>
-        /// Retrieves information.
-        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
-        /// Operation Id: MgmtGroupParents_Get
-        /// </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <param name="mgmtGroupParentName"> Name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public static async Task<Response<MgmtGroupParent>> GetMgmtGroupParentAsync(this ManagementGroup managementGroup, string mgmtGroupParentName, CancellationToken cancellationToken = default)
-        {
-            return await managementGroup.GetMgmtGroupParents().GetAsync(mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(managementGroup).GetMgmtGroupParentResources();
         }
 
         /// <summary>
@@ -172,9 +157,24 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
-        public static Response<MgmtGroupParent> GetMgmtGroupParent(this ManagementGroup managementGroup, string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<MgmtGroupParentResource>> GetMgmtGroupParentResourceAsync(this ManagementGroup managementGroup, string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            return managementGroup.GetMgmtGroupParents().Get(mgmtGroupParentName, cancellationToken);
+            return await managementGroup.GetMgmtGroupParentResources().GetAsync(mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}
+        /// Operation Id: MgmtGroupParents_Get
+        /// </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="mgmtGroupParentName"> Name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
+        public static Response<MgmtGroupParentResource> GetMgmtGroupParentResource(this ManagementGroup managementGroup, string mgmtGroupParentName, CancellationToken cancellationToken = default)
+        {
+            return managementGroup.GetMgmtGroupParentResources().Get(mgmtGroupParentName, cancellationToken);
         }
     }
 }

@@ -13,49 +13,49 @@ namespace NoTypeReplacement
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region NoTypeReplacementModel1
-        /// <summary> Gets an object representing a NoTypeReplacementModel1 along with the instance operations that can be performed on it but with no data. </summary>
+        #region NoTypeReplacementModel1Resource
+        /// <summary> Gets an object representing a NoTypeReplacementModel1Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1" /> object. </returns>
-        public static NoTypeReplacementModel1 GetNoTypeReplacementModel1(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
+        public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                NoTypeReplacementModel1.ValidateResourceId(id);
-                return new NoTypeReplacementModel1(client, id);
+                NoTypeReplacementModel1Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel1Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region NoTypeReplacementModel2
-        /// <summary> Gets an object representing a NoTypeReplacementModel2 along with the instance operations that can be performed on it but with no data. </summary>
+        #region NoTypeReplacementModel2Resource
+        /// <summary> Gets an object representing a NoTypeReplacementModel2Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2" /> object. </returns>
-        public static NoTypeReplacementModel2 GetNoTypeReplacementModel2(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
+        public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                NoTypeReplacementModel2.ValidateResourceId(id);
-                return new NoTypeReplacementModel2(client, id);
+                NoTypeReplacementModel2Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel2Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region NoTypeReplacementModel3
-        /// <summary> Gets an object representing a NoTypeReplacementModel3 along with the instance operations that can be performed on it but with no data. </summary>
+        #region NoTypeReplacementModel3Resource
+        /// <summary> Gets an object representing a NoTypeReplacementModel3Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3" /> object. </returns>
-        public static NoTypeReplacementModel3 GetNoTypeReplacementModel3(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
+        public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                NoTypeReplacementModel3.ValidateResourceId(id);
-                return new NoTypeReplacementModel3(client, id);
+                NoTypeReplacementModel3Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel3Resource(client, id);
             }
             );
         }

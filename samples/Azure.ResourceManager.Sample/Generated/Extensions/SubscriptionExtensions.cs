@@ -28,19 +28,19 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImages in the VirtualMachineExtensionImage. </summary>
+        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the VirtualMachineExtensionImageResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        /// <returns> An object representing collection of VirtualMachineExtensionImages and their operations over a VirtualMachineExtensionImage. </returns>
-        public static VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(this Subscription subscription, string location, string publisherName)
+        /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
+        public static VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImageResources(this Subscription subscription, string location, string publisherName)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
-            return GetExtensionClient(subscription).GetVirtualMachineExtensionImages(location, publisherName);
+            return GetExtensionClient(subscription).GetVirtualMachineExtensionImageResources(location, publisherName);
         }
 
         /// <summary>
@@ -56,9 +56,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
-        public static async Task<Response<VirtualMachineExtensionImage>> GetVirtualMachineExtensionImageAsync(this Subscription subscription, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineExtensionImageResource>> GetVirtualMachineExtensionImageResourceAsync(this Subscription subscription, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetVirtualMachineExtensionImages(location, publisherName).GetAsync(type, version, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetVirtualMachineExtensionImageResources(location, publisherName).GetAsync(type, version, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -74,9 +74,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
-        public static Response<VirtualMachineExtensionImage> GetVirtualMachineExtensionImage(this Subscription subscription, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineExtensionImageResource> GetVirtualMachineExtensionImageResource(this Subscription subscription, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
-            return subscription.GetVirtualMachineExtensionImages(location, publisherName).Get(type, version, cancellationToken);
+            return subscription.GetVirtualMachineExtensionImageResources(location, publisherName).Get(type, version, cancellationToken);
         }
 
         /// <summary>
@@ -87,10 +87,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AvailabilitySet" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<AvailabilitySet> GetAvailabilitySetsAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetResourcesAsync(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetAvailabilitySetsAsync(expand, cancellationToken);
+            return GetExtensionClient(subscription).GetAvailabilitySetResourcesAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -101,10 +101,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AvailabilitySet" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<AvailabilitySet> GetAvailabilitySets(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<AvailabilitySetResource> GetAvailabilitySetResources(this Subscription subscription, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetAvailabilitySets(expand, cancellationToken);
+            return GetExtensionClient(subscription).GetAvailabilitySetResources(expand, cancellationToken);
         }
 
         /// <summary>
@@ -114,10 +114,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ProximityPlacementGroup> GetProximityPlacementGroupsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ProximityPlacementGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ProximityPlacementGroupResource> GetProximityPlacementGroupResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetProximityPlacementGroupsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetProximityPlacementGroupResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -127,10 +127,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ProximityPlacementGroup> GetProximityPlacementGroups(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ProximityPlacementGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ProximityPlacementGroupResource> GetProximityPlacementGroupResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetProximityPlacementGroups(cancellationToken);
+            return GetExtensionClient(subscription).GetProximityPlacementGroupResources(cancellationToken);
         }
 
         /// <summary>
@@ -140,10 +140,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DedicatedHostGroup" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<DedicatedHostGroup> GetDedicatedHostGroupsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<DedicatedHostGroupResource> GetDedicatedHostGroupResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetDedicatedHostGroupsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetDedicatedHostGroupResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -153,10 +153,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DedicatedHostGroup" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<DedicatedHostGroup> GetDedicatedHostGroups(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<DedicatedHostGroupResource> GetDedicatedHostGroupResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetDedicatedHostGroups(cancellationToken);
+            return GetExtensionClient(subscription).GetDedicatedHostGroupResources(cancellationToken);
         }
 
         /// <summary>
@@ -166,10 +166,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SshPublicKey" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<SshPublicKey> GetSshPublicKeysAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="SshPublicKeyResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<SshPublicKeyResource> GetSshPublicKeyResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetSshPublicKeysAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetSshPublicKeyResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -179,10 +179,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SshPublicKey" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<SshPublicKey> GetSshPublicKeys(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="SshPublicKeyResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<SshPublicKeyResource> GetSshPublicKeyResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetSshPublicKeys(cancellationToken);
+            return GetExtensionClient(subscription).GetSshPublicKeyResources(cancellationToken);
         }
 
         /// <summary>
@@ -455,12 +455,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachine> GetVirtualMachinesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<VirtualMachineResource> GetVirtualMachineResourcesByLocationAsync(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetVirtualMachinesByLocationAsync(location, cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachineResourcesByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -473,12 +473,12 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachine> GetVirtualMachinesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<VirtualMachineResource> GetVirtualMachineResourcesByLocation(this Subscription subscription, string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetVirtualMachinesByLocation(location, cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachineResourcesByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -489,10 +489,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachine> GetVirtualMachinesAsync(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<VirtualMachineResource> GetVirtualMachineResourcesAsync(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVirtualMachinesAsync(statusOnly, cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachineResourcesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -503,10 +503,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachine> GetVirtualMachines(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<VirtualMachineResource> GetVirtualMachineResources(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVirtualMachines(statusOnly, cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachineResources(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -552,10 +552,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Image> GetImagesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ImageResource> GetImageResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetImagesAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetImageResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -565,10 +565,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Image> GetImages(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ImageResource> GetImageResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetImages(cancellationToken);
+            return GetExtensionClient(subscription).GetImageResources(cancellationToken);
         }
 
         /// <summary>
@@ -578,10 +578,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineScaleSet" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachineScaleSet> GetVirtualMachineScaleSetsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVirtualMachineScaleSetsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachineScaleSetResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -591,10 +591,10 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineScaleSet" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachineScaleSet> GetVirtualMachineScaleSets(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVirtualMachineScaleSets(cancellationToken);
+            return GetExtensionClient(subscription).GetVirtualMachineScaleSetResources(cancellationToken);
         }
 
         /// <summary>
