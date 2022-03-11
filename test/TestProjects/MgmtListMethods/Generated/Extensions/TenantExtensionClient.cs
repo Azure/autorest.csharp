@@ -32,9 +32,9 @@ namespace MgmtListMethods
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of TenantTests in the TenantTest. </summary>
-        /// <returns> An object representing collection of TenantTests and their operations over a TenantTest. </returns>
-        public virtual TenantTestCollection GetTenantTests()
+        /// <summary> Gets a collection of TenantTestResources in the TenantTestResource. </summary>
+        /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
+        public virtual TenantTestCollection GetTenantTestResources()
         {
             return new TenantTestCollection(Client, Id);
         }

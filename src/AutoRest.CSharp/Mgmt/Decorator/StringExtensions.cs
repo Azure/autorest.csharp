@@ -20,5 +20,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 pluralResourceName :
                 $"All{pluralResourceName}";
         }
+
+        /// <summary>
+        /// Add `Resource` suffix to a resource name if that resource doesn't end with `Resource`.
+        /// </summary>
+        /// <param name="resourceName"></param>
+        /// <returns></returns>
+        public static string AddResourceSuffixToResourceName(this string resourceName)
+        {
+            return resourceName.EndsWith("Resource") ? resourceName : resourceName + "Resource";
+        }
     }
 }

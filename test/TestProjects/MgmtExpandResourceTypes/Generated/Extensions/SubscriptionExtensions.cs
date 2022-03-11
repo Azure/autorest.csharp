@@ -35,10 +35,10 @@ namespace MgmtExpandResourceTypes
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Zone> GetZonesByDnszoneAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ZoneResource> GetZoneResourcesByDnszoneAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetZonesByDnszoneAsync(top, cancellationToken);
+            return GetExtensionClient(subscription).GetZoneResourcesByDnszoneAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -49,10 +49,10 @@ namespace MgmtExpandResourceTypes
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Zone> GetZonesByDnszone(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ZoneResource> GetZoneResourcesByDnszone(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetZonesByDnszone(top, cancellationToken);
+            return GetExtensionClient(subscription).GetZoneResourcesByDnszone(top, cancellationToken);
         }
 
         /// <summary>

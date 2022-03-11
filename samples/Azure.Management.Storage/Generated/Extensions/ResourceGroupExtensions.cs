@@ -26,12 +26,12 @@ namespace Azure.Management.Storage
             );
         }
 
-        /// <summary> Gets a collection of StorageAccounts in the StorageAccount. </summary>
+        /// <summary> Gets a collection of StorageAccountResources in the StorageAccountResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of StorageAccounts and their operations over a StorageAccount. </returns>
-        public static StorageAccountCollection GetStorageAccounts(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of StorageAccountResources and their operations over a StorageAccountResource. </returns>
+        public static StorageAccountCollection GetStorageAccountResources(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetStorageAccounts();
+            return GetExtensionClient(resourceGroup).GetStorageAccountResources();
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        public static async Task<Response<StorageAccount>> GetStorageAccountAsync(this ResourceGroup resourceGroup, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<StorageAccountResource>> GetStorageAccountResourceAsync(this ResourceGroup resourceGroup, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetStorageAccounts().GetAsync(accountName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetStorageAccountResources().GetAsync(accountName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        public static Response<StorageAccount> GetStorageAccount(this ResourceGroup resourceGroup, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public static Response<StorageAccountResource> GetStorageAccountResource(this ResourceGroup resourceGroup, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetStorageAccounts().Get(accountName, expand, cancellationToken);
+            return resourceGroup.GetStorageAccountResources().Get(accountName, expand, cancellationToken);
         }
     }
 }

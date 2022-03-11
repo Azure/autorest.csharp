@@ -32,9 +32,9 @@ namespace Azure.Management.Storage
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of StorageAccounts in the StorageAccount. </summary>
-        /// <returns> An object representing collection of StorageAccounts and their operations over a StorageAccount. </returns>
-        public virtual StorageAccountCollection GetStorageAccounts()
+        /// <summary> Gets a collection of StorageAccountResources in the StorageAccountResource. </summary>
+        /// <returns> An object representing collection of StorageAccountResources and their operations over a StorageAccountResource. </returns>
+        public virtual StorageAccountCollection GetStorageAccountResources()
         {
             return new StorageAccountCollection(Client, Id);
         }

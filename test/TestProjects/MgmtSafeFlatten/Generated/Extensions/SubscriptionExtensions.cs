@@ -30,10 +30,10 @@ namespace MgmtSafeFlatten
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<TypeOne> GetTypeOnesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<TypeOneResource> GetTypeOneResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetTypeOnesAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetTypeOneResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -43,10 +43,10 @@ namespace MgmtSafeFlatten
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeOne" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<TypeOne> GetTypeOnes(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<TypeOneResource> GetTypeOneResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetTypeOnes(cancellationToken);
+            return GetExtensionClient(subscription).GetTypeOneResources(cancellationToken);
         }
 
         /// <summary>
@@ -56,10 +56,10 @@ namespace MgmtSafeFlatten
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<TypeTwo> GetTypeTwosAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<TypeTwoResource> GetTypeTwoResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetTypeTwosAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetTypeTwoResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -69,10 +69,10 @@ namespace MgmtSafeFlatten
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeTwo" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<TypeTwo> GetTypeTwos(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<TypeTwoResource> GetTypeTwoResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetTypeTwos(cancellationToken);
+            return GetExtensionClient(subscription).GetTypeTwoResources(cancellationToken);
         }
     }
 }

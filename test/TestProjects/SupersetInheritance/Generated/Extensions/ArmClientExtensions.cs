@@ -13,65 +13,65 @@ namespace SupersetInheritance
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region SupersetModel1
-        /// <summary> Gets an object representing a SupersetModel1 along with the instance operations that can be performed on it but with no data. </summary>
+        #region SupersetModel1Resource
+        /// <summary> Gets an object representing a SupersetModel1Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel1" /> object. </returns>
-        public static SupersetModel1 GetSupersetModel1(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SupersetModel1Resource" /> object. </returns>
+        public static SupersetModel1Resource GetSupersetModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SupersetModel1.ValidateResourceId(id);
-                return new SupersetModel1(client, id);
+                SupersetModel1Resource.ValidateResourceId(id);
+                return new SupersetModel1Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region SupersetModel4
-        /// <summary> Gets an object representing a SupersetModel4 along with the instance operations that can be performed on it but with no data. </summary>
+        #region SupersetModel4Resource
+        /// <summary> Gets an object representing a SupersetModel4Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel4" /> object. </returns>
-        public static SupersetModel4 GetSupersetModel4(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SupersetModel4Resource" /> object. </returns>
+        public static SupersetModel4Resource GetSupersetModel4Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SupersetModel4.ValidateResourceId(id);
-                return new SupersetModel4(client, id);
+                SupersetModel4Resource.ValidateResourceId(id);
+                return new SupersetModel4Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region SupersetModel6
-        /// <summary> Gets an object representing a SupersetModel6 along with the instance operations that can be performed on it but with no data. </summary>
+        #region SupersetModel6Resource
+        /// <summary> Gets an object representing a SupersetModel6Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel6" /> object. </returns>
-        public static SupersetModel6 GetSupersetModel6(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SupersetModel6Resource" /> object. </returns>
+        public static SupersetModel6Resource GetSupersetModel6Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SupersetModel6.ValidateResourceId(id);
-                return new SupersetModel6(client, id);
+                SupersetModel6Resource.ValidateResourceId(id);
+                return new SupersetModel6Resource(client, id);
             }
             );
         }
         #endregion
 
-        #region SupersetModel7
-        /// <summary> Gets an object representing a SupersetModel7 along with the instance operations that can be performed on it but with no data. </summary>
+        #region SupersetModel7Resource
+        /// <summary> Gets an object representing a SupersetModel7Resource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel7" /> object. </returns>
-        public static SupersetModel7 GetSupersetModel7(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SupersetModel7Resource" /> object. </returns>
+        public static SupersetModel7Resource GetSupersetModel7Resource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SupersetModel7.ValidateResourceId(id);
-                return new SupersetModel7(client, id);
+                SupersetModel7Resource.ValidateResourceId(id);
+                return new SupersetModel7Resource(client, id);
             }
             );
         }

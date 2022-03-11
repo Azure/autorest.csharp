@@ -25,12 +25,12 @@ namespace MgmtMultipleParentResource
             );
         }
 
-        /// <summary> Gets a collection of AnotherParents in the AnotherParent. </summary>
+        /// <summary> Gets a collection of AnotherParentResources in the AnotherParentResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of AnotherParents and their operations over a AnotherParent. </returns>
-        public static AnotherParentCollection GetAnotherParents(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
+        public static AnotherParentCollection GetAnotherParentResources(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetAnotherParents();
+            return GetExtensionClient(resourceGroup).GetAnotherParentResources();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public static async Task<Response<AnotherParent>> GetAnotherParentAsync(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<AnotherParentResource>> GetAnotherParentResourceAsync(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetAnotherParents().GetAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetAnotherParentResources().GetAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -60,33 +60,17 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
-        public static Response<AnotherParent> GetAnotherParent(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<AnotherParentResource> GetAnotherParentResource(this ResourceGroup resourceGroup, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetAnotherParents().Get(anotherName, expand, cancellationToken);
+            return resourceGroup.GetAnotherParentResources().Get(anotherName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of TheParents in the TheParent. </summary>
+        /// <summary> Gets a collection of TheParentResources in the TheParentResource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of TheParents and their operations over a TheParent. </returns>
-        public static TheParentCollection GetTheParents(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
+        public static TheParentCollection GetTheParentResources(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetTheParents();
-        }
-
-        /// <summary>
-        /// The operation to get the VMSS VM run command.
-        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
-        /// Operation Id: TheParents_Get
-        /// </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <param name="theParentName"> The name of the VM scale set. </param>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
-        public static async Task<Response<TheParent>> GetTheParentAsync(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            return await resourceGroup.GetTheParents().GetAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(resourceGroup).GetTheParentResources();
         }
 
         /// <summary>
@@ -100,9 +84,25 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
-        public static Response<TheParent> GetTheParent(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<TheParentResource>> GetTheParentResourceAsync(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetTheParents().Get(theParentName, expand, cancellationToken);
+            return await resourceGroup.GetTheParentResources().GetAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// The operation to get the VMSS VM run command.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}
+        /// Operation Id: TheParents_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="theParentName"> The name of the VM scale set. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
+        public static Response<TheParentResource> GetTheParentResource(this ResourceGroup resourceGroup, string theParentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetTheParentResources().Get(theParentName, expand, cancellationToken);
         }
     }
 }

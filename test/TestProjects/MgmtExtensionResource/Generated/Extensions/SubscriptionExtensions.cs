@@ -27,35 +27,20 @@ namespace MgmtExtensionResource
             );
         }
 
-        /// <summary> Gets an object representing a SubSingleton along with the instance operations that can be performed on it in the SubscriptionExtensions. </summary>
+        /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionExtensions. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SubSingleton" /> object. </returns>
-        public static SubSingleton GetSubSingleton(this Subscription subscription)
+        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
+        public static SubSingletonResource GetSubSingletonResource(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetSubSingleton();
+            return GetExtensionClient(subscription).GetSubSingletonResource();
         }
 
-        /// <summary> Gets a collection of SubscriptionPolicyDefinitions in the SubscriptionPolicyDefinition. </summary>
+        /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionPolicyDefinitionResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of SubscriptionPolicyDefinitions and their operations over a SubscriptionPolicyDefinition. </returns>
-        public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions(this Subscription subscription)
+        /// <returns> An object representing collection of SubscriptionPolicyDefinitionResources and their operations over a SubscriptionPolicyDefinitionResource. </returns>
+        public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitionResources(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetSubscriptionPolicyDefinitions();
-        }
-
-        /// <summary>
-        /// This operation retrieves the policy definition in the given subscription with the given name.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
-        /// Operation Id: PolicyDefinitions_Get
-        /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public static async Task<Response<SubscriptionPolicyDefinition>> GetSubscriptionPolicyDefinitionAsync(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
-        {
-            return await GetSubscriptionPolicyDefinitions(subscription).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(subscription).GetSubscriptionPolicyDefinitionResources();
         }
 
         /// <summary>
@@ -68,9 +53,24 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        public static Response<SubscriptionPolicyDefinition> GetSubscriptionPolicyDefinition(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SubscriptionPolicyDefinitionResource>> GetSubscriptionPolicyDefinitionResourceAsync(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionPolicyDefinitions(subscription).Get(policyDefinitionName, cancellationToken);
+            return await subscription.GetSubscriptionPolicyDefinitionResources().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// This operation retrieves the policy definition in the given subscription with the given name.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_Get
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public static Response<SubscriptionPolicyDefinitionResource> GetSubscriptionPolicyDefinitionResource(this Subscription subscription, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetSubscriptionPolicyDefinitionResources().Get(policyDefinitionName, cancellationToken);
         }
 
         /// <summary>

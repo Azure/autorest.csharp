@@ -32,16 +32,16 @@ namespace MgmtSafeFlatten
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of TypeOnes in the TypeOne. </summary>
-        /// <returns> An object representing collection of TypeOnes and their operations over a TypeOne. </returns>
-        public virtual TypeOneCollection GetTypeOnes()
+        /// <summary> Gets a collection of TypeOneResources in the TypeOneResource. </summary>
+        /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
+        public virtual TypeOneCollection GetTypeOneResources()
         {
             return new TypeOneCollection(Client, Id);
         }
 
-        /// <summary> Gets a collection of TypeTwos in the TypeTwo. </summary>
-        /// <returns> An object representing collection of TypeTwos and their operations over a TypeTwo. </returns>
-        public virtual TypeTwoCollection GetTypeTwos()
+        /// <summary> Gets a collection of TypeTwoResources in the TypeTwoResource. </summary>
+        /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
+        public virtual TypeTwoCollection GetTypeTwoResources()
         {
             return new TypeTwoCollection(Client, Id);
         }

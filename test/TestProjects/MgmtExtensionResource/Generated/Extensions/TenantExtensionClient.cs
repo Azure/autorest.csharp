@@ -32,9 +32,9 @@ namespace MgmtExtensionResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of BuiltInPolicyDefinitions in the BuiltInPolicyDefinition. </summary>
-        /// <returns> An object representing collection of BuiltInPolicyDefinitions and their operations over a BuiltInPolicyDefinition. </returns>
-        public virtual BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions()
+        /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the BuiltInPolicyDefinitionResource. </summary>
+        /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
+        public virtual BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitionResources()
         {
             return new BuiltInPolicyDefinitionCollection(Client, Id);
         }

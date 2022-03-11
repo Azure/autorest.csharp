@@ -32,23 +32,23 @@ namespace NoTypeReplacement
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel1s in the NoTypeReplacementModel1. </summary>
-        /// <returns> An object representing collection of NoTypeReplacementModel1s and their operations over a NoTypeReplacementModel1. </returns>
-        public virtual NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s()
+        /// <summary> Gets a collection of NoTypeReplacementModel1Resources in the NoTypeReplacementModel1Resource. </summary>
+        /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
+        public virtual NoTypeReplacementModel1Collection GetNoTypeReplacementModel1Resources()
         {
             return new NoTypeReplacementModel1Collection(Client, Id);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel2s in the NoTypeReplacementModel2. </summary>
-        /// <returns> An object representing collection of NoTypeReplacementModel2s and their operations over a NoTypeReplacementModel2. </returns>
-        public virtual NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s()
+        /// <summary> Gets a collection of NoTypeReplacementModel2Resources in the NoTypeReplacementModel2Resource. </summary>
+        /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
+        public virtual NoTypeReplacementModel2Collection GetNoTypeReplacementModel2Resources()
         {
             return new NoTypeReplacementModel2Collection(Client, Id);
         }
 
-        /// <summary> Gets a collection of NoTypeReplacementModel3s in the NoTypeReplacementModel3. </summary>
-        /// <returns> An object representing collection of NoTypeReplacementModel3s and their operations over a NoTypeReplacementModel3. </returns>
-        public virtual NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s()
+        /// <summary> Gets a collection of NoTypeReplacementModel3Resources in the NoTypeReplacementModel3Resource. </summary>
+        /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
+        public virtual NoTypeReplacementModel3Collection GetNoTypeReplacementModel3Resources()
         {
             return new NoTypeReplacementModel3Collection(Client, Id);
         }

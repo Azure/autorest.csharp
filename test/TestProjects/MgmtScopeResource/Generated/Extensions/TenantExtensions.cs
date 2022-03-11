@@ -27,12 +27,12 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <summary> Gets a collection of DeploymentExtendedResources in the DeploymentExtendedResource. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
-        public static DeploymentExtendedCollection GetDeploymentExtendeds(this Tenant tenant)
+        /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendedResources(this Tenant tenant)
         {
-            return GetExtensionClient(tenant).GetDeploymentExtendeds();
+            return GetExtensionClient(tenant).GetDeploymentExtendedResources();
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedResourceAsync(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return await tenant.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+            return await tenant.GetDeploymentExtendedResources().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -60,21 +60,21 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public static Response<DeploymentExtended> GetDeploymentExtended(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
+        public static Response<DeploymentExtendedResource> GetDeploymentExtendedResource(this Tenant tenant, string deploymentName, CancellationToken cancellationToken = default)
         {
-            return tenant.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+            return tenant.GetDeploymentExtendedResources().Get(deploymentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ResourceLinks in the ResourceLink. </summary>
+        /// <summary> Gets a collection of ResourceLinkResources in the ResourceLinkResource. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        /// <returns> An object representing collection of ResourceLinks and their operations over a ResourceLink. </returns>
-        public static ResourceLinkCollection GetResourceLinks(this Tenant tenant, string scope)
+        /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
+        public static ResourceLinkCollection GetResourceLinkResources(this Tenant tenant, string scope)
         {
             Argument.AssertNotNull(scope, nameof(scope));
 
-            return GetExtensionClient(tenant).GetResourceLinks(scope);
+            return GetExtensionClient(tenant).GetResourceLinkResources(scope);
         }
 
         /// <summary>
@@ -86,9 +86,9 @@ namespace MgmtScopeResource
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public static async Task<Response<ResourceLink>> GetResourceLinkAsync(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResourceLinkResource>> GetResourceLinkResourceAsync(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
         {
-            return await GetResourceLinks(tenant, scope).GetAsync(cancellationToken).ConfigureAwait(false);
+            return await tenant.GetResourceLinkResources(scope).GetAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -100,9 +100,9 @@ namespace MgmtScopeResource
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
-        public static Response<ResourceLink> GetResourceLink(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
+        public static Response<ResourceLinkResource> GetResourceLinkResource(this Tenant tenant, string scope, CancellationToken cancellationToken = default)
         {
-            return GetResourceLinks(tenant, scope).Get(cancellationToken);
+            return tenant.GetResourceLinkResources(scope).Get(cancellationToken);
         }
 
         /// <summary>

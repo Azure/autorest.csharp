@@ -25,12 +25,12 @@ namespace MgmtScopeResource
             );
         }
 
-        /// <summary> Gets a collection of FakePolicyAssignments in the FakePolicyAssignment. </summary>
+        /// <summary> Gets a collection of FakePolicyAssignmentResources in the FakePolicyAssignmentResource. </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of FakePolicyAssignments and their operations over a FakePolicyAssignment. </returns>
-        public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
+        /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
+        public static FakePolicyAssignmentCollection GetFakePolicyAssignmentResources(this ArmResource armResource)
         {
-            return GetExtensionClient(armResource).GetFakePolicyAssignments();
+            return GetExtensionClient(armResource).GetFakePolicyAssignmentResources();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        public static async Task<Response<FakePolicyAssignment>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentResourceAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await armResource.GetFakePolicyAssignments().GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await armResource.GetFakePolicyAssignmentResources().GetAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
-        public static Response<FakePolicyAssignment> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignmentResource(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return armResource.GetFakePolicyAssignments().Get(policyAssignmentName, cancellationToken);
+            return armResource.GetFakePolicyAssignmentResources().Get(policyAssignmentName, cancellationToken);
         }
     }
 }

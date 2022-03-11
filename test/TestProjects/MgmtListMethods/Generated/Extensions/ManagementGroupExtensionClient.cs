@@ -32,30 +32,30 @@ namespace MgmtListMethods
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocs in the MgmtGrpParentWithNonResChWithLoc. </summary>
-        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocs and their operations over a MgmtGrpParentWithNonResChWithLoc. </returns>
-        public virtual MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs()
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the MgmtGrpParentWithNonResChWithLocResource. </summary>
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocResources and their operations over a MgmtGrpParentWithNonResChWithLocResource. </returns>
+        public virtual MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocResources()
         {
             return new MgmtGrpParentWithNonResChWithLocCollection(Client, Id);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithNonResChes in the MgmtGrpParentWithNonResCh. </summary>
-        /// <returns> An object representing collection of MgmtGrpParentWithNonResChes and their operations over a MgmtGrpParentWithNonResCh. </returns>
-        public virtual MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes()
+        /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the MgmtGrpParentWithNonResChResource. </summary>
+        /// <returns> An object representing collection of MgmtGrpParentWithNonResChResources and their operations over a MgmtGrpParentWithNonResChResource. </returns>
+        public virtual MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChResources()
         {
             return new MgmtGrpParentWithNonResChCollection(Client, Id);
         }
 
-        /// <summary> Gets a collection of MgmtGrpParentWithLocs in the MgmtGrpParentWithLoc. </summary>
-        /// <returns> An object representing collection of MgmtGrpParentWithLocs and their operations over a MgmtGrpParentWithLoc. </returns>
-        public virtual MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs()
+        /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the MgmtGrpParentWithLocResource. </summary>
+        /// <returns> An object representing collection of MgmtGrpParentWithLocResources and their operations over a MgmtGrpParentWithLocResource. </returns>
+        public virtual MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocResources()
         {
             return new MgmtGrpParentWithLocCollection(Client, Id);
         }
 
-        /// <summary> Gets a collection of MgmtGroupParents in the MgmtGroupParent. </summary>
-        /// <returns> An object representing collection of MgmtGroupParents and their operations over a MgmtGroupParent. </returns>
-        public virtual MgmtGroupParentCollection GetMgmtGroupParents()
+        /// <summary> Gets a collection of MgmtGroupParentResources in the MgmtGroupParentResource. </summary>
+        /// <returns> An object representing collection of MgmtGroupParentResources and their operations over a MgmtGroupParentResource. </returns>
+        public virtual MgmtGroupParentCollection GetMgmtGroupParentResources()
         {
             return new MgmtGroupParentCollection(Client, Id);
         }

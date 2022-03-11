@@ -13,177 +13,177 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region RecordSetA
-        /// <summary> Gets an object representing a RecordSetA along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetAResource
+        /// <summary> Gets an object representing a RecordSetAResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetA" /> object. </returns>
-        public static RecordSetA GetRecordSetA(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetAResource" /> object. </returns>
+        public static RecordSetAResource GetRecordSetAResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetA.ValidateResourceId(id);
-                return new RecordSetA(client, id);
+                RecordSetAResource.ValidateResourceId(id);
+                return new RecordSetAResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetAaaa
-        /// <summary> Gets an object representing a RecordSetAaaa along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetAaaaResource
+        /// <summary> Gets an object representing a RecordSetAaaaResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetAaaa" /> object. </returns>
-        public static RecordSetAaaa GetRecordSetAaaa(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetAaaaResource" /> object. </returns>
+        public static RecordSetAaaaResource GetRecordSetAaaaResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetAaaa.ValidateResourceId(id);
-                return new RecordSetAaaa(client, id);
+                RecordSetAaaaResource.ValidateResourceId(id);
+                return new RecordSetAaaaResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetCaa
-        /// <summary> Gets an object representing a RecordSetCaa along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetCaaResource
+        /// <summary> Gets an object representing a RecordSetCaaResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetCaa" /> object. </returns>
-        public static RecordSetCaa GetRecordSetCaa(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetCaaResource" /> object. </returns>
+        public static RecordSetCaaResource GetRecordSetCaaResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetCaa.ValidateResourceId(id);
-                return new RecordSetCaa(client, id);
+                RecordSetCaaResource.ValidateResourceId(id);
+                return new RecordSetCaaResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetCName
-        /// <summary> Gets an object representing a RecordSetCName along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetCNameResource
+        /// <summary> Gets an object representing a RecordSetCNameResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetCName" /> object. </returns>
-        public static RecordSetCName GetRecordSetCName(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetCNameResource" /> object. </returns>
+        public static RecordSetCNameResource GetRecordSetCNameResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetCName.ValidateResourceId(id);
-                return new RecordSetCName(client, id);
+                RecordSetCNameResource.ValidateResourceId(id);
+                return new RecordSetCNameResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetMx
-        /// <summary> Gets an object representing a RecordSetMx along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetMxResource
+        /// <summary> Gets an object representing a RecordSetMxResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetMx" /> object. </returns>
-        public static RecordSetMx GetRecordSetMx(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetMxResource" /> object. </returns>
+        public static RecordSetMxResource GetRecordSetMxResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetMx.ValidateResourceId(id);
-                return new RecordSetMx(client, id);
+                RecordSetMxResource.ValidateResourceId(id);
+                return new RecordSetMxResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetNs
-        /// <summary> Gets an object representing a RecordSetNs along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetNsResource
+        /// <summary> Gets an object representing a RecordSetNsResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetNs" /> object. </returns>
-        public static RecordSetNs GetRecordSetNs(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetNsResource" /> object. </returns>
+        public static RecordSetNsResource GetRecordSetNsResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetNs.ValidateResourceId(id);
-                return new RecordSetNs(client, id);
+                RecordSetNsResource.ValidateResourceId(id);
+                return new RecordSetNsResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetPtr
-        /// <summary> Gets an object representing a RecordSetPtr along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetPtrResource
+        /// <summary> Gets an object representing a RecordSetPtrResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetPtr" /> object. </returns>
-        public static RecordSetPtr GetRecordSetPtr(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetPtrResource" /> object. </returns>
+        public static RecordSetPtrResource GetRecordSetPtrResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetPtr.ValidateResourceId(id);
-                return new RecordSetPtr(client, id);
+                RecordSetPtrResource.ValidateResourceId(id);
+                return new RecordSetPtrResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetSoa
-        /// <summary> Gets an object representing a RecordSetSoa along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetSoaResource
+        /// <summary> Gets an object representing a RecordSetSoaResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetSoa" /> object. </returns>
-        public static RecordSetSoa GetRecordSetSoa(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetSoaResource" /> object. </returns>
+        public static RecordSetSoaResource GetRecordSetSoaResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetSoa.ValidateResourceId(id);
-                return new RecordSetSoa(client, id);
+                RecordSetSoaResource.ValidateResourceId(id);
+                return new RecordSetSoaResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetSrv
-        /// <summary> Gets an object representing a RecordSetSrv along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetSrvResource
+        /// <summary> Gets an object representing a RecordSetSrvResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetSrv" /> object. </returns>
-        public static RecordSetSrv GetRecordSetSrv(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetSrvResource" /> object. </returns>
+        public static RecordSetSrvResource GetRecordSetSrvResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetSrv.ValidateResourceId(id);
-                return new RecordSetSrv(client, id);
+                RecordSetSrvResource.ValidateResourceId(id);
+                return new RecordSetSrvResource(client, id);
             }
             );
         }
         #endregion
 
-        #region RecordSetTxt
-        /// <summary> Gets an object representing a RecordSetTxt along with the instance operations that can be performed on it but with no data. </summary>
+        #region RecordSetTxtResource
+        /// <summary> Gets an object representing a RecordSetTxtResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetTxt" /> object. </returns>
-        public static RecordSetTxt GetRecordSetTxt(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="RecordSetTxtResource" /> object. </returns>
+        public static RecordSetTxtResource GetRecordSetTxtResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                RecordSetTxt.ValidateResourceId(id);
-                return new RecordSetTxt(client, id);
+                RecordSetTxtResource.ValidateResourceId(id);
+                return new RecordSetTxtResource(client, id);
             }
             );
         }
         #endregion
 
-        #region Zone
-        /// <summary> Gets an object representing a Zone along with the instance operations that can be performed on it but with no data. </summary>
+        #region ZoneResource
+        /// <summary> Gets an object representing a ZoneResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Zone" /> object. </returns>
-        public static Zone GetZone(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="ZoneResource" /> object. </returns>
+        public static ZoneResource GetZoneResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                Zone.ValidateResourceId(id);
-                return new Zone(client, id);
+                ZoneResource.ValidateResourceId(id);
+                return new ZoneResource(client, id);
             }
             );
         }

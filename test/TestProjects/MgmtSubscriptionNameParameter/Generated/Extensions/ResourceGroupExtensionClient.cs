@@ -32,9 +32,9 @@ namespace MgmtSubscriptionNameParameter
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of SBSubscriptions in the SBSubscription. </summary>
-        /// <returns> An object representing collection of SBSubscriptions and their operations over a SBSubscription. </returns>
-        public virtual SBSubscriptionCollection GetSBSubscriptions()
+        /// <summary> Gets a collection of SBSubscriptionResources in the SBSubscriptionResource. </summary>
+        /// <returns> An object representing collection of SBSubscriptionResources and their operations over a SBSubscriptionResource. </returns>
+        public virtual SBSubscriptionCollection GetSBSubscriptionResources()
         {
             return new SBSubscriptionCollection(Client, Id);
         }

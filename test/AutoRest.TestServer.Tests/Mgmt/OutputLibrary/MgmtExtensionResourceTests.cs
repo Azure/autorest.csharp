@@ -13,9 +13,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtExtensionResourceTests() : base("MgmtExtensionResource") { }
 
-        [TestCase("SubscriptionPolicyDefinition", "SubscriptionExtensions")]
-        [TestCase("ManagementGroupPolicyDefinition", "ManagementGroupExtensions")]
-        [TestCase("BuiltInPolicyDefinition", "TenantExtensions")]
+        [TestCase("SubscriptionPolicyDefinitionResource", "SubscriptionExtensions")]
+        [TestCase("ManagementGroupPolicyDefinitionResource", "ManagementGroupExtensions")]
+        [TestCase("BuiltInPolicyDefinitionResource", "TenantExtensions")]
         public void TestExtensionResource(string resourceName, string parentName)
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);

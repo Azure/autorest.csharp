@@ -48,30 +48,30 @@ namespace SupersetInheritance
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of SupersetModel1s in the SupersetModel1. </summary>
-        /// <returns> An object representing collection of SupersetModel1s and their operations over a SupersetModel1. </returns>
-        public virtual SupersetModel1Collection GetSupersetModel1s()
+        /// <summary> Gets a collection of SupersetModel1Resources in the SupersetModel1Resource. </summary>
+        /// <returns> An object representing collection of SupersetModel1Resources and their operations over a SupersetModel1Resource. </returns>
+        public virtual SupersetModel1Collection GetSupersetModel1Resources()
         {
             return new SupersetModel1Collection(Client, Id);
         }
 
-        /// <summary> Gets a collection of SupersetModel4s in the SupersetModel4. </summary>
-        /// <returns> An object representing collection of SupersetModel4s and their operations over a SupersetModel4. </returns>
-        public virtual SupersetModel4Collection GetSupersetModel4s()
+        /// <summary> Gets a collection of SupersetModel4Resources in the SupersetModel4Resource. </summary>
+        /// <returns> An object representing collection of SupersetModel4Resources and their operations over a SupersetModel4Resource. </returns>
+        public virtual SupersetModel4Collection GetSupersetModel4Resources()
         {
             return new SupersetModel4Collection(Client, Id);
         }
 
-        /// <summary> Gets a collection of SupersetModel6s in the SupersetModel6. </summary>
-        /// <returns> An object representing collection of SupersetModel6s and their operations over a SupersetModel6. </returns>
-        public virtual SupersetModel6Collection GetSupersetModel6s()
+        /// <summary> Gets a collection of SupersetModel6Resources in the SupersetModel6Resource. </summary>
+        /// <returns> An object representing collection of SupersetModel6Resources and their operations over a SupersetModel6Resource. </returns>
+        public virtual SupersetModel6Collection GetSupersetModel6Resources()
         {
             return new SupersetModel6Collection(Client, Id);
         }
 
-        /// <summary> Gets a collection of SupersetModel7s in the SupersetModel7. </summary>
-        /// <returns> An object representing collection of SupersetModel7s and their operations over a SupersetModel7. </returns>
-        public virtual SupersetModel7Collection GetSupersetModel7s()
+        /// <summary> Gets a collection of SupersetModel7Resources in the SupersetModel7Resource. </summary>
+        /// <returns> An object representing collection of SupersetModel7Resources and their operations over a SupersetModel7Resource. </returns>
+        public virtual SupersetModel7Collection GetSupersetModel7Resources()
         {
             return new SupersetModel7Collection(Client, Id);
         }

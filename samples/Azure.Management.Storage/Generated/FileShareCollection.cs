@@ -21,10 +21,10 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileShare and their operations over its parent. </summary>
-    public partial class FileShareCollection : ArmCollection, IEnumerable<FileShare>, IAsyncEnumerable<FileShare>
+    public partial class FileShareCollection : ArmCollection, IEnumerable<FileShareResource>, IAsyncEnumerable<FileShareResource>
     {
-        private readonly ClientDiagnostics _fileShareClientDiagnostics;
-        private readonly FileSharesRestOperations _fileShareRestClient;
+        private readonly ClientDiagnostics _fileShareResourceFileSharesClientDiagnostics;
+        private readonly FileSharesRestOperations _fileShareResourceFileSharesRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="FileShareCollection"/> class for mocking. </summary>
         protected FileShareCollection()
@@ -36,9 +36,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
         internal FileShareCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _fileShareClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", FileShare.ResourceType.Namespace, DiagnosticOptions);
-            TryGetApiVersion(FileShare.ResourceType, out string fileShareApiVersion);
-            _fileShareRestClient = new FileSharesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileShareApiVersion);
+            _fileShareResourceFileSharesClientDiagnostics = new ClientDiagnostics("Azure.Management.Storage", FileShareResource.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(FileShareResource.ResourceType, out string fileShareResourceFileSharesApiVersion);
+            _fileShareResourceFileSharesRestClient = new FileSharesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, fileShareResourceFileSharesApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -46,8 +46,8 @@ namespace Azure.Management.Storage
 
         internal static void ValidateResourceId(ResourceIdentifier id)
         {
-            if (id.ResourceType != FileService.ResourceType)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, FileService.ResourceType), nameof(id));
+            if (id.ResourceType != FileServiceResource.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, FileServiceResource.ResourceType), nameof(id));
         }
 
         /// <summary>
@@ -62,17 +62,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public virtual async Task<ArmOperation<FileShare>> CreateOrUpdateAsync(WaitUntil waitUntil, string shareName, FileShareData fileShare, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FileShareResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string shareName, FileShareData fileShare, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
             Argument.AssertNotNull(fileShare, nameof(fileShare));
 
-            using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.CreateOrUpdate");
+            using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _fileShareRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, fileShare, expand, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation<FileShare>(Response.FromValue(new FileShare(Client, response), response.GetRawResponse()));
+                var response = await _fileShareResourceFileSharesRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, fileShare, expand, cancellationToken).ConfigureAwait(false);
+                var operation = new StorageArmOperation<FileShareResource>(Response.FromValue(new FileShareResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -96,17 +96,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public virtual ArmOperation<FileShare> CreateOrUpdate(WaitUntil waitUntil, string shareName, FileShareData fileShare, string expand = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FileShareResource> CreateOrUpdate(WaitUntil waitUntil, string shareName, FileShareData fileShare, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
             Argument.AssertNotNull(fileShare, nameof(fileShare));
 
-            using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.CreateOrUpdate");
+            using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _fileShareRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, fileShare, expand, cancellationToken);
-                var operation = new StorageArmOperation<FileShare>(Response.FromValue(new FileShare(Client, response), response.GetRawResponse()));
+                var response = _fileShareResourceFileSharesRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, fileShare, expand, cancellationToken);
+                var operation = new StorageArmOperation<FileShareResource>(Response.FromValue(new FileShareResource(Client, response), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -129,18 +129,18 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
-        public virtual async Task<Response<FileShare>> GetAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShareResource>> GetAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
-            using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.Get");
+            using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.Get");
             scope.Start();
             try
             {
-                var response = await _fileShareRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken).ConfigureAwait(false);
+                var response = await _fileShareResourceFileSharesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FileShare(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FileShareResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -160,18 +160,18 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
-        public virtual Response<FileShare> Get(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        public virtual Response<FileShareResource> Get(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
-            using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.Get");
+            using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.Get");
             scope.Start();
             try
             {
-                var response = _fileShareRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken);
+                var response = _fileShareResourceFileSharesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FileShare(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FileShareResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -189,17 +189,17 @@ namespace Azure.Management.Storage
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FileShare" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FileShare> GetAllAsync(int? maxpagesize = null, string filter = null, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="FileShareResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<FileShareResource> GetAllAsync(int? maxpagesize = null, string filter = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<FileShare>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<FileShareResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.GetAll");
+                using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fileShareRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FileShare(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _fileShareResourceFileSharesRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new FileShareResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -207,14 +207,14 @@ namespace Azure.Management.Storage
                     throw;
                 }
             }
-            async Task<Page<FileShare>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<FileShareResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.GetAll");
+                using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _fileShareRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new FileShare(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await _fileShareResourceFileSharesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new FileShareResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -234,17 +234,17 @@ namespace Azure.Management.Storage
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="expand"> Optional, used to expand the properties within share&apos;s properties. Valid values are: deleted, snapshots. Should be passed as a string with delimiter &apos;,&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FileShare" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FileShare> GetAll(int? maxpagesize = null, string filter = null, string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="FileShareResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<FileShareResource> GetAll(int? maxpagesize = null, string filter = null, string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<FileShare> FirstPageFunc(int? pageSizeHint)
+            Page<FileShareResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.GetAll");
+                using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fileShareRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FileShare(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _fileShareResourceFileSharesRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new FileShareResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -252,14 +252,14 @@ namespace Azure.Management.Storage
                     throw;
                 }
             }
-            Page<FileShare> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<FileShareResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.GetAll");
+                using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _fileShareRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new FileShare(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = _fileShareResourceFileSharesRestClient.ListNextPage(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, pageSizeHint, filter, expand, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new FileShareResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -285,7 +285,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
-            using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.Exists");
+            using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.Exists");
             scope.Start();
             try
             {
@@ -314,7 +314,7 @@ namespace Azure.Management.Storage
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
-            using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.Exists");
+            using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.Exists");
             scope.Start();
             try
             {
@@ -339,18 +339,18 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
-        public virtual async Task<Response<FileShare>> GetIfExistsAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShareResource>> GetIfExistsAsync(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
-            using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
+            using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = await _fileShareRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _fileShareResourceFileSharesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    return Response.FromValue<FileShare>(null, response.GetRawResponse());
-                return Response.FromValue(new FileShare(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<FileShareResource>(null, response.GetRawResponse());
+                return Response.FromValue(new FileShareResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -370,18 +370,18 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
-        public virtual Response<FileShare> GetIfExists(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
+        public virtual Response<FileShareResource> GetIfExists(string shareName, string expand = null, string xMsSnapshot = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
 
-            using var scope = _fileShareClientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
+            using var scope = _fileShareResourceFileSharesClientDiagnostics.CreateScope("FileShareCollection.GetIfExists");
             scope.Start();
             try
             {
-                var response = _fileShareRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken);
+                var response = _fileShareResourceFileSharesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, shareName, expand, xMsSnapshot, cancellationToken: cancellationToken);
                 if (response.Value == null)
-                    return Response.FromValue<FileShare>(null, response.GetRawResponse());
-                return Response.FromValue(new FileShare(Client, response.Value), response.GetRawResponse());
+                    return Response.FromValue<FileShareResource>(null, response.GetRawResponse());
+                return Response.FromValue(new FileShareResource(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -390,7 +390,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        IEnumerator<FileShare> IEnumerable<FileShare>.GetEnumerator()
+        IEnumerator<FileShareResource> IEnumerable<FileShareResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();
         }
@@ -400,7 +400,7 @@ namespace Azure.Management.Storage
             return GetAll().GetEnumerator();
         }
 
-        IAsyncEnumerator<FileShare> IAsyncEnumerable<FileShare>.GetAsyncEnumerator(CancellationToken cancellationToken)
+        IAsyncEnumerator<FileShareResource> IAsyncEnumerable<FileShareResource>.GetAsyncEnumerator(CancellationToken cancellationToken)
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }

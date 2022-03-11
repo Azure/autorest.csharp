@@ -32,10 +32,10 @@ namespace MgmtHierarchicalNonResource
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of SharedGalleries in the SharedGallery. </summary>
+        /// <summary> Gets a collection of SharedGalleryResources in the SharedGalleryResource. </summary>
         /// <param name="location"> Resource location. </param>
-        /// <returns> An object representing collection of SharedGalleries and their operations over a SharedGallery. </returns>
-        public virtual SharedGalleryCollection GetSharedGalleries(string location)
+        /// <returns> An object representing collection of SharedGalleryResources and their operations over a SharedGalleryResource. </returns>
+        public virtual SharedGalleryCollection GetSharedGalleryResources(string location)
         {
             return new SharedGalleryCollection(Client, Id, location);
         }

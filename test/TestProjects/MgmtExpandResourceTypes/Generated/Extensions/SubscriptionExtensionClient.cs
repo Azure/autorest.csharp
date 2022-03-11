@@ -21,8 +21,8 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to Subscription. </summary>
     internal partial class SubscriptionExtensionClient : ArmResource
     {
-        private ClientDiagnostics _zoneClientDiagnostics;
-        private ZonesRestOperations _zoneRestClient;
+        private ClientDiagnostics _zoneResourceZonesClientDiagnostics;
+        private ZonesRestOperations _zoneResourceZonesRestClient;
         private ClientDiagnostics _dnsResourceReferenceClientDiagnostics;
         private DnsResourceReferenceRestOperations _dnsResourceReferenceRestClient;
 
@@ -38,8 +38,8 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        private ClientDiagnostics ZoneClientDiagnostics => _zoneClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", Zone.ResourceType.Namespace, DiagnosticOptions);
-        private ZonesRestOperations ZoneRestClient => _zoneRestClient ??= new ZonesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(Zone.ResourceType));
+        private ClientDiagnostics ZoneResourceZonesClientDiagnostics => _zoneResourceZonesClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", ZoneResource.ResourceType.Namespace, DiagnosticOptions);
+        private ZonesRestOperations ZoneResourceZonesRestClient => _zoneResourceZonesRestClient ??= new ZonesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(ZoneResource.ResourceType));
         private ClientDiagnostics DnsResourceReferenceClientDiagnostics => _dnsResourceReferenceClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
         private DnsResourceReferenceRestOperations DnsResourceReferenceRestClient => _dnsResourceReferenceRestClient ??= new DnsResourceReferenceRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
@@ -56,17 +56,17 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Zone> GetZonesByDnszoneAsync(int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<ZoneResource> GetZoneResourcesByDnszoneAsync(int? top = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<Zone>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ZoneResource>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneResourceZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZoneResourcesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = await ZoneRestClient.ListAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await ZoneResourceZonesRestClient.ListAsync(Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ZoneResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -74,14 +74,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            async Task<Page<Zone>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<ZoneResource>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneResourceZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZoneResourcesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = await ZoneRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = await ZoneResourceZonesRestClient.ListNextPageAsync(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new ZoneResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -99,17 +99,17 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Zone" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Zone> GetZonesByDnszone(int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<ZoneResource> GetZoneResourcesByDnszone(int? top = null, CancellationToken cancellationToken = default)
         {
-            Page<Zone> FirstPageFunc(int? pageSizeHint)
+            Page<ZoneResource> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneResourceZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZoneResourcesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = ZoneRestClient.List(Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = ZoneResourceZonesRestClient.List(Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ZoneResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -117,14 +117,14 @@ namespace MgmtExpandResourceTypes
                     throw;
                 }
             }
-            Page<Zone> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<ZoneResource> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = ZoneClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZonesByDnszone");
+                using var scope = ZoneResourceZonesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetZoneResourcesByDnszone");
                 scope.Start();
                 try
                 {
-                    var response = ZoneRestClient.ListNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Zone(Client, value)), response.Value.NextLink, response.GetRawResponse());
+                    var response = ZoneResourceZonesRestClient.ListNextPage(nextLink, Id.SubscriptionId, top, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new ZoneResource(Client, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

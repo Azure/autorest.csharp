@@ -13,17 +13,17 @@ namespace ResourceRename
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region SshPublicKeyInfo
-        /// <summary> Gets an object representing a SshPublicKeyInfo along with the instance operations that can be performed on it but with no data. </summary>
+        #region SshPublicKeyInfoResource
+        /// <summary> Gets an object representing a SshPublicKeyInfoResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SshPublicKeyInfo" /> object. </returns>
-        public static SshPublicKeyInfo GetSshPublicKeyInfo(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SshPublicKeyInfoResource" /> object. </returns>
+        public static SshPublicKeyInfoResource GetSshPublicKeyInfoResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SshPublicKeyInfo.ValidateResourceId(id);
-                return new SshPublicKeyInfo(client, id);
+                SshPublicKeyInfoResource.ValidateResourceId(id);
+                return new SshPublicKeyInfoResource(client, id);
             }
             );
         }

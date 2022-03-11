@@ -13,129 +13,129 @@ namespace Pagination
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region PageSizeIntegerModel
-        /// <summary> Gets an object representing a PageSizeIntegerModel along with the instance operations that can be performed on it but with no data. </summary>
+        #region PageSizeIntegerModelResource
+        /// <summary> Gets an object representing a PageSizeIntegerModelResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeIntegerModel" /> object. </returns>
-        public static PageSizeIntegerModel GetPageSizeIntegerModel(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PageSizeIntegerModelResource" /> object. </returns>
+        public static PageSizeIntegerModelResource GetPageSizeIntegerModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PageSizeIntegerModel.ValidateResourceId(id);
-                return new PageSizeIntegerModel(client, id);
+                PageSizeIntegerModelResource.ValidateResourceId(id);
+                return new PageSizeIntegerModelResource(client, id);
             }
             );
         }
         #endregion
 
-        #region PageSizeInt64Model
-        /// <summary> Gets an object representing a PageSizeInt64Model along with the instance operations that can be performed on it but with no data. </summary>
+        #region PageSizeInt64ModelResource
+        /// <summary> Gets an object representing a PageSizeInt64ModelResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeInt64Model" /> object. </returns>
-        public static PageSizeInt64Model GetPageSizeInt64Model(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PageSizeInt64ModelResource" /> object. </returns>
+        public static PageSizeInt64ModelResource GetPageSizeInt64ModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PageSizeInt64Model.ValidateResourceId(id);
-                return new PageSizeInt64Model(client, id);
+                PageSizeInt64ModelResource.ValidateResourceId(id);
+                return new PageSizeInt64ModelResource(client, id);
             }
             );
         }
         #endregion
 
-        #region PageSizeInt32Model
-        /// <summary> Gets an object representing a PageSizeInt32Model along with the instance operations that can be performed on it but with no data. </summary>
+        #region PageSizeInt32ModelResource
+        /// <summary> Gets an object representing a PageSizeInt32ModelResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeInt32Model" /> object. </returns>
-        public static PageSizeInt32Model GetPageSizeInt32Model(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PageSizeInt32ModelResource" /> object. </returns>
+        public static PageSizeInt32ModelResource GetPageSizeInt32ModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PageSizeInt32Model.ValidateResourceId(id);
-                return new PageSizeInt32Model(client, id);
+                PageSizeInt32ModelResource.ValidateResourceId(id);
+                return new PageSizeInt32ModelResource(client, id);
             }
             );
         }
         #endregion
 
-        #region PageSizeNumericModel
-        /// <summary> Gets an object representing a PageSizeNumericModel along with the instance operations that can be performed on it but with no data. </summary>
+        #region PageSizeNumericModelResource
+        /// <summary> Gets an object representing a PageSizeNumericModelResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeNumericModel" /> object. </returns>
-        public static PageSizeNumericModel GetPageSizeNumericModel(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PageSizeNumericModelResource" /> object. </returns>
+        public static PageSizeNumericModelResource GetPageSizeNumericModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PageSizeNumericModel.ValidateResourceId(id);
-                return new PageSizeNumericModel(client, id);
+                PageSizeNumericModelResource.ValidateResourceId(id);
+                return new PageSizeNumericModelResource(client, id);
             }
             );
         }
         #endregion
 
-        #region PageSizeFloatModel
-        /// <summary> Gets an object representing a PageSizeFloatModel along with the instance operations that can be performed on it but with no data. </summary>
+        #region PageSizeFloatModelResource
+        /// <summary> Gets an object representing a PageSizeFloatModelResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeFloatModel" /> object. </returns>
-        public static PageSizeFloatModel GetPageSizeFloatModel(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PageSizeFloatModelResource" /> object. </returns>
+        public static PageSizeFloatModelResource GetPageSizeFloatModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PageSizeFloatModel.ValidateResourceId(id);
-                return new PageSizeFloatModel(client, id);
+                PageSizeFloatModelResource.ValidateResourceId(id);
+                return new PageSizeFloatModelResource(client, id);
             }
             );
         }
         #endregion
 
-        #region PageSizeDoubleModel
-        /// <summary> Gets an object representing a PageSizeDoubleModel along with the instance operations that can be performed on it but with no data. </summary>
+        #region PageSizeDoubleModelResource
+        /// <summary> Gets an object representing a PageSizeDoubleModelResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeDoubleModel" /> object. </returns>
-        public static PageSizeDoubleModel GetPageSizeDoubleModel(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PageSizeDoubleModelResource" /> object. </returns>
+        public static PageSizeDoubleModelResource GetPageSizeDoubleModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PageSizeDoubleModel.ValidateResourceId(id);
-                return new PageSizeDoubleModel(client, id);
+                PageSizeDoubleModelResource.ValidateResourceId(id);
+                return new PageSizeDoubleModelResource(client, id);
             }
             );
         }
         #endregion
 
-        #region PageSizeDecimalModel
-        /// <summary> Gets an object representing a PageSizeDecimalModel along with the instance operations that can be performed on it but with no data. </summary>
+        #region PageSizeDecimalModelResource
+        /// <summary> Gets an object representing a PageSizeDecimalModelResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeDecimalModel" /> object. </returns>
-        public static PageSizeDecimalModel GetPageSizeDecimalModel(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PageSizeDecimalModelResource" /> object. </returns>
+        public static PageSizeDecimalModelResource GetPageSizeDecimalModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PageSizeDecimalModel.ValidateResourceId(id);
-                return new PageSizeDecimalModel(client, id);
+                PageSizeDecimalModelResource.ValidateResourceId(id);
+                return new PageSizeDecimalModelResource(client, id);
             }
             );
         }
         #endregion
 
-        #region PageSizeStringModel
-        /// <summary> Gets an object representing a PageSizeStringModel along with the instance operations that can be performed on it but with no data. </summary>
+        #region PageSizeStringModelResource
+        /// <summary> Gets an object representing a PageSizeStringModelResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeStringModel" /> object. </returns>
-        public static PageSizeStringModel GetPageSizeStringModel(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="PageSizeStringModelResource" /> object. </returns>
+        public static PageSizeStringModelResource GetPageSizeStringModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                PageSizeStringModel.ValidateResourceId(id);
-                return new PageSizeStringModel(client, id);
+                PageSizeStringModelResource.ValidateResourceId(id);
+                return new PageSizeStringModelResource(client, id);
             }
             );
         }

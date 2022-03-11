@@ -27,12 +27,12 @@ namespace OmitOperationGroups
             );
         }
 
-        /// <summary> Gets a collection of Model2s in the Model2. </summary>
+        /// <summary> Gets a collection of Model2Resources in the Model2Resource. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of Model2s and their operations over a Model2. </returns>
-        public static Model2Collection GetModel2s(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
+        public static Model2Collection GetModel2Resources(this ResourceGroup resourceGroup)
         {
-            return GetExtensionClient(resourceGroup).GetModel2s();
+            return GetExtensionClient(resourceGroup).GetModel2Resources();
         }
 
         /// <summary>
@@ -44,9 +44,9 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
-        public static async Task<Response<Model2>> GetModel2Async(this ResourceGroup resourceGroup, string model2SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<Model2Resource>> GetModel2ResourceAsync(this ResourceGroup resourceGroup, string model2SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroup.GetModel2s().GetAsync(model2SName, cancellationToken).ConfigureAwait(false);
+            return await resourceGroup.GetModel2Resources().GetAsync(model2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace OmitOperationGroups
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
-        public static Response<Model2> GetModel2(this ResourceGroup resourceGroup, string model2SName, CancellationToken cancellationToken = default)
+        public static Response<Model2Resource> GetModel2Resource(this ResourceGroup resourceGroup, string model2SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroup.GetModel2s().Get(model2SName, cancellationToken);
+            return resourceGroup.GetModel2Resources().Get(model2SName, cancellationToken);
         }
 
         /// <summary>

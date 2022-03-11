@@ -20,9 +20,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSingleField()
         {
-            ValidateFields(typeof(TypeOne), "typetwo");
+            ValidateFields(typeof(TypeOneResource), "typetwo");
             ValidateFields(typeof(TypeOneCollection), "typetwo");
-            ValidateFields(typeof(TypeTwo), "typeone");
+            ValidateFields(typeof(TypeTwoResource), "typeone");
             ValidateFields(typeof(TypeTwoCollection), "typeone");
         }
 
@@ -40,16 +40,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             var extensionClient = typeof(SubscriptionExtensionClient);
             var fields = extensionClient.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
-            var field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneCommonRestClient", StringComparison.OrdinalIgnoreCase));
+            var field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneResourceCommonRestClient", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);
             Assert.AreEqual(field.FieldType, typeof(CommonRestOperations));
-            field = fields.FirstOrDefault(f => f.Name.Contains("_typeTwoCommonRestClient", StringComparison.OrdinalIgnoreCase));
+            field = fields.FirstOrDefault(f => f.Name.Contains("_typeTwoResourceCommonRestClient", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);
             Assert.AreEqual(field.FieldType, typeof(CommonRestOperations));
-            field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneCommonClientDiagnostics", StringComparison.OrdinalIgnoreCase));
+            field = fields.FirstOrDefault(f => f.Name.Contains("_typeOneResourceCommonClientDiagnostics", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);
             Assert.AreEqual(field.FieldType, typeof(ClientDiagnostics));
-            field = fields.FirstOrDefault(f => f.Name.Contains("_typeTwoCommonClientDiagnostics", StringComparison.OrdinalIgnoreCase));
+            field = fields.FirstOrDefault(f => f.Name.Contains("_typeTwoResourceCommonClientDiagnostics", StringComparison.OrdinalIgnoreCase));
             Assert.NotNull(field);
             Assert.AreEqual(field.FieldType, typeof(ClientDiagnostics));
         }

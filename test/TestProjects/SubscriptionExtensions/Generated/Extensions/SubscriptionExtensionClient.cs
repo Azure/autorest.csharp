@@ -32,9 +32,9 @@ namespace SubscriptionExtensions
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of Toasters in the Toaster. </summary>
-        /// <returns> An object representing collection of Toasters and their operations over a Toaster. </returns>
-        public virtual ToasterCollection GetToasters()
+        /// <summary> Gets a collection of ToasterResources in the ToasterResource. </summary>
+        /// <returns> An object representing collection of ToasterResources and their operations over a ToasterResource. </returns>
+        public virtual ToasterCollection GetToasterResources()
         {
             return new ToasterCollection(Client, Id);
         }

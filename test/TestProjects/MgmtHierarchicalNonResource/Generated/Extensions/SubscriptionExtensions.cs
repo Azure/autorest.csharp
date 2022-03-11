@@ -26,17 +26,17 @@ namespace MgmtHierarchicalNonResource
             );
         }
 
-        /// <summary> Gets a collection of SharedGalleries in the SharedGallery. </summary>
+        /// <summary> Gets a collection of SharedGalleryResources in the SharedGalleryResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An object representing collection of SharedGalleries and their operations over a SharedGallery. </returns>
-        public static SharedGalleryCollection GetSharedGalleries(this Subscription subscription, string location)
+        /// <returns> An object representing collection of SharedGalleryResources and their operations over a SharedGalleryResource. </returns>
+        public static SharedGalleryCollection GetSharedGalleryResources(this Subscription subscription, string location)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscription).GetSharedGalleries(location);
+            return GetExtensionClient(subscription).GetSharedGalleryResources(location);
         }
 
         /// <summary>
@@ -50,9 +50,9 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
-        public static async Task<Response<SharedGallery>> GetSharedGalleryAsync(this Subscription subscription, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SharedGalleryResource>> GetSharedGalleryResourceAsync(this Subscription subscription, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetSharedGalleries(location).GetAsync(galleryUniqueName, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetSharedGalleryResources(location).GetAsync(galleryUniqueName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
-        public static Response<SharedGallery> GetSharedGallery(this Subscription subscription, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
+        public static Response<SharedGalleryResource> GetSharedGalleryResource(this Subscription subscription, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetSharedGalleries(location).Get(galleryUniqueName, cancellationToken);
+            return subscription.GetSharedGalleryResources(location).Get(galleryUniqueName, cancellationToken);
         }
     }
 }

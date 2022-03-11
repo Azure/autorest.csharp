@@ -32,9 +32,9 @@ namespace ResourceRename
             return apiVersion;
         }
 
-        /// <summary> Gets a collection of SshPublicKeyInfos in the SshPublicKeyInfo. </summary>
-        /// <returns> An object representing collection of SshPublicKeyInfos and their operations over a SshPublicKeyInfo. </returns>
-        public virtual SshPublicKeyInfoCollection GetSshPublicKeyInfos()
+        /// <summary> Gets a collection of SshPublicKeyInfoResources in the SshPublicKeyInfoResource. </summary>
+        /// <returns> An object representing collection of SshPublicKeyInfoResources and their operations over a SshPublicKeyInfoResource. </returns>
+        public virtual SshPublicKeyInfoCollection GetSshPublicKeyInfoResources()
         {
             return new SshPublicKeyInfoCollection(Client, Id);
         }

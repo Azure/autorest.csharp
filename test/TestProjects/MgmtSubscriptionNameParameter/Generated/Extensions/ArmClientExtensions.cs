@@ -13,17 +13,17 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region SBSubscription
-        /// <summary> Gets an object representing a SBSubscription along with the instance operations that can be performed on it but with no data. </summary>
+        #region SBSubscriptionResource
+        /// <summary> Gets an object representing a SBSubscriptionResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SBSubscription" /> object. </returns>
-        public static SBSubscription GetSBSubscription(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="SBSubscriptionResource" /> object. </returns>
+        public static SBSubscriptionResource GetSBSubscriptionResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                SBSubscription.ValidateResourceId(id);
-                return new SBSubscription(client, id);
+                SBSubscriptionResource.ValidateResourceId(id);
+                return new SBSubscriptionResource(client, id);
             }
             );
         }

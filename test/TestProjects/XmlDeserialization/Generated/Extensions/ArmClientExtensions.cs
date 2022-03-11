@@ -13,17 +13,17 @@ namespace XmlDeserialization
     /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
-        #region XmlInstance
-        /// <summary> Gets an object representing a XmlInstance along with the instance operations that can be performed on it but with no data. </summary>
+        #region XmlInstanceResource
+        /// <summary> Gets an object representing a XmlInstanceResource along with the instance operations that can be performed on it but with no data. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="XmlInstance" /> object. </returns>
-        public static XmlInstance GetXmlInstance(this ArmClient client, ResourceIdentifier id)
+        /// <returns> Returns a <see cref="XmlInstanceResource" /> object. </returns>
+        public static XmlInstanceResource GetXmlInstanceResource(this ArmClient client, ResourceIdentifier id)
         {
             return client.GetClient(() =>
             {
-                XmlInstance.ValidateResourceId(id);
-                return new XmlInstance(client, id);
+                XmlInstanceResource.ValidateResourceId(id);
+                return new XmlInstanceResource(client, id);
             }
             );
         }

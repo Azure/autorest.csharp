@@ -27,12 +27,12 @@ namespace MgmtKeyvault
             );
         }
 
-        /// <summary> Gets a collection of DeletedVaults in the DeletedVault. </summary>
+        /// <summary> Gets a collection of DeletedVaultResources in the DeletedVaultResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeletedVaults and their operations over a DeletedVault. </returns>
-        public static DeletedVaultCollection GetDeletedVaults(this Subscription subscription)
+        /// <returns> An object representing collection of DeletedVaultResources and their operations over a DeletedVaultResource. </returns>
+        public static DeletedVaultCollection GetDeletedVaultResources(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetDeletedVaults();
+            return GetExtensionClient(subscription).GetDeletedVaultResources();
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
-        public static async Task<Response<DeletedVault>> GetDeletedVaultAsync(this Subscription subscription, string location, string vaultName, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeletedVaultResource>> GetDeletedVaultResourceAsync(this Subscription subscription, string location, string vaultName, CancellationToken cancellationToken = default)
         {
-            return await subscription.GetDeletedVaults().GetAsync(location, vaultName, cancellationToken).ConfigureAwait(false);
+            return await subscription.GetDeletedVaultResources().GetAsync(location, vaultName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -62,33 +62,17 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
-        public static Response<DeletedVault> GetDeletedVault(this Subscription subscription, string location, string vaultName, CancellationToken cancellationToken = default)
+        public static Response<DeletedVaultResource> GetDeletedVaultResource(this Subscription subscription, string location, string vaultName, CancellationToken cancellationToken = default)
         {
-            return subscription.GetDeletedVaults().Get(location, vaultName, cancellationToken);
+            return subscription.GetDeletedVaultResources().Get(location, vaultName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DeletedManagedHsms in the DeletedManagedHsm. </summary>
+        /// <summary> Gets a collection of DeletedManagedHsmResources in the DeletedManagedHsmResource. </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of DeletedManagedHsms and their operations over a DeletedManagedHsm. </returns>
-        public static DeletedManagedHsmCollection GetDeletedManagedHsms(this Subscription subscription)
+        /// <returns> An object representing collection of DeletedManagedHsmResources and their operations over a DeletedManagedHsmResource. </returns>
+        public static DeletedManagedHsmCollection GetDeletedManagedHsmResources(this Subscription subscription)
         {
-            return GetExtensionClient(subscription).GetDeletedManagedHsms();
-        }
-
-        /// <summary>
-        /// Gets the specified deleted managed HSM.
-        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}
-        /// Operation Id: ManagedHsms_GetDeleted
-        /// </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <param name="location"> The location of the deleted managed HSM. </param>
-        /// <param name="name"> The name of the deleted managed HSM. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
-        public static async Task<Response<DeletedManagedHsm>> GetDeletedManagedHsmAsync(this Subscription subscription, string location, string name, CancellationToken cancellationToken = default)
-        {
-            return await subscription.GetDeletedManagedHsms().GetAsync(location, name, cancellationToken).ConfigureAwait(false);
+            return GetExtensionClient(subscription).GetDeletedManagedHsmResources();
         }
 
         /// <summary>
@@ -102,9 +86,25 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
-        public static Response<DeletedManagedHsm> GetDeletedManagedHsm(this Subscription subscription, string location, string name, CancellationToken cancellationToken = default)
+        public static async Task<Response<DeletedManagedHsmResource>> GetDeletedManagedHsmResourceAsync(this Subscription subscription, string location, string name, CancellationToken cancellationToken = default)
         {
-            return subscription.GetDeletedManagedHsms().Get(location, name, cancellationToken);
+            return await subscription.GetDeletedManagedHsmResources().GetAsync(location, name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets the specified deleted managed HSM.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}
+        /// Operation Id: ManagedHsms_GetDeleted
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the deleted managed HSM. </param>
+        /// <param name="name"> The name of the deleted managed HSM. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="name"/> is null. </exception>
+        public static Response<DeletedManagedHsmResource> GetDeletedManagedHsmResource(this Subscription subscription, string location, string name, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetDeletedManagedHsmResources().Get(location, name, cancellationToken);
         }
 
         /// <summary>
@@ -115,10 +115,10 @@ namespace MgmtKeyvault
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Vault" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Vault> GetVaultsAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="VaultResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<VaultResource> GetVaultResourcesAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVaultsAsync(top, cancellationToken);
+            return GetExtensionClient(subscription).GetVaultResourcesAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -129,10 +129,10 @@ namespace MgmtKeyvault
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Vault" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Vault> GetVaults(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="VaultResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<VaultResource> GetVaultResources(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetVaults(top, cancellationToken);
+            return GetExtensionClient(subscription).GetVaultResources(top, cancellationToken);
         }
 
         /// <summary>
@@ -142,10 +142,10 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeletedVault" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<DeletedVault> GetDeletedVaultsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="DeletedVaultResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<DeletedVaultResource> GetDeletedVaultResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetDeletedVaultsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetDeletedVaultResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -155,10 +155,10 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeletedVault" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<DeletedVault> GetDeletedVaults(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="DeletedVaultResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<DeletedVaultResource> GetDeletedVaultResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetDeletedVaults(cancellationToken);
+            return GetExtensionClient(subscription).GetDeletedVaultResources(cancellationToken);
         }
 
         /// <summary>
@@ -201,10 +201,10 @@ namespace MgmtKeyvault
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ManagedHsm" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ManagedHsm> GetManagedHsmsAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ManagedHsmResource> GetManagedHsmResourcesAsync(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetManagedHsmsAsync(top, cancellationToken);
+            return GetExtensionClient(subscription).GetManagedHsmResourcesAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -215,10 +215,10 @@ namespace MgmtKeyvault
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ManagedHsm" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ManagedHsm> GetManagedHsms(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ManagedHsmResource> GetManagedHsmResources(this Subscription subscription, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetManagedHsms(top, cancellationToken);
+            return GetExtensionClient(subscription).GetManagedHsmResources(top, cancellationToken);
         }
 
         /// <summary>
@@ -228,10 +228,10 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeletedManagedHsm" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<DeletedManagedHsm> GetDeletedManagedHsmsAsync(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="DeletedManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<DeletedManagedHsmResource> GetDeletedManagedHsmResourcesAsync(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetDeletedManagedHsmsAsync(cancellationToken);
+            return GetExtensionClient(subscription).GetDeletedManagedHsmResourcesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -241,10 +241,10 @@ namespace MgmtKeyvault
         /// </summary>
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeletedManagedHsm" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<DeletedManagedHsm> GetDeletedManagedHsms(this Subscription subscription, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="DeletedManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<DeletedManagedHsmResource> GetDeletedManagedHsmResources(this Subscription subscription, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscription).GetDeletedManagedHsms(cancellationToken);
+            return GetExtensionClient(subscription).GetDeletedManagedHsmResources(cancellationToken);
         }
     }
 }
