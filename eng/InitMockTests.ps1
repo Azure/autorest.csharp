@@ -99,7 +99,7 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
     $mocktestsFolder = $path + "/mocktests"
     $mockMd = $mocktestsFolder + "/autorest.tests.md"
     $csproj = ($mocktestsFolder + "/Azure.ResourceManager.Template.Tests.csproj").Replace("Template", $RPName)
-
+    Write-Host "`n`nStart Generate $RPName"
     # Create [mocktests] folder if it not exist
     if (!(Test-Path $mockMd) -or !(Test-Path $csproj)) {
         # please check [azmocktests] template has been imported
@@ -112,32 +112,41 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 
     # Generate src code
     & cd $srcFolder
-    & dotnet build /t:GenerateCode
+    $null = & dotnet build /t:GenerateCode
     if ($?) {
+        Write-Host "$RPName Src Generate Successed"
         $Script:srcGenerateSuccessedRps += $RPName
     }
     else {
+        Write-Host "$RPName Src Generate Failed"
         $Script:srcGenerateErrorRps += $RPName
         return
     }
     
     # Build src code
-    & dotnet build
+    $null = & dotnet build
     if ($?) {
+        Write-Host "$RPName Src Build Successed"
         $Script:srcBuildSuccessedRps += $RPName
     }
     else {
+        Write-Host "$RPName Src Build Failed"
         $Script:srcBuildErrorRps += $RPName
         return
     }
 
     # Generate MockTest code
     if ((Test-Path $mockMd) -and (Test-Path $csproj)) {
-        & autorest --use=$autorestVersion $mockMd --testmodeler="{}" --debug
+        $result = & autorest --use=$autorestVersion $mockMd --testmodeler="{}" --debug
         if ($?) {
+            Write-Host "$RPName MockTest Generate Successed"
             $Script:testGenerateSuccessedRps += $RPName
         }
         else {
+            Write-Host "$RPName MockTest Generate Failed"
+            foreach ($item in $result) {
+                Write-Host $item
+            }
             $Script:testGenerateErrorRps += $RPName
             return
         }
@@ -145,11 +154,16 @@ function Update-AllGeneratedCode([string]$path, [string]$autorestVersion) {
 
     # Build MockTest code
     & cd $mocktestsFolder
-    & dotnet build
+    $result = & dotnet build
     if ($?) {
+        Write-Host "$RPName MockTest Build Successed"
         $Script:testBuildSuccessedRps += $RPName
     }
     else {
+        Write-Host "$RPName MockTest Build Failed"
+        foreach ($item in $result) {
+            Write-Host $item
+        }
         $Script:testBuildErrorRps += $RPName
     }
 }
@@ -181,8 +195,6 @@ function  MockTestInit {
         $Script:RPMapping = [ordered]@{ }
     }
     process {
-
-
         # Install npm and autorest
         if ($NpmInit) {
             & npm install -g autorest
