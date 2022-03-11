@@ -296,9 +296,6 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "outputVariables")]
         public Dictionary<string, string>? OutputVariables { get; set; }
 
-        [YamlMember(Alias = "outputVariableNames")]
-        public ICollection<string> OutputVariableNames { get; set; } = Array.Empty<string>();
-
         public HashSet<string> GetAllVariableNames()
         {
             HashSet<string> variableNames = new HashSet<string>();
@@ -422,6 +419,9 @@ namespace AutoRest.CSharp.Input
 
         [YamlMember(Alias = "armTemplatePayload")]
         public RecordOfStringAndAny? ArmTemplatePayload { get; set; }
+
+        [YamlMember(Alias = "armTemplatePayloadString")]
+        public string? ArmTemplatePayloadString { get; set; }
 
         // for TestStepRestCall (type==restCall)
         [YamlMember(Alias = "operationId")]
