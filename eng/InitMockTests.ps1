@@ -203,7 +203,7 @@ function  MockTestInit {
         # Build current autorest project 
         $projRoot = Join-Path $PSScriptRoot "..\"
         & cd $projRoot
-        & dotnet build
+        $null = & dotnet build
         if (-not $?) {
             Send-ErrorMessage -message "Autorest build fail."
         }
