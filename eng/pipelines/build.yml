@@ -141,7 +141,6 @@ stages:
           #   displayName: "Generate All SDK"
           #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - powershell: |
-              Start-Process powershell ./eng/Launch-MockServiceHost.ps1 -WindowStyle Hidden
               ./eng/InitMockTests.ps1
             displayName: "Generate All SDK"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
