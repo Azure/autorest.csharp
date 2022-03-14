@@ -57,11 +57,11 @@ namespace MgmtHierarchicalNonResource
         {
             _sharedGalleryClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string sharedGalleryApiVersion);
-            _sharedGalleryRestClient = new SharedGalleriesRestOperations(_sharedGalleryClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
+            _sharedGalleryRestClient = new SharedGalleriesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, sharedGalleryApiVersion);
             _sharedGalleryImagesClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(_sharedGalleryImagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _sharedGalleryImagesRestClient = new SharedGalleryImagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
             _sharedGalleryImageVersionsClientDiagnostics = new ClientDiagnostics("MgmtHierarchicalNonResource", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(_sharedGalleryImageVersionsClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+            _sharedGalleryImageVersionsRestClient = new SharedGalleryImageVersionsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -97,7 +97,7 @@ namespace MgmtHierarchicalNonResource
         /// Operation Id: SharedGalleries_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SharedGallery>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SharedGallery>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _sharedGalleryClientDiagnostics.CreateScope("SharedGallery.Get");
             scope.Start();
@@ -105,7 +105,7 @@ namespace MgmtHierarchicalNonResource
             {
                 var response = await _sharedGalleryRestClient.GetAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _sharedGalleryClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
                 return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
@@ -130,7 +130,7 @@ namespace MgmtHierarchicalNonResource
             {
                 var response = _sharedGalleryRestClient.Get(Id.SubscriptionId, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _sharedGalleryClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
                 return Response.FromValue(new SharedGallery(Client, response.Value), response.GetRawResponse());
             }
@@ -236,7 +236,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> is null. </exception>
-        public async virtual Task<Response<SharedGalleryImage>> GetSharedGalleryImageAsync(string galleryImageName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SharedGalleryImage>> GetSharedGalleryImageAsync(string galleryImageName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
 
@@ -387,7 +387,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="galleryImageName"/> or <paramref name="galleryImageVersionName"/> is null. </exception>
-        public async virtual Task<Response<SharedGalleryImageVersion>> GetSharedGalleryImageVersionAsync(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SharedGalleryImageVersion>> GetSharedGalleryImageVersionAsync(string galleryImageName, string galleryImageVersionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(galleryImageName, nameof(galleryImageName));
             Argument.AssertNotNullOrEmpty(galleryImageVersionName, nameof(galleryImageVersionName));

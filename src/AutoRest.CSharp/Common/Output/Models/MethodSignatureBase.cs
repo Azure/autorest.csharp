@@ -2,11 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal abstract record MethodSignatureBase(string Name, string? Description, MethodSignatureModifiers Modifiers, Parameter[] Parameters);
+    internal abstract record MethodSignatureBase(string Name, string? Description, MethodSignatureModifiers Modifiers, IReadOnlyList<Parameter> Parameters);
 
     [Flags]
     internal enum MethodSignatureModifiers

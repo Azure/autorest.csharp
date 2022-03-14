@@ -12,7 +12,7 @@ using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class WorkspaceListResult
+    internal partial class WorkspaceListResult
     {
         internal static WorkspaceListResult DeserializeWorkspaceListResult(JsonElement element)
         {

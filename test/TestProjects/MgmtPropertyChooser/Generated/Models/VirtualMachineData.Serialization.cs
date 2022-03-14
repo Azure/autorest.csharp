@@ -22,7 +22,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan");
-                writer.WriteObjectValue(Plan);
+                JsonSerializer.Serialize(writer, Plan);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -103,7 +103,7 @@ namespace MgmtPropertyChooser
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            Optional<Models.Plan> plan = default;
+            Optional<ArmPlan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
@@ -112,7 +112,7 @@ namespace MgmtPropertyChooser
             Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<ManagedServiceIdentity> identityV3 = default;
             Optional<IList<string>> zones = default;
-            Optional<IReadOnlyList<Resource>> fakeResources = default;
+            Optional<IReadOnlyList<MgmtPropertyChooserResourceData>> fakeResources = default;
             Optional<SubResource> fakeSubResource = default;
             Optional<WritableSubResource> fakeWritableSubResource = default;
             IDictionary<string, string> tags = default;
@@ -134,7 +134,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Models.Plan.DeserializePlan(property.Value);
+                    plan = JsonSerializer.Deserialize<ArmPlan>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("resources"))
@@ -235,10 +235,10 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<Resource> array = new List<Resource>();
+                    List<MgmtPropertyChooserResourceData> array = new List<MgmtPropertyChooserResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Resource.DeserializeResource(item));
+                        array.Add(MgmtPropertyChooserResourceData.DeserializeMgmtPropertyChooserResourceData(item));
                     }
                     fakeResources = array;
                     continue;
@@ -331,7 +331,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, systemData, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, systemData, tags, location, plan, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, identityV3, Optional.ToList(zones), Optional.ToList(fakeResources), fakeSubResource, fakeWritableSubResource, provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

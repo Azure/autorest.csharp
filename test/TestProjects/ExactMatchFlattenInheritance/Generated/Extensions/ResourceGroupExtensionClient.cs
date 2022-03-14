@@ -42,13 +42,13 @@ namespace ExactMatchFlattenInheritance
         }
 
         private ClientDiagnostics AzureResourceFlattenModel2sClientDiagnostics => _azureResourceFlattenModel2sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private AzureResourceFlattenModel2SRestOperations AzureResourceFlattenModel2sRestClient => _azureResourceFlattenModel2sRestClient ??= new AzureResourceFlattenModel2SRestOperations(AzureResourceFlattenModel2sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private AzureResourceFlattenModel2SRestOperations AzureResourceFlattenModel2sRestClient => _azureResourceFlattenModel2sRestClient ??= new AzureResourceFlattenModel2SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics AzureResourceFlattenModel3sClientDiagnostics => _azureResourceFlattenModel3sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private AzureResourceFlattenModel3SRestOperations AzureResourceFlattenModel3sRestClient => _azureResourceFlattenModel3sRestClient ??= new AzureResourceFlattenModel3SRestOperations(AzureResourceFlattenModel3sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private AzureResourceFlattenModel3SRestOperations AzureResourceFlattenModel3sRestClient => _azureResourceFlattenModel3sRestClient ??= new AzureResourceFlattenModel3SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics AzureResourceFlattenModel4sClientDiagnostics => _azureResourceFlattenModel4sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private AzureResourceFlattenModel4SRestOperations AzureResourceFlattenModel4sRestClient => _azureResourceFlattenModel4sRestClient ??= new AzureResourceFlattenModel4SRestOperations(AzureResourceFlattenModel4sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private AzureResourceFlattenModel4SRestOperations AzureResourceFlattenModel4sRestClient => _azureResourceFlattenModel4sRestClient ??= new AzureResourceFlattenModel4SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics AzureResourceFlattenModel5sClientDiagnostics => _azureResourceFlattenModel5sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private AzureResourceFlattenModel5SRestOperations AzureResourceFlattenModel5sRestClient => _azureResourceFlattenModel5sRestClient ??= new AzureResourceFlattenModel5SRestOperations(AzureResourceFlattenModel5sClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private AzureResourceFlattenModel5SRestOperations AzureResourceFlattenModel5sRestClient => _azureResourceFlattenModel5sRestClient ??= new AzureResourceFlattenModel5SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -139,7 +139,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(string name, AzureResourceFlattenModel2 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutAzureResourceFlattenModel2");
             scope.Start();
@@ -186,7 +186,7 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2Async(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2Async(string name, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetAzureResourceFlattenModel2");
             scope.Start();
@@ -287,7 +287,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(string name, AzureResourceFlattenModel3 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutAzureResourceFlattenModel3");
             scope.Start();
@@ -334,7 +334,7 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3Async(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3Async(string name, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetAzureResourceFlattenModel3");
             scope.Start();
@@ -435,7 +435,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(string name, AzureResourceFlattenModel4 parameters, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutAzureResourceFlattenModel4");
             scope.Start();
@@ -482,7 +482,7 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4Async(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4Async(string name, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetAzureResourceFlattenModel4");
             scope.Start();
@@ -583,7 +583,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(string name, int? foo = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.PutAzureResourceFlattenModel5");
             scope.Start();
@@ -630,7 +630,7 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5Async(string name, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5Async(string name, CancellationToken cancellationToken = default)
         {
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("ResourceGroupExtensionClient.GetAzureResourceFlattenModel5");
             scope.Start();

@@ -20,7 +20,7 @@ schemas: !Schemas
           name: Boolean
           description: Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_106
+    - !BooleanSchema &ref_107
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -31,7 +31,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   numbers:
-    - !NumberSchema &ref_36
+    - !NumberSchema &ref_37
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -100,7 +100,17 @@ schemas: !Schemas
           name: PlanPromotionCode
           description: The promotion code.
       protocol: !Protocols {}
-    - !StringSchema &ref_48
+    - !StringSchema &ref_28
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: PlanVersion
+          description: The version.
+      protocol: !Protocols {}
+    - !StringSchema &ref_49
       type: string
       apiVersions:
         - !ApiVersion 
@@ -110,7 +120,7 @@ schemas: !Schemas
           name: VirtualMachinePropertiesProvisioningState
           description: The provisioning state, which only appears in the response.
       protocol: !Protocols {}
-    - !StringSchema &ref_49
+    - !StringSchema &ref_50
       type: string
       apiVersions:
         - !ApiVersion 
@@ -123,7 +133,7 @@ schemas: !Schemas
             Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows
             Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15
       protocol: !Protocols {}
-    - !StringSchema &ref_50
+    - !StringSchema &ref_51
       type: string
       apiVersions:
         - !ApiVersion 
@@ -133,7 +143,7 @@ schemas: !Schemas
           name: VirtualMachinePropertiesVmId
           description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
       protocol: !Protocols {}
-    - !StringSchema &ref_51
+    - !StringSchema &ref_52
       type: string
       apiVersions:
         - !ApiVersion 
@@ -235,7 +245,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Resource location
       protocol: !Protocols {}
-    - !StringSchema &ref_28
+    - !StringSchema &ref_29
       type: string
       apiVersions:
         - !ApiVersion 
@@ -245,7 +255,7 @@ schemas: !Schemas
           name: VirtualMachineIdentityPrincipalId
           description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_29
+    - !StringSchema &ref_30
       type: string
       apiVersions:
         - !ApiVersion 
@@ -275,7 +285,7 @@ schemas: !Schemas
           name: String
           description: The client id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_32
+    - !StringSchema &ref_33
       type: string
       apiVersions:
         - !ApiVersion 
@@ -285,7 +295,7 @@ schemas: !Schemas
           name: IdentityWithRenamedPropertyTestPrincipalId
           description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_33
+    - !StringSchema &ref_34
       type: string
       apiVersions:
         - !ApiVersion 
@@ -305,7 +315,7 @@ schemas: !Schemas
           name: IdentityWithRenamedPropertyUserAssignedIdentitiesProperties
           description: The principal id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_35
+    - !StringSchema &ref_36
       type: string
       apiVersions:
         - !ApiVersion 
@@ -325,7 +335,7 @@ schemas: !Schemas
           name: IdentityWithDifferentPropertyTypeUserAssignedIdentitiesProperties
           description: The principal id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_38
+    - !StringSchema &ref_39
       type: string
       apiVersions:
         - !ApiVersion 
@@ -335,7 +345,7 @@ schemas: !Schemas
           name: IdentityWithNoUserIdentityPrincipalId
           description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_39
+    - !StringSchema &ref_40
       type: string
       apiVersions:
         - !ApiVersion 
@@ -355,7 +365,7 @@ schemas: !Schemas
           name: IdentityWithNoSystemIdentityUserAssignedIdentitiesProperties
           description: The principal id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_41
+    - !StringSchema &ref_42
       type: string
       apiVersions:
         - !ApiVersion 
@@ -365,7 +375,7 @@ schemas: !Schemas
           name: IdentityV3PrincipalId
           description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_42
+    - !StringSchema &ref_43
       type: string
       apiVersions:
         - !ApiVersion 
@@ -385,7 +395,7 @@ schemas: !Schemas
           name: IdentityV3UserAssignedIdentitiesProperties
           description: The principal id of user assigned identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_45
+    - !StringSchema &ref_46
       type: string
       apiVersions:
         - !ApiVersion 
@@ -395,7 +405,7 @@ schemas: !Schemas
           name: VirtualMachineZonesItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_46
+    - !StringSchema &ref_47
       type: string
       apiVersions:
         - !ApiVersion 
@@ -405,7 +415,7 @@ schemas: !Schemas
           name: FakeSubResourceId
           description: The ARM identifier for fake SubResource
       protocol: !Protocols {}
-    - !StringSchema &ref_47
+    - !StringSchema &ref_48
       type: string
       apiVersions:
         - !ApiVersion 
@@ -415,7 +425,7 @@ schemas: !Schemas
           name: FakeWritableSubResourceId
           description: The ARM identifier for fake writable SubResource
       protocol: !Protocols {}
-    - !StringSchema &ref_52
+    - !StringSchema &ref_53
       type: string
       apiVersions:
         - !ApiVersion 
@@ -425,7 +435,7 @@ schemas: !Schemas
           name: VirtualMachineListResultNextLink
           description: The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
       protocol: !Protocols {}
-    - !StringSchema &ref_67
+    - !StringSchema &ref_68
       type: string
       apiVersions:
         - !ApiVersion 
@@ -435,7 +445,7 @@ schemas: !Schemas
           name: ErrorResponseCode
           description: The error code.
       protocol: !Protocols {}
-    - !StringSchema &ref_68
+    - !StringSchema &ref_69
       type: string
       apiVersions:
         - !ApiVersion 
@@ -445,7 +455,7 @@ schemas: !Schemas
           name: ErrorResponseMessage
           description: The error message.
       protocol: !Protocols {}
-    - !StringSchema &ref_69
+    - !StringSchema &ref_70
       type: string
       apiVersions:
         - !ApiVersion 
@@ -455,7 +465,7 @@ schemas: !Schemas
           name: ErrorResponseTarget
           description: The error target.
       protocol: !Protocols {}
-    - !StringSchema &ref_71
+    - !StringSchema &ref_72
       type: string
       apiVersions:
         - !ApiVersion 
@@ -465,7 +475,7 @@ schemas: !Schemas
           name: ErrorAdditionalInfoType
           description: The additional info type.
       protocol: !Protocols {}
-    - !StringSchema &ref_72
+    - !StringSchema &ref_73
       type: string
       apiVersions:
         - !ApiVersion 
@@ -475,7 +485,7 @@ schemas: !Schemas
           name: ErrorResponseWithAnotherNameCode
           description: The error code.
       protocol: !Protocols {}
-    - !StringSchema &ref_73
+    - !StringSchema &ref_74
       type: string
       apiVersions:
         - !ApiVersion 
@@ -485,7 +495,7 @@ schemas: !Schemas
           name: ErrorResponseWithAnotherNameMessage
           description: The error message.
       protocol: !Protocols {}
-    - !StringSchema &ref_74
+    - !StringSchema &ref_75
       type: string
       apiVersions:
         - !ApiVersion 
@@ -495,7 +505,7 @@ schemas: !Schemas
           name: ErrorResponseWithAnotherNameTarget
           description: The error target.
       protocol: !Protocols {}
-    - !StringSchema &ref_80
+    - !StringSchema &ref_81
       type: string
       apiVersions:
         - !ApiVersion 
@@ -506,7 +516,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   choices:
-    - !ChoiceSchema &ref_43
+    - !ChoiceSchema &ref_44
       choices:
         - !ChoiceValue 
           value: SystemAssigned
@@ -539,13 +549,13 @@ schemas: !Schemas
       choiceType: *ref_0
       language: !Languages 
         default:
-          name: ResourceIdentityTypeV3
+          name: ResourceIdentityV3Type
           description: >-
             The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the
             virtual machine.
       protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_30
+    - !SealedChoiceSchema &ref_31
       choices:
         - !ChoiceValue 
           value: SystemAssigned
@@ -584,7 +594,7 @@ schemas: !Schemas
             virtual machine.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_92
+    - !ConstantSchema &ref_93
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -597,7 +607,7 @@ schemas: !Schemas
           name: InstanceViewTypes
           description: ''
       protocol: !Protocols {}
-    - !ConstantSchema &ref_90
+    - !ConstantSchema &ref_91
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -607,7 +617,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_95
+    - !ConstantSchema &ref_96
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -617,7 +627,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_98
+    - !ConstantSchema &ref_99
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -636,9 +646,9 @@ schemas: !Schemas
           name: ResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_31
+    - !DictionarySchema &ref_32
       type: dictionary
-      elementType: !ObjectSchema &ref_55
+      elementType: !ObjectSchema &ref_56
         type: object
         apiVersions:
           - !ApiVersion 
@@ -680,9 +690,9 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_34
+    - !DictionarySchema &ref_35
       type: dictionary
-      elementType: !ObjectSchema &ref_57
+      elementType: !ObjectSchema &ref_58
         type: object
         apiVersions:
           - !ApiVersion 
@@ -724,9 +734,9 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_37
+    - !DictionarySchema &ref_38
       type: dictionary
-      elementType: !ObjectSchema &ref_59
+      elementType: !ObjectSchema &ref_60
         type: object
         apiVersions:
           - !ApiVersion 
@@ -768,9 +778,9 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_40
+    - !DictionarySchema &ref_41
       type: dictionary
-      elementType: !ObjectSchema &ref_62
+      elementType: !ObjectSchema &ref_63
         type: object
         apiVersions:
           - !ApiVersion 
@@ -812,9 +822,9 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_44
+    - !DictionarySchema &ref_45
       type: dictionary
-      elementType: !ObjectSchema &ref_64
+      elementType: !ObjectSchema &ref_65
         type: object
         apiVersions:
           - !ApiVersion 
@@ -856,7 +866,7 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_78
+    - !DictionarySchema &ref_79
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -873,14 +883,14 @@ schemas: !Schemas
           description: Any object
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_97
+    - !ObjectSchema &ref_98
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_84
+          schema: !ArraySchema &ref_85
             type: array
             apiVersions:
               - !ApiVersion 
@@ -1093,7 +1103,7 @@ schemas: !Schemas
                   - *ref_8
               properties:
                 - !Property 
-                  schema: !ObjectSchema &ref_53
+                  schema: !ObjectSchema &ref_54
                     type: object
                     apiVersions:
                       - !ApiVersion 
@@ -1131,6 +1141,14 @@ schemas: !Schemas
                             name: promotionCode
                             description: The promotion code.
                         protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_28
+                        serializedName: version
+                        language: !Languages 
+                          default:
+                            name: version
+                            description: The version.
+                        protocol: !Protocols {}
                     serializationFormats:
                       - json
                     usage:
@@ -1154,7 +1172,7 @@ schemas: !Schemas
                         for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_81
+                  schema: !ArraySchema &ref_82
                     type: array
                     apiVersions:
                       - !ApiVersion 
@@ -1173,14 +1191,14 @@ schemas: !Schemas
                       description: The virtual machine child extension resources.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_54
+                  schema: !ObjectSchema &ref_55
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_28
+                        schema: *ref_29
                         readOnly: true
                         serializedName: principalId
                         language: !Languages 
@@ -1189,7 +1207,7 @@ schemas: !Schemas
                             description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_29
+                        schema: *ref_30
                         readOnly: true
                         serializedName: tenantId
                         language: !Languages 
@@ -1198,7 +1216,7 @@ schemas: !Schemas
                             description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_30
+                        schema: *ref_31
                         serializedName: type
                         language: !Languages 
                           default:
@@ -1208,7 +1226,7 @@ schemas: !Schemas
                               identities from the virtual machine.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_31
+                        schema: *ref_32
                         serializedName: userAssignedIdentities
                         language: !Languages 
                           default:
@@ -1235,14 +1253,14 @@ schemas: !Schemas
                       description: The identity of the virtual machine, if configured.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_56
+                  schema: !ObjectSchema &ref_57
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_32
+                        schema: *ref_33
                         readOnly: true
                         serializedName: testPrincipalId
                         language: !Languages 
@@ -1251,7 +1269,7 @@ schemas: !Schemas
                             description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_33
+                        schema: *ref_34
                         readOnly: true
                         serializedName: tenantId
                         language: !Languages 
@@ -1260,7 +1278,7 @@ schemas: !Schemas
                             description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_30
+                        schema: *ref_31
                         serializedName: type
                         language: !Languages 
                           default:
@@ -1270,7 +1288,7 @@ schemas: !Schemas
                               identities from the virtual machine.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_34
+                        schema: *ref_35
                         serializedName: userAssignedIdentities
                         language: !Languages 
                           default:
@@ -1297,14 +1315,14 @@ schemas: !Schemas
                       description: The identity of the virtual machine, if configured.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_58
+                  schema: !ObjectSchema &ref_59
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_35
+                        schema: *ref_36
                         readOnly: true
                         serializedName: principalId
                         language: !Languages 
@@ -1313,7 +1331,7 @@ schemas: !Schemas
                             description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_36
+                        schema: *ref_37
                         readOnly: true
                         serializedName: tenantId
                         language: !Languages 
@@ -1322,7 +1340,7 @@ schemas: !Schemas
                             description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_30
+                        schema: *ref_31
                         serializedName: type
                         language: !Languages 
                           default:
@@ -1332,7 +1350,7 @@ schemas: !Schemas
                               identities from the virtual machine.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_37
+                        schema: *ref_38
                         serializedName: userAssignedIdentities
                         language: !Languages 
                           default:
@@ -1359,14 +1377,14 @@ schemas: !Schemas
                       description: The identity of the virtual machine, if configured.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_60
+                  schema: !ObjectSchema &ref_61
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_38
+                        schema: *ref_39
                         readOnly: true
                         serializedName: principalId
                         language: !Languages 
@@ -1375,7 +1393,7 @@ schemas: !Schemas
                             description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_39
+                        schema: *ref_40
                         readOnly: true
                         serializedName: tenantId
                         language: !Languages 
@@ -1384,7 +1402,7 @@ schemas: !Schemas
                             description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_30
+                        schema: *ref_31
                         serializedName: type
                         language: !Languages 
                           default:
@@ -1411,14 +1429,14 @@ schemas: !Schemas
                       description: The identity of the virtual machine, if configured.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_61
+                  schema: !ObjectSchema &ref_62
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_30
+                        schema: *ref_31
                         serializedName: type
                         language: !Languages 
                           default:
@@ -1428,7 +1446,7 @@ schemas: !Schemas
                               identities from the virtual machine.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_40
+                        schema: *ref_41
                         serializedName: userAssignedIdentities
                         language: !Languages 
                           default:
@@ -1455,14 +1473,14 @@ schemas: !Schemas
                       description: The identity of the virtual machine, if configured.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_63
+                  schema: !ObjectSchema &ref_64
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_41
+                        schema: *ref_42
                         readOnly: true
                         serializedName: principalId
                         language: !Languages 
@@ -1471,7 +1489,7 @@ schemas: !Schemas
                             description: The principal id of virtual machine identity. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_42
+                        schema: *ref_43
                         readOnly: true
                         serializedName: tenantId
                         language: !Languages 
@@ -1480,7 +1498,7 @@ schemas: !Schemas
                             description: The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_43
+                        schema: *ref_44
                         serializedName: type
                         language: !Languages 
                           default:
@@ -1490,7 +1508,7 @@ schemas: !Schemas
                               identities from the virtual machine.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_44
+                        schema: *ref_45
                         serializedName: userAssignedIdentities
                         language: !Languages 
                           default:
@@ -1517,12 +1535,12 @@ schemas: !Schemas
                       description: The identity of the virtual machine, if configured.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_82
+                  schema: !ArraySchema &ref_83
                     type: array
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
-                    elementType: *ref_45
+                    elementType: *ref_46
                     language: !Languages 
                       default:
                         name: VirtualMachineZones
@@ -1535,7 +1553,7 @@ schemas: !Schemas
                       description: The virtual machine zones.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_83
+                  schema: !ArraySchema &ref_84
                     type: array
                     apiVersions:
                       - !ApiVersion 
@@ -1554,14 +1572,14 @@ schemas: !Schemas
                       description: The fake resources for the virtual machine.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_65
+                  schema: !ObjectSchema &ref_66
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_46
+                        schema: *ref_47
                         readOnly: true
                         serializedName: id
                         language: !Languages 
@@ -1587,14 +1605,14 @@ schemas: !Schemas
                       description: The fake subresource.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_66
+                  schema: !ObjectSchema &ref_67
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_47
+                        schema: *ref_48
                         serializedName: id
                         language: !Languages 
                           default:
@@ -1619,7 +1637,7 @@ schemas: !Schemas
                       description: The fake writable subresource.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_48
+                  schema: *ref_49
                   flattenedNames:
                     - properties
                     - provisioningState
@@ -1631,7 +1649,7 @@ schemas: !Schemas
                       description: The provisioning state, which only appears in the response.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_49
+                  schema: *ref_50
                   flattenedNames:
                     - properties
                     - licenseType
@@ -1646,7 +1664,7 @@ schemas: !Schemas
                         api-version: 2015-06-15
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_50
+                  schema: *ref_51
                   flattenedNames:
                     - properties
                     - vmId
@@ -1658,7 +1676,7 @@ schemas: !Schemas
                       description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_51
+                  schema: *ref_52
                   flattenedNames:
                     - properties
                     - extensionsTimeBudget
@@ -1694,7 +1712,7 @@ schemas: !Schemas
               description: The list of virtual machines.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_52
+          schema: *ref_53
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -1713,10 +1731,9 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_17
-    - *ref_53
+    - *ref_54
     - *ref_18
     - *ref_8
-    - *ref_54
     - *ref_55
     - *ref_56
     - *ref_57
@@ -1729,21 +1746,22 @@ schemas: !Schemas
     - *ref_64
     - *ref_65
     - *ref_66
-    - !ObjectSchema &ref_102
+    - *ref_67
+    - !ObjectSchema &ref_103
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_70
+          schema: !ObjectSchema &ref_71
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             properties:
               - !Property 
-                schema: *ref_67
+                schema: *ref_68
                 readOnly: true
                 serializedName: code
                 language: !Languages 
@@ -1752,7 +1770,7 @@ schemas: !Schemas
                     description: The error code.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_68
+                schema: *ref_69
                 readOnly: true
                 serializedName: message
                 language: !Languages 
@@ -1761,7 +1779,7 @@ schemas: !Schemas
                     description: The error message.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_69
+                schema: *ref_70
                 readOnly: true
                 serializedName: target
                 language: !Languages 
@@ -1770,12 +1788,12 @@ schemas: !Schemas
                     description: The error target.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_85
+                schema: !ArraySchema &ref_86
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: *ref_70
+                  elementType: *ref_71
                   language: !Languages 
                     default:
                       name: ErrorResponseDetails
@@ -1789,19 +1807,19 @@ schemas: !Schemas
                     description: The error details.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_86
+                schema: !ArraySchema &ref_87
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: !ObjectSchema &ref_76
+                  elementType: !ObjectSchema &ref_77
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_71
+                        schema: *ref_72
                         readOnly: true
                         serializedName: type
                         language: !Languages 
@@ -1859,14 +1877,14 @@ schemas: !Schemas
               description: Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
           protocol: !Protocols {}
         - !Property 
-          schema: !ObjectSchema &ref_75
+          schema: !ObjectSchema &ref_76
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             properties:
               - !Property 
-                schema: *ref_72
+                schema: *ref_73
                 readOnly: true
                 serializedName: code
                 language: !Languages 
@@ -1875,7 +1893,7 @@ schemas: !Schemas
                     description: The error code.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_73
+                schema: *ref_74
                 readOnly: true
                 serializedName: message
                 language: !Languages 
@@ -1884,7 +1902,7 @@ schemas: !Schemas
                     description: The error message.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_74
+                schema: *ref_75
                 readOnly: true
                 serializedName: target
                 language: !Languages 
@@ -1893,12 +1911,12 @@ schemas: !Schemas
                     description: The error target.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_87
+                schema: !ArraySchema &ref_88
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: *ref_75
+                  elementType: *ref_76
                   language: !Languages 
                     default:
                       name: ErrorResponseWithAnotherNameDetails
@@ -1912,12 +1930,12 @@ schemas: !Schemas
                     description: The error details.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_88
+                schema: !ArraySchema &ref_89
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: *ref_76
+                  elementType: *ref_77
                   language: !Languages 
                     default:
                       name: ErrorResponseWithAnotherNameAdditionalInfo
@@ -1960,29 +1978,29 @@ schemas: !Schemas
           description: An error response for a resource management request.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_70
+    - *ref_71
+    - *ref_77
     - *ref_76
-    - *ref_75
-    - !ObjectSchema &ref_77
+    - !ObjectSchema &ref_78
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_79
+          - !ObjectSchema &ref_80
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             children: !Relations 
               all:
-                - *ref_77
+                - *ref_78
               immediate:
-                - *ref_77
+                - *ref_78
             properties:
               - !Property 
-                schema: *ref_78
+                schema: *ref_79
                 serializedName: tags
                 language: !Languages 
                   default:
@@ -2000,10 +2018,10 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_79
+          - *ref_80
       properties:
         - !Property 
-          schema: *ref_53
+          schema: *ref_54
           serializedName: plan
           language: !Languages 
             default:
@@ -2013,7 +2031,7 @@ schemas: !Schemas
                 programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_54
+          schema: *ref_55
           serializedName: identity
           language: !Languages 
             default:
@@ -2021,12 +2039,12 @@ schemas: !Schemas
               description: The identity of the virtual machine, if configured.
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_89
+          schema: !ArraySchema &ref_90
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_80
+            elementType: *ref_81
             language: !Languages 
               default:
                 name: VirtualMachineUpdateZones
@@ -2039,7 +2057,7 @@ schemas: !Schemas
               description: The virtual machine zones.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_48
+          schema: *ref_49
           flattenedNames:
             - properties
             - provisioningState
@@ -2051,7 +2069,7 @@ schemas: !Schemas
               description: The provisioning state, which only appears in the response.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_49
+          schema: *ref_50
           flattenedNames:
             - properties
             - licenseType
@@ -2065,7 +2083,7 @@ schemas: !Schemas
                 Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_50
+          schema: *ref_51
           flattenedNames:
             - properties
             - vmId
@@ -2077,7 +2095,7 @@ schemas: !Schemas
               description: Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_51
+          schema: *ref_52
           flattenedNames:
             - properties
             - extensionsTimeBudget
@@ -2099,9 +2117,8 @@ schemas: !Schemas
           description: Describes a Virtual Machine Update.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_79
+    - *ref_80
   arrays:
-    - *ref_81
     - *ref_82
     - *ref_83
     - *ref_84
@@ -2110,8 +2127,9 @@ schemas: !Schemas
     - *ref_87
     - *ref_88
     - *ref_89
+    - *ref_90
 globalParameters:
-  - !Parameter &ref_94
+  - !Parameter &ref_95
     schema: *ref_1
     implementation: Client
     required: true
@@ -2125,7 +2143,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_91
+  - !Parameter &ref_92
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -2141,8 +2159,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_93
-    schema: *ref_90
+  - !Parameter &ref_94
+    schema: *ref_91
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -2163,8 +2181,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_91
-          - !Parameter &ref_96
+          - *ref_92
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -2177,7 +2195,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_92
+            schema: *ref_93
             implementation: Method
             language: !Languages 
               default:
@@ -2187,13 +2205,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_93
           - *ref_94
+          - *ref_95
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_95
+                schema: *ref_96
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2216,10 +2234,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_96
+          - *ref_97
         responses:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -2241,8 +2259,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_91
-          - !Parameter &ref_100
+          - *ref_92
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -2254,7 +2272,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_101
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             required: true
@@ -2266,13 +2284,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_93
           - *ref_94
+          - *ref_95
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_98
+                schema: *ref_99
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2284,7 +2302,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_99
+              - !Parameter &ref_100
                 schema: *ref_17
                 implementation: Method
                 required: true
@@ -2297,7 +2315,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_95
+                schema: *ref_96
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2310,7 +2328,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_99
+              - *ref_100
             language: !Languages 
               default:
                 name: ''
@@ -2324,8 +2342,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_100
           - *ref_101
+          - *ref_102
         responses:
           - !SchemaResponse 
             schema: *ref_17
@@ -2355,7 +2373,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_102
+            schema: *ref_103
             language: !Languages 
               default:
                 name: ''
@@ -2379,8 +2397,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_91
-          - !Parameter &ref_104
+          - *ref_92
+          - !Parameter &ref_105
             schema: *ref_1
             implementation: Method
             required: true
@@ -2392,7 +2410,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_105
+          - !Parameter &ref_106
             schema: *ref_1
             implementation: Method
             required: true
@@ -2404,13 +2422,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_93
           - *ref_94
+          - *ref_95
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_98
+                schema: *ref_99
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2422,8 +2440,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_103
-                schema: *ref_77
+              - !Parameter &ref_104
+                schema: *ref_78
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2435,7 +2453,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_95
+                schema: *ref_96
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2448,7 +2466,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_103
+              - *ref_104
             language: !Languages 
               default:
                 name: ''
@@ -2462,8 +2480,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_104
           - *ref_105
+          - *ref_106
         responses:
           - !SchemaResponse 
             schema: *ref_17
@@ -2503,8 +2521,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_91
-          - !Parameter &ref_107
+          - *ref_92
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -2516,7 +2534,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_108
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -2528,8 +2546,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_109
-            schema: *ref_106
+          - !Parameter &ref_110
+            schema: *ref_107
             implementation: Method
             language: !Languages 
               default:
@@ -2539,8 +2557,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_93
           - *ref_94
+          - *ref_95
         requests:
           - !Request 
             language: !Languages 
@@ -2553,9 +2571,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_107
           - *ref_108
           - *ref_109
+          - *ref_110
         responses:
           - !Response 
             language: !Languages 
@@ -2596,8 +2614,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_91
-          - !Parameter &ref_110
+          - *ref_92
+          - !Parameter &ref_111
             schema: *ref_1
             implementation: Method
             required: true
@@ -2609,7 +2627,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_111
+          - !Parameter &ref_112
             schema: *ref_1
             implementation: Method
             required: true
@@ -2622,7 +2640,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_92
+            schema: *ref_93
             implementation: Method
             language: !Languages 
               default:
@@ -2632,13 +2650,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_93
           - *ref_94
+          - *ref_95
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_95
+                schema: *ref_96
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2661,8 +2679,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_110
           - *ref_111
+          - *ref_112
         responses:
           - !SchemaResponse 
             schema: *ref_17

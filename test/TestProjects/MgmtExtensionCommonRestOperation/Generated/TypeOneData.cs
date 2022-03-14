@@ -23,12 +23,12 @@ namespace MgmtExtensionCommonRestOperation
         /// <summary> Initializes a new instance of TypeOneData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="myType"> The details of the type. </param>
-        internal TypeOneData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType) : base(id, name, type, systemData, tags, location)
+        internal TypeOneData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string myType) : base(id, name, resourceType, systemData, tags, location)
         {
             MyType = myType;
         }

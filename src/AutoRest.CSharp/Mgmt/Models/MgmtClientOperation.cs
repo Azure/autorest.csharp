@@ -33,14 +33,6 @@ namespace AutoRest.CSharp.Mgmt.Models
     {
         private const string IdVariableName = "Id";
         private readonly Parameter? _extensionParameter;
-        internal static readonly Parameter WaitForCompletionParameter = new Parameter(
-            "waitForCompletion",
-            "Waits for the completion of the long running operations.",
-            typeof(bool),
-            null,
-            false);
-
-
         public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
         {
             if (operations.Count > 0)
@@ -164,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (_extensionParameter is not null)
                 parameters.Add(_extensionParameter);
             if (IsLongRunningOperation)
-                parameters.Add(WaitForCompletionParameter);
+                parameters.Add(KnownParameters.WaitForCompletion);
             var overrideParameters = OperationMappings.Values.First().OverrideParameters;
             if (overrideParameters.Length > 0)
             {
@@ -174,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 parameters.AddRange(ParameterMappings.Values.First().GetPassThroughParameters());
             }
-            parameters.Add(MgmtClientBaseWriter.CancellationTokenParameter);
+            parameters.Add(KnownParameters.CancellationTokenParameter);
             return parameters;
         }
     }

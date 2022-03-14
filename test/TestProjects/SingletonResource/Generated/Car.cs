@@ -52,7 +52,7 @@ namespace SingletonResource
         {
             _carClientDiagnostics = new ClientDiagnostics("SingletonResource", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string carApiVersion);
-            _carRestClient = new CarsRestOperations(_carClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
+            _carRestClient = new CarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -94,7 +94,7 @@ namespace SingletonResource
         /// Operation Id: Cars_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Car>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Car>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _carClientDiagnostics.CreateScope("Car.Get");
             scope.Start();
@@ -102,7 +102,7 @@ namespace SingletonResource
             {
                 var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _carClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -125,7 +125,7 @@ namespace SingletonResource
             {
                 var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _carClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             FormattableString diagOptionsCtor = ConstructClientDiagnostic(_writer, GetProviderNamespaceFromReturnType(resourceName), DiagnosticOptionsProperty);
             _writer.Line($"private {typeof(ClientDiagnostics)} {diagPropertyName} => {GetDiagnosticFieldName(client, resource)} ??= {diagOptionsCtor};");
             string apiVersionString = resourceName == null ? string.Empty : $", GetApiVersionOrNull({resourceName}.ResourceType)";
-            string restCtor = GetRestConstructorString(client, diagPropertyName, apiVersionString);
+            string restCtor = GetRestConstructorString(client, apiVersionString);
             _writer.Line($"private {client.Type} {GetRestPropertyName(client, resource)} => {GetRestFieldName(client, resource)} ??= {restCtor};");
         }
     }

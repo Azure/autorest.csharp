@@ -13,7 +13,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtSubscriptionNameParameter.Models
 {
     /// <summary> The Resource definition. </summary>
-    public partial class TrackedResource : ResourceData
+    internal partial class TrackedResource : ResourceData
     {
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="location"> The Geo-location where the resource lives. </param>
@@ -32,11 +32,11 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> The Geo-location where the resource lives. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal TrackedResource(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, type, systemData)
+        internal TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;

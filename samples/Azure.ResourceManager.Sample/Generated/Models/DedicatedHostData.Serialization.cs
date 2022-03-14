@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static DedicatedHostData DeserializeDedicatedHostData(JsonElement element)
         {
-            Models.Sku sku = default;
+            SampleSku sku = default;
             IDictionary<string, string> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample
             {
                 if (property.NameEquals("sku"))
                 {
-                    sku = Models.Sku.DeserializeSku(property.Value);
+                    sku = SampleSku.DeserializeSampleSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"))

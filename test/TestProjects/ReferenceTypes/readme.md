@@ -100,4 +100,7 @@ directive:
   - rename-model:
       from: PrivateLinkResourceListResult
       to: PrivateLinkResourceList
+  - from: types.json
+    where: $.definitions.CheckNameAvailabilityRequest.properties.type
+    transform: $["x-ms-client-name"] = "ResourceType"
 ```

@@ -12,34 +12,30 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
 using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
     internal partial class AnotherChildrenRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly string _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of AnotherChildrenRestOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public AnotherChildrenRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        public AnotherChildrenRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2021-03-01";
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
-            _userAgent = new UserAgentValue(GetType(), applicationId);
+            _userAgent = Azure.ResourceManager.Core.HttpMessageUtilities.GetUserAgentName(this, applicationId);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData childBody)
@@ -64,7 +60,7 @@ namespace MgmtMultipleParentResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(childBody);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -76,28 +72,14 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
-            if (childBody == null)
-            {
-                throw new ArgumentNullException(nameof(childBody));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            Argument.AssertNotNull(childBody, nameof(childBody));
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, anotherName, childName, childBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -107,7 +89,7 @@ namespace MgmtMultipleParentResource
                 case 201:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -119,28 +101,14 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
-            if (childBody == null)
-            {
-                throw new ArgumentNullException(nameof(childBody));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            Argument.AssertNotNull(childBody, nameof(childBody));
 
             using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, anotherName, childName, childBody);
             _pipeline.Send(message, cancellationToken);
@@ -150,7 +118,7 @@ namespace MgmtMultipleParentResource
                 case 201:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -176,7 +144,7 @@ namespace MgmtMultipleParentResource
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(childBody);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -188,28 +156,14 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
-            if (childBody == null)
-            {
-                throw new ArgumentNullException(nameof(childBody));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            Argument.AssertNotNull(childBody, nameof(childBody));
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, anotherName, childName, childBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -218,7 +172,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -230,28 +184,14 @@ namespace MgmtMultipleParentResource
         /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Update(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
-            if (childBody == null)
-            {
-                throw new ArgumentNullException(nameof(childBody));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            Argument.AssertNotNull(childBody, nameof(childBody));
 
             using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, anotherName, childName, childBody);
             _pipeline.Send(message, cancellationToken);
@@ -260,7 +200,7 @@ namespace MgmtMultipleParentResource
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -282,7 +222,7 @@ namespace MgmtMultipleParentResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
-            message.SetUserAgentString(_userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -293,24 +233,13 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, anotherName, childName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -321,7 +250,7 @@ namespace MgmtMultipleParentResource
                 case 204:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -332,24 +261,13 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response Delete(string subscriptionId, string resourceGroupName, string anotherName, string childName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, anotherName, childName);
             _pipeline.Send(message, cancellationToken);
@@ -360,7 +278,7 @@ namespace MgmtMultipleParentResource
                 case 204:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -386,7 +304,7 @@ namespace MgmtMultipleParentResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
-            message.SetUserAgentString(_userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -398,24 +316,13 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ChildBodyData>> GetAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, anotherName, childName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -431,7 +338,7 @@ namespace MgmtMultipleParentResource
                 case 404:
                     return Response.FromValue((ChildBodyData)null, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -443,24 +350,13 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ChildBodyData> Get(string subscriptionId, string resourceGroupName, string anotherName, string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
-            if (childName == null)
-            {
-                throw new ArgumentNullException(nameof(childName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
 
             using var message = CreateGetRequest(subscriptionId, resourceGroupName, anotherName, childName, expand);
             _pipeline.Send(message, cancellationToken);
@@ -476,7 +372,7 @@ namespace MgmtMultipleParentResource
                 case 404:
                     return Response.FromValue((ChildBodyData)null, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -501,7 +397,7 @@ namespace MgmtMultipleParentResource
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
-            message.SetUserAgentString(_userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -512,20 +408,12 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="anotherName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ChildBodiesListResult>> ListAsync(string subscriptionId, string resourceGroupName, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, anotherName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -539,7 +427,7 @@ namespace MgmtMultipleParentResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -550,20 +438,12 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="anotherName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ChildBodiesListResult> List(string subscriptionId, string resourceGroupName, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
 
             using var message = CreateListRequest(subscriptionId, resourceGroupName, anotherName, expand);
             _pipeline.Send(message, cancellationToken);
@@ -577,7 +457,7 @@ namespace MgmtMultipleParentResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -591,7 +471,7 @@ namespace MgmtMultipleParentResource
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json, text/json");
-            message.SetUserAgentString(_userAgent);
+            message.SetProperty("SDKUserAgent", _userAgent);
             return message;
         }
 
@@ -603,24 +483,13 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="anotherName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<ChildBodiesListResult>> ListNextPageAsync(string nextLink, string subscriptionId, string resourceGroupName, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, anotherName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -634,7 +503,7 @@ namespace MgmtMultipleParentResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -646,24 +515,13 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="anotherName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<ChildBodiesListResult> ListNextPage(string nextLink, string subscriptionId, string resourceGroupName, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (anotherName == null)
-            {
-                throw new ArgumentNullException(nameof(anotherName));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
 
             using var message = CreateListNextPageRequest(nextLink, subscriptionId, resourceGroupName, anotherName, expand);
             _pipeline.Send(message, cancellationToken);
@@ -677,7 +535,7 @@ namespace MgmtMultipleParentResource
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

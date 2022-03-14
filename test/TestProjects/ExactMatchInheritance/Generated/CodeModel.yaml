@@ -756,7 +756,7 @@ schemas: !Schemas
                               serializedName: type
                               language: !Languages 
                                 default:
-                                  name: type
+                                  name: resourceType
                                   description: ''
                               protocol: !Protocols {}
                           serializationFormats:

@@ -41,11 +41,11 @@ namespace Azure.Management.Storage
         }
 
         private ClientDiagnostics SkusClientDiagnostics => _skusClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private SkusRestOperations SkusRestClient => _skusRestClient ??= new SkusRestOperations(SkusClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private SkusRestOperations SkusRestClient => _skusRestClient ??= new SkusRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
         private ClientDiagnostics StorageAccountClientDiagnostics => _storageAccountClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage", StorageAccount.ResourceType.Namespace, DiagnosticOptions);
-        private StorageAccountsRestOperations StorageAccountRestClient => _storageAccountRestClient ??= new StorageAccountsRestOperations(StorageAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(StorageAccount.ResourceType));
+        private StorageAccountsRestOperations StorageAccountRestClient => _storageAccountRestClient ??= new StorageAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, GetApiVersionOrNull(StorageAccount.ResourceType));
         private ClientDiagnostics UsagesClientDiagnostics => _usagesClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage", ProviderConstants.DefaultProviderNamespace, DiagnosticOptions);
-        private UsagesRestOperations UsagesRestClient => _usagesRestClient ??= new UsagesRestOperations(UsagesClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
+        private UsagesRestOperations UsagesRestClient => _usagesRestClient ??= new UsagesRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
         {
@@ -66,10 +66,10 @@ namespace Azure.Management.Storage
         /// Operation Id: Skus_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<SkuInformation> GetSkusAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<StorageSkuInformation> GetSkusAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<StorageSkuInformation>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = SkusClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSkus");
                 scope.Start();
@@ -93,10 +93,10 @@ namespace Azure.Management.Storage
         /// Operation Id: Skus_List
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SkuInformation" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<SkuInformation> GetSkus(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<StorageSkuInformation> GetSkus(CancellationToken cancellationToken = default)
         {
-            Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
+            Page<StorageSkuInformation> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = SkusClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetSkus");
                 scope.Start();
@@ -205,10 +205,10 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Usage> GetUsagesByLocationAsync(string location, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="StorageUsage" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<StorageUsage> GetUsagesByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
-            async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<StorageUsage>> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsagesByLocation");
                 scope.Start();
@@ -233,10 +233,10 @@ namespace Azure.Management.Storage
         /// </summary>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Usage> GetUsagesByLocation(string location, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="StorageUsage" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<StorageUsage> GetUsagesByLocation(string location, CancellationToken cancellationToken = default)
         {
-            Page<Usage> FirstPageFunc(int? pageSizeHint)
+            Page<StorageUsage> FirstPageFunc(int? pageSizeHint)
             {
                 using var scope = UsagesClientDiagnostics.CreateScope("SubscriptionExtensionClient.GetUsagesByLocation");
                 scope.Start();

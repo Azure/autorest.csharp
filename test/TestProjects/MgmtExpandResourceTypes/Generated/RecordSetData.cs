@@ -33,7 +33,7 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of RecordSetData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="etag"> The etag of the record set. </param>
         /// <param name="metadata"> The metadata attached to the record set. </param>
@@ -51,7 +51,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cnameRecord"> The CNAME record in the  record set. </param>
         /// <param name="soaRecord"> The SOA record in the record set. </param>
         /// <param name="caaRecords"> The list of CAA records in the record set. </param>
-        internal RecordSetData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string etag, IDictionary<string, string> metadata, long? ttl, string fqdn, string provisioningState, WritableSubResource targetResource, IList<ARecord> aRecords, IList<AaaaRecord> aaaaRecords, IList<MxRecord> mxRecords, IList<NsRecord> nsRecords, IList<PtrRecord> ptrRecords, IList<SrvRecord> srvRecords, IList<TxtRecord> txtRecords, CnameRecord cnameRecord, SoaRecord soaRecord, IList<CaaRecord> caaRecords) : base(id, name, type, systemData)
+        internal RecordSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, IDictionary<string, string> metadata, long? ttl, string fqdn, string provisioningState, WritableSubResource targetResource, IList<ARecord> aRecords, IList<AaaaRecord> aaaaRecords, IList<MxRecord> mxRecords, IList<NsRecord> nsRecords, IList<PtrRecord> ptrRecords, IList<SrvRecord> srvRecords, IList<TxtRecord> txtRecords, CnameRecord cnameRecord, SoaRecord soaRecord, IList<CaaRecord> caaRecords) : base(id, name, resourceType, systemData)
         {
             Etag = etag;
             Metadata = metadata;
