@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
@@ -15,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="schema"></param>
         /// <returns></returns>
-        internal static IEnumerable<Property> GetAllProperties(this ObjectSchema schema)
+        private static IEnumerable<Property> GetAllProperties(this ObjectSchema schema)
         {
             return schema.Parents!.All.OfType<ObjectSchema>().SelectMany(parentSchema => parentSchema.Properties).Concat(schema.Properties);
         }
@@ -89,6 +90,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return idPropertyFound && typePropertyFound && namePropertyFound;
+        }
+
+        // TODO: we may reuse the IsResourceModel instead of creating this method, but the result for flattened properties is different as although models with matched flattened properties are not treated as Resource but they still inherit from ResourceData. We should probably consider to align the behavior before we can refactor the methods.
+        internal static bool IsResourceData(this ObjectSchema objSchema)
+        {
+            return objSchema.ContainsStringProperty("id") && objSchema.ContainsStringProperty("name") && objSchema.ContainsStringProperty("type");
+        }
+
+        private static bool ContainsStringProperty(this ObjectSchema objSchema, string propertyName)
+        {
+            return objSchema.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String);
         }
     }
 }
