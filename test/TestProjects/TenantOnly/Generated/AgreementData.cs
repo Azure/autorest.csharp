@@ -23,12 +23,12 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of AgreementData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal AgreementData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string foo, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, type, systemData)
+        internal AgreementData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string foo, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             Foo = foo;
             Location = location;

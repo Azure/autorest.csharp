@@ -22,7 +22,7 @@ namespace MgmtRenameRules.Models
         /// <summary> Initializes a new instance of PatchableVirtualMachineScaleSetExtensionData. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="name"> The name of the extension. </param>
-        /// <param name="type"> Resource type. </param>
+        /// <param name="resourceType"> Resource type. </param>
         /// <param name="forceUpdateTag"> If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed. </param>
         /// <param name="publisher"> The name of the extension handler publisher. </param>
         /// <param name="typePropertiesType"> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </param>
@@ -33,10 +33,10 @@ namespace MgmtRenameRules.Models
         /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="provisionAfterExtensions"> Collection of extension names after which this extension needs to be provisioned. </param>
-        internal PatchableVirtualMachineScaleSetExtensionData(string id, string name, string type, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
+        internal PatchableVirtualMachineScaleSetExtensionData(string id, string name, string resourceType, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
         {
             Name = name;
-            Type = type;
+            ResourceType = resourceType;
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;
             TypePropertiesType = typePropertiesType;
@@ -52,7 +52,7 @@ namespace MgmtRenameRules.Models
         /// <summary> The name of the extension. </summary>
         public string Name { get; }
         /// <summary> Resource type. </summary>
-        public string Type { get; }
+        public string ResourceType { get; }
         /// <summary> If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed. </summary>
         public string ForceUpdateTag { get; set; }
         /// <summary> The name of the extension handler publisher. </summary>

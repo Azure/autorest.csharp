@@ -17,16 +17,16 @@ namespace ExactMatchInheritance.Models
 
         /// <summary> Initializes a new instance of ExactMatchModel11. </summary>
         /// <param name="name"></param>
-        /// <param name="type"></param>
-        internal ExactMatchModel11(string name, string type)
+        /// <param name="resourceType"></param>
+        internal ExactMatchModel11(string name, string resourceType)
         {
             Name = name;
-            Type = type;
+            ResourceType = resourceType;
         }
 
         /// <summary> Gets the name. </summary>
         public string Name { get; }
-        /// <summary> Gets the type. </summary>
-        public string Type { get; }
+        /// <summary> Gets the resource type. </summary>
+        public string ResourceType { get; }
     }
 }
