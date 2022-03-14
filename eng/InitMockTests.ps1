@@ -278,9 +278,9 @@ function  MockTestInit {
                 }
             }
         }
-        Start-Sleep 120
 
         # Run build successed mock unit tests
+        Write-Host "`n`nRun Mock Test:"
         $FinalStatics = @{}
         $ErrorTypeStatic = @()
         $RunRpList = @()
@@ -337,7 +337,7 @@ function  MockTestInit {
         return
     }
     end {
-        Start-Sleep 30
+        Start-Sleep 10
         # All Successed Output statistical results
         Write-Host "`n`n"
         Write-Host "================================================================================="
@@ -403,7 +403,7 @@ Start-Job $task
 
 # Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
-$GenerateNewSDKs = $false
+$GenerateNewSDKs = $true
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
