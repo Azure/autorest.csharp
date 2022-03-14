@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the AzureResourceFlattenModel1 data model. </summary>
-    public partial class AzureResourceFlattenModel1Data : TrackedResource
+    public partial class AzureResourceFlattenModel1Data : TrackedResourceData
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
         /// <param name="location"> The location. </param>
@@ -23,13 +23,14 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="fooPropertiesFoo"></param>
         /// <param name="idPropertiesId"> ID in CustomModel1. </param>
-        internal AzureResourceFlattenModel1Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id, name, type, tags, location)
+        internal AzureResourceFlattenModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id, name, resourceType, systemData, tags, location)
         {
             Foo = foo;
             FooPropertiesFoo = fooPropertiesFoo;

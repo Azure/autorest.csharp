@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace NoTypeReplacement
 {
     /// <summary> A class representing the NoTypeReplacementModel1 data model. </summary>
-    public partial class NoTypeReplacementModel1Data : Resource
+    public partial class NoTypeReplacementModel1Data : ResourceData
     {
         /// <summary> Initializes a new instance of NoTypeReplacementModel1Data. </summary>
         public NoTypeReplacementModel1Data()
@@ -22,14 +22,20 @@ namespace NoTypeReplacement
         /// <summary> Initializes a new instance of NoTypeReplacementModel1Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        internal NoTypeReplacementModel1Data(ResourceIdentifier id, string name, ResourceType type, SubResource foo) : base(id, name, type)
+        internal NoTypeReplacementModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, SubResource foo) : base(id, name, resourceType, systemData)
         {
             Foo = foo;
         }
 
         /// <summary> Gets or sets the foo. </summary>
-        public SubResource Foo { get; set; }
+        internal SubResource Foo { get; set; }
+        /// <summary> Gets Id. </summary>
+        public ResourceIdentifier FooId
+        {
+            get => Foo is null ? default : Foo.Id;
+        }
     }
 }

@@ -30,10 +30,10 @@ namespace ExactMatchInheritance.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Type))
+            if (Optional.IsDefined(ExactMatchModel7Type))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
+                writer.WriteStringValue(ExactMatchModel7Type);
             }
             writer.WriteEndObject();
         }
@@ -41,7 +41,7 @@ namespace ExactMatchInheritance.Models
         internal static ExactMatchModel2 DeserializeExactMatchModel2(JsonElement element)
         {
             Optional<string> @new = default;
-            Optional<string> iD = default;
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
@@ -53,7 +53,7 @@ namespace ExactMatchInheritance.Models
                 }
                 if (property.NameEquals("iD"))
                 {
-                    iD = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -67,7 +67,7 @@ namespace ExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel2(iD.Value, name.Value, type.Value, @new.Value);
+            return new ExactMatchModel2(id.Value, name.Value, type.Value, @new.Value);
         }
     }
 }

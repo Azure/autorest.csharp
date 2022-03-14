@@ -31,53 +31,34 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(typeof(UserAssignedIdentity), valueType);
 
             var valueProperties = valueType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var principalIdProperty = valueProperties[1];
+            var principalIdProperty = valueProperties[0];
             Assert.NotNull(principalIdProperty);
             Assert.AreEqual("PrincipalId", principalIdProperty.Name);
-            Assert.AreEqual(typeof(Guid), principalIdProperty.PropertyType);
+            Assert.AreEqual(typeof(Guid), principalIdProperty.PropertyType.GetGenericArguments()[0]);
 
-            var clientIdProperty = valueProperties[0];
+            var clientIdProperty = valueProperties[1];
             Assert.NotNull(clientIdProperty);
             Assert.AreEqual("ClientId", clientIdProperty.Name);
-            Assert.AreEqual(typeof(Guid), clientIdProperty.PropertyType);
-        }
-
-        [TestCase]
-        public void ValidateModelUsingErrorResponse()
-        {
-            var cloudErrorModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.CloudError");
-            var properties = cloudErrorModel.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            var errorResponseModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponse");
-            Assert.Null(errorResponseModel);
-            var errorProperty = properties[0];
-            Assert.NotNull(errorProperty);
-            Assert.AreEqual("Error", errorProperty.Name);
-            Assert.AreEqual(typeof(ErrorDetail), errorProperty.PropertyType);
-
-            var errorResponseWithAnotherNameModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponseWithAnotherName");
-            Assert.Null(errorResponseWithAnotherNameModel);
-            var anotherErrorProperty = properties[1];
-            Assert.NotNull(anotherErrorProperty);
-            Assert.AreEqual("AnotherError", anotherErrorProperty.Name);
-            Assert.AreEqual(typeof(ErrorDetail), anotherErrorProperty.PropertyType);
+            Assert.AreEqual(typeof(Guid), clientIdProperty.PropertyType.GetGenericArguments()[0]);
         }
 
         [TestCase]
         public void ValidatePropertyReplacement()
         {
             var virtualMachineData = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
-            var properties = virtualMachineData.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var properties = virtualMachineData.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             // Resource in the test swagger will be replaced by TrackedResource when used as the base class for inheritance,
             // but is not replaced when used as a property.
-            Assert.AreEqual(virtualMachineData.BaseType, typeof(TrackedResource));
-            Assert.AreEqual(properties.First(p => p.Name == "FakeResources").PropertyType.GetGenericArguments().First(), typeof(MgmtPropertyChooser.Models.Resource));
-            // VirtualMachineIdentity is replaced by ResourceIdentity, property name is unchanged, still called Identity.
-            Assert.IsFalse(properties.Any(p => p.Name == "ResourceIdentity"));
-            Assert.IsTrue(properties.Any(p => p.Name == "Identity" && p.PropertyType == typeof(ResourceIdentity)));
+            Assert.AreEqual(virtualMachineData.BaseType, typeof(TrackedResourceData));
+            Assert.AreEqual(properties.First(p => p.Name == "FakeResources").PropertyType.GetGenericArguments().First(), typeof(MgmtPropertyChooser.Models.MgmtPropertyChooserResourceData));
+            // VirtualMachineIdentity is replaced by ManagedServiceIdentity, property name is unchanged, still called Identity.
+            Assert.IsFalse(properties.Any(p => p.Name == "ManagedServiceIdentity"));
+            Assert.IsTrue(properties.Any(p => p.Name == "Identity" && p.PropertyType == typeof(ManagedServiceIdentity)));
             // VirtualMachineIdentity is not generated
             var virtualMachineIdentityModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
             Assert.Null(virtualMachineIdentityModel);
+            //IdentityV3 is replaced by ManagedServiceIdentity
+            Assert.IsTrue(properties.Any(p => p.Name == "IdentityV3" && p.PropertyType == typeof(ManagedServiceIdentity)));
             // FakeSubResource is replaced by SubResource
             Assert.IsTrue(properties.Any(p => p.Name == "FakeSubResource" && p.PropertyType == typeof(SubResource)));
             // FakeWritableSubResource is replaced by WritableSubResource

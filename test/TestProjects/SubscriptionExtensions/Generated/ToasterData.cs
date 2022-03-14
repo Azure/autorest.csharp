@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the Toaster data model. </summary>
-    public partial class ToasterData : TrackedResource
+    public partial class ToasterData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="location"> The location. </param>
@@ -23,11 +23,12 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal ToasterData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, type, tags, location)
+        internal ToasterData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, resourceType, systemData, tags, location)
         {
             Foo = foo;
         }

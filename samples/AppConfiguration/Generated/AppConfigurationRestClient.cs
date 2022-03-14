@@ -18,11 +18,13 @@ namespace AppConfiguration
 {
     internal partial class AppConfigurationRestClient
     {
-        private string endpoint;
-        private string syncToken;
-        private string apiVersion;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _endpoint;
+        private readonly string _syncToken;
+        private readonly string _apiVersion;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of AppConfigurationRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -30,14 +32,14 @@ namespace AppConfiguration
         /// <param name="endpoint"> The endpoint of the App Configuration instance to send requests to. </param>
         /// <param name="syncToken"> Used to guarantee real-time consistency between requests. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
         public AppConfigurationRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string syncToken = null, string apiVersion = "1.0")
         {
-            this.endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
-            this.syncToken = syncToken;
-            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            _syncToken = syncToken;
+            _apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
         }
 
         internal HttpMessage CreateGetKeysRequest(string name, string after, string acceptDatetime)
@@ -46,21 +48,21 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/keys", false);
             if (name != null)
             {
                 uri.AppendQuery("name", name, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (after != null)
             {
                 uri.AppendQuery("After", after, true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -90,7 +92,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -114,7 +116,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -124,21 +126,21 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/keys", false);
             if (name != null)
             {
                 uri.AppendQuery("name", name, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (after != null)
             {
                 uri.AppendQuery("After", after, true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -162,7 +164,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -181,7 +183,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -191,7 +193,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/kv", false);
             if (key != null)
             {
@@ -201,7 +203,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (after != null)
             {
                 uri.AppendQuery("After", after, true);
@@ -211,9 +213,9 @@ namespace AppConfiguration
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -245,7 +247,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -271,7 +273,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -281,7 +283,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/kv", false);
             if (key != null)
             {
@@ -291,7 +293,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (after != null)
             {
                 uri.AppendQuery("After", after, true);
@@ -301,9 +303,9 @@ namespace AppConfiguration
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -329,7 +331,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -350,7 +352,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -360,22 +362,22 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/kv/", false);
             uri.AppendPath(key, true);
             if (label != null)
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (select != null)
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -422,7 +424,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -455,7 +457,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -465,18 +467,18 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/kv/", false);
             uri.AppendPath(key, true);
             if (label != null)
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (ifMatch != null)
             {
@@ -525,7 +527,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -557,7 +559,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -567,18 +569,18 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/kv/", false);
             uri.AppendPath(key, true);
             if (label != null)
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (ifMatch != null)
             {
@@ -616,7 +618,7 @@ namespace AppConfiguration
                 case 204:
                     return ResponseWithHeaders.FromValue((KeyValue)null, headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -648,7 +650,7 @@ namespace AppConfiguration
                 case 204:
                     return ResponseWithHeaders.FromValue((KeyValue)null, headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -658,22 +660,22 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/kv/", false);
             uri.AppendPath(key, true);
             if (label != null)
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (select != null)
             {
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -714,7 +716,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -742,7 +744,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -752,13 +754,13 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/labels", false);
             if (name != null)
             {
                 uri.AppendQuery("name", name, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (after != null)
             {
                 uri.AppendQuery("After", after, true);
@@ -768,9 +770,9 @@ namespace AppConfiguration
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -801,7 +803,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -826,7 +828,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -836,13 +838,13 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/labels", false);
             if (name != null)
             {
                 uri.AppendQuery("name", name, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (after != null)
             {
                 uri.AppendQuery("After", after, true);
@@ -852,9 +854,9 @@ namespace AppConfiguration
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -879,7 +881,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -899,7 +901,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -909,18 +911,18 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/locks/", false);
             uri.AppendPath(key, true);
             if (label != null)
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (ifMatch != null)
             {
@@ -961,7 +963,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -992,7 +994,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1002,18 +1004,18 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/locks/", false);
             uri.AppendPath(key, true);
             if (label != null)
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (ifMatch != null)
             {
@@ -1054,7 +1056,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1085,7 +1087,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1095,7 +1097,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/revisions", false);
             if (key != null)
             {
@@ -1105,7 +1107,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (after != null)
             {
                 uri.AppendQuery("After", after, true);
@@ -1115,9 +1117,9 @@ namespace AppConfiguration
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -1149,7 +1151,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1175,7 +1177,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1185,7 +1187,7 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendPath("/revisions", false);
             if (key != null)
             {
@@ -1195,7 +1197,7 @@ namespace AppConfiguration
             {
                 uri.AppendQuery("label", label, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (after != null)
             {
                 uri.AppendQuery("After", after, true);
@@ -1205,9 +1207,9 @@ namespace AppConfiguration
                 uri.AppendQueryDelimited("$Select", select, ",", true);
             }
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -1233,7 +1235,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1254,7 +1256,7 @@ namespace AppConfiguration
                 case 200:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1264,12 +1266,12 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -1306,7 +1308,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1337,7 +1339,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1347,12 +1349,12 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -1391,7 +1393,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1424,7 +1426,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1434,12 +1436,12 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -1477,7 +1479,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1509,7 +1511,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1519,12 +1521,12 @@ namespace AppConfiguration
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw(_endpoint, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            if (syncToken != null)
+            if (_syncToken != null)
             {
-                request.Headers.Add("Sync-Token", syncToken);
+                request.Headers.Add("Sync-Token", _syncToken);
             }
             if (acceptDatetime != null)
             {
@@ -1563,7 +1565,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1596,7 +1598,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

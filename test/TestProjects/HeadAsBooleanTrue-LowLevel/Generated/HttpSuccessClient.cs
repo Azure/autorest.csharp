@@ -19,8 +19,10 @@ namespace HeadAsBooleanTrue_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -35,16 +37,13 @@ namespace HeadAsBooleanTrue_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HttpSuccessClient(AzureKeyCredential credential, Uri endpoint = null, HeadAsBooleanTrueClientOptions options = null)
+        public HttpSuccessClient(AzureKeyCredential credential, Uri endpoint = null, HttpSuccessClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new HeadAsBooleanTrueClientOptions();
+            options ??= new HttpSuccessClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -52,16 +51,14 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head200Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -72,16 +69,14 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 200 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response<bool> Head200(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead200Request(context);
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -92,16 +87,14 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head204Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -112,16 +105,14 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 204 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response<bool> Head204(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead204Request(context);
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -132,16 +123,14 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 404 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response<bool>> Head404Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessHeadAsBoolMessageAsync(message, ClientDiagnostics, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -152,16 +141,14 @@ namespace HeadAsBooleanTrue_LowLevel
 
         /// <summary> Return 404 status code if successful. </summary>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response<bool> Head404(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
+            using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead404Request(context);
-                return _pipeline.ProcessHeadAsBoolMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnostics, context);
             }
             catch (Exception e)
             {
@@ -172,47 +159,42 @@ namespace HeadAsBooleanTrue_LowLevel
 
         internal HttpMessage CreateHead200Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200To300400To500);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
         }
 
         internal HttpMessage CreateHead204Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200To300400To500);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
         }
 
         internal HttpMessage CreateHead404Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200To300400To500);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/http/success/404", false);
             request.Uri = uri;
-            message.ResponseClassifier = ResponseClassifier200To300400To500.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200To300400To500 : ResponseClassifier
+        private sealed class ResponseClassifier200To300400To500Override : ResponseClassifier
         {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200To300400To500();
             public override bool IsErrorResponse(HttpMessage message)
             {
                 return message.Response.Status switch
@@ -223,5 +205,8 @@ namespace HeadAsBooleanTrue_LowLevel
                 };
             }
         }
+
+        private static ResponseClassifier _responseClassifier200To300400To500;
+        private static ResponseClassifier ResponseClassifier200To300400To500 => _responseClassifier200To300400To500 ??= new ResponseClassifier200To300400To500Override();
     }
 }

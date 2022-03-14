@@ -19,8 +19,10 @@ namespace CollapseRequestCondition_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -37,14 +39,11 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public MatchConditionCollapseClient(AzureKeyCredential credential, Uri endpoint = null, CollapseRequestConditionsClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new CollapseRequestConditionsClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -53,16 +52,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="otherHeader"> other header. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CollapseGetWithHeadAsync(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -74,16 +71,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="otherHeader"> other header. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response CollapseGetWithHead(string otherHeader = null, MatchConditions matchConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGetWithHead");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapseGetWithHeadRequest(otherHeader, matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -95,16 +90,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -116,16 +109,14 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response CollapsePut(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapsePutRequest(content, matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -136,16 +127,14 @@ namespace CollapseRequestCondition_LowLevel
 
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CollapseGetAsync(MatchConditions matchConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(matchConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -156,56 +145,14 @@ namespace CollapseRequestCondition_LowLevel
 
         /// <param name="matchConditions"> The content to send as the request conditions of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
         public virtual Response CollapseGet(MatchConditions matchConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapseGet");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCollapseGetRequest(matchConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> MulticollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
-        {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-#pragma warning disable AZC0002
-        public virtual Response MulticollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
-#pragma warning restore AZC0002
-        {
-            using var scope = _clientDiagnostics.CreateScope("MatchConditionCollapseClient.MulticollapseGet");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateMulticollapseGetRequest(requestConditions, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -216,7 +163,7 @@ namespace CollapseRequestCondition_LowLevel
 
         internal HttpMessage CreateCollapseGetWithHeadRequest(string otherHeader, MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -231,13 +178,12 @@ namespace CollapseRequestCondition_LowLevel
             {
                 request.Headers.Add(matchConditions);
             }
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateCollapsePutRequest(RequestContent content, MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -250,13 +196,12 @@ namespace CollapseRequestCondition_LowLevel
             }
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateCollapseGetRequest(MatchConditions matchConditions, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -267,39 +212,10 @@ namespace CollapseRequestCondition_LowLevel
             {
                 request.Headers.Add(matchConditions);
             }
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateMulticollapseGetRequest(RequestConditions requestConditions, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context);
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/MatchConditionCollapse/multi", false);
-            request.Uri = uri;
-            if (requestConditions != null)
-            {
-                request.Headers.Add(requestConditions, "R");
-            }
-            message.ResponseClassifier = ResponseClassifier200.Instance;
-            return message;
-        }
-
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

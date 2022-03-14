@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
-using System.Text.Json;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -30,7 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.22.0-alpha.20220104.6"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.23.0-alpha.20220312.1"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -39,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20220104.6"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20220312.1"" />
   </ItemGroup>
 ";
 
@@ -94,11 +93,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            var configuration = Configuration.GetConfiguration(autoRest);
+            Configuration.Initialize(autoRest);
 
-            var context = new BuildContext(codeModel, configuration, null);
+            var context = new BuildContext(codeModel, null);
 
-            var isTestProject = configuration.MgmtConfiguration.TestModeler is not null;
+            var isTestProject = Configuration.MgmtConfiguration.TestModeler is not null;
             if (isTestProject)
             {
                 _coreCsProjContent += string.Format(@"
@@ -117,14 +116,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             string csProjContent;
-            if (configuration.SkipCSProjPackageReference)
+            if (Configuration.SkipCSProjPackageReference)
             {
                 string additionalContent = string.Empty;
-                if (configuration.AzureArm)
+                if (Configuration.AzureArm)
                 {
                   additionalContent += _armCsProjContent;
                 }
-                if (configuration.DataPlane)
+                if (Configuration.DataPlane)
                 {
                   additionalContent += _llcProjectContent;
                 }
@@ -138,7 +137,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
-            var projectFile = $"{configuration.ProjectFolder}{context.DefaultNamespace}";
+            var projectFile = $"{Configuration.ProjectFolder}{context.DefaultNamespace}";
             if (isTestProject)
             {
                 projectFile += "Test";

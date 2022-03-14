@@ -19,9 +19,11 @@ namespace custom_baseUrl_more_options_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly string _subscriptionId;
         private readonly string _dnsSuffix;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -36,24 +38,16 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/>, or <paramref name="dnsSuffix"/> is null. </exception>
-        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", AutoRestParameterizedCustomHostTestClientOptions options = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="credential"/> or <paramref name="dnsSuffix"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
+        public PathsClient(string subscriptionId, AzureKeyCredential credential, string dnsSuffix = "host", PathsClientOptions options = null)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
-            if (dnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(dnsSuffix));
-            }
-            options ??= new AutoRestParameterizedCustomHostTestClientOptions();
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNull(credential, nameof(credential));
+            Argument.AssertNotNull(dnsSuffix, nameof(dnsSuffix));
+            options ??= new PathsClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _subscriptionId = subscriptionId;
@@ -66,7 +60,8 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/>, or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -76,16 +71,18 @@ namespace custom_baseUrl_more_options_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            Argument.AssertNotNull(vault, nameof(vault));
+            Argument.AssertNotNull(secret, nameof(secret));
+            Argument.AssertNotNullOrEmpty(keyName, nameof(keyName));
+
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -100,7 +97,8 @@ namespace custom_baseUrl_more_options_LowLevel
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/>, or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="keyName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -110,16 +108,18 @@ namespace custom_baseUrl_more_options_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
+            Argument.AssertNotNull(vault, nameof(vault));
+            Argument.AssertNotNull(secret, nameof(secret));
+            Argument.AssertNotNullOrEmpty(keyName, nameof(keyName));
+
+            using var scope = ClientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetEmptyRequest(vault, secret, keyName, keyVersion, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -130,7 +130,7 @@ namespace custom_baseUrl_more_options_LowLevel
 
         internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -147,22 +147,10 @@ namespace custom_baseUrl_more_options_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

@@ -12,7 +12,7 @@ using NoTypeReplacement.Models;
 namespace NoTypeReplacement
 {
     /// <summary> A class representing the NoTypeReplacementModel2 data model. </summary>
-    public partial class NoTypeReplacementModel2Data : Resource
+    public partial class NoTypeReplacementModel2Data : ResourceData
     {
         /// <summary> Initializes a new instance of NoTypeReplacementModel2Data. </summary>
         public NoTypeReplacementModel2Data()
@@ -22,14 +22,20 @@ namespace NoTypeReplacement
         /// <summary> Initializes a new instance of NoTypeReplacementModel2Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        internal NoTypeReplacementModel2Data(ResourceIdentifier id, string name, ResourceType type, NoSubResourceModel foo) : base(id, name, type)
+        internal NoTypeReplacementModel2Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, NoSubResourceModel foo) : base(id, name, resourceType, systemData)
         {
             Foo = foo;
         }
 
         /// <summary> Gets or sets the foo. </summary>
-        public NoSubResourceModel Foo { get; set; }
+        internal NoSubResourceModel Foo { get; set; }
+        /// <summary> Gets the foo id. </summary>
+        public string FooId
+        {
+            get => Foo is null ? default : Foo.Id;
+        }
     }
 }

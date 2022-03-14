@@ -15,133 +15,193 @@ namespace Azure.Management.Storage
     {
         #region BlobService
         /// <summary> Gets an object representing a BlobService along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="BlobService" /> object. </returns>
-        public static BlobService GetBlobService(this ArmClient armClient, ResourceIdentifier id)
+        public static BlobService GetBlobService(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BlobService(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                BlobService.ValidateResourceId(id);
+                return new BlobService(client, id);
+            }
+            );
         }
         #endregion
 
         #region BlobContainer
         /// <summary> Gets an object representing a BlobContainer along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="BlobContainer" /> object. </returns>
-        public static BlobContainer GetBlobContainer(this ArmClient armClient, ResourceIdentifier id)
+        public static BlobContainer GetBlobContainer(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BlobContainer(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                BlobContainer.ValidateResourceId(id);
+                return new BlobContainer(client, id);
+            }
+            );
         }
         #endregion
 
         #region ImmutabilityPolicy
         /// <summary> Gets an object representing a ImmutabilityPolicy along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
-        public static ImmutabilityPolicy GetImmutabilityPolicy(this ArmClient armClient, ResourceIdentifier id)
+        public static ImmutabilityPolicy GetImmutabilityPolicy(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ImmutabilityPolicy(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                ImmutabilityPolicy.ValidateResourceId(id);
+                return new ImmutabilityPolicy(client, id);
+            }
+            );
         }
         #endregion
 
         #region FileService
         /// <summary> Gets an object representing a FileService along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FileService" /> object. </returns>
-        public static FileService GetFileService(this ArmClient armClient, ResourceIdentifier id)
+        public static FileService GetFileService(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new FileService(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                FileService.ValidateResourceId(id);
+                return new FileService(client, id);
+            }
+            );
         }
         #endregion
 
         #region FileShare
         /// <summary> Gets an object representing a FileShare along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="FileShare" /> object. </returns>
-        public static FileShare GetFileShare(this ArmClient armClient, ResourceIdentifier id)
+        public static FileShare GetFileShare(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new FileShare(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                FileShare.ValidateResourceId(id);
+                return new FileShare(client, id);
+            }
+            );
         }
         #endregion
 
         #region StorageAccount
         /// <summary> Gets an object representing a StorageAccount along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="StorageAccount" /> object. </returns>
-        public static StorageAccount GetStorageAccount(this ArmClient armClient, ResourceIdentifier id)
+        public static StorageAccount GetStorageAccount(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new StorageAccount(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                StorageAccount.ValidateResourceId(id);
+                return new StorageAccount(client, id);
+            }
+            );
         }
         #endregion
 
         #region DeletedAccount
         /// <summary> Gets an object representing a DeletedAccount along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="DeletedAccount" /> object. </returns>
-        public static DeletedAccount GetDeletedAccount(this ArmClient armClient, ResourceIdentifier id)
+        public static DeletedAccount GetDeletedAccount(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new DeletedAccount(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                DeletedAccount.ValidateResourceId(id);
+                return new DeletedAccount(client, id);
+            }
+            );
         }
         #endregion
 
         #region ManagementPolicy
         /// <summary> Gets an object representing a ManagementPolicy along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ManagementPolicy" /> object. </returns>
-        public static ManagementPolicy GetManagementPolicy(this ArmClient armClient, ResourceIdentifier id)
+        public static ManagementPolicy GetManagementPolicy(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ManagementPolicy(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                ManagementPolicy.ValidateResourceId(id);
+                return new ManagementPolicy(client, id);
+            }
+            );
         }
         #endregion
 
         #region BlobInventoryPolicy
         /// <summary> Gets an object representing a BlobInventoryPolicy along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="BlobInventoryPolicy" /> object. </returns>
-        public static BlobInventoryPolicy GetBlobInventoryPolicy(this ArmClient armClient, ResourceIdentifier id)
+        public static BlobInventoryPolicy GetBlobInventoryPolicy(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BlobInventoryPolicy(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                BlobInventoryPolicy.ValidateResourceId(id);
+                return new BlobInventoryPolicy(client, id);
+            }
+            );
         }
         #endregion
 
         #region PrivateEndpointConnection
         /// <summary> Gets an object representing a PrivateEndpointConnection along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="PrivateEndpointConnection" /> object. </returns>
-        public static PrivateEndpointConnection GetPrivateEndpointConnection(this ArmClient armClient, ResourceIdentifier id)
+        public static PrivateEndpointConnection GetPrivateEndpointConnection(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new PrivateEndpointConnection(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                PrivateEndpointConnection.ValidateResourceId(id);
+                return new PrivateEndpointConnection(client, id);
+            }
+            );
         }
         #endregion
 
         #region ObjectReplicationPolicy
         /// <summary> Gets an object representing a ObjectReplicationPolicy along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="ObjectReplicationPolicy" /> object. </returns>
-        public static ObjectReplicationPolicy GetObjectReplicationPolicy(this ArmClient armClient, ResourceIdentifier id)
+        public static ObjectReplicationPolicy GetObjectReplicationPolicy(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new ObjectReplicationPolicy(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                ObjectReplicationPolicy.ValidateResourceId(id);
+                return new ObjectReplicationPolicy(client, id);
+            }
+            );
         }
         #endregion
 
         #region EncryptionScope
         /// <summary> Gets an object representing a EncryptionScope along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="EncryptionScope" /> object. </returns>
-        public static EncryptionScope GetEncryptionScope(this ArmClient armClient, ResourceIdentifier id)
+        public static EncryptionScope GetEncryptionScope(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new EncryptionScope(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                EncryptionScope.ValidateResourceId(id);
+                return new EncryptionScope(client, id);
+            }
+            );
         }
         #endregion
     }

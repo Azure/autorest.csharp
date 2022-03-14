@@ -12,7 +12,7 @@ using ExactMatchFlattenInheritance;
 namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> The response from the List Storage Accounts operation. </summary>
-    public partial class CustomModel3ListResult
+    internal partial class CustomModel3ListResult
     {
         /// <summary> Initializes a new instance of CustomModel3ListResult. </summary>
         internal CustomModel3ListResult()

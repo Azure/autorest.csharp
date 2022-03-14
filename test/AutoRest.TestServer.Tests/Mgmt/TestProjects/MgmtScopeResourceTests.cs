@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
+using System.Collections.Generic;
+using MgmtScopeResource;
+using System;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -8,23 +11,25 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtScopeResourceTests() : base("MgmtScopeResource") { }
 
+        protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(ResourceLinkCollection) };
+
         [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", false)]
         [TestCase("SubscriptionExtensions", "GetPolicyAssignments", false)]
         [TestCase("ResourceGroupExtensions", "GetPolicyAssignments", false)]
-        [TestCase("ArmResourceExtensions", "GetPolicyAssignments", true)]
         [TestCase("ManagementGroupExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("SubscriptionExtensions", "GetDeploymentExtendeds", true)]
         [TestCase("ResourceGroupExtensions", "GetDeploymentExtendeds", true)]
+        [TestCase("ArmResourceExtensions", "GetFakePolicyAssignments", true)]
         [TestCase("ArmResourceExtensions", "GetDeploymentExtendeds", false)]
-        [TestCase("PolicyAssignmentCollection", "CreateOrUpdate", true)]
-        [TestCase("PolicyAssignmentCollection", "Get", true)]
-        [TestCase("PolicyAssignmentCollection", "GetAll", true)]
-        [TestCase("PolicyAssignmentCollection", "GetForResourceGroup", false)]
-        [TestCase("PolicyAssignmentCollection", "GetForResource", false)]
-        [TestCase("PolicyAssignmentCollection", "GetForManagementGroup", false)]
-        [TestCase("PolicyAssignmentCollection", "GetAllAsGenericResources", false)]
-        [TestCase("PolicyAssignment", "Get", true)]
-        [TestCase("PolicyAssignment", "Delete", true)]
+        [TestCase("FakePolicyAssignmentCollection", "CreateOrUpdate", true)]
+        [TestCase("FakePolicyAssignmentCollection", "Get", true)]
+        [TestCase("FakePolicyAssignmentCollection", "GetAll", true)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForResourceGroup", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForResource", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetForManagementGroup", false)]
+        [TestCase("FakePolicyAssignmentCollection", "GetAllAsGenericResources", false)]
+        [TestCase("FakePolicyAssignment", "Get", true)]
+        [TestCase("FakePolicyAssignment", "Delete", true)]
         [TestCase("DeploymentExtendedCollection", "CreateOrUpdate", true)]
         [TestCase("DeploymentExtendedCollection", "Get", true)]
         [TestCase("DeploymentExtendedCollection", "GetAll", true)]

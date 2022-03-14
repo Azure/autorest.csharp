@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace OmitOperationGroups.Models
 {
-    public partial class Model5ListResult
+    internal partial class Model5ListResult
     {
         internal static Model5ListResult DeserializeModel5ListResult(JsonElement element)
         {

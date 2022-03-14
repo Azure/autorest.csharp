@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace SupersetFlattenInheritance.Models
 {
-    public partial class TrackedResourceModel2ListResult
+    internal partial class TrackedResourceModel2ListResult
     {
         internal static TrackedResourceModel2ListResult DeserializeTrackedResourceModel2ListResult(JsonElement element)
         {

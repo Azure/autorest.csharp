@@ -11,7 +11,7 @@ using Azure.ResourceManager.Models;
 namespace SingletonResource
 {
     /// <summary> A class representing the Car data model. </summary>
-    public partial class CarData : Resource
+    public partial class CarData : ResourceData
     {
         /// <summary> Initializes a new instance of CarData. </summary>
         public CarData()
@@ -21,9 +21,10 @@ namespace SingletonResource
         /// <summary> Initializes a new instance of CarData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="horsepower"></param>
-        internal CarData(ResourceIdentifier id, string name, ResourceType type, string horsepower) : base(id, name, type)
+        internal CarData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string horsepower) : base(id, name, resourceType, systemData)
         {
             Horsepower = horsepower;
         }

@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,96 +18,61 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using SupersetInheritance.Models;
 
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel4 and their operations over its parent. </summary>
     public partial class SupersetModel4Collection : ArmCollection, IEnumerable<SupersetModel4>, IAsyncEnumerable<SupersetModel4>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly SupersetModel4SRestOperations _supersetModel4sRestClient;
+        private readonly ClientDiagnostics _supersetModel4ClientDiagnostics;
+        private readonly SupersetModel4SRestOperations _supersetModel4RestClient;
 
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Collection"/> class for mocking. </summary>
         protected SupersetModel4Collection()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel4Collection class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SupersetModel4Collection(ArmResource parent) : base(parent)
+        /// <summary> Initializes a new instance of the <see cref="SupersetModel4Collection"/> class. </summary>
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal SupersetModel4Collection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _supersetModel4sRestClient = new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _supersetModel4ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", SupersetModel4.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(SupersetModel4.ResourceType, out string supersetModel4ApiVersion);
+            _supersetModel4RestClient = new SupersetModel4SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel4ApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
-        // Collection level operations.
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel4s_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
+        /// Operation Id: SupersetModel4s_Put
+        /// </summary>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel4SPutOperation CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SupersetModel4>> CreateOrUpdateAsync(WaitUntil waitUntil, string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
-            if (supersetModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel4SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel4SName, nameof(supersetModel4SName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.CreateOrUpdate");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _supersetModel4sRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken);
-                var operation = new SupersetModel4SPutOperation(Parent, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel4s_Put
-        /// <param name="supersetModel4SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel4 to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel4SPutOperation> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
-        {
-            if (supersetModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel4SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = await _supersetModel4sRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new SupersetModel4SPutOperation(Parent, response);
-                if (waitForCompletion)
+                var response = await _supersetModel4RestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SupersetInheritanceArmOperation<SupersetModel4>(Response.FromValue(new SupersetModel4(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -117,27 +83,86 @@ namespace SupersetInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel4s_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
+        /// Operation Id: SupersetModel4s_Put
+        /// </summary>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="supersetModel4SName"> The String to use. </param>
+        /// <param name="parameters"> The SupersetModel4 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<SupersetModel4> CreateOrUpdate(WaitUntil waitUntil, string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(supersetModel4SName, nameof(supersetModel4SName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
+
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var response = _supersetModel4RestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken);
+                var operation = new SupersetInheritanceArmOperation<SupersetModel4>(Response.FromValue(new SupersetModel4(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
+        /// Operation Id: SupersetModel4s_Get
+        /// </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
+        public virtual async Task<Response<SupersetModel4>> GetAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(supersetModel4SName, nameof(supersetModel4SName));
+
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.Get");
+            scope.Start();
+            try
+            {
+                var response = await _supersetModel4RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw new RequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new SupersetModel4(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
+        /// Operation Id: SupersetModel4s_Get
+        /// </summary>
+        /// <param name="supersetModel4SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
         public virtual Response<SupersetModel4> Get(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel4SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel4SName, nameof(supersetModel4SName));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.Get");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.Get");
             scope.Start();
             try
             {
-                var response = _supersetModel4sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken);
+                var response = _supersetModel4RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SupersetModel4(Parent, response.Value), response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new SupersetModel4(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -146,126 +171,72 @@ namespace SupersetInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4sName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel4s_Get
-        /// <param name="supersetModel4SName"> The String to use. </param>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s
+        /// Operation Id: SupersetModel4s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
-        public async virtual Task<Response<SupersetModel4>> GetAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="SupersetModel4" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<SupersetModel4> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            if (supersetModel4SName == null)
+            async Task<Page<SupersetModel4>> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(supersetModel4SName));
+                using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _supersetModel4RestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel4(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.Get");
-            scope.Start();
-            try
-            {
-                var response = await _supersetModel4sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new SupersetModel4(Parent, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="supersetModel4SName"> The String to use. </param>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s
+        /// Operation Id: SupersetModel4s_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
-        public virtual Response<SupersetModel4> GetIfExists(string supersetModel4SName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="SupersetModel4" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<SupersetModel4> GetAll(CancellationToken cancellationToken = default)
         {
-            if (supersetModel4SName == null)
+            Page<SupersetModel4> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(supersetModel4SName));
+                using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _supersetModel4RestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel4(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = _supersetModel4sRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<SupersetModel4>(null, response.GetRawResponse())
-                    : Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
+        /// Operation Id: SupersetModel4s_Get
+        /// </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
-        public async virtual Task<Response<SupersetModel4>> GetIfExistsAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            if (supersetModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel4SName));
-            }
+            Argument.AssertNotNullOrEmpty(supersetModel4SName, nameof(supersetModel4SName));
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetIfExistsAsync");
-            scope.Start();
-            try
-            {
-                var response = await _supersetModel4sRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<SupersetModel4>(null, response.GetRawResponse())
-                    : Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="supersetModel4SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
-        public virtual Response<bool> Exists(string supersetModel4SName, CancellationToken cancellationToken = default)
-        {
-            if (supersetModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel4SName));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.Exists");
-            scope.Start();
-            try
-            {
-                var response = GetIfExists(supersetModel4SName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="supersetModel4SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
-        {
-            if (supersetModel4SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel4SName));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.ExistsAsync");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.Exists");
             scope.Start();
             try
             {
@@ -279,71 +250,25 @@ namespace SupersetInheritance
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel4s_List
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
+        /// Operation Id: SupersetModel4s_Get
+        /// </summary>
+        /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SupersetModel4" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<SupersetModel4> GetAll(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
+        public virtual Response<bool> Exists(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            Page<SupersetModel4> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _supersetModel4sRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel4(Parent, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-        }
+            Argument.AssertNotNullOrEmpty(supersetModel4SName, nameof(supersetModel4SName));
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: SupersetModel4s_List
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SupersetModel4" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<SupersetModel4> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<SupersetModel4>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _supersetModel4sRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SupersetModel4(Parent, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-        }
-
-        /// <summary> Filters the list of <see cref="SupersetModel4" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAllAsGenericResources");
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.Exists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(SupersetModel4.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                var response = GetIfExists(supersetModel4SName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -352,21 +277,56 @@ namespace SupersetInheritance
             }
         }
 
-        /// <summary> Filters the list of <see cref="SupersetModel4" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
+        /// Operation Id: SupersetModel4s_Get
+        /// </summary>
+        /// <param name="supersetModel4SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
+        public virtual async Task<Response<SupersetModel4>> GetIfExistsAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Collection.GetAllAsGenericResources");
+            Argument.AssertNotNullOrEmpty(supersetModel4SName, nameof(supersetModel4SName));
+
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.GetIfExists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(SupersetModel4.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                var response = await _supersetModel4RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<SupersetModel4>(null, response.GetRawResponse());
+                return Response.FromValue(new SupersetModel4(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4SName}
+        /// Operation Id: SupersetModel4s_Get
+        /// </summary>
+        /// <param name="supersetModel4SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
+        public virtual Response<SupersetModel4> GetIfExists(string supersetModel4SName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(supersetModel4SName, nameof(supersetModel4SName));
+
+            using var scope = _supersetModel4ClientDiagnostics.CreateScope("SupersetModel4Collection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _supersetModel4RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<SupersetModel4>(null, response.GetRawResponse());
+                return Response.FromValue(new SupersetModel4(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -389,8 +349,5 @@ namespace SupersetInheritance
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, SupersetModel4, SupersetModel4Data> Construct() { }
     }
 }

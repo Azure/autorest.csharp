@@ -894,7 +894,7 @@
     "CloudError": {
       "x-ms-external": true,
       "properties": {
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse"
         }
       },
@@ -953,6 +953,7 @@
         "duration": {
           "readOnly": true,
           "type": "string",
+          "format": "duration",
           "description": "The duration of the template deployment."
         },
         "outputs": {
@@ -966,7 +967,7 @@
           "description": "Deployment parameters. "
         },
         
-        "error": {
+        "errorResponse": {
           "readOnly": true,
           "$ref": "#/definitions/ErrorResponse",
           "description": "The deployment error."
@@ -976,7 +977,7 @@
     },
     "DeploymentValidateResult": {
       "properties": {
-        "error": {
+        "errorResponse": {
           "readOnly": true,
           "$ref": "#/definitions/ErrorResponse",
           "description": "The deployment validation error."
@@ -1129,7 +1130,15 @@
         "duration": {
           "readOnly": true,
           "type": "string",
+          "format": "duration",
           "description": "The duration of the operation."
+        },
+        "anotherDuration": {
+          "readOnly": true,
+          "type": "string",
+          "format": "duration",
+          "x-ms-format": "duration-constant",
+          "description": "Another duration of the operation."
         },
         "serviceRequestId": {
           "readOnly": true,
@@ -1304,7 +1313,7 @@
           "$ref": "#/definitions/WhatIfOperationProperties",
           "description": "What-If operation properties."
         },
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse",
           "description": "Error when What-If operation fails."
         }
@@ -1318,7 +1327,7 @@
           "type": "string",
           "description": "Status of the deployment operation."
         },
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse",
           "description": "The error reported by the operation."
         }

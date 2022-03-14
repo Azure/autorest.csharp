@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Azure;
+using AutoRest.CSharp.Output.Models.Shared;
+using Azure.ResourceManager;
 using MgmtLRO;
-using MgmtLRO.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -11,8 +11,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtLROTests() : base("MgmtLRO") { }
 
-        [TestCase("BarCollection", "CreateOrUpdate", typeof(BarCreateOperation))]
-        [TestCase("FakeCollection", "StartCreateOrUpdate", typeof(FakeCreateOrUpdateOperation))]
+        [TestCase("BarCollection", "CreateOrUpdate", typeof(ArmOperation<Bar>))]
+        [TestCase("FakeCollection", "CreateOrUpdate", typeof(ArmOperation<Fake>))]
         public void ValidateLongRunningOperationFunctionInCollection(string className, string functionName, Type returnType)
         {
             var collections = FindAllCollections().First(c => c.Name == className);
@@ -21,43 +21,25 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(method.ReturnType, returnType, $"method {className}.{functionName} does not return type {returnType}");
         }
 
-        [TestCase("Fake", "Delete")]
-        [TestCase("Fake", "DoSomethingSlro")]
-        [TestCase("BarCollection", "CreateOrUpdate")]
-        [TestCase("Bar", "Update")]
-        public void ValidateSLROMethods(string className, string methodName)
-        {
-            ValidateMethods(className, methodName, true, true);
-        }
-
-        [TestCase("FakeCollection", "StartCreateOrUpdate")]
-        [TestCase("Fake", "StartUpdate")]
-        [TestCase("Fake", "StartDoSomethingLRO")]
-        [TestCase("Bar", "StartDelete")]
+        [TestCase("FakeCollection", "CreateOrUpdate")]
+        [TestCase("Fake", "Update")]
+        [TestCase("Fake", "DoSomethingLRO")]
+        [TestCase("Bar", "Delete")]
         public void ValidateLROMethods(string className, string methodName)
         {
-            ValidateMethods(className, methodName, true, false);
+            ValidateMethods(className, methodName, true);
         }
 
-        public void ValidateMethods(string className, string methodName, bool exist, bool isSLRO)
+        public void ValidateMethods(string className, string methodName, bool exist)
         {
             var classesToCheck = FindAllCollections().Concat(FindAllResources());
             var classToCheck = classesToCheck.First(t => t.Name == className);
             var methodInfo = classToCheck.GetMethod(methodName);
             Assert.AreEqual(exist, methodInfo != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
 
-            var waitForCompletionParam = methodInfo.GetParameters().Where(P => P.Name == "waitForCompletion").First();
+            var waitForCompletionParam = methodInfo.GetParameters().Where(P => P.Name == KnownParameters.WaitForCompletion.Name).First();
             Assert.NotNull(waitForCompletionParam);
-            if (isSLRO)
-            {
-                Assert.False(methodInfo.Name.StartsWith("Start"));
-                Assert.AreEqual(true, waitForCompletionParam.DefaultValue);
-            }
-            else
-            {
-                Assert.True(methodInfo.Name.StartsWith("Start"));
-                Assert.AreEqual(false, waitForCompletionParam.DefaultValue);
-            }
+            Assert.IsEmpty(waitForCompletionParam.DefaultValue.ToString());
         }
     }
 }

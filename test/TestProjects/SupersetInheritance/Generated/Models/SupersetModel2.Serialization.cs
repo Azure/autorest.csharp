@@ -25,10 +25,10 @@ namespace SupersetInheritance.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Type))
+            if (Optional.IsDefined(SupersetModel2Type))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
+                writer.WriteStringValue(SupersetModel2Type);
             }
             if (Optional.IsDefined(New))
             {
@@ -40,7 +40,7 @@ namespace SupersetInheritance.Models
 
         internal static SupersetModel2 DeserializeSupersetModel2(JsonElement element)
         {
-            Optional<string> iD = default;
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> @new = default;
@@ -48,7 +48,7 @@ namespace SupersetInheritance.Models
             {
                 if (property.NameEquals("iD"))
                 {
-                    iD = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -67,7 +67,7 @@ namespace SupersetInheritance.Models
                     continue;
                 }
             }
-            return new SupersetModel2(iD.Value, name.Value, type.Value, @new.Value);
+            return new SupersetModel2(id.Value, name.Value, type.Value, @new.Value);
         }
     }
 }

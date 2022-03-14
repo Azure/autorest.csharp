@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,98 +18,61 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
-using SingletonResource.Models;
 
 namespace SingletonResource
 {
     /// <summary> A class representing collection of Car and their operations over its parent. </summary>
     public partial class CarCollection : ArmCollection, IEnumerable<Car>, IAsyncEnumerable<Car>
     {
-        private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly CarsRestOperations _carsRestClient;
-        private readonly SingletonResourceRestOperations _restClient;
+        private readonly ClientDiagnostics _carClientDiagnostics;
+        private readonly CarsRestOperations _carRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="CarCollection"/> class for mocking. </summary>
         protected CarCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of CarCollection class. </summary>
-        /// <param name="parent"> The resource representing the parent resource. </param>
-        internal CarCollection(ArmResource parent) : base(parent)
+        /// <summary> Initializes a new instance of the <see cref="CarCollection"/> class. </summary>
+        /// <param name="client"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the parent resource that is the target of operations. </param>
+        internal CarCollection(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _carsRestClient = new CarsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
-            _restClient = new SingletonResourceRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
+            _carClientDiagnostics = new ClientDiagnostics("SingletonResource", Car.ResourceType.Namespace, DiagnosticOptions);
+            TryGetApiVersion(Car.ResourceType, out string carApiVersion);
+            _carRestClient = new CarsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, carApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
-        /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
+        internal static void ValidateResourceId(ResourceIdentifier id)
+        {
+            if (id.ResourceType != ResourceGroup.ResourceType)
+                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Invalid resource type {0} expected {1}", id.ResourceType, ResourceGroup.ResourceType), nameof(id));
+        }
 
-        // Collection level operations.
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Cars_Put
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Put
+        /// </summary>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="carName"> The String to use. </param>
         /// <param name="parameters"> The Car to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual CarPutOperation CreateOrUpdate(string carName, CarData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<Car>> CreateOrUpdateAsync(WaitUntil waitUntil, string carName, CarData parameters, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _carsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
-                var operation = new CarPutOperation(Parent, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Cars_Put
-        /// <param name="carName"> The String to use. </param>
-        /// <param name="parameters"> The Car to use. </param>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<CarPutOperation> CreateOrUpdateAsync(string carName, CarData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
-        {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = await _carsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
-                var operation = new CarPutOperation(Parent, response);
-                if (waitForCompletion)
+                var response = await _carRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = new SingletonResourceArmOperation<Car>(Response.FromValue(new Car(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -119,27 +83,86 @@ namespace SingletonResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Cars_Get
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Put
+        /// </summary>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        /// <param name="carName"> The String to use. </param>
+        /// <param name="parameters"> The Car to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
+        public virtual ArmOperation<Car> CreateOrUpdate(WaitUntil waitUntil, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
+
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var response = _carRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, parameters, cancellationToken);
+                var operation = new SingletonResourceArmOperation<Car>(Response.FromValue(new Car(Client, response), response.GetRawResponse()));
+                if (waitUntil == WaitUntil.Completed)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Get
+        /// </summary>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        public virtual async Task<Response<Car>> GetAsync(string carName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.Get");
+            scope.Start();
+            try
+            {
+                var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw new RequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Get
+        /// </summary>
+        /// <param name="carName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         public virtual Response<Car> Get(string carName, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.Get");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.Get");
             scope.Start();
             try
             {
-                var response = _carsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken);
+                var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken);
                 if (response.Value == null)
-                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Car(Parent, response.Value), response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -148,126 +171,72 @@ namespace SingletonResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Cars_Get
-        /// <param name="carName"> The String to use. </param>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars
+        /// Operation Id: Cars_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<Car>> GetAsync(string carName, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="Car" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<Car> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            if (carName == null)
+            async Task<Page<Car>> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(carName));
+                using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = await _carRestClient.ListAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Car(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.Get");
-            scope.Start();
-            try
-            {
-                var response = await _carsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken).ConfigureAwait(false);
-                if (response.Value == null)
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new Car(Parent, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="carName"> The String to use. </param>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars
+        /// Operation Id: Cars_List
+        /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public virtual Response<Car> GetIfExists(string carName, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="Car" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<Car> GetAll(CancellationToken cancellationToken = default)
         {
-            if (carName == null)
+            Page<Car> FirstPageFunc(int? pageSizeHint)
             {
-                throw new ArgumentNullException(nameof(carName));
+                using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetAll");
+                scope.Start();
+                try
+                {
+                    var response = _carRestClient.List(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Car(Client, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
-
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExists");
-            scope.Start();
-            try
-            {
-                var response = _carsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken);
-                return response.Value == null
-                    ? Response.FromValue<Car>(null, response.GetRawResponse())
-                    : Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Get
+        /// </summary>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<Car>> GetIfExistsAsync(string carName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetIfExistsAsync");
-            scope.Start();
-            try
-            {
-                var response = await _carsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return response.Value == null
-                    ? Response.FromValue<Car>(null, response.GetRawResponse())
-                    : Response.FromValue(new Car(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="carName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public virtual Response<bool> Exists(string carName, CancellationToken cancellationToken = default)
-        {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.Exists");
-            scope.Start();
-            try
-            {
-                var response = GetIfExists(carName, cancellationToken: cancellationToken);
-                return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Tries to get details for this resource from the service. </summary>
-        /// <param name="carName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
-        public async virtual Task<Response<bool>> ExistsAsync(string carName, CancellationToken cancellationToken = default)
-        {
-            if (carName == null)
-            {
-                throw new ArgumentNullException(nameof(carName));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.ExistsAsync");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
             try
             {
@@ -281,71 +250,25 @@ namespace SingletonResource
             }
         }
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Cars
+        /// <summary>
+        /// Checks to see if the resource exists in azure.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Get
+        /// </summary>
+        /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Car" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Car> GetAll(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        public virtual Response<bool> Exists(string carName, CancellationToken cancellationToken = default)
         {
-            Page<Car> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = _restClient.Cars(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Car(Parent, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-        }
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
 
-        /// RequestPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars
-        /// ContextualPath: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}
-        /// OperationId: Cars
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Car" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Car> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<Car>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAll");
-                scope.Start();
-                try
-                {
-                    var response = await _restClient.CarsAsync(Id.SubscriptionId, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Car(Parent, value)), null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-        }
-
-        /// <summary> Filters the list of <see cref="Car" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAllAsGenericResources");
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.Exists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(Car.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                var response = GetIfExists(carName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -354,21 +277,56 @@ namespace SingletonResource
             }
         }
 
-        /// <summary> Filters the list of <see cref="Car" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Get
+        /// </summary>
+        /// <param name="carName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        public virtual async Task<Response<Car>> GetIfExistsAsync(string carName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CarCollection.GetAllAsGenericResources");
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetIfExists");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(Car.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return Response.FromValue<Car>(null, response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cars/{carName}
+        /// Operation Id: Cars_Get
+        /// </summary>
+        /// <param name="carName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
+        public virtual Response<Car> GetIfExists(string carName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(carName, nameof(carName));
+
+            using var scope = _carClientDiagnostics.CreateScope("CarCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return Response.FromValue<Car>(null, response.GetRawResponse());
+                return Response.FromValue(new Car(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -391,8 +349,5 @@ namespace SingletonResource
         {
             return GetAllAsync(cancellationToken: cancellationToken).GetAsyncEnumerator(cancellationToken);
         }
-
-        // Builders.
-        // public ArmBuilder<Azure.Core.ResourceIdentifier, Car, CarData> Construct() { }
     }
 }

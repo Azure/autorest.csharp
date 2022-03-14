@@ -11,6 +11,9 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/ExactMatchInheritance.json
 namespace: ExactMatchInheritance
-mgmt-debug:
-  show-request-path: true
+directive:
+  - from: ExactMatchInheritance.json
+    where: $.definitions.ExactMatchModel11.properties.type
+    transform: >
+       $["x-ms-client-name"] = "ResourceType";
 ```

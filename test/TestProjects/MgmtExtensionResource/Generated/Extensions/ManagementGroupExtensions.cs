@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Management;
 
 namespace MgmtExtensionResource
@@ -12,14 +16,51 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to ManagementGroup. </summary>
     public static partial class ManagementGroupExtensions
     {
-        #region ManagementGroupPolicyDefinition
-        /// <summary> Gets an object representing a ManagementGroupPolicyDefinitionCollection along with the instance operations that can be performed on it. </summary>
+        private static ManagementGroupExtensionClient GetExtensionClient(ManagementGroup managementGroup)
+        {
+            return managementGroup.GetCachedClient((client) =>
+            {
+                return new ManagementGroupExtensionClient(client, managementGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of ManagementGroupPolicyDefinitions in the ManagementGroupPolicyDefinition. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionCollection" /> object. </returns>
+        /// <returns> An object representing collection of ManagementGroupPolicyDefinitions and their operations over a ManagementGroupPolicyDefinition. </returns>
         public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroup managementGroup)
         {
-            return new ManagementGroupPolicyDefinitionCollection(managementGroup);
+            return GetExtensionClient(managementGroup).GetManagementGroupPolicyDefinitions();
         }
-        #endregion
+
+        /// <summary>
+        /// This operation retrieves the policy definition in the given management group with the given name.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_GetAtManagementGroup
+        /// </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public static async Task<Response<ManagementGroupPolicyDefinition>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return await GetManagementGroupPolicyDefinitions(managementGroup).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// This operation retrieves the policy definition in the given management group with the given name.
+        /// Request Path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_GetAtManagementGroup
+        /// </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public static Response<ManagementGroupPolicyDefinition> GetManagementGroupPolicyDefinition(this ManagementGroup managementGroup, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return GetManagementGroupPolicyDefinitions(managementGroup).Get(policyDefinitionName, cancellationToken);
+        }
     }
 }

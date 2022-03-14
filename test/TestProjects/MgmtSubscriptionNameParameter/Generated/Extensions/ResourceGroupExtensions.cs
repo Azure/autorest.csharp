@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtSubscriptionNameParameter
@@ -12,14 +16,51 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region SBSubscription
-        /// <summary> Gets an object representing a SBSubscriptionCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of SBSubscriptions in the SBSubscription. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SBSubscriptionCollection" /> object. </returns>
+        /// <returns> An object representing collection of SBSubscriptions and their operations over a SBSubscription. </returns>
         public static SBSubscriptionCollection GetSBSubscriptions(this ResourceGroup resourceGroup)
         {
-            return new SBSubscriptionCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetSBSubscriptions();
         }
-        #endregion
+
+        /// <summary>
+        /// Returns a subscription description for the specified topic.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
+        /// Operation Id: Subscriptions_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="subscriptionName"> The subscription name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
+        public static async Task<Response<SBSubscription>> GetSBSubscriptionAsync(this ResourceGroup resourceGroup, string subscriptionName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetSBSubscriptions().GetAsync(subscriptionName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Returns a subscription description for the specified topic.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/subscriptions/{subscriptionName}
+        /// Operation Id: Subscriptions_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="subscriptionName"> The subscription name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
+        public static Response<SBSubscription> GetSBSubscription(this ResourceGroup resourceGroup, string subscriptionName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetSBSubscriptions().Get(subscriptionName, cancellationToken);
+        }
     }
 }

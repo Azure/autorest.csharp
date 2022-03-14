@@ -14,7 +14,7 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> A private link resource. </summary>
     [TypeReferenceType]
-    public partial class PrivateLinkResourceData : ResourceManager.Models.Resource
+    public partial class PrivateLinkResourceData : ResourceData
     {
         /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
         [InitializationConstructor]
@@ -27,12 +27,13 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="groupId"> The private link resource group id. </param>
         /// <param name="requiredMembers"> The private link resource required member names. </param>
         /// <param name="requiredZoneNames"> The private link resource Private link DNS zone name. </param>
         [SerializationConstructor]
-        internal PrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType type, string groupId, IReadOnlyList<string> requiredMembers, IReadOnlyList<string> requiredZoneNames) : base(id, name, type)
+        internal PrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IReadOnlyList<string> requiredZoneNames) : base(id, name, resourceType, systemData)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;

@@ -12,7 +12,7 @@ using Azure.Management.Storage;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class FileServiceItems
+    internal partial class FileServiceItems
     {
         internal static FileServiceItems DeserializeFileServiceItems(JsonElement element)
         {

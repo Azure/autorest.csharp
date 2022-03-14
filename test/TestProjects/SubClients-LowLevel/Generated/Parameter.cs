@@ -19,8 +19,10 @@ namespace SubClients_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -31,24 +33,13 @@ namespace SubClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of Parameter. </summary>
-        /// <param name="clientDiagnostics"> The ClientDiagnostics instance to use. </param>
-        /// <param name="pipeline"> The pipeline instance to use. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        internal Parameter(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint = null)
+        internal Parameter(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint)
         {
-            if (clientDiagnostics == null)
-            {
-                throw new ArgumentNullException(nameof(clientDiagnostics));
-            }
-            if (pipeline == null)
-            {
-                throw new ArgumentNullException(nameof(pipeline));
-            }
-            endpoint ??= new Uri("http://localhost:3000");
-
-            _clientDiagnostics = clientDiagnostics;
+            ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _keyCredential = keyCredential;
             _endpoint = endpoint;
@@ -57,16 +48,17 @@ namespace SubClients_LowLevel
         /// <param name="subParameter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
+            Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
+
+            using var scope = ClientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetSubParameterRequest(subParameter, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -78,16 +70,17 @@ namespace SubClients_LowLevel
         /// <param name="subParameter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
-#pragma warning disable AZC0002
+        /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("Parameter.GetSubParameter");
+            Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
+
+            using var scope = ClientDiagnostics.CreateScope("Parameter.GetSubParameter");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGetSubParameterRequest(subParameter, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -98,7 +91,7 @@ namespace SubClients_LowLevel
 
         internal HttpMessage CreateGetSubParameterRequest(string subParameter, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -107,22 +100,10 @@ namespace SubClients_LowLevel
             uri.AppendPath(subParameter, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

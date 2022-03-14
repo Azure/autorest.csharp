@@ -6,20 +6,23 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OperationExtensions
     {
+        private static readonly ConcurrentDictionary<Operation, string> _operationIdCache = new ConcurrentDictionary<Operation, string>();
+
+        private static readonly ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<(Operation, ResourceTypeSegment?), RequestPath>();
+
+        private static readonly ConcurrentDictionary<Operation, IEnumerable<Resource>> _operationToResourceCache = new ConcurrentDictionary<Operation, IEnumerable<Resource>>();
+
         /// <summary>
         /// Returns the CSharpName of an operation in management plane pattern where we replace the word List with Get or GetAll depending on if there are following words
         /// </summary>
@@ -41,6 +44,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return string.Join("", replacedWords);
         }
 
+        /// <summary>
+        /// Search the configuration for an overridden of this operation's name
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="context"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool TryGetConfigOperationName(this Operation operation, [MaybeNullWhen(false)] out string name)
+        {
+            var operationId = operation.OperationId(MgmtContext.Library.GetRestClient(operation).OperationGroup);
+            return Configuration.MgmtConfiguration.OverrideOperationName.TryGetValue(operationId, out name);
+        }
+
         public static string OperationId(this Operation operation, OperationGroup operationGroup)
         {
             if (_operationIdCache.TryGetValue(operation, out var result))
@@ -50,79 +66,90 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        private static readonly ConcurrentDictionary<Operation, string> _operationIdCache = new ConcurrentDictionary<Operation, string>();
-
-        private static readonly ConcurrentDictionary<Operation, RequestPath> _operationToRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
-
-        public static RequestPath GetRequestPath(this Operation operation, BuildContext<MgmtOutputLibrary> context)
+        public static RequestPath GetRequestPath(this Operation operation, ResourceTypeSegment? hint = null)
         {
-            if (_operationToRequestPathCache.TryGetValue(operation, out var requestPath))
+            if (_operationToRequestPathCache.TryGetValue((operation, hint), out var requestPath))
                 return requestPath;
 
-            requestPath = new RequestPath(context.Library.RestClientMethods[operation]);
-            _operationToRequestPathCache.TryAdd(operation, requestPath);
+            requestPath = MgmtContext.Library.GetRequestPath(operation);
+            if (hint.HasValue)
+                requestPath = requestPath.ApplyHint(hint.Value);
+
+            _operationToRequestPathCache.TryAdd((operation, hint), requestPath);
             return requestPath;
         }
 
-        public static bool IsResourceCollectionOperation(this Operation operation, BuildContext<MgmtOutputLibrary> context, [MaybeNullWhen(false)] out OperationSet operationSetOfResource)
+        public static bool IsResourceCollectionOperation(this Operation operation, [MaybeNullWhen(false)] out OperationSet operationSetOfResource)
         {
             operationSetOfResource = null;
             // first we need to ensure this operation at least returns a collection of something
-            var restClientMethod = context.Library.RestClientMethods[operation];
+            var restClientMethod = MgmtContext.Library.GetRestClientMethod(operation);
             if (!restClientMethod.IsListMethod(out var valueType))
                 return false;
 
             // then check if its path is a prefix of which resource's operationSet
             // if there are multiple resources that share the same prefix of request path, we choose the shortest one
-            var requestPath = operation.GetRequestPath(context);
-            operationSetOfResource = FindOperationSetOfResource(requestPath, context);
+            var requestPath = operation.GetRequestPath();
+            operationSetOfResource = FindOperationSetOfResource(requestPath);
             // if we find none, this cannot be a resource collection operation
             if (operationSetOfResource is null)
                 return false;
 
             // then check if this method returns a collection of the corresponding resource data
             // check if valueType is the current resource data type
-            var resourceData = context.Library.GetResourceData(operationSetOfResource.RequestPath);
+            var resourceData = MgmtContext.Library.GetResourceData(operationSetOfResource.RequestPath);
             return valueType.EqualsByName(resourceData.Type);
         }
 
-        private static ISet<ResourceTypeSegment> GetScopeResourceTypes(RequestPath requestPath, MgmtConfiguration config)
+        private static ISet<ResourceTypeSegment> GetScopeResourceTypes(RequestPath requestPath)
         {
             var scope = requestPath.GetScopePath();
             if (scope.IsParameterizedScope())
             {
-                return new HashSet<ResourceTypeSegment>(requestPath.GetParameterizedScopeResourceTypes(config)!);
+                return new HashSet<ResourceTypeSegment>(requestPath.GetParameterizedScopeResourceTypes()!);
             }
 
-            return new HashSet<ResourceTypeSegment> { scope.GetResourceType(config) };
+            return new HashSet<ResourceTypeSegment> { scope.GetResourceType() };
         }
 
-        private static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath, MgmtConfiguration config)
+        private static bool IsScopeCompatible(RequestPath requestPath, RequestPath resourcePath)
         {
             // get scope types
-            var requestScopeTypes = GetScopeResourceTypes(requestPath, config);
-            var resourceScopeTypes = GetScopeResourceTypes(resourcePath, config);
+            var requestScopeTypes = GetScopeResourceTypes(requestPath);
+            var resourceScopeTypes = GetScopeResourceTypes(resourcePath);
             if (resourceScopeTypes.Contains(ResourceTypeSegment.Any))
                 return true;
             return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
         }
 
-        private static OperationSet? FindOperationSetOfResource(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        private static OperationSet? FindOperationSetOfResource(RequestPath requestPath)
         {
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var rawPath))
+                return MgmtContext.Library.GetOperationSet(rawPath);
             var candidates = new List<OperationSet>();
             // we need to iterate all resources to find if this is the parent of that
-            foreach (var operationSet in context.Library.ResourceOperationSets)
+            foreach (var operationSet in MgmtContext.Library.ResourceOperationSets)
             {
-                var resourceRequestPath = operationSet.GetRequestPath(context);
+                var resourceRequestPath = operationSet.GetRequestPath();
                 // we compare the request with the resource request in two parts:
                 // 1. Compare if they have the same scope
                 // 2. Compare if they have the "compatible" remaining path
                 // check if they have compatible scopes
-                if (!IsScopeCompatible(requestPath, resourceRequestPath, context.Configuration.MgmtConfiguration))
+                if (!IsScopeCompatible(requestPath, resourceRequestPath))
                     continue;
                 // check the remaining path
-                if (!requestPath.TrimScope().IsAncestorOf(resourceRequestPath.TrimScope()))
+                var trimmedRequestPath = requestPath.TrimScope();
+                var trimmedResourceRequestPath = resourceRequestPath.TrimScope();
+                // For a path of a scope like /subscriptions/{subscriptionId}/resourcegroups, the trimmed path is empty. The path of its resource should also be a scope, its trimmed path should also be empty.
+                if (trimmedRequestPath.Count == 0 && trimmedResourceRequestPath.Count != 0)
                     continue;
+                // In the case that the full path of requestPath and resourceRequestPath are both scopes (trimmed path is empty), comparing the scope part is enough.
+                // We should not compare the remaining paths as both will be empty path and Tenant.IsAncestorOf(Tenant) always returns false.
+                else if (trimmedRequestPath.Count != 0 || trimmedResourceRequestPath.Count != 0)
+                {
+                    if (!trimmedRequestPath.IsAncestorOf(trimmedResourceRequestPath))
+                        continue;
+                }
                 candidates.Add(operationSet);
             }
 
@@ -130,7 +157,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return null;
 
             // choose the toppest of the rank
-            return candidates.OrderBy(operationSet => RankRequestPath(operationSet.GetRequestPath(context))).First();
+            return candidates.OrderBy(operationSet => RankRequestPath(operationSet.GetRequestPath())).First();
         }
 
         /// <summary>
@@ -152,7 +179,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static string GetHttpPath(this Operation operation)
         {
-            return operation.GetHttpRequest()?.Path.TrimEnd('/') ??
+            var path = operation.GetHttpRequest()?.Path;
+            // Do not trim the tenant resource path '/'.
+            return (path?.Length == 1 ? path : path?.TrimEnd('/')) ??
                 throw new InvalidOperationException($"Cannot get HTTP path from operation {operation.CSharpName()}");
         }
 
@@ -173,22 +202,44 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return operation.GetHttpRequest()!.Method;
         }
 
+        public static RequestParameter? GetBodyParameter(this Operation operation)
+        {
+            var serviceRequest = operation.GetServiceRequest();
+            return serviceRequest?.Parameters.FirstOrDefault(parameter => parameter.In == HttpParameterIn.Body);
+        }
+
+        public static ServiceRequest? GetServiceRequest(this Operation operation)
+        {
+            return operation.Requests.FirstOrDefault();
+        }
+
         public static ServiceResponse? GetServiceResponse(this Operation operation, StatusCodes code = StatusCodes._200)
         {
             return operation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(code));
         }
 
-        public static bool IsGetResourceOperation(this Input.Operation operation, string? responseBodyType, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+        public static bool IsGetResourceOperation(this Input.Operation operation, string? responseBodyType, ResourceData resourceData)
         {
             // first we need to be a GET operation
             var request = operation.GetHttpRequest();
             if (request == null || request.Method != HttpMethod.Get)
                 return false;
             // then we get the corresponding OperationSet and see if this OperationSet corresponds to a resource
-            var operationSet = context.Library.GetOperationSet(operation.GetHttpPath());
-            if (!operationSet.IsResource(context.Configuration.MgmtConfiguration))
+            var operationSet = MgmtContext.Library.GetOperationSet(operation.GetHttpPath());
+            if (!operationSet.IsResource())
                 return false;
             return responseBodyType == resourceData.Type.Name;
+        }
+
+        internal static IEnumerable<Resource> GetResourceFromResourceType(this Operation operation)
+        {
+            if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
+                return cacheResult;
+
+            var resourceType = operation.GetRequestPath().GetResourceType();
+            var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType));
+
+            return candidates;
         }
     }
 }

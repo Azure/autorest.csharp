@@ -2,6 +2,8 @@
 // Licensed under the MIT License
 
 using System.Linq;
+using System.Threading.Tasks;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using NUnit.Framework;
 
@@ -14,11 +16,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("BillingAccount")]
         public void TestTenant(string resourceName)
         {
-            (_, var context) = Generate("TenantOnly").Result;
-
-            var resource = context.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
+            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.IsNotNull(resource);
-            Assert.IsTrue(resource.Parent(context).Contains(context.Library.TenantExtensions));
+            Assert.IsTrue(resource.Parent().Contains(MgmtContext.Library.TenantExtensions));
         }
     }
 }

@@ -29,6 +29,7 @@ namespace lro
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal LROsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             RestClient = new LROsRestClient(clientDiagnostics, pipeline, endpoint);
@@ -104,6 +105,82 @@ namespace lro
             {
                 var originalResponse = RestClient.Patch200SucceededIgnoreHeaders(product, cancellationToken);
                 return new LROsPatch200SucceededIgnoreHeadersOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededIgnoreHeadersRequest(product).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running patch request, service returns a 201 to the initial request with async header. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<LROsPatch201RetryWithAsyncHeaderOperation> StartPatch201RetryWithAsyncHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPatch201RetryWithAsyncHeader");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.Patch201RetryWithAsyncHeaderAsync(product, cancellationToken).ConfigureAwait(false);
+                return new LROsPatch201RetryWithAsyncHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch201RetryWithAsyncHeaderRequest(product).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running patch request, service returns a 201 to the initial request with async header. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual LROsPatch201RetryWithAsyncHeaderOperation StartPatch201RetryWithAsyncHeader(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPatch201RetryWithAsyncHeader");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.Patch201RetryWithAsyncHeader(product, cancellationToken);
+                return new LROsPatch201RetryWithAsyncHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch201RetryWithAsyncHeaderRequest(product).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running patch request, service returns a 202 to the initial request with async and location header. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<LROsPatch202RetryWithAsyncAndLocationHeaderOperation> StartPatch202RetryWithAsyncAndLocationHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPatch202RetryWithAsyncAndLocationHeader");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.Patch202RetryWithAsyncAndLocationHeaderAsync(product, cancellationToken).ConfigureAwait(false);
+                return new LROsPatch202RetryWithAsyncAndLocationHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch202RetryWithAsyncAndLocationHeaderRequest(product).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running patch request, service returns a 202 to the initial request with async and location header. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual LROsPatch202RetryWithAsyncAndLocationHeaderOperation StartPatch202RetryWithAsyncAndLocationHeader(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPatch202RetryWithAsyncAndLocationHeader");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.Patch202RetryWithAsyncAndLocationHeader(product, cancellationToken);
+                return new LROsPatch202RetryWithAsyncAndLocationHeaderOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch202RetryWithAsyncAndLocationHeaderRequest(product).Request, originalResponse);
             }
             catch (Exception e)
             {

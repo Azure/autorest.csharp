@@ -13,11 +13,22 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
-        public static FormattableString GetLiteralsFormattable(this ICollection<Parameter> parameters)
+        public static FormattableString Join(this ICollection<FormattableString> fss, string separator)
+            => fss.Count switch
+            {
+                0 => $"",
+                1 => fss.First(),
+                _ => FormattableStringFactory.Create(string.Join(separator, Enumerable.Range(0, fss.Count).Select(i => $"{{{i}}}")), fss.ToArray<object>())
+            };
+
+        public static FormattableString GetLiteralsFormattable(this IReadOnlyCollection<Parameter> parameters)
             => GetLiteralsFormattable(parameters.Select(p => p.Name), parameters.Count);
 
-        public static FormattableString GetLiteralsFormattable(this ICollection<Reference> references)
+        public static FormattableString GetLiteralsFormattable(this IReadOnlyCollection<Reference> references)
             => GetLiteralsFormattable(references.Select(p => p.Name), references.Count);
+
+        public static FormattableString GetLiteralsFormattable(this IReadOnlyCollection<string> literals)
+            => GetLiteralsFormattable(literals, literals.Count);
 
         public static FormattableString GetLiteralsFormattable(this ICollection<string> literals)
             => GetLiteralsFormattable(literals, literals.Count);
@@ -30,13 +41,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'L'), literals.ToArray<object>())
             };
 
-        public static FormattableString GetIdentifiersFormattable(this ICollection<Parameter> parameters)
+        public static FormattableString GetIdentifiersFormattable(this IReadOnlyCollection<Parameter> parameters)
             => GetIdentifiersFormattable(parameters.Select(p => p.Name), parameters.Count);
 
-        public static FormattableString GetIdentifiersFormattable(this ICollection<Reference> references)
+        public static FormattableString GetIdentifiersFormattable(this IReadOnlyCollection<Reference> references)
             => GetIdentifiersFormattable(references.Select(p => p.Name), references.Count);
 
-        public static FormattableString GetIdentifiersFormattable(this ICollection<string> identifiers)
+        public static FormattableString GetIdentifiersFormattable(this IReadOnlyCollection<string> identifiers)
             => GetIdentifiersFormattable(identifiers, identifiers.Count);
 
         public static FormattableString GetIdentifiersFormattable(this IEnumerable<string> identifiers, int count)

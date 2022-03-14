@@ -1,15 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
+using System;
 using System.Collections.Concurrent;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -58,27 +54,36 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var indexOfProvider = requestPath.ToList().LastIndexOf(Segment.Providers);
             // if there is no providers segment, myself should be a scope request path. Just return myself
-            if (indexOfProvider < 0)
-                return requestPath;
-
-            return new RequestPath(requestPath.Take(indexOfProvider));
+            if (indexOfProvider >= 0)
+            {
+                if (indexOfProvider == 0 && requestPath.SerializedPath.StartsWith(RequestPath.ManagementGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                    return RequestPath.ManagementGroup;
+                return new RequestPath(requestPath.Take(indexOfProvider));
+            }
+            if (requestPath.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                return RequestPath.ResourceGroup;
+            if (requestPath.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                return RequestPath.Subscription;
+            if (requestPath.SerializedPath.Equals(RequestPath.TenantScopePrefix))
+                return RequestPath.Tenant;
+            return requestPath;
         }
 
-        public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        public static ResourceTypeSegment[]? GetParameterizedScopeResourceTypes(this RequestPath requestPath)
         {
             if (_scopeTypesCache.TryGetValue(requestPath, out var result))
                 return result;
 
-            result = requestPath.CalculateScopeResourceTypes(config);
+            result = requestPath.CalculateScopeResourceTypes();
             _scopeTypesCache.TryAdd(requestPath, result);
             return result;
         }
 
-        private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath, MgmtConfiguration config)
+        private static ResourceTypeSegment[]? CalculateScopeResourceTypes(this RequestPath requestPath)
         {
             if (!requestPath.GetScopePath().IsParameterizedScope())
                 return null;
-            if (config.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
+            if (Configuration.MgmtConfiguration.RequestPathToScopeResourceTypes.TryGetValue(requestPath, out var resourceTypes))
                 return resourceTypes.Select(v => BuildResourceType(v)).ToArray();
             // otherwise we just assume this is scope and this scope could be anything
             return new[] { ResourceTypeSegment.Subscription, ResourceTypeSegment.ResourceGroup, ResourceTypeSegment.ManagementGroup, ResourceTypeSegment.Tenant, ResourceTypeSegment.Any };

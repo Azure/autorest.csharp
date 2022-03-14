@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the MgmtGroupParent data model. </summary>
-    public partial class MgmtGroupParentData : TrackedResource
+    public partial class MgmtGroupParentData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of MgmtGroupParentData. </summary>
         /// <param name="location"> The location. </param>
@@ -23,11 +23,12 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of MgmtGroupParentData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal MgmtGroupParentData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string bar) : base(id, name, type, tags, location)
+        internal MgmtGroupParentData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string bar) : base(id, name, resourceType, systemData, tags, location)
         {
             Bar = bar;
         }

@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtExtensionResource
@@ -12,14 +16,51 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions
     {
-        #region BuiltInPolicyDefinition
-        /// <summary> Gets an object representing a BuiltInPolicyDefinitionCollection along with the instance operations that can be performed on it. </summary>
+        private static TenantExtensionClient GetExtensionClient(Tenant tenant)
+        {
+            return tenant.GetCachedClient((client) =>
+            {
+                return new TenantExtensionClient(client, tenant.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of BuiltInPolicyDefinitions in the BuiltInPolicyDefinition. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionCollection" /> object. </returns>
+        /// <returns> An object representing collection of BuiltInPolicyDefinitions and their operations over a BuiltInPolicyDefinition. </returns>
         public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this Tenant tenant)
         {
-            return new BuiltInPolicyDefinitionCollection(tenant);
+            return GetExtensionClient(tenant).GetBuiltInPolicyDefinitions();
         }
-        #endregion
+
+        /// <summary>
+        /// This operation retrieves the built-in policy definition with the given name.
+        /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_GetBuiltIn
+        /// </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public static async Task<Response<BuiltInPolicyDefinition>> GetBuiltInPolicyDefinitionAsync(this Tenant tenant, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return await tenant.GetBuiltInPolicyDefinitions().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// This operation retrieves the built-in policy definition with the given name.
+        /// Request Path: /providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}
+        /// Operation Id: PolicyDefinitions_GetBuiltIn
+        /// </summary>
+        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public static Response<BuiltInPolicyDefinition> GetBuiltInPolicyDefinition(this Tenant tenant, string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            return tenant.GetBuiltInPolicyDefinitions().Get(policyDefinitionName, cancellationToken);
+        }
     }
 }

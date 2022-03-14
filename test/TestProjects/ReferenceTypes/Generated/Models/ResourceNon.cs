@@ -20,6 +20,6 @@ namespace ReferenceTypes.Models
         /// <summary> The name of the resource. </summary>
         public string Name { get; }
         /// <summary> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </summary>
-        public string Type { get; }
+        public string ResourceType { get; }
     }
 }

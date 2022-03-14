@@ -19,8 +19,10 @@ namespace httpInfrastructure_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -37,16 +39,13 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpServerFailureClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
@@ -61,16 +60,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Head501Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead501Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -90,16 +87,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Head501(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateHead501Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -119,16 +114,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Get501Async(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet501Request(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -148,16 +141,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Get501(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateGet501Request(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -178,16 +169,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Post505Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost505Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -208,16 +197,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Post505(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
             scope.Start();
             try
             {
                 using HttpMessage message = CreatePost505Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -238,16 +225,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> Delete505Async(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete505Request(content, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -268,16 +253,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response Delete505(RequestContent content, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
+            using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateDelete505Request(content, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -288,7 +271,7 @@ namespace httpInfrastructure_LowLevel
 
         internal HttpMessage CreateHead501Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -296,13 +279,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/server/501", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
         internal HttpMessage CreateGet501Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -310,13 +292,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/server/501", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
         internal HttpMessage CreatePost505Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -326,13 +307,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
         internal HttpMessage CreateDelete505Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -342,21 +322,10 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier : Azure.Core.ResponseClassifier
-        {
-            private static Azure.Core.ResponseClassifier _instance;
-            public static Azure.Core.ResponseClassifier Instance => _instance ??= new ResponseClassifier();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier;
+        private static ResponseClassifier ResponseClassifier => _responseClassifier ??= new StatusCodeClassifier(stackalloc ushort[] { });
     }
 }

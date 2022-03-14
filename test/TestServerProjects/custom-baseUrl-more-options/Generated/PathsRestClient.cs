@@ -16,23 +16,26 @@ namespace custom_baseUrl_more_options
 {
     internal partial class PathsRestClient
     {
-        private string subscriptionId;
-        private string dnsSuffix;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _subscriptionId;
+        private readonly string _dnsSuffix;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of PathsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The subscription id with value &apos;test12&apos;. </param>
         /// <param name="dnsSuffix"> A string value that is used as a global part of the parameterized host. Default value &apos;host&apos;. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="dnsSuffix"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="dnsSuffix"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
         {
-            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
-            this.dnsSuffix = dnsSuffix ?? throw new ArgumentNullException(nameof(dnsSuffix));
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
+            _dnsSuffix = dnsSuffix ?? throw new ArgumentNullException(nameof(dnsSuffix));
         }
 
         internal HttpMessage CreateGetEmptyRequest(string vault, string secret, string keyName, string keyVersion)
@@ -43,9 +46,9 @@ namespace custom_baseUrl_more_options
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(vault, false);
             uri.AppendRaw(secret, false);
-            uri.AppendRaw(dnsSuffix, false);
+            uri.AppendRaw(_dnsSuffix, false);
             uri.AppendPath("/customuri/", false);
-            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath(_subscriptionId, true);
             uri.AppendPath("/", false);
             uri.AppendPath(keyName, true);
             if (keyVersion != null)
@@ -63,7 +66,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/>, or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
         public async Task<Response> GetEmptyAsync(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
             if (vault == null)
@@ -86,7 +89,7 @@ namespace custom_baseUrl_more_options
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -96,7 +99,7 @@ namespace custom_baseUrl_more_options
         /// <param name="keyName"> The key name with value &apos;key1&apos;. </param>
         /// <param name="keyVersion"> The key version. Default value &apos;v1&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/>, or <paramref name="keyName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vault"/>, <paramref name="secret"/> or <paramref name="keyName"/> is null. </exception>
         public Response GetEmpty(string vault, string secret, string keyName, string keyVersion = null, CancellationToken cancellationToken = default)
         {
             if (vault == null)
@@ -119,7 +122,7 @@ namespace custom_baseUrl_more_options
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

@@ -39,14 +39,6 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        public bool? IsLongRunningReallyLong
-        {
-            get
-            {
-                return Convert.ToBoolean(Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("x-ms-long-running-reallyLong"));
-            }
-        }
-
         public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
@@ -92,7 +84,7 @@ namespace AutoRest.CSharp.Input
         public ServiceResponse? GetResponseByCode(StatusCodes code)
         {
             return Responses.FirstOrDefault(response => response.Protocol.Http is HttpResponse httpResponse &&
-                httpResponse.StatusCodes.Any(c=> c == code));
+                httpResponse.StatusCodes.Any(c => c == code));
 
         }
         public ServiceResponse? GetSuccessfulQueryResponse()
@@ -101,7 +93,7 @@ namespace AutoRest.CSharp.Input
         }
     }
 
-    internal partial class DictionaryOfAny
+    internal partial class RecordOfStringAndAny
     {
         private static char[] _formatSplitChar = new[] { ',', ' ' };
 
@@ -137,6 +129,8 @@ namespace AutoRest.CSharp.Input
         /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src/autorest.md
         /// </summary>
         public bool MgmtTypeReferenceType => TryGetValue("x-ms-mgmt-typeReferenceType", out var value) && Convert.ToBoolean(value);
+
+        public string? Format => TryGetValue("x-ms-format", out object? value) ? value?.ToString() : null;
     }
 
     internal partial class ServiceResponse
@@ -147,9 +141,9 @@ namespace AutoRest.CSharp.Input
 
     internal partial class RequestParameter
     {
-        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-parameter"));
+        public bool IsResourceParameter => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-resource-identifier"));
 
-        public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
+        public HttpParameterIn In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : HttpParameterIn.None;
         public bool IsFlattened => Flattened ?? false;
     }
 
@@ -164,7 +158,7 @@ namespace AutoRest.CSharp.Input
     {
         public Value()
         {
-            Extensions = new DictionaryOfAny();
+            Extensions = new RecordOfStringAndAny();
         }
 
         public bool IsNullable => Nullable ?? false;
@@ -254,28 +248,6 @@ namespace AutoRest.CSharp.Input
         public string? Summary { get; set; }
     }
 
-    internal partial class NoAuthSecurity : SecurityScheme
-    {
-    }
-
-    internal partial class Security
-    {
-        internal IEnumerable<SecurityScheme> GetSchemesOrAnonymous()
-        {
-            if (Schemes.Count == 0)
-            {
-                yield return new NoAuthSecurity();
-            }
-            else
-            {
-                foreach (var scheme in Schemes)
-                {
-                    yield return scheme;
-                }
-            }
-        }
-    }
-
     internal partial class OperationGroup
     {
         public override string ToString()
@@ -288,9 +260,16 @@ namespace AutoRest.CSharp.Input
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "testModel")]
         public TestModel? TestModel { get; set; }
+
+        private IEnumerable<Schema>? _allSchemas;
+        public IEnumerable<Schema> AllSchemas => _allSchemas ??= Schemas.Choices.Cast<Schema>()
+                .Concat(Schemas.SealedChoices)
+                .Concat(Schemas.Objects)
+                .Concat(Schemas.Groups);
     }
 
-    internal partial class TestDefinitionModel {
+    internal partial class TestDefinitionModel
+    {
 
         [YamlMember(Alias = "useArmTemplate")]
         public Boolean UseArmTemplate;
@@ -317,7 +296,8 @@ namespace AutoRest.CSharp.Input
         public System.Collections.Generic.ICollection<string>? RequiredVariables;
     };
 
-    internal partial class TestStep{
+    internal partial class TestStep
+    {
 
         [YamlMember(Alias = "type")]
         public string Type;
@@ -327,14 +307,14 @@ namespace AutoRest.CSharp.Input
         public string Step;
 
         [YamlMember(Alias = "armTemplatePayload")]
-        public DictionaryOfAny? ArmTemplatePayload;
+        public RecordOfStringAndAny? ArmTemplatePayload;
 
         [YamlMember(Alias = "armTemplateParametersPayload")]
-        public DictionaryOfAny? ArmTemplateParametersPayload;
+        public RecordOfStringAndAny? ArmTemplateParametersPayload;
 
         // for TestStepRestCall (type==restCall)
         [YamlMember(Alias = "operation")]
-        public DictionaryOfAny? Operation;
+        public RecordOfStringAndAny? Operation;
 
         [YamlMember(Alias = "exampleId")]
         public string? ExampleId;
@@ -343,10 +323,10 @@ namespace AutoRest.CSharp.Input
         public string? ExampleFilePath;
 
         [YamlMember(Alias = "requestParameters")]
-        public DictionaryOfAny? RequestParameters;
+        public RecordOfStringAndAny? RequestParameters;
 
         [YamlMember(Alias = "ResponseExpected")]
-        public DictionaryOfAny? responseExpected;
+        public RecordOfStringAndAny? responseExpected;
 
         // test-modeler properties
         [YamlMember(Alias = "exampleModel")]
@@ -356,7 +336,8 @@ namespace AutoRest.CSharp.Input
         public System.Collections.Generic.ICollection<string>? OutputVariableNames;
     };
 
-    internal partial class TestScenario {
+    internal partial class TestScenario
+    {
         [YamlMember(Alias = "requiredVariablesDefault")]
         public System.Collections.Generic.Dictionary<string, string> RequiredVariablesDefault;
 
@@ -423,6 +404,8 @@ namespace AutoRest.CSharp.Input
 
         [YamlMember(Alias = "responses")]
         public System.Collections.Generic.Dictionary<string, ExampleResponse> Responses; // statusCode-->ExampleResponse
+
+        public IEnumerable<ExampleParameter> AllParameter => this.ClientParameters.Concat(this.MethodParameters);
     }
 
     internal partial class ExampleResponse

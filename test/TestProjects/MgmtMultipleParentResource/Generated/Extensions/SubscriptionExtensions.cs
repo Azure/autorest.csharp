@@ -5,10 +5,20 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Resources;
+
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
+        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
+        {
+            return subscription.GetCachedClient((client) =>
+            {
+                return new SubscriptionExtensionClient(client, subscription.Id);
+            }
+            );
+        }
     }
 }

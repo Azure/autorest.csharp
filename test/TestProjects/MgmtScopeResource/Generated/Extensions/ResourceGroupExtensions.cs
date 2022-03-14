@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtScopeResource
@@ -12,14 +16,51 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region DeploymentExtended
-        /// <summary> Gets an object representing a DeploymentExtendedCollection along with the instance operations that can be performed on it. </summary>
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
+        {
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
+        }
+
+        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="DeploymentExtendedCollection" /> object. </returns>
+        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroup resourceGroup)
         {
-            return new DeploymentExtendedCollection(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetDeploymentExtendeds();
         }
-        #endregion
+
+        /// <summary>
+        /// Gets a deployment.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// Operation Id: Deployments_GetAtScope
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this ResourceGroup resourceGroup, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a deployment.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// Operation Id: Deployments_GetAtScope
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        public static Response<DeploymentExtended> GetDeploymentExtended(this ResourceGroup resourceGroup, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+        }
     }
 }

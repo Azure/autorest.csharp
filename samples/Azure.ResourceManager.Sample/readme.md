@@ -14,9 +14,8 @@ public-clients: false
 head-as-boolean: false
 modelerfour:
   lenient-model-deduplication: true
+keep-orphaned-models: AvailabilitySetSkuTypes
 
-mgmt-debug:
-  show-request-path: true
 directive:
   - rename-model:
       from: SshPublicKey

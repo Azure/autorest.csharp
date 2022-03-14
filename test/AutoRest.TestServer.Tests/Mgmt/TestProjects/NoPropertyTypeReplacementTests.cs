@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Reflection;
 using Azure.ResourceManager.Resources.Models;
 using NoTypeReplacement;
 using NUnit.Framework;
@@ -20,7 +21,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(NoTypeReplacement.Models.NoSubResourceModel2), typeof(NoTypeReplacement.Models.MiddleResourceModel))]
         public void ValidateType(Type expectedType, Type targetClass)
         {
-            Assert.AreEqual(expectedType, targetClass.GetProperty("Foo").PropertyType);
+            Assert.AreEqual(expectedType, targetClass.GetProperty("Foo", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance).PropertyType);
         }
 
     }

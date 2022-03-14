@@ -25,7 +25,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("ResGrpParentWithAncestorWithLocCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestorWithLoc", "GetAll", false, false)]
-        [TestCase("SubscriptionExtensions", "GetTestResGrpParentWithAncestorWithLocs", true, false)]
+        [TestCase("SubscriptionExtensions", "GetResGrpParentWithAncestorWithLocs", true, false)]
 
         [TestCase("ResGrpParentWithAncestorCollection", "GetAll", true, false)]
         [TestCase("ResGrpParentWithAncestor", "GetAll", false, false)]
@@ -160,13 +160,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase("FakeCollection", "GetAllAsGenericResources", true)]
-        [TestCase("SubParentCollection", "GetAllAsGenericResources", true)]
-        public void ValidateMethods(string className, string methodName, bool exist)
-        {
-            var classesToCheck = FindAllCollections();
-            var classToCheck = classesToCheck.First(t => t.Name == className);
-            Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
-        }
+        //[TestCase("FakeCollection", "GetAllAsGenericResources", true)]
+        //[TestCase("SubParentCollection", "GetAllAsGenericResources", true)]
+        //public void ValidateMethods(string className, string methodName, bool exist)
+        //{
+        //    var classesToCheck = FindAllCollections();
+        //    var classToCheck = classesToCheck.First(t => t.Name == className);
+        //    Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
+        //}
     }
 }

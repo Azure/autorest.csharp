@@ -8,7 +8,7 @@
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Enables or disables a capability on the virtual machine or virtual machine scale set. </summary>
-    public partial class AdditionalCapabilities
+    internal partial class AdditionalCapabilities
     {
         /// <summary> Initializes a new instance of AdditionalCapabilities. </summary>
         public AdditionalCapabilities()

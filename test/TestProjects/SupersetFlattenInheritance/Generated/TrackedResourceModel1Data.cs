@@ -12,7 +12,7 @@ using Azure.ResourceManager.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the TrackedResourceModel1 data model. </summary>
-    public partial class TrackedResourceModel1Data : TrackedResource
+    public partial class TrackedResourceModel1Data : TrackedResourceData
     {
         /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
         /// <param name="location"> The location. </param>
@@ -23,11 +23,12 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"></param>
-        internal TrackedResourceModel1Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, type, tags, location)
+        internal TrackedResourceModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, resourceType, systemData, tags, location)
         {
             Foo = foo;
         }

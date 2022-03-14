@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -17,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal struct ResourceTypeSegment : IEquatable<ResourceTypeSegment>, IReadOnlyList<Segment>
     {
-        public static readonly ResourceTypeSegment Scope = new(new Segment[0]);
+        public static readonly ResourceTypeSegment Scope = new(Array.Empty<Segment>());
 
         public static readonly ResourceTypeSegment Any = new(new[] { new Segment("*") });
 
@@ -88,9 +89,18 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             var segment = new List<Segment>();
             // find providers
-            int index = path.ToList().LastIndexOf(Segment.Providers);
-            if (index < 0)
-                throw new ArgumentException($"Could not set ResourceTypeSegment for operations group {path}. No {Segment.Providers} string found in the URI");
+            var paths = path.ToList();
+            int index = paths.LastIndexOf(Segment.Providers);
+            if (index < 0 || index == paths.Count - 1)
+            {
+                if (path.SerializedPath.StartsWith(RequestPath.ResourceGroupScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                    return ResourceTypeSegment.ResourceGroup;
+                if (path.SerializedPath.StartsWith(RequestPath.SubscriptionScopePrefix, StringComparison.InvariantCultureIgnoreCase))
+                    return ResourceTypeSegment.Subscription;
+                if (path.SerializedPath.Equals(RequestPath.TenantScopePrefix))
+                    return ResourceTypeSegment.Tenant;
+                throw new ErrorHelpers.ErrorException($"Could not set ResourceTypeSegment for request path {path}. No {Segment.Providers} string found in the URI. Please assign a valid resource type in `request-path-to-resource-type` configuration");
+            }
             segment.Add(path[index + 1]);
             segment.AddRange(path.Skip(index + 1).Where((_, index) => index % 2 != 0));
 
@@ -138,6 +148,30 @@ namespace AutoRest.CSharp.Mgmt.Models
         public static bool operator !=(ResourceTypeSegment left, ResourceTypeSegment right)
         {
             return !(left == right);
+        }
+
+        internal bool DoesMatch(ResourceTypeSegment other)
+        {
+            if (Count == 0)
+                return other.Count == 0;
+
+            if (Count != other.Count)
+                return false;
+
+            if (this[Count - 1].IsConstant == other[Count - 1].IsConstant)
+                return this.Equals(other);
+
+            return DoAllButLastItemMatch(other); //TODO: limit matching to the enum values
+        }
+
+        private bool DoAllButLastItemMatch(ResourceTypeSegment other)
+        {
+            for (int i = 0; i < Count - 1; i++)
+            {
+                if (!this[i].Equals(other[i]))
+                    return false;
+            }
+            return true;
         }
     }
 }

@@ -5,13 +5,14 @@
 
 #nullable disable
 
+using Azure.Core;
 using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods.Models
 {
     /// <summary> The descendant. </summary>
-    internal partial class DescendantInfo : Resource
+    internal partial class DescendantInfo : ResourceData
     {
         /// <summary> Initializes a new instance of DescendantInfo. </summary>
         internal DescendantInfo()
@@ -21,6 +22,11 @@ namespace MgmtListMethods.Models
         /// <summary> The friendly name of the management group. </summary>
         public string DisplayName { get; }
         /// <summary> The ID of the parent management group. </summary>
-        public SubResource Parent { get; }
+        internal SubResource Parent { get; }
+        /// <summary> Gets Id. </summary>
+        public ResourceIdentifier ParentId
+        {
+            get => Parent.Id;
+        }
     }
 }

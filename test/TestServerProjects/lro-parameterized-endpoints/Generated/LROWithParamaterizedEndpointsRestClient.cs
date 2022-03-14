@@ -15,20 +15,22 @@ namespace lro_parameterized_endpoints
 {
     internal partial class LROWithParamaterizedEndpointsRestClient
     {
-        private string host;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _host;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. Pass in &apos;host:3000&apos; to pass test. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="host"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
         public LROWithParamaterizedEndpointsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
-            this.host = host ?? throw new ArgumentNullException(nameof(host));
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _host = host ?? throw new ArgumentNullException(nameof(host));
         }
 
         internal HttpMessage CreatePollWithParameterizedEndpointsRequest(string accountName)
@@ -39,7 +41,7 @@ namespace lro_parameterized_endpoints
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendPath("/lroParameterizedEndpoints", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -66,7 +68,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -90,7 +92,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -102,7 +104,7 @@ namespace lro_parameterized_endpoints
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendPath("/lroConstantParameterizedEndpoints/", false);
             uri.AppendPath("iAmConstant", false);
             request.Uri = uri;
@@ -130,7 +132,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -154,7 +156,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

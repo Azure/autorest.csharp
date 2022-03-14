@@ -7,7 +7,7 @@
 
 namespace SupersetInheritance.Models
 {
-    /// <summary> The SupersetModel2. </summary>
+    /// <summary> This model does not have id property, it&apos;s Non-Resource. </summary>
     public partial class SupersetModel2
     {
         /// <summary> Initializes a new instance of SupersetModel2. </summary>
@@ -16,15 +16,15 @@ namespace SupersetInheritance.Models
         }
 
         /// <summary> Initializes a new instance of SupersetModel2. </summary>
-        /// <param name="iD"></param>
+        /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="type"></param>
+        /// <param name="supersetModel2Type"></param>
         /// <param name="new"></param>
-        internal SupersetModel2(string iD, string name, string type, string @new)
+        internal SupersetModel2(string id, string name, string supersetModel2Type, string @new)
         {
-            ID = iD;
+            ID = id;
             Name = name;
-            Type = type;
+            SupersetModel2Type = supersetModel2Type;
             New = @new;
         }
 
@@ -32,8 +32,8 @@ namespace SupersetInheritance.Models
         public string ID { get; set; }
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the type. </summary>
-        public string Type { get; set; }
+        /// <summary> Gets or sets the superset model 2 type. </summary>
+        public string SupersetModel2Type { get; set; }
         /// <summary> Gets or sets the new. </summary>
         public string New { get; set; }
     }

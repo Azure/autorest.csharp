@@ -14,7 +14,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing the EnvironmentContainerResource data model. </summary>
-    public partial class EnvironmentContainerResourceData : TrackedResource
+    public partial class EnvironmentContainerResourceData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
         /// <param name="location"> The location. </param>
@@ -33,20 +33,17 @@ namespace MgmtParamOrdering
         /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
-        /// <param name="systemData"> System data associated with resource provider. </param>
-        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, EnvironmentContainer properties, SystemData systemData) : base(id, name, type, tags, location)
+        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, EnvironmentContainer properties) : base(id, name, resourceType, systemData, tags, location)
         {
             Properties = properties;
-            SystemData = systemData;
         }
 
         /// <summary> Additional attributes of the entity. </summary>
         public EnvironmentContainer Properties { get; set; }
-        /// <summary> System data associated with resource provider. </summary>
-        public SystemData SystemData { get; }
     }
 }

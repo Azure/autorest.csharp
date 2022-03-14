@@ -8,7 +8,7 @@
 namespace Azure.Management.Storage.Models
 {
     /// <summary> Encryption identity for the storage account. </summary>
-    public partial class EncryptionIdentity
+    internal partial class EncryptionIdentity
     {
         /// <summary> Initializes a new instance of EncryptionIdentity. </summary>
         public EncryptionIdentity()

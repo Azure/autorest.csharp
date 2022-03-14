@@ -18,7 +18,7 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="detectedLanguage"> Detected Language. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="detectedLanguage"/>, or <paramref name="warnings"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="detectedLanguage"/> or <paramref name="warnings"/> is null. </exception>
         internal DocumentLanguage(string id, DetectedLanguage detectedLanguage, IEnumerable<TextAnalyticsWarning> warnings)
         {
             if (id == null)

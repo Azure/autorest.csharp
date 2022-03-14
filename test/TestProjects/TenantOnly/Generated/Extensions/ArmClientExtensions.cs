@@ -15,23 +15,33 @@ namespace TenantOnly
     {
         #region BillingAccount
         /// <summary> Gets an object representing a BillingAccount along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="BillingAccount" /> object. </returns>
-        public static BillingAccount GetBillingAccount(this ArmClient armClient, ResourceIdentifier id)
+        public static BillingAccount GetBillingAccount(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new BillingAccount(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                BillingAccount.ValidateResourceId(id);
+                return new BillingAccount(client, id);
+            }
+            );
         }
         #endregion
 
         #region Agreement
         /// <summary> Gets an object representing a Agreement along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="Agreement" /> object. </returns>
-        public static Agreement GetAgreement(this ArmClient armClient, ResourceIdentifier id)
+        public static Agreement GetAgreement(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new Agreement(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                Agreement.ValidateResourceId(id);
+                return new Agreement(client, id);
+            }
+            );
         }
         #endregion
     }

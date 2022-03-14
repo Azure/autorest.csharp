@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -12,7 +13,7 @@ using Azure.ResourceManager.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing the ChildBody data model. </summary>
-    public partial class ChildBodyData : TrackedResource
+    public partial class ChildBodyData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ChildBodyData. </summary>
         /// <param name="location"> The location. </param>
@@ -23,7 +24,8 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of ChildBodyData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
@@ -33,7 +35,7 @@ namespace MgmtMultipleParentResource
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal ChildBodyData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, tags, location)
+        internal ChildBodyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState) : base(id, name, resourceType, systemData, tags, location)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;
@@ -53,9 +55,9 @@ namespace MgmtMultipleParentResource
         /// <summary> The timeout in seconds to execute the run command. </summary>
         public int? TimeoutInSeconds { get; set; }
         /// <summary> Specifies the Azure storage blob where script output stream will be uploaded. </summary>
-        public string OutputBlobUri { get; set; }
+        public Uri OutputBlobUri { get; set; }
         /// <summary> Specifies the Azure storage blob where script error stream will be uploaded. </summary>
-        public string ErrorBlobUri { get; set; }
+        public Uri ErrorBlobUri { get; set; }
         /// <summary> The provisioning state, which only appears in the response. </summary>
         public string ProvisioningState { get; }
     }

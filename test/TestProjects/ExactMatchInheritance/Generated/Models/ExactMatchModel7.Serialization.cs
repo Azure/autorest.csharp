@@ -25,24 +25,24 @@ namespace ExactMatchInheritance.Models
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Type))
+            if (Optional.IsDefined(ExactMatchModel7Type))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
+                writer.WriteStringValue(ExactMatchModel7Type);
             }
             writer.WriteEndObject();
         }
 
         internal static ExactMatchModel7 DeserializeExactMatchModel7(JsonElement element)
         {
-            Optional<string> iD = default;
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("iD"))
                 {
-                    iD = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -56,7 +56,7 @@ namespace ExactMatchInheritance.Models
                     continue;
                 }
             }
-            return new ExactMatchModel7(iD.Value, name.Value, type.Value);
+            return new ExactMatchModel7(id.Value, name.Value, type.Value);
         }
     }
 }

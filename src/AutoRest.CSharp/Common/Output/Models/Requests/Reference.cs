@@ -18,5 +18,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType Type { get; }
 
         public static implicit operator Reference(Parameter parameter) => new Reference(parameter.Name, parameter.Type);
+        public static implicit operator Reference(FieldDeclaration field) => new Reference(field.Name, field.Type);
     }
 }

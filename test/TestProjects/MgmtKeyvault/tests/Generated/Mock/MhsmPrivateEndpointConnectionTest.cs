@@ -9,12 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Azure.Core;
+using Azure;
 using Azure.Core.TestFramework;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager.Resources.Models;
 using Azure.ResourceManager.TestFramework;
-using MgmtKeyvault.Models;
+using MgmtKeyvault;
 
 namespace MgmtKeyvault.Tests.Mock
 {
@@ -28,21 +26,23 @@ namespace MgmtKeyvault.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetAsync()
+        public async Task Get()
         {
             // Example: ManagedHsmGetPrivateEndpointConnection
-            var mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnection(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm/privateEndpointConnections/sample-pec"));
+            var mhsmPrivateEndpointConnectionId = MgmtKeyvault.MhsmPrivateEndpointConnection.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            var mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnection(mhsmPrivateEndpointConnectionId);
 
             await mhsmPrivateEndpointConnection.GetAsync();
         }
 
         [RecordedTest]
-        public async Task DeleteAsync()
+        public async Task Delete()
         {
             // Example: ManagedHsmDeletePrivateEndpointConnection
-            var mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnection(new ResourceIdentifier("/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedHSMs/sample-mhsm/privateEndpointConnections/sample-pec"));
+            var mhsmPrivateEndpointConnectionId = MgmtKeyvault.MhsmPrivateEndpointConnection.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm", "sample-pec");
+            var mhsmPrivateEndpointConnection = GetArmClient().GetMhsmPrivateEndpointConnection(mhsmPrivateEndpointConnectionId);
 
-            await mhsmPrivateEndpointConnection.DeleteAsync();
+            await mhsmPrivateEndpointConnection.DeleteAsync(WaitUntil.Completed);
         }
     }
 }

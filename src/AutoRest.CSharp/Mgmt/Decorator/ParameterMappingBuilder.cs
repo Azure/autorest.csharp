@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -26,14 +27,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="context">The <see cref="BuildContext"/></param>
         /// <param name="idVariableName">The variable name of the Id variable</param>
         /// <returns></returns>
-        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context, string idVariableName)
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, string idVariableName)
         {
             var stack = new Stack<ContextualParameterMapping>();
-            BuildContextualParameterMappingHierarchy(requestPath, context, stack, idVariableName);
+            BuildContextualParameterMappingHierarchy(requestPath, stack, idVariableName);
             return stack;
         }
 
-        private static void BuildContextualParameterMappingHierarchy(RequestPath current, BuildContext<MgmtOutputLibrary> context, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
+        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
         {
             // Check if the current path is a scope parameter
             if (current.IsParameterizedScope())
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // RequestPath of tenant does not have any parameter in it (actually it does not have anything), we take this as an exit
             if (current == RequestPath.Tenant)
                 return;
-            var parent = current.ParentRequestPath(context);
+            var parent = current.ParentRequestPath();
             // Subscription and ManagementGroup are not terminal states - tenant is their parent
             if (current == RequestPath.Subscription)
             {
@@ -87,7 +88,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             if (keySegment == Segment.Providers) // if the key is providers and the value is a parameter
                             {
-                                parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                if (current.Count <= 4) // path is /providers/{resourceProviderNamespace} or /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}
+                                {
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.Provider"));
+                                }
+                                else
+                                {
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                }
                                 // do not append a new .Parent to the id
                             }
                             else // for all other normal keys
@@ -109,6 +117,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
                             appendParent = true;
                         }
+                        else if (keySegment.IsExpandable)
+                        {
+                            //this is the case where we have expanded the reference into its enumerations
+                            var keyParam = keySegment.Type.Name.ToVariableName();
+                            parameterMappingStack.Push(new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, $"\"{keySegment.ConstantValue}\"", Enumerable.Empty<string>()));
+                            appendParent = true;
+                        }
                         // add .Parent suffix
                         if (appendParent)
                             invocationSuffix += ".Parent";
@@ -127,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
             }
             // recursively get the parameters of its parent
-            BuildContextualParameterMappingHierarchy(parent, context, parameterMappingStack, idVariableName, invocationSuffix);
+            BuildContextualParameterMappingHierarchy(parent, parameterMappingStack, idVariableName, invocationSuffix);
         }
 
         /// <summary>
@@ -179,7 +194,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static FormattableString GetValueExpression(CSharpType type, FormattableString rawExpression)
         {
-            if (type.IsStringLike())
+            if (TypeFactory.IsStringLike(type))
                 return rawExpression;
 
             if (!type.IsFrameworkType)
@@ -319,24 +334,45 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // if we match one parameter, we need to remove the matching ContextualParameterMapping from the list to avoid multiple matching
             if (result != null)
                 contextualParameterMappings.Remove(result);
+            if (result is null && pathParameter.Type.IsEnum)
+            {
+                var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type));
+                if (requestSegment.Any())
+                {
+                    var keySegment = requestSegment.First();
+                    var keyParam = keySegment.Type.Name.ToVariableName();
+                    return new ContextualParameterMapping(keyParam, keyParam, keySegment.Type, $"\"{keySegment.ConstantValue}\"", Enumerable.Empty<string>());
+                }
+            }
             return result;
         }
 
         public static string FindKeyOfParameter(Reference reference, RequestPath requestPath)
         {
             var segments = requestPath.ToList();
-            int index = segments.FindIndex(segment => segment.IsReference && segment.ReferenceName == reference.Name && segment.Type.Equals(reference.Type));
+            int index = segments.FindIndex(segment =>
+            {
+                if (segment.IsReference && segment.ReferenceName == reference.Name && segment.Type.Equals(reference.Type))
+                    return true;
+                if (segment.IsExpandable && segment.Type.Equals(reference.Type))
+                    return true;
+
+                return false;
+            });
             if (index < 0)
                 throw new InvalidOperationException($"Cannot find the key corresponding to parameter {reference.Name} in path {requestPath}");
 
             if (index == 0)
                 return string.Empty;
 
+            if (segments[index].IsExpandable)
+                return segments[index].Type.Name.ToVariableName();
+
             var keySegment = segments[index - 1];
             return keySegment.IsConstant ? keySegment.ConstantValue : string.Empty;
         }
 
-        public static IReadOnlyList<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
+        public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
         {
             return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
         }

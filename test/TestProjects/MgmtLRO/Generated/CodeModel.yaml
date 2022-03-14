@@ -575,7 +575,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_20
-    - !ObjectSchema &ref_51
+    - !ObjectSchema &ref_49
       type: object
       apiVersions:
         - !ApiVersion 
@@ -792,9 +792,6 @@ operationGroups:
                   - '201'
         extensions:
           x-ms-long-running-operation: true
-          x-ms-long-running-operation-options:
-            final-state-via: location
-            x-ms-long-running-reallyLong: true
         language: !Languages 
           default:
             name: CreateOrUpdate
@@ -919,9 +916,6 @@ operationGroups:
                   - '201'
         extensions:
           x-ms-long-running-operation: true
-          x-ms-long-running-operation-options:
-            final-state-via: location
-            x-ms-long-running-reallyLong: true
         language: !Languages 
           default:
             name: Update
@@ -1232,7 +1226,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingSLRO
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingLRO
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -1256,91 +1250,6 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: DoSomethingSlro
-            description: Retrieves information about an fake.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_26
-          - !Parameter &ref_48
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_49
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: fakeName
-                description: The name of the fake.
-                serializedName: fakeName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_27
-          - *ref_28
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_30
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingLRO
-                method: post
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_48
-          - *ref_49
-        responses:
-          - !SchemaResponse 
-            schema: *ref_47
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-long-running-operation: true
-          x-ms-long-running-operation-options:
-            final-state-via: location
-            x-ms-long-running-reallyLong: true
-        language: !Languages 
-          default:
             name: DoSomethingLRO
             description: Retrieves information about an fake.
         protocol: !Protocols {}
@@ -1358,7 +1267,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_50
+          - !Parameter &ref_48
             schema: *ref_1
             implementation: Method
             required: true
@@ -1399,10 +1308,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_50
+          - *ref_48
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1425,7 +1334,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_53
+          - !Parameter &ref_51
             schema: *ref_1
             implementation: Method
             required: true
@@ -1437,7 +1346,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_54
+          - !Parameter &ref_52
             schema: *ref_1
             implementation: Method
             required: true
@@ -1467,7 +1376,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_52
+              - !Parameter &ref_50
                 schema: *ref_5
                 implementation: Method
                 required: true
@@ -1493,7 +1402,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_52
+              - *ref_50
             language: !Languages 
               default:
                 name: ''
@@ -1507,8 +1416,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_53
-          - *ref_54
+          - *ref_51
+          - *ref_52
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1549,7 +1458,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_56
+          - !Parameter &ref_54
             schema: *ref_1
             implementation: Method
             required: true
@@ -1561,7 +1470,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
+          - !Parameter &ref_55
             schema: *ref_1
             implementation: Method
             required: true
@@ -1591,7 +1500,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_55
+              - !Parameter &ref_53
                 schema: *ref_16
                 implementation: Method
                 required: true
@@ -1617,7 +1526,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_55
+              - *ref_53
             language: !Languages 
               default:
                 name: ''
@@ -1631,8 +1540,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
-          - *ref_57
+          - *ref_54
+          - *ref_55
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1673,7 +1582,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_58
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             required: true
@@ -1685,7 +1594,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_59
+          - !Parameter &ref_57
             schema: *ref_1
             implementation: Method
             required: true
@@ -1726,8 +1635,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_58
-          - *ref_59
+          - *ref_56
+          - *ref_57
         responses:
           - !SchemaResponse 
             schema: *ref_5
@@ -1753,7 +1662,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_26
-          - !Parameter &ref_60
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -1765,7 +1674,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_61
+          - !Parameter &ref_59
             schema: *ref_1
             implementation: Method
             required: true
@@ -1791,8 +1700,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_60
-          - *ref_61
+          - *ref_58
+          - *ref_59
         responses:
           - !Response 
             language: !Languages 
@@ -1823,9 +1732,6 @@ operationGroups:
                   - '204'
         extensions:
           x-ms-long-running-operation: true
-          x-ms-long-running-operation-options:
-            final-state-via: location
-            x-ms-long-running-reallyLong: true
         language: !Languages 
           default:
             name: Delete

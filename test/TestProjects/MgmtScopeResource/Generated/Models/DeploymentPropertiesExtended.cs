@@ -24,8 +24,8 @@ namespace MgmtScopeResource.Models
         /// <param name="duration"> The duration of the template deployment. </param>
         /// <param name="outputs"> Key/value pairs that represent deployment output. </param>
         /// <param name="parameters"> Deployment parameters. </param>
-        /// <param name="error"> The deployment error. </param>
-        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, string duration, object outputs, object parameters, ErrorResponse error)
+        /// <param name="errorResponse"> The deployment error. </param>
+        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, object outputs, object parameters, ErrorResponse errorResponse)
         {
             ProvisioningState = provisioningState;
             CorrelationId = correlationId;
@@ -33,7 +33,7 @@ namespace MgmtScopeResource.Models
             Duration = duration;
             Outputs = outputs;
             Parameters = parameters;
-            Error = error;
+            ErrorResponse = errorResponse;
         }
 
         /// <summary> Denotes the state of provisioning. </summary>
@@ -43,12 +43,17 @@ namespace MgmtScopeResource.Models
         /// <summary> The timestamp of the template deployment. </summary>
         public DateTimeOffset? Timestamp { get; }
         /// <summary> The duration of the template deployment. </summary>
-        public string Duration { get; }
+        public TimeSpan? Duration { get; }
         /// <summary> Key/value pairs that represent deployment output. </summary>
         public object Outputs { get; }
         /// <summary> Deployment parameters. </summary>
         public object Parameters { get; }
         /// <summary> The deployment error. </summary>
-        public ErrorResponse Error { get; }
+        internal ErrorResponse ErrorResponse { get; }
+        /// <summary> The details of the error. </summary>
+        public string Error
+        {
+            get => ErrorResponse.Error;
+        }
     }
 }

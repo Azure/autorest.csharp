@@ -19,8 +19,10 @@ namespace header_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
@@ -35,16 +37,13 @@ namespace header_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HeaderClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATHeaderServiceClientOptions options = null)
+        public HeaderClient(AzureKeyCredential credential, Uri endpoint = null, HeaderClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-            options ??= new AutoRestSwaggerBATHeaderServiceClientOptions();
+            options ??= new HeaderClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
@@ -63,16 +62,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
+            Argument.AssertNotNull(userAgent, nameof(userAgent));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamExistingKeyRequest(userAgent, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -94,16 +93,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamExistingKey(string userAgent, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
+            Argument.AssertNotNull(userAgent, nameof(userAgent));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamExistingKeyRequest(userAgent, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -123,16 +122,14 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseExistingKeyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseExistingKeyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -152,16 +149,14 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseExistingKey(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseExistingKeyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -183,16 +178,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
+            Argument.AssertNotNull(contentType, nameof(contentType));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamProtectedKeyRequest(contentType, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -214,16 +209,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamProtectedKey(string contentType, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
+            Argument.AssertNotNull(contentType, nameof(contentType));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamProtectedKeyRequest(contentType, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -243,16 +238,14 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseProtectedKeyAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseProtectedKeyRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -272,16 +265,14 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseProtectedKey(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseProtectedKeyRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -304,16 +295,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamIntegerRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -336,16 +327,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamInteger(string scenario, int value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamIntegerRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -367,16 +358,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseIntegerRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -398,16 +389,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseInteger(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseIntegerRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -430,16 +421,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamLongRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -462,16 +453,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamLong(string scenario, long value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamLongRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -493,16 +484,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseLongAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseLongRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -524,16 +515,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseLong(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseLongRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -556,16 +547,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamFloatRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -588,16 +579,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamFloat(string scenario, float value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamFloatRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -619,16 +610,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseFloatRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -650,16 +641,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseFloat(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseFloatRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -682,16 +673,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDoubleRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -714,16 +705,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDouble(string scenario, double value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDoubleRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -745,16 +736,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDoubleRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -776,16 +767,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDouble(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDoubleRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -808,16 +799,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamBoolRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -840,16 +831,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamBool(string scenario, bool value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamBoolRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -871,16 +862,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseBoolRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -902,16 +893,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseBool(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseBoolRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -934,16 +925,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamStringRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -966,16 +957,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamString(string scenario, string value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamStringRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -997,16 +988,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseStringAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseStringRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1028,16 +1019,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseString(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseStringRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1060,16 +1051,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDateRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1092,16 +1083,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDateRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1123,16 +1114,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDateAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDateRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1154,16 +1145,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDate(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDateRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1186,16 +1177,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDatetimeRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1218,16 +1209,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDatetimeRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1249,16 +1240,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1280,16 +1271,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDatetime(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1312,16 +1303,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1344,16 +1335,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1375,16 +1366,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1406,16 +1397,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDatetimeRfc1123(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1438,16 +1429,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDurationRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1470,16 +1461,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamDuration(string scenario, TimeSpan value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamDurationRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1501,16 +1492,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDurationRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1532,16 +1523,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseDuration(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseDurationRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1564,16 +1555,17 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+            Argument.AssertNotNull(value, nameof(value));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamByteRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1596,16 +1588,17 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamByte(string scenario, byte[] value, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+            Argument.AssertNotNull(value, nameof(value));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamByteRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1627,16 +1620,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseByteAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseByteRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1658,16 +1651,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseByte(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseByteRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1690,16 +1683,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamEnumRequest(scenario, value, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1722,16 +1715,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ParamEnum(string scenario, string value = null, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateParamEnumRequest(scenario, value, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1753,16 +1746,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseEnumRequest(scenario, context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1784,16 +1777,16 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response ResponseEnum(string scenario, RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
+            Argument.AssertNotNull(scenario, nameof(scenario));
+
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateResponseEnumRequest(scenario, context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1813,16 +1806,14 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual async Task<Response> CustomRequestIdAsync(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCustomRequestIdRequest(context);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, context).ConfigureAwait(false);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1842,16 +1833,14 @@ namespace header_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
         public virtual Response CustomRequestId(RequestContext context = null)
-#pragma warning restore AZC0002
         {
-            using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
+            using var scope = ClientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
                 using HttpMessage message = CreateCustomRequestIdRequest(context);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1862,7 +1851,7 @@ namespace header_LowLevel
 
         internal HttpMessage CreateParamExistingKeyRequest(string userAgent, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1871,13 +1860,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("User-Agent", userAgent);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseExistingKeyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1885,13 +1873,12 @@ namespace header_LowLevel
             uri.AppendPath("/header/response/existingkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamProtectedKeyRequest(string contentType, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1899,13 +1886,12 @@ namespace header_LowLevel
             uri.AppendPath("/header/param/protectedkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseProtectedKeyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1913,13 +1899,12 @@ namespace header_LowLevel
             uri.AppendPath("/header/response/protectedkey", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamIntegerRequest(string scenario, int value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1929,13 +1914,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseIntegerRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1944,13 +1928,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamLongRequest(string scenario, long value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1960,13 +1943,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseLongRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1975,13 +1957,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamFloatRequest(string scenario, float value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1991,13 +1972,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseFloatRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2006,13 +1986,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamDoubleRequest(string scenario, double value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2022,13 +2001,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseDoubleRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2037,13 +2015,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamBoolRequest(string scenario, bool value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2053,13 +2030,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseBoolRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2068,13 +2044,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamStringRequest(string scenario, string value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2087,13 +2062,12 @@ namespace header_LowLevel
                 request.Headers.Add("value", value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseStringRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2102,13 +2076,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2118,13 +2091,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "D");
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseDateRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2133,13 +2105,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2149,13 +2120,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "O");
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseDatetimeRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2164,13 +2134,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2183,13 +2152,12 @@ namespace header_LowLevel
                 request.Headers.Add("value", value.Value, "R");
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseDatetimeRfc1123Request(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2198,13 +2166,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2214,13 +2181,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "P");
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseDurationRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2229,13 +2195,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamByteRequest(string scenario, byte[] value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2245,13 +2210,12 @@ namespace header_LowLevel
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("value", value, "D");
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseByteRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2260,13 +2224,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateParamEnumRequest(string scenario, string value, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2279,13 +2242,12 @@ namespace header_LowLevel
                 request.Headers.Add("value", value);
             }
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateResponseEnumRequest(string scenario, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2294,13 +2256,12 @@ namespace header_LowLevel
             request.Uri = uri;
             request.Headers.Add("scenario", scenario);
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateCustomRequestIdRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2308,22 +2269,10 @@ namespace header_LowLevel
             uri.AppendPath("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

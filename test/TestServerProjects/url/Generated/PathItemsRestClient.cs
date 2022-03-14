@@ -16,11 +16,13 @@ namespace url
 {
     internal partial class PathItemsRestClient
     {
-        private string globalStringPath;
-        private Uri endpoint;
-        private string globalStringQuery;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _globalStringPath;
+        private readonly Uri _endpoint;
+        private readonly string _globalStringQuery;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of PathItemsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
@@ -28,14 +30,15 @@ namespace url
         /// <param name="globalStringPath"> A string value &apos;globalItemStringPath&apos; that appears in the path. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="globalStringQuery"> should contain value null. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="globalStringPath"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="globalStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         public PathItemsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, Uri endpoint = null, string globalStringQuery = null)
         {
-            this.globalStringPath = globalStringPath ?? throw new ArgumentNullException(nameof(globalStringPath));
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            this.globalStringQuery = globalStringQuery;
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _globalStringPath = globalStringPath ?? throw new ArgumentNullException(nameof(globalStringPath));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
+            _globalStringQuery = globalStringQuery;
         }
 
         internal HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery, string localStringQuery)
@@ -44,9 +47,9 @@ namespace url
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-            uri.AppendPath(globalStringPath, true);
+            uri.AppendPath(_globalStringPath, true);
             uri.AppendPath("/pathItemStringPath/", false);
             uri.AppendPath(pathItemStringPath, true);
             uri.AppendPath("/localStringPath/", false);
@@ -56,9 +59,9 @@ namespace url
             {
                 uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
             }
-            if (globalStringQuery != null)
+            if (_globalStringQuery != null)
             {
-                uri.AppendQuery("globalStringQuery", globalStringQuery, true);
+                uri.AppendQuery("globalStringQuery", _globalStringQuery, true);
             }
             if (localStringQuery != null)
             {
@@ -94,7 +97,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -123,7 +126,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -133,9 +136,9 @@ namespace url
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-            uri.AppendPath(globalStringPath, true);
+            uri.AppendPath(_globalStringPath, true);
             uri.AppendPath("/pathItemStringPath/", false);
             uri.AppendPath(pathItemStringPath, true);
             uri.AppendPath("/localStringPath/", false);
@@ -145,9 +148,9 @@ namespace url
             {
                 uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
             }
-            if (globalStringQuery != null)
+            if (_globalStringQuery != null)
             {
-                uri.AppendQuery("globalStringQuery", globalStringQuery, true);
+                uri.AppendQuery("globalStringQuery", _globalStringQuery, true);
             }
             if (localStringQuery != null)
             {
@@ -183,7 +186,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -212,7 +215,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -222,9 +225,9 @@ namespace url
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-            uri.AppendPath(globalStringPath, true);
+            uri.AppendPath(_globalStringPath, true);
             uri.AppendPath("/pathItemStringPath/", false);
             uri.AppendPath(pathItemStringPath, true);
             uri.AppendPath("/localStringPath/", false);
@@ -234,9 +237,9 @@ namespace url
             {
                 uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
             }
-            if (globalStringQuery != null)
+            if (_globalStringQuery != null)
             {
-                uri.AppendQuery("globalStringQuery", globalStringQuery, true);
+                uri.AppendQuery("globalStringQuery", _globalStringQuery, true);
             }
             if (localStringQuery != null)
             {
@@ -272,7 +275,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -301,7 +304,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -311,9 +314,9 @@ namespace url
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/pathitem/nullable/globalStringPath/", false);
-            uri.AppendPath(globalStringPath, true);
+            uri.AppendPath(_globalStringPath, true);
             uri.AppendPath("/pathItemStringPath/", false);
             uri.AppendPath(pathItemStringPath, true);
             uri.AppendPath("/localStringPath/", false);
@@ -323,9 +326,9 @@ namespace url
             {
                 uri.AppendQuery("pathItemStringQuery", pathItemStringQuery, true);
             }
-            if (globalStringQuery != null)
+            if (_globalStringQuery != null)
             {
-                uri.AppendQuery("globalStringQuery", globalStringQuery, true);
+                uri.AppendQuery("globalStringQuery", _globalStringQuery, true);
             }
             if (localStringQuery != null)
             {
@@ -361,7 +364,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -390,7 +393,7 @@ namespace url
                 case 200:
                     return message.Response;
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

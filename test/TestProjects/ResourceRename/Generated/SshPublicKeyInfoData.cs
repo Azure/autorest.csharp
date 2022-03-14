@@ -12,7 +12,7 @@ using ResourceRename.Models;
 namespace ResourceRename
 {
     /// <summary> A class representing the SshPublicKeyInfo data model. </summary>
-    public partial class SshPublicKeyInfoData : Resource
+    public partial class SshPublicKeyInfoData : ResourceData
     {
         /// <summary> Initializes a new instance of SshPublicKeyInfoData. </summary>
         public SshPublicKeyInfoData()
@@ -22,9 +22,10 @@ namespace ResourceRename
         /// <summary> Initializes a new instance of SshPublicKeyInfoData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed. </param>
-        internal SshPublicKeyInfoData(ResourceIdentifier id, string name, ResourceType type, SshPublicKeyProperties properties) : base(id, name, type)
+        internal SshPublicKeyInfoData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, SshPublicKeyProperties properties) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
         }

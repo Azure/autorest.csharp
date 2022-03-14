@@ -14,7 +14,7 @@ using Azure.ResourceManager.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the StorageAccount data model. </summary>
-    public partial class StorageAccountData : TrackedResource
+    public partial class StorageAccountData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of StorageAccountData. </summary>
         /// <param name="location"> The location. </param>
@@ -26,7 +26,8 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of StorageAccountData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="sku"> Gets the SKU. </param>
@@ -66,7 +67,7 @@ namespace Azure.Management.Storage
         /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
         /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be &apos;Enabled&apos; or &apos;Disabled&apos;. </param>
         /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default. </param>
-        internal StorageAccountData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, Models.Sku sku, Kind? kind, Identity identity, ExtendedLocation extendedLocation, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, SasPolicy sasPolicy, KeyPolicy keyPolicy, KeyCreationTime keyCreationTime, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, PublicNetworkAccess? publicNetworkAccess, ImmutableStorageAccount immutableStorageWithVersioning) : base(id, name, type, tags, location)
+        internal StorageAccountData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, StorageSku sku, StorageKind? kind, ManagedServiceIdentity identity, ExtendedLocation extendedLocation, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, SasPolicy sasPolicy, KeyPolicy keyPolicy, KeyCreationTime keyCreationTime, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, PublicNetworkAccess? publicNetworkAccess, ImmutableStorageAccount immutableStorageWithVersioning) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Kind = kind;
@@ -108,11 +109,11 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets the SKU. </summary>
-        public Models.Sku Sku { get; }
+        public StorageSku Sku { get; }
         /// <summary> Gets the Kind. </summary>
-        public Kind? Kind { get; }
+        public StorageKind? Kind { get; }
         /// <summary> The identity of the resource. </summary>
-        public Identity Identity { get; set; }
+        public ManagedServiceIdentity Identity { get; set; }
         /// <summary> The extendedLocation of the resource. </summary>
         public ExtendedLocation ExtendedLocation { get; set; }
         /// <summary> Gets the status of the storage account at the time the operation was called. </summary>
@@ -136,7 +137,14 @@ namespace Azure.Management.Storage
         /// <summary> SasPolicy assigned to the storage account. </summary>
         public SasPolicy SasPolicy { get; }
         /// <summary> KeyPolicy assigned to the storage account. </summary>
-        public KeyPolicy KeyPolicy { get; }
+        internal KeyPolicy KeyPolicy { get; }
+        /// <summary> The key expiration period in days. </summary>
+        public int KeyExpirationPeriodInDays
+        {
+            get => KeyPolicy.KeyExpirationPeriodInDays;
+            set => KeyPolicy.KeyExpirationPeriodInDays = value;
+        }
+
         /// <summary> Storage account keys creation time. </summary>
         public KeyCreationTime KeyCreationTime { get; }
         /// <summary> Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS. </summary>

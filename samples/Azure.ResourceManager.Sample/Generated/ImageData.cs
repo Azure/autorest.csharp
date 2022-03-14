@@ -14,7 +14,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the Image data model. </summary>
-    public partial class ImageData : TrackedResource
+    public partial class ImageData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ImageData. </summary>
         /// <param name="location"> The location. </param>
@@ -25,14 +25,15 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of ImageData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="sourceVirtualMachine"> The source virtual machine from which Image is created. </param>
         /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
         /// <param name="provisioningState"> The provisioning state. </param>
         /// <param name="hyperVGeneration"> Gets the HyperVGenerationType of the VirtualMachine created from the image. </param>
-        internal ImageData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, type, tags, location)
+        internal ImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, resourceType, systemData, tags, location)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;
@@ -41,7 +42,19 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> The source virtual machine from which Image is created. </summary>
-        public WritableSubResource SourceVirtualMachine { get; set; }
+        internal WritableSubResource SourceVirtualMachine { get; set; }
+        /// <summary> Gets or sets Id. </summary>
+        public ResourceIdentifier SourceVirtualMachineId
+        {
+            get => SourceVirtualMachine is null ? default : SourceVirtualMachine.Id;
+            set
+            {
+                if (SourceVirtualMachine is null)
+                    SourceVirtualMachine = new WritableSubResource();
+                SourceVirtualMachine.Id = value;
+            }
+        }
+
         /// <summary> Specifies the storage settings for the virtual machine disks. </summary>
         public ImageStorageProfile StorageProfile { get; set; }
         /// <summary> The provisioning state. </summary>

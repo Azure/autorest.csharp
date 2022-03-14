@@ -15,12 +15,17 @@ namespace MgmtCollectionParent
     {
         #region OrderResource
         /// <summary> Gets an object representing a OrderResource along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="armClient"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="OrderResource" /> object. </returns>
-        public static OrderResource GetOrderResource(this ArmClient armClient, ResourceIdentifier id)
+        public static OrderResource GetOrderResource(this ArmClient client, ResourceIdentifier id)
         {
-            return armClient.UseClientContext((uri, credential, clientOptions, pipeline) => new OrderResource(clientOptions, credential, uri, pipeline, id));
+            return client.GetClient(() =>
+            {
+                OrderResource.ValidateResourceId(id);
+                return new OrderResource(client, id);
+            }
+            );
         }
         #endregion
     }

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
@@ -17,10 +17,10 @@ namespace MgmtPropertyChooser.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Type))
+            if (Optional.IsDefined(ResourceIdentityType))
             {
                 writer.WritePropertyName("type");
-                writer.WriteStringValue(Type.Value.ToSerialString());
+                writer.WriteStringValue(ResourceIdentityType.Value.ToSerialString());
             }
             if (Optional.IsCollectionDefined(UserAssignedIdentities))
             {

@@ -14,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -34,7 +35,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
-            return ReferenceClassFinder.ExternalTypes.Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
+            return ReferenceClassFinder.ExternalTypes.Where(t =>
+            {
+                return t.GetCustomAttributes(false).Any(a => a.GetType().Name == PropertyReferenceAttributeName) &&
+                    t.Name.SplitByCamelCase().Count() > 1; //this is needed while we have the backcompat Plan and ArmPlan inside Azure.ResourceManager
+            }).ToList();
         }
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
@@ -47,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(schema, out result);
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace)
         {
             if (_valueCache.TryGetValue(typeToReplace.ObjectSchema, out var result))
                 return result;
@@ -62,22 +67,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
                     List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
 
-                    if (replacementType == typeof(ResourceIdentity))
-                    {
-                        List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
-                        foreach (var parentProperty in replacementTypeProperties)
-                        {
-                            if (parentProperty.PropertyType.IsClass && parentProperty.PropertyType != typeof(string))
-                            {
-                                flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
-                            }
-                            else
-                            {
-                                flattenedReplacementTypeProperties.Add(parentProperty);
-                            }
-                        }
-                        replacementTypeProperties = flattenedReplacementTypeProperties;
-                    }
                     if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
                     {
                         result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
@@ -100,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (originalType.Declaration.Name == "Location" && (isString || frameworkType.Name == _locationType.Name))
                 return GetObjectTypeProperty(originalType, _locationType, context);
 
-            if (originalType.Declaration.Name == "Type" && (isString || frameworkType.Name == _resourceTypeType.Name))
+            if (originalType.Declaration.Name == "ResourceType" && (isString || frameworkType.Name == _resourceTypeType.Name))
                 return GetObjectTypeProperty(originalType, _resourceTypeType, context);
 
             if (originalType.Declaration.Name == "Id" && (isString || frameworkType.Name == _resourceIdentifierType.Name))

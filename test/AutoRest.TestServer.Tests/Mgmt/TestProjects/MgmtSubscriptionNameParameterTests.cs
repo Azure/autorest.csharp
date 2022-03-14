@@ -12,8 +12,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtSubscriptionNameParameterTests() : base("MgmtSubscriptionNameParameter")
         {
         }
-        [TestCase("SBSubscriptionCollection", "CreateOrUpdateAsync", new[] { "subscriptionName", "parameters", "waitForCompletion", "cancellationToken" })]
-        [TestCase("SBSubscriptionCollection", "CreateOrUpdate", new[] { "subscriptionName", "parameters", "waitForCompletion", "cancellationToken" })]
+        [TestCase("SBSubscriptionCollection", "CreateOrUpdateAsync", new[] { "waitUntil", "subscriptionName", "parameters", "cancellationToken" })]
+        [TestCase("SBSubscriptionCollection", "CreateOrUpdate", new[] { "waitUntil", "subscriptionName", "parameters", "cancellationToken" })]
         [TestCase("SBSubscriptionCollection", "Get", new[] { "subscriptionName", "cancellationToken" })]
         [TestCase("SBSubscriptionCollection", "GetAsync", new[] { "subscriptionName", "cancellationToken" })]
         public void ValidateParameter(string className, string methodName, string[] parameterNames)
