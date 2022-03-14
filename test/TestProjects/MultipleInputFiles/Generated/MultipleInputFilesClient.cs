@@ -68,6 +68,7 @@ namespace MultipleInputFiles
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="source"> source - server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal MultipleInputFilesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Source? source = default)
         {
             RestClient = new MultipleInputFilesRestClient(clientDiagnostics, pipeline, source);

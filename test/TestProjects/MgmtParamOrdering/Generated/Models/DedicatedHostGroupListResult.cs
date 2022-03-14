@@ -13,7 +13,7 @@ using MgmtParamOrdering;
 namespace MgmtParamOrdering.Models
 {
     /// <summary> The list dedicated host operation response. </summary>
-    public partial class DedicatedHostGroupListResult
+    internal partial class DedicatedHostGroupListResult
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>

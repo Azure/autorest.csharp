@@ -12,7 +12,7 @@ using SingletonResource;
 
 namespace SingletonResource.Models
 {
-    public partial class ParentResourceListResult
+    internal partial class ParentResourceListResult
     {
         internal static ParentResourceListResult DeserializeParentResourceListResult(JsonElement element)
         {

@@ -52,7 +52,7 @@ namespace ExactMatchInheritance
         {
             _exactMatchModel1ClientDiagnostics = new ClientDiagnostics("ExactMatchInheritance", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string exactMatchModel1ApiVersion);
-            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(_exactMatchModel1ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
+            _exactMatchModel1RestClient = new ExactMatchModel1SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, exactMatchModel1ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,7 +87,7 @@ namespace ExactMatchInheritance
         /// Operation Id: ExactMatchModel1s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ExactMatchModel1>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ExactMatchModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _exactMatchModel1ClientDiagnostics.CreateScope("ExactMatchModel1.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace ExactMatchInheritance
             {
                 var response = await _exactMatchModel1RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _exactMatchModel1ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace ExactMatchInheritance
             {
                 var response = _exactMatchModel1RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _exactMatchModel1ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ExactMatchModel1(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

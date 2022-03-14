@@ -12,7 +12,7 @@ using MgmtExtensionCommonRestOperation;
 
 namespace MgmtExtensionCommonRestOperation.Models
 {
-    public partial class TypeTwoListResult
+    internal partial class TypeTwoListResult
     {
         internal static TypeTwoListResult DeserializeTypeTwoListResult(JsonElement element)
         {

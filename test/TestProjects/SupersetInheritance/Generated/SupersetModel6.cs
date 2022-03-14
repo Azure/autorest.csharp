@@ -52,7 +52,7 @@ namespace SupersetInheritance
         {
             _supersetModel6ClientDiagnostics = new ClientDiagnostics("SupersetInheritance", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string supersetModel6ApiVersion);
-            _supersetModel6RestClient = new SupersetModel6SRestOperations(_supersetModel6ClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel6ApiVersion);
+            _supersetModel6RestClient = new SupersetModel6SRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, supersetModel6ApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,7 +87,7 @@ namespace SupersetInheritance
         /// Operation Id: SupersetModel6s_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<SupersetModel6>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SupersetModel6>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _supersetModel6ClientDiagnostics.CreateScope("SupersetModel6.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace SupersetInheritance
             {
                 var response = await _supersetModel6RestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _supersetModel6ClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel6(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace SupersetInheritance
             {
                 var response = _supersetModel6RestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _supersetModel6ClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel6(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

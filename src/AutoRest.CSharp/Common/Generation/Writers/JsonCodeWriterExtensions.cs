@@ -16,6 +16,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -217,7 +218,14 @@ namespace AutoRest.CSharp.Generation.Writers
                                 var systemObjectType = objectType as SystemObjectType;
                                 if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
                                 {
-                                    writer.Append($"JsonSerializer.Serialize(writer, {name});");
+                                    var optionalSerializeOptions = string.Empty;
+                                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
+                                    {
+                                        writer.UseNamespace("Azure.ResourceManager.Models");
+                                        writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                                        optionalSerializeOptions = ", serializeOptions";
+                                    }
+                                    writer.Append($"JsonSerializer.Serialize(writer, {name}{optionalSerializeOptions});");
                                 }
                                 else
                                 {
@@ -476,6 +484,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     valueCallback(writer, w => w.Append(dictionaryVariable));
                     return;
                 case JsonValueSerialization valueSerialization:
+                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
+                    {
+                        writer.Line($"var serializeOptions = new JsonSerializerOptions {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
+                    }
                     valueCallback(writer, w => w.DeserializeValue(valueSerialization, element));
                     return;
             }
@@ -503,7 +515,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                writer.DeserializeImplementation(serialization.Type.Implementation, element);
+                writer.DeserializeImplementation(serialization.Type.Implementation, serialization, element);
             }
         }
 
@@ -602,7 +614,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return systemObjectType.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
         }
 
-        public static void DeserializeImplementation(this CodeWriter writer, TypeProvider implementation, CodeWriterDelegate element)
+        public static void DeserializeImplementation(this CodeWriter writer, TypeProvider implementation, JsonSerialization serialization, CodeWriterDelegate element)
         {
             switch (implementation)
             {
@@ -611,7 +623,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         var systemObjectType = objectType as SystemObjectType;
                         if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
                         {
-                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString())");
+                            var optionalSerializeOptions = (serialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3) ? ", serializeOptions" : string.Empty;
+                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString(){optionalSerializeOptions})");
                         }
                         else if (objectType is MgmtObjectType mgmtObjectType && TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema))
                         {
@@ -641,6 +654,7 @@ namespace AutoRest.CSharp.Generation.Writers
             SerializationFormat.Bytes_Base64Url => "U",
             SerializationFormat.Bytes_Base64 => "D",
             SerializationFormat.Duration_ISO8601 => "P",
+            SerializationFormat.Duration_Constant => "c",
             SerializationFormat.Time_ISO8601 => "T",
             _ => null
         };

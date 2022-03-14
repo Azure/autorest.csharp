@@ -18,10 +18,10 @@ namespace MgmtScopeResource.Models
             Optional<ProvisioningState> provisioningState = default;
             Optional<string> correlationId = default;
             Optional<DateTimeOffset> timestamp = default;
-            Optional<string> duration = default;
+            Optional<TimeSpan> duration = default;
             Optional<object> outputs = default;
             Optional<object> parameters = default;
-            Optional<ErrorResponse> error = default;
+            Optional<ErrorResponse> errorResponse = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("provisioningState"))
@@ -51,7 +51,12 @@ namespace MgmtScopeResource.Models
                 }
                 if (property.NameEquals("duration"))
                 {
-                    duration = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    duration = property.Value.GetTimeSpan("P");
                     continue;
                 }
                 if (property.NameEquals("outputs"))
@@ -74,18 +79,18 @@ namespace MgmtScopeResource.Models
                     parameters = property.Value.GetObject();
                     continue;
                 }
-                if (property.NameEquals("error"))
+                if (property.NameEquals("errorResponse"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = ErrorResponse.DeserializeErrorResponse(property.Value);
+                    errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
             }
-            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), duration.Value, outputs.Value, parameters.Value, error.Value);
+            return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), outputs.Value, parameters.Value, errorResponse.Value);
         }
     }
 }

@@ -52,13 +52,13 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        public virtual async Task<Response> CollapsePutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
+        public virtual async Task<Response> IfMatchPutAsync(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch, context);
+                using HttpMessage message = CreateIfMatchPutRequest(content, ifMatch, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -71,13 +71,13 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="ifMatch"> Specify an ETag value to operate only on blobs with a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        public virtual Response CollapsePut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
+        public virtual Response IfMatchPut(RequestContent content, ETag? ifMatch = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapsePut");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfMatchPut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapsePutRequest(content, ifMatch, context);
+                using HttpMessage message = CreateIfMatchPutRequest(content, ifMatch, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -87,15 +87,16 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
+        public virtual async Task<Response> IfNoneMatchPutAsync(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
+                using HttpMessage message = CreateIfNoneMatchPutRequest(content, ifNoneMatch, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,15 +106,16 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="ifNoneMatch"> Specify an ETag value to operate only on blobs without a matching value. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
+        public virtual Response IfNoneMatchPut(RequestContent content, ETag? ifNoneMatch = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.CollapseGet");
+            using var scope = ClientDiagnostics.CreateScope("NonCollapseClient.IfNoneMatchPut");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateCollapseGetRequest(requestConditions, context);
+                using HttpMessage message = CreateIfNoneMatchPutRequest(content, ifNoneMatch, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -123,14 +125,14 @@ namespace CollapseRequestCondition_LowLevel
             }
         }
 
-        internal HttpMessage CreateCollapsePutRequest(RequestContent content, ETag? ifMatch, RequestContext context)
+        internal HttpMessage CreateIfMatchPutRequest(RequestContent content, ETag? ifMatch, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/NonCollapse/", false);
+            uri.AppendPath("/NonCollapse/ifMatch", false);
             request.Uri = uri;
             if (ifMatch != null)
             {
@@ -138,39 +140,28 @@ namespace CollapseRequestCondition_LowLevel
             }
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateCollapseGetRequest(RequestConditions requestConditions, RequestContext context)
+        internal HttpMessage CreateIfNoneMatchPutRequest(RequestContent content, ETag? ifNoneMatch, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/NonCollapse/", false);
+            uri.AppendPath("/NonCollapse/ifNoneMatch", false);
             request.Uri = uri;
-            if (requestConditions != null)
+            if (ifNoneMatch != null)
             {
-                request.Headers.Add(requestConditions, "R");
+                request.Headers.Add("If-None-Match", ifNoneMatch.Value);
             }
-            message.ResponseClassifier = ResponseClassifier200.Instance;
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

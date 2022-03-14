@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class SshConfiguration : IUtf8JsonSerializable
+    internal partial class SshConfiguration : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

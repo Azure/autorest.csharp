@@ -280,6 +280,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCollectionParent\\Generated"
     },
+    "MgmtDiscriminator": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtDiscriminator\\Generated"
+    },
     "MgmtExpandResourceTypes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExpandResourceTypes\\Generated"
@@ -335,6 +339,10 @@
     "MgmtRenameRules": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtRenameRules\\Generated"
+    },
+    "MgmtSafeFlatten": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSafeFlatten\\Generated"
     },
     "MgmtScopeResource": {
       "commandName": "Project",

@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _existingType = new Lazy<INamedTypeSymbol?>(() => Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
-        public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum);
+        public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         internal BuildContext Context { get; private set; }

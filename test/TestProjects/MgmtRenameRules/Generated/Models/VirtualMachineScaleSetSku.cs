@@ -19,7 +19,7 @@ namespace MgmtRenameRules.Models
         /// <param name="resourceType"> The type of resource the sku applies to. </param>
         /// <param name="sku"> The Sku. </param>
         /// <param name="capacity"> Specifies the number of virtual machines in the scale set. </param>
-        internal VirtualMachineScaleSetSku(string resourceType, Sku sku, VirtualMachineScaleSetSkuCapacity capacity)
+        internal VirtualMachineScaleSetSku(string resourceType, MgmtRenameRulesSku sku, VirtualMachineScaleSetSkuCapacity capacity)
         {
             ResourceType = resourceType;
             Sku = sku;
@@ -29,7 +29,7 @@ namespace MgmtRenameRules.Models
         /// <summary> The type of resource the sku applies to. </summary>
         public string ResourceType { get; }
         /// <summary> The Sku. </summary>
-        public Sku Sku { get; }
+        public MgmtRenameRulesSku Sku { get; }
         /// <summary> Specifies the number of virtual machines in the scale set. </summary>
         public VirtualMachineScaleSetSkuCapacity Capacity { get; }
     }

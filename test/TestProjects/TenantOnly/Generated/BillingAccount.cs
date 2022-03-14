@@ -53,7 +53,7 @@ namespace TenantOnly
         {
             _billingAccountClientDiagnostics = new ClientDiagnostics("TenantOnly", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string billingAccountApiVersion);
-            _billingAccountRestClient = new BillingAccountsRestOperations(_billingAccountClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
+            _billingAccountRestClient = new BillingAccountsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, billingAccountApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -91,13 +91,43 @@ namespace TenantOnly
         }
 
         /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
+        /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
+        public virtual async Task<Response<Agreement>> GetAgreementAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await GetAgreements().GetAsync(agreementName, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
+        /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
+        public virtual Response<Agreement> GetAgreement(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return GetAgreements().Get(agreementName, expand, cancellationToken);
+        }
+
+        /// <summary>
         /// Gets a billing account by its ID.
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
         /// Operation Id: BillingAccounts_Get
         /// </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<BillingAccount>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BillingAccount>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _billingAccountClientDiagnostics.CreateScope("BillingAccount.Get");
             scope.Start();
@@ -105,7 +135,7 @@ namespace TenantOnly
             {
                 var response = await _billingAccountRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _billingAccountClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BillingAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -130,7 +160,7 @@ namespace TenantOnly
             {
                 var response = _billingAccountRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
-                    throw _billingAccountClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BillingAccount(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -149,7 +179,7 @@ namespace TenantOnly
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> or <paramref name="value"/> is null. </exception>
-        public async virtual Task<Response<BillingAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BillingAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
             Argument.AssertNotNull(value, nameof(value));
@@ -159,8 +189,8 @@ namespace TenantOnly
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.TagValues[key] = value;
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -190,8 +220,8 @@ namespace TenantOnly
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                originalTags.Value.Data.TagValues[key] = value;
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -210,7 +240,7 @@ namespace TenantOnly
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tags"/> is null. </exception>
-        public async virtual Task<Response<BillingAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BillingAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(tags, nameof(tags));
 
@@ -218,10 +248,10 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.TagValues.ReplaceWith(tags);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -248,10 +278,10 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                originalTags.Value.Data.TagValues.ReplaceWith(tags);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -270,7 +300,7 @@ namespace TenantOnly
         /// <param name="key"> The key for the tag. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="key"/> is null. </exception>
-        public async virtual Task<Response<BillingAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BillingAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(key, nameof(key));
 
@@ -279,8 +309,8 @@ namespace TenantOnly
             try
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
-                originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.TagValues.Remove(key);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -308,8 +338,8 @@ namespace TenantOnly
             try
             {
                 var originalTags = TagResource.Get(cancellationToken);
-                originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                originalTags.Value.Data.TagValues.Remove(key);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

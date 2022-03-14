@@ -52,7 +52,7 @@ namespace Pagination
         {
             _pageSizeDoubleModelClientDiagnostics = new ClientDiagnostics("Pagination", ResourceType.Namespace, DiagnosticOptions);
             TryGetApiVersion(ResourceType, out string pageSizeDoubleModelApiVersion);
-            _pageSizeDoubleModelRestClient = new PageSizeDoubleModelsRestOperations(_pageSizeDoubleModelClientDiagnostics, Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDoubleModelApiVersion);
+            _pageSizeDoubleModelRestClient = new PageSizeDoubleModelsRestOperations(Pipeline, DiagnosticOptions.ApplicationId, BaseUri, pageSizeDoubleModelApiVersion);
 #if DEBUG
 			ValidateResourceId(Id);
 #endif
@@ -87,7 +87,7 @@ namespace Pagination
         /// Operation Id: PageSizeDoubleModels_Get
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PageSizeDoubleModel>> GetAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<PageSizeDoubleModel>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _pageSizeDoubleModelClientDiagnostics.CreateScope("PageSizeDoubleModel.Get");
             scope.Start();
@@ -95,7 +95,7 @@ namespace Pagination
             {
                 var response = await _pageSizeDoubleModelRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
-                    throw await _pageSizeDoubleModelClientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDoubleModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -118,7 +118,7 @@ namespace Pagination
             {
                 var response = _pageSizeDoubleModelRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
-                    throw _pageSizeDoubleModelClientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                    throw new RequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeDoubleModel(Client, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

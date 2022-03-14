@@ -14,18 +14,18 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentValidateResult DeserializeDeploymentValidateResult(JsonElement element)
         {
-            Optional<ErrorResponse> error = default;
+            Optional<ErrorResponse> errorResponse = default;
             Optional<DeploymentPropertiesExtended> properties = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("error"))
+                if (property.NameEquals("errorResponse"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = ErrorResponse.DeserializeErrorResponse(property.Value);
+                    errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -39,7 +39,7 @@ namespace MgmtScopeResource.Models
                     continue;
                 }
             }
-            return new DeploymentValidateResult(error.Value, properties.Value);
+            return new DeploymentValidateResult(errorResponse.Value, properties.Value);
         }
     }
 }
