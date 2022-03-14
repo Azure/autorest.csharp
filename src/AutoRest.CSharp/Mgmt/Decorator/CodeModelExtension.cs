@@ -76,17 +76,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     // Do not use property.SerializedName=="type" so that we can still use x-ms-client-name to override the auto-renaming here if there is some edge case.
                     if (property.Language.Default.Name.Equals("type", StringComparison.OrdinalIgnoreCase))
                     {
+                        // TODO: we may reuse the IsResourceModel method from SchemaExtension, but the result for flattened properties is different as although models with matched flattened properties are not treated as Resource but they still inherit from ResourceData. Here we align with the inheritance match to include flattened properties for match.
                         if (property.Schema.Type == AllSchemaTypes.String
                             && objSchema.ContainsStringProperty("id")
-                            && objSchema.ContainsStringProperty("name"))
+                            && objSchema.ContainsStringProperty("name")
+                            || objSchema.Language.Default.Name.Contains("NameAvailability", StringComparison.Ordinal))
                         {
                             property.Language.Default.Name = "resourceType";
                         }
-                        else if (property.Schema.Name.EndsWith("Type", StringComparison.Ordinal))
+                        else if (property.Schema.Name.EndsWith("Type", StringComparison.Ordinal) && property.Schema.Name.Length != 4)
                         {
                             property.Language.Default.Name = property.Schema.Name;
                         }
-                        else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal))
+                        else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal) && property.Schema.Name.Length != 5)
                         {
                             property.Language.Default.Name = property.Schema.Name.TrimEnd('s');
                         }
@@ -101,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static bool ContainsStringProperty(this ObjectSchema objSchema, string propertyName)
         {
-            return objSchema.Properties.Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String || objSchema.Parents?.All.Any(pt => pt is ObjectSchema ps && ps.Properties.Any(pp => pp.SerializedName.Equals(propertyName, StringComparison.Ordinal) && pp.Schema.Type == AllSchemaTypes.String)) == true);
+            return objSchema.GetAllProperties().Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String);
         }
 
         public static void UpdateSubscriptionIdForAllResource(this CodeModel codeModel)
