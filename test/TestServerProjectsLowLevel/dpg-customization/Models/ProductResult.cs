@@ -12,7 +12,7 @@ using Azure.Core;
 namespace dpg_customization_LowLevel.Models
 {
     /// <summary> The ProductResult. </summary>
-    public partial class ProductResult
+    internal partial class ProductResult
     {
         /// <summary> Initializes a new instance of ProductResult. </summary>
         internal ProductResult()

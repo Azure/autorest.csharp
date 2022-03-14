@@ -58,12 +58,10 @@ namespace dpg_customization_LowLevel
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            };
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(input);
 
-            Response response = await PostModelAsync("model", RequestContent.Create(input, new JsonObjectSerializer(options)), requestContext);
+            Response response = await PostModelAsync("model", content, requestContext);
             return Response.FromValue((Product)response, response);
         }
 
@@ -79,12 +77,10 @@ namespace dpg_customization_LowLevel
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            };
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(input);
 
-            Response result = PostModel("model", RequestContent.Create(input, new JsonObjectSerializer(options)), requestContext);
+            Response result = PostModel("model", content, requestContext);
             return Response.FromValue((Product)result, result);
         }
 
