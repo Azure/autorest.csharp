@@ -140,7 +140,7 @@ stages:
           # - pwsh: ./eng/InitMockTests.ps1
           #   displayName: "Generate All SDK"
           #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - powershell: |
+          - script: |
               ./eng/InitMockTests.ps1
             displayName: "Generate All SDK"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
