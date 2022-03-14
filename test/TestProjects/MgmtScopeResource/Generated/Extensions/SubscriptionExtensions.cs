@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtScopeResource
@@ -12,14 +16,79 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region PolicyAssignment
-        /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
-        public static PolicyAssignmentContainer GetPolicyAssignments(this Subscription subscription)
+        private static SubscriptionExtensionClient GetExtensionClient(Subscription subscription)
         {
-            return new PolicyAssignmentContainer(subscription);
+            return subscription.GetCachedClient((client) =>
+            {
+                return new SubscriptionExtensionClient(client, subscription.Id);
+            }
+            );
         }
-        #endregion
+
+        /// <summary> Gets a collection of DeploymentExtendeds in the DeploymentExtended. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of DeploymentExtendeds and their operations over a DeploymentExtended. </returns>
+        public static DeploymentExtendedCollection GetDeploymentExtendeds(this Subscription subscription)
+        {
+            return GetExtensionClient(subscription).GetDeploymentExtendeds();
+        }
+
+        /// <summary>
+        /// Gets a deployment.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// Operation Id: Deployments_GetAtScope
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        public static async Task<Response<DeploymentExtended>> GetDeploymentExtendedAsync(this Subscription subscription, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            return await subscription.GetDeploymentExtendeds().GetAsync(deploymentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a deployment.
+        /// Request Path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+        /// Operation Id: Deployments_GetAtScope
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        public static Response<DeploymentExtended> GetDeploymentExtended(this Subscription subscription, string deploymentName, CancellationToken cancellationToken = default)
+        {
+            return subscription.GetDeploymentExtendeds().Get(deploymentName, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets all the linked resources for the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
+        /// Operation Id: ResourceLinks_ListAtSubscription
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ResourceLink> GetResourceLinksAsync(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(subscription).GetResourceLinksAsync(filter, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets all the linked resources for the subscription.
+        /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
+        /// Operation Id: ResourceLinks_ListAtSubscription
+        /// </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ResourceLink> GetResourceLinks(this Subscription subscription, string filter = null, CancellationToken cancellationToken = default)
+        {
+            return GetExtensionClient(subscription).GetResourceLinks(filter, cancellationToken);
+        }
     }
 }

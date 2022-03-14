@@ -1,40 +1,47 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using System.Collections.Generic;
+using MgmtParent;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
     public class MgmtParentTests : TestProjectTests
     {
-        public MgmtParentTests() : base("MgmtParent") { }
+        public MgmtParentTests()
+            : base("MgmtParent")
+        {
+        }
+
+        protected override HashSet<Type> ListExceptionCollections { get; } = new HashSet<Type>() { typeof(DedicatedHostGroupCollection) };
 
         [TestCase("AvailabilitySet", true)]
         [TestCase("DedicatedHostGroup", true)]
         [TestCase("DedicatedHost", true)]
-        [TestCase("VirtualMachineExtensionImage", false)]
+        [TestCase("VirtualMachineExtensionImage", true)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
             Assert.AreEqual(isExists, resourceTypeExists);
         }
 
-        [TestCase("AvailabilitySetContainer", true)]
-        [TestCase("DedicatedHostGroupContainer", true)]
-        [TestCase("DedicatedHostContainer", true)]
-        [TestCase("VirtualMachineExtensionImageContainer", false)]
-        public void ValidateContainers(string container, bool isExists)
+        [TestCase("AvailabilitySetCollection", true)]
+        [TestCase("DedicatedHostGroupCollection", true)]
+        [TestCase("DedicatedHostCollection", true)]
+        [TestCase("VirtualMachineExtensionImageCollection", true)]
+        public void ValidateCollections(string collection, bool isExists)
         {
-            var containerTypeExists = FindAllContainers().Any(o => o.Name == container);
-            Assert.AreEqual(isExists, containerTypeExists);
+            var collectionTypeExists = FindAllCollections().Any(o => o.Name == collection);
+            Assert.AreEqual(isExists, collectionTypeExists);
         }
 
-        [TestCase("AvailabilitySetContainer", "GetAllAsGenericResources", true)]
-        [TestCase("DedicatedHostGroupContainer", "GetAllAsGenericResources", true)]
-        public void ValidateMethods(string className, string methodName, bool exist)
-        {
-            var classesToCheck = FindAllContainers();
-            var classToCheck = classesToCheck.First(t => t.Name == className);
-            Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
-        }
+        //[TestCase("AvailabilitySetCollection", "GetAllAsGenericResources", true)]
+        //[TestCase("DedicatedHostGroupCollection", "GetAllAsGenericResources", true)]
+        //public void ValidateMethods(string className, string methodName, bool exist)
+        //{
+        //    var classesToCheck = FindAllCollections();
+        //    var classToCheck = classesToCheck.First(t => t.Name == className);
+        //    Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
+        //}
     }
 }

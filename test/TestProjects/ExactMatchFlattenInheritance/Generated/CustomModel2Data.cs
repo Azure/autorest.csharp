@@ -5,13 +5,13 @@
 
 #nullable disable
 
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
 
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the CustomModel2 data model. </summary>
-    public partial class CustomModel2Data : Resource
+    public partial class CustomModel2Data : ResourceData
     {
         /// <summary> Initializes a new instance of CustomModel2Data. </summary>
         public CustomModel2Data()
@@ -22,8 +22,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        internal CustomModel2Data(ResourceIdentifier id, string name, ResourceType type, string foo) : base(id, name, type)
+        internal CustomModel2Data(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string foo) : base(id, name, type, systemData)
         {
             Foo = foo;
         }

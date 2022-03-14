@@ -345,7 +345,6 @@ schemas: !Schemas
               name: whatNotFound
               description: ''
           protocol: !Protocols {}
-      discriminatorValue: NotFoundErrorBase
       parents: !Relations 
         all:
           - *ref_7
@@ -481,7 +480,6 @@ schemas: !Schemas
               immediate:
                 PetSadError: *ref_15
               property: *ref_22
-            discriminatorValue: PetActionError
             parents: !Relations 
               all:
                 - *ref_17
@@ -541,7 +539,7 @@ schemas: !Schemas
 globalParameters:
   - !Parameter &ref_25
     schema: *ref_0
-    clientDefaultValue: http://localhost
+    clientDefaultValue: http://localhost:3000
     implementation: Client
     origin: modelerfour:synthesized/host
     required: true

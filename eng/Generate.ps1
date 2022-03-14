@@ -9,6 +9,7 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 
 $swaggerDefinitions = @{};
+$swaggerTestDefinitions = @{};
 
 # Test server test configuration
 $autoRestPluginProject = (Get-AutoRestProject)
@@ -19,6 +20,14 @@ $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' '
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
+        'projectName'=$name;
+        'output'=$output;
+        'arguments'=$arguments
+    }
+}
+
+function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
+    $swaggerTestDefinitions[$name] = @{
         'projectName'=$name;
         'output'=$output;
         'arguments'=$arguments
@@ -84,7 +93,7 @@ if (!($Exclude -contains "TestServer"))
     }
 }
 
-$llcArgs = "--low-level-client=true --security=AzureKey --security-header-name=Fake-Subscription-Key"
+$llcArgs = "--data-plane=true --security=AzureKey --security-header-name=Fake-Subscription-Key"
 
 $testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
 $testNamesLowLevel =
@@ -112,6 +121,27 @@ if (!($Exclude -contains "TestServerLowLevel"))
     }
 }
 
+function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest) {
+    $readmeConfigurationPath = Join-Path $directory "readme.md"
+    $testArguments = $null
+    if (Test-Path $readmeConfigurationPath)
+    {
+        $testArguments = "--require=$readmeConfigurationPath"
+    }
+    else
+    {
+        $inputFile = Join-Path $directory "$testName.json"
+        $testArguments ="--require=$configurationPath --input-file=$inputFile"
+    }
+
+    if ($forTest) {
+        Add-Swagger-Test $testName $directory $testArguments
+    }
+    else {
+        Add-Swagger $testName $directory $testArguments
+    }
+}
+
 if (!($Exclude -contains "TestProjects"))
 {
     # Local test projects
@@ -122,6 +152,14 @@ if (!($Exclude -contains "TestProjects"))
         $testName = $directory.Name
         $readmeConfigurationPath = Join-Path $directory "readme.md"
         $testArguments = $null
+        $srcFolder = Join-Path $directory "src"
+        $testsFolder = Join-Path $directory "tests"
+
+        if ((Test-Path -Path $srcFolder) -And (Test-Path -Path $testsFolder)) {
+            Add-Directory $testName $srcFolder $FALSE
+            Add-Directory $testName $testsFolder $TRUE
+            continue
+        }
         if (Test-Path $readmeConfigurationPath)
         {
             $testArguments = "--require=$readmeConfigurationPath"
@@ -135,6 +173,7 @@ if (!($Exclude -contains "TestProjects"))
         Add-Swagger $testName $directory $testArguments
     }
 }
+
 # Sample configuration
 $projectNames =
     'AppConfiguration',
@@ -145,7 +184,8 @@ $projectNames =
     'Azure.ResourceManager.Sample',
     'Azure.Management.Storage',
     'Azure.Network.Management.Interface',
-    'Azure.AI.DocumentTranslation'
+    'Azure.AI.DocumentTranslation',
+    'Azure.Analytics.Purview.Account'
 
 if (!($Exclude -contains "Samples"))
 {
@@ -189,7 +229,12 @@ $settings = @{
 foreach ($key in Sort-FileSafe ($swaggerDefinitions.Keys))
 {
     $definition = $swaggerDefinitions[$key];
-    $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
+    $outputPath = Join-Path $definition.output "Generated"
+    if ($key -eq "TypeSchemaMapping")
+    {
+        $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
+    }
+    $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 
     $settings.profiles[$key] = [ordered]@{
         'commandName'='Project';
@@ -227,5 +272,12 @@ if (![string]::IsNullOrWhiteSpace($filter))
 $keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
     Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast;
+} -ThrottleLimit $parallel
+
+$keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
+    if ($_.output -ne $null) {
+        Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
+        Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast;
+    }
 } -ThrottleLimit $parallel
 

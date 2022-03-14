@@ -26,7 +26,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20210603.1
+      ref: refs/tags/azure-sdk-build-tools_20211215.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -34,14 +34,22 @@ stages:
       - job: Build
         timeoutInMinutes: 120
         pool:
-          vmImage: windows-2019
+          name: azsdk-pool-mms-win-2019-general
+          vmImage: MMS2019
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
-          - task: NodeTool@0
-            displayName: "Install Node 14.x"
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core SDK'
+            retryCountOnTaskFailure: 3
             inputs:
-              versionSpec: '14.x'
+              useGlobalJson: true
+              performMultiLevelLookup: true
+          - task: NodeTool@0
+            displayName: "Install Node 16.x"
+            inputs:
+              # https://github.com/nodejs/node/issues/40468
+              versionSpec: '16.6.2'
           - script: |
               npm ci
             displayName: "Install packages"
@@ -128,6 +136,11 @@ stages:
             - checkout: self
             - checkout: azure-sdk-for-net
             - checkout: azure-sdk-tools
+            - task: UseDotNet@2
+              displayName: 'Use .NET Core SDK'
+              inputs:
+                useGlobalJson: true
+                performMultiLevelLookup: true
             - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -Version $(AutorestCSharpVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
               failOnStderr: false
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp

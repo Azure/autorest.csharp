@@ -3,6 +3,7 @@
 
 using System;
 using System.Buffers;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
@@ -42,14 +43,21 @@ namespace AutoRest.CSharp.Generation.Types
             IsNullable = isNullable;
             Arguments = arguments;
             IsValueType = type.IsValueType;
+            IsEnum = type.IsEnum;
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
         }
 
-        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
+        public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
+            : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments)
+        {
+        }
+
+        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
         {
             _implementation = implementation;
             Name = name;
             IsValueType = isValueType;
+            IsEnum = isEnum;
             IsNullable = isNullable;
             Namespace = ns;
             if (arguments != null)
@@ -62,6 +70,7 @@ namespace AutoRest.CSharp.Generation.Types
         public string Namespace { get; }
         public string Name { get; }
         public bool IsValueType { get; }
+        public bool IsEnum { get; }
         public bool IsPublic { get; }
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
@@ -86,20 +95,35 @@ namespace AutoRest.CSharp.Generation.Types
 
         public bool EqualsIgnoreNullable(CSharpType other) => Equals(other, ignoreNullable: true);
 
-        public bool Equals(Type type)
+        public bool Equals(Type type) =>
+            IsFrameworkType && (type.IsGenericType ? type.GetGenericTypeDefinition() == FrameworkType && ArgumentsEquals(type.GetGenericArguments()) : type == FrameworkType);
+
+        private bool ArgumentsEquals(Type[] genericArguments)
         {
-            return IsFrameworkType && type == FrameworkType;
+            if (Arguments.Length != genericArguments.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < Arguments.Length; i++)
+            {
+                if (!Arguments[i].Equals(genericArguments[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(_implementation, _type, Arguments);
-        }
+        public override int GetHashCode() => HashCode.Combine(_implementation, _type, ((System.Collections.IStructuralEquatable)Arguments).GetHashCode(EqualityComparer<CSharpType>.Default));
+
+        public bool IsGenericType => Arguments.Length > 0;
 
         public CSharpType WithNullable(bool isNullable) =>
             isNullable == IsNullable ? this : IsFrameworkType
                 ? new CSharpType(FrameworkType, isNullable, Arguments)
-                : new CSharpType(Implementation, Namespace, Name, IsValueType, isNullable);
+                : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
 
@@ -116,7 +140,8 @@ namespace AutoRest.CSharp.Generation.Types
                 systemObjectType,
                 type.Namespace ?? context.DefaultNamespace,
                 systemObjectType.Declaration.Name,
-                false,
+                type.IsValueType,
+                type.IsEnum,
                 false,
                 genericTypes.ToArray());
         }

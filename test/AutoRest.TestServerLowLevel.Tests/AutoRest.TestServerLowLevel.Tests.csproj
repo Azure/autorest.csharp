@@ -15,8 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.19.0" />
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.16" />
+    <RuntimeHostConfigurationOption Include="Azure.Core.Pipeline.HttpClientTransport.EnableCookies" Value="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Core" Version="1.23.0-alpha.20220310.5" />
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Include="Azure.Identity" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
     <PackageReference Include="nunit" Version="3.12.0" />
@@ -35,6 +39,7 @@
 
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
+    <Compile Include="../AutoRest.TestServer.Tests/TypeAsserts.cs" />
   </ItemGroup>
 
 </Project>

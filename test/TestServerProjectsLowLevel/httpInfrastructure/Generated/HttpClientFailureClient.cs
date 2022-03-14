@@ -18,13 +18,14 @@ namespace httpInfrastructure_LowLevel
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of HttpClientFailureClient for mocking. </summary>
         protected HttpClientFailureClient()
@@ -38,22 +39,18 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpClientFailureClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new Azure.Core.ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -63,16 +60,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Head400Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Head400Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead400Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead400Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -82,7 +77,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -92,16 +87,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Head400(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Head400(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead400Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateHead400Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -111,7 +104,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -121,16 +114,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Get400Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Get400Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet400Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet400Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -140,7 +131,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -150,16 +141,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Get400(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Get400(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet400Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGet400Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -169,7 +158,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -179,16 +168,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Options400Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Options400Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions400Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions400Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -198,7 +185,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -208,16 +195,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Options400(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Options400(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions400Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateOptions400Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -228,7 +213,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -238,16 +223,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Put400Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Put400Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut400Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut400Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -258,7 +241,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -268,16 +251,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Put400(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Put400(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut400Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePut400Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -288,7 +269,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -298,16 +279,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Patch400Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Patch400Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch400Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch400Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -318,7 +297,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -328,16 +307,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Patch400(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Patch400(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch400Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePatch400Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -348,7 +325,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -358,16 +335,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Post400Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Post400Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost400Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost400Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -378,7 +353,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -388,16 +363,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Post400(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Post400(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost400Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePost400Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -408,7 +381,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -418,16 +391,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Delete400Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Delete400Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete400Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete400Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -438,7 +409,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -448,16 +419,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Delete400(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Delete400(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete400Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateDelete400Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -467,7 +436,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -477,16 +446,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Head401Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Head401Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead401Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead401Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -496,7 +463,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -506,16 +473,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Head401(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Head401(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead401Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateHead401Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -525,7 +490,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -535,16 +500,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Get402Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Get402Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet402Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet402Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -554,7 +517,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -564,16 +527,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Get402(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Get402(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet402Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGet402Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -583,7 +544,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -593,16 +554,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Options403Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Options403Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions403Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions403Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -612,7 +571,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -622,16 +581,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Options403(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Options403(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions403Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateOptions403Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -641,7 +598,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -651,16 +608,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Get403Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Get403Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet403Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet403Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -670,7 +625,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -680,16 +635,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Get403(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Get403(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet403Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGet403Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -700,7 +653,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -710,16 +663,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Put404Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Put404Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut404Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut404Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -730,7 +681,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -740,16 +691,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Put404(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Put404(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut404Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePut404Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -760,7 +709,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -770,16 +719,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Patch405Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Patch405Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch405Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch405Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -790,7 +737,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -800,16 +747,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Patch405(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Patch405(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch405Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePatch405Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -820,7 +765,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -830,16 +775,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Post406Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Post406Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost406Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost406Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -850,7 +793,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -860,16 +803,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Post406(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Post406(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost406Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePost406Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -880,7 +821,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -890,16 +831,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Delete407Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Delete407Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete407Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete407Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -910,7 +849,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -920,16 +859,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Delete407(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Delete407(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete407Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateDelete407Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -940,7 +877,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -950,16 +887,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Put409Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Put409Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut409Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut409Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -970,7 +905,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -980,16 +915,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Put409(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Put409(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut409Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePut409Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -999,7 +932,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1009,16 +942,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Head410Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Head410Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead410Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead410Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1028,7 +959,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1038,16 +969,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Head410(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Head410(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead410Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateHead410Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1057,7 +986,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1067,16 +996,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Get411Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Get411Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet411Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet411Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1086,7 +1013,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1096,16 +1023,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Get411(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Get411(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet411Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGet411Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1115,7 +1040,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1125,16 +1050,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Options412Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Options412Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions412Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions412Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1144,7 +1067,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1154,16 +1077,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Options412(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Options412(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions412Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateOptions412Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1173,7 +1094,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1183,16 +1104,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Get412Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Get412Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet412Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet412Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1202,7 +1121,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1212,16 +1131,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Get412(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Get412(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet412Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGet412Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1232,7 +1149,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1242,16 +1159,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Put413Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Put413Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut413Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut413Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1262,7 +1177,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1272,16 +1187,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Put413(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Put413(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut413Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePut413Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1292,7 +1205,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1302,16 +1215,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Patch414Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Patch414Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch414Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch414Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1322,7 +1233,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1332,16 +1243,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Patch414(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Patch414(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch414Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePatch414Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1352,7 +1261,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1362,16 +1271,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Post415Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Post415Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost415Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost415Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1382,7 +1289,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1392,16 +1299,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Post415(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Post415(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost415Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePost415Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1411,7 +1316,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1421,16 +1326,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Get416Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Get416Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet416Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet416Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1440,7 +1343,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1450,16 +1353,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Get416(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Get416(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet416Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGet416Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1470,7 +1371,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1480,16 +1381,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Delete417Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Delete417Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete417Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete417Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1500,7 +1399,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1510,16 +1409,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Delete417(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Delete417(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete417Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateDelete417Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1529,7 +1426,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1539,16 +1436,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Head429Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Head429Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead429Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead429Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1558,7 +1453,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -1568,16 +1463,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Head429(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Head429(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
+            using var scope = ClientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead429Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateHead429Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1586,9 +1479,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal HttpMessage CreateHead400Request()
+        internal HttpMessage CreateHead400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1596,13 +1489,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGet400Request()
+        internal HttpMessage CreateGet400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1610,13 +1502,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateOptions400Request()
+        internal HttpMessage CreateOptions400Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1624,13 +1515,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePut400Request(RequestContent content)
+        internal HttpMessage CreatePut400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1640,13 +1530,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePatch400Request(RequestContent content)
+        internal HttpMessage CreatePatch400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1656,13 +1545,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePost400Request(RequestContent content)
+        internal HttpMessage CreatePost400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1672,13 +1560,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateDelete400Request(RequestContent content)
+        internal HttpMessage CreateDelete400Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1688,13 +1575,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateHead401Request()
+        internal HttpMessage CreateHead401Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1702,13 +1588,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/401", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGet402Request()
+        internal HttpMessage CreateGet402Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1716,13 +1601,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/402", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateOptions403Request()
+        internal HttpMessage CreateOptions403Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1730,13 +1614,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGet403Request()
+        internal HttpMessage CreateGet403Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1744,13 +1627,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePut404Request(RequestContent content)
+        internal HttpMessage CreatePut404Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1760,13 +1642,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePatch405Request(RequestContent content)
+        internal HttpMessage CreatePatch405Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1776,13 +1657,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePost406Request(RequestContent content)
+        internal HttpMessage CreatePost406Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1792,13 +1672,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateDelete407Request(RequestContent content)
+        internal HttpMessage CreateDelete407Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1808,13 +1687,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePut409Request(RequestContent content)
+        internal HttpMessage CreatePut409Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1824,13 +1702,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateHead410Request()
+        internal HttpMessage CreateHead410Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1838,13 +1715,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/410", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGet411Request()
+        internal HttpMessage CreateGet411Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1852,13 +1728,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/411", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateOptions412Request()
+        internal HttpMessage CreateOptions412Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1866,13 +1741,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGet412Request()
+        internal HttpMessage CreateGet412Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1880,13 +1754,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePut413Request(RequestContent content)
+        internal HttpMessage CreatePut413Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1896,13 +1769,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePatch414Request(RequestContent content)
+        internal HttpMessage CreatePatch414Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1912,13 +1784,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePost415Request(RequestContent content)
+        internal HttpMessage CreatePost415Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1928,13 +1799,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGet416Request()
+        internal HttpMessage CreateGet416Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1942,13 +1812,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/416", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateDelete417Request(RequestContent content)
+        internal HttpMessage CreateDelete417Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1958,13 +1827,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        internal HttpMessage CreateHead429Request()
+        internal HttpMessage CreateHead429Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1972,21 +1840,10 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/failure/client/429", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier : Azure.Core.ResponseClassifier
-        {
-            private static Azure.Core.ResponseClassifier _instance;
-            public static Azure.Core.ResponseClassifier Instance => _instance ??= new ResponseClassifier();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier;
+        private static ResponseClassifier ResponseClassifier => _responseClassifier ??= new StatusCodeClassifier(stackalloc ushort[] { });
     }
 }

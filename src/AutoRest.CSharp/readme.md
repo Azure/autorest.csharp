@@ -4,7 +4,7 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.21.1"
+  "@autorest/modelerfour": "4.22.3"
 modelerfour:
   always-create-content-type-parameter: true
 pipeline:
@@ -18,7 +18,7 @@ output-scope:
 shared-source-folders: $(this-folder)/Generator.Shared;$(this-folder)/Azure.Core.Shared
 ```
 
-```yaml !$(low-level-client)
+```yaml !$(data-plane)
 modelerfour:
   flatten-models: true
   flatten-payloads: true
@@ -32,6 +32,29 @@ pipeline:
   csharpproj/emitter:
     input: csharpproj
     scope: output-scope
+```
+
+```yaml $(testmodeler)
+use-extension:
+  # "@autorest/testmodeler": "D://projects//codegen//azure-sdk-tools//tools//sdk-testgen//packages//autorest.testmodeler"
+  "@autorest/testmodeler": "2.2.0"
+
+
+pipeline:
+  test-modeler:
+    input: modelerfour/identity
+    scope : output-scope
+  test-modeler/identity:
+    input: test-modeler
+  csharpgen:
+    input: test-modeler/identity
+
+modelerfour:
+  emit-yaml-tags: true
+
+testmodeler:
+  use-parents-value: true
+  split-parents-value: false
 ```
 
 ## Help

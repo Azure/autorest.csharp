@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -13,12 +14,13 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using Azure.Core;
 using AutoRest.CSharp.Utilities;
+using Azure;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, IReadOnlyDictionary<string, string>? fieldNames, string? responseClassifierType, bool writeUserAgentOverride)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -37,7 +39,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                if (clientMethod.Parameters.Contains(KnownParameters.RequestContext))
+                {
+                    writer.Append($"var {message:D} = _pipeline.CreateMessage({KnownParameters.RequestContext.Name:I}");
+                    if (responseClassifierType != default)
+                    {
+                        writer.Append($", {responseClassifierType}");
+                    }
+                    writer.Line($");");
+                }
+                else
+                {
+                    writer.Line($"var {message:D} = _pipeline.CreateMessage();");
+                }
+
                 writer.Line($"var {request:D} = {message}.Request;");
 
                 var method = clientMethod.Request.HttpMethod;
@@ -50,7 +65,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
                 foreach (var segment in clientMethod.Request.PathSegments)
                 {
-                    var value = FixFieldReference(fieldNames, segment.Value);
+                    var value = GetFieldReference(fields, segment.Value);
                     if (value.Type.IsFrameworkType && value.Type.FrameworkType == typeof(Uri))
                     {
                         writer.Append($"{uri}.Reset(");
@@ -70,23 +85,23 @@ namespace AutoRest.CSharp.Generation.Writers
                 //TODO: Duplicate code between query and header parameter processing logic
                 foreach (var queryParameter in clientMethod.Request.Query)
                 {
-                    WriteQueryParameter(writer, uri, queryParameter, fieldNames);
+                    WriteQueryParameter(writer, uri, queryParameter, fields, clientParameters);
                 }
 
                 writer.Line($"{request}.Uri = {uri};");
 
-                WriteHeaders(writer, clientMethod, request, content: false);
+                WriteHeaders(writer, clientMethod, request, content: false, fields);
 
                 switch (clientMethod.Request.Body)
                 {
                     case RequestContentRequestBody body:
-                        WriteHeaders(writer, clientMethod, request, content: true);
+                        WriteHeaders(writer, clientMethod, request, content: true, fields);
                         writer.Line($"{request}.Content = {body.Parameter.Name};");
                         break;
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))
                         {
-                            WriteHeaders(writer, clientMethod, request, content: true);
+                            WriteHeaders(writer, clientMethod, request, content: true, fields);
                             WriteSerializeContent(
                                 writer,
                                 request,
@@ -98,7 +113,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     case BinaryRequestBody binaryBody:
                         using (WriteValueNullCheck(writer, binaryBody.Value))
                         {
-                            WriteHeaders(writer, clientMethod, request, content: true);
+                            WriteHeaders(writer, clientMethod, request, content: true, fields);
                             writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
                             WriteConstantOrParameter(writer, binaryBody.Value);
                             writer.Line($");");
@@ -107,14 +122,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     case TextRequestBody textBody:
                         using (WriteValueNullCheck(writer, textBody.Value))
                         {
-                            WriteHeaders(writer, clientMethod, request, content: true);
+                            WriteHeaders(writer, clientMethod, request, content: true, fields);
                             writer.Append($"{request}.Content = new {typeof(StringRequestContent)}(");
                             WriteConstantOrParameter(writer, textBody.Value);
                             writer.Line($");");
                         }
                         break;
                     case MultipartRequestBody multipartRequestBody:
-                        WriteHeaders(writer, clientMethod, request, content: true);
+                        WriteHeaders(writer, clientMethod, request, content: true, fields);
 
                         var multipartContent = new CodeWriterDeclaration("content");
                         writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
@@ -153,7 +168,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line($"{multipartContent}.ApplyToRequest({request});");
                         break;
                     case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
-                        WriteHeaders(writer, clientMethod, request, content: true);
+                        WriteHeaders(writer, clientMethod, request, content: true, fields);
 
                         var initializers = new List<PropertyInitializer>();
                         foreach (var initializer in flattenedSchemaRequestBody.Initializers)
@@ -176,7 +191,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     case UrlEncodedBody urlEncodedRequestBody:
                         var urlContent = new CodeWriterDeclaration("content");
 
-                        WriteHeaders(writer, clientMethod, request, content: true);
+                        WriteHeaders(writer, clientMethod, request, content: true, fields);
                         writer.Line($"var {urlContent:D} = new {typeof(FormUrlEncodedContent)}();");
 
                         foreach (var (name, value) in urlEncodedRequestBody.Values)
@@ -196,14 +211,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
                 }
 
-                if (writeUserAgentOverride)
+                if (writeSDKUserAgent)
                 {
-                    writer.Line($"{message}.SetProperty(\"UserAgentOverride\", _userAgent);");
-                }
-
-                if (responseClassifierType != default)
-                {
-                    writer.Line($"{message}.{nameof(HttpMessage.ResponseClassifier)} = {responseClassifierType}.Instance;");
+                    writer.Line($"{message}.SetProperty(\"SDKUserAgent\", _userAgent);");
                 }
 
                 writer.Line($"return {message};");
@@ -211,16 +221,16 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static ReferenceOrConstant FixFieldReference(IReadOnlyDictionary<string, string>? fields, ReferenceOrConstant value) =>
-            fields != null && !value.IsConstant && fields.TryGetValue(value.Reference.Name, out var field) ? new Reference(field, value.Type) : value;
+        private static ReferenceOrConstant GetFieldReference(ClientFields? fields, ReferenceOrConstant value) =>
+            fields != null && !value.IsConstant ? fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value : value;
 
-        public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content)
+        public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content, ClientFields? fields)
         {
             foreach (var header in clientMethod.Request.Headers)
             {
                 if (header.IsContentHeader == content)
                 {
-                    WriteHeader(writer, request, header);
+                    WriteHeader(writer, request, header, fields);
                 }
             }
         }
@@ -260,24 +270,31 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header)
+        private static void WriteHeader(CodeWriter writer, CodeWriterDeclaration request, RequestHeader header, ClientFields? fields)
         {
             string? delimiter = GetSerializationStyleDelimiter(header.SerializationStyle);
             string method = delimiter != null
                 ? nameof(RequestHeaderExtensions.AddDelimited)
                 : nameof(RequestHeaderExtensions.Add);
 
-            using (WriteValueNullCheck(writer, header.Value))
+            var value = GetFieldReference(fields, header.Value);
+            using (WriteValueNullCheck(writer, value))
             {
-                writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
-
-                if (header.Value.Type.Equals(typeof(Azure.Core.ContentType)))
+                if (value.Type.Equals(typeof(MatchConditions)) || value.Type.Equals(typeof(RequestConditions)))
                 {
-                    WriteConstantOrParameterAsString(writer, header.Value);
+                    writer.Append($"{request}.Headers.{method}(");
+                } else
+                {
+                    writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
+                }
+
+                if (value.Type.Equals(typeof(ContentType)))
+                {
+                    WriteConstantOrParameterAsString(writer, value);
                 }
                 else
                 {
-                    WriteConstantOrParameter(writer, header.Value, enumAsString: true);
+                    WriteConstantOrParameter(writer, value, enumAsString: true);
                 }
 
                 if (delimiter != null)
@@ -339,7 +356,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, IReadOnlyDictionary<string, string>? fieldNames)
+        private static void WriteQueryParameter(CodeWriter writer, CodeWriterDeclaration uri, QueryParameter queryParameter, ClientFields? fields, IReadOnlyList<Parameter>? parameters)
         {
             string? delimiter = GetSerializationStyleDelimiter(queryParameter.SerializationStyle);
             bool explode = queryParameter.Explode;
@@ -347,8 +364,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 ? nameof(RequestUriBuilderExtensions.AppendQueryDelimited)
                 : nameof(RequestUriBuilderExtensions.AppendQuery);
 
-            var value = FixFieldReference(fieldNames, queryParameter.Value);
-            using (WriteValueNullCheck(writer, value))
+            var value = GetFieldReference(fields, queryParameter.Value);
+            var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;
+            using (parameter != null && parameter.DefaultValue != null ? null : WriteValueNullCheck(writer, value))
             {
                 if (explode)
                 {
@@ -359,7 +377,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.Scope())
                     {
                         writer.Append($"{uri}.{method}({queryParameter.Name:L}, ");
-                        WriteConstantOrParameter(writer, new Reference(paramVariable.ActualName, value.Type.Arguments.Length > 0 ? value.Type.Arguments[0]: value.Type), enumAsString: true);
+                        WriteConstantOrParameter(writer, new Reference(paramVariable.ActualName, value.Type.Arguments.Length > 0 ? value.Type.Arguments[0] : value.Type), enumAsString: true);
                         WriteSerializationFormat(writer, queryParameter.SerializationFormat);
                         writer.Line($", {queryParameter.Escape:L});");
                     }

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
@@ -50,6 +50,7 @@ namespace Azure.Management.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<string> policyId = default;
             Optional<DateTimeOffset> enabledTime = default;
             Optional<string> sourceAccount = default;
@@ -59,7 +60,7 @@ namespace Azure.Management.Storage
             {
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -70,6 +71,11 @@ namespace Azure.Management.Storage
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -125,7 +131,7 @@ namespace Azure.Management.Storage
                     continue;
                 }
             }
-            return new ObjectReplicationPolicyData(id, name, type, policyId.Value, Optional.ToNullable(enabledTime), sourceAccount.Value, destinationAccount.Value, Optional.ToList(rules));
+            return new ObjectReplicationPolicyData(id, name, type, systemData, policyId.Value, Optional.ToNullable(enabledTime), sourceAccount.Value, destinationAccount.Value, Optional.ToList(rules));
         }
     }
 }

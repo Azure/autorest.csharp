@@ -1,27 +1,30 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Linq;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeConstructor
     {
-        public ObjectTypeConstructor(string name, string modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
+        public ObjectTypeConstructor(string name, MethodSignatureModifiers modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
         {
-            Signature = new MethodSignature(
+            Signature = new ConstructorSignature(
                 name,
                 $"Initializes a new instance of {name}",
                 modifiers,
                 parameters,
-                baseConstructor?.Signature);
+                new(isBase: true, baseConstructor?.Signature.Parameters ?? Array.Empty<Parameter>()));
 
             Initializers = initializers;
             BaseConstructor = baseConstructor;
         }
 
-        public MethodSignature Signature { get; }
+        public ConstructorSignature Signature { get; }
         public ObjectPropertyInitializer[] Initializers { get; }
         public ObjectTypeConstructor? BaseConstructor { get; }
 

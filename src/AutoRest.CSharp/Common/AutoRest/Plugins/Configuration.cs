@@ -2,12 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.IO;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Communication;
 
-namespace AutoRest.CSharp.AutoRest.Plugins
+namespace AutoRest.CSharp.Input
 {
-    internal class Configuration
+    internal static class Configuration
     {
         public static class Options
         {
@@ -21,46 +22,60 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             public const string ModelNamespace = "model-namespace";
             public const string HeadAsBoolean = "head-as-boolean";
             public const string SkipCSProjPackageReference = "skip-csproj-packagereference";
-            public const string LowLevelClient = "low-level-client";
-            public const string RequestOptionsAllOptional = "request-options-all-optional";
+            public const string DataPlane = "data-plane";
+            public const string SingleTopLevelClient = "single-top-level-client";
             public const string AttachDebuggerFormat = "{0}.attach";
+            public const string ProjectFolder = "project-folder";
+            public const string ProtocolMethodList = "protocol-method-list";
         }
 
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, bool requestOptionsAllOptional, MgmtConfiguration mgmtConfiguration)
+        public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool dataplane, bool singleTopLevelClient, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
         {
-            OutputFolder = outputFolder;
+            _outputFolder = outputFolder;
             Namespace = ns;
             LibraryName = name;
-            SharedSourceFolders = sharedSourceFolders;
+            _sharedSourceFolders = sharedSourceFolders;
             SaveInputs = saveInputs;
             AzureArm = azureArm;
             PublicClients = publicClients || AzureArm;
             ModelNamespace = azureArm || modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
-            LowLevelClient = lowLevelClient;
-            RequestOptionsAllOptional = requestOptionsAllOptional;
-            MgmtConfiguration = mgmtConfiguration;
+            DataPlane = dataplane;
+            SingleTopLevelClient = singleTopLevelClient;
+            _projectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
+            _protocolMethodList = protocolMethodList;
+            _mgmtConfiguration = mgmtConfiguration;
         }
 
-        public string OutputFolder { get; }
-        public string? Namespace { get; }
-        public string? LibraryName { get; }
-        public string[] SharedSourceFolders { get; }
-        public bool SaveInputs { get; }
-        public bool AzureArm { get; }
-        public bool PublicClients { get; }
-        public bool ModelNamespace { get; }
-        public bool HeadAsBoolean { get; }
-        public bool SkipCSProjPackageReference { get; }
-        public static string ProjectRelativeDirectory = "../";
-        public bool LowLevelClient { get; }
-        public bool RequestOptionsAllOptional { get; }
-        public MgmtConfiguration MgmtConfiguration { get; }
+        private static string? _outputFolder;
+        public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static string? Namespace { get; private set; }
+        public static string? LibraryName { get; private set; }
 
-        public static Configuration GetConfiguration(IPluginCommunication autoRest)
+        private static string[]? _sharedSourceFolders;
+        public static string[] SharedSourceFolders => _sharedSourceFolders ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static bool SaveInputs { get; private set; }
+        public static bool AzureArm { get; private set; }
+        public static bool PublicClients { get; private set; }
+        public static bool ModelNamespace { get; private set; }
+        public static bool HeadAsBoolean { get; private set; }
+        public static bool SkipCSProjPackageReference { get; private set; }
+        public static bool DataPlane { get; private set; }
+        public static bool SingleTopLevelClient { get; private set; }
+
+        private static string[]? _protocolMethodList;
+        public static string[] ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        private static MgmtConfiguration? _mgmtConfiguration;
+        public static MgmtConfiguration MgmtConfiguration => _mgmtConfiguration ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        private static string? _projectFolder;
+        public static string ProjectFolder => _projectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        public static void Initialize(IPluginCommunication autoRest)
         {
-            return new Configuration(
+            Initialize(
                 outputFolder: TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder)),
                 ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult(),
                 name: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult(),
@@ -71,8 +86,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 modelNamespace: GetOptionValue(autoRest, Options.ModelNamespace),
                 headAsBoolean: GetOptionValue(autoRest, Options.HeadAsBoolean),
                 skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
-                lowLevelClient: GetOptionValue(autoRest, Options.LowLevelClient),
-                requestOptionsAllOptional: GetOptionValue(autoRest, Options.RequestOptionsAllOptional),
+                dataplane: GetOptionValue(autoRest, Options.DataPlane),
+                singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
+                projectFolder: GetOptionStringValue(autoRest, Options.ProjectFolder, TrimFileSuffix),
+                protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
@@ -98,10 +115,27 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     return false;
                 case Options.SkipCSProjPackageReference:
                     return false;
-                case Options.LowLevelClient:
+                case Options.DataPlane:
                     return false;
-                case Options.RequestOptionsAllOptional:
+                case Options.SingleTopLevelClient:
                     return false;
+                default:
+                    return null;
+            }
+        }
+
+        private static string GetOptionStringValue(IPluginCommunication autoRest, string option, Func<string, string>? func)
+        {
+            var projectFolder = autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();
+            return projectFolder == null ? GetDefaultOptionStringValue(option)! : (func == null ? projectFolder : func(projectFolder));
+        }
+
+        public static string? GetDefaultOptionStringValue(string option)
+        {
+            switch (option)
+            {
+                case Options.ProjectFolder:
+                    return "../";
                 default:
                     return null;
             }

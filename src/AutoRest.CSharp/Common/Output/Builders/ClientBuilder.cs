@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
@@ -20,8 +19,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private const string ClientSuffixValue = "Client";
         private const string OperationsSuffixValue = "Operations";
 
-        public static string GetClientSuffix(BuildContext context) => context.Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
-        public static string GetRestClientSuffix(BuildContext context) => (context.Configuration.LowLevelClient ? "" : "Rest") + GetClientSuffix(context);
+        public static string GetClientSuffix(BuildContext context) => Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
 
         public static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
@@ -55,8 +53,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// <param name="declaration">The type declaration options</param>
         /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
         /// <returns>An enumerable of <see cref="ClientMethod"/></returns>
-        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration,
-            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
+        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -68,7 +65,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 foreach (var request in operation.Requests)
                 {
                     RestClientMethod startMethod = restClient.GetOperationMethod(request);
-                    var name = nameOverrider?.Invoke(operationGroup, operation, startMethod) ?? operation.CSharpName();
+                    var name = operation.CSharpName();
 
                     yield return new ClientMethod(
                         name,

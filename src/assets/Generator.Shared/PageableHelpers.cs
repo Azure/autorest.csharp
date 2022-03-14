@@ -6,6 +6,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
@@ -14,6 +16,24 @@ namespace Azure.Core
 {
     internal static class PageableHelpers
     {
+        public static AsyncPageable<T> Select<T>(AsyncPageable<BinaryData> input, Func<Response, IReadOnlyList<T>> selectFunc) where T : notnull
+            => new AsyncPageableWrapper<T>((ct, ph) => SelectPage(input.AsPages(ct, ph), selectFunc));
+
+        private static async IAsyncEnumerable<Page<T>> SelectPage<T>(IAsyncEnumerable<Page<BinaryData>> pages, Func<Response, IReadOnlyList<T>> selectFunc, [EnumeratorCancellation] CancellationToken cancellationToken = default) where T : notnull
+        {
+            await foreach (var page in pages.WithCancellation(cancellationToken).ConfigureAwait(false))
+            {
+                var response = page.GetRawResponse();
+                yield return Page<T>.FromValues(selectFunc(response), page.ContinuationToken, response);
+            }
+        }
+
+        public static Pageable<T> Select<T>(Pageable<BinaryData> input, Func<Response, IReadOnlyList<T>> selectFunc) where T : notnull
+            => new PageableWrapper<T>((ct, ph) => input
+                .AsPages(ct, ph)
+                .Select(page => Page<T>.FromValues(selectFunc(page.GetRawResponse()), page.ContinuationToken, page.GetRawResponse()))
+            );
+
         public static Pageable<T> CreatePageable<T>(Func<string?, int?, IEnumerable<Page<T>>> enumerableFactory, ClientDiagnostics clientDiagnostics, string scopeName) where T : notnull
             => new PageableWrapper<T>((ct, ph) => new EnumerableWithScope<T>(enumerableFactory(ct, ph), clientDiagnostics, scopeName));
 

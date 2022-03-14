@@ -16,19 +16,22 @@ namespace httpInfrastructure
 {
     internal partial class HttpClientFailureRestClient
     {
-        private Uri endpoint;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of HttpClientFailureRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         public HttpClientFailureRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
         internal HttpMessage CreateHead400Request()
@@ -37,7 +40,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -53,7 +56,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -66,7 +69,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -76,7 +79,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -92,7 +95,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -105,7 +108,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -115,7 +118,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -131,7 +134,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -144,7 +147,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -154,7 +157,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -174,7 +177,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -187,7 +190,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -197,7 +200,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -217,7 +220,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -230,7 +233,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -240,7 +243,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -260,7 +263,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -273,7 +276,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -283,7 +286,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/400", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -303,7 +306,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -316,7 +319,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -326,7 +329,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/401", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -342,7 +345,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -355,7 +358,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -365,7 +368,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/402", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -381,7 +384,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -394,7 +397,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -404,7 +407,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -420,7 +423,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -433,7 +436,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -443,7 +446,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/403", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -459,7 +462,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -472,7 +475,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -482,7 +485,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/404", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -502,7 +505,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -515,7 +518,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -525,7 +528,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/405", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -545,7 +548,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -558,7 +561,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -568,7 +571,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/406", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -588,7 +591,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -601,7 +604,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -611,7 +614,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/407", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -631,7 +634,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -644,7 +647,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -654,7 +657,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/409", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -674,7 +677,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -687,7 +690,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -697,7 +700,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/410", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -713,7 +716,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -726,7 +729,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -736,7 +739,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/411", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -752,7 +755,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -765,7 +768,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -775,7 +778,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -791,7 +794,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -804,7 +807,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -814,7 +817,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/412", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -830,7 +833,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -843,7 +846,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -853,7 +856,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/413", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -873,7 +876,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -886,7 +889,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -896,7 +899,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/414", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -916,7 +919,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -929,7 +932,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -939,7 +942,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/415", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -959,7 +962,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -972,7 +975,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -982,7 +985,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/416", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -998,7 +1001,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1011,7 +1014,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1021,7 +1024,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/417", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1041,7 +1044,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1054,7 +1057,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -1064,7 +1067,7 @@ namespace httpInfrastructure
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.Reset(_endpoint);
             uri.AppendPath("/http/failure/client/429", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1080,7 +1083,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -1093,7 +1096,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

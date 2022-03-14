@@ -5,20 +5,20 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using MgmtLRO.Models;
 
 namespace MgmtLRO
 {
     /// <summary> A class representing the Bar data model. </summary>
-    public partial class BarData : TrackedResource
+    public partial class BarData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of BarData. </summary>
         /// <param name="location"> The location. </param>
-        public BarData(Location location) : base(location)
+        public BarData(AzureLocation location) : base(location)
         {
         }
 
@@ -26,15 +26,27 @@ namespace MgmtLRO
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal BarData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, BarProperties properties) : base(id, name, type, tags, location)
+        internal BarData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, BarProperties properties) : base(id, name, type, systemData, tags, location)
         {
             Properties = properties;
         }
 
         /// <summary> The instance view of a resource. </summary>
-        public BarProperties Properties { get; set; }
+        internal BarProperties Properties { get; set; }
+        /// <summary> Update Domain count. </summary>
+        public Guid? BarBuzz
+        {
+            get => Properties is null ? default : Properties.Buzz;
+            set
+            {
+                if (Properties is null)
+                    Properties = new BarProperties();
+                Properties.Buzz = value;
+            }
+        }
     }
 }

@@ -79,11 +79,6 @@
                             "$ref": "#/definitions/AvailabilitySet"
                         }
                     }
-                },
-                "x-ms-examples": {
-                    "Create an availability set.": {
-                        "$ref": "./examples/CreateAnAvailabilitySet.json"
-                    }
                 }
             },
             "patch": {
@@ -239,11 +234,6 @@
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
-                },
-                "x-ms-examples": {
-                    "List availability sets in a subscription.": {
-                        "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
-                    }
                 }
             }
         },
@@ -279,6 +269,52 @@
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups": {
+            "get": {
+                "tags": [
+                    "DedicatedHostGroups"
+                ],
+                "operationId": "DedicatedHostGroups_List",
+                "description": "Retrieves information about a dedicated host group.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group.",
+                        "enum": [
+                            "instanceView"
+                        ],
+                        "x-ms-enum": {
+                            "name": "InstanceViewTypes",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/DedicatedHostGroupListResult"
+                        }
+                    }
                 }
             }
         },
@@ -332,11 +368,6 @@
                         "schema": {
                             "$ref": "#/definitions/DedicatedHostGroup"
                         }
-                    }
-                },
-                "x-ms-examples": {
-                    "Create or update a dedicated host group.": {
-                        "$ref": "./examples/CreateOrUpdateADedicatedHostGroup.json"
                     }
                 }
             },
@@ -472,11 +503,6 @@
                             "$ref": "#/definitions/DedicatedHostGroup"
                         }
                     }
-                },
-                "x-ms-examples": {
-                    "Create a dedicated host group.": {
-                        "$ref": "./examples/GetADedicatedHostGroup.json"
-                    }
                 }
             }
         },
@@ -537,11 +563,6 @@
                         "schema": {
                             "$ref": "#/definitions/DedicatedHost"
                         }
-                    }
-                },
-                "x-ms-examples": {
-                    "Create or update a dedicated host .": {
-                        "$ref": "./examples/CreateOrUpdateADedicatedHost.json"
                     }
                 },
                 "x-ms-long-running-operation": true
@@ -704,11 +725,6 @@
                             "$ref": "#/definitions/DedicatedHost"
                         }
                     }
-                },
-                "x-ms-examples": {
-                    "Get a dedicated host.": {
-                        "$ref": "./examples/GetADedicatedHost.json"
-                    }
                 }
             }
         },
@@ -792,63 +808,6 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/VirtualMachineExtensionImage"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "VirtualMachineExtensionImages"
-                ],
-                "operationId": "VirtualMachineExtensionImages_CreateOrUpdate",
-                "description": "Gets a virtual machine extension image.",
-                "parameters": [
-                    {
-                        "name": "location",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of a supported Azure region."
-                    },
-                    {
-                        "name": "publisherName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "type",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "version",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/VirtualMachineExtensionImage"
-                        },
-                        "description": "Parameters supplied to the Create VirtualMachineExtensionImage."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -968,6 +927,46 @@
                     }
                 },
                 "x-ms-odata": "#/definitions/VirtualMachineExtensionImage"
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments": {
+            "get": {
+                "tags": [
+                    "EnvironmentContainer"
+                ],
+                "summary": "Get container.",
+                "operationId": "EnvironmentContainers_List",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/EnvironmentContainerResourceListResult"
+                        }
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}": {
@@ -1121,6 +1120,40 @@
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/EnvironmentContainerResource"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces": {
+            "get": {
+                "tags": [
+                    "Workspaces"
+                ],
+                "description": "Gets the properties of the specified machine learning workspace.",
+                "operationId": "Workspaces_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request was successful; the request was well-formed and received properly.",
+                        "schema": {
+                            "$ref": "#/definitions/WorkspaceListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
                         }
                     }
                 }
@@ -1299,6 +1332,423 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
+            "put": {
+                "tags": [
+                    "VirtualMachineScaleSets"
+                ],
+                "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+                "description": "required body, required header;Create or update a VM scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set to create or update."
+                    },
+                    {
+                        "name": "quick",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        },
+                        "description": "The scale set object."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": [
+                    "VirtualMachineScaleSets"
+                ],
+                "operationId": "VirtualMachineScaleSets_Update",
+                "description": "optional body, no query; Update a VM scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSetUpdate"
+                        },
+                        "description": "The scale set object."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set to create or update."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "delete": {
+                "tags": [
+                    "VirtualMachineScaleSets"
+                ],
+                "operationId": "VirtualMachineScaleSets_Delete",
+                "description": "Deletes a VM scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "forceDeletion",
+                        "in": "query",
+                        "required": true,
+                        "type": "boolean",
+                        "description": "Optional parameter to force delete a VM scale set. (Feature in Preview)"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "Force Delete a VM scale set.": {
+                        "$ref": "./examples/compute/ForceDeleteVirtualMachineScaleSets.json"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "VirtualMachineScaleSets"
+                ],
+                "operationId": "VirtualMachineScaleSets_Get",
+                "description": "Display information about a virtual machine scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation. 'UserData' retrieves the UserData property of the VM scale set that was provided by the user during the VM scale set Create/Update operation",
+                        "enum": [
+                            "userData"
+                        ],
+                        "x-ms-enum": {
+                            "name": "ExpandTypesForGetVMScaleSets",
+                            "modelAsString": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSet"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get a virtual machine scale set placed on a dedicated host group through automatic placement.": {
+                        "$ref": "./examples/compute/GetVirtualMachineScaleSetAutoPlacedOnDedicatedHostGroup.json"
+                    },
+                    "Get a virtual machine scale set with UserData": {
+                        "$ref": "./examples/compute/GetVirtualMachineScaleSetWithUserData.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate": {
+            "post": {
+                "tags": [
+                    "VirtualMachineScaleSets"
+                ],
+                "operationId": "VirtualMachineScaleSets_Deallocate",
+                "description": "optional body, optional query; Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "vmInstanceIDs",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceIDs"
+                        },
+                        "description": "A list of virtual machine instance IDs from the VM scale set."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete": {
+            "post": {
+                "tags": [
+                    "VirtualMachineScaleSets"
+                ],
+                "operationId": "VirtualMachineScaleSets_DeleteInstances",
+                "description": "required body, optional query; Deletes virtual machines in a VM scale set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "forceDeletion",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "description": "Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)"
+                    },
+                    {
+                        "name": "vmInstanceIDs",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSetVMInstanceRequiredIDs"
+                        },
+                        "description": "A list of virtual machine instance IDs from the VM scale set."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView": {
+            "get": {
+                "tags": [
+                    "VirtualMachineScaleSets"
+                ],
+                "operationId": "VirtualMachineScaleSets_GetInstanceView",
+                "description": "No body, mixed parameters; Gets the status of a VM scale set instance.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "vmScaleSetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the VM scale set."
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSetInstanceView"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets": {
+            "get": {
+                "tags": [
+                    "VirtualMachineScaleSets"
+                ],
+                "operationId": "VirtualMachineScaleSets_List",
+                "description": "Gets a list of all VM scale sets under a resource group.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/VirtualMachineScaleSetListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
         }
     },
     "definitions": {
@@ -1442,6 +1892,25 @@
                 }
             ],
             "description": "Specifies information about the Dedicated host."
+        },
+        "DedicatedHostGroupListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DedicatedHostGroup"
+                    },
+                    "description": "The list of dedicated hosts"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The list dedicated host operation response."
         },
         "DedicatedHostGroup": {
             "properties": {
@@ -1620,6 +2089,25 @@
             },
             "description": "The resource management error additional info."
         },
+        "EnvironmentContainerResourceListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EnvironmentContainerResource"
+                    },
+                    "description": "The list of dedicated hosts"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The list dedicated host operation response."
+        },
         "EnvironmentContainerResource": {
             "description": "Azure Resource Manager resource envelope.",
             "required": [
@@ -1723,6 +2211,25 @@
                 }
             },
             "additionalProperties": false
+        },
+        "WorkspaceListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Workspace"
+                    },
+                    "description": "The list of dedicated hosts"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The list dedicated host operation response."
         },
         "Workspace": {
             "type": "object",
@@ -1857,6 +2364,154 @@
                     }
                 }
             }
+        },
+        "VirtualMachineScaleSetVMListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VirtualMachineScaleSetVM"
+                    },
+                    "description": "The list of virtual machine scale sets VMs."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Virtual Machine Scale Set VMs operation response."
+        },
+        "VirtualMachineScaleSet": {
+            "properties": {
+                "zones": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Describes a Virtual Machine Scale Set."
+        },
+        "VirtualMachineScaleSetListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/VirtualMachineScaleSet"
+                    },
+                    "description": "The list of virtual machine scale sets."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Virtual Machine operation response."
+        },
+        "VirtualMachineScaleSetUpdate": {
+            "properties": {
+                "sku": {
+                    "$ref": "#/definitions/Sku",
+                    "description": "The virtual machine scale set sku."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Describes a Virtual Machine Scale Set."
+        },
+        "Sku": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The sku name."
+                },
+                "tier": {
+                    "type": "string",
+                    "description": "Specifies the tier of virtual machines in a scale set.<br /><br /> Possible Values:<br /><br /> **Standard**<br /><br /> **Basic**"
+                },
+                "capacity": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Specifies the number of virtual machines in the scale set."
+                }
+            },
+            "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name."
+        },
+        "VirtualMachineScaleSetVMInstanceIDs": {
+            "properties": {
+                "instanceIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set."
+                }
+            },
+            "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
+        },
+        "VirtualMachineScaleSetVMInstanceRequiredIDs": {
+            "properties": {
+                "instanceIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The virtual machine scale set instance ids."
+                }
+            },
+            "required": [
+                "instanceIds"
+            ],
+            "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
+        },
+        "VirtualMachineScaleSetInstanceView": {
+            "properties": {
+                "virtualMachine": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The instance view status summary for the virtual machine scale set."
+                }
+            },
+            "description": "The instance view of a virtual machine scale set."
+        },
+        "VirtualMachineScaleSetVM": {
+            "properties": {
+                "instanceId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "remove some properties to simplify; The virtual machine instance ID."
+                },
+                "zones": {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The virtual machine zones."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Describes a virtual machine scale set virtual machine."
+
         }
     },
     "parameters": {

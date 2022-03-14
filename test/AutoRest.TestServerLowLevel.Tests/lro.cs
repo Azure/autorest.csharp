@@ -17,1435 +17,1643 @@ namespace AutoRest.TestServer.Tests
     public class LroTest : TestServerLowLevelTestBase
     {
         [Test]
-        public Task CustomHeaderPostAsyncSucceded() => TestStatus(async (endpoint) =>
+        public Task CustomHeaderPostAsyncSucceded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceededAsync(value);
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceededAsync(waitUntil, value);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task CustomHeaderPostAsyncSucceded_Sync() => TestStatus((endpoint) =>
+        public Task CustomHeaderPostAsyncSucceded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceeded(value);
-            return WaitForCompletion(operation);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceeded(waitUntil, value);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task CustomHeaderPostSucceeded() => TestStatus(async (endpoint) =>
+        public Task CustomHeaderPostSucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200Async(value);
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200Async(waitUntil, value);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task CustomHeaderPostSucceeded_Sync() => TestStatus((endpoint) =>
+        public Task CustomHeaderPostSucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200(value);
-            return WaitForCompletion(operation);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200(waitUntil, value);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task CustomHeaderPutAsyncSucceded() => Test(async (endpoint) =>
+        public Task CustomHeaderPutAsyncSucceded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task CustomHeaderPutAsyncSucceded_Sync() => Test((endpoint) =>
+        public Task CustomHeaderPutAsyncSucceded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceeded(value);
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task CustomHeaderPutSucceeded() => Test(async (endpoint) =>
+        public Task CustomHeaderPutSucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200Async(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200Async(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task CustomHeaderPutSucceeded_Sync() => Test((endpoint) =>
+        public Task CustomHeaderPutSucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             using var _ = ClientRequestIdScope.Start("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200(value);
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LRODelete200() => Test(async (endpoint) =>
+        public Task LRODelete200([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).Delete202Retry200Async();
+            var operation = await new LROsClient(Key, endpoint).Delete202Retry200Async(waitUntil);
             // Empty response body
-            Assert.AreEqual(0, (await operation.WaitForCompletionAsync().ConfigureAwait(false)).Value.ToMemory().Length);
+            Assert.AreEqual(0, (await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false)).Value.ToMemory().Length);
         });
 
         [Test]
-        public Task LRODelete200_Sync() => Test((endpoint) =>
+        public Task LRODelete200_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).Delete202Retry200();
+            var operation = new LROsClient(Key, endpoint).Delete202Retry200(waitUntil);
             // Empty response body
-            Assert.AreEqual(0, WaitForCompletion(operation).Content.ToMemory().Length);
+            Assert.AreEqual(0, WaitForCompletion(operation, waitUntil).Content.ToMemory().Length);
         });
 
         [Test]
-        public Task LRODelete204() => Test(async (endpoint) =>
+        public Task LRODelete204([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).Delete202NoRetry204Async();
+            var operation = await new LROsClient(Key, endpoint).Delete202NoRetry204Async(waitUntil);
             // Empty response body
-            Assert.AreEqual(0, (await operation.WaitForCompletionAsync().ConfigureAwait(false)).Value.ToMemory().Length);
+            Assert.AreEqual(0, (await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false)).Value.ToMemory().Length);
         });
 
         [Test]
-        public Task LRODelete204_Sync() => Test((endpoint) =>
+        public Task LRODelete204_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).Delete202NoRetry204();
+            var operation = new LROsClient(Key, endpoint).Delete202NoRetry204(waitUntil);
             // Empty response body
-            Assert.AreEqual(0, WaitForCompletion(operation).Content.ToMemory().Length);
+            Assert.AreEqual(0, WaitForCompletion(operation, waitUntil).Content.ToMemory().Length);
         });
 
         [Test]
-        public Task LRODeleteAsyncNoHeaderInRetry() => TestStatus(async (endpoint) =>
+        public Task LRODeleteAsyncNoHeaderInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteAsyncNoHeaderInRetryAsync();
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).DeleteAsyncNoHeaderInRetryAsync(waitUntil);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task LRODeleteAsyncNoHeaderInRetry_Sync() => TestStatus((endpoint) =>
+        public Task LRODeleteAsyncNoHeaderInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteAsyncNoHeaderInRetry();
-            return WaitForCompletion(operation);
+            var operation = new LROsClient(Key, endpoint).DeleteAsyncNoHeaderInRetry(waitUntil);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task LRODeleteAsyncNoRetrySucceeded() => TestStatus(async (endpoint) =>
+        public Task LRODeleteAsyncNoRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteAsyncNoRetrySucceededAsync();
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).DeleteAsyncNoRetrySucceededAsync(waitUntil);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task LRODeleteAsyncNoRetrySucceeded_Sync() => TestStatus((endpoint) =>
+        public Task LRODeleteAsyncNoRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteAsyncNoRetrySucceeded();
-            return WaitForCompletion(operation);
+            var operation = new LROsClient(Key, endpoint).DeleteAsyncNoRetrySucceeded(waitUntil);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task LRODeleteAsyncRetryCanceled() => Test(async (endpoint) =>
+        public Task LRODeleteAsyncRetryCanceled([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteAsyncRetrycanceledAsync();
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LROsClient(Key, endpoint).DeleteAsyncRetrycanceledAsync(waitUntil);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LRODeleteAsyncRetryCanceled_Sync() => Test((endpoint) =>
+        public Task LRODeleteAsyncRetryCanceled_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteAsyncRetrycanceled();
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LROsClient(Key, endpoint).DeleteAsyncRetrycanceled(waitUntil);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRODeleteAsyncRetryFailed() => Test(async (endpoint) =>
+        public Task LRODeleteAsyncRetryFailed([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteAsyncRetryFailedAsync();
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LROsClient(Key, endpoint).DeleteAsyncRetryFailedAsync(waitUntil);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LRODeleteAsyncRetryFailed_Sync() => Test((endpoint) =>
+        public Task LRODeleteAsyncRetryFailed_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteAsyncRetryFailed();
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LROsClient(Key, endpoint).DeleteAsyncRetryFailed(waitUntil);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRODeleteAsyncRetrySucceeded() => TestStatus(async (endpoint) =>
+        public Task LRODeleteAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteAsyncRetrySucceededAsync();
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).DeleteAsyncRetrySucceededAsync(waitUntil);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task LRODeleteAsyncRetrySucceeded_Sync() => TestStatus((endpoint) =>
+        public Task LRODeleteAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteAsyncRetrySucceeded();
-            return WaitForCompletion(operation);
+            var operation = new LROsClient(Key, endpoint).DeleteAsyncRetrySucceeded(waitUntil);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task LRODeleteInlineComplete() => TestStatus(async (endpoint) =>
+        public Task LRODeleteInlineComplete([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).Delete204SucceededAsync();
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).Delete204SucceededAsync(waitUntil);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task LRODeleteInlineComplete_Sync() => TestStatus((endpoint) =>
+        public Task LRODeleteInlineComplete_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).Delete204Succeeded();
-            return WaitForCompletion(operation);
+            var operation = new LROsClient(Key, endpoint).Delete204Succeeded(waitUntil);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task LRODeleteNoHeaderInRetry() => TestStatus(async (endpoint) =>
+        public Task LRODeleteNoHeaderInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteNoHeaderInRetryAsync();
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).DeleteNoHeaderInRetryAsync(waitUntil);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task LRODeleteNoHeaderInRetry_Sync() => TestStatus((endpoint) =>
+        public Task LRODeleteNoHeaderInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteNoHeaderInRetry();
-            return WaitForCompletion(operation);
+            var operation = new LROsClient(Key, endpoint).DeleteNoHeaderInRetry(waitUntil);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task LRODeleteProvisioningCanceled() => Test(async (endpoint) =>
+        public Task LRODeleteProvisioningCanceled([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteProvisioning202Deletingcanceled200Async();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).DeleteProvisioning202Deletingcanceled200Async(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Canceled", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LRODeleteProvisioningCanceled_Sync() => Test((endpoint) =>
+        public Task LRODeleteProvisioningCanceled_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteProvisioning202Deletingcanceled200();
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).DeleteProvisioning202Deletingcanceled200(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Canceled", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LRODeleteProvisioningFailed() => Test(async (endpoint) =>
+        public Task LRODeleteProvisioningFailed([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteProvisioning202DeletingFailed200Async();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).DeleteProvisioning202DeletingFailed200Async(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Failed", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LRODeleteProvisioningFailed_Sync() => Test((endpoint) =>
+        public Task LRODeleteProvisioningFailed_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteProvisioning202DeletingFailed200();
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).DeleteProvisioning202DeletingFailed200(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Failed", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LRODeleteProvisioningSucceededWithBody() => Test(async (endpoint) =>
+        public Task LRODeleteProvisioningSucceededWithBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).DeleteProvisioning202Accepted200SucceededAsync();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).DeleteProvisioning202Accepted200SucceededAsync(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LRODeleteProvisioningSucceededWithBody_Sync() => Test((endpoint) =>
+        public Task LRODeleteProvisioningSucceededWithBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).DeleteProvisioning202Accepted200Succeeded();
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).DeleteProvisioning202Accepted200Succeeded(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROErrorDelete202RetryInvalidHeader() => Test(async (endpoint) =>
+        public Task LROErrorDelete202RetryInvalidHeader([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LrosaDsClient(Key, endpoint).Delete202RetryInvalidHeaderAsync();
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).Delete202RetryInvalidHeaderAsync(waitUntil);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorDelete202RetryInvalidHeader_Sync() => Test((endpoint) =>
+        public Task LROErrorDelete202RetryInvalidHeader_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LrosaDsClient(Key, endpoint).Delete202RetryInvalidHeader();
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).Delete202RetryInvalidHeader(waitUntil);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorDeleteAsyncInvalidHeader() => Test(async (endpoint) =>
+        public Task LROErrorDeleteAsyncInvalidHeader([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryInvalidHeaderAsync();
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryInvalidHeaderAsync(waitUntil);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorDeleteAsyncInvalidHeader_Sync() => Test((endpoint) =>
+        public Task LROErrorDeleteAsyncInvalidHeader_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryInvalidHeader();
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryInvalidHeader(waitUntil);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorDeleteAsyncInvalidJsonPolling() => Test(async (endpoint) =>
+        public Task LROErrorDeleteAsyncInvalidJsonPolling([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryInvalidJsonPollingAsync();
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryInvalidJsonPollingAsync(waitUntil);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorDeleteAsyncInvalidJsonPolling_Sync() => Test((endpoint) =>
+        public Task LROErrorDeleteAsyncInvalidJsonPolling_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryInvalidJsonPolling();
-            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
+            Assert.Throws(Is.InstanceOf<JsonException>(), () =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryInvalidJsonPolling(waitUntil);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorDeleteAsyncNoPollingStatus() => Test(async (endpoint) =>
+        public Task LROErrorDeleteAsyncNoPollingStatus([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryNoStatusAsync();
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryNoStatusAsync(waitUntil);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorDeleteAsyncNoPollingStatus_Sync() => Test((endpoint) =>
+        public Task LROErrorDeleteAsyncNoPollingStatus_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryNoStatus();
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetryNoStatus(waitUntil);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorDeleteNoLocation() => TestStatus(async (endpoint) =>
+        public Task LROErrorDeleteNoLocation([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
-            var operation = await new LrosaDsClient(Key, endpoint).Delete204SucceededAsync();
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LrosaDsClient(Key, endpoint).Delete204SucceededAsync(waitUntil);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task LROErrorDeleteNoLocation_Sync() => TestStatus((endpoint) =>
+        public Task LROErrorDeleteNoLocation_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
-            var operation = new LrosaDsClient(Key, endpoint).Delete204Succeeded();
-            return WaitForCompletion(operation);
+            var operation = new LrosaDsClient(Key, endpoint).Delete204Succeeded(waitUntil);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task LROErrorPost202RetryInvalidHeader() => Test(async (endpoint) =>
+        public Task LROErrorPost202RetryInvalidHeader([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).Post202RetryInvalidHeaderAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).Post202RetryInvalidHeaderAsync(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPost202RetryInvalidHeader_Sync() => Test((endpoint) =>
+        public Task LROErrorPost202RetryInvalidHeader_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).Post202RetryInvalidHeader(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).Post202RetryInvalidHeader(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorPostAsyncInvalidHeader() => Test(async (endpoint) =>
+        public Task LROErrorPostAsyncInvalidHeader([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryInvalidHeaderAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryInvalidHeaderAsync(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPostAsyncInvalidHeader_Sync() => Test((endpoint) =>
+        public Task LROErrorPostAsyncInvalidHeader_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryInvalidHeader(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryInvalidHeader(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorPostAsyncInvalidJsonPolling() => Test(async (endpoint) =>
+        public Task LROErrorPostAsyncInvalidJsonPolling([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryInvalidJsonPollingAsync(value);
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.CatchAsync<JsonException>(async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryInvalidJsonPollingAsync(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPostAsyncInvalidJsonPolling_Sync() => Test((endpoint) =>
+        public Task LROErrorPostAsyncInvalidJsonPolling_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryInvalidJsonPolling(value);
-            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
+            Assert.Catch<JsonException>(() =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryInvalidJsonPolling(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorPostAsyncNoPollingPayload() => Test(async (endpoint) =>
+        public Task LROErrorPostAsyncNoPollingPayload([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryNoPayloadAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryNoPayloadAsync(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPostAsyncNoPollingPayload_Sync() => Test((endpoint) =>
+        public Task LROErrorPostAsyncNoPollingPayload_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryNoPayload(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetryNoPayload(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorPostNoLocation() => Test(async (endpoint) =>
+        public Task LROErrorPostNoLocation([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).Post202NoLocationAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LrosaDsClient(Key, endpoint).Post202NoLocationAsync(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPostNoLocation_Sync() => Test((endpoint) =>
+        public Task LROErrorPostNoLocation_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).Post202NoLocation(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LrosaDsClient(Key, endpoint).Post202NoLocation(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorPut200InvalidJson() => Test(async (endpoint) =>
+        public Task LROErrorPut200InvalidJson([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).Put200InvalidJsonAsync(value);
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.CatchAsync<JsonException>(async () => await WaitForCompletionWithValueAsync(await new LrosaDsClient(Key, endpoint).Put200InvalidJsonAsync(waitUntil, value), waitUntil));
         });
 
         [Test]
-        public Task LROErrorPut200InvalidJson_Sync() => Test((endpoint) =>
+        public Task LROErrorPut200InvalidJson_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).Put200InvalidJson(value);
-            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
+            Assert.Catch<JsonException>(() => WaitForCompletion(new LrosaDsClient(Key, endpoint).Put200InvalidJson(waitUntil, value), waitUntil));
         });
 
         [Test]
-        public Task LROErrorPut201NoProvisioningStatePayload() => Test(async (endpoint) =>
+        public Task LROErrorPut201NoProvisioningStatePayload([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PutError201NoProvisioningStatePayloadAsync(value);
+            var operation = await new LrosaDsClient(Key, endpoint).PutError201NoProvisioningStatePayloadAsync(waitUntil, value);
             // Empty response body
-            Assert.AreEqual(0, (await operation.WaitForCompletionAsync().ConfigureAwait(false)).Value.ToMemory().Length);
+            Assert.AreEqual(0, (await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false)).Value.ToMemory().Length);
         });
 
         [Test]
-        public Task LROErrorPut201NoProvisioningStatePayload_Sync() => Test((endpoint) =>
+        public Task LROErrorPut201NoProvisioningStatePayload_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PutError201NoProvisioningStatePayload(value);
+            var operation = new LrosaDsClient(Key, endpoint).PutError201NoProvisioningStatePayload(waitUntil, value);
             // Empty response body
-            Assert.AreEqual(0, WaitForCompletion(operation).Content.ToMemory().Length);
+            Assert.AreEqual(0, WaitForCompletion(operation, waitUntil).Content.ToMemory().Length);
         });
 
         [Test]
-        public Task LROErrorPutAsyncInvalidHeader() => Test(async (endpoint) =>
+        public Task LROErrorPutAsyncInvalidHeader([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetryInvalidHeaderAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPutAsyncInvalidHeader_Sync() => Test((endpoint) =>
+        public Task LROErrorPutAsyncInvalidHeader_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetryInvalidHeader(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.PutAsyncRelativeRetryInvalidHeader(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorPutAsyncInvalidJsonPolling() => Test(async (endpoint) =>
+        public Task LROErrorPutAsyncInvalidJsonPolling([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetryInvalidJsonPollingAsync(value);
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.CatchAsync<JsonException>(async () =>
+            {
+                var operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPutAsyncInvalidJsonPolling_Sync() => Test((endpoint) =>
+        public Task LROErrorPutAsyncInvalidJsonPolling_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetryInvalidJsonPolling(value);
-            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Catch<JsonException>(() =>
+            {
+                var operation = client.PutAsyncRelativeRetryInvalidJsonPolling(waitUntil, value);
+                WaitForCompletionWithValue(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorPutAsyncNoPollingStatus() => Test(async (endpoint) =>
+        public Task LROErrorPutAsyncNoPollingStatus([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetryNoStatusAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.PutAsyncRelativeRetryNoStatusAsync(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPutAsyncNoPollingStatus_Sync() => Test((endpoint) =>
+        public Task LROErrorPutAsyncNoPollingStatus_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetryNoStatus(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.PutAsyncRelativeRetryNoStatus(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROErrorPutAsyncNoPollingStatusPayload() => Test(async (endpoint) =>
+        public Task LROErrorPutAsyncNoPollingStatusPayload([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetryNoStatusPayloadAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROErrorPutAsyncNoPollingStatusPayload_Sync() => Test((endpoint) =>
+        public Task LROErrorPutAsyncNoPollingStatusPayload_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetryNoStatusPayload(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.PutAsyncRelativeRetryNoStatusPayload(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRONonRetryDelete202Retry400() => Test(async (endpoint) =>
+        public Task LRONonRetryDelete202Retry400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LrosaDsClient(Key, endpoint).Delete202NonRetry400Async();
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.Delete202NonRetry400Async(waitUntil);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LRONonRetryDelete202Retry400_Sync() => Test((endpoint) =>
+        public Task LRONonRetryDelete202Retry400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LrosaDsClient(Key, endpoint).Delete202NonRetry400();
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.Delete202NonRetry400(waitUntil);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRONonRetryDelete400() => Test((endpoint) =>
+        public Task LRONonRetryDelete400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint).DeleteNonRetry400Async());
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint).DeleteNonRetry400Async(waitUntil).ConfigureAwait(false));
         });
 
         [Test]
-        public Task LRONonRetryDelete400_Sync() => Test((endpoint) =>
+        public Task LRONonRetryDelete400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint).DeleteNonRetry400());
+            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint).DeleteNonRetry400(waitUntil));
         });
 
         [Test]
-        public Task LRONonRetryDeleteAsyncRetry400() => Test(async (endpoint) =>
+        public Task LRONonRetryDeleteAsyncRetry400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetry400Async();
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.DeleteAsyncRelativeRetry400Async(waitUntil);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LRONonRetryDeleteAsyncRetry400_Sync() => Test((endpoint) =>
+        public Task LRONonRetryDeleteAsyncRetry400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LrosaDsClient(Key, endpoint).DeleteAsyncRelativeRetry400();
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.DeleteAsyncRelativeRetry400(waitUntil);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPost202Retry400() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).Post202NonRetry400Async(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
-        });
-
-        [Test]
-        public Task LRONonRetryPost202Retry400_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).Post202NonRetry400(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
-        });
-
-        [Test]
-        public Task LRONonRetryPost400() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint).PostNonRetry400Async(value));
-        });
-
-        [Test]
-        public Task LRONonRetryPost400_Sync() => Test((endpoint) =>
+        public Task LRONonRetryPost202Retry400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint).PostNonRetry400(value));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.Post202NonRetry400Async(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPostAsyncRetry400() => Test(async (endpoint) =>
+        public Task LRONonRetryPost202Retry400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetry400Async(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.Post202NonRetry400(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPostAsyncRetry400_Sync() => Test((endpoint) =>
+        public Task LRONonRetryPost400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PostAsyncRelativeRetry400(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint).PostNonRetry400Async(waitUntil, value));
         });
 
         [Test]
-        public Task LRONonRetryPut201Creating400() => Test(async (endpoint) =>
+        public Task LRONonRetryPost400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PutNonRetry201Creating400Async(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint).PostNonRetry400(waitUntil, value));
         });
 
         [Test]
-        public Task LRONonRetryPut201Creating400_Sync() => Test((endpoint) =>
+        public Task LRONonRetryPostAsyncRetry400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PutNonRetry201Creating400(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.PostAsyncRelativeRetry400Async(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPut201Creating400InvalidJson() => Test(async (endpoint) =>
+        public Task LRONonRetryPostAsyncRetry400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PutNonRetry201Creating400InvalidJsonAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.PostAsyncRelativeRetry400(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPut201Creating400InvalidJson_Sync() => Test((endpoint) =>
+        public Task LRONonRetryPut201Creating400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PutNonRetry201Creating400InvalidJson(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.PutNonRetry201Creating400Async(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPut400() => Test((endpoint) =>
+        public Task LRONonRetryPut201Creating400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint).PutNonRetry400Async(value));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.PutNonRetry201Creating400(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPut400_Sync() => Test((endpoint) =>
+        public Task LRONonRetryPut201Creating400InvalidJson([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint).PutNonRetry400(value));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.PutNonRetry201Creating400InvalidJsonAsync(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPutAsyncRetry400() => Test(async (endpoint) =>
+        public Task LRONonRetryPut201Creating400InvalidJson_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetry400Async(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.PutNonRetry201Creating400InvalidJson(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LRONonRetryPutAsyncRetry400_Sync() => Test((endpoint) =>
+        public Task LRONonRetryPut400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint).PutAsyncRelativeRetry400(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint).PutNonRetry400Async(waitUntil, value));
         });
 
         [Test]
-        public Task LROPost200() => Test(async (endpoint) =>
+        public Task LRONonRetryPut400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).Post200WithPayloadAsync();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var value = RequestContent.Create(new object());
+            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint).PutNonRetry400(waitUntil, value));
+        });
+
+        [Test]
+        public Task LRONonRetryPutAsyncRetry400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await client.PutAsyncRelativeRetry400Async(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
+        });
+
+        [Test]
+        public Task LRONonRetryPutAsyncRetry400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var client = new LrosaDsClient(Key, endpoint);
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = client.PutAsyncRelativeRetry400(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
+        });
+
+        [Test]
+        public Task LROPost200([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var operation = await new LROsClient(Key, endpoint).Post200WithPayloadAsync(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("1", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("product", GetResultValue(result.Value, "Name"));
         });
 
         [Test]
-        public Task LROPost200_Sync() => Test((endpoint) =>
+        public Task LROPost200_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).Post200WithPayload();
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).Post200WithPayload(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("1", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("product", GetResultValue(result.Value, "Name"));
         });
 
         [Test]
-        public Task LROPostAsyncNoRetrySucceeded() => Test(async (endpoint) =>
+        public Task LROPostAsyncNoRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PostAsyncNoRetrySucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).PostAsyncNoRetrySucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostAndGetList() => Test(async (endpoint) =>
+        public Task LROPostAndGetList([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).Post202ListAsync();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).Post202ListAsync(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual(1, GetArrayLength(result.Value));
             Assert.AreEqual("100", GetResultArrayValue(result.Value, 0, "Id"));
             Assert.AreEqual("foo", GetResultArrayValue(result.Value, 0, "Name"));
         });
 
         [Test]
-        public Task LROPostAsyncNoRetrySucceeded_Sync() => Test((endpoint) =>
+        public Task LROPostAndGetList_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var operation = new LROsClient(Key, endpoint).Post202List(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual(1, GetArrayLength(result.Value));
+            Assert.AreEqual("100", GetResultArrayValue(result.Value, 0, "Id"));
+            Assert.AreEqual("foo", GetResultArrayValue(result.Value, 0, "Name"));
+        });
+
+        [Test]
+        public Task LROPostAsyncNoRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PostAsyncNoRetrySucceeded(value);
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).PostAsyncNoRetrySucceeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostAsyncRetryCanceled() => Test(async (endpoint) =>
+        public Task LROPostAsyncRetryCanceled([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PostAsyncRetrycanceledAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LROsClient(Key, endpoint).PostAsyncRetrycanceledAsync(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROPostAsyncRetryCanceled_Sync() => Test((endpoint) =>
+        public Task LROPostAsyncRetryCanceled_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PostAsyncRetrycanceled(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LROsClient(Key, endpoint).PostAsyncRetrycanceled(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROPostAsyncRetryFailed() => Test(async (endpoint) =>
+        public Task LROPostAsyncRetryFailed([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PostAsyncRetryFailedAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionResponseAsync().ConfigureAwait(false));
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LROsClient(Key, endpoint).PostAsyncRetryFailedAsync(waitUntil, value);
+                await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+            });
         });
 
         [Test]
-        public Task LROPostAsyncRetryFailed_Sync() => Test((endpoint) =>
+        public Task LROPostAsyncRetryFailed_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PostAsyncRetryFailed(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LROsClient(Key, endpoint).PostAsyncRetryFailed(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
         });
 
         [Test]
-        public Task LROPostAsyncRetrySucceeded() => Test(async (endpoint) =>
+        public Task LROPostAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PostAsyncRetrySucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).PostAsyncRetrySucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostAsyncRetrySucceeded_Sync() => Test((endpoint) =>
+        public Task LROPostAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PostAsyncRetrySucceeded(value);
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).PostAsyncRetrySucceeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostDoubleHeadersFinalAzureHeaderGet() => Test(async (endpoint) =>
+        public Task LROPostDoubleHeadersFinalAzureHeaderGet([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).PostDoubleHeadersFinalAzureHeaderGetAsync();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).PostDoubleHeadersFinalAzureHeaderGetAsync(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual(null, GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostDoubleHeadersFinalAzureHeaderGet_Sync() => Test((endpoint) =>
+        public Task LROPostDoubleHeadersFinalAzureHeaderGet_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).PostDoubleHeadersFinalAzureHeaderGet();
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).PostDoubleHeadersFinalAzureHeaderGet(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual(null, GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault() => Test(async (endpoint) =>
+        public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).PostDoubleHeadersFinalAzureHeaderGetDefaultAsync();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault_Sync() => Test((endpoint) =>
+        public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).PostDoubleHeadersFinalAzureHeaderGetDefault();
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).PostDoubleHeadersFinalAzureHeaderGetDefault(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostDoubleHeadersFinalLocationGet() => Test(async (endpoint) =>
+        public Task LROPostDoubleHeadersFinalLocationGet([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint).PostDoubleHeadersFinalLocationGetAsync();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).PostDoubleHeadersFinalLocationGetAsync(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostDoubleHeadersFinalLocationGet_Sync() => Test((endpoint) =>
+        public Task LROPostDoubleHeadersFinalLocationGet_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint).PostDoubleHeadersFinalLocationGet();
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).PostDoubleHeadersFinalLocationGet(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPostSuccededNoBody() => Test(async (endpoint) =>
+        public Task LROPostSuccededNoBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Post202NoRetry204Async(value);
+            var operation = await new LROsClient(Key, endpoint).Post202NoRetry204Async(waitUntil, value);
             // Empty response body
-            Assert.AreEqual(0, (await operation.WaitForCompletionAsync().ConfigureAwait(false)).Value.ToMemory().Length);
+            Assert.AreEqual(0, (await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false)).Value.ToMemory().Length);
         });
 
         [Test]
-        public Task LROPostSuccededNoBody_Sync() => Test((endpoint) =>
+        public Task LROPostSuccededNoBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Post202NoRetry204(value);
+            var operation = new LROsClient(Key, endpoint).Post202NoRetry204(waitUntil, value);
             // Empty response body
-            Assert.AreEqual(0, WaitForCompletion(operation).Content.ToMemory().Length);
+            Assert.AreEqual(0, WaitForCompletion(operation, waitUntil).Content.ToMemory().Length);
         });
 
         [Test]
-        public Task LROPostSuccededWithBody() => TestStatus(async (endpoint) =>
+        public Task LROPostSuccededWithBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Post202Retry200Async(value);
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).Post202Retry200Async(waitUntil, value);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
         [Test]
-        public Task LROPostSuccededWithBody_Sync() => TestStatus((endpoint) =>
+        public Task LROPostSuccededWithBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Post202Retry200(value);
-            return WaitForCompletion(operation);
+            var operation = new LROsClient(Key, endpoint).Post202Retry200(waitUntil, value);
+            return WaitForCompletion(operation, waitUntil);
         });
 
         [Test]
-        public Task LROPut200InlineCompleteNoState() => Test(async (endpoint) =>
+        public Task LROPut200InlineCompleteNoState([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Put200SucceededNoStateAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).Put200SucceededNoStateAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPut200InlineCompleteNoState_Sync() => Test((endpoint) =>
+        public Task LROPut200InlineCompleteNoState_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Put200SucceededNoState(value);
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).Put200SucceededNoState(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPut202Retry200() => Test(async (endpoint) =>
+        public Task LROPut202Retry200([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Put202Retry200Async(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).Put202Retry200Async(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPut202Retry200_Sync() => Test((endpoint) =>
+        public Task LROPut202Retry200_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Put202Retry200(value);
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).Put202Retry200(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual(null, GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPutAsyncNoHeaderInRetry() => Test(async (endpoint) =>
+        public Task LROPutAsyncNoHeaderInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutAsyncNoHeaderInRetryAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            var operation = await new LROsClient(Key, endpoint).PutAsyncNoHeaderInRetryAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPutAsyncNoHeaderInRetry_Sync() => Test((endpoint) =>
+        public Task LROPutAsyncNoHeaderInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutAsyncNoHeaderInRetry(value);
-            var result = WaitForCompletionWithValue(operation);
+            var operation = new LROsClient(Key, endpoint).PutAsyncNoHeaderInRetry(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
         });
 
         [Test]
-        public Task LROPutAsyncNoRetryCanceled() => Test(async (endpoint) =>
+        public Task LROPutAsyncNoRetryCanceled([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutAsyncNoRetrycanceledAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
-        });
-
-        [Test]
-        public Task LROPutAsyncNoRetryCanceled_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutAsyncNoRetrycanceled(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
-        });
-
-        [Test]
-        public Task LROPutAsyncNoRetrySucceeded() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutAsyncNoRetrySucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutAsyncNoRetrySucceeded_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutAsyncNoRetrySucceeded(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutAsyncRetryFailed() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutAsyncRetryFailedAsync(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
-        });
-
-        [Test]
-        public Task LROPutAsyncRetryFailed_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutAsyncRetryFailed(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
-        });
-
-        [Test]
-        public Task LROPutAsyncRetrySucceeded() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutAsyncRetrySucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutAsyncRetrySucceeded_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutAsyncRetrySucceeded(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutCanceled() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Put200Acceptedcanceled200Async(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
-        });
-
-        [Test]
-        public Task LROPutCanceled_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Put200Acceptedcanceled200(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
-        });
-
-        [Test]
-        public Task LROPutFailed() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Put201CreatingFailed200Async(value);
-            Assert.ThrowsAsync<RequestFailedException>(async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
-        });
-
-        [Test]
-        public Task LROPutFailed_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Put201CreatingFailed200(value);
-            Assert.Throws<RequestFailedException>(() => WaitForCompletion(operation));
-        });
-
-        [Test]
-        public Task LROPutInlineComplete() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Put200SucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutInlineComplete_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Put200Succeeded(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutInlineComplete201() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Put201SucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutInlineComplete201_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Put201Succeeded(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutNoHeaderInRetry() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutNoHeaderInRetryAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutNoHeaderInRetry_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutNoHeaderInRetry(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutNonResourceAsyncInRetry() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutAsyncNonResourceAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
-        });
-
-        [Test]
-        public Task LROPutNonResourceAsyncInRetry_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutAsyncNonResource(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
-        });
-
-        [Test]
-        public Task LROPutNonResourceInRetry() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutNonResourceAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
-        });
-
-        [Test]
-        public Task LROPutNonResourceInRetry_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutNonResource(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
-        });
-
-        [Test]
-        public Task LROPutSubResourceAsyncInRetry() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutAsyncSubResourceAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutSubResourceAsyncInRetry_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutAsyncSubResource(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutSubResourceInRetry() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).PutSubResourceAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutSubResourceInRetry_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).PutSubResource(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutSucceededNoBody() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Put200UpdatingSucceeded204Async(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutSucceededNoBody_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Put200UpdatingSucceeded204(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutSucceededWithBody() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint).Put201CreatingSucceeded200Async(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LROPutSucceededWithBody_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint).Put201CreatingSucceeded200(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LRORetryErrorDelete202Accepted200Succeeded() => Test(async (endpoint) =>
-        {
-            var operation = await new LRORetrysClient(Key, endpoint).DeleteProvisioning202Accepted200SucceededAsync();
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LRORetryErrorDelete202Accepted200Succeeded_Sync() => Test((endpoint) =>
-        {
-            var operation = new LRORetrysClient(Key, endpoint).DeleteProvisioning202Accepted200Succeeded();
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LRORetryErrorDelete202Retry200Succeeded() => TestStatus(async (endpoint) =>
-        {
-            var operation = await new LRORetrysClient(Key, endpoint).Delete202Retry200Async();
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
-        });
-
-        [Test]
-        public Task LRORetryErrorDelete202Retry200Succeeded_Sync() => TestStatus((endpoint) =>
-        {
-            var operation = new LRORetrysClient(Key, endpoint).Delete202Retry200();
-            return WaitForCompletion(operation);
-        });
-
-        [Test]
-        public Task LRORetryErrorDeleteAsyncRetrySucceeded() => TestStatus(async (endpoint) =>
-        {
-            var operation = await new LRORetrysClient(Key, endpoint).DeleteAsyncRelativeRetrySucceededAsync();
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
-        });
-
-        [Test]
-        public Task LRORetryErrorDeleteAsyncRetrySucceeded_Sync() => TestStatus((endpoint) =>
-        {
-            var operation = new LRORetrysClient(Key, endpoint).DeleteAsyncRelativeRetrySucceeded();
-            return WaitForCompletion(operation);
-        });
-
-        [Test]
-        public Task LRORetryErrorPost202Retry200Succeeded() => TestStatus(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint).Post202Retry200Async(value);
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
-        });
-
-        [Test]
-        public Task LRORetryErrorPost202Retry200Succeeded_Sync() => TestStatus((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint).Post202Retry200(value);
-            return WaitForCompletion(operation);
-        });
-
-        [Test]
-        public Task LRORetryErrorPostAsyncRetrySucceeded() => TestStatus(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint).PostAsyncRelativeRetrySucceededAsync(value);
-            return await operation.WaitForCompletionResponseAsync().ConfigureAwait(false);
-        });
-
-        [Test]
-        public Task LRORetryErrorPostAsyncRetrySucceeded_Sync() => TestStatus((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint).PostAsyncRelativeRetrySucceeded(value);
-            return WaitForCompletion(operation);
-        });
-
-        [Test]
-        public Task LRORetryErrorPutAsyncSucceeded() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint).PutAsyncRelativeRetrySucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LRORetryErrorPutAsyncSucceeded_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint).PutAsyncRelativeRetrySucceeded(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LRORetryErrorPutAsyncSucceededPolling() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint).PutAsyncRelativeRetrySucceededAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LRORetryErrorPutAsyncSucceededPolling_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint).PutAsyncRelativeRetrySucceeded(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LRORetryPutSucceededWithBody() => Test(async (endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint).Put201CreatingSucceeded200Async(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        [Test]
-        public Task LRORetryPutSucceededWithBody_Sync() => Test((endpoint) =>
-        {
-            var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint).Put201CreatingSucceeded200(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
-            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
-            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
-        });
-
-        private static Response WaitForCompletion(Operation operation, CancellationToken cancellationToken = default)
-        {
-            return WaitForCompletion(operation, OperationHelpers.DefaultPollingInterval, cancellationToken);
-        }
-
-        private static Response WaitForCompletion(Operation operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default)
-        {
-            while (true)
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                operation.UpdateStatus(cancellationToken);
-                if (operation.HasCompleted)
-                {
-                    return operation.GetRawResponse();
-                }
+                var operation = await new LROsClient(Key, endpoint).PutAsyncNoRetrycanceledAsync(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
+        });
 
-                Thread.Sleep(pollingInterval);
-            }
-        }
-
-        private static Response<TResult> WaitForCompletionWithValue<TResult>(Operation<TResult> operation, CancellationToken cancellationToken = default) where TResult : notnull
+        [Test]
+        public Task LROPutAsyncNoRetryCanceled_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            return WaitForCompletionWithValue(operation, OperationHelpers.DefaultPollingInterval, cancellationToken);
-        }
-
-        private static Response<TResult> WaitForCompletionWithValue<TResult>(Operation<TResult> operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default) where TResult : notnull
-        {
-            while (true)
+            var value = RequestContent.Create(new object());
+            Assert.Throws<RequestFailedException>(() =>
             {
-                operation.UpdateStatus(cancellationToken);
-                if (operation.HasCompleted)
-                {
-                    return Response.FromValue(operation.Value, operation.GetRawResponse());
-                }
+                var operation = new LROsClient(Key, endpoint).PutAsyncNoRetrycanceled(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
+        });
 
-                Thread.Sleep(pollingInterval);
+        [Test]
+        public Task LROPutAsyncNoRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).PutAsyncNoRetrySucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutAsyncNoRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).PutAsyncNoRetrySucceeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutAsyncRetryFailed([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LROsClient(Key, endpoint).PutAsyncRetryFailedAsync(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
+        });
+
+        [Test]
+        public Task LROPutAsyncRetryFailed_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LROsClient(Key, endpoint).PutAsyncRetryFailed(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
+        });
+
+        [Test]
+        public Task LROPutAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).PutAsyncRetrySucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).PutAsyncRetrySucceeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutCanceled([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LROsClient(Key, endpoint).Put200Acceptedcanceled200Async(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
+        });
+
+        [Test]
+        public Task LROPutCanceled_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LROsClient(Key, endpoint).Put200Acceptedcanceled200(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
+        });
+
+        [Test]
+        public Task LROPutFailed([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            Assert.ThrowsAsync<RequestFailedException>(async () =>
+            {
+                var operation = await new LROsClient(Key, endpoint).Put201CreatingFailed200Async(waitUntil, value);
+                await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            });
+        });
+
+        [Test]
+        public Task LROPutFailed_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            Assert.Throws<RequestFailedException>(() =>
+            {
+                var operation = new LROsClient(Key, endpoint).Put201CreatingFailed200(waitUntil, value);
+                WaitForCompletion(operation, waitUntil);
+            });
+        });
+
+        [Test]
+        public Task LROPutInlineComplete([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).Put200SucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutInlineComplete_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).Put200Succeeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutInlineComplete201([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).Put201SucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutInlineComplete201_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).Put201Succeeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutNoHeaderInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).PutNoHeaderInRetryAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutNoHeaderInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).PutNoHeaderInRetry(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutNonResourceAsyncInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).PutAsyncNonResourceAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
+        });
+
+        [Test]
+        public Task LROPutNonResourceAsyncInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).PutAsyncNonResource(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
+        });
+
+        [Test]
+        public Task LROPutNonResourceInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).PutNonResourceAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
+        });
+
+        [Test]
+        public Task LROPutNonResourceInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).PutNonResource(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
+        });
+
+        [Test]
+        public Task LROPutSubResourceAsyncInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).PutAsyncSubResourceAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutSubResourceAsyncInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).PutAsyncSubResource(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutSubResourceInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).PutSubResourceAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutSubResourceInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).PutSubResource(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutSucceededNoBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).Put200UpdatingSucceeded204Async(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutSucceededNoBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).Put200UpdatingSucceeded204(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutSucceededWithBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LROsClient(Key, endpoint).Put201CreatingSucceeded200Async(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LROPutSucceededWithBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LROsClient(Key, endpoint).Put201CreatingSucceeded200(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LRORetryErrorDelete202Accepted200Succeeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var operation = await new LRORetrysClient(Key, endpoint).DeleteProvisioning202Accepted200SucceededAsync(waitUntil);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LRORetryErrorDelete202Accepted200Succeeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var operation = new LRORetrysClient(Key, endpoint).DeleteProvisioning202Accepted200Succeeded(waitUntil);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LRORetryErrorDelete202Retry200Succeeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
+        {
+            var operation = await new LRORetrysClient(Key, endpoint).Delete202Retry200Async(waitUntil);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+        });
+
+        [Test]
+        public Task LRORetryErrorDelete202Retry200Succeeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
+        {
+            var operation = new LRORetrysClient(Key, endpoint).Delete202Retry200(waitUntil);
+            return WaitForCompletion(operation, waitUntil);
+        });
+
+        [Test]
+        public Task LRORetryErrorDeleteAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
+        {
+            var operation = await new LRORetrysClient(Key, endpoint).DeleteAsyncRelativeRetrySucceededAsync(waitUntil);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+        });
+
+        [Test]
+        public Task LRORetryErrorDeleteAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
+        {
+            var operation = new LRORetrysClient(Key, endpoint).DeleteAsyncRelativeRetrySucceeded(waitUntil);
+            return WaitForCompletion(operation, waitUntil);
+        });
+
+        [Test]
+        public Task LRORetryErrorPost202Retry200Succeeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LRORetrysClient(Key, endpoint).Post202Retry200Async(waitUntil, value);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+        });
+
+        [Test]
+        public Task LRORetryErrorPost202Retry200Succeeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LRORetrysClient(Key, endpoint).Post202Retry200(waitUntil, value);
+            return WaitForCompletion(operation, waitUntil);
+        });
+
+        [Test]
+        public Task LRORetryErrorPostAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LRORetrysClient(Key, endpoint).PostAsyncRelativeRetrySucceededAsync(waitUntil, value);
+            return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
+        });
+
+        [Test]
+        public Task LRORetryErrorPostAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LRORetrysClient(Key, endpoint).PostAsyncRelativeRetrySucceeded(waitUntil, value);
+            return WaitForCompletion(operation, waitUntil);
+        });
+
+        [Test]
+        public Task LRORetryErrorPutAsyncSucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LRORetrysClient(Key, endpoint).PutAsyncRelativeRetrySucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LRORetryErrorPutAsyncSucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LRORetrysClient(Key, endpoint).PutAsyncRelativeRetrySucceeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LRORetryErrorPutAsyncSucceededPolling([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LRORetrysClient(Key, endpoint).PutAsyncRelativeRetrySucceededAsync(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LRORetryErrorPutAsyncSucceededPolling_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LRORetrysClient(Key, endpoint).PutAsyncRelativeRetrySucceeded(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LRORetryPutSucceededWithBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = await new LRORetrysClient(Key, endpoint).Put201CreatingSucceeded200Async(waitUntil, value);
+            var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        [Test]
+        public Task LRORetryPutSucceededWithBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
+        {
+            var value = RequestContent.Create(new object());
+            var operation = new LRORetrysClient(Key, endpoint).Put201CreatingSucceeded200(waitUntil, value);
+            var result = WaitForCompletionWithValue(operation, waitUntil);
+            Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
+            Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
+            Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
+        });
+
+        private static ValueTask<Response> WaitForCompletionAsync(Operation operation, WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        {
+            var operationHasCompleted = waitUntil == WaitUntil.Completed;
+            if (operationHasCompleted)
+            {
+                Assert.IsTrue(operation.HasCompleted);
+                return new ValueTask<Response>(operation.GetRawResponse());
             }
+
+            return operation.WaitForCompletionResponseAsync(TimeSpan.FromSeconds(1), cancellationToken);
+        }
+
+        private static ValueTask<Response<TResult>> WaitForCompletionWithValueAsync<TResult>(Operation<TResult> operation, WaitUntil waitUntil, CancellationToken cancellationToken = default) where TResult : notnull
+        {
+            var operationHasCompleted = waitUntil == WaitUntil.Completed;
+            if (operationHasCompleted)
+            {
+                Assert.IsTrue(operation.HasCompleted);
+                return new ValueTask<Response<TResult>>(Response.FromValue(operation.Value, operation.GetRawResponse()));
+            }
+
+            return operation.WaitForCompletionAsync(TimeSpan.FromSeconds(1), cancellationToken);
+        }
+
+        private static Response WaitForCompletion(Operation operation, WaitUntil waitUntil, CancellationToken cancellationToken = default)
+        {
+            var operationHasCompleted = waitUntil == WaitUntil.Completed;
+            if (operationHasCompleted)
+            {
+                Assert.IsTrue(operation.HasCompleted);
+                return operation.GetRawResponse();
+            }
+
+            return operation.WaitForCompletionResponse(TimeSpan.FromSeconds(1), cancellationToken);
+        }
+
+        private static Response<TResult> WaitForCompletionWithValue<TResult>(Operation<TResult> operation, WaitUntil waitUntil, CancellationToken cancellationToken = default) where TResult : notnull
+        {
+            var operationHasCompleted = waitUntil == WaitUntil.Completed;
+            if (operationHasCompleted)
+            {
+                Assert.IsTrue(operation.HasCompleted);
+                return Response.FromValue(operation.Value, operation.GetRawResponse());
+            }
+
+            return operation.WaitForCompletion(TimeSpan.FromSeconds(1), cancellationToken);
         }
 
         private static int GetArrayLength(BinaryData result)

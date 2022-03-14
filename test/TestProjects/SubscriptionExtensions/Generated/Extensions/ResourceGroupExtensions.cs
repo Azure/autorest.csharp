@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace SubscriptionExtensions
@@ -12,14 +16,49 @@ namespace SubscriptionExtensions
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region Oven
-        /// <summary> Gets an object representing a OvenContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="OvenContainer" /> object. </returns>
-        public static OvenContainer GetOvens(this ResourceGroup resourceGroup)
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
-            return new OvenContainer(resourceGroup);
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
         }
-        #endregion
+
+        /// <summary> Gets a collection of Ovens in the Oven. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of Ovens and their operations over a Oven. </returns>
+        public static OvenCollection GetOvens(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetOvens();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
+        /// Operation Id: Ovens_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="ovenName"> The name of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        public static async Task<Response<Oven>> GetOvenAsync(this ResourceGroup resourceGroup, string ovenName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetOvens().GetAsync(ovenName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
+        /// Operation Id: Ovens_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="ovenName"> The name of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> is null. </exception>
+        public static Response<Oven> GetOven(this ResourceGroup resourceGroup, string ovenName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetOvens().Get(ovenName, cancellationToken);
+        }
     }
 }

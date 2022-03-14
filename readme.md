@@ -1088,12 +1088,14 @@ namespace Azure.Service.Models
 
 ```yaml
 # autorest-core version
-version: 3.6.6
+version: 3.7.6
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/
 clear-output-folder: true
 public-clients: true
 skip-csproj-packagereference: true
+directive:
+  - remove-operation: putTextAndJsonBody
 ```
 
 </details>

@@ -31,6 +31,7 @@ namespace media_types
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal MediaTypesClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             RestClient = new MediaTypesRestClient(clientDiagnostics, pipeline, endpoint);
@@ -186,7 +187,7 @@ namespace media_types
             }
         }
 
-        /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <summary> Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<string>> ContentTypeWithEncodingAsync(string input = null, CancellationToken cancellationToken = default)
@@ -204,7 +205,7 @@ namespace media_types
             }
         }
 
-        /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
+        /// <summary> Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<string> ContentTypeWithEncoding(string input = null, CancellationToken cancellationToken = default)
@@ -214,6 +215,118 @@ namespace media_types
             try
             {
                 return RestClient.ContentTypeWithEncoding(input, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream. </summary>
+        /// <param name="contentType"> Upload file type. </param>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<string>> BinaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithTwoContentTypes");
+            scope.Start();
+            try
+            {
+                return await RestClient.BinaryBodyWithTwoContentTypesAsync(contentType, message, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream. </summary>
+        /// <param name="contentType"> Upload file type. </param>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<string> BinaryBodyWithTwoContentTypes(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithTwoContentTypes");
+            scope.Start();
+            try
+            {
+                return RestClient.BinaryBodyWithTwoContentTypes(contentType, message, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="contentType"> Upload file type. </param>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<string>> BinaryBodyWithThreeContentTypesAsync(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
+            scope.Start();
+            try
+            {
+                return await RestClient.BinaryBodyWithThreeContentTypesAsync(contentType, message, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="contentType"> Upload file type. </param>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<string> BinaryBodyWithThreeContentTypes(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
+            scope.Start();
+            try
+            {
+                return RestClient.BinaryBodyWithThreeContentTypes(contentType, message, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<string>> BinaryBodyWithThreeContentTypesAsync(string message, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
+            scope.Start();
+            try
+            {
+                return await RestClient.BinaryBodyWithThreeContentTypesAsync(message, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<string> BinaryBodyWithThreeContentTypes(string message, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
+            scope.Start();
+            try
+            {
+                return RestClient.BinaryBodyWithThreeContentTypes(message, cancellationToken);
             }
             catch (Exception e)
             {

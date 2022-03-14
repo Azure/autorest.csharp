@@ -78,10 +78,20 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
+          name: ToasterListResultNextLink
+          description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
           name: OvenBar
           description: specifies the bar
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -91,7 +101,7 @@ schemas: !Schemas
           name: OvenId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -101,7 +111,7 @@ schemas: !Schemas
           name: OvenName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_13
       type: string
       apiVersions:
         - !ApiVersion 
@@ -111,7 +121,7 @@ schemas: !Schemas
           name: OvenType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
@@ -121,7 +131,7 @@ schemas: !Schemas
           name: OvenLocation
           description: Resource location
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
@@ -132,7 +142,7 @@ schemas: !Schemas
           description: The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_17
+    - !ConstantSchema &ref_20
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -142,17 +152,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_21
-      type: constant
-      value: !ConstantValue 
-        value: application/json
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: ApplicationJson
-          description: Content Type 'application/json'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_23
+    - !ConstantSchema &ref_24
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -161,6 +161,16 @@ schemas: !Schemas
         default:
           name: Accept
           description: 'Accept: application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_26
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
       protocol: !Protocols {}
   dictionaries:
     - !DictionarySchema &ref_7
@@ -171,7 +181,7 @@ schemas: !Schemas
           name: ToasterTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_13
+    - !DictionarySchema &ref_15
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -180,155 +190,198 @@ schemas: !Schemas
           description: Resource tags
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_22
+    - !ObjectSchema &ref_25
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: *ref_2
-          serializedName: foo
-          language: !Languages 
-            default:
-              name: foo
-              description: specifies the foo
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_3
-          readOnly: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: Resource Id
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_4
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: Resource name
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_5
-          readOnly: true
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: Resource type
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_6
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: Resource location
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_7
-          serializedName: tags
-          language: !Languages 
-            default:
-              name: tags
-              description: Resource tags
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      language: !Languages 
-        default:
-          name: Toaster
-          description: The ToasterListResult.
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_14
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_8
-          serializedName: bar
-          language: !Languages 
-            default:
-              name: bar
-              description: specifies the bar
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_9
-          readOnly: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: Resource Id
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_10
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: Resource name
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_11
-          readOnly: true
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: Resource type
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_12
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: Resource location
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_13
-          serializedName: tags
-          language: !Languages 
-            default:
-              name: tags
-              description: Resource tags
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      language: !Languages 
-        default:
-          name: Oven
-          description: The Oven.
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_35
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: !ArraySchema &ref_16
+          schema: !ArraySchema &ref_18
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_14
+            elementType: !ObjectSchema &ref_9
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-06-01'
+              properties:
+                - !Property 
+                  schema: *ref_2
+                  serializedName: foo
+                  language: !Languages 
+                    default:
+                      name: foo
+                      description: specifies the foo
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_3
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: Resource Id
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_4
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: Resource name
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_5
+                  readOnly: true
+                  serializedName: type
+                  language: !Languages 
+                    default:
+                      name: type
+                      description: Resource type
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_6
+                  serializedName: location
+                  language: !Languages 
+                    default:
+                      name: location
+                      description: Resource location
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_7
+                  serializedName: tags
+                  language: !Languages 
+                    default:
+                      name: tags
+                      description: Resource tags
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - input
+                - output
+              language: !Languages 
+                default:
+                  name: Toaster
+                  description: The ToasterListResult.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: ToasterListResultValue
+                description: Gets the list of storage accounts and their properties.
+            protocol: !Protocols {}
+          readOnly: true
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: Gets the list of storage accounts and their properties.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_8
+          readOnly: true
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: ToasterListResult
+          description: The response from the List Storage Accounts operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_9
+    - !ObjectSchema &ref_32
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_19
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: !ObjectSchema &ref_17
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-06-01'
+              properties:
+                - !Property 
+                  schema: *ref_10
+                  serializedName: bar
+                  language: !Languages 
+                    default:
+                      name: bar
+                      description: specifies the bar
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_11
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: Resource Id
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_12
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: Resource name
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_13
+                  readOnly: true
+                  serializedName: type
+                  language: !Languages 
+                    default:
+                      name: type
+                      description: Resource type
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_14
+                  serializedName: location
+                  language: !Languages 
+                    default:
+                      name: location
+                      description: Resource location
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_15
+                  serializedName: tags
+                  language: !Languages 
+                    default:
+                      name: tags
+                      description: Resource tags
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - input
+                - output
+              language: !Languages 
+                default:
+                  name: Oven
+                  description: The Oven.
+                  namespace: ''
+              protocol: !Protocols {}
             language: !Languages 
               default:
                 name: OvenListResultValue
@@ -342,7 +395,7 @@ schemas: !Schemas
               description: The list of virtual machines.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_15
+          schema: *ref_16
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -360,10 +413,12 @@ schemas: !Schemas
           description: The List Virtual Machine operation response.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_17
   arrays:
-    - *ref_16
+    - *ref_18
+    - *ref_19
 globalParameters:
-  - !Parameter &ref_20
+  - !Parameter &ref_23
     schema: *ref_1
     implementation: Client
     required: true
@@ -377,7 +432,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_18
+  - !Parameter &ref_21
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -393,8 +448,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_19
-    schema: *ref_17
+  - !Parameter &ref_22
+    schema: *ref_20
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -415,38 +470,80 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_18
-          - !Parameter &ref_25
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: subscriptionId
-                description: ''
-                serializedName: subscriptionId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_26
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_19
-          - *ref_20
+          - *ref_21
+          - *ref_22
+          - *ref_23
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_24
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters
+                method: get
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_25
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_21
+          - !Parameter &ref_28
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: toasterName
+                description: The name of the availability set.
+                serializedName: toasterName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_22
+          - *ref_23
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -458,8 +555,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_24
-                schema: *ref_22
+              - !Parameter &ref_27
+                schema: *ref_9
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -471,7 +568,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -484,25 +581,24 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_24
+              - *ref_27
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_25
-          - *ref_26
+          - *ref_28
         responses:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -524,38 +620,26 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_18
-          - !Parameter &ref_27
+          - *ref_21
+          - !Parameter &ref_29
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: subscriptionId
-                description: ''
-                serializedName: subscriptionId
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_28
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
+                name: toasterName
                 description: The name of the availability set.
-                serializedName: availabilitySetName
+                serializedName: toasterName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_19
-          - *ref_20
+          - *ref_22
+          - *ref_23
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -574,15 +658,14 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/toasters/{toasterName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_27
-          - *ref_28
+          - *ref_29
         responses:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -612,7 +695,7 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_18
+          - *ref_21
           - !Parameter &ref_30
             schema: *ref_1
             implementation: Method
@@ -625,25 +708,109 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
+          - *ref_22
+          - *ref_23
           - !Parameter &ref_31
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: statusOnly
+                description: statusOnly=true enables fetching run time status of all Virtual Machines in the subscription.
+                serializedName: statusOnly
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_24
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_30
+          - *ref_31
+        responses:
+          - !SchemaResponse 
+            schema: *ref_32
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListAll
+            description: Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_21
+          - !Parameter &ref_34
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: vmName
-                description: The name of the virtual machine.
-                serializedName: vmName
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_19
-          - *ref_20
+          - !Parameter &ref_35
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: ovenName
+                description: The name of the virtual machine.
+                serializedName: ovenName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_22
+          - *ref_23
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_21
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -655,8 +822,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_29
-                schema: *ref_14
+              - !Parameter &ref_33
+                schema: *ref_17
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -668,7 +835,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -681,25 +848,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_29
+              - *ref_33
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_30
-          - *ref_31
+          - *ref_34
+          - *ref_35
         responses:
           - !SchemaResponse 
-            schema: *ref_14
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -712,7 +879,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_14
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -736,8 +903,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_18
-          - !Parameter &ref_32
+          - *ref_21
+          - !Parameter &ref_36
             schema: *ref_1
             implementation: Method
             required: true
@@ -749,25 +916,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_33
+          - !Parameter &ref_37
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: vmName
+                name: ovenName
                 description: The name of the virtual machine.
-                serializedName: vmName
+                serializedName: ovenName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_19
-          - *ref_20
+          - *ref_22
+          - *ref_23
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -786,15 +953,15 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ovens/{ovenName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_32
-          - *ref_33
+          - *ref_36
+          - *ref_37
         responses:
           - !SchemaResponse 
-            schema: *ref_14
+            schema: *ref_17
             language: !Languages 
               default:
                 name: ''
@@ -810,77 +977,6 @@ operationGroups:
           default:
             name: Get
             description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_18
-          - *ref_19
-          - *ref_20
-          - !Parameter &ref_34
-            schema: *ref_1
-            implementation: Method
-            language: !Languages 
-              default:
-                name: statusOnly
-                description: statusOnly=true enables fetching run time status of all Virtual Machines in the subscription.
-                serializedName: statusOnly
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_23
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_34
-        responses:
-          - !SchemaResponse 
-            schema: *ref_35
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: ListAll
-            description: Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
-            paging:
-              nextLinkName: nextLink
         protocol: !Protocols {}
     language: !Languages 
       default:

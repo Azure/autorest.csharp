@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Builders
             DateTimeSchema {Format: DateTimeSchemaFormat.DateTime} => SerializationFormat.DateTime_ISO8601,
             DateTimeSchema {Format: DateTimeSchemaFormat.DateTimeRfc1123} => SerializationFormat.DateTime_RFC1123,
             DateSchema _ => SerializationFormat.Date_ISO8601,
-            DurationSchema _ => SerializationFormat.Duration_ISO8601,
+            DurationSchema _ => schema.Extensions?.Format?.Equals("duration-constant") == true ? SerializationFormat.Duration_Constant : SerializationFormat.Duration_ISO8601,
             TimeSchema _ => SerializationFormat.Time_ISO8601,
             _ => SerializationFormat.Default
         };
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Output.Builders
                 );
             }
 
-            return new TypeDeclarationOptions(defaultName,defaultNamespace, defaultAccessibility, false, false);
+            return new TypeDeclarationOptions(defaultName, defaultNamespace, defaultAccessibility, false, false);
         }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)

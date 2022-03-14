@@ -1,54 +1,62 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OmitOperationGroups
     {
-        public static void RemoveOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
+        public static void RemoveOperationGroups()
         {
-            var omitSet = context.Configuration.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
-            if (codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
+            var omitSet = Configuration.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
+            if (MgmtContext.CodeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
             {
                 omitSet.Add("Operations");
             }
             if (omitSet.Count > 0)
             {
-                var omittedOGs = codeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
-                var nonOmittedOGs = codeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
+                var omittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
+                var nonOmittedOGs = MgmtContext.CodeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
 
-                codeModel.OperationGroups = nonOmittedOGs;
+                MgmtContext.CodeModel.OperationGroups = nonOmittedOGs;
                 var schemasToOmit = new HashSet<Schema>();
                 var schemasToKeep = new HashSet<Schema>();
-                foreach (var operationGroup in codeModel.OperationGroups)
+                foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
                 {
                     DetectSchemas(operationGroup, schemasToKeep);
                 }
+                AddDependantSchemasRecursively(schemasToKeep);
 
                 foreach (var operationGroup in omittedOGs)
                 {
                     DetectSchemas(operationGroup, schemasToOmit);
                 }
-                RemoveSchemas(codeModel, schemasToOmit, schemasToKeep);
+                AddDependantSchemasRecursively(schemasToOmit);
+
+                RemoveSchemas(schemasToOmit, schemasToKeep);
             }
         }
 
-        private static void RemoveSchemas(CodeModel codeModel, HashSet<Schema> schemasToOmit, HashSet<Schema> schemasToKeep)
+        private static void RemoveSchemas(HashSet<Schema> schemasToOmit, HashSet<Schema> schemasToKeep)
         {
             foreach (var schema in schemasToOmit)
             {
                 if (schema is ObjectSchema objSchema && !schemasToKeep.Contains(objSchema))
                 {
-                    codeModel.Schemas.Objects.Remove(objSchema);
+                    MgmtContext.CodeModel.Schemas.Objects.Remove(objSchema);
                     RemoveRelations(objSchema);
+                }
+                else if (schema is ChoiceSchema choiceSchema && !schemasToKeep.Contains(choiceSchema))
+                {
+                    MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
+                }
+                else if (schema is SealedChoiceSchema sealChoiceSchema && !schemasToKeep.Contains(sealChoiceSchema))
+                {
+                    MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealChoiceSchema);
                 }
             }
         }
@@ -79,7 +87,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     foreach (var property in curSchema.Properties)
                     {
-                        if (property.Schema is ObjectSchema propertySchema)
+                        var propertySchema = property.Schema;
+                        if (propertySchema is ObjectSchema || propertySchema is ChoiceSchema || propertySchema is SealedChoiceSchema)
                         {
                             if (!handledSchemas.Contains(propertySchema))
                             {
@@ -87,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                                 setToProcess.Add(propertySchema);
                             }
                         }
-                        else if (property.Schema is ArraySchema arraySchema && arraySchema.ElementType is ObjectSchema arrayPropertySchema)
+                        else if (propertySchema is ArraySchema arraySchema && arraySchema.ElementType is ObjectSchema arrayPropertySchema)
                         {
                             if (!handledSchemas.Contains(arrayPropertySchema))
                             {
@@ -121,7 +130,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 AddResponseSchemas(operation, setToProcess);
                 AddRequestSchemas(operation, setToProcess);
             }
-            AddDependantSchemasRecursively(setToProcess);
         }
 
         private static void AddResponseSchemas(Operation operation, HashSet<Schema> setToProcess)

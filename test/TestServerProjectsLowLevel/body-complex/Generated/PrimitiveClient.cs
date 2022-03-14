@@ -18,13 +18,14 @@ namespace body_complex_LowLevel
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of PrimitiveClient for mocking. </summary>
         protected PrimitiveClient()
@@ -38,22 +39,18 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public PrimitiveClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestComplexTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get complex types with integer properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -69,16 +66,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetIntAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetIntAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetInt");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetInt");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetIntRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetIntRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -88,7 +83,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with integer properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -104,16 +99,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetInt(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetInt(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetInt");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetInt");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetIntRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetIntRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -124,7 +117,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -141,16 +134,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutIntAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutIntAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutInt");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutInt");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutIntRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutIntRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -161,7 +154,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -178,16 +171,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutInt(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutInt(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutInt");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutInt");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutIntRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutIntRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -197,7 +190,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with long properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -213,16 +206,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetLongAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetLongAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetLong");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetLong");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetLongRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetLongRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -232,7 +223,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with long properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -248,16 +239,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetLong(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetLong(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetLong");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetLong");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetLongRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetLongRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -268,7 +257,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -285,16 +274,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutLongAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutLongAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutLong");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutLong");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutLongRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutLongRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -305,7 +294,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -322,16 +311,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutLong(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutLong(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutLong");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutLong");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutLongRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutLongRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -341,7 +330,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with float properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -357,16 +346,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetFloatAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetFloatAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFloatRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetFloatRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -376,7 +363,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with float properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -392,16 +379,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetFloat(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetFloat(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFloatRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetFloatRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -412,7 +397,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -429,16 +414,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutFloatAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutFloatAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutFloatRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutFloatRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -449,7 +434,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -466,16 +451,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutFloat(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutFloat(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutFloat");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutFloatRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutFloatRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -485,7 +470,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with double properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -501,16 +486,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetDoubleAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetDoubleAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDoubleRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDoubleRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -520,7 +503,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with double properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -536,16 +519,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetDouble(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetDouble(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDoubleRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetDoubleRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -556,7 +537,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -573,16 +554,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutDoubleAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutDoubleAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDoubleRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDoubleRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -593,7 +574,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -610,16 +591,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutDouble(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutDouble(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDouble");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDoubleRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutDoubleRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -629,7 +610,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with bool properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -645,16 +626,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetBoolAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetBoolAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetBool");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetBool");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBoolRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetBoolRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -664,7 +643,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with bool properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -680,16 +659,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetBool(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetBool(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetBool");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetBool");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetBoolRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetBoolRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -700,7 +677,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -717,16 +694,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutBoolAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutBoolAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutBool");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutBool");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutBoolRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutBoolRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -737,7 +714,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -754,16 +731,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutBool(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutBool(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutBool");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutBool");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutBoolRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutBoolRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -773,7 +750,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with string properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -790,16 +767,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetStringAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetStringAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetString");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetString");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetStringRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetStringRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -809,7 +784,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with string properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -826,16 +801,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetString(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetString(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetString");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetString");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetStringRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetStringRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -846,7 +819,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -864,16 +837,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutStringAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutStringAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutString");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutString");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutStringRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutStringRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -884,7 +857,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -902,16 +875,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutString(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutString(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutString");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutString");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutStringRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutStringRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -921,7 +894,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with date properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -937,16 +910,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetDateAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDate");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDate");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDateRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDateRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -956,7 +927,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with date properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -972,16 +943,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetDate(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetDate(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDate");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDate");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDateRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetDateRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -992,7 +961,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1009,16 +978,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutDateAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDate");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDate");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDateRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDateRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1029,7 +998,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1046,16 +1015,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutDate(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutDate(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDate");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDate");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDateRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutDateRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1065,7 +1034,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1081,16 +1050,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetDateTimeAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDateTimeRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDateTimeRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1100,7 +1067,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1116,16 +1083,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetDateTime(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetDateTime(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDateTimeRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetDateTimeRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1136,7 +1101,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1153,16 +1118,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateTimeAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutDateTimeAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDateTimeRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDateTimeRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1173,7 +1138,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1190,16 +1155,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutDateTime(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutDateTime(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDateTime");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDateTimeRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutDateTimeRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1209,7 +1174,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1225,16 +1190,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetDateTimeRfc1123Async(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetDateTimeRfc1123Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDateTimeRfc1123Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDateTimeRfc1123Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1244,7 +1207,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1260,16 +1223,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetDateTimeRfc1123(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetDateTimeRfc1123(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDateTimeRfc1123Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetDateTimeRfc1123Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1280,7 +1241,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1297,16 +1258,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDateTimeRfc1123Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDateTimeRfc1123Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1317,7 +1278,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1334,16 +1295,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutDateTimeRfc1123(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutDateTimeRfc1123(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDateTimeRfc1123");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDateTimeRfc1123Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutDateTimeRfc1123Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1353,7 +1314,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with duration properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1368,16 +1329,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetDurationAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetDurationAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDurationRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetDurationRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1387,7 +1346,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with duration properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1402,16 +1361,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetDuration(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetDuration(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetDurationRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetDurationRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1422,7 +1379,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1438,16 +1395,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutDurationAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutDurationAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDurationRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutDurationRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1458,7 +1415,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1474,16 +1431,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutDuration(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutDuration(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutDuration");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutDurationRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutDurationRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1493,7 +1450,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with byte properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1508,16 +1465,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetByteAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetByteAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetByte");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetByte");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetByteRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetByteRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1527,7 +1482,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with byte properties. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -1542,16 +1497,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetByte(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetByte(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.GetByte");
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetByte");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetByteRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetByteRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1562,7 +1515,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1578,16 +1531,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutByteAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutByteAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutByte");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutByte");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutByteRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutByteRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -1598,7 +1551,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -1614,16 +1567,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutByte(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutByte(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrimitiveClient.PutByte");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.PutByte");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutByteRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutByteRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -1632,9 +1585,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetIntRequest()
+        internal HttpMessage CreateGetIntRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1642,13 +1595,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/integer", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutIntRequest(RequestContent content)
+        internal HttpMessage CreatePutIntRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1658,13 +1610,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetLongRequest()
+        internal HttpMessage CreateGetLongRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1672,13 +1623,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/long", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutLongRequest(RequestContent content)
+        internal HttpMessage CreatePutLongRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1688,13 +1638,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetFloatRequest()
+        internal HttpMessage CreateGetFloatRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1702,13 +1651,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/float", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutFloatRequest(RequestContent content)
+        internal HttpMessage CreatePutFloatRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1718,13 +1666,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetDoubleRequest()
+        internal HttpMessage CreateGetDoubleRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1732,13 +1679,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/double", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutDoubleRequest(RequestContent content)
+        internal HttpMessage CreatePutDoubleRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1748,13 +1694,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetBoolRequest()
+        internal HttpMessage CreateGetBoolRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1762,13 +1707,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/bool", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutBoolRequest(RequestContent content)
+        internal HttpMessage CreatePutBoolRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1778,13 +1722,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetStringRequest()
+        internal HttpMessage CreateGetStringRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1792,13 +1735,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/string", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutStringRequest(RequestContent content)
+        internal HttpMessage CreatePutStringRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1808,13 +1750,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetDateRequest()
+        internal HttpMessage CreateGetDateRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1822,13 +1763,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/date", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutDateRequest(RequestContent content)
+        internal HttpMessage CreatePutDateRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1838,13 +1778,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetDateTimeRequest()
+        internal HttpMessage CreateGetDateTimeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1852,13 +1791,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/datetime", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutDateTimeRequest(RequestContent content)
+        internal HttpMessage CreatePutDateTimeRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1868,13 +1806,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetDateTimeRfc1123Request()
+        internal HttpMessage CreateGetDateTimeRfc1123Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1882,13 +1819,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutDateTimeRfc1123Request(RequestContent content)
+        internal HttpMessage CreatePutDateTimeRfc1123Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1898,13 +1834,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetDurationRequest()
+        internal HttpMessage CreateGetDurationRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1912,13 +1847,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/duration", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutDurationRequest(RequestContent content)
+        internal HttpMessage CreatePutDurationRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1928,13 +1862,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetByteRequest()
+        internal HttpMessage CreateGetByteRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1942,13 +1875,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/byte", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutByteRequest(RequestContent content)
+        internal HttpMessage CreatePutByteRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1958,22 +1890,10 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

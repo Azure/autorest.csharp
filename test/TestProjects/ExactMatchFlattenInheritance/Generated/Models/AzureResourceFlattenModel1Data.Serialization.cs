@@ -8,8 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -53,10 +52,11 @@ namespace ExactMatchFlattenInheritance
         {
             Optional<int> foo = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<string> foo0 = default;
             Optional<string> id0 = default;
             foreach (var property in element.EnumerateObject())
@@ -88,7 +88,7 @@ namespace ExactMatchFlattenInheritance
                 }
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -99,6 +99,11 @@ namespace ExactMatchFlattenInheritance
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -124,7 +129,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel1Data(id, name, type, tags, location, Optional.ToNullable(foo), foo0.Value, id0.Value);
+            return new AzureResourceFlattenModel1Data(id, name, type, systemData, tags, location, Optional.ToNullable(foo), foo0.Value, id0.Value);
         }
     }
 }

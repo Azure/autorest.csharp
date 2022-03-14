@@ -8,17 +8,27 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Humanizer;
+using Humanizer.Inflections;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Utilities
 {
     internal static class StringExtensions
     {
+        static StringExtensions()
+        {
+            Vocabularies.Default.AddUncountable("data");
+            // "S".Singularize() throws exception, github issue link: https://github.com/Humanizr/Humanizer/issues/1154
+            Vocabularies.Default.AddUncountable("S");
+        }
+
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
         public static bool IsNullOrWhiteSpace(this string? text) => String.IsNullOrWhiteSpace(text);
 
+        private static bool IsWordSeparator(char c) => !SyntaxFacts.IsIdentifierPartCharacter(c) || c == '_';
+
         [return: NotNullIfNotNull("name")]
-        public static string ToCleanName(this string name, bool camelCase = true)
+        public static string ToCleanName(this string name, bool isCamelCase = true)
         {
             StringBuilder nameBuilder = new StringBuilder();
 
@@ -37,19 +47,33 @@ namespace AutoRest.CSharp.Utilities
             }
 
             bool upperCase = false;
+            int firstWordLength = 1;
             for (; i < name.Length; i++)
             {
                 var c = name[i];
-                if (!SyntaxFacts.IsIdentifierPartCharacter(c) || c == '_')
+                if (IsWordSeparator(c))
                 {
                     upperCase = true;
                     continue;
                 }
 
-                if (nameBuilder.Length == 0)
+                if (nameBuilder.Length == 0 && isCamelCase)
                 {
-                    c = camelCase ? char.ToUpper(c) : char.ToLower(c);
+                    c = char.ToUpper(c);
                     upperCase = false;
+                }
+                else if (nameBuilder.Length < firstWordLength && !isCamelCase)
+                {
+                    c = char.ToLower(c);
+                    upperCase = false;
+                    // grow the first word length when this letter follows by two other upper case letters
+                    // this happens in OSProfile, where OS is the first word
+                    if (i + 2 < name.Length && char.IsUpper(name[i + 1]) && (char.IsUpper(name[i + 2]) || IsWordSeparator(name[i + 2])))
+                        firstWordLength++;
+                    // grow the first word length when this letter follows by another upper case letter and an end of the string
+                    // this happens when the string only has one word, like OS, DNS
+                    if (i + 2 == name.Length && char.IsUpper(name[i + 1]))
+                        firstWordLength++;
                 }
 
                 if (upperCase)
@@ -65,7 +89,7 @@ namespace AutoRest.CSharp.Utilities
         }
 
         [return: NotNullIfNotNull("name")]
-        public static string ToVariableName(this string name) => ToCleanName(name, camelCase: false);
+        public static string ToVariableName(this string name) => ToCleanName(name, isCamelCase: false);
 
         public static GetPathPartsEnumerator GetPathParts(string? path) => new GetPathPartsEnumerator(path);
 
@@ -272,15 +296,52 @@ namespace AutoRest.CSharp.Utilities
             }
         }
 
-
+        /// <summary>
+        /// Change a word to its plural form.
+        /// Notice that this function will treat this word as a whole word instead of only changing the last word if it contains multiple words. Please use <see cref="LastWordToPlural(string, bool)"/> instead.
+        /// </summary>
+        /// <param name="single"></param>
+        /// <param name="inputIsKnownToBeSingular"></param>
+        /// <returns></returns>
         public static string ToPlural(this string single, bool inputIsKnownToBeSingular = true)
         {
             return single.Pluralize(inputIsKnownToBeSingular);
         }
 
+        public static string LastWordToPlural(this string single, bool inputIsKnownToBeSingular = true)
+        {
+            var words = single.SplitByCamelCase();
+            var lastWord = words.LastOrDefault();
+            var lastWordPlural = lastWord.ToPlural(inputIsKnownToBeSingular);
+            if (inputIsKnownToBeSingular || lastWord != lastWordPlural)
+            {
+                return $"{string.Join("", words.SkipLast(1))}{lastWordPlural}";
+            }
+            return single;
+        }
+
+        /// <summary>
+        /// Change a word to its singular form.
+        /// Notice that this function will treat this word as a whole word instead of only changing the last word if it contains multiple words. Please use <see cref="LastWordToSingular(string, bool)"/> instead.
+        /// </summary>
+        /// <param name="plural"></param>
+        /// <param name="inputIsKnownToBePlural"></param>
+        /// <returns></returns>
         public static string ToSingular(this string plural, bool inputIsKnownToBePlural = true)
         {
             return plural.Singularize(inputIsKnownToBePlural);
+        }
+
+        public static string LastWordToSingular(this string plural, bool inputIsKnownToBePlural = true)
+        {
+            var words = plural.SplitByCamelCase();
+            var lastWord = words.LastOrDefault();
+            var lastWordSingular = lastWord.ToSingular(inputIsKnownToBePlural);
+            if (inputIsKnownToBePlural || lastWord != lastWordSingular)
+            {
+                return $"{string.Join("", words.SkipLast(1))}{lastWordSingular}";
+            }
+            return plural;
         }
 
         public static string FirstCharToLowerCase(this string str)
@@ -326,23 +387,41 @@ namespace AutoRest.CSharp.Utilities
         public static string RenameListToGet(this string methodName, string resourceName)
         {
             var newName = methodName;
-            if (methodName.Equals("List") || methodName.Equals("ListAll"))
+            if (methodName.Equals("List") || methodName.Equals("ListAll") || methodName.StartsWith("ListBy"))
             {
-                newName = $"Get{resourceName.ToPlural(inputIsKnownToBeSingular: false)}";
-            }
-            else if (methodName.StartsWith("ListBy"))
-            {
-                newName = methodName.ReplaceFirst("List", $"Get{resourceName.ToPlural(inputIsKnownToBeSingular: false)}");
+                var pluralResourceName = resourceName.LastWordToPlural(inputIsKnownToBeSingular: false);
+                var singularResourceName = resourceName.LastWordToSingular(inputIsKnownToBePlural: false);
+                var getMethodPrefix = pluralResourceName == singularResourceName ? "GetAll" : "Get";
+                var wordToBeReplaced = methodName.StartsWith("ListBy") ? "List" : methodName;
+                newName = methodName.ReplaceFirst(wordToBeReplaced, $"{getMethodPrefix}{pluralResourceName}");
             }
             else if (methodName.StartsWith("List"))
             {
                 var words = methodName.SplitByCamelCase();
-                var lastNoun = words.LastOrDefault();
-                if (lastNoun != null && !words.Any(w => new HashSet<string>{"By", "With"}.Contains(w)))
-                    methodName = methodName.ReplaceLast(lastNoun, lastNoun.ToPlural(inputIsKnownToBeSingular: false));
-                newName = methodName.ReplaceFirst("List", "Get");
+                var getMethodPrefix = "Get";
+                // Cases like ListEntitiesAssignedWithTerm is difficult to parse which noun should be plural and will just make no changes to the nouns for now.
+                if (!words.Any(w => new HashSet<string> { "By", "With" }.Contains(w)))
+                {
+                    var pluralMethodName = methodName.LastWordToPlural(inputIsKnownToBeSingular: false);
+                    var singularMethodName = methodName.LastWordToSingular(inputIsKnownToBePlural: false);
+                    if (pluralMethodName == singularMethodName)
+                    {
+                        getMethodPrefix = "GetAll";
+                    }
+                    newName = pluralMethodName;
+                }
+                newName = newName.ReplaceFirst("List", getMethodPrefix);
             }
             return newName;
+        }
+
+        public static string RenameGetMethod(this string methodName, string resourceName)
+        {
+            if (methodName.Equals("Get"))
+            {
+                return $"Get{resourceName.LastWordToSingular(inputIsKnownToBePlural: false)}";
+            }
+            return methodName;
         }
     }
 }

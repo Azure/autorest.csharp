@@ -9,13 +9,5 @@
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
-  "skip-csproj-packagereference": true,
-  "OperationGroupToResource": {
-    "SupersetModel2s": "NonResource",
-    "SupersetModel3s": "NonResource"
-  },
-  "OperationGroupToParent": {
-    "SupersetModel2s": "resourceGroups",
-    "SupersetModel3s": "resourceGroups"
-  }
+  "skip-csproj-packagereference": true
 }

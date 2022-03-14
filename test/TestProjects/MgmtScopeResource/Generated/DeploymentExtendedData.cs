@@ -7,14 +7,13 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
     /// <summary> A class representing the DeploymentExtended data model. </summary>
-    public partial class DeploymentExtendedData : Resource
+    public partial class DeploymentExtendedData : ResourceData
     {
         /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
         internal DeploymentExtendedData()
@@ -26,10 +25,11 @@ namespace MgmtScopeResource
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> the location of the deployment. </param>
         /// <param name="properties"> Deployment properties. </param>
         /// <param name="tags"> Deployment tags. </param>
-        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType type, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags) : base(id, name, type)
+        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags) : base(id, name, type, systemData)
         {
             Location = location;
             Properties = properties;

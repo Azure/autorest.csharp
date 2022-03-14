@@ -1,6 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -15,22 +18,56 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
-        {
-            BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
-            var restClientWriter = new MgmtRestClientWriter();
-            var serializeWriter = new SerializationWriter();
-            var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
+        private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
+        private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
 
-            foreach (var model in context.Library.Models)
+        private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
+        {
+            if (!_addedProjectFilenames.TryGetValue(project, out var addedFileNames))
             {
-                if (ShouldSkipModelGeneration(model, context))
+                addedFileNames = new HashSet<string>();
+                _addedProjectFilenames.Add(project, addedFileNames);
+            }
+            if (addedFileNames.Contains(filename))
+            {
+                if (!_overriddenProjectFilenames.TryGetValue(project, out var overriddenFileNames))
+                {
+                    overriddenFileNames = new List<string>();
+                    _overriddenProjectFilenames.Add(project, overriddenFileNames);
+                }
+                overriddenFileNames.Add(filename);
+            }
+            else
+            {
+                addedFileNames.Add(filename);
+            }
+            project.AddGeneratedFile(filename, text);
+        }
+
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
+        {
+            var addedFilenames = new HashSet<string>();
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+            var serializeWriter = new SerializationWriter();
+            var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
+
+            if (!isArmCore)
+            {
+                var utilCodeWriter = new CodeWriter();
+                var staticUtilWriter = new StaticUtilWriter(utilCodeWriter);
+                staticUtilWriter.Write();
+                AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
+            }
+
+            foreach (var model in MgmtContext.Library.Models)
+            {
+                if (ShouldSkipModelGeneration(model))
                     continue;
 
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
                 var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"Models/{name}.cs", codeWriter.ToString());
 
                 if (model is MgmtReferenceType mgmtReferenceType)
                 {
@@ -41,28 +78,30 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
-                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                AddGeneratedFile(project, $"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            foreach (var client in context.Library.RestClients)
+            foreach (var client in MgmtContext.Library.RestClients)
             {
                 var restCodeWriter = new CodeWriter();
-                restClientWriter.WriteClient(restCodeWriter, client);
+                new MgmtRestClientWriter().WriteClient(restCodeWriter, client);
 
-                project.AddGeneratedFile($"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
+                AddGeneratedFile(project, $"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (var resourceContainer in context.Library.ResourceContainers)
+            foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
             {
                 var codeWriter = new CodeWriter();
-                var containerWriter = new ResourceContainerWriter(codeWriter, resourceContainer, context);
-                containerWriter.WriteContainer();
+                new ResourceCollectionWriter(codeWriter, resourceCollection).Write();
 
-                project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var model in context.Library.ResourceData)
+            foreach (var model in MgmtContext.Library.ResourceData)
             {
+                if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
+                    continue;
+
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
@@ -70,93 +109,112 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
                 var name = model.Type.Name;
-                project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
-                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                AddGeneratedFile(project, $"{name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            foreach (var resource in context.Library.ArmResources)
+            foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var codeWriter = new CodeWriter();
-                var armResourceWriter = new ResourceWriter(codeWriter, resource, context);
-                armResourceWriter.WriteResource();
+                new ResourceWriter(codeWriter, resource).Write();
 
-                project.AddGeneratedFile($"{resource.Type.Name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var operation in context.Library.LongRunningOperations)
+            if (!isArmCore)
             {
-                var codeWriter = new CodeWriter();
-                mgmtLongRunningOperationWriter.Write(codeWriter, operation);
-
-                project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+                // we will write the ResourceGroupExtensions and SubscriptionExtensions classes even if it does not contain anything
+                WriteExtensionPair(project, MgmtContext.Library.ResourceGroupExtensionsClient);
+                WriteExtensionPair(project, MgmtContext.Library.SubscriptionExtensionsClient);
             }
 
-            foreach (var operation in context.Library.NonLongRunningOperations)
+            if (!MgmtContext.Library.ManagementGroupExtensions.IsEmpty)
             {
-                var codeWriter = new CodeWriter();
-                NonLongRunningOperationWriter.Write(codeWriter, operation);
-
-                project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+                WriteExtensionPair(project, MgmtContext.Library.ManagementGroupExtensionsClient);
             }
 
-            foreach (var tupleResource in context.Library.TupleResources)
+            if (!MgmtContext.Library.TenantExtensions.IsEmpty)
             {
-                var codeWriter = new CodeWriter();
-                var resourceWriter = new TupleResourceWriter(codeWriter, tupleResource, context);
-                resourceWriter.WriteResource();
-
-                project.AddGeneratedFile($"{tupleResource.Type.Name}.cs", codeWriter.ToString());
+                WriteExtensionPair(project, MgmtContext.Library.TenantExtensionsClient);
             }
 
-            foreach (var tupleResourceContainer in context.Library.TupleResourceContainers)
+            if (!MgmtContext.Library.ArmClientExtensions.IsEmpty)
             {
-                var codeWriter = new CodeWriter();
-                new TupleResourceContainerWriter(codeWriter, tupleResourceContainer, context).WriteContainer();
-
-                project.AddGeneratedFile($"{tupleResourceContainer.Type.Name}.cs", codeWriter.ToString());
+                var armClientExtension = MgmtContext.Library.ArmClientExtensions;
+                var armClientExtensionsCodeWriter = new ArmClientExtensionsWriter(armClientExtension);
+                armClientExtensionsCodeWriter.Write();
+                AddGeneratedFile(project, $"Extensions/{armClientExtensionsCodeWriter.FileName}.cs", armClientExtensionsCodeWriter.ToString());
             }
 
-            var resourceGroupExtensionsCodeWriter = new CodeWriter();
-            new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context).WriteExtension();
-            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups]}.cs", resourceGroupExtensionsCodeWriter.ToString());
-
-            var subscriptionExtensionsCodeWriter = new CodeWriter();
-            new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context).WriteExtension();
-            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
-
-            if (context.Library.ManagementGroupChildResources.Count() > 0)
+            if (!MgmtContext.Library.ArmResourceExtensions.IsEmpty)
             {
-                var managementGroupExtensionsCodeWriter = new CodeWriter();
-                new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context).WriteExtension();
-                project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups]}.cs", managementGroupExtensionsCodeWriter.ToString());
+                WriteExtensionPair(project, MgmtContext.Library.ArmResourceExtensionsClient);
             }
 
-            if (context.Library.TenantChildResources.Count() > 0)
+            var lroWriter = new MgmtLongRunningOperationWriter(true);
+            lroWriter.Write();
+            AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
+            lroWriter = new MgmtLongRunningOperationWriter(false);
+            lroWriter.Write();
+            AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
+
+            foreach (var operationSource in MgmtContext.Library.OperationSources)
             {
-                var tenantExtensionsCodeWriter = new CodeWriter();
-                new TenantExtensionsWriter(tenantExtensionsCodeWriter, context).WriteExtension();
-                project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Tenant]}.cs", tenantExtensionsCodeWriter.ToString());
+                var writer = new OperationSourceWriter(operationSource);
+                writer.Write();
+                AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
             }
 
-            var armClientExtensionsCodeWriter = new CodeWriter();
-            new ArmClientExtensionsWriter(armClientExtensionsCodeWriter, context).WriteExtension();
-            project.AddGeneratedFile($"Extensions/ArmClientExtensions.cs", armClientExtensionsCodeWriter.ToString());
+            if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
+                throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+
+            if (!isArmCore)
+            {
+                var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
+                project.InternalizeOrphanedModels(modelsToKeep).GetAwaiter().GetResult();
+            }
         }
 
-        private static bool ShouldSkipModelGeneration(TypeProvider model, BuildContext<MgmtOutputLibrary> context)
+        private static void WriteExtensionPair(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        {
+            WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
+            if (!Configuration.MgmtConfiguration.IsArmCore)
+                WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
+        }
+
+        private static void WriteExtensionPiece(GeneratedCodeWorkspace project, MgmtClientBaseWriter extensionWriter)
+        {
+            extensionWriter.Write();
+            AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());
+        }
+
+        private static bool ShouldSkipModelGeneration(TypeProvider model)
         {
             // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
             // Can go way after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
             // The includeArmCore parameter should also be removed in FindForType() then.
-            if (!context.Configuration.MgmtConfiguration.IsArmCore && context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name, includeArmCore: true) != null)
+            if (!Configuration.MgmtConfiguration.IsArmCore && MgmtContext.Context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name, includeArmCore: true) != null)
             {
                 return true;
             }
+
+            // do not skip generation of reference types in resource manager
+            // some common types (like `PrivateEndpointConnectionData`) will inherit `Resource`
+            // it will cause `Resource` not being generated since `Resource` is `usedAsInheritance`
+            if (model is MgmtReferenceType)
+            {
+                return false;
+            }
+
             if (model is SchemaObjectType objSchema)
             {
                 //TODO: we need to add logic to replace SubResource with ResourceIdentifier where appropriate until then we won't remove these types
                 if (objSchema.ObjectSchema.Name.StartsWith("SubResource"))
                     return false;
+
+                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
+                    return true;
+
                 //skip things that had exact match replacements
                 //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
                 //Since we forced the evaluation of inheritance and property match for all models before, here we can use the fully loaded cache to
@@ -176,7 +234,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     //In the cache of ReferenceTypePropertyChooser, only models used as a direct property of another model is stored.
                     //There could be orphaned models that are not a direct property of another model and is not tracked by cache.
                     //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-                    if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObjType, context) != null)
+                    if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObjType) != null)
                         return true;
                 }
             }

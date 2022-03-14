@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string SerializationCtorAttributeName = "SerializationConstructorAttribute";
         internal const string ReferenceTypeAttributeName = "ReferenceTypeAttribute";
 
+        private static IList<Type>? _externalTypes;
         private static IList<Type>? _referenceTypes;
 
         internal class Node
@@ -35,17 +36,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        internal static IList<Type> GetReferenceClassCollection(BuildContext<MgmtOutputLibrary> context) => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal(context));
+        /// <summary>
+        /// All external types, right now they are all defined in <c>ResourceManager</c>
+        /// See: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/src
+        /// </summary>
+        internal static IList<Type> ExternalTypes => _externalTypes ??= GetExternalTypes();
+        internal static IList<Type> GetReferenceClassCollection() => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal());
 
-        private static IList<Type> GetReferenceClassCollectionInternal(BuildContext<MgmtOutputLibrary> context)
+        private static IList<Type> GetExternalTypes()
         {
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
             if (assembly == null)
             {
                 return new List<Type>();
             }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
+            return assembly.GetTypes().ToList();
         }
+
+        private static IList<Type> GetReferenceClassCollectionInternal()
+        {
+            return ExternalTypes.Where(t =>
+                !t.Name.Equals("Resource") && //temp while we have both Resource and ResourceData
+                !t.Name.Equals("TrackedResource") && //temp while we have both TrackedResource and TrackedResourceData
+                t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
+    }
 
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
         {

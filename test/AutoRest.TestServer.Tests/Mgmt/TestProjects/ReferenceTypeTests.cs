@@ -23,11 +23,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private const string ProjectNamespace = "ReferenceTypes.Models";
         private IEnumerable<Type>? _referenceTypes;
         private IEnumerable<Type>? _projectTypes;
-        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(Resource)).GetTypes().Where(
+        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(ReferenceTypesResourceData)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ReferenceNamespace &&
             !t.IsEnum);
-        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(Resource)).GetTypes().Where(
+        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(ReferenceTypesResourceData)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ProjectNamespace &&
             !t.IsEnum);
@@ -51,12 +51,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(Resource), ReferenceNamespace)]
+        [TestCase(typeof(ReferenceTypesResourceData), ReferenceNamespace)]
         [TestCase(typeof(TrackedResource), ReferenceNamespace)]
-        [TestCase(typeof(Sku), ReferenceNamespace)]
-        [TestCase(typeof(SkuTier), ReferenceNamespace)]
+        [TestCase(typeof(ReferenceTypesSku), ReferenceNamespace)]
+        [TestCase(typeof(ReferenceTypesSkuTier), ReferenceNamespace)]
         [TestCase(typeof(CreatedByType), ReferenceNamespace)]
         [TestCase(typeof(ResourceNon), ProjectNamespace)]
+        [TestCase(typeof(PrivateLinkResourceData), ReferenceNamespace)]
+        [TestCase(typeof(PrivateLinkResourceList), ReferenceNamespace)]
+        [TestCase(typeof(PrivateEndpointConnectionData), ReferenceNamespace)]
+        [TestCase(typeof(PrivateEndpointConnectionList), ReferenceNamespace)]
         public void ValidateNamespace(Type typeToTest, string expectedNamespace)
         {
             //all should be resources.models namespace from referencetype
@@ -64,10 +68,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(expectedNamespace, typeToTest.Namespace);
         }
 
-        [TestCase(typeof(Resource), typeof(ReferenceTypeAttribute))]
+        [TestCase(typeof(ReferenceTypesResourceData), typeof(ReferenceTypeAttribute))]
         [TestCase(typeof(TrackedResource), typeof(ReferenceTypeAttribute))]
-        [TestCase(typeof(Sku), typeof(PropertyReferenceTypeAttribute))]
-        public void ValidateAttributes(Type referenceType, Type attributeType)
+        [TestCase(typeof(ReferenceTypesSku), typeof(PropertyReferenceTypeAttribute))]
+        [TestCase(typeof(PrivateLinkResourceData), typeof(TypeReferenceTypeAttribute))]
+        [TestCase(typeof(PrivateLinkResourceList), typeof(TypeReferenceTypeAttribute))]
+        [TestCase(typeof(PrivateEndpointConnectionData), typeof(TypeReferenceTypeAttribute))]
+        [TestCase(typeof(PrivateEndpointConnectionList), typeof(TypeReferenceTypeAttribute))]
+        public void ValidateReferrenceTypeAttributes(Type referenceType, Type attributeType)
         {
             Assert.IsNotNull(referenceType.GetCustomAttribute(attributeType), $"ReferenceType attribute was not found for {referenceType.Name}");
             var ctors = referenceType.GetConstructors();

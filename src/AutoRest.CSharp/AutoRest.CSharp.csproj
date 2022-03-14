@@ -13,25 +13,28 @@
     <PackAsTool>true</PackAsTool>
     <RollForward>Minor</RollForward>
     <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.19.0" />
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.16" />
-    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-beta.4" />
-    <PackageReference Include="Humanizer.Core" Version="2.11.10" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.10.0-1.final" />
-    <PackageReference Include="YamlDotNet" Version="8.1.2" />
+    <PackageReference Include="Azure.Core" Version="1.23.0-alpha.20220310.5" />
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
+    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20220310.5" />
+    <PackageReference Include="Humanizer.Core" Version="2.13.14" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.0.1" />
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="../../src/assets/**/*.cs" />
     <TfmSpecificPackageFile Include="../../src/assets/" PackagePath="content" />
+
+    <Content Include="../../node_modules/autorest/**/*" PackagePath="tools\autorest" />
 
     <Content Include="build\CodeGeneration.targets" PackagePath="build\Microsoft.Azure.AutoRest.CSharp.targets" />
     <Content Include="build\CodeGeneration.targets" PackagePath="buildMultiTargeting\Microsoft.Azure.AutoRest.CSharp.targets" />
@@ -52,16 +55,13 @@
       <_SourceRoot>$([System.String]::Copy('%(SourceRoot.SourceLinkUrl)').Replace('*', ''))</_SourceRoot>
       <_RawUrl>$(_SourceRoot)$(_RelativePath.Replace('\', '/'))/*</_RawUrl>
       <_ReadmeMdPath>$(_RepoRoot)readme.md</_ReadmeMdPath>
-      <_PackageJsonPath>$(_RepoRoot)package.json</_PackageJsonPath>
       <_GeneratedPropsFilePath>$(IntermediateOutputPath)/Microsoft.Azure.AutoRest.CSharp.props</_GeneratedPropsFilePath>
 
       <_ReadmeMdLines>$([System.IO.File]::ReadAllText($(_ReadmeMdPath)))</_ReadmeMdLines>
-      <_PackageJsonLines>$([System.IO.File]::ReadAllText($(_PackageJsonPath)))</_PackageJsonLines>
     </PropertyGroup>
 
     <PropertyGroup>
       <_CoreVersion>$([System.Text.RegularExpressions.Regex]::Match('$(_ReadmeMdLines)', 'version: ([\.\d]+)').get_Groups().get_Item(1))</_CoreVersion>
-      <_AutorestVersion>$([System.Text.RegularExpressions.Regex]::Match('$(_PackageJsonLines)', '"autorest": "(.*?)"').get_Groups().get_Item(1))</_AutorestVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -70,7 +70,6 @@
       <_GeneratedPropsFileLines Include="&lt;SourceRoot Include=&quot;%24([System.IO.Path]::GetFullPath('%24(MSBuildThisFileDirectory)..\contentFiles\any\$(TargetFramework)\'))&quot; SourceLinkUrl=&quot;$(_RawUrl)&quot;/&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/ItemGroup&gt;" />
       <_GeneratedPropsFileLines Include="&lt;PropertyGroup&gt;" />
-      <_GeneratedPropsFileLines Include="&lt;AutoRestVersion&gt;$(_AutorestVersion)&lt;/AutoRestVersion&gt;" />
       <_GeneratedPropsFileLines Include="&lt;AutoRestCoreVersion&gt;$(_CoreVersion)&lt;/AutoRestCoreVersion&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/PropertyGroup&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/Project&gt;" />

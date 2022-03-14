@@ -20,7 +20,13 @@ namespace AutoRest.CSharp.Output.Models.Responses
             "x-ms-request-id"
         };
 
-        public DataPlaneResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context) : base(context)
+        public DataPlaneResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context)
+            :this(httpResponseHeaders, context, operation.CSharpName(), context.Library.FindRestClient(operationGroup).ClientPrefix)
+        {
+        }
+
+        private DataPlaneResponseHeaderGroupType(HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context, string operationName, string clientName)
+            : base(context)
         {
             ResponseHeader CreateResponseHeader(HttpResponseHeader header)
             {
@@ -33,17 +39,14 @@ namespace AutoRest.CSharp.Output.Models.Responses
                     BuilderHelpers.EscapeXmlDescription(header.Language!.Default.Description));
             }
 
-            string operationName = operation.CSharpName();
-            var clientName = context.Library.FindRestClient(operationGroup).ClientPrefix;
-
             DefaultName = clientName + operationName + "Headers";
             Description = $"Header model for {operationName}";
             Headers = httpResponseHeaders.Select(CreateResponseHeader).ToArray();
         }
 
+        protected override string DefaultName { get; }
         public string Description { get; }
         public ResponseHeader[] Headers { get; }
-        protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "internal";
 
         public static DataPlaneResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext<DataPlaneOutputLibrary> context)

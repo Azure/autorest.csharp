@@ -6,18 +6,17 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods
 {
     /// <summary> A class representing the MgmtGrpParentWithLoc data model. </summary>
-    public partial class MgmtGrpParentWithLocData : TrackedResource
+    public partial class MgmtGrpParentWithLocData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of MgmtGrpParentWithLocData. </summary>
         /// <param name="location"> The location. </param>
-        public MgmtGrpParentWithLocData(Location location) : base(location)
+        public MgmtGrpParentWithLocData(AzureLocation location) : base(location)
         {
         }
 
@@ -25,10 +24,11 @@ namespace MgmtListMethods
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal MgmtGrpParentWithLocData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string bar) : base(id, name, type, tags, location)
+        internal MgmtGrpParentWithLocData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string bar) : base(id, name, type, systemData, tags, location)
         {
             Bar = bar;
         }

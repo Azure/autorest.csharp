@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
@@ -29,18 +29,25 @@ namespace Azure.Management.Storage
                 writer.WritePropertyName("shareDeleteRetentionPolicy");
                 writer.WriteObjectValue(ShareDeleteRetentionPolicy);
             }
+            if (Optional.IsDefined(ProtocolSettings))
+            {
+                writer.WritePropertyName("protocolSettings");
+                writer.WriteObjectValue(ProtocolSettings);
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
         internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
-            Optional<Sku> sku = default;
+            Optional<StorageSku> sku = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<CorsRules> cors = default;
             Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
+            Optional<ProtocolSettings> protocolSettings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"))
@@ -50,12 +57,12 @@ namespace Azure.Management.Storage
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = StorageSku.DeserializeStorageSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -66,6 +73,11 @@ namespace Azure.Management.Storage
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -97,11 +109,21 @@ namespace Azure.Management.Storage
                             shareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
                             continue;
                         }
+                        if (property0.NameEquals("protocolSettings"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            protocolSettings = ProtocolSettings.DeserializeProtocolSettings(property0.Value);
+                            continue;
+                        }
                     }
                     continue;
                 }
             }
-            return new FileServiceData(id, name, type, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value);
+            return new FileServiceData(id, name, type, systemData, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value, protocolSettings.Value);
         }
     }
 }

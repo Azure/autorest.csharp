@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace NoTypeReplacement
@@ -12,34 +16,121 @@ namespace NoTypeReplacement
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region NoTypeReplacementModel1
-        /// <summary> Gets an object representing a NoTypeReplacementModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1Container" /> object. </returns>
-        public static NoTypeReplacementModel1Container GetNoTypeReplacementModel1s(this ResourceGroup resourceGroup)
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
-            return new NoTypeReplacementModel1Container(resourceGroup);
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
         }
-        #endregion
 
-        #region NoTypeReplacementModel2
-        /// <summary> Gets an object representing a NoTypeReplacementModel2Container along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of NoTypeReplacementModel1s in the NoTypeReplacementModel1. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2Container" /> object. </returns>
-        public static NoTypeReplacementModel2Container GetNoTypeReplacementModel2s(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of NoTypeReplacementModel1s and their operations over a NoTypeReplacementModel1. </returns>
+        public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroup resourceGroup)
         {
-            return new NoTypeReplacementModel2Container(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel1s();
         }
-        #endregion
 
-        #region NoTypeReplacementModel3
-        /// <summary> Gets an object representing a NoTypeReplacementModel3Container along with the instance operations that can be performed on it. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}
+        /// Operation Id: NoTypeReplacementModel1s_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3Container" /> object. </returns>
-        public static NoTypeReplacementModel3Container GetNoTypeReplacementModel3s(this ResourceGroup resourceGroup)
+        /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
+        public static async Task<Response<NoTypeReplacementModel1>> GetNoTypeReplacementModel1Async(this ResourceGroup resourceGroup, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return new NoTypeReplacementModel3Container(resourceGroup);
+            return await resourceGroup.GetNoTypeReplacementModel1s().GetAsync(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
         }
-        #endregion
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel1s/{noTypeReplacementModel1SName}
+        /// Operation Id: NoTypeReplacementModel1s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
+        public static Response<NoTypeReplacementModel1> GetNoTypeReplacementModel1(this ResourceGroup resourceGroup, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetNoTypeReplacementModel1s().Get(noTypeReplacementModel1SName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of NoTypeReplacementModel2s in the NoTypeReplacementModel2. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of NoTypeReplacementModel2s and their operations over a NoTypeReplacementModel2. </returns>
+        public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel2s();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2SName}
+        /// Operation Id: NoTypeReplacementModel2s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
+        public static async Task<Response<NoTypeReplacementModel2>> GetNoTypeReplacementModel2Async(this ResourceGroup resourceGroup, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetNoTypeReplacementModel2s().GetAsync(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel2s/{noTypeReplacementModel2SName}
+        /// Operation Id: NoTypeReplacementModel2s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
+        public static Response<NoTypeReplacementModel2> GetNoTypeReplacementModel2(this ResourceGroup resourceGroup, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetNoTypeReplacementModel2s().Get(noTypeReplacementModel2SName, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of NoTypeReplacementModel3s in the NoTypeReplacementModel3. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of NoTypeReplacementModel3s and their operations over a NoTypeReplacementModel3. </returns>
+        public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetNoTypeReplacementModel3s();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
+        public static async Task<Response<NoTypeReplacementModel3>> GetNoTypeReplacementModel3Async(this ResourceGroup resourceGroup, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetNoTypeReplacementModel3s().GetAsync(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/noTypeReplacementModel3s/{noTypeReplacementModel3SName}
+        /// Operation Id: NoTypeReplacementModel3s_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
+        public static Response<NoTypeReplacementModel3> GetNoTypeReplacementModel3(this ResourceGroup resourceGroup, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetNoTypeReplacementModel3s().Get(noTypeReplacementModel3SName, cancellationToken);
+        }
     }
 }

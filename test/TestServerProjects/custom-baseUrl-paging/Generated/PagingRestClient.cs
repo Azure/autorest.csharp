@@ -18,20 +18,22 @@ namespace custom_baseUrl_paging
 {
     internal partial class PagingRestClient
     {
-        private string host;
-        private ClientDiagnostics _clientDiagnostics;
-        private HttpPipeline _pipeline;
+        private readonly HttpPipeline _pipeline;
+        private readonly string _host;
+
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
 
         /// <summary> Initializes a new instance of PagingRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="host"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
         public PagingRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
-            this.host = host ?? throw new ArgumentNullException(nameof(host));
-            _clientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _host = host ?? throw new ArgumentNullException(nameof(host));
         }
 
         internal HttpMessage CreateGetPagesPartialUrlRequest(string accountName)
@@ -42,7 +44,7 @@ namespace custom_baseUrl_paging
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendPath("/paging/customurl/partialnextlink", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -72,7 +74,7 @@ namespace custom_baseUrl_paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -99,7 +101,7 @@ namespace custom_baseUrl_paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -111,7 +113,7 @@ namespace custom_baseUrl_paging
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendPath("/paging/customurl/partialnextlinkop", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -141,7 +143,7 @@ namespace custom_baseUrl_paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -168,7 +170,7 @@ namespace custom_baseUrl_paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -180,7 +182,7 @@ namespace custom_baseUrl_paging
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendPath("/paging/customurl/", false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
@@ -216,7 +218,7 @@ namespace custom_baseUrl_paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -248,7 +250,7 @@ namespace custom_baseUrl_paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -260,7 +262,7 @@ namespace custom_baseUrl_paging
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("http://", false);
             uri.AppendRaw(accountName, false);
-            uri.AppendRaw(host, false);
+            uri.AppendRaw(_host, false);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -295,7 +297,7 @@ namespace custom_baseUrl_paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -327,7 +329,7 @@ namespace custom_baseUrl_paging
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

@@ -4,365 +4,407 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Generation;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Core;
+using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class Resource : TypeProvider
+    internal class Resource : MgmtTypeProvider
     {
-        private BuildContext<MgmtOutputLibrary> _context;
-        private IEnumerable<ClientMethod>? _methods;
-        private IEnumerable<PagingMethod>? _pagingMethods;
-        private ClientMethod? _getMethod;
-        private ClientMethod? _getByIdMethod;
-        private List<ClientMethod>? _getMethods;
-        private IEnumerable<ResourceListMethod>? _resourceListMethods;
-        private IEnumerable<ResourceListMethod>? _subscriptionExtensionsListMethods;
-        private IEnumerable<ResourceListMethod>? _resourceGroupExtensionsListMethods;
-        private IEnumerable<ResourceListMethod>? _tenantExtensionsListMethods;
-        private IEnumerable<ResourceListMethod>? _managementGroupExtensionsListMethods;
+        protected static readonly string ResourcePosition = "resource";
+        protected static readonly string CollectionPosition = "collection";
+        private const string DataFieldName = "_data";
+        protected readonly Parameter[] _armClientCtorParameters;
 
-        private IDictionary<OperationGroup, MgmtNonResourceOperation> _childOperations;
+        private static readonly HttpMethod[] MethodToExclude = new[] { HttpMethod.Put, HttpMethod.Get, HttpMethod.Delete, HttpMethod.Patch };
 
-        internal OperationGroup OperationGroup { get; }
-        protected MgmtRestClient? _restClient;
-        public bool IsScopeOrExtension { get; }
+        private static readonly Parameter TagKeyParameter = new Parameter(
+            "key",
+            "The key for the tag.",
+            typeof(string),
+            null,
+            true);
 
-        public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
-            IEnumerable<OperationGroup>? nonResourceOperationGroups = null): base(context)
+        private static readonly Parameter TagValueParameter = new Parameter(
+            "value",
+            "The value for the tag.",
+            typeof(string),
+            null,
+            true);
+
+        private static readonly Parameter TagSetParameter = new Parameter(
+            "tags",
+            "The set of tags to use as replacement.",
+            typeof(IDictionary<string, string>),
+            null,
+            true);
+
+        /// <summary>
+        /// The position means which class an operation should go. Possible value of this property is `resource` or `collection`.
+        /// There is a configuration in <see cref="MgmtConfiguration"/> which assign values to operations.
+        /// </summary>
+        protected string Position { get; }
+
+        public IEnumerable<OperationSet> OperationSets { get; }
+
+        protected IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> _allOperationMap;
+
+        private IEnumerable<RequestPath>? _requestPaths;
+        public IEnumerable<RequestPath> RequestPaths => _requestPaths ??= OperationSets.Select(operationSet => operationSet.GetRequestPath(ResourceType));
+
+        /// <summary>
+        /// </summary>
+        /// <param name="allOperations">The map that contains all possible operations in this resource and its corresponding resource collection class (if any)</param>
+        /// <param name="resourceName">The name of the corresponding resource data model</param>
+        /// <param name="resourceType">The type of this resource instance represents</param>
+        /// <param name="resourceData">The corresponding resource data model</param>
+        /// <param name="context">The build context of this resource instance</param>
+        /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
+        protected internal Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
+            : base(resourceName)
         {
-            _context = context;
-            OperationGroup = operationGroup;
-            // check if this is an extension resource, if so, we need to append the name of its parent to this resource name unless it's also a scope resource
-            var isExtension = operationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration);
-            var isScope = operationGroup.IsScopeResource(context.Configuration.MgmtConfiguration);
-            string parentValue = "";
-            if (isExtension && !isScope)
+            _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
+            OperationSets = allOperations.Keys;
+            ResourceType = resourceType;
+            ResourceData = resourceData;
+
+            if (OperationSets.First().TryGetSingletonResourceSuffix(out var singletonResourceIdSuffix))
+                SingletonResourceIdSuffix = singletonResourceIdSuffix;
+
+            _allOperationMap = GetAllOperationsMap(allOperations);
+
+            IsById = OperationSets.Any(operationSet => operationSet.IsById);
+
+            Position = position;
+        }
+
+        protected override ConstructorSignature? EnsureArmClientCtor()
+        {
+            return new ConstructorSignature(
+              Name: Type.Name,
+              Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+              Modifiers: Internal,
+              Parameters: _armClientCtorParameters,
+              Initializer: new(
+                  isBase: true,
+                  arguments: _armClientCtorParameters));
+        }
+
+        protected override ConstructorSignature? EnsureResourceDataCtor()
+        {
+            return new ConstructorSignature(
+                Name: Type.Name,
+                Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
+                Modifiers: Internal,
+                Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                Initializer: new(
+                    IsBase: false,
+                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+        }
+
+        public override CSharpType? BaseType => typeof(ArmResource);
+
+        public override Resource? DefaultResource => this;
+
+        protected override FieldModifiers FieldModifiers => base.FieldModifiers | FieldModifiers.ReadOnly;
+
+        protected override IEnumerable<FieldDeclaration>? GetAdditionalFields()
+        {
+            yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
+        }
+
+        //TODO: make 1-1 mapping of operationset to resource
+        public Resource(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
+            : this(allOperations, resourceName, resourceType, resourceData, ResourcePosition)
+        { }
+
+        private IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> GetAllOperationsMap(IReadOnlyDictionary<OperationSet, IEnumerable<Operation>> allOperations)
+        {
+            var result = new Dictionary<OperationSet, IEnumerable<Operation>>();
+
+            foreach ((var operationSet, var operations) in allOperations)
             {
-                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
-                // if we cannot find a parent operation group, we just give up and append nothing.
-                // this case will only happen when resource's parent is tenant, subscriptions, or resourceGroups
-                parentValue = parentOperationGroup?.Key.ToSingular(false) ?? string.Empty;
+                result.Add(operationSet, operations.Concat(operationSet.Where(operation => !MethodToExclude.Contains(operation.GetHttpRequest()!.Method))));
             }
 
-            IsScopeOrExtension = isScope || isExtension;
-            DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration) + parentValue + SuffixValue;
-            _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
-                operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
+            return result;
         }
 
-        protected override string DefaultName { get; }
+        protected bool IsById { get; }
 
-        protected override string DefaultAccessibility => "public";
-
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, ResourceName));
-
-        public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(OperationGroup);
-
-        public virtual string ResourceName => Type.Name;
-
-        protected virtual string SuffixValue => string.Empty;
-
-        public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
-
-        public ResourceData ResourceData => _context.Library.GetResourceData(OperationGroup);
-
-        public Type ResourceIdentifierType => typeof(ResourceIdentifier);
-
-        public IEnumerable<ClientMethod> Methods => _methods ??= GetMethodsInScope();
-
-        public IEnumerable<ClientMethod> ResourceClientMethods => GetResourceClientMethods();
-
-        public IEnumerable<RestClientMethod> ResourceLROMethods => GetResourceLROMethods();
-
-        public IDictionary<OperationGroup, MgmtNonResourceOperation> ChildOperations => _childOperations;
-
-        public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration);
-
-        public IEnumerable<ResourceListMethod> ResourceListMethods => _resourceListMethods ??= GetResourceListMethods();
-
-        public IEnumerable<ResourceListMethod>? SubscriptionExtensionsListMethods => _subscriptionExtensionsListMethods ??= GetSubscriptionExtensionsListMethods();
-
-        public IEnumerable<ResourceListMethod>? ResourceGroupExtensionsListMethods => _resourceGroupExtensionsListMethods ??= GetResourceGroupExtensionsListMethods();
-
-        public IEnumerable<ResourceListMethod>? TenantExtensionsListMethods => _tenantExtensionsListMethods ??= GetTenantExtensionsListMethods();
-
-        public IEnumerable<ResourceListMethod>? ManagementGroupExtensionListMethods => _managementGroupExtensionsListMethods ??= GetManagementGroupExtensionsListMethods();
-
-        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.IsGetResourceMethod(ResourceData) && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => m.IsGetResourceMethod(ResourceData));
-
-        protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
+        protected MgmtClientOperation? GetOperationWithVerb(HttpMethod method, string operationName, bool? isLongRunning = null, bool throwIfNull = false)
         {
-            return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration);
-        }
-
-        private IEnumerable<ClientMethod> GetResourceClientMethods()
-        {
-            var clientMethods = new List<ClientMethod>();
-            foreach (var clientMethod in Methods)
+            var result = new List<MgmtRestOperation>();
+            foreach (var operationSet in OperationSets)
             {
-                var isMethodAlreadyExist = false;
-                if (ResourceContainer != null)
+                var operation = operationSet.GetOperation(method);
+                if (operation is not null)
                 {
-                    isMethodAlreadyExist = ResourceContainer.PutMethods.Any(m => m == clientMethod.RestClientMethod) ||
-                        ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod.RestClientMethod) ||
-                        ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod ||
-                        SubscriptionExtensionsListMethods.Any(s => clientMethod.RestClientMethod == s.GetRestClientMethod()));
+                    var restClient = MgmtContext.Library.GetRestClient(operation);
+                    var requestPath = operation.GetRequestPath(ResourceType);
+                    var contextualPath = GetContextualPath(operationSet, requestPath);
+                    var restOperation = new MgmtRestOperation(
+                        MgmtContext.Library.GetRestClientMethod(operation),
+                        restClient,
+                        requestPath,
+                        contextualPath,
+                        operationName,
+                        isLongRunning,
+                        throwIfNull);
+                    result.Add(restOperation);
                 }
-                if (!isMethodAlreadyExist)
-                {
-                    clientMethods.Add(clientMethod);
-                }
             }
 
-            return clientMethods;
+            return MgmtClientOperation.FromOperations(result);
         }
 
-        public virtual ClientMethod? GetByIdMethod => _getByIdMethod ??= GetGetByIdMethod();
-        public virtual List<ClientMethod> GetMethods => _getMethods ??= GetGetMethods();
+        public virtual Resource GetResource() => this;
 
-        private List<ClientMethod> GetGetMethods()
+        //private string? _defaultName;
+        protected override string DefaultName => ResourceName;
+
+        public override string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(ResourceName));
+
+        public bool IsSingleton => SingletonResourceIdSuffix != null;
+
+        public string? SingletonResourceIdSuffix { get; }
+
+        public bool IsTaggable => ResourceData.IsTaggable;
+
+        /// <summary>
+        /// Finds the corresponding <see cref="ResourceCollection"/> of this <see cref="Resource"/>
+        /// Return null when this resource is a singleton.
+        /// </summary>
+        public ResourceCollection? ResourceCollection { get; internal set; }
+
+        /// <summary>
+        /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
+        /// </summary>
+        public ResourceData ResourceData { get; }
+
+        public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
+        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
+        public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
+        public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
+
+        protected virtual bool ShouldIncludeOperation(Operation operation)
         {
-            var getMethods = new List<ClientMethod>();
-            if (IsScopeOrExtension)
+            var requestPath = operation.GetHttpPath();
+            if (Configuration.MgmtConfiguration.OperationPositions.TryGetValue(requestPath, out var positions))
             {
-                getMethods = Methods.Where(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name).ToList();
-                if (GetByIdMethod != null && GetByIdMethod.Name != GetMethod!.Name)
-                {
-                    getMethods.RemoveAll(m => m.Name == GetByIdMethod.Name);
-                }
+                return positions.Contains(Position);
             }
-            else if (GetMethod != null)
+            // In the resource class, we need to exclude the List operations
+            var restClientMethod = MgmtContext.Library.GetRestClientMethod(operation);
+            if (restClientMethod.IsListMethod(out var valueType))
+                return !valueType.EqualsByName(ResourceData.Type);
+            return true;
+        }
+
+        protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()
+        {
+            var result = new List<MgmtClientOperation>();
+            if (GetOperation != null)
+                result.Add(GetOperation);
+            if (DeleteOperation != null)
+                result.Add(DeleteOperation);
+            if (UpdateOperation != null)
+                result.Add(UpdateOperation);
+            if (IsSingleton && CreateOperation != null)
+                result.Add(CreateOperation);
+            result.AddRange(ClientOperations);
+            if (GetOperation != null && IsTaggable)
             {
-                getMethods.Add(GetMethod);
+                var getOperation = GetOperation.OperationMappings.Values.First();
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getOperation,
+                        "AddTag",
+                        getOperation.MgmtReturnType,
+                        "Add a tag to the current resource.",
+                        TagKeyParameter,
+                        TagValueParameter)));
+
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getOperation,
+                        "SetTags",
+                        getOperation.MgmtReturnType,
+                        "Replace the tags on the resource with the given set.",
+                        TagSetParameter)));
+
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getOperation,
+                        "RemoveTag",
+                        getOperation.MgmtReturnType,
+                        "Removes a tag by key from the resource.",
+                        TagKeyParameter)));
             }
-            return getMethods;
+            return result;
         }
 
-        private ClientMethod? GetGetByIdMethod()
+        public override string BranchIdVariableName => "Id.Parent";
+
+        public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
-            return Methods.FirstOrDefault(m => m.RestClientMethod.Request.HttpMethod.Equals(RequestMethod.Get) && m.RestClientMethod.IsByIdMethod());
+            return branch.ParentRequestPath().GetResourceType();
         }
 
-        private IEnumerable<RestClientMethod> GetResourceLROMethods()
+        private IEnumerable<ContextualParameterMapping>? _extraContextualParameterMapping;
+        public IEnumerable<ContextualParameterMapping> ExtraContextualParameterMapping => _extraContextualParameterMapping ??= EnsureExtraContextualParameterMapping();
+        protected virtual IEnumerable<ContextualParameterMapping> EnsureExtraContextualParameterMapping() =>Enumerable.Empty<ContextualParameterMapping>();
+
+        /// <summary>
+        /// A collection of ClientOperations.
+        /// The List of <see cref="MgmtRestOperation"/> represents a set of the same operations under different parent (OperationSet)
+        /// </summary>
+        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations() => EnsureClientOperationMap().Values;
+
+        /// <summary>
+        /// This is a map from the diff request path between the operation and the contextual path to the actual operations
+        /// </summary>
+        private IDictionary<string, MgmtClientOperation>? _clientOperationMap;
+        private IDictionary<string, MgmtClientOperation> EnsureClientOperationMap()
         {
-            var clientMethods = new List<RestClientMethod>();
-            foreach (var clientMethod in RestClient.Methods)
+            if (_clientOperationMap != null)
+                return _clientOperationMap;
+
+            var result = new Dictionary<string, List<MgmtRestOperation>>();
+            foreach ((var operationSet, var operations) in _allOperationMap)
             {
-                if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning)
+                var resourceRequestPath = operationSet.GetRequestPath();
+                var resourceRestClient = MgmtContext.Library.GetRestClient(operationSet.First());
+                // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
+                foreach (var operation in operations)
                 {
-                    var isMethodExistInContainer = false;
-                    if (ResourceContainer != null)
+                    if (!ShouldIncludeOperation(operation))
+                        continue; // meaning this operation will be included in the collection
+                    var method = operation.GetHttpMethod();
+                    // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
+                    // therefore we trim the scope off and then calculate the diff
+                    var requestPath = operation.GetRequestPath(ResourceType);
+                    var requestTrimmedPath = requestPath.TrimScope();
+                    var resourceTrimmedPath = resourceRequestPath.TrimScope();
+                    // the operations are grouped by the following key
+                    var key = $"{method}{resourceTrimmedPath.Minus(requestTrimmedPath)}";
+                    var contextualPath = GetContextualPath(operationSet, requestPath);
+                    var methodName = IsListOperation(operation, operationSet) ?
+                        "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
+                        GetOperationName(operation, resourceRestClient.OperationGroup.Key);
+                    // get the MgmtRestOperation with a proper name
+                    var restClient = MgmtContext.Library.GetRestClient(operation);
+                    var restOperation = new MgmtRestOperation(
+                        MgmtContext.Library.GetRestClientMethod(operation),
+                        restClient,
+                        requestPath,
+                        contextualPath,
+                        methodName);
+
+                    if (result.TryGetValue(key, out var list))
                     {
-                        isMethodExistInContainer = ResourceContainer.PutMethods.Any(m => m == clientMethod) ||
-                            ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
-                            ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod ||
-                            SubscriptionExtensionsListMethods.Any(s => clientMethod == s.GetRestClientMethod()));
+                        list.Add(restOperation);
                     }
-                    if (!isMethodExistInContainer)
+                    else
                     {
-                        clientMethods.Add(clientMethod);
+                        result.Add(key, new List<MgmtRestOperation> { restOperation });
                     }
                 }
             }
 
-            return clientMethods;
+            // now the operations should be properly categarized into the dictionary in the key of diff between contextual request path and the operation
+            // TODO -- what if the response type is not the same? Also we need to verify they have the same parameters before we could union those together
+            _clientOperationMap = result.Where(pair => pair.Value.Count > 0).ToDictionary(
+                pair => pair.Key,
+                pair => MgmtClientOperation.FromOperations(pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
+            return _clientOperationMap;
         }
 
-        private IEnumerable<ResourceListMethod> GetResourceListMethods()
+        /// <summary>
+        /// This method returns the contextual path from one resource <see cref="OperationSet"/>
+        /// In the <see cref="Resource"/> class, we just use the RequestPath of the OperationSet as its contextual path
+        /// Also we need to replace the parameterized scope if there is any with the actual scope value.
+        /// </summary>
+        /// <param name="operationSet"></param>
+        /// <param name="operationRequestPath"></param>
+        /// <returns></returns>
+        protected virtual RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            return GetListMethods(true, false);
+            var contextualPath = operationSet.GetRequestPath();
+            // we need to replace the scope in this contextual path with the actual scope in the operation
+            var scope = contextualPath.GetScopePath();
+            if (!scope.IsParameterizedScope())
+                return contextualPath;
+
+            return operationRequestPath.GetScopePath().Append(contextualPath.TrimScope());
         }
 
-        private IEnumerable<ResourceListMethod>? GetSubscriptionExtensionsListMethods()
+        protected bool IsListOperation(Operation operation, OperationSet operationSet)
         {
-            var listMethods = new List<ResourceListMethod>();
-            // for resource grand child
-            listMethods.AddRange(GetListMethods(false, true).ToList());
+            return operation.IsResourceCollectionOperation(out var resourceOperationSet) && resourceOperationSet == operationSet;
+        }
 
-            // for non resource grand child
-            listMethods.AddRange(GetListMethods(false, false).ToList());
+        protected override IEnumerable<MgmtRestClient> EnsureRestClients()
+        {
+            var childRestClients = ClientOperations.SelectMany(clientOperation => clientOperation.Select(restOperation => restOperation.RestClient)).Distinct();
+            var resourceRestClients = OperationSets.SelectMany(operationSet => operationSet.Select(operation => MgmtContext.Library.GetRestClient(operation))).Distinct();
 
-            var subscriptionExtensionsListMethods = new List<ResourceListMethod>();
+            return resourceRestClients.Concat(childRestClients).Distinct();
+        }
 
-            foreach (var listMethod in listMethods)
+        private MgmtRestClient? _myRestClient;
+        public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
+
+        public ResourceTypeSegment ResourceType { get; }
+
+        protected virtual string CreateDescription(string clientPrefix)
+        {
+            return $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.";
+        }
+
+        /// <summary>
+        /// Returns the different method signature for different base path of this resource
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<RequestPath, MethodSignature> CreateResourceIdentifierMethodSignature()
+        {
+            return RequestPaths.ToDictionary(requestPath => requestPath,
+                requestPath => new MethodSignature(
+                    Name: "CreateResourceIdentifier",
+                    Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+                    Modifiers: Public | Static,
+                    ReturnType: typeof(ResourceIdentifier),
+                    ReturnDescription: null,
+                    Parameters: requestPath.Where(segment => segment.IsReference).Select(segment => new Parameter(segment.Reference.Name, null, segment.Reference.Type, null, true)).ToArray()));
+        }
+
+        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
+        {
+            var typeOfId = ResourceData.TypeOfId;
+            if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
-
-                // Subscriptions scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/") && !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/"))
-                {
-                    subscriptionExtensionsListMethods.Add(listMethod);
-                }
+                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
             }
-
-            return subscriptionExtensionsListMethods;
-        }
-
-        private IEnumerable<ResourceListMethod>? GetResourceGroupExtensionsListMethods()
-        {
-            var listMethods = new List<ResourceListMethod>();
-            // for resource grand child
-            listMethods.AddRange(GetListMethods(false, true).ToList());
-
-            // for non resource grand child
-            listMethods.AddRange(GetListMethods(false, false).ToList());
-
-            var resourceGroupExtensionsListMethod = new List<ResourceListMethod>();
-            foreach (var listMethod in listMethods)
+            else
             {
-                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
-
-                // Resource group scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/"))
-                {
-                    resourceGroupExtensionsListMethod.Add(listMethod);
-                }
-            }
-
-            return resourceGroupExtensionsListMethod;
-        }
-
-        private IEnumerable<ResourceListMethod>? GetTenantExtensionsListMethods()
-        {
-            var listMethods = new List<ResourceListMethod>();
-            // for resource grand child
-            listMethods.AddRange(GetListMethods(false, true).ToList());
-
-            // for non resource grand child
-            listMethods.AddRange(GetListMethods(false, false).ToList());
-
-            var tenantExtensionListMethods = new List<ResourceListMethod>();
-            foreach (var listMethod in listMethods)
-            {
-                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
-
-                // Tenant scope
-                if (!pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/") &&
-                    !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/") &&
-                    !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ManagementGroups}/"))
-                {
-                    tenantExtensionListMethods.Add(listMethod);
-                }
-            }
-
-            return tenantExtensionListMethods;
-        }
-
-        private IEnumerable<ResourceListMethod>? GetManagementGroupExtensionsListMethods()
-        {
-            var listMethods = new List<ResourceListMethod>();
-            // for resource grand child
-            listMethods.AddRange(GetListMethods(false, true).ToList());
-
-            // for non resource grand child
-            listMethods.AddRange(GetListMethods(false, false).ToList());
-
-            var managementGroupExtensionsListMethod = new List<ResourceListMethod>();
-            foreach (var listMethod in listMethods)
-            {
-                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
-
-                // Management Group scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ManagementGroups}/"))
-                {
-                    managementGroupExtensionsListMethod.Add(listMethod);
-                }
-            }
-
-            return managementGroupExtensionsListMethod;
-        }
-
-        protected IEnumerable<ResourceListMethod> GetListMethods(bool shouldParentExistInPath, bool shouldReturnTypeBeResourceData)
-        {
-            List<ResourceListMethod> listMethods = new List<ResourceListMethod>();
-            foreach (var pagingMethod in PagingMethods)
-            {
-                if (IsValidListMethod(shouldParentExistInPath, shouldReturnTypeBeResourceData, pagingMethod.Method))
-                {
-                    listMethods.Add(new ResourceListMethod(pagingMethod));
-                }
-            }
-
-            foreach (var method in Methods)
-            {
-                if (IsValidListMethod(shouldParentExistInPath, shouldReturnTypeBeResourceData, method.RestClientMethod))
-                {
-                    listMethods.Add(new ResourceListMethod(method));
-                }
-            }
-
-            return listMethods;
-        }
-
-        private bool IsValidListMethod(bool shouldParentExistInPath, bool shouldReturnTypeBeResourceData, RestClientMethod clientMethod)
-        {
-            var result = MethodExtensions.GetBodyTypeForList(clientMethod, OperationGroup, _context);
-
-            if (!result.IsListFunction)
-                return false;
-
-            var parentResourceType = IsScopeOrExtension ? clientMethod.Operation.ParentResourceType() : OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
-            bool isParentExistsInPathParams = (parentResourceType == ResourceTypeBuilder.ResourceGroupResources || parentResourceType == ResourceTypeBuilder.Tenant) ? true : MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
-
-            return (isParentExistsInPathParams == shouldParentExistInPath && result.WasResourceData == shouldReturnTypeBeResourceData);
-        }
-
-        public Diagnostic GetDiagnostic(RestClientMethod method)
-        {
-            return new Diagnostic($"{Declaration.Name}.{method.Name}", Array.Empty<DiagnosticAttribute>());
-        }
-
-        protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
-        {
-            return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
-                $"A Class representing a {DefaultName} along with the instance operations that can be performed on it." :
-                BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
-        }
-
-        public class ResourceListMethod
-        {
-            public PagingMethod? PagingMethod { get; }
-
-            public ClientMethod? ClientMethod { get; }
-
-            public ResourceListMethod(PagingMethod pagingMethod)
-            {
-                PagingMethod = pagingMethod;
-                ClientMethod = null;
-            }
-            public ResourceListMethod(ClientMethod clientMethod)
-            {
-                PagingMethod = null;
-                ClientMethod = clientMethod;
-            }
-
-            public RestClientMethod? GetRestClientMethod()
-            {
-                if (PagingMethod != null)
-                {
-                    return PagingMethod.Method;
-                }
-                else if (ClientMethod != null)
-                {
-                    return ClientMethod.RestClientMethod;
-                }
-
-                return null;
+                // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
+                return $"{dataExpression}.Id";
             }
         }
+
+        public Parameter ResourceParameter => new Parameter(Name: "resource", Description: $"The client parameters to use in these operations.",
+                            Type: typeof(Azure.ResourceManager.Core.ArmResource), DefaultValue: null, Validate: false);
+        public Parameter ResourceDataParameter => new Parameter(Name: "data", Description: $"The resource that is the target of operations.",
+                        Type: ResourceData.Type, DefaultValue: null, Validate: false);
     }
 }

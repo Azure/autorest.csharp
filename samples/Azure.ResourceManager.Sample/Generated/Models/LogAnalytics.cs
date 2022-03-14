@@ -23,6 +23,11 @@ namespace Azure.ResourceManager.Sample.Models
         }
 
         /// <summary> LogAnalyticsOutput. </summary>
-        public LogAnalyticsOutput Properties { get; }
+        internal LogAnalyticsOutput Properties { get; }
+        /// <summary> Output file Uri path to blob container. </summary>
+        public string LogAnalyticsOutput
+        {
+            get => Properties.Output;
+        }
     }
 }

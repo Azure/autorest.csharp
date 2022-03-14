@@ -9,18 +9,16 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the StorageAccount data model. </summary>
-    public partial class StorageAccountData : TrackedResource
+    public partial class StorageAccountData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of StorageAccountData. </summary>
         /// <param name="location"> The location. </param>
-        public StorageAccountData(Location location) : base(location)
+        public StorageAccountData(AzureLocation location) : base(location)
         {
             PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionData>();
         }
@@ -29,11 +27,13 @@ namespace Azure.Management.Storage
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="sku"> Gets the SKU. </param>
         /// <param name="kind"> Gets the Kind. </param>
         /// <param name="identity"> The identity of the resource. </param>
+        /// <param name="extendedLocation"> The extendedLocation of the resource. </param>
         /// <param name="provisioningState"> Gets the status of the storage account at the time the operation was called. </param>
         /// <param name="primaryEndpoints"> Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint. </param>
         /// <param name="primaryLocation"> Gets the location of the primary data center for the storage account. </param>
@@ -43,6 +43,9 @@ namespace Azure.Management.Storage
         /// <param name="statusOfSecondary"> Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the SKU name is Standard_GRS or Standard_RAGRS. </param>
         /// <param name="creationTime"> Gets the creation date and time of the storage account in UTC. </param>
         /// <param name="customDomain"> Gets the custom domain the user assigned to this storage account. </param>
+        /// <param name="sasPolicy"> SasPolicy assigned to the storage account. </param>
+        /// <param name="keyPolicy"> KeyPolicy assigned to the storage account. </param>
+        /// <param name="keyCreationTime"> Storage account keys creation time. </param>
         /// <param name="secondaryEndpoints"> Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS. </param>
         /// <param name="encryption"> Gets the encryption settings on the account. If unspecified, the account is unencrypted. </param>
         /// <param name="accessTier"> Required for storage accounts where kind = BlobStorage. The access tier used for billing. </param>
@@ -56,11 +59,20 @@ namespace Azure.Management.Storage
         /// <param name="privateEndpointConnections"> List of private endpoint connection associated with the specified storage account. </param>
         /// <param name="routingPreference"> Maintains information about the network routing choice opted by the user for data transfer. </param>
         /// <param name="blobRestoreStatus"> Blob restore status. </param>
-        internal StorageAccountData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, Models.Sku sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus) : base(id, name, type, tags, location)
+        /// <param name="allowBlobPublicAccess"> Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property. </param>
+        /// <param name="minimumTlsVersion"> Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. </param>
+        /// <param name="allowSharedKeyAccess"> Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true. </param>
+        /// <param name="enableNfsV3"> NFS 3.0 protocol support enabled if set to true. </param>
+        /// <param name="allowCrossTenantReplication"> Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property. </param>
+        /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
+        /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be &apos;Enabled&apos; or &apos;Disabled&apos;. </param>
+        /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default. </param>
+        internal StorageAccountData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, StorageSku sku, StorageKind? kind, ManagedServiceIdentity identity, ExtendedLocation extendedLocation, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, SasPolicy sasPolicy, KeyPolicy keyPolicy, KeyCreationTime keyCreationTime, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, PublicNetworkAccess? publicNetworkAccess, ImmutableStorageAccount immutableStorageWithVersioning) : base(id, name, type, systemData, tags, location)
         {
             Sku = sku;
             Kind = kind;
             Identity = identity;
+            ExtendedLocation = extendedLocation;
             ProvisioningState = provisioningState;
             PrimaryEndpoints = primaryEndpoints;
             PrimaryLocation = primaryLocation;
@@ -70,6 +82,9 @@ namespace Azure.Management.Storage
             StatusOfSecondary = statusOfSecondary;
             CreationTime = creationTime;
             CustomDomain = customDomain;
+            SasPolicy = sasPolicy;
+            KeyPolicy = keyPolicy;
+            KeyCreationTime = keyCreationTime;
             SecondaryEndpoints = secondaryEndpoints;
             Encryption = encryption;
             AccessTier = accessTier;
@@ -83,14 +98,24 @@ namespace Azure.Management.Storage
             PrivateEndpointConnections = privateEndpointConnections;
             RoutingPreference = routingPreference;
             BlobRestoreStatus = blobRestoreStatus;
+            AllowBlobPublicAccess = allowBlobPublicAccess;
+            MinimumTlsVersion = minimumTlsVersion;
+            AllowSharedKeyAccess = allowSharedKeyAccess;
+            EnableNfsV3 = enableNfsV3;
+            AllowCrossTenantReplication = allowCrossTenantReplication;
+            DefaultToOAuthAuthentication = defaultToOAuthAuthentication;
+            PublicNetworkAccess = publicNetworkAccess;
+            ImmutableStorageWithVersioning = immutableStorageWithVersioning;
         }
 
         /// <summary> Gets the SKU. </summary>
-        public Models.Sku Sku { get; }
+        public StorageSku Sku { get; }
         /// <summary> Gets the Kind. </summary>
-        public Kind? Kind { get; }
+        public StorageKind? Kind { get; }
         /// <summary> The identity of the resource. </summary>
-        public Identity Identity { get; set; }
+        public ManagedServiceIdentity Identity { get; set; }
+        /// <summary> The extendedLocation of the resource. </summary>
+        public ExtendedLocation ExtendedLocation { get; set; }
         /// <summary> Gets the status of the storage account at the time the operation was called. </summary>
         public ProvisioningState? ProvisioningState { get; }
         /// <summary> Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint. </summary>
@@ -109,6 +134,19 @@ namespace Azure.Management.Storage
         public DateTimeOffset? CreationTime { get; }
         /// <summary> Gets the custom domain the user assigned to this storage account. </summary>
         public CustomDomain CustomDomain { get; }
+        /// <summary> SasPolicy assigned to the storage account. </summary>
+        public SasPolicy SasPolicy { get; }
+        /// <summary> KeyPolicy assigned to the storage account. </summary>
+        internal KeyPolicy KeyPolicy { get; }
+        /// <summary> The key expiration period in days. </summary>
+        public int KeyExpirationPeriodInDays
+        {
+            get => KeyPolicy.KeyExpirationPeriodInDays;
+            set => KeyPolicy.KeyExpirationPeriodInDays = value;
+        }
+
+        /// <summary> Storage account keys creation time. </summary>
+        public KeyCreationTime KeyCreationTime { get; }
         /// <summary> Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS. </summary>
         public Endpoints SecondaryEndpoints { get; }
         /// <summary> Gets the encryption settings on the account. If unspecified, the account is unencrypted. </summary>
@@ -135,5 +173,21 @@ namespace Azure.Management.Storage
         public RoutingPreference RoutingPreference { get; set; }
         /// <summary> Blob restore status. </summary>
         public BlobRestoreStatus BlobRestoreStatus { get; }
+        /// <summary> Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property. </summary>
+        public bool? AllowBlobPublicAccess { get; set; }
+        /// <summary> Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. </summary>
+        public MinimumTlsVersion? MinimumTlsVersion { get; set; }
+        /// <summary> Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true. </summary>
+        public bool? AllowSharedKeyAccess { get; set; }
+        /// <summary> NFS 3.0 protocol support enabled if set to true. </summary>
+        public bool? EnableNfsV3 { get; set; }
+        /// <summary> Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property. </summary>
+        public bool? AllowCrossTenantReplication { get; set; }
+        /// <summary> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </summary>
+        public bool? DefaultToOAuthAuthentication { get; set; }
+        /// <summary> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be &apos;Enabled&apos; or &apos;Disabled&apos;. </summary>
+        public PublicNetworkAccess? PublicNetworkAccess { get; set; }
+        /// <summary> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default. </summary>
+        public ImmutableStorageAccount ImmutableStorageWithVersioning { get; set; }
     }
 }

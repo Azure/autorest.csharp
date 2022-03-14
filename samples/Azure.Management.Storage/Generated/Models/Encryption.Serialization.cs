@@ -22,10 +22,20 @@ namespace Azure.Management.Storage.Models
             }
             writer.WritePropertyName("keySource");
             writer.WriteStringValue(KeySource.ToString());
+            if (Optional.IsDefined(RequireInfrastructureEncryption))
+            {
+                writer.WritePropertyName("requireInfrastructureEncryption");
+                writer.WriteBooleanValue(RequireInfrastructureEncryption.Value);
+            }
             if (Optional.IsDefined(KeyVaultProperties))
             {
                 writer.WritePropertyName("keyvaultproperties");
                 writer.WriteObjectValue(KeyVaultProperties);
+            }
+            if (Optional.IsDefined(EncryptionIdentity))
+            {
+                writer.WritePropertyName("identity");
+                writer.WriteObjectValue(EncryptionIdentity);
             }
             writer.WriteEndObject();
         }
@@ -34,7 +44,9 @@ namespace Azure.Management.Storage.Models
         {
             Optional<EncryptionServices> services = default;
             KeySource keySource = default;
+            Optional<bool> requireInfrastructureEncryption = default;
             Optional<KeyVaultProperties> keyvaultproperties = default;
+            Optional<EncryptionIdentity> identity = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("services"))
@@ -52,6 +64,16 @@ namespace Azure.Management.Storage.Models
                     keySource = new KeySource(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("requireInfrastructureEncryption"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    requireInfrastructureEncryption = property.Value.GetBoolean();
+                    continue;
+                }
                 if (property.NameEquals("keyvaultproperties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -62,8 +84,18 @@ namespace Azure.Management.Storage.Models
                     keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
                     continue;
                 }
+                if (property.NameEquals("identity"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    identity = EncryptionIdentity.DeserializeEncryptionIdentity(property.Value);
+                    continue;
+                }
             }
-            return new Encryption(services.Value, keySource, keyvaultproperties.Value);
+            return new Encryption(services.Value, keySource, Optional.ToNullable(requireInfrastructureEncryption), keyvaultproperties.Value, identity.Value);
         }
     }
 }

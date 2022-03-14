@@ -2,13 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 
@@ -71,26 +72,258 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     WriteConstructor(writer, schema);
 
-                    foreach (var property in schema.Properties)
-                    {
-                        writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
-
-                        CSharpType propertyType = property.Declaration.Type;
-                        writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
-                        writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
-
-                        writer.Line();
-                    }
+                    WriteProperties(writer, schema);
                 }
             }
         }
-        private FormattableString CreatePropertyDescription(ObjectTypeProperty property)
+
+        protected virtual void WriteProperties(CodeWriter writer, ObjectType schema)
+        {
+            foreach (var property in schema.Properties)
+            {
+                Stack<ObjectTypeProperty> heiarchyStack = new Stack<ObjectTypeProperty>();
+                heiarchyStack.Push(property);
+                BuildHeirarchy(property, heiarchyStack);
+                if (Configuration.AzureArm && heiarchyStack.Count > 1)
+                {
+                    var innerProperty = heiarchyStack.Pop();
+                    var immediateParentProperty = heiarchyStack.Pop();
+                    WriteProperty(writer, property, "internal");
+
+                    string immediateParentPropertyName = GetPropertyName(immediateParentProperty.Declaration);
+                    string myPropertyName = GetCombinedPropertyName(immediateParentPropertyName, innerProperty.Declaration);
+                    string childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
+                    writer.WriteXmlDocumentationSummary(CreatePropertyDescription(innerProperty, myPropertyName));
+                    using (writer.Scope($"{innerProperty.Declaration.Accessibility} {innerProperty.Declaration.Type} {myPropertyName:D}"))
+                    {
+                        if (!property.IsReadOnly && innerProperty.IsReadOnly)
+                        {
+                            if (HasDefaultPublicCtor(property))
+                            {
+                                if (innerProperty.Declaration.Type.Arguments.Length > 0)
+                                {
+                                    using (writer.Scope($"get"))
+                                    {
+                                        writer.Line($"if ({property.Declaration.Name:D} is null)");
+                                        writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
+                                        writer.Line($"return {property.Declaration.Name:D}.{childPropertyName};");
+                                    }
+                                }
+                                else
+                                {
+                                    writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+                                }
+                            }
+                            else if (HasCtorWithSingleParam(property, innerProperty))
+                            {
+                                writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+                                writer.Line($"set => {property.Declaration.Name:D} = new {property.Declaration.Type}(value);");
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
+                            }
+                        }
+                        else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
+                        {
+                            writer.Line($"get => {property.Declaration.Name:D} is null ? default({innerProperty.Declaration.Type}) : {property.Declaration.Name:D}.{childPropertyName};");
+                            if (HasDefaultPublicCtor(property))
+                            {
+                                using (writer.Scope($"set"))
+                                {
+                                    writer.Line($"if ({property.Declaration.Name:D} is null)");
+                                    writer.Line($"{property.Declaration.Name:D} = new {property.Declaration.Type}();");
+                                    writer.Line($"{property.Declaration.Name:D}.{childPropertyName} = value;");
+                                }
+                            }
+                            else if (HasCtorWithSingleParam(property, innerProperty))
+                            {
+                                writer.Line($"set => {property.Declaration.Name:D} = new {property.Declaration.Type}(value);");
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException($"Unsupported parameter access combination for {schema.Type.Name}, Property {property.Declaration.Name}, ChildProperty {innerProperty.Declaration.Name}");
+                            }
+                        }
+                        else
+                        {
+                            writer.Line($"get => {property.Declaration.Name:D}.{childPropertyName};");
+                            if (!innerProperty.IsReadOnly)
+                                writer.Line($"set => {property.Declaration.Name:D}.{childPropertyName} = value;");
+                        }
+                    }
+
+                    writer.Line();
+                }
+                else
+                {
+                    WriteProperty(writer, property);
+                }
+            }
+        }
+
+        private bool HasCtorWithSingleParam(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
+        {
+            var type = property.Declaration.Type;
+            if (type.IsFrameworkType)
+                return false;
+
+            if (type.Implementation is not ObjectType objType)
+                return false;
+
+            foreach (var ctor in objType.Constructors)
+            {
+                if (ctor.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                    ctor.Signature.Parameters.Count == 1)
+                {
+                    var paramType = ctor.Signature.Parameters[0].Type;
+                    var propertyType = innerProperty.Declaration.Type;
+                    if (paramType.Arguments.Length == 0 && paramType.Equals(propertyType))
+                        return true;
+
+                    if (paramType.Arguments.Length == 1 && propertyType.Arguments.Length == 1 && paramType.Arguments[0].Equals(propertyType.Arguments[0]))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool HasDefaultPublicCtor(ObjectTypeProperty objectTypeProperty)
+        {
+            var type = objectTypeProperty.Declaration.Type;
+            if (type.IsFrameworkType)
+                return true;
+
+            if (type.Implementation is not ObjectType objType)
+                return true;
+
+            foreach (var ctor in objType.Constructors)
+            {
+                if (ctor.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) && !ctor.Signature.Parameters.Any())
+                    return true;
+            }
+
+            return false;
+        }
+
+        private string GetCombinedPropertyName(string immediateParentPropertyName, MemberDeclarationOptions property)
+        {
+            string parentName = immediateParentPropertyName;
+
+            if (property.Type.Equals(typeof(bool)) || property.Type.Equals(typeof(bool?)))
+            {
+                return property.Name.Equals("Enabled", StringComparison.Ordinal) ? $"{parentName}{property.Name}" : property.Name;
+            }
+
+            if (property.Name.Equals("Id", StringComparison.Ordinal))
+                return $"{parentName}{property.Name}";
+
+            if (immediateParentPropertyName.EndsWith(property.Name, StringComparison.Ordinal))
+                return immediateParentPropertyName;
+
+            IEnumerable<string> parentWords = immediateParentPropertyName.SplitByCamelCase();
+            if (immediateParentPropertyName.EndsWith("Profile", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Policy", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Configuration", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Properties", StringComparison.Ordinal) ||
+                immediateParentPropertyName.EndsWith("Settings", StringComparison.Ordinal))
+            {
+                parentWords = parentWords.Take(parentWords.Count() - 1);
+            }
+
+            var parentWordArray = parentWords.ToArray();
+            var parentWordsHash = new HashSet<string>(parentWordArray);
+            var nameWords = property.Name.SplitByCamelCase().ToArray();
+            var lastWord = string.Empty;
+            for (int i = 0; i < nameWords.Length; i++)
+            {
+                var word = nameWords[i];
+                lastWord = word;
+                if (parentWordsHash.Contains(word))
+                {
+                    if (i == nameWords.Length - 2 && parentWordArray.Length >= 2 && word.Equals(parentWordArray[parentWordArray.Length - 2], StringComparison.Ordinal))
+                    {
+                        parentWords = parentWords.Take(parentWords.Count() - 2);
+                        break;
+                    }
+                    {
+                        return property.Name;
+                    }
+                }
+
+                //need to depluralize the last word and check
+                if (i == nameWords.Length - 1 && parentWordsHash.Contains(lastWord.ToSingular(false)))
+                    return property.Name;
+            }
+
+            parentName = string.Join("", parentWords);
+
+            return $"{parentName}{property.Name}";
+        }
+
+        private string GetPropertyName(MemberDeclarationOptions property)
+        {
+            const string properties = "Properties";
+            if (property.Name.Equals(properties, StringComparison.Ordinal))
+            {
+                string typeName = property.Type.Name;
+                int index = typeName.IndexOf(properties);
+                if (index > -1 && index + properties.Length == typeName.Length)
+                    return typeName.Substring(0, index);
+
+                return typeName;
+            }
+            return property.Name;
+        }
+
+        private void WriteProperty(CodeWriter writer, ObjectTypeProperty property, string? overrideAccessibility = null)
+        {
+            writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            var accessibility = overrideAccessibility ?? property.Declaration.Accessibility;
+            CSharpType propertyType = property.Declaration.Type;
+            writer.Append($"{accessibility} {propertyType} {property.Declaration.Name:D}");
+            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+
+            writer.Line();
+        }
+
+        private void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
+        {
+            if (IsSinglePropertyObject(property, out var childProp))
+            {
+                heirarchyStack.Push(childProp);
+                BuildHeirarchy(childProp, heirarchyStack);
+            }
+        }
+
+        private bool IsSinglePropertyObject(ObjectTypeProperty property, [MaybeNullWhen(false)] out ObjectTypeProperty innerProperty)
+        {
+            innerProperty = null;
+
+            if (property.ValueType.IsFrameworkType)
+                return false;
+
+            if (property.ValueType.Implementation is not ObjectType objType)
+                return false;
+
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            bool isSingleProperty = properties.Count() == 1;
+
+            if (isSingleProperty)
+                innerProperty = properties.First();
+
+            return isSingleProperty;
+        }
+
+        private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
         {
             if (!string.IsNullOrWhiteSpace(property.Description))
             {
                 return $"{property.Description}";
             }
-            String splitDeclarationName = string.Join(" ", StringExtensions.SplitByCamelCase(property.Declaration.Name)).ToLower();
+            var nameToUse = overrideName ?? property.Declaration.Name;
+            String splitDeclarationName = string.Join(" ", StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
             if (property.IsReadOnly)
             {
                 return $"Gets the {splitDeclarationName}";

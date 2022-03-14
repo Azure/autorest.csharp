@@ -28,16 +28,13 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : this(new OperationInternals(clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName))
+            : this(new OperationInternal(clientDiagnostics, NextLinkOperationImplementation.Create(pipeline, originalRequest.Method, originalRequest.Uri.ToUri(), originalResponse, finalStateVia), originalResponse, scopeName, null, new ExponentialDelayStrategy()))
         {
         }
 
-        protected OperationOrResponseInternals(OperationInternals operationInternals)
+        protected OperationOrResponseInternals(OperationInternalBase operationInternal)
         {
-            if (operationInternals is null)
-                throw new ArgumentNullException(nameof(operationInternals));
-
-            Operation = operationInternals;
+            Operation = operationInternal ?? throw new ArgumentNullException(nameof(operationInternal));
         }
 
         public OperationOrResponseInternals(Response response)
@@ -48,7 +45,7 @@ namespace Azure.Core
             VoidResponse = response;
         }
 
-        protected OperationInternals? Operation { get; }
+        protected OperationInternalBase? Operation { get; }
 
         protected Response? VoidResponse { get; }
 
@@ -63,7 +60,7 @@ namespace Azure.Core
 
         public Response GetRawResponse()
         {
-            return DoesWrapOperation ? Operation!.GetRawResponse() : VoidResponse!;
+            return DoesWrapOperation ? Operation!.RawResponse : VoidResponse!;
         }
 
         public Response UpdateStatus(CancellationToken cancellationToken = default)
@@ -78,10 +75,26 @@ namespace Azure.Core
                 : new ValueTask<Response>(VoidResponse!);
         }
 
+        public Response WaitForCompletionResponse(CancellationToken cancellationToken = default)
+        {
+            return DoesWrapOperation
+                ? Operation!.WaitForCompletionResponse(cancellationToken)
+                : VoidResponse!;
+        }
+
+        public Response WaitForCompletionResponse(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        {
+            return DoesWrapOperation
+                ? Operation!.WaitForCompletionResponse(pollingInterval, cancellationToken)
+                : VoidResponse!;
+        }
+
         public async ValueTask<Response> WaitForCompletionResponseAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionResponseAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return DoesWrapOperation
+                ? await Operation!.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false)
+                : VoidResponse!;
         }
 
         public async ValueTask<Response> WaitForCompletionResponseAsync(

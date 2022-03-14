@@ -6,18 +6,17 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the Toaster data model. </summary>
-    public partial class ToasterData : TrackedResource
+    public partial class ToasterData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="location"> The location. </param>
-        public ToasterData(Location location) : base(location)
+        public ToasterData(AzureLocation location) : base(location)
         {
         }
 
@@ -25,10 +24,11 @@ namespace SubscriptionExtensions
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
+        /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal ToasterData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string foo) : base(id, name, type, tags, location)
+        internal ToasterData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, type, systemData, tags, location)
         {
             Foo = foo;
         }

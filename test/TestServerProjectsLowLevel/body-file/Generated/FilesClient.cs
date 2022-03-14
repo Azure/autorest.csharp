@@ -18,13 +18,14 @@ namespace body_file_LowLevel
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of FilesClient for mocking. </summary>
         protected FilesClient()
@@ -36,24 +37,20 @@ namespace body_file_LowLevel
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public FilesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATFileServiceClientOptions options = null)
+        public FilesClient(AzureKeyCredential credential, Uri endpoint = null, FilesClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
+            options ??= new FilesClientOptions();
 
-            options ??= new AutoRestSwaggerBATFileServiceClientOptions();
-
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -63,16 +60,14 @@ namespace body_file_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetFileAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetFileAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFileRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetFileRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -82,7 +77,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -92,16 +87,14 @@ namespace body_file_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetFile(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetFile(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFileRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetFileRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -111,7 +104,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -121,16 +114,14 @@ namespace body_file_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetFileLargeAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetFileLargeAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFileLargeRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetFileLargeRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -140,7 +131,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -150,16 +141,14 @@ namespace body_file_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetFileLarge(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetFileLarge(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetFileLargeRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetFileLargeRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -169,7 +158,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -179,16 +168,14 @@ namespace body_file_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyFileAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetEmptyFileAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyFileRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetEmptyFileRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -198,7 +185,7 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -208,16 +195,14 @@ namespace body_file_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetEmptyFile(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetEmptyFile(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
+            using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyFileRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetEmptyFileRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -226,9 +211,9 @@ namespace body_file_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetFileRequest()
+        internal HttpMessage CreateGetFileRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
@@ -237,13 +222,12 @@ namespace body_file_LowLevel
             uri.AppendPath("/files/stream/nonempty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetFileLargeRequest()
+        internal HttpMessage CreateGetFileLargeRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
@@ -252,13 +236,12 @@ namespace body_file_LowLevel
             uri.AppendPath("/files/stream/verylarge", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetEmptyFileRequest()
+        internal HttpMessage CreateGetEmptyFileRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             message.BufferResponse = false;
             request.Method = RequestMethod.Get;
@@ -267,22 +250,10 @@ namespace body_file_LowLevel
             uri.AppendPath("/files/stream/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "image/png, application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

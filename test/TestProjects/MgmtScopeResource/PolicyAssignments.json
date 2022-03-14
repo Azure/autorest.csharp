@@ -37,16 +37,11 @@
       "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}": {
         "delete": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_Delete",
+          "operationId": "FakePolicyAssignments_Delete",
           "summary": "Deletes a policy assignment.",
           "description": "This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding '/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
-          "x-ms-examples": {
-            "Delete a policy assignment": {
-              "$ref": "./examples/deletePolicyAssignment.json"
-            }
-          },
           "parameters": [
             {
               "name": "scope",
@@ -71,7 +66,7 @@
             "200": {
               "description": "OK - Returns information about the deleted assignment.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignment"
+                "$ref": "#/definitions/FakePolicyAssignment"
               }
             },
             "204": {
@@ -87,25 +82,11 @@
         },
         "put": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_Create",
+          "operationId": "FakePolicyAssignments_Create",
           "summary": "Creates or updates a policy assignment.",
           "description": " This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
-          "x-ms-examples": {
-            "Create or update a policy assignment": {
-              "$ref": "./examples/createPolicyAssignment.json"
-            },
-            "Create or update a policy assignment with multiple non-compliance messages": {
-              "$ref": "./examples/createPolicyAssignmentNonComplianceMessages.json"
-            },
-            "Create or update a policy assignment with a managed identity": {
-              "$ref": "./examples/createPolicyAssignmentWithIdentity.json"
-            },
-            "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
-              "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
-            }
-          },
           "parameters": [
             {
               "name": "scope",
@@ -127,7 +108,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/PolicyAssignment"
+                "$ref": "#/definitions/FakePolicyAssignment"
               },
               "description": "Parameters for the policy assignment."
             },
@@ -139,7 +120,7 @@
             "201": {
               "description": "Created - Returns information about the new policy assignment.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignment"
+                "$ref": "#/definitions/FakePolicyAssignment"
               }
             },
             "default": {
@@ -152,19 +133,11 @@
         },
         "get": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_Get",
+          "operationId": "FakePolicyAssignments_Get",
           "summary": "Retrieves a policy assignment.",
           "description": "This operation retrieves a single policy assignment, given its name and the scope it was created at.",
-          "x-ms-examples": {
-            "Retrieve a policy assignment": {
-              "$ref": "./examples/getPolicyAssignment.json"
-            },
-            "Retrieve a policy assignment with a managed identity": {
-              "$ref": "./examples/getPolicyAssignmentWithIdentity.json"
-            }
-          },
           "parameters": [
             {
               "name": "scope",
@@ -189,7 +162,7 @@
             "200": {
               "description": "OK - Returns information about the policy assignment.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignment"
+                "$ref": "#/definitions/FakePolicyAssignment"
               }
             },
             "default": {
@@ -204,16 +177,11 @@
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments": {
         "get": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_ListForResourceGroup",
+          "operationId": "FakePolicyAssignments_ListForResourceGroup",
           "summary": "Retrieves all policy assignments that apply to a resource group.",
           "description": "This operation retrieves the list of all policy assignments associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource group, which is everything in the unfiltered list except those applied to resources contained within the resource group. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource group.",
-          "x-ms-examples": {
-            "List policy assignments that apply to a resource group": {
-              "$ref": "./examples/listPolicyAssignmentsForResourceGroup.json"
-            }
-          },
           "parameters": [
             {
               "name": "resourceGroupName",
@@ -226,7 +194,7 @@
               "maxLength": 90
             },
             {
-              "$ref": "#/parameters/PolicyAssignmentsFilterParameter"
+              "$ref": "#/parameters/FakePolicyAssignmentsFilterParameter"
             },
             {
               "$ref": "#/parameters/TopParameter"
@@ -242,7 +210,7 @@
             "200": {
               "description": "OK - Returns an array of policy assignments.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignmentListResult"
+                "$ref": "#/definitions/FakePolicyAssignmentListResult"
               }
             },
             "default": {
@@ -260,17 +228,12 @@
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyAssignments": {
         "get": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_ListForResource",
+          "operationId": "FakePolicyAssignments_ListForResource",
           "summary": "Retrieves all policy assignments that apply to a resource.",
           "description": "This operation retrieves the list of all policy assignments associated with the specified resource in the given resource group and subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource, including those that apply directly or from all containing scopes, as well as any applied to resources contained within the resource. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource, which is everything in the unfiltered list except those applied to resources contained within the resource. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource level. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource. Three parameters plus the resource name are used to identify a specific resource. If the resource is not part of a parent resource (the more common case), the parent resource path should not be provided (or provided as ''). For example a web app could be specified as ({resourceProviderNamespace} == 'Microsoft.Web', {parentResourcePath} == '', {resourceType} == 'sites', {resourceName} == 'MyWebApp'). If the resource is part of a parent resource, then all parameters should be provided. For example a virtual machine DNS name could be specified as ({resourceProviderNamespace} == 'Microsoft.Compute', {parentResourcePath} == 'virtualMachines/MyVirtualMachine', {resourceType} == 'domainNames', {resourceName} == 'MyComputerName'). A convenient alternative to providing the namespace and type name separately is to provide both in the {resourceType} parameter, format: ({resourceProviderNamespace} == '', {parentResourcePath} == '', {resourceType} == 'Microsoft.Web/sites', {resourceName} == 'MyWebApp').",
           "deprecated": false,
-          "x-ms-examples": {
-            "List all policy assignments that apply to a resource": {
-              "$ref": "./examples/listPolicyAssignmentsForResource.json"
-            }
-          },
           "parameters": [
             {
               "name": "resourceGroupName",
@@ -313,7 +276,7 @@
               "description": "The name of the resource."
             },
             {
-              "$ref": "#/parameters/PolicyAssignmentsFilterParameter"
+              "$ref": "#/parameters/FakePolicyAssignmentsFilterParameter"
             },
             {
               "$ref": "#/parameters/TopParameter"
@@ -329,7 +292,7 @@
             "200": {
               "description": "OK - Returns an array of policy assignments.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignmentListResult"
+                "$ref": "#/definitions/FakePolicyAssignmentListResult"
               }
             },
             "default": {
@@ -348,22 +311,17 @@
       "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyAssignments": {
         "get": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_ListForManagementGroup",
+          "operationId": "FakePolicyAssignments_ListForManagementGroup",
           "summary": "Retrieves all policy assignments that apply to a management group.",
           "description": "This operation retrieves the list of all policy assignments applicable to the management group that match the given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter=atScope() is provided, the returned list includes all policy assignments that are assigned to the management group or the management group's ancestors. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the management group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the management group.",
-          "x-ms-examples": {
-            "List policy assignments that apply to a management group": {
-              "$ref": "./examples/listPolicyAssignmentsForManagementGroup.json"
-            }
-          },
           "parameters": [
             {
               "$ref": "#/parameters/ManagementGroupIdParameter"
             },
             {
-              "$ref": "#/parameters/PolicyAssignmentsFilterParameter"
+              "$ref": "#/parameters/FakePolicyAssignmentsFilterParameter"
             },
             {
               "$ref": "#/parameters/TopParameter"
@@ -376,7 +334,7 @@
             "200": {
               "description": "OK - Returns an array of policy assignments.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignmentListResult"
+                "$ref": "#/definitions/FakePolicyAssignmentListResult"
               }
             },
             "default": {
@@ -394,19 +352,14 @@
       "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyAssignments": {
         "get": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_List",
+          "operationId": "FakePolicyAssignments_List",
           "summary": "Retrieves all policy assignments that apply to a subscription.",
           "description": "This operation retrieves the list of all policy assignments associated with the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the subscription, including those that apply directly or from management groups that contain the given subscription, as well as any applied to objects contained within the subscription. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the subscription, which is everything in the unfiltered list except those applied to objects contained within the subscription. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the subscription. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.",
-          "x-ms-examples": {
-            "List policy assignments that apply to a subscription": {
-              "$ref": "./examples/listPolicyAssignments.json"
-            }
-          },
           "parameters": [
             {
-              "$ref": "#/parameters/PolicyAssignmentsFilterParameter"
+              "$ref": "#/parameters/FakePolicyAssignmentsFilterParameter"
             },
             {
               "$ref": "#/parameters/TopParameter"
@@ -422,7 +375,7 @@
             "200": {
               "description": "OK - Returns an array of policy assignments.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignmentListResult"
+                "$ref": "#/definitions/FakePolicyAssignmentListResult"
               }
             },
             "default": {
@@ -435,22 +388,17 @@
           "x-ms-pageable": {
             "nextLinkName": "nextLink"
           },
-          "x-ms-odata": "#/definitions/PolicyAssignment"
+          "x-ms-odata": "#/definitions/FakePolicyAssignment"
         }
       },
       "/{policyAssignmentId}": {
         "delete": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_DeleteById",
+          "operationId": "FakePolicyAssignments_DeleteById",
           "summary": "Deletes a policy assignment.",
           "description": "This operation deletes the policy with the given ID. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid formats for {scope} are: '/providers/Microsoft.Management/managementGroups/{managementGroup}' (management group), '/subscriptions/{subscriptionId}' (subscription), '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' (resource group), or '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}' (resource).",
-          "x-ms-examples": {
-            "Delete a policy assignment by ID": {
-              "$ref": "./examples/deletePolicyAssignmentById.json"
-            }
-          },
           "parameters": [
             {
               "name": "policyAssignmentId",
@@ -468,7 +416,7 @@
             "200": {
               "description": "OK - Returns information about the policy assignment.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignment"
+                "$ref": "#/definitions/FakePolicyAssignment"
               }
             },
             "204": {
@@ -484,19 +432,11 @@
         },
         "put": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_CreateById",
+          "operationId": "FakePolicyAssignments_CreateById",
           "summary": "Creates or updates a policy assignment.",
           "description": "This operation creates or updates the policy assignment with the given ID. Policy assignments made on a scope apply to all resources contained in that scope. For example, when you assign a policy to a resource group that policy applies to all resources in the group. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.",
-          "x-ms-examples": {
-            "Create or update policy assignment by ID": {
-              "$ref": "./examples/createPolicyAssignmentById.json"
-            },
-            "Create or update policy assignment with a managed identity by ID": {
-              "$ref": "./examples/createPolicyAssignmentWithIdentityById.json"
-            }
-          },
           "parameters": [
             {
               "name": "policyAssignmentId",
@@ -511,7 +451,7 @@
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/PolicyAssignment"
+                "$ref": "#/definitions/FakePolicyAssignment"
               },
               "description": "Parameters for policy assignment."
             },
@@ -523,7 +463,7 @@
             "201": {
               "description": "Created - Returns information about the policy assignment.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignment"
+                "$ref": "#/definitions/FakePolicyAssignment"
               }
             },
             "default": {
@@ -536,19 +476,11 @@
         },
         "get": {
           "tags": [
-            "PolicyAssignments"
+            "FakePolicyAssignments"
           ],
-          "operationId": "PolicyAssignments_GetById",
+          "operationId": "FakePolicyAssignments_GetById",
           "summary": "Retrieves the policy assignment with the given ID.",
           "description": "The operation retrieves the policy assignment with the given ID. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.",
-          "x-ms-examples": {
-            "Retrieve a policy assignment by ID": {
-              "$ref": "./examples/getPolicyAssignmentById.json"
-            },
-            "Retrieve a policy assignment with a managed identity by ID": {
-              "$ref": "./examples/getPolicyAssignmentWithIdentityById.json"
-            }
-          },
           "parameters": [
             {
               "name": "policyAssignmentId",
@@ -566,7 +498,7 @@
             "200": {
               "description": "OK - Returns information about the policy assignment.",
               "schema": {
-                "$ref": "#/definitions/PolicyAssignment"
+                "$ref": "#/definitions/FakePolicyAssignment"
               }
             },
             "default": {
@@ -583,7 +515,7 @@
       "CloudError": {
         "x-ms-external": true,
         "properties": {
-          "error": {
+          "errorResponse": {
             "$ref": "#/definitions/ErrorResponse"
           }
         },
@@ -599,7 +531,7 @@
             }
         }
       },
-      "PolicyAssignmentProperties": {
+      "FakePolicyAssignmentProperties": {
         "properties": {
           "displayName": {
             "type": "string",
@@ -698,11 +630,11 @@
         },
         "description": "The value of a parameter."
       },
-      "PolicyAssignment": {
+      "FakePolicyAssignment": {
         "properties": {
           "properties": {
             "x-ms-client-flatten": true,
-            "$ref": "#/definitions/PolicyAssignmentProperties",
+            "$ref": "#/definitions/FakePolicyAssignmentProperties",
             "description": "Properties for the policy assignment."
           },
           "id": {
@@ -732,12 +664,12 @@
         "description": "The policy assignment.",
         "x-ms-azure-resource": true
       },
-      "PolicyAssignmentListResult": {
+      "FakePolicyAssignmentListResult": {
         "properties": {
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/PolicyAssignment"
+              "$ref": "#/definitions/FakePolicyAssignment"
             },
             "description": "An array of policy assignments."
           },
@@ -809,7 +741,7 @@
         "description": "The ID of the management group.",
         "x-ms-parameter-location": "method"
       },
-      "PolicyAssignmentsFilterParameter": {
+      "FakePolicyAssignmentsFilterParameter": {
         "name": "$filter",
         "in": "query",
         "required": false,

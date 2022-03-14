@@ -18,13 +18,14 @@ namespace body_complex_LowLevel
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of ArrayClient for mocking. </summary>
         protected ArrayClient()
@@ -38,22 +39,18 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public ArrayClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestComplexTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Get complex types with array property. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -68,16 +65,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetValidAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetValid");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -87,7 +82,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -102,16 +97,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetValid(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetValid(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetValid");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetValid");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetValidRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -122,7 +115,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with array property. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -138,16 +131,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutValid");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutValid");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutValidRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -158,7 +151,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with array property. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -174,16 +167,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutValid(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutValid");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutValid");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutValidRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -193,7 +186,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property which is empty. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -208,16 +201,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetEmptyAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetEmptyRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -227,7 +218,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property which is empty. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -242,16 +233,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetEmpty(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetEmpty(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetEmptyRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetEmptyRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -262,7 +251,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -278,16 +267,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutEmptyRequest(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePutEmptyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -298,7 +287,7 @@ namespace body_complex_LowLevel
 
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
@@ -314,16 +303,16 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response PutEmpty(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.PutEmpty");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePutEmptyRequest(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePutEmptyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -333,7 +322,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -348,16 +337,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotProvidedRequest();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGetNotProvidedRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -367,7 +354,7 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
         /// <code>{
@@ -382,16 +369,14 @@ namespace body_complex_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response GetNotProvided(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response GetNotProvided(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGetNotProvidedRequest();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGetNotProvidedRequest(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -400,9 +385,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        internal HttpMessage CreateGetValidRequest()
+        internal HttpMessage CreateGetValidRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -410,13 +395,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/array/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutValidRequest(RequestContent content)
+        internal HttpMessage CreatePutValidRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -426,13 +410,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetEmptyRequest()
+        internal HttpMessage CreateGetEmptyRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -440,13 +423,12 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/array/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePutEmptyRequest(RequestContent content)
+        internal HttpMessage CreatePutEmptyRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -456,13 +438,12 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGetNotProvidedRequest()
+        internal HttpMessage CreateGetNotProvidedRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -470,22 +451,10 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/array/notprovided", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

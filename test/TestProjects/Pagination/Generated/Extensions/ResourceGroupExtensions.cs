@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace Pagination
@@ -12,84 +16,301 @@ namespace Pagination
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region PageSizeIntegerModel
-        /// <summary> Gets an object representing a PageSizeIntegerModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeIntegerModelContainer" /> object. </returns>
-        public static PageSizeIntegerModelContainer GetPageSizeIntegerModels(this ResourceGroup resourceGroup)
+        private static ResourceGroupExtensionClient GetExtensionClient(ResourceGroup resourceGroup)
         {
-            return new PageSizeIntegerModelContainer(resourceGroup);
+            return resourceGroup.GetCachedClient((client) =>
+            {
+                return new ResourceGroupExtensionClient(client, resourceGroup.Id);
+            }
+            );
         }
-        #endregion
 
-        #region PageSizeInt64Model
-        /// <summary> Gets an object representing a PageSizeInt64ModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeIntegerModels in the PageSizeIntegerModel. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeInt64ModelContainer" /> object. </returns>
-        public static PageSizeInt64ModelContainer GetPageSizeInt64Models(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of PageSizeIntegerModels and their operations over a PageSizeIntegerModel. </returns>
+        public static PageSizeIntegerModelCollection GetPageSizeIntegerModels(this ResourceGroup resourceGroup)
         {
-            return new PageSizeInt64ModelContainer(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeIntegerModels();
         }
-        #endregion
 
-        #region PageSizeInt32Model
-        /// <summary> Gets an object representing a PageSizeInt32ModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeIntegerModel/{name}
+        /// Operation Id: PageSizeIntegerModels_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeInt32ModelContainer" /> object. </returns>
-        public static PageSizeInt32ModelContainer GetPageSizeInt32Models(this ResourceGroup resourceGroup)
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<PageSizeIntegerModel>> GetPageSizeIntegerModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            return new PageSizeInt32ModelContainer(resourceGroup);
+            return await resourceGroup.GetPageSizeIntegerModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
-        #endregion
 
-        #region PageSizeNumericModel
-        /// <summary> Gets an object representing a PageSizeNumericModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeIntegerModel/{name}
+        /// Operation Id: PageSizeIntegerModels_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeNumericModelContainer" /> object. </returns>
-        public static PageSizeNumericModelContainer GetPageSizeNumericModels(this ResourceGroup resourceGroup)
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<PageSizeIntegerModel> GetPageSizeIntegerModel(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            return new PageSizeNumericModelContainer(resourceGroup);
+            return resourceGroup.GetPageSizeIntegerModels().Get(name, cancellationToken);
         }
-        #endregion
 
-        #region PageSizeFloatModel
-        /// <summary> Gets an object representing a PageSizeFloatModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeInt64Models in the PageSizeInt64Model. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeFloatModelContainer" /> object. </returns>
-        public static PageSizeFloatModelContainer GetPageSizeFloatModels(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of PageSizeInt64Models and their operations over a PageSizeInt64Model. </returns>
+        public static PageSizeInt64ModelCollection GetPageSizeInt64Models(this ResourceGroup resourceGroup)
         {
-            return new PageSizeFloatModelContainer(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeInt64Models();
         }
-        #endregion
 
-        #region PageSizeDoubleModel
-        /// <summary> Gets an object representing a PageSizeDoubleModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt64Model/{name}
+        /// Operation Id: PageSizeInt64Models_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeDoubleModelContainer" /> object. </returns>
-        public static PageSizeDoubleModelContainer GetPageSizeDoubleModels(this ResourceGroup resourceGroup)
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<PageSizeInt64Model>> GetPageSizeInt64ModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            return new PageSizeDoubleModelContainer(resourceGroup);
+            return await resourceGroup.GetPageSizeInt64Models().GetAsync(name, cancellationToken).ConfigureAwait(false);
         }
-        #endregion
 
-        #region PageSizeDecimalModel
-        /// <summary> Gets an object representing a PageSizeDecimalModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt64Model/{name}
+        /// Operation Id: PageSizeInt64Models_Get
+        /// </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeDecimalModelContainer" /> object. </returns>
-        public static PageSizeDecimalModelContainer GetPageSizeDecimalModels(this ResourceGroup resourceGroup)
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<PageSizeInt64Model> GetPageSizeInt64Model(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
         {
-            return new PageSizeDecimalModelContainer(resourceGroup);
+            return resourceGroup.GetPageSizeInt64Models().Get(name, cancellationToken);
         }
-        #endregion
 
-        #region PageSizeStringModel
-        /// <summary> Gets an object representing a PageSizeStringModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <summary> Gets a collection of PageSizeInt32Models in the PageSizeInt32Model. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PageSizeStringModelContainer" /> object. </returns>
-        public static PageSizeStringModelContainer GetPageSizeStringModels(this ResourceGroup resourceGroup)
+        /// <returns> An object representing collection of PageSizeInt32Models and their operations over a PageSizeInt32Model. </returns>
+        public static PageSizeInt32ModelCollection GetPageSizeInt32Models(this ResourceGroup resourceGroup)
         {
-            return new PageSizeStringModelContainer(resourceGroup);
+            return GetExtensionClient(resourceGroup).GetPageSizeInt32Models();
         }
-        #endregion
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt32Model/{name}
+        /// Operation Id: PageSizeInt32Models_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<PageSizeInt32Model>> GetPageSizeInt32ModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetPageSizeInt32Models().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeInt32Model/{name}
+        /// Operation Id: PageSizeInt32Models_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<PageSizeInt32Model> GetPageSizeInt32Model(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetPageSizeInt32Models().Get(name, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of PageSizeNumericModels in the PageSizeNumericModel. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of PageSizeNumericModels and their operations over a PageSizeNumericModel. </returns>
+        public static PageSizeNumericModelCollection GetPageSizeNumericModels(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetPageSizeNumericModels();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeNumericModel/{name}
+        /// Operation Id: PageSizeNumericModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<PageSizeNumericModel>> GetPageSizeNumericModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetPageSizeNumericModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeNumericModel/{name}
+        /// Operation Id: PageSizeNumericModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<PageSizeNumericModel> GetPageSizeNumericModel(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetPageSizeNumericModels().Get(name, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of PageSizeFloatModels in the PageSizeFloatModel. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of PageSizeFloatModels and their operations over a PageSizeFloatModel. </returns>
+        public static PageSizeFloatModelCollection GetPageSizeFloatModels(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetPageSizeFloatModels();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeFloatModel/{name}
+        /// Operation Id: PageSizeFloatModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<PageSizeFloatModel>> GetPageSizeFloatModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetPageSizeFloatModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeFloatModel/{name}
+        /// Operation Id: PageSizeFloatModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<PageSizeFloatModel> GetPageSizeFloatModel(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetPageSizeFloatModels().Get(name, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of PageSizeDoubleModels in the PageSizeDoubleModel. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of PageSizeDoubleModels and their operations over a PageSizeDoubleModel. </returns>
+        public static PageSizeDoubleModelCollection GetPageSizeDoubleModels(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetPageSizeDoubleModels();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDoubleModel/{name}
+        /// Operation Id: PageSizeDoubleModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<PageSizeDoubleModel>> GetPageSizeDoubleModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetPageSizeDoubleModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDoubleModel/{name}
+        /// Operation Id: PageSizeDoubleModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<PageSizeDoubleModel> GetPageSizeDoubleModel(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetPageSizeDoubleModels().Get(name, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of PageSizeDecimalModels in the PageSizeDecimalModel. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of PageSizeDecimalModels and their operations over a PageSizeDecimalModel. </returns>
+        public static PageSizeDecimalModelCollection GetPageSizeDecimalModels(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetPageSizeDecimalModels();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
+        /// Operation Id: PageSizeDecimalModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<PageSizeDecimalModel>> GetPageSizeDecimalModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetPageSizeDecimalModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDecimalModel/{name}
+        /// Operation Id: PageSizeDecimalModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<PageSizeDecimalModel> GetPageSizeDecimalModel(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetPageSizeDecimalModels().Get(name, cancellationToken);
+        }
+
+        /// <summary> Gets a collection of PageSizeStringModels in the PageSizeStringModel. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of PageSizeStringModels and their operations over a PageSizeStringModel. </returns>
+        public static PageSizeStringModelCollection GetPageSizeStringModels(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetPageSizeStringModels();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeStringModel/{name}
+        /// Operation Id: PageSizeStringModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static async Task<Response<PageSizeStringModel>> GetPageSizeStringModelAsync(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetPageSizeStringModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeStringModel/{name}
+        /// Operation Id: PageSizeStringModels_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public static Response<PageSizeStringModel> GetPageSizeStringModel(this ResourceGroup resourceGroup, string name, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetPageSizeStringModels().Get(name, cancellationToken);
+        }
     }
 }

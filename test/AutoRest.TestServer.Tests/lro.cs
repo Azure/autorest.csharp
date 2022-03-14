@@ -116,6 +116,38 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task LROPatch201WithAsyncHeader() => Test(async (host, pipeline) =>
+        {
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch201RetryWithAsyncHeaderAsync();
+            var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("/lro/patch/201/retry/onlyAsyncHeader/operationStatuses/201", resp.Value.Id);
+        });
+
+        [Test]
+        public Task LROPatch201WithAsyncHeader_Sync() => Test((host, pipeline) =>
+        {
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch201RetryWithAsyncHeader();
+            var resp = WaitForCompletionWithValue(operation);
+            Assert.AreEqual("/lro/patch/201/retry/onlyAsyncHeader/operationStatuses/201", resp.Value.Id);
+        });
+
+        [Test]
+        public Task LROPatch202WithAsyncAndLocationHeader() => Test(async (host, pipeline) =>
+        {
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch202RetryWithAsyncAndLocationHeaderAsync();
+            var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("/lro/patch/202/retry/asyncAndLocationHeader/operationResults/202/finalResults/202", resp.Value.Id);
+        });
+
+        [Test]
+        public Task LROPatch202WithAsyncAndLocationHeader_Sync() => Test((host, pipeline) =>
+        {
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch202RetryWithAsyncAndLocationHeader();
+            var resp = WaitForCompletionWithValue(operation);
+            Assert.AreEqual("/lro/patch/202/retry/asyncAndLocationHeader/operationResults/202/finalResults/202", resp.Value.Id);
+        });
+
+        [Test]
         public Task LRODelete200() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200Async();
@@ -456,19 +488,17 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task LROErrorPut200InvalidJson() => Test(async (host, pipeline) =>
+        public Task LROErrorPut200InvalidJson() => Test((host, pipeline) =>
         {
             var value = new Product();
-            var operation = await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPut200InvalidJsonAsync(value);
-            Assert.ThrowsAsync(Is.InstanceOf<JsonException>(), async () => await operation.WaitForCompletionAsync().ConfigureAwait(false));
+            Assert.CatchAsync<JsonException>(async () => await (await new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPut200InvalidJsonAsync(value)).WaitForCompletionAsync());
         });
 
         [Test]
         public Task LROErrorPut200InvalidJson_Sync() => Test((host, pipeline) =>
         {
             var value = new Product();
-            var operation = new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPut200InvalidJson(value);
-            Assert.Throws(Is.InstanceOf<JsonException>(), () => WaitForCompletion(operation));
+            Assert.Catch<JsonException>(() => WaitForCompletion(new LrosaDsClient(ClientDiagnostics, pipeline, host).StartPut200InvalidJson(value)));
         });
 
         [Test]
@@ -1413,7 +1443,7 @@ namespace AutoRest.TestServer.Tests
 
         private static Response WaitForCompletion(Operation operation, CancellationToken cancellationToken = default)
         {
-            return WaitForCompletion(operation, OperationHelpers.DefaultPollingInterval, cancellationToken);
+            return WaitForCompletion(operation, TimeSpan.FromSeconds(1), cancellationToken);
         }
 
         private static Response WaitForCompletion(Operation operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default)
@@ -1432,7 +1462,7 @@ namespace AutoRest.TestServer.Tests
 
         private static Response<TResult> WaitForCompletionWithValue<TResult>(Operation<TResult> operation, CancellationToken cancellationToken = default) where TResult : notnull
         {
-            return WaitForCompletionWithValue(operation, OperationHelpers.DefaultPollingInterval, cancellationToken);
+            return WaitForCompletionWithValue(operation, TimeSpan.FromSeconds(1), cancellationToken);
         }
 
         private static Response<TResult> WaitForCompletionWithValue<TResult>(Operation<TResult> operation, TimeSpan pollingInterval, CancellationToken cancellationToken = default) where TResult : notnull

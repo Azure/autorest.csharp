@@ -17,11 +17,14 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class LongRunningOperation : TypeProvider
     {
-        public LongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo) : base(context)
+        public LongRunningOperation(Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo) : this(operation, context, lroInfo, lroInfo.ClientPrefix + operation.CSharpName() + "Operation")
+        {
+        }
+
+        protected LongRunningOperation(Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo, string defaultName) : base(context)
         {
             Debug.Assert(operation.IsLongRunning);
 
-            DefaultName = lroInfo.ClientPrefix + operation.CSharpName() + "Operation";
             FinalStateVia = operation.LongRunningFinalStateVia;
 
             var finalResponse = operation.LongRunningFinalResponse;
@@ -41,6 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 }
             }
 
+            DefaultName = defaultName;
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
         }

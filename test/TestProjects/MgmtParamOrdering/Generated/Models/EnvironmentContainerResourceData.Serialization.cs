@@ -8,9 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
-using Azure.ResourceManager.Resources.Models;
 using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
@@ -38,27 +36,17 @@ namespace MgmtParamOrdering
         internal static EnvironmentContainerResourceData DeserializeEnvironmentContainerResourceData(JsonElement element)
         {
             EnvironmentContainer properties = default;
-            Optional<SystemData> systemData = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            AzureLocation location = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"))
                 {
                     properties = EnvironmentContainer.DeserializeEnvironmentContainer(property.Value);
-                    continue;
-                }
-                if (property.NameEquals("systemData"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -78,7 +66,7 @@ namespace MgmtParamOrdering
                 }
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -91,8 +79,13 @@ namespace MgmtParamOrdering
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new EnvironmentContainerResourceData(id, name, type, tags, location, properties, systemData);
+            return new EnvironmentContainerResourceData(id, name, type, systemData, tags, location, properties);
         }
     }
 }

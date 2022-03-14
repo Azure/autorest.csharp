@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
@@ -52,6 +52,16 @@ namespace Azure.Management.Storage
                 writer.WritePropertyName("accessTier");
                 writer.WriteStringValue(AccessTier.Value.ToString());
             }
+            if (Optional.IsCollectionDefined(SignedIdentifiers))
+            {
+                writer.WritePropertyName("signedIdentifiers");
+                writer.WriteStartArray();
+                foreach (var item in SignedIdentifiers)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -62,6 +72,7 @@ namespace Azure.Management.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<DateTimeOffset> lastModifiedTime = default;
             Optional<IDictionary<string, string>> metadata = default;
             Optional<int> shareQuota = default;
@@ -74,7 +85,12 @@ namespace Azure.Management.Storage
             Optional<ShareAccessTier> accessTier = default;
             Optional<DateTimeOffset> accessTierChangeTime = default;
             Optional<string> accessTierStatus = default;
-            Optional<int> shareUsageBytes = default;
+            Optional<long> shareUsageBytes = default;
+            Optional<LeaseStatus> leaseStatus = default;
+            Optional<LeaseState> leaseState = default;
+            Optional<LeaseDuration> leaseDuration = default;
+            Optional<IList<SignedIdentifier>> signedIdentifiers = default;
+            Optional<DateTimeOffset> snapshotTime = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"))
@@ -84,7 +100,7 @@ namespace Azure.Management.Storage
                 }
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -95,6 +111,11 @@ namespace Azure.Management.Storage
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -228,14 +249,69 @@ namespace Azure.Management.Storage
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            shareUsageBytes = property0.Value.GetInt32();
+                            shareUsageBytes = property0.Value.GetInt64();
+                            continue;
+                        }
+                        if (property0.NameEquals("leaseStatus"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            leaseStatus = new LeaseStatus(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("leaseState"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            leaseState = new LeaseState(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("leaseDuration"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            leaseDuration = new LeaseDuration(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("signedIdentifiers"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            List<SignedIdentifier> array = new List<SignedIdentifier>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                array.Add(SignedIdentifier.DeserializeSignedIdentifier(item));
+                            }
+                            signedIdentifiers = array;
+                            continue;
+                        }
+                        if (property0.NameEquals("snapshotTime"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            snapshotTime = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new FileShareData(id, name, type, etag.Value, Optional.ToNullable(lastModifiedTime), Optional.ToDictionary(metadata), Optional.ToNullable(shareQuota), Optional.ToNullable(enabledProtocols), Optional.ToNullable(rootSquash), version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), Optional.ToNullable(accessTier), Optional.ToNullable(accessTierChangeTime), accessTierStatus.Value, Optional.ToNullable(shareUsageBytes));
+            return new FileShareData(id, name, type, systemData, etag.Value, Optional.ToNullable(lastModifiedTime), Optional.ToDictionary(metadata), Optional.ToNullable(shareQuota), Optional.ToNullable(enabledProtocols), Optional.ToNullable(rootSquash), version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), Optional.ToNullable(accessTier), Optional.ToNullable(accessTierChangeTime), accessTierStatus.Value, Optional.ToNullable(shareUsageBytes), Optional.ToNullable(leaseStatus), Optional.ToNullable(leaseState), Optional.ToNullable(leaseDuration), Optional.ToList(signedIdentifiers), Optional.ToNullable(snapshotTime));
         }
     }
 }

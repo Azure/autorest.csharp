@@ -33,6 +33,8 @@ namespace CognitiveSearch
         /// <param name="endpoint"> The endpoint URL of the search service. </param>
         /// <param name="indexName"> The name of the index. </param>
         /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="endpoint"/>, <paramref name="indexName"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="indexName"/> is an empty string, and was expected to be non-empty. </exception>
         internal DocumentsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
             RestClient = new DocumentsRestClient(clientDiagnostics, pipeline, endpoint, indexName, apiVersion);
@@ -43,7 +45,7 @@ namespace CognitiveSearch
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<long>> CountAsync(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<long>> CountAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
@@ -61,7 +63,7 @@ namespace CognitiveSearch
         /// <summary> Queries the number of documents in the index. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<long> Count(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<long> Count(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Count");
             scope.Start();
@@ -81,7 +83,7 @@ namespace CognitiveSearch
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SearchDocumentsResult>> SearchGetAsync(string searchText = null, SearchOptions searchOptions = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SearchDocumentsResult>> SearchGetAsync(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
@@ -101,7 +103,7 @@ namespace CognitiveSearch
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SearchDocumentsResult> SearchGet(string searchText = null, SearchOptions searchOptions = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<SearchDocumentsResult> SearchGet(string searchText = null, SearchOptions searchOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SearchGet");
             scope.Start();
@@ -120,7 +122,7 @@ namespace CognitiveSearch
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SearchDocumentsResult>> SearchPostAsync(SearchRequest searchRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SearchPost");
             scope.Start();
@@ -139,7 +141,7 @@ namespace CognitiveSearch
         /// <param name="searchRequest"> The definition of the Search request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<SearchDocumentsResult> SearchPost(SearchRequest searchRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SearchPost");
             scope.Start();
@@ -159,7 +161,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<object>> GetAsync(string key, IEnumerable<string> selectedFields = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Get");
             scope.Start();
@@ -179,7 +181,7 @@ namespace CognitiveSearch
         /// <param name="selectedFields"> List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<object> Get(string key, IEnumerable<string> selectedFields = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<object> Get(string key, IEnumerable<string> selectedFields = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Get");
             scope.Start();
@@ -200,7 +202,7 @@ namespace CognitiveSearch
         /// <param name="suggestOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuggestDocumentsResult>> SuggestGetAsync(string searchText, string suggesterName, SuggestOptions suggestOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SuggestGet");
             scope.Start();
@@ -221,7 +223,7 @@ namespace CognitiveSearch
         /// <param name="suggestOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<SuggestDocumentsResult> SuggestGet(string searchText, string suggesterName, SuggestOptions suggestOptions = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SuggestGet");
             scope.Start();
@@ -240,7 +242,7 @@ namespace CognitiveSearch
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SuggestDocumentsResult>> SuggestPostAsync(SuggestRequest suggestRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SuggestPost");
             scope.Start();
@@ -259,7 +261,7 @@ namespace CognitiveSearch
         /// <param name="suggestRequest"> The Suggest request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<SuggestDocumentsResult> SuggestPost(SuggestRequest suggestRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.SuggestPost");
             scope.Start();
@@ -278,7 +280,7 @@ namespace CognitiveSearch
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IndexDocumentsResult>> IndexAsync(IndexBatch batch, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Index");
             scope.Start();
@@ -297,7 +299,7 @@ namespace CognitiveSearch
         /// <param name="batch"> The batch of index actions. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IndexDocumentsResult> Index(IndexBatch batch, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<IndexDocumentsResult> Index(IndexBatch batch, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.Index");
             scope.Start();
@@ -318,7 +320,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, Models.RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AutocompleteResult>> AutocompleteGetAsync(string searchText, string suggesterName, RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.AutocompleteGet");
             scope.Start();
@@ -339,7 +341,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, Models.RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<AutocompleteResult> AutocompleteGet(string searchText, string suggesterName, RequestOptions requestOptions = null, AutocompleteOptions autocompleteOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.AutocompleteGet");
             scope.Start();
@@ -358,7 +360,7 @@ namespace CognitiveSearch
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<AutocompleteResult>> AutocompletePostAsync(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.AutocompletePost");
             scope.Start();
@@ -377,7 +379,7 @@ namespace CognitiveSearch
         /// <param name="autocompleteRequest"> The definition of the Autocomplete request. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<AutocompleteResult> AutocompletePost(AutocompleteRequest autocompleteRequest, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DocumentsClient.AutocompletePost");
             scope.Start();

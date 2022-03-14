@@ -4,69 +4,70 @@
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class SingletonDetection
     {
-        private static string[] SingletonKeywords = { "/default", "/latest" };
+        private static string[] SingletonKeywords = { "default", "latest", "current" };
 
-        private static ConcurrentDictionary<OperationGroup, string?> _valueCache = new ConcurrentDictionary<OperationGroup, string?>();
+        private static ConcurrentDictionary<OperationSet, string?> _singletonResourceCache = new ConcurrentDictionary<OperationSet, string?>();
 
-        public static bool IsSingletonResource(this OperationGroup operationGroup, MgmtConfiguration config)
+        public static bool IsSingletonResource(this OperationSet operationSet)
         {
-            return TryGetSingletonResourceSuffix(operationGroup, config, out _);
+            return operationSet.TryGetSingletonResourceSuffix(out _);
         }
 
-        public static bool TryGetSingletonResourceSuffix(this OperationGroup operationGroup, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceSuffix)
+        public static bool TryGetSingletonResourceSuffix(this OperationSet operationSet, [MaybeNullWhen(false)] out string singletonIdSuffix)
         {
-            resourceSuffix = null;
-            if (_valueCache.TryGetValue(operationGroup, out resourceSuffix))
-            {
-                return resourceSuffix != null;
-            }
+            singletonIdSuffix = null;
+            if (_singletonResourceCache.TryGetValue(operationSet, out singletonIdSuffix))
+                return singletonIdSuffix != null;
 
-            bool result = IsSingleton(operationGroup, config, out resourceSuffix);
-            _valueCache.TryAdd(operationGroup, resourceSuffix);
+            bool result = IsSingleton(operationSet, out singletonIdSuffix);
+            _singletonResourceCache.TryAdd(operationSet, singletonIdSuffix);
             return result;
         }
 
-        private static bool IsSingleton(OperationGroup operationGroup, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceSuffix)
+        private static bool IsSingleton(OperationSet operationSet, [MaybeNullWhen(false)] out string singletonIdSuffix)
         {
-            // we should first check the configuration for the singleton settings, if we get none, we could try to deduce this from its path
-            if (config.OperationGroupToSingletonResource.TryGetValue(operationGroup.Key, out resourceSuffix))
+            // we should first check the configuration for the singleton settings
+            if (Configuration.MgmtConfiguration.RequestPathToSingletonResource.TryGetValue(operationSet.RequestPath, out singletonIdSuffix))
             {
-                // ensure the resourceSuffix does not a slash at the beginning
-                resourceSuffix = resourceSuffix.TrimStart('/');
+                // ensure the singletonIdSuffix does not have a slash at the beginning
+                singletonIdSuffix = singletonIdSuffix.TrimStart('/');
                 return true;
             }
 
-            // we cannot find the corresponding operation group in the configuration, trying to deduce from the path
-            if (operationGroup.TryGetResourceName(config, out var resourceName))
+            // we cannot find the corresponding request path in the configuration, trying to deduce from the path
+            // return false if this is not a resource
+            if (!operationSet.IsResource())
+                return false;
+            // get the request path
+            var currentRequestPath = operationSet.GetRequestPath();
+            // if we are a singleton resource,
+            // we need to find the suffix which should be the difference between our path and our parent resource
+            var parentRequestPath = operationSet.ParentRequestPath();
+            var diff = parentRequestPath.TrimAncestorFrom(currentRequestPath);
+            // if not all of the segment in difference are constant, we cannot be a singleton resource
+            if (!diff.Any() || !diff.All(s => s.IsConstant))
+                return false;
+            // see if the configuration says that we need to honor the dictionary for singletons
+            if (!Configuration.MgmtConfiguration.DoesSingletonRequiresKeyword)
             {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    // Check to see if any GET operation path ends with Singleton keywords
-                    if (!operation.IsLongRunning
-                        && operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest
-                        && httpRequest.Method == HttpMethod.Get
-                        // the returned data schema should be the type of the Resource of the operation group
-                        && operation.GetSuccessfulQueryResponse()?.ResponseSchema?.Name == resourceName
-                        && SingletonKeywords.Any(w => httpRequest.Path.EndsWith(w)))
-                    {
-                        // the path ends with our singleton keyword, now we need to get the last two segments of it
-                        var segments = httpRequest.Path.Split("/");
-                        if (segments.Length < 2)
-                            return false;
-                        resourceSuffix = string.Join('/', segments.TakeLast(2));
-                        return true;
-                    }
-                }
+                singletonIdSuffix = string.Join('/', diff.Select(s => s.ConstantValue));
+                return true;
+            }
+            // now we can ensure the last segment of the path is a constant
+            var lastSegment = currentRequestPath.Last();
+            if (lastSegment.Constant.Type.Equals(typeof(string)) && SingletonKeywords.Any(w => lastSegment.ConstantValue == w))
+            {
+                singletonIdSuffix = string.Join('/', diff.Select(s => s.ConstantValue));
+                return true;
             }
 
-            // if no match found, return false and null
             return false;
         }
     }

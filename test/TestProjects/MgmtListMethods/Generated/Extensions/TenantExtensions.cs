@@ -5,7 +5,10 @@
 
 #nullable disable
 
-using Azure.ResourceManager;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Resources;
 
 namespace MgmtListMethods
@@ -13,114 +16,53 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to Tenant. </summary>
     public static partial class TenantExtensions
     {
-        #region ManagementGroup
-        /// <summary> Gets an object representing a ManagementGroup along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagementGroup" /> object. </returns>
-        public static ManagementGroup GetManagementGroup(this Tenant tenant, ResourceIdentifier id)
+        private static TenantExtensionClient GetExtensionClient(Tenant tenant)
         {
-            return new ManagementGroup(tenant, id);
+            return tenant.GetCachedClient((client) =>
+            {
+                return new TenantExtensionClient(client, tenant.Id);
+            }
+            );
         }
-        #endregion
 
-        #region MgmtGrpParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary> Gets a collection of TenantTests in the TenantTest. </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLoc" /> object. </returns>
-        public static MgmtGrpParentWithNonResChWithLoc GetMgmtGrpParentWithNonResChWithLoc(this Tenant tenant, ResourceIdentifier id)
+        /// <returns> An object representing collection of TenantTests and their operations over a TenantTest. </returns>
+        public static TenantTestCollection GetTenantTests(this Tenant tenant)
         {
-            return new MgmtGrpParentWithNonResChWithLoc(tenant, id);
+            return GetExtensionClient(tenant).GetTenantTests();
         }
-        #endregion
 
-        #region MgmtGrpParentWithNonResCh
-        /// <summary> Gets an object representing a MgmtGrpParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResCh" /> object. </returns>
-        public static MgmtGrpParentWithNonResCh GetMgmtGrpParentWithNonResCh(this Tenant tenant, ResourceIdentifier id)
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public static async Task<Response<TenantTest>> GetTenantTestAsync(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return new MgmtGrpParentWithNonResCh(tenant, id);
+            return await tenant.GetTenantTests().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
         }
-        #endregion
 
-        #region MgmtGrpParentWithLoc
-        /// <summary> Gets an object representing a MgmtGrpParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
+        /// <summary>
+        /// Gets a billing account by its ID.
+        /// Request Path: /providers/Microsoft.Tenant/tenantTests/{tenantTestName}
+        /// Operation Id: TenantTests_Get
+        /// </summary>
         /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithLoc" /> object. </returns>
-        public static MgmtGrpParentWithLoc GetMgmtGrpParentWithLoc(this Tenant tenant, ResourceIdentifier id)
+        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> is null. </exception>
+        public static Response<TenantTest> GetTenantTest(this Tenant tenant, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return new MgmtGrpParentWithLoc(tenant, id);
+            return tenant.GetTenantTests().Get(tenantTestName, expand, cancellationToken);
         }
-        #endregion
-
-        #region MgmtGroupParent
-        /// <summary> Gets an object representing a MgmtGroupParent along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGroupParent" /> object. </returns>
-        public static MgmtGroupParent GetMgmtGroupParent(this Tenant tenant, ResourceIdentifier id)
-        {
-            return new MgmtGroupParent(tenant, id);
-        }
-        #endregion
-
-        #region TenantTest
-        /// <summary> Gets an object representing a TenantTest along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantTest" /> object. </returns>
-        public static TenantTest GetTenantTest(this Tenant tenant, ResourceIdentifier id)
-        {
-            return new TenantTest(tenant, id);
-        }
-        #endregion
-
-        #region TenantParentWithNonResChWithLoc
-        /// <summary> Gets an object representing a TenantParentWithNonResChWithLoc along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLoc" /> object. </returns>
-        public static TenantParentWithNonResChWithLoc GetTenantParentWithNonResChWithLoc(this Tenant tenant, ResourceIdentifier id)
-        {
-            return new TenantParentWithNonResChWithLoc(tenant, id);
-        }
-        #endregion
-
-        #region TenantParentWithNonResCh
-        /// <summary> Gets an object representing a TenantParentWithNonResCh along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResCh" /> object. </returns>
-        public static TenantParentWithNonResCh GetTenantParentWithNonResCh(this Tenant tenant, ResourceIdentifier id)
-        {
-            return new TenantParentWithNonResCh(tenant, id);
-        }
-        #endregion
-
-        #region TenantParentWithLoc
-        /// <summary> Gets an object representing a TenantParentWithLoc along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithLoc" /> object. </returns>
-        public static TenantParentWithLoc GetTenantParentWithLoc(this Tenant tenant, ResourceIdentifier id)
-        {
-            return new TenantParentWithLoc(tenant, id);
-        }
-        #endregion
-
-        #region TenantParent
-        /// <summary> Gets an object representing a TenantParent along with the instance operations that can be performed on it but with no data. </summary>
-        /// <param name="tenant"> The <see cref="Tenant" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParent" /> object. </returns>
-        public static TenantParent GetTenantParent(this Tenant tenant, ResourceIdentifier id)
-        {
-            return new TenantParent(tenant, id);
-        }
-        #endregion
     }
 }

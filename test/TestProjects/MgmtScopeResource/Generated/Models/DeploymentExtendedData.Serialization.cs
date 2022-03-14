@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
@@ -23,6 +23,7 @@ namespace MgmtScopeResource
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
@@ -57,7 +58,7 @@ namespace MgmtScopeResource
                 }
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -70,8 +71,13 @@ namespace MgmtScopeResource
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new DeploymentExtendedData(id, name, type, location.Value, properties.Value, Optional.ToDictionary(tags));
+            return new DeploymentExtendedData(id, name, type, systemData, location.Value, properties.Value, Optional.ToDictionary(tags));
         }
     }
 }

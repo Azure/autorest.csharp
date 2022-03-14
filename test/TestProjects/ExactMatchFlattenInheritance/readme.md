@@ -2,7 +2,7 @@
 
 This project is for testing flatten properties.
 
-### AutoRest Configuration
+## AutoRest Configuration
 > see https://aka.ms/autorest
 
 ``` yaml

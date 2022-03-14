@@ -1,5 +1,7 @@
 # MgmtPropertyChooser
-### AutoRest Configuration
+
+## AutoRest Configuration
+
 > see https://aka.ms/autorest
 
 ``` yaml

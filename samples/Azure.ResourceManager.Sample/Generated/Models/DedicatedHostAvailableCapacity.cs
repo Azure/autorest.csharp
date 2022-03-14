@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Dedicated host unutilized capacity. </summary>
-    public partial class DedicatedHostAvailableCapacity
+    internal partial class DedicatedHostAvailableCapacity
     {
         /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
         internal DedicatedHostAvailableCapacity()

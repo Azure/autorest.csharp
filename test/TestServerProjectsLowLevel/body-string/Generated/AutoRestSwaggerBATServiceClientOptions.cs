@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace body_string_LowLevel
 {
-    /// <summary> Client options for AutoRestSwaggerBATServiceClient. </summary>
+    /// <summary> Client options for AutoRestSwaggerBATService library clients. </summary>
     public partial class AutoRestSwaggerBATServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;

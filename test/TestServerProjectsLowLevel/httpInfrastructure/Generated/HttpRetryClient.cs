@@ -18,13 +18,14 @@ namespace httpInfrastructure_LowLevel
     {
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
-
         private readonly HttpPipeline _pipeline;
-        private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Uri _endpoint;
 
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of HttpRetryClient for mocking. </summary>
         protected HttpRetryClient()
@@ -38,22 +39,18 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
         public HttpRetryClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestHttpInfrastructureTestServiceClientOptions options = null)
         {
-            if (credential == null)
-            {
-                throw new ArgumentNullException(nameof(credential));
-            }
+            Argument.AssertNotNull(credential, nameof(credential));
             endpoint ??= new Uri("http://localhost:3000");
-
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
-            _clientDiagnostics = new ClientDiagnostics(options);
+            ClientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
         }
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -63,16 +60,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Head408Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Head408Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead408Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateHead408Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -82,7 +77,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -92,16 +87,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Head408(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Head408(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateHead408Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateHead408Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -112,7 +105,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -122,16 +115,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Put500Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Put500Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut500Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut500Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -142,7 +133,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -152,16 +143,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Put500(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Put500(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut500Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePut500Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -172,7 +161,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -182,16 +171,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Patch500Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Patch500Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch500Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch500Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -202,7 +189,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -212,16 +199,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Patch500(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Patch500(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch500Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePatch500Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -231,7 +216,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -241,16 +226,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Get502Async(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Get502Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet502Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateGet502Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -260,7 +243,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -270,16 +253,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Get502(RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Get502(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateGet502Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateGet502Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -289,7 +270,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -299,16 +280,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Options502Async(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Options502Async(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions502Request();
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateOptions502Request(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -318,7 +297,7 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -328,16 +307,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Options502(RequestOptions options)
-#pragma warning restore AZC0002
+        public virtual Response Options502(RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptions502Request();
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateOptions502Request(context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -348,7 +325,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -358,16 +335,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Post503Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Post503Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost503Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePost503Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -378,7 +353,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -388,16 +363,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Post503(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Post503(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePost503Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePost503Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -408,7 +381,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -418,16 +391,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Delete503Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Delete503Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete503Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreateDelete503Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -438,7 +409,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -448,16 +419,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Delete503(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Delete503(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDelete503Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreateDelete503Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -468,7 +437,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -478,16 +447,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Put504Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Put504Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut504Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePut504Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -498,7 +465,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -508,16 +475,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Put504(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Put504(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePut504Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePut504Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -528,7 +493,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -538,16 +503,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual async Task<Response> Patch504Async(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual async Task<Response> Patch504Async(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch504Request(content);
-                return await _pipeline.ProcessMessageAsync(message, _clientDiagnostics, options).ConfigureAwait(false);
+                using HttpMessage message = CreatePatch504Request(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -558,7 +521,7 @@ namespace httpInfrastructure_LowLevel
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
+        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
         /// <code>{
@@ -568,16 +531,14 @@ namespace httpInfrastructure_LowLevel
         /// </code>
         /// 
         /// </remarks>
-#pragma warning disable AZC0002
-        public virtual Response Patch504(RequestContent content, RequestOptions options = null)
-#pragma warning restore AZC0002
+        public virtual Response Patch504(RequestContent content, RequestContext context = null)
         {
-            using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
+            using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
             try
             {
-                using HttpMessage message = CreatePatch504Request(content);
-                return _pipeline.ProcessMessage(message, _clientDiagnostics, options);
+                using HttpMessage message = CreatePatch504Request(content, context);
+                return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
             {
@@ -586,9 +547,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        internal HttpMessage CreateHead408Request()
+        internal HttpMessage CreateHead408Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -596,13 +557,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/retry/408", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePut500Request(RequestContent content)
+        internal HttpMessage CreatePut500Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -612,13 +572,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePatch500Request(RequestContent content)
+        internal HttpMessage CreatePatch500Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -628,13 +587,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateGet502Request()
+        internal HttpMessage CreateGet502Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -642,13 +600,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/retry/502", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateOptions502Request()
+        internal HttpMessage CreateOptions502Request(RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -656,13 +613,12 @@ namespace httpInfrastructure_LowLevel
             uri.AppendPath("/http/retry/502", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePost503Request(RequestContent content)
+        internal HttpMessage CreatePost503Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -672,13 +628,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreateDelete503Request(RequestContent content)
+        internal HttpMessage CreateDelete503Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -688,13 +643,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePut504Request(RequestContent content)
+        internal HttpMessage CreatePut504Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -704,13 +658,12 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        internal HttpMessage CreatePatch504Request(RequestContent content)
+        internal HttpMessage CreatePatch504Request(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -720,22 +673,10 @@ namespace httpInfrastructure_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

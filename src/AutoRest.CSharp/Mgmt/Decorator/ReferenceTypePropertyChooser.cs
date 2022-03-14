@@ -14,6 +14,8 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -27,18 +29,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
-        private static readonly Type _locationType = typeof(Location);
-        private static readonly Type _resourceIdentifierType = typeof(ResourceIdentifier);
-        private static readonly Type _resourceTypeType = typeof(ResourceType);
+        private static readonly Type _locationType = typeof(AzureLocation);
+        private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
+        private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
-            var assembly = Assembly.GetAssembly(typeof(ArmClient));
-            if (assembly == null)
+            return ReferenceClassFinder.ExternalTypes.Where(t =>
             {
-                return new List<System.Type>();
-            }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
+                return t.GetCustomAttributes(false).Any(a => a.GetType().Name == PropertyReferenceAttributeName) &&
+                    t.Name.SplitByCamelCase().Count() > 1; //this is needed while we have the backcompat Plan and ArmPlan inside Azure.ResourceManager
+            }).ToList();
         }
 
         public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
@@ -51,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(schema, out result);
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace)
         {
             if (_valueCache.TryGetValue(typeToReplace.ObjectSchema, out var result))
                 return result;
@@ -66,22 +67,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
                     List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
 
-                    if (replacementType == typeof(ResourceIdentity))
-                    {
-                        List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
-                        foreach (var parentProperty in replacementTypeProperties)
-                        {
-                            if (parentProperty.PropertyType.IsClass && parentProperty.PropertyType != typeof(string))
-                            {
-                                flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
-                            }
-                            else
-                            {
-                                flattenedReplacementTypeProperties.Add(parentProperty);
-                            }
-                        }
-                        replacementTypeProperties = flattenedReplacementTypeProperties;
-                    }
                     if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
                     {
                         result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
@@ -89,7 +74,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         return result;
                     }
                 }
-
             }
             _valueCache.TryAdd(typeToReplace.ObjectSchema, null);
             return null;

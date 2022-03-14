@@ -1,8 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using NUnit.Framework;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
@@ -10,22 +13,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     {
         public MgmtParentTests() : base("MgmtParent") { }
 
-        [Test]
-        public void TestParentComputer()
+        [TestCase("VirtualMachineExtensionImage", "SubscriptionExtensions")]
+        [TestCase("AvailabilitySet", "ResourceGroupExtensions")]
+        [TestCase("DedicatedHost", "DedicatedHostGroup")]
+        public void TestParent(string resourceName, string parentName)
         {
-            var result = Generate("MgmtParent").Result;
-            var model = result.Model;
-            var context = result.Context;
-            foreach (var operations in model.OperationGroups)
-            {
-                Assert.IsNotNull(operations.ParentResourceType(context.Configuration.MgmtConfiguration));
-                if (operations.Key.Equals("VirtualMachineExtensionImages"))
-                    Assert.AreEqual("subscriptions", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
-                else if (operations.Key.Equals("AvailabilitySets"))
-                    Assert.AreEqual("resourceGroups", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
-                else if (operations.Key.Equals("DedicatedHosts"))
-                    Assert.AreEqual("Microsoft.Compute/hostGroups", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
-            }
+            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
+            Assert.NotNull(resource);
+            var parents = resource.Parent();
+            Assert.IsTrue(parents.Any(p => p.Type.Name == parentName));
         }
     }
 }

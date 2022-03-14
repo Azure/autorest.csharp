@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtLRO.Models
 {
-    public partial class FakePostResultProperties
+    internal partial class FakePostResultProperties
     {
         internal static FakePostResultProperties DeserializeFakePostResultProperties(JsonElement element)
         {

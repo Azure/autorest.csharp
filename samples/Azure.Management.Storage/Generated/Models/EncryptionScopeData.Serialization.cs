@@ -9,7 +9,7 @@ using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
@@ -35,6 +35,11 @@ namespace Azure.Management.Storage
                 writer.WritePropertyName("keyVaultProperties");
                 writer.WriteObjectValue(KeyVaultProperties);
             }
+            if (Optional.IsDefined(RequireInfrastructureEncryption))
+            {
+                writer.WritePropertyName("requireInfrastructureEncryption");
+                writer.WriteBooleanValue(RequireInfrastructureEncryption.Value);
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -44,16 +49,18 @@ namespace Azure.Management.Storage
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
+            SystemData systemData = default;
             Optional<EncryptionScopeSource> source = default;
             Optional<EncryptionScopeState> state = default;
             Optional<DateTimeOffset> creationTime = default;
             Optional<DateTimeOffset> lastModifiedTime = default;
             Optional<EncryptionScopeKeyVaultProperties> keyVaultProperties = default;
+            Optional<bool> requireInfrastructureEncryption = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -64,6 +71,11 @@ namespace Azure.Management.Storage
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("systemData"))
+                {
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -125,11 +137,21 @@ namespace Azure.Management.Storage
                             keyVaultProperties = EncryptionScopeKeyVaultProperties.DeserializeEncryptionScopeKeyVaultProperties(property0.Value);
                             continue;
                         }
+                        if (property0.NameEquals("requireInfrastructureEncryption"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            requireInfrastructureEncryption = property0.Value.GetBoolean();
+                            continue;
+                        }
                     }
                     continue;
                 }
             }
-            return new EncryptionScopeData(id, name, type, Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value);
+            return new EncryptionScopeData(id, name, type, systemData, Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value, Optional.ToNullable(requireInfrastructureEncryption));
         }
     }
 }

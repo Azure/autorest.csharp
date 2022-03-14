@@ -148,12 +148,7 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create deployment at a given scope.": {
-            "$ref": "./examples/PutDeploymentAtScope.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -408,11 +403,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Predict template changes at management group scope": {
-            "$ref": "./examples/PostDeploymentWhatIfOnTenant.json"
-          }
-        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -473,11 +463,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Predict template changes at management group scope": {
-            "$ref": "./examples/PostDeploymentWhatIfOnManagementGroup.json"
-          }
-        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -536,11 +521,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Predict template changes at subscription scope": {
-            "$ref": "./examples/PostDeploymentWhatIfOnSubscription.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -611,11 +591,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Predict template changes at resource group scope": {
-            "$ref": "./examples/PostDeploymentWhatIfOnResourceGroup.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -731,11 +706,6 @@
             "description": "The template provided to calculate hash."
           }
         ],
-        "x-ms-examples": {
-          "Calculate template hash": {
-            "$ref": "./examples/CalculateTemplateHash.json"
-          }
-        },
         "responses": {
           "200": {
             "description": "OK - Returns the hash.",
@@ -924,7 +894,7 @@
     "CloudError": {
       "x-ms-external": true,
       "properties": {
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse"
         }
       },
@@ -983,6 +953,7 @@
         "duration": {
           "readOnly": true,
           "type": "string",
+          "format": "duration",
           "description": "The duration of the template deployment."
         },
         "outputs": {
@@ -996,7 +967,7 @@
           "description": "Deployment parameters. "
         },
         
-        "error": {
+        "errorResponse": {
           "readOnly": true,
           "$ref": "#/definitions/ErrorResponse",
           "description": "The deployment error."
@@ -1006,7 +977,7 @@
     },
     "DeploymentValidateResult": {
       "properties": {
-        "error": {
+        "errorResponse": {
           "readOnly": true,
           "$ref": "#/definitions/ErrorResponse",
           "description": "The deployment validation error."
@@ -1159,7 +1130,15 @@
         "duration": {
           "readOnly": true,
           "type": "string",
+          "format": "duration",
           "description": "The duration of the operation."
+        },
+        "anotherDuration": {
+          "readOnly": true,
+          "type": "string",
+          "format": "duration",
+          "x-ms-format": "duration-constant",
+          "description": "Another duration of the operation."
         },
         "serviceRequestId": {
           "readOnly": true,
@@ -1334,7 +1313,7 @@
           "$ref": "#/definitions/WhatIfOperationProperties",
           "description": "What-If operation properties."
         },
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse",
           "description": "Error when What-If operation fails."
         }
@@ -1348,7 +1327,7 @@
           "type": "string",
           "description": "Status of the deployment operation."
         },
-        "error": {
+        "errorResponse": {
           "$ref": "#/definitions/ErrorResponse",
           "description": "The error reported by the operation."
         }

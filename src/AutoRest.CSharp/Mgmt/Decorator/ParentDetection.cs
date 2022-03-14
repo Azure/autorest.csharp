@@ -5,241 +5,183 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ParentDetection
     {
-        private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
+        private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
+        private static ConcurrentDictionary<Operation, RequestPath> _operationToParentRequestPathCache = new ConcurrentDictionary<Operation, RequestPath>();
 
-        private static ConcurrentDictionary<OperationGroup, OperationGroup?> _parentCache = new ConcurrentDictionary<OperationGroup, OperationGroup?>();
+        private static ConcurrentDictionary<MgmtTypeProvider, IEnumerable<MgmtTypeProvider>> _resourceParentCache = new ConcurrentDictionary<MgmtTypeProvider, IEnumerable<MgmtTypeProvider>>();
 
-        private static ConcurrentDictionary<string, string> _operationPathAncestorCache = new ConcurrentDictionary<string, string>();
-        private static ConcurrentDictionary<string, string> _operationPathParentCache = new ConcurrentDictionary<string, string>();
-
-        public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
+        /// <summary>
+        /// Returns the collection of the parent of the given resource.
+        /// This is not initialized while the TypeProviders are constructing and can only be used in the writers.
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static IEnumerable<MgmtTypeProvider> Parent(this Resource resource)
         {
-            string? result = null;
-            if (_valueCache.TryGetValue(operationGroup, out result))
+            if (_resourceParentCache.TryGetValue(resource, out var parentList))
+                return parentList;
+
+            parentList = resource.GetParent();
+            _resourceParentCache.TryAdd(resource, parentList);
+            return parentList;
+        }
+
+        private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
+        {
+            return resource.OperationSets.SelectMany(resourceOperationSet => resourceOperationSet.GetParent());
+        }
+
+        private static IEnumerable<MgmtTypeProvider> GetParent(this OperationSet resourceOperationSet)
+        {
+            var parentRequestPath = resourceOperationSet.ParentRequestPath();
+            if (MgmtContext.Library.TryGetArmResource(parentRequestPath, out var parent))
+            {
+                return parent.AsIEnumerable();
+            }
+            // if we cannot find a resource as its parent, its parent must be one of the Extensions
+            if (parentRequestPath.Equals(RequestPath.ManagementGroup))
+                return MgmtContext.Library.ManagementGroupExtensions.AsIEnumerable();
+            if (parentRequestPath.Equals(RequestPath.ResourceGroup))
+                return MgmtContext.Library.ResourceGroupExtensions.AsIEnumerable();
+            if (parentRequestPath.Equals(RequestPath.Subscription))
+                return MgmtContext.Library.SubscriptionExtensions.AsIEnumerable();
+            // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
+            var scope = parentRequestPath.GetScopePath();
+            // if the scope of this request path is parameterized, we return the scope as its parent
+            if (scope.IsParameterizedScope())
+            {
+                // we already verified that the scope is parameterized, therefore we assert the type can never be null
+                var types = resourceOperationSet.GetRequestPath().GetParameterizedScopeResourceTypes()!;
+                return FindScopeParents(types);
+            }
+            return MgmtContext.Library.TenantExtensions.AsIEnumerable();
+        }
+
+        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceTypeSegment[] parameterizedScopeTypes)
+        {
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
+            {
+                yield return MgmtContext.Library.ArmResourceExtensions;
+                yield break;
+            }
+            // try all the possible extensions one by one
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ManagementGroup))
+                yield return MgmtContext.Library.ManagementGroupExtensions;
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.ResourceGroup))
+                yield return MgmtContext.Library.ResourceGroupExtensions;
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Subscription))
+                yield return MgmtContext.Library.SubscriptionExtensions;
+            if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Tenant))
+                yield return MgmtContext.Library.TenantExtensions;
+            // tenant is not quite a concrete resource, therefore we do not include it here
+        }
+
+        public static RequestPath ParentRequestPath(this OperationSet operationSet)
+        {
+            // escape the calculation if this is configured in the configuration
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))
+                return GetRequestPathFromRawPath(rawPath);
+
+            return operationSet.GetRequestPath().ParentRequestPath();
+        }
+
+        private static RequestPath GetRequestPathFromRawPath(string rawPath)
+        {
+            var parentSet = MgmtContext.Library.GetOperationSet(rawPath);
+            return parentSet.GetRequestPath();
+        }
+
+        /// <summary>
+        /// This method gives the proper grouping of the given operation by testing the following:
+        /// 1. If this operation comes from a resource operation set, return the request path of the resource
+        /// 2. If this operation is a collection operation of a resource, return the request path of the resource
+        /// 3. If neither of above meets, return the parent request path of an existing resource
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static RequestPath ParentRequestPath(this Operation operation)
+        {
+            if (_operationToParentRequestPathCache.TryGetValue(operation, out var result))
                 return result;
 
-            if (!config.OperationGroupToParent.TryGetValue(operationGroup.Key, out result))
-            {
-                result = ParentDetection.GetParent(operationGroup, config);
-            }
-
-            _valueCache.TryAdd(operationGroup, result);
+            result = operation.GetParentRequestPath();
+            _operationToParentRequestPathCache.TryAdd(operation, result);
             return result;
         }
 
-        // Get the parent operation group. If the parent is resource group, subscription or tenant, it will return null.
-        public static OperationGroup? ParentOperationGroup(this OperationGroup operationGroup, BuildContext context)
+        private static RequestPath GetParentRequestPath(this Operation operation)
         {
-            OperationGroup? result = null;
-            if (_parentCache.TryGetValue(operationGroup, out result))
-                return result;
-            var config = context.Configuration.MgmtConfiguration;
-            var parentResourceType = operationGroup.ParentResourceType(config);
+            // escape the calculation if this is configured in the configuration
+            if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.GetHttpPath(), out var rawPath))
+                return GetRequestPathFromRawPath(rawPath);
 
-            foreach (var opGroup in context.CodeModel.OperationGroups)
+            var currentRequestPath = operation.GetRequestPath();
+            var currentOperationSet = MgmtContext.Library.GetOperationSet(currentRequestPath);
+            // if this operation comes from a resource, return itself
+            if (currentOperationSet.IsResource())
+                return currentRequestPath;
+
+            // if this operation corresponds to a collection operation of a resource, return the path of the resource
+            if (operation.IsResourceCollectionOperation(out var operationSetOfResource))
+                return operationSetOfResource.GetRequestPath();
+
+            // if neither of the above, we find a request path that is the longest parent of this, and belongs to a resource
+            return currentRequestPath.ParentRequestPath();
+        }
+
+        internal static RequestPath ParentRequestPath(this RequestPath requestPath)
+        {
+            if (_requestPathToParentCache.TryGetValue(requestPath, out var result))
             {
-                if (opGroup.ResourceType(config).Equals(parentResourceType))
-                {
-                    result = opGroup;
-                    break;
-                }
+                return result;
             }
-            _parentCache.TryAdd(operationGroup, result);
+
+            result = requestPath.GetParent();
+            _requestPathToParentCache.TryAdd(requestPath, result);
+
             return result;
         }
 
-        private static string GetParent(OperationGroup operationGroup, MgmtConfiguration config)
+        public static RequestPath GetParent(this RequestPath requestPath)
         {
-            if (operationGroup.IsTenantResource(config))
+            // find a parent resource in the resource list
+            // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
+            // or null if none matched
+            // NOTE that we are always using fuzzy match in the IsAncestorOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
+            // We will never want this
+            var scope = requestPath.GetScopePath();
+            var candidates = MgmtContext.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath())
+                .Concat(new List<RequestPath> { RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup }) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
+                .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);
+            if (candidates.Any())
             {
-                return ResourceTypeBuilder.Tenant;
-            }
-            if (operationGroup.IsExtensionResource(config))
-            {
-                throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. This an extensions resource, please add to readme.md");
-            }
-            var method = GetBestMethod(operationGroup.OperationHttpMethodMapping());
-            if (method == null)
-            {
-                throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
-            }
-
-            var fullProvider = GetFullProvider(method.ProviderSegments());
-            if (fullProvider == null)
-            {
-                throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
-            }
-            var canidateParent = ParseMethodForParent(fullProvider, method.Path, operationGroup.ResourceType(config));
-            if (canidateParent == string.Empty)
-            {
-                throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
-            }
-            return canidateParent;
-        }
-
-        public static string AncestorResourceType(this Operation operation)
-        {
-            //TODO: use PathSegment to get resource type?
-            string? result = null;
-            if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
-            {
-                throw new ArgumentException($"The operation does not have an HttpRequest.");
-            }
-            var path = httpRequest.Path;
-            if (_operationPathAncestorCache.TryGetValue(path, out result))
-                return result;
-
-            if (path.Contains("/resourcegroups/", StringComparison.InvariantCultureIgnoreCase))
-            {
-                result = ResourceTypeBuilder.ResourceGroups;
-            }
-            else if (path.Contains("/subscriptions/", StringComparison.InvariantCultureIgnoreCase))
-            {
-                result = ResourceTypeBuilder.Subscriptions;
-            }
-            else if (path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
-            {
-                result = ResourceTypeBuilder.ManagementGroups;
-            }
-            else
-            {
-                result = ResourceTypeBuilder.Tenant;
-            }
-            _operationPathAncestorCache.TryAdd(path, result);
-            return result;
-        }
-
-        public static string ParentResourceType(this Operation operation)
-        {
-            string? result = null;
-            if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
-            {
-                throw new ArgumentException($"The operation does not have an HttpRequest.");
-            }
-            var path = httpRequest.Path;
-            if (_operationPathParentCache.TryGetValue(path, out result))
-                return result;
-
-            if (operation.IsParentTenant() || operation.IsParentScope())
-            {
-                result = ResourceTypeBuilder.Tenant;
-            }
-            else if (path.StartsWith("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers", StringComparison.InvariantCultureIgnoreCase))
-            {
-                // TODO: rethink about how to represent and get the resource type for this case
-                result = ResourceTypeBuilder.ResourceGroupResources;
-            }
-            else
-            {
-                var fullProvider = GetFullProvider(httpRequest.ProviderSegments());
-                if (fullProvider == null)
+                var parent = candidates.First();
+                if (parent == RequestPath.Tenant)
                 {
-                    // fullProvider is null in the case of /{resourceId}
-                    // For other unkown cases, use tenant for now
-                    result = ResourceTypeBuilder.Tenant;
+                    // when generating for tenant and a scope path like policy assignment in Azure.ResourceManager, Tenant could be the only parent in context.Library.ResourceOperationSets.
+                    // we need to return the parameterized scope instead.
+                    if (scope != requestPath && scope.IsParameterizedScope())
+                        parent = scope;
                 }
-                else
-                {
-                    result = ParseMethodForParent(fullProvider, httpRequest.Path, operation.ResourceType());
-                    if (result == string.Empty)
-                    {
-                        // If the parent is unknown, return tenant
-                        // Eventually we should be able to get a parent for every operation
-                        // This also aligns the behavior with AncestorResourceType().
-                        result = ResourceTypeBuilder.Tenant;
-                    }
-                }
+                return parent;
             }
-            _operationPathParentCache.TryAdd(path, result);
-            return result;
-        }
-
-        public static HttpRequest? GetBestMethod(Dictionary<HttpMethod, List<ServiceRequest>> operations)
-        {
-            List<ServiceRequest>? requests;
-
-            if (operations.TryGetValue(HttpMethod.Put, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operations.TryGetValue(HttpMethod.Delete, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operations.TryGetValue(HttpMethod.Patch, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operations.TryGetValue(HttpMethod.Get, out requests)) // optimized which get to return here
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            return null;
-        }
-
-        private static ProviderSegment? GetFullProvider(List<ProviderSegment> providerSegments)
-        {
-            if (providerSegments.Count == 0)
-            {
-                return null;
-            }
-            return providerSegments.Last().IsFullProvider ? providerSegments.Last() : null;
-        }
-
-        private static string ParseMethodForParent(ProviderSegment fullProvider, string path, string resourceType)
-        {
-            // Microsoft.Resources/deployments/ == lastFullProvider
-            // resourceType = Microsoft.Management/managementGroups/providers/Microsoft.Resources/deployments
-            // TODO: Fix in ResourceType()?
-            var fullProviderToken = fullProvider.TokenValue;
-            if (resourceType.StartsWith("Microsoft.Management/managementGroups/providers/"))
-            {
-                fullProviderToken = $"Microsoft.Management/managementGroups/providers/{fullProvider.TokenValue}";
-            }
-            //case 1:
-            // Microsoft.Network/virtualNetworks/ == lastFullProvider
-            // resourceType = Microsoft.Network/virtualNetworks
-            //
-            if (fullProviderToken.Trim('/').Equals(resourceType))
-            {
-                var lastSlash = path.LastIndexOf('/', fullProvider.IndexFoundAt - 1); //ok because tenant only resources should never get here.
-                var lastClosedBrace = path.LastIndexOf('}', lastSlash);
-                if (path[lastSlash + 1] != '{')
-                {
-                    return string.Empty;
-                }
-                return lastClosedBrace > -1 ? path.Substring(lastClosedBrace + 1, lastSlash - lastClosedBrace).Trim('/') : path.Substring(lastClosedBrace + 1, lastSlash).Trim('/');
-
-            }
-            //case 2:
-            // Microsoft.Network/virtualNetworks/ == lastFullProvider
-            // resourceType = Microsoft.Network/virtualNetwork/subnets
-            // expected path to be: Microsoft.Network/virtualNetworks/{}/constant/{}/constant/.... (verfied in construction of type provider)
-            return resourceType.StartsWith(fullProviderToken) ? resourceType.Substring(0, resourceType.LastIndexOf('/')) : string.Empty;
-        }
-
-        public static void VerifyParents(System.Collections.Generic.ICollection<OperationGroup> operationGroups, HashSet<string> ResourceTypes, MgmtConfiguration config)
-        {
-            foreach (var operationsGroup in operationGroups)
-            {
-                if (!operationsGroup.IsResource(config))
-                    continue;
-
-                if (operationsGroup.ParentResourceType(config) != null && !ResourceTypes.Contains(operationsGroup.ParentResourceType(config)))
-                {
-                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.ParentResourceType(config)}. key Please add to readme.md");
-                }
-            }
+            // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
+            // if the scope of this request path is parameterized, we return the scope as its parent
+            if (scope != requestPath && scope.IsParameterizedScope())
+                return scope;
+            // we do not have much choice to make, return tenant as the parent
+            return RequestPath.Tenant;
         }
     }
 }
