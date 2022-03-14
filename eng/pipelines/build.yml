@@ -141,7 +141,7 @@ stages:
           #   displayName: "Generate All SDK"
           #   workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
-              ./eng/InitMockTests.ps1
+              pwsh ./eng/InitMockTests.ps1
             displayName: "Generate All SDK"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: smoke-test.yml
