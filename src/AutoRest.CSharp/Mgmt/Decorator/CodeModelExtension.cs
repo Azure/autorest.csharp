@@ -67,26 +67,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 foreach (var property in objSchema.Properties)
                 {
-                    if (property.Language.Default.Name.EndsWith("Uri", StringComparison.Ordinal) ||
-                        property.Language.Default.Name.Equals("uri", StringComparison.Ordinal))
+                    if (property.CSharpName().EndsWith("Uri", StringComparison.Ordinal))
                         property.Schema.Type = AllSchemaTypes.Uri;
-                    if (property.Language.Default.Name.SplitByCamelCase().Last().Equals("Duration") && property.Schema.Type == AllSchemaTypes.String)
+                    if (property.CSharpName().EndsWith("Duration", StringComparison.Ordinal) && property.Schema.Type == AllSchemaTypes.String)
                         throw new InvalidOperationException($"The {property.Language.Default.Name} property of {objSchema.Name} ends with \"Duration\" but does not use the duration format to be generated as TimeSpan type. Add \"format\": \"duration\" with directive in autorest.md for the property if it's ISO 8601 format like P1DT2H59M59S. Add both \"format\": \"duration\" and \"x-ms-format\": \"duration-constant\" if it's the constant format like 1.2:59:59.5000000. If the property does not conform to a TimeSpan format, please use \"x-ms-client-name\" to rename the property for the client.");
-                    // With UpdateAcronyms processing, the case of the name may be changed, so use ignore case comparison.
                     // Do not use property.SerializedName=="type" so that we can still use x-ms-client-name to override the auto-renaming here if there is some edge case.
-                    if (property.Language.Default.Name.Equals("type", StringComparison.OrdinalIgnoreCase))
+                    if (property.CSharpName().Equals("Type", StringComparison.Ordinal))
                     {
-                        if (property.Schema.Type == AllSchemaTypes.String
-                            && objSchema.ContainsStringProperty("id")
-                            && objSchema.ContainsStringProperty("name"))
+                        if (objSchema.IsResourceData() || objSchema.CSharpName().Contains("NameAvailability", StringComparison.Ordinal))
                         {
                             property.Language.Default.Name = "resourceType";
                         }
-                        else if (property.Schema.Name.EndsWith("Type", StringComparison.Ordinal))
+                        else if (property.Schema.Name.EndsWith("Type", StringComparison.Ordinal) && property.Schema.Name.Length != 4)
                         {
                             property.Language.Default.Name = property.Schema.Name;
                         }
-                        else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal))
+                        else if (property.Schema.Name.EndsWith("Types", StringComparison.Ordinal) && property.Schema.Name.Length != 5)
                         {
                             property.Language.Default.Name = property.Schema.Name.TrimEnd('s');
                         }
@@ -97,11 +93,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                 }
             }
-        }
-
-        public static bool ContainsStringProperty(this ObjectSchema objSchema, string propertyName)
-        {
-            return objSchema.Properties.Any(p => p.SerializedName.Equals(propertyName, StringComparison.Ordinal) && p.Schema.Type == AllSchemaTypes.String || objSchema.Parents?.All.Any(pt => pt is ObjectSchema ps && ps.Properties.Any(pp => pp.SerializedName.Equals(propertyName, StringComparison.Ordinal) && pp.Schema.Type == AllSchemaTypes.String)) == true);
         }
 
         public static void UpdateSubscriptionIdForAllResource(this CodeModel codeModel)
