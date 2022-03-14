@@ -18,28 +18,23 @@ namespace MgmtListMethods
 {
     internal partial class MgmtGrpParentWithNonResChWithLocsRestOperations
     {
-        private readonly UserAgentValue _userAgent;
+        private readonly TelemetryDetails _userAgent;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
-        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
-        internal ClientDiagnostics ClientDiagnostics { get; }
-
         /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChWithLocsRestOperations. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="applicationId"> The application id to use for user agent. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public MgmtGrpParentWithNonResChWithLocsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        public MgmtGrpParentWithNonResChWithLocsRestOperations(HttpPipeline pipeline, string applicationId, Uri endpoint = null, string apiVersion = default)
         {
+            _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
             _apiVersion = apiVersion ?? "2020-06-01";
-            ClientDiagnostics = clientDiagnostics;
-            _pipeline = pipeline;
-            _userAgent = new UserAgentValue(GetType(), applicationId);
+            _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters)
@@ -60,7 +55,7 @@ namespace MgmtListMethods
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -70,20 +65,12 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGrpParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<MgmtGrpParentWithNonResChWithLocData>> CreateOrUpdateAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
-            if (mgmtGrpParentWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreateCreateOrUpdateRequest(groupId, mgmtGrpParentWithNonResChWithLocName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -97,7 +84,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -107,20 +94,12 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGrpParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<MgmtGrpParentWithNonResChWithLocData> CreateOrUpdate(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
         {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
-            if (mgmtGrpParentWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
+            Argument.AssertNotNull(parameters, nameof(parameters));
 
             using var message = CreateCreateOrUpdateRequest(groupId, mgmtGrpParentWithNonResChWithLocName, parameters);
             _pipeline.Send(message, cancellationToken);
@@ -134,7 +113,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -152,7 +131,7 @@ namespace MgmtListMethods
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -161,16 +140,11 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<MgmtGrpParentWithNonResChWithLocData>> GetAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
-            if (mgmtGrpParentWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
 
             using var message = CreateGetRequest(groupId, mgmtGrpParentWithNonResChWithLocName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -186,7 +160,7 @@ namespace MgmtListMethods
                 case 404:
                     return Response.FromValue((MgmtGrpParentWithNonResChWithLocData)null, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -195,16 +169,11 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<MgmtGrpParentWithNonResChWithLocData> Get(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
-            if (mgmtGrpParentWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
 
             using var message = CreateGetRequest(groupId, mgmtGrpParentWithNonResChWithLocName);
             _pipeline.Send(message, cancellationToken);
@@ -220,7 +189,7 @@ namespace MgmtListMethods
                 case 404:
                     return Response.FromValue((MgmtGrpParentWithNonResChWithLocData)null, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -237,7 +206,7 @@ namespace MgmtListMethods
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -245,12 +214,10 @@ namespace MgmtListMethods
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<MgmtGrpParentWithNonResChWithLocListResult>> ListAsync(string groupId, CancellationToken cancellationToken = default)
         {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
             using var message = CreateListRequest(groupId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -264,7 +231,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -272,12 +239,10 @@ namespace MgmtListMethods
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<MgmtGrpParentWithNonResChWithLocListResult> List(string groupId, CancellationToken cancellationToken = default)
         {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
             using var message = CreateListRequest(groupId);
             _pipeline.Send(message, cancellationToken);
@@ -291,7 +256,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -310,7 +275,7 @@ namespace MgmtListMethods
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -319,16 +284,11 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<NonResourceChildListResult>> ListNonResourceChildAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
-            if (mgmtGrpParentWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
 
             using var message = CreateListNonResourceChildRequest(groupId, mgmtGrpParentWithNonResChWithLocName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -342,7 +302,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -351,16 +311,11 @@ namespace MgmtListMethods
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<NonResourceChildListResult> ListNonResourceChild(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
-            if (mgmtGrpParentWithNonResChWithLocName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGrpParentWithNonResChWithLocName));
-            }
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
 
             using var message = CreateListNonResourceChildRequest(groupId, mgmtGrpParentWithNonResChWithLocName);
             _pipeline.Send(message, cancellationToken);
@@ -374,7 +329,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -388,7 +343,7 @@ namespace MgmtListMethods
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.SetUserAgentString(_userAgent);
+            _userAgent.Apply(message);
             return message;
         }
 
@@ -397,16 +352,11 @@ namespace MgmtListMethods
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="groupId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public async Task<Response<MgmtGrpParentWithNonResChWithLocListResult>> ListNextPageAsync(string nextLink, string groupId, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
             using var message = CreateListNextPageRequest(nextLink, groupId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -420,7 +370,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -429,16 +379,11 @@ namespace MgmtListMethods
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="groupId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="groupId"/> is an empty string, and was expected to be non-empty. </exception>
         public Response<MgmtGrpParentWithNonResChWithLocListResult> ListNextPage(string nextLink, string groupId, CancellationToken cancellationToken = default)
         {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
+            Argument.AssertNotNull(nextLink, nameof(nextLink));
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
 
             using var message = CreateListNextPageRequest(nextLink, groupId);
             _pipeline.Send(message, cancellationToken);
@@ -452,7 +397,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }
