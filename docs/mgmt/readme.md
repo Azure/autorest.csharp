@@ -20,7 +20,7 @@ An operation set is marked as a resource, only when the following conditions mee
 
 If all the above conditions are met, this operation set will be marked as a "resource" by management generator, and the schema of the `200` response of the GET request will be its corresponding `ResourceData`.
 
-We have multiple ways to tweak the criteria of identifying resources, please see [Changing resource](Changing-resource) section.
+We have multiple ways to tweak the criteria of identifying resources, please see [changing resource](Changing-resource) section.
 
 ### How does the generator build hierarchical structure of resources
 
@@ -42,6 +42,21 @@ For each operation set, the management generator will try to find its parent, by
 1. `Tenant`
 
 Now every operation set (and it corresponds to a resource) will have a parent and only have one parent, the resource hierarchy has been built.
+
+### Resource types and expanded resources
+
+Once an operation set is marked as a resource, resource type is able to calculate. In general, the resource type of a resource is calculated in this way:
+
+1. Take everything after the last `providers` segment. Anything before the last `providers` segment will be regarded as the `scope` of this resource. For instance, for request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{groupName}/hosts/{hostName}`, we get `providers/Microsoft.Compute/hostGroups/{groupName}/hosts/{hostName}`
+1. Take the provider namespace as the namespace of the resource type, in this case, we get `Microsoft.Compute`, and we have `hostGroups/{groupName}/hosts/{hostName}` left.
+1. Take all the segments with even indices in whatever left in last step. In this case, we get `hostGroups` and `hosts`.
+1. Put them all together and we get the resource type of this resource, `Microsoft.Compute/hostGroups/hosts`.
+
+In the design of .Net management SDK, one resource must only have one constant resource type, therefore the generator will check if the resource type which it calculates is a constant, if the resource type is not a constant, it means that the swagger might be using one request path to represent a set of similar resources with different resource types. If this happens, the generator will try to expand the resource types into multiple constant resource types.
+
+For instance, if the above procedure is applied on this request path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/{recordType}/{relativeRecordSetName}`, it produces the resource type `Microsoft.Network/dnsZones/{recordType}` which contains a variable in it and is not a constant. If this happens, the generator will try to expand it into multiple constant resource types. This requires the variables in the resulted resource type to be an enum type, if this condition is not met, the generator will throw exceptions for you to resolve by adding configuration/directives.
+
+We have some ways to change the resource type of a resource, please see [changing the resource type](Changing-the-resource-type) section.
 
 ## Management plane configurations
 
