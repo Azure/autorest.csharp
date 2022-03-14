@@ -36,7 +36,7 @@ ___
     - [Change operation accessibility in bulk](#change-operation-accessibility-in-bulk)
     - [Exclude models from namespace](#exclude-models-from-namespace)
     - [Extending a model with additional constructors](#extending-a-model-with-additional-constructors)
-- [Management plane configurations](#mgmt-plane-configurations)
+- [Management plane concepts and configurations](#management-plane-concepts-and-configurations)
 
 <!-- /TOC -->
 
@@ -1101,6 +1101,6 @@ directive:
 
 </details>
 
-## Management plane configurations
+## Management plane concepts and configurations
 
 See the documentation [here](./docs/mgmt/readme.md)
