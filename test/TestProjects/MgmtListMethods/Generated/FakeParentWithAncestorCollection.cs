@@ -55,13 +55,13 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestors/{fakeParentWithAncestorName}
         /// Operation Id: FakeParentWithAncestors_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="fakeParentWithAncestorName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<FakeParentWithAncestor>> CreateOrUpdateAsync(bool waitForCompletion, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakeParentWithAncestor>> CreateOrUpdateAsync(WaitUntil waitUntil, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -72,7 +72,7 @@ namespace MgmtListMethods
             {
                 var response = await _fakeParentWithAncestorRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtListMethodsArmOperation<FakeParentWithAncestor>(Response.FromValue(new FakeParentWithAncestor(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -88,13 +88,13 @@ namespace MgmtListMethods
         /// Request Path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestors/{fakeParentWithAncestorName}
         /// Operation Id: FakeParentWithAncestors_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="fakeParentWithAncestorName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fakeParentWithAncestorName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<FakeParentWithAncestor> CreateOrUpdate(bool waitForCompletion, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakeParentWithAncestor> CreateOrUpdate(WaitUntil waitUntil, string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(fakeParentWithAncestorName, nameof(fakeParentWithAncestorName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -105,7 +105,7 @@ namespace MgmtListMethods
             {
                 var response = _fakeParentWithAncestorRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, fakeParentWithAncestorName, parameters, cancellationToken);
                 var operation = new MgmtListMethodsArmOperation<FakeParentWithAncestor>(Response.FromValue(new FakeParentWithAncestor(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }

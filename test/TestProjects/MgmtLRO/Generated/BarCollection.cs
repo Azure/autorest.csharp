@@ -56,13 +56,13 @@ namespace MgmtLRO
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual async Task<ArmOperation<Bar>> CreateOrUpdateAsync(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<Bar>> CreateOrUpdateAsync(WaitUntil waitUntil, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(body, nameof(body));
@@ -73,7 +73,7 @@ namespace MgmtLRO
             {
                 var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtLROArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -89,13 +89,13 @@ namespace MgmtLRO
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
         /// Operation Id: Bars_Create
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual ArmOperation<Bar> CreateOrUpdate(bool waitForCompletion, string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<Bar> CreateOrUpdate(WaitUntil waitUntil, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
             Argument.AssertNotNull(body, nameof(body));
@@ -106,7 +106,7 @@ namespace MgmtLRO
             {
                 var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, body, cancellationToken);
                 var operation = new MgmtLROArmOperation<Bar>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, body).Request, response, OperationFinalStateVia.Location);
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }

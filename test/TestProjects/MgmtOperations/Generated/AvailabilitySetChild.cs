@@ -92,6 +92,34 @@ namespace MgmtOperations
 
         /// <summary>
         /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+        /// Operation Id: availabilitySetGrandChild_Get
+        /// </summary>
+        /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        public virtual async Task<Response<AvailabilitySetGrandChild>> GetAvailabilitySetGrandChildAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        {
+            return await GetAvailabilitySetGrandChildren().GetAsync(availabilitySetGrandChildName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Retrieves information about an availability set.
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}
+        /// Operation Id: availabilitySetGrandChild_Get
+        /// </summary>
+        /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        public virtual Response<AvailabilitySetGrandChild> GetAvailabilitySetGrandChild(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        {
+            return GetAvailabilitySetGrandChildren().Get(availabilitySetGrandChildName, cancellationToken);
+        }
+
+        /// <summary>
+        /// Retrieves information about an availability set.
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
         /// Operation Id: availabilitySetChild_Get
         /// </summary>
@@ -158,7 +186,7 @@ namespace MgmtOperations
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -189,7 +217,7 @@ namespace MgmtOperations
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -216,10 +244,10 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -246,10 +274,10 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -278,7 +306,7 @@ namespace MgmtOperations
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _availabilitySetChildavailabilitySetChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -307,7 +335,7 @@ namespace MgmtOperations
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _availabilitySetChildavailabilitySetChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetChild(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

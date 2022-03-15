@@ -32,11 +32,11 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal MgmtPropertyChooserResourceData(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, type, systemData)
+        internal MgmtPropertyChooserResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;

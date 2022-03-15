@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Azure;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager;
 using MgmtLRO;
-using MgmtLRO.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -38,7 +37,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var methodInfo = classToCheck.GetMethod(methodName);
             Assert.AreEqual(exist, methodInfo != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
 
-            var waitForCompletionParam = methodInfo.GetParameters().Where(P => P.Name == "waitForCompletion").First();
+            var waitForCompletionParam = methodInfo.GetParameters().Where(P => P.Name == KnownParameters.WaitForCompletion.Name).First();
             Assert.NotNull(waitForCompletionParam);
             Assert.IsEmpty(waitForCompletionParam.DefaultValue.ToString());
         }

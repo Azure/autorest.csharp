@@ -31,7 +31,7 @@ namespace lro_parameterized_endpoints
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
         internal LROWithParamaterizedEndpointsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
-            RestClient = new LROWithParamaterizedEndpointsRestClient(pipeline, host);
+            RestClient = new LROWithParamaterizedEndpointsRestClient(clientDiagnostics, pipeline, host);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -9,7 +9,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Storage.Tables.Models;
@@ -22,13 +21,18 @@ namespace Azure.Storage.Tables
         private readonly string _url;
         private readonly Enum0 _version;
 
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> Initializes a new instance of ServiceRestClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="url"> The URL of the service account or table that is the targe of the desired operation. </param>
         /// <param name="version"> Specifies the version of the operation to use for this request. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="url"/> is null. </exception>
-        public ServiceRestClient(HttpPipeline pipeline, string url, Enum0 version)
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="url"/> is null. </exception>
+        public ServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string url, Enum0 version)
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _url = url ?? throw new ArgumentNullException(nameof(url));
             _version = version;
@@ -80,7 +84,7 @@ namespace Azure.Storage.Tables
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -106,7 +110,7 @@ namespace Azure.Storage.Tables
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -153,7 +157,7 @@ namespace Azure.Storage.Tables
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -180,7 +184,7 @@ namespace Azure.Storage.Tables
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -227,7 +231,7 @@ namespace Azure.Storage.Tables
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -254,7 +258,7 @@ namespace Azure.Storage.Tables
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

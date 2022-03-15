@@ -91,6 +91,36 @@ namespace TenantOnly
         }
 
         /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
+        /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
+        public virtual async Task<Response<Agreement>> GetAgreementAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await GetAgreements().GetAsync(agreementName, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets an agreement by ID.
+        /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}
+        /// Operation Id: Agreements_Get
+        /// </summary>
+        /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="agreementName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="agreementName"/> is null. </exception>
+        public virtual Response<Agreement> GetAgreement(string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return GetAgreements().Get(agreementName, expand, cancellationToken);
+        }
+
+        /// <summary>
         /// Gets a billing account by its ID.
         /// Request Path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}
         /// Operation Id: BillingAccounts_Get
@@ -160,7 +190,7 @@ namespace TenantOnly
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues[key] = value;
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -191,7 +221,7 @@ namespace TenantOnly
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues[key] = value;
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -218,10 +248,10 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(true, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(WaitUntil.Completed, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -248,10 +278,10 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                TagResource.Delete(true, cancellationToken: cancellationToken);
+                TagResource.Delete(WaitUntil.Completed, cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.ReplaceWith(tags);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -280,7 +310,7 @@ namespace TenantOnly
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.TagValues.Remove(key);
-                await TagResource.CreateOrUpdateAsync(true, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
+                await TagResource.CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _billingAccountRestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -309,7 +339,7 @@ namespace TenantOnly
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.TagValues.Remove(key);
-                TagResource.CreateOrUpdate(true, originalTags.Value.Data, cancellationToken: cancellationToken);
+                TagResource.CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _billingAccountRestClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(Client, originalResponse.Value), originalResponse.GetRawResponse());
             }

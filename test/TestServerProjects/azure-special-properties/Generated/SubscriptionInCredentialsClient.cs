@@ -35,7 +35,7 @@ namespace azure_special_properties
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
         internal SubscriptionInCredentialsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
-            RestClient = new SubscriptionInCredentialsRestClient(pipeline, subscriptionId, endpoint, apiVersion);
+            RestClient = new SubscriptionInCredentialsRestClient(clientDiagnostics, pipeline, subscriptionId, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

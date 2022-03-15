@@ -764,7 +764,7 @@ schemas: !Schemas
                                 x-ms-format: resource-type
                               language: !Languages 
                                 default:
-                                  name: type
+                                  name: resourceType
                                   description: ''
                               protocol: !Protocols {}
                           serializationFormats:

@@ -1397,7 +1397,7 @@ schemas: !Schemas
           serializedName: type
           language: !Languages 
             default:
-              name: type
+              name: resourceType
               description: The resource type.
           protocol: !Protocols {}
       extensions:

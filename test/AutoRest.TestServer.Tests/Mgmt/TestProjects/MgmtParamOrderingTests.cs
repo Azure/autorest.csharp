@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using AutoRest.CSharp.Output.Models.Shared;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -48,7 +48,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             var method = FindAllCollections().Single(o => o.Name == collectionName).GetMethod(methodName);
             var firstParamName = method?.GetParameters().First().Name;
-            if (firstParamName.Equals("waitForCompletion"))
+            if (firstParamName.Equals(KnownParameters.WaitForCompletion.Name))
             {
                 // LRO, get next one
                 firstParamName = method?.GetParameters()[1].Name;

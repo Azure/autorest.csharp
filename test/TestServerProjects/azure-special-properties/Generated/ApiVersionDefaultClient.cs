@@ -33,7 +33,7 @@ namespace azure_special_properties
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         internal ApiVersionDefaultClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2015-07-01-preview")
         {
-            RestClient = new ApiVersionDefaultRestClient(pipeline, endpoint, apiVersion);
+            RestClient = new ApiVersionDefaultRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

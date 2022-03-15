@@ -35,7 +35,7 @@ namespace url
         /// <exception cref="ArgumentException"> <paramref name="globalStringPath"/> is an empty string, and was expected to be non-empty. </exception>
         internal PathItemsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, Uri endpoint = null, string globalStringQuery = null)
         {
-            RestClient = new PathItemsRestClient(pipeline, globalStringPath, endpoint, globalStringQuery);
+            RestClient = new PathItemsRestClient(clientDiagnostics, pipeline, globalStringPath, endpoint, globalStringQuery);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

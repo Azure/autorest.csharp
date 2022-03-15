@@ -21,12 +21,17 @@ namespace CognitiveServices.TextAnalytics
         private readonly HttpPipeline _pipeline;
         private readonly string _endpoint;
 
+        /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
+        internal ClientDiagnostics ClientDiagnostics { get; }
+
         /// <summary> Initializes a new instance of CognitiveServicesTextAnalyticsRestClient. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="pipeline"/> or <paramref name="endpoint"/> is null. </exception>
-        public CognitiveServicesTextAnalyticsRestClient(HttpPipeline pipeline, string endpoint)
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="endpoint"/> is null. </exception>
+        public CognitiveServicesTextAnalyticsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
+            ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
         }
@@ -82,7 +87,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -111,7 +116,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -166,7 +171,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -195,7 +200,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -250,7 +255,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -279,7 +284,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -334,7 +339,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -363,7 +368,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
@@ -418,7 +423,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
@@ -447,7 +452,7 @@ namespace CognitiveServices.TextAnalytics
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw new RequestFailedException(message.Response);
+                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
     }

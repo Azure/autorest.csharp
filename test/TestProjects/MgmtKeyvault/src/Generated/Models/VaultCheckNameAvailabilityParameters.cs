@@ -23,12 +23,12 @@ namespace MgmtKeyvault.Models
             }
 
             Name = name;
-            Type = "Microsoft.KeyVault/vaults";
+            ResourceType = "Microsoft.KeyVault/vaults";
         }
 
         /// <summary> The vault name. </summary>
         public string Name { get; }
         /// <summary> The type of resource, Microsoft.KeyVault/vaults. </summary>
-        public string Type { get; }
+        public string ResourceType { get; }
     }
 }

@@ -21,10 +21,10 @@ namespace SupersetFlattenInheritance.Models
         /// <summary> Initializes a new instance of ResourceModel2. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="foo"></param>
-        internal ResourceModel2(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, string foo) : base(id, name, type, systemData)
+        internal ResourceModel2(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string foo) : base(id, name, resourceType, systemData)
         {
             Foo = foo;
         }

@@ -55,13 +55,13 @@ namespace MgmtOperations
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
         /// Operation Id: availabilitySetChild_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<AvailabilitySetChild>> CreateOrUpdateAsync(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<AvailabilitySetChild>> CreateOrUpdateAsync(WaitUntil waitUntil, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -72,7 +72,7 @@ namespace MgmtOperations
             {
                 var response = await _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken).ConfigureAwait(false);
                 var operation = new MgmtOperationsArmOperation<AvailabilitySetChild>(Response.FromValue(new AvailabilitySetChild(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
@@ -88,13 +88,13 @@ namespace MgmtOperations
         /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}
         /// Operation Id: availabilitySetChild_CreateOrUpdate
         /// </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="waitUntil"> "F:Azure.WaitUntil.Completed" if the method should wait to return until the long-running operation has completed on the service; "F:Azure.WaitUntil.Started" if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<AvailabilitySetChild> CreateOrUpdate(bool waitForCompletion, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<AvailabilitySetChild> CreateOrUpdate(WaitUntil waitUntil, string availabilitySetChildName, AvailabilitySetChildData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(availabilitySetChildName, nameof(availabilitySetChildName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -105,7 +105,7 @@ namespace MgmtOperations
             {
                 var response = _availabilitySetChildavailabilitySetChildRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, availabilitySetChildName, parameters, cancellationToken);
                 var operation = new MgmtOperationsArmOperation<AvailabilitySetChild>(Response.FromValue(new AvailabilitySetChild(Client, response), response.GetRawResponse()));
-                if (waitForCompletion)
+                if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
             }

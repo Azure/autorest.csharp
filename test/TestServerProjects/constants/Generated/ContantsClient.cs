@@ -36,7 +36,7 @@ namespace constants
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
         internal ContantsClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Enum8 headerConstant, Enum9 queryConstant, Enum10 pathConstant, Uri endpoint = null)
         {
-            RestClient = new ContantsRestClient(pipeline, headerConstant, queryConstant, pathConstant, endpoint);
+            RestClient = new ContantsRestClient(clientDiagnostics, pipeline, headerConstant, queryConstant, pathConstant, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -34,7 +34,7 @@ namespace ApiVersion
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
         internal ApiVersionClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "1.0.0")
         {
-            RestClient = new ApiVersionRestClient(pipeline, endpoint, apiVersion);
+            RestClient = new ApiVersionRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

@@ -23,12 +23,12 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="new"></param>
-        internal SupersetModel4Data(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new) : base(id, name, type, systemData, tags, location)
+        internal SupersetModel4Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new) : base(id, name, resourceType, systemData, tags, location)
         {
             New = @new;
         }
