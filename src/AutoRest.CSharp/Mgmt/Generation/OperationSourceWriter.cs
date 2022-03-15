@@ -135,27 +135,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                //if (_opSource.ReturnType.Equals(typeof(BinaryData)))
-                //{
-                //    _writer.Line($"return {typeof(BinaryData)}.FromStream(response.ContentStream);");
-                //}
-                //else
-                //{
-                    _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, false, valueCallback, responseVariable, _opSource.ReturnType);
-                //}
+                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, false, valueCallback, responseVariable, _opSource.ReturnType);
             }
             _writer.Line();
 
             using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                //if (_opSource.ReturnType.Equals(typeof(BinaryData)))
-                //{
-                //    _writer.Line($"return await {typeof(BinaryData)}.FromStreamAsync(response.ContentStream);");
-                //}
-                //else
-                //{
-                    _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, true, valueCallback, responseVariable, _opSource.ReturnType);
-                //}
+                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, true, valueCallback, responseVariable, _opSource.ReturnType);
             }
         }
 
