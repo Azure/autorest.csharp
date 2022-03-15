@@ -411,7 +411,7 @@ Write-Host "$LaunchScript"
 # netstat -ano 
 # netstat -ano | findstr "844"
 
-$task = {  $LaunchScript }
+$task = {D:\a\_work\1\s\autorest.csharp\eng\Launch-MockServiceHost.ps1 }
 $job =  Start-Job -ScriptBlock $task
 Start-Sleep 600
 $result = Receive-Job -Job $job
