@@ -401,12 +401,16 @@ Write-Host "$LaunchScript"
 
 $task = { & $LaunchScript }
 Start-Job $task
-
-Start-Process powershell $LaunchScript -WindowStyle Hidden -Verb runas
-Start-Sleep 300 -
+Start-Sleep 300 
 netstat -ano 
 netstat -ano | findstr "844"
 
+# does not work
+# Start-Process powershell $LaunchScript -WindowStyle Hidden -Verb runas
+
+
+
+Start-Sleep 300 
 Start-Process powershell $LaunchScript 
 netstat -ano 
 
