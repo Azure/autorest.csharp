@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -145,7 +146,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         bool writeFormat = false;
 
-                        writer.Append($"{writerName}.");
+                        if (frameworkType != typeof(BinaryData))
+                            writer.Append($"{writerName}.");
                         if (frameworkType == typeof(decimal) ||
                             frameworkType == typeof(double) ||
                             frameworkType == typeof(float) ||
@@ -196,6 +198,15 @@ namespace AutoRest.CSharp.Generation.Writers
                         else if (frameworkType == typeof(Uri))
                         {
                             writer.Line($"WriteStringValue({name}.{nameof(Uri.AbsoluteUri)});");
+                            return;
+                        }
+                        else if (frameworkType == typeof(BinaryData))
+                        {
+                            writer.Line($"#if NET6_0_OR_GREATER");
+                            writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name});");
+                            writer.Line($"#else");
+                            writer.Line($"{typeof(JsonSerializer)}.Serialize({writerName}, {typeof(JsonDocument)}.Parse({name}.ToString()).RootElement);");
+                            writer.Line($"#endif");
                             return;
                         }
 
@@ -543,6 +554,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"JsonSerializer.Deserialize<{typeof(Azure.ResourceManager.Models.SystemData)}>({element}.ToString())");
                 return;
             }
+            else if (frameworkType == typeof(BinaryData))
+            {
+                writer.Append($"{typeof(BinaryData)}.FromString(property.Value.GetRawText())");
+                return;
+            }
             else
             {
                 if (serializeFromType != null)
@@ -660,24 +676,38 @@ namespace AutoRest.CSharp.Generation.Writers
         };
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, JsonSerialization serialization, bool async,
-            Action<CodeWriter, CodeWriterDelegate> callback, string response)
+            Action<CodeWriter, CodeWriterDelegate> callback, string response, bool isBinaryData)
         {
-            var documentVariable = new CodeWriterDeclaration("document");
-            writer.Append($"using var {documentVariable:D} = ");
-            if (async)
+            if (isBinaryData)
             {
-                writer.Line($"await {typeof(JsonDocument)}.ParseAsync({response}.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                if (async)
+                {
+                    callback(writer, w => w.Append($"await {typeof(BinaryData)}.FromStreamAsync({response}.ContentStream).ConfigureAwait(false)"));
+                }
+                else
+                {
+                    callback(writer, w => w.Append($"{typeof(BinaryData)}.FromStream({response}.ContentStream)"));
+                }
             }
             else
             {
-                writer.Line($"{typeof(JsonDocument)}.Parse({response}.ContentStream);");
-            }
+                var documentVariable = new CodeWriterDeclaration("document");
+                writer.Append($"using var {documentVariable:D} = ");
+                if (async)
+                {
+                    writer.Line($"await {typeof(JsonDocument)}.ParseAsync({response}.ContentStream, default, cancellationToken).ConfigureAwait(false);");
+                }
+                else
+                {
+                    writer.Line($"{typeof(JsonDocument)}.Parse({response}.ContentStream);");
+                }
 
-            writer.DeserializeValue(
-                serialization,
-                w => w.Append($"{documentVariable}.RootElement"),
-                callback
-            );
+                writer.DeserializeValue(
+                    serialization,
+                    w => w.Append($"{documentVariable}.RootElement"),
+                    callback
+                );
+            }
         }
 
         private readonly struct ObjectPropertyVariable

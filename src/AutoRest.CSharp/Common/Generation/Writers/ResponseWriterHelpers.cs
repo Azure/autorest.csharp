@@ -78,7 +78,8 @@ namespace AutoRest.CSharp.Generation.Writers
                                     objectResponseBody.Serialization,
                                     async,
                                     (w, v) => w.Line($"{valueVariable} = {v};"),
-                                    responseVariable);
+                                    responseVariable,
+                                    objectResponseBody.Type);
                                 value = new Reference(valueVariable.ActualName, responseBody.Type);
                                 break;
                             case StreamResponseBody _:
