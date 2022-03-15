@@ -413,15 +413,13 @@ Write-Host "$LaunchScript"
 
 $task = {D:\a\_work\1\s\autorest.csharp\eng\Launch-MockServiceHost.ps1 }
 $job =  Start-Job -ScriptBlock $task
-Start-Sleep 600
-$result = Receive-Job -Job $job
-netstat -ano 
-netstat -ano | findstr "844"
-Write-Host $result
-foreach ($item in $result){
-    Write-Host $item
-}
-
+# $result = Receive-Job -Job $job
+# netstat -ano 
+# netstat -ano | findstr "844"
+# Write-Host $result
+# foreach ($item in $result){
+#     Write-Host $item
+# }
 
 # does not work
 # Start-Process powershell $LaunchScript -WindowStyle Hidden -Verb runas
@@ -429,14 +427,11 @@ foreach ($item in $result){
 # netstat -ano 
 # netstat -ano | findstr "844"
 
-
-
-
 # Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
 $GenerateNewSDKs = $true
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
-# MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
+MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
 # $buildTask = { MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri }
 # Invoke-Command  -ScriptBlock $buildTask
