@@ -49,11 +49,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("Id", "ExactMatchModel3", typeof(ResourceIdentifier))]
         [TestCase("Id", "ExactMatchModel8", typeof(ResourceIdentifier))]
-        [TestCase("Type", "ExactMatchModel11", typeof(ResourceType?))]
+        [TestCase("ResourceType", "ExactMatchModel11", typeof(ResourceType?))]
         [TestCase("ID", "ExactMatchModel7", typeof(string))]
-        [TestCase("Type", "ExactMatchModel7", typeof(string))]
+        [TestCase("ExactMatchModel7Type", "ExactMatchModel7", typeof(string))]
         [TestCase("Id", "ExactMatchModel1Data", typeof(ResourceIdentifier))]
-        [TestCase("Type", "ExactMatchModel1Data", typeof(ResourceType))]
+        [TestCase("ResourceType", "ExactMatchModel1Data", typeof(ResourceType))]
         public void ValidatePropertyType(string propertyName, string className, Type expectedType)
         {
             var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == className);
