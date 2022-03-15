@@ -135,7 +135,7 @@ namespace MgmtSignalR.Tests.Scenario
             {
                 // Step: SignalR_Get
 
-                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier($"{subscriptionId}", $"{resourceGroupName}", $"{resourceName}");
+                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("{subscriptionId}", "{resourceGroupName}", "{resourceName}");
                 var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
 
                 await signalRResource.GetAsync();
@@ -144,7 +144,7 @@ namespace MgmtSignalR.Tests.Scenario
             {
                 // Step: SignalR_Update
 
-                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier($"{subscriptionId}", $"{resourceGroupName}", $"{resourceName}");
+                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("{subscriptionId}", "{resourceGroupName}", "{resourceName}");
                 var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
                 MgmtSignalR.SignalRResourceData data = new MgmtSignalR.SignalRResourceData(location: new AzureLocation($"{location}"))
                 {
@@ -181,7 +181,7 @@ namespace MgmtSignalR.Tests.Scenario
             {
                 // Step: SignalR_ListKeys
 
-                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier($"{subscriptionId}", $"{resourceGroupName}", $"{resourceName}");
+                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("{subscriptionId}", "{resourceGroupName}", "{resourceName}");
                 var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
 
                 await signalRResource.GetKeysAsync();
@@ -190,7 +190,7 @@ namespace MgmtSignalR.Tests.Scenario
             {
                 // Step: SignalR_RegenerateKey
 
-                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier($"{subscriptionId}", $"{resourceGroupName}", $"{resourceName}");
+                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("{subscriptionId}", "{resourceGroupName}", "{resourceName}");
                 var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
                 MgmtSignalR.Models.RegenerateKeyParameters regenerateKeyParameters = new MgmtSignalR.Models.RegenerateKeyParameters()
                 {
@@ -203,7 +203,7 @@ namespace MgmtSignalR.Tests.Scenario
             {
                 // Step: SignalR_Restart
 
-                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier($"{subscriptionId}", $"{resourceGroupName}", $"{resourceName}");
+                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("{subscriptionId}", "{resourceGroupName}", "{resourceName}");
                 var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
 
                 await signalRResource.RestartAsync(WaitUntil.Completed);
@@ -248,7 +248,7 @@ namespace MgmtSignalR.Tests.Scenario
             {
                 // Step: SignalR_Delete
 
-                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier($"{subscriptionId}", $"{resourceGroupName}", $"{resourceName}");
+                var signalRResourceId = MgmtSignalR.SignalRResource.CreateResourceIdentifier("{subscriptionId}", "{resourceGroupName}", "{resourceName}");
                 var signalRResource = GetArmClient().GetSignalRResource(signalRResourceId);
 
                 await signalRResource.DeleteAsync(WaitUntil.Completed);
