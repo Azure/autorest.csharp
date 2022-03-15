@@ -30,7 +30,7 @@ namespace TenantOnly
 
         private readonly ClientDiagnostics _agreementResourceAgreementsClientDiagnostics;
         private readonly AgreementsRestOperations _agreementResourceAgreementsRestClient;
-        private readonly AgreementData _data;
+        private readonly AgreementResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AgreementResource"/> class for mocking. </summary>
         protected AgreementResource()
@@ -40,7 +40,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref = "AgreementResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AgreementResource(ArmClient client, AgreementData data) : this(client, data.Id)
+        internal AgreementResource(ArmClient client, AgreementResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace TenantOnly
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AgreementData Data
+        public virtual AgreementResourceData Data
         {
             get
             {

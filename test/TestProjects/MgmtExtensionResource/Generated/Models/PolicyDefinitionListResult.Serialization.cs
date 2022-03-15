@@ -16,7 +16,7 @@ namespace MgmtExtensionResource.Models
     {
         internal static PolicyDefinitionListResult DeserializePolicyDefinitionListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<PolicyDefinitionData>> value = default;
+            Optional<IReadOnlyList<PolicyDefinitionResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtExtensionResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PolicyDefinitionData> array = new List<PolicyDefinitionData>();
+                    List<PolicyDefinitionResourceData> array = new List<PolicyDefinitionResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PolicyDefinitionData.DeserializePolicyDefinitionData(item));
+                        array.Add(PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(item));
                     }
                     value = array;
                     continue;

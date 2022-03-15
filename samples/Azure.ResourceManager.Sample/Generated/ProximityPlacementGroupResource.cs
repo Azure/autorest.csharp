@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample
 
         private readonly ClientDiagnostics _proximityPlacementGroupResourceProximityPlacementGroupsClientDiagnostics;
         private readonly ProximityPlacementGroupsRestOperations _proximityPlacementGroupResourceProximityPlacementGroupsRestClient;
-        private readonly ProximityPlacementGroupData _data;
+        private readonly ProximityPlacementGroupResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupResource"/> class for mocking. </summary>
         protected ProximityPlacementGroupResource()
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "ProximityPlacementGroupResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ProximityPlacementGroupResource(ArmClient client, ProximityPlacementGroupData data) : this(client, data.Id)
+        internal ProximityPlacementGroupResource(ArmClient client, ProximityPlacementGroupResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ProximityPlacementGroupData Data
+        public virtual ProximityPlacementGroupResourceData Data
         {
             get
             {

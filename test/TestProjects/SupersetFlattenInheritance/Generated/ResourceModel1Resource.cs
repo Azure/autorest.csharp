@@ -29,7 +29,7 @@ namespace SupersetFlattenInheritance
 
         private readonly ClientDiagnostics _resourceModel1ResourceResourceModel1sClientDiagnostics;
         private readonly ResourceModel1SRestOperations _resourceModel1ResourceResourceModel1sRestClient;
-        private readonly ResourceModel1Data _data;
+        private readonly ResourceModel1ResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Resource"/> class for mocking. </summary>
         protected ResourceModel1Resource()
@@ -39,7 +39,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "ResourceModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResourceModel1Resource(ArmClient client, ResourceModel1Data data) : this(client, data.Id)
+        internal ResourceModel1Resource(ArmClient client, ResourceModel1ResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ResourceModel1Data Data
+        public virtual ResourceModel1ResourceData Data
         {
             get
             {

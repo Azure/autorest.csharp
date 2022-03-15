@@ -30,7 +30,7 @@ namespace MgmtExpandResourceTypes
 
         private readonly ClientDiagnostics _recordSetAaaaResourceRecordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetAaaaResourceRecordSetsRestClient;
-        private readonly RecordSetData _data;
+        private readonly RecordSetResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="RecordSetAaaaResource"/> class for mocking. </summary>
         protected RecordSetAaaaResource()
@@ -40,7 +40,7 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of the <see cref = "RecordSetAaaaResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal RecordSetAaaaResource(ArmClient client, RecordSetData data) : this(client, data.Id)
+        internal RecordSetAaaaResource(ArmClient client, RecordSetResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual RecordSetData Data
+        public virtual RecordSetResourceData Data
         {
             get
             {
@@ -194,7 +194,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<RecordSetAaaaResource>> UpdateAsync(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RecordSetAaaaResource>> UpdateAsync(RecordSetResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -221,7 +221,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="ifMatch"> The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<RecordSetAaaaResource> Update(RecordSetData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual Response<RecordSetAaaaResource> Update(RecordSetResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 

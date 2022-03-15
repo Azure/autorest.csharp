@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
 
         private readonly ClientDiagnostics _dedicatedHostGroupResourceDedicatedHostGroupsClientDiagnostics;
         private readonly DedicatedHostGroupsRestOperations _dedicatedHostGroupResourceDedicatedHostGroupsRestClient;
-        private readonly DedicatedHostGroupData _data;
+        private readonly DedicatedHostGroupResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupResource"/> class for mocking. </summary>
         protected DedicatedHostGroupResource()
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "DedicatedHostGroupResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DedicatedHostGroupResource(ArmClient client, DedicatedHostGroupData data) : this(client, data.Id)
+        internal DedicatedHostGroupResource(ArmClient client, DedicatedHostGroupResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DedicatedHostGroupData Data
+        public virtual DedicatedHostGroupResourceData Data
         {
             get
             {

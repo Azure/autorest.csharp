@@ -16,16 +16,16 @@ namespace MgmtNonStringPathVariable.Models
     {
         internal static FakeListResult DeserializeFakeListResult(JsonElement element)
         {
-            IReadOnlyList<FakeData> value = default;
+            IReadOnlyList<FakeResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<FakeData> array = new List<FakeData>();
+                    List<FakeResourceData> array = new List<FakeResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakeData.DeserializeFakeData(item));
+                        array.Add(FakeResourceData.DeserializeFakeResourceData(item));
                     }
                     value = array;
                     continue;

@@ -53,7 +53,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FakePolicyAssignmentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -86,7 +86,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<FakePolicyAssignmentResource> CreateOrUpdate(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FakePolicyAssignmentResource> CreateOrUpdate(WaitUntil waitUntil, string policyAssignmentName, FakePolicyAssignmentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
             Argument.AssertNotNull(parameters, nameof(parameters));

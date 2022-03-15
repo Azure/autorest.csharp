@@ -18,7 +18,7 @@ namespace MgmtLRO.Models
         /// <summary> Initializes a new instance of BarListResult. </summary>
         /// <param name="value"> The list of bars. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal BarListResult(IEnumerable<BarData> value)
+        internal BarListResult(IEnumerable<BarResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtLRO.Models
         /// <summary> Initializes a new instance of BarListResult. </summary>
         /// <param name="value"> The list of bars. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
-        internal BarListResult(IReadOnlyList<BarData> value, string nextLink)
+        internal BarListResult(IReadOnlyList<BarResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of bars. </summary>
-        public IReadOnlyList<BarData> Value { get; }
+        public IReadOnlyList<BarResourceData> Value { get; }
         /// <summary> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </summary>
         public string NextLink { get; }
     }

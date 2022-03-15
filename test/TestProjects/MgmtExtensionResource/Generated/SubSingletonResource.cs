@@ -29,7 +29,7 @@ namespace MgmtExtensionResource
 
         private readonly ClientDiagnostics _subSingletonResourceSubSingletonsClientDiagnostics;
         private readonly SubSingletonsRestOperations _subSingletonResourceSubSingletonsRestClient;
-        private readonly SubSingletonData _data;
+        private readonly SubSingletonResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubSingletonResource"/> class for mocking. </summary>
         protected SubSingletonResource()
@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref = "SubSingletonResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubSingletonResource(ArmClient client, SubSingletonData data) : this(client, data.Id)
+        internal SubSingletonResource(ArmClient client, SubSingletonResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace MgmtExtensionResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SubSingletonData Data
+        public virtual SubSingletonResourceData Data
         {
             get
             {

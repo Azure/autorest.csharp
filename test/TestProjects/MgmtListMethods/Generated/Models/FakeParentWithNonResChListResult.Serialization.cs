@@ -16,16 +16,16 @@ namespace MgmtListMethods.Models
     {
         internal static FakeParentWithNonResChListResult DeserializeFakeParentWithNonResChListResult(JsonElement element)
         {
-            IReadOnlyList<FakeParentWithNonResChData> value = default;
+            IReadOnlyList<FakeParentWithNonResChResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<FakeParentWithNonResChData> array = new List<FakeParentWithNonResChData>();
+                    List<FakeParentWithNonResChResourceData> array = new List<FakeParentWithNonResChResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(item));
+                        array.Add(FakeParentWithNonResChResourceData.DeserializeFakeParentWithNonResChResourceData(item));
                     }
                     value = array;
                     continue;

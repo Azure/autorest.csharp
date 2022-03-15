@@ -18,6 +18,6 @@ namespace MgmtExpandResourceTypes.Models
         }
 
         /// <summary> Specifies information about the record set being updated. </summary>
-        public RecordSetData RecordSet { get; }
+        public RecordSetResourceData RecordSet { get; }
     }
 }

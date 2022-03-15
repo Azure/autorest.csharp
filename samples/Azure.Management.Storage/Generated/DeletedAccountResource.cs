@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _deletedAccountResourceDeletedAccountsClientDiagnostics;
         private readonly DeletedAccountsRestOperations _deletedAccountResourceDeletedAccountsRestClient;
-        private readonly DeletedAccountData _data;
+        private readonly DeletedAccountResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedAccountResource"/> class for mocking. </summary>
         protected DeletedAccountResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "DeletedAccountResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeletedAccountResource(ArmClient client, DeletedAccountData data) : this(client, data.Id)
+        internal DeletedAccountResource(ArmClient client, DeletedAccountResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DeletedAccountData Data
+        public virtual DeletedAccountResourceData Data
         {
             get
             {

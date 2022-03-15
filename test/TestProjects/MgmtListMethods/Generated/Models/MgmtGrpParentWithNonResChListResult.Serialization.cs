@@ -16,16 +16,16 @@ namespace MgmtListMethods.Models
     {
         internal static MgmtGrpParentWithNonResChListResult DeserializeMgmtGrpParentWithNonResChListResult(JsonElement element)
         {
-            IReadOnlyList<MgmtGrpParentWithNonResChData> value = default;
+            IReadOnlyList<MgmtGrpParentWithNonResChResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<MgmtGrpParentWithNonResChData> array = new List<MgmtGrpParentWithNonResChData>();
+                    List<MgmtGrpParentWithNonResChResourceData> array = new List<MgmtGrpParentWithNonResChResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtGrpParentWithNonResChData.DeserializeMgmtGrpParentWithNonResChData(item));
+                        array.Add(MgmtGrpParentWithNonResChResourceData.DeserializeMgmtGrpParentWithNonResChResourceData(item));
                     }
                     value = array;
                     continue;

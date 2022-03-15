@@ -18,7 +18,7 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of ResourceLinkResult. </summary>
         /// <param name="value"> An array of resource links. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal ResourceLinkResult(IEnumerable<ResourceLinkData> value)
+        internal ResourceLinkResult(IEnumerable<ResourceLinkResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of ResourceLinkResult. </summary>
         /// <param name="value"> An array of resource links. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal ResourceLinkResult(IReadOnlyList<ResourceLinkData> value, string nextLink)
+        internal ResourceLinkResult(IReadOnlyList<ResourceLinkResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> An array of resource links. </summary>
-        public IReadOnlyList<ResourceLinkData> Value { get; }
+        public IReadOnlyList<ResourceLinkResourceData> Value { get; }
         /// <summary> The URL to use for getting the next set of results. </summary>
         public string NextLink { get; }
     }

@@ -16,7 +16,7 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentListResult DeserializeDeploymentListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<DeploymentExtendedData>> value = default;
+            Optional<IReadOnlyList<DeploymentExtendedResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtScopeResource.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<DeploymentExtendedData> array = new List<DeploymentExtendedData>();
+                    List<DeploymentExtendedResourceData> array = new List<DeploymentExtendedResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeploymentExtendedData.DeserializeDeploymentExtendedData(item));
+                        array.Add(DeploymentExtendedResourceData.DeserializeDeploymentExtendedResourceData(item));
                     }
                     value = array;
                     continue;

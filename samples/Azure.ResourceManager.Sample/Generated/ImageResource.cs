@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
 
         private readonly ClientDiagnostics _imageResourceImagesClientDiagnostics;
         private readonly ImagesRestOperations _imageResourceImagesRestClient;
-        private readonly ImageData _data;
+        private readonly ImageResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ImageResource"/> class for mocking. </summary>
         protected ImageResource()
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "ImageResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ImageResource(ArmClient client, ImageData data) : this(client, data.Id)
+        internal ImageResource(ArmClient client, ImageResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ImageData Data
+        public virtual ImageResourceData Data
         {
             get
             {

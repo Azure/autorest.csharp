@@ -31,7 +31,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _subParentWithNonResChResourceSubParentWithNonResChesClientDiagnostics;
         private readonly SubParentWithNonResChesRestOperations _subParentWithNonResChResourceSubParentWithNonResChesRestClient;
-        private readonly SubParentWithNonResChData _data;
+        private readonly SubParentWithNonResChResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResChResource"/> class for mocking. </summary>
         protected SubParentWithNonResChResource()
@@ -41,7 +41,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "SubParentWithNonResChResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubParentWithNonResChResource(ArmClient client, SubParentWithNonResChData data) : this(client, data.Id)
+        internal SubParentWithNonResChResource(ArmClient client, SubParentWithNonResChResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SubParentWithNonResChData Data
+        public virtual SubParentWithNonResChResourceData Data
         {
             get
             {

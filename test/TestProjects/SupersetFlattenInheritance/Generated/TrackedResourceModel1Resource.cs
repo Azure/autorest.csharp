@@ -30,7 +30,7 @@ namespace SupersetFlattenInheritance
 
         private readonly ClientDiagnostics _trackedResourceModel1ResourceTrackedResourceModel1sClientDiagnostics;
         private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1ResourceTrackedResourceModel1sRestClient;
-        private readonly TrackedResourceModel1Data _data;
+        private readonly TrackedResourceModel1ResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1Resource"/> class for mocking. </summary>
         protected TrackedResourceModel1Resource()
@@ -40,7 +40,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "TrackedResourceModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TrackedResourceModel1Resource(ArmClient client, TrackedResourceModel1Data data) : this(client, data.Id)
+        internal TrackedResourceModel1Resource(ArmClient client, TrackedResourceModel1ResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TrackedResourceModel1Data Data
+        public virtual TrackedResourceModel1ResourceData Data
         {
             get
             {

@@ -16,7 +16,7 @@ namespace MgmtExpandResourceTypes.Models
     {
         internal static RecordSetListResult DeserializeRecordSetListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<RecordSetData>> value = default;
+            Optional<IReadOnlyList<RecordSetResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtExpandResourceTypes.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<RecordSetData> array = new List<RecordSetData>();
+                    List<RecordSetResourceData> array = new List<RecordSetResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(RecordSetData.DeserializeRecordSetData(item));
+                        array.Add(RecordSetResourceData.DeserializeRecordSetResourceData(item));
                     }
                     value = array;
                     continue;

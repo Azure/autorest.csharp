@@ -31,7 +31,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _fakeParentWithAncestorWithNonResChResourceFakeParentWithAncestorWithNonResChesClientDiagnostics;
         private readonly FakeParentWithAncestorWithNonResChesRestOperations _fakeParentWithAncestorWithNonResChResourceFakeParentWithAncestorWithNonResChesRestClient;
-        private readonly FakeParentWithAncestorWithNonResChData _data;
+        private readonly FakeParentWithAncestorWithNonResChResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithNonResChResource"/> class for mocking. </summary>
         protected FakeParentWithAncestorWithNonResChResource()
@@ -41,7 +41,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "FakeParentWithAncestorWithNonResChResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FakeParentWithAncestorWithNonResChResource(ArmClient client, FakeParentWithAncestorWithNonResChData data) : this(client, data.Id)
+        internal FakeParentWithAncestorWithNonResChResource(ArmClient client, FakeParentWithAncestorWithNonResChResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual FakeParentWithAncestorWithNonResChData Data
+        public virtual FakeParentWithAncestorWithNonResChResourceData Data
         {
             get
             {

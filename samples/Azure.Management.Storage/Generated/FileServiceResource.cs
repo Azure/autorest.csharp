@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _fileServiceResourceFileServicesClientDiagnostics;
         private readonly FileServicesRestOperations _fileServiceResourceFileServicesRestClient;
-        private readonly FileServiceData _data;
+        private readonly FileServiceResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FileServiceResource"/> class for mocking. </summary>
         protected FileServiceResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "FileServiceResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FileServiceResource(ArmClient client, FileServiceData data) : this(client, data.Id)
+        internal FileServiceResource(ArmClient client, FileServiceResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual FileServiceData Data
+        public virtual FileServiceResourceData Data
         {
             get
             {
@@ -178,7 +178,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<FileServiceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FileServiceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, FileServiceResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -208,7 +208,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<FileServiceResource> CreateOrUpdate(WaitUntil waitUntil, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FileServiceResource> CreateOrUpdate(WaitUntil waitUntil, FileServiceResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 

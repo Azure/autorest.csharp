@@ -30,7 +30,7 @@ namespace MgmtParent
 
         private readonly ClientDiagnostics _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesClientDiagnostics;
         private readonly VirtualMachineExtensionImagesRestOperations _virtualMachineExtensionImageResourceVirtualMachineExtensionImagesRestClient;
-        private readonly VirtualMachineExtensionImageData _data;
+        private readonly VirtualMachineExtensionImageResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageResource"/> class for mocking. </summary>
         protected VirtualMachineExtensionImageResource()
@@ -40,7 +40,7 @@ namespace MgmtParent
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionImageResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineExtensionImageResource(ArmClient client, VirtualMachineExtensionImageData data) : this(client, data.Id)
+        internal VirtualMachineExtensionImageResource(ArmClient client, VirtualMachineExtensionImageResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtParent
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineExtensionImageData Data
+        public virtual VirtualMachineExtensionImageResourceData Data
         {
             get
             {

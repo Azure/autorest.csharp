@@ -52,7 +52,7 @@ namespace MgmtKeyvault.Tests.Mock
             // Example: Update an existing managed HSM Pool
             var managedHsmResourceId = MgmtKeyvault.ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "hsm-group", "hsm1");
             var managedHsmResource = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
-            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData(location: AzureLocation.WestUS)
+            MgmtKeyvault.ManagedHsmResourceData parameters = new MgmtKeyvault.ManagedHsmResourceData(location: AzureLocation.WestUS)
             {
             };
             parameters.Tags.ReplaceWith(new Dictionary<string, string>()

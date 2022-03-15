@@ -62,7 +62,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ToasterResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ToasterResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string toasterName, ToasterResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -95,7 +95,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="toasterName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="toasterName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ToasterResource> CreateOrUpdate(WaitUntil waitUntil, string toasterName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ToasterResource> CreateOrUpdate(WaitUntil waitUntil, string toasterName, ToasterResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(toasterName, nameof(toasterName));
             Argument.AssertNotNull(parameters, nameof(parameters));

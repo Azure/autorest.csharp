@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
     {
         internal static EncryptionScopeListResult DeserializeEncryptionScopeListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<EncryptionScopeData>> value = default;
+            Optional<IReadOnlyList<EncryptionScopeResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<EncryptionScopeData> array = new List<EncryptionScopeData>();
+                    List<EncryptionScopeResourceData> array = new List<EncryptionScopeResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(EncryptionScopeData.DeserializeEncryptionScopeData(item));
+                        array.Add(EncryptionScopeResourceData.DeserializeEncryptionScopeResourceData(item));
                     }
                     value = array;
                     continue;

@@ -143,7 +143,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SharedGalleryData>> GetAsync(string subscriptionId, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
+        public async Task<Response<SharedGalleryResourceData>> GetAsync(string subscriptionId, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -155,13 +155,13 @@ namespace MgmtHierarchicalNonResource
             {
                 case 200:
                     {
-                        SharedGalleryData value = default;
+                        SharedGalleryResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SharedGalleryData.DeserializeSharedGalleryData(document.RootElement);
+                        value = SharedGalleryResourceData.DeserializeSharedGalleryResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SharedGalleryData)null, message.Response);
+                    return Response.FromValue((SharedGalleryResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -174,7 +174,7 @@ namespace MgmtHierarchicalNonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SharedGalleryData> Get(string subscriptionId, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
+        public Response<SharedGalleryResourceData> Get(string subscriptionId, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -186,13 +186,13 @@ namespace MgmtHierarchicalNonResource
             {
                 case 200:
                     {
-                        SharedGalleryData value = default;
+                        SharedGalleryResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SharedGalleryData.DeserializeSharedGalleryData(document.RootElement);
+                        value = SharedGalleryResourceData.DeserializeSharedGalleryResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SharedGalleryData)null, message.Response);
+                    return Response.FromValue((SharedGalleryResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

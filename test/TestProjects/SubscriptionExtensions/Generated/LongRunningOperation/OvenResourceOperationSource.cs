@@ -26,14 +26,14 @@ namespace SubscriptionExtensions
         OvenResource IOperationSource<OvenResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = OvenData.DeserializeOvenData(document.RootElement);
+            var data = OvenResourceData.DeserializeOvenResourceData(document.RootElement);
             return new OvenResource(_client, data);
         }
 
         async ValueTask<OvenResource> IOperationSource<OvenResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = OvenData.DeserializeOvenData(document.RootElement);
+            var data = OvenResourceData.DeserializeOvenResourceData(document.RootElement);
             return new OvenResource(_client, data);
         }
     }

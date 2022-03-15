@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,7 +66,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TenantParentWithLocData>> CreateOrUpdateAsync(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantParentWithLocResourceData>> CreateOrUpdateAsync(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -78,9 +78,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        TenantParentWithLocData value = default;
+                        TenantParentWithLocResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TenantParentWithLocData.DeserializeTenantParentWithLocData(document.RootElement);
+                        value = TenantParentWithLocResourceData.DeserializeTenantParentWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -95,7 +95,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/>, <paramref name="tenantParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TenantParentWithLocData> CreateOrUpdate(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public Response<TenantParentWithLocResourceData> CreateOrUpdate(string tenantTestName, string tenantParentWithLocName, TenantParentWithLocResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -107,9 +107,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        TenantParentWithLocData value = default;
+                        TenantParentWithLocResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TenantParentWithLocData.DeserializeTenantParentWithLocData(document.RootElement);
+                        value = TenantParentWithLocResourceData.DeserializeTenantParentWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -141,7 +141,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TenantParentWithLocData>> GetAsync(string tenantTestName, string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantParentWithLocResourceData>> GetAsync(string tenantTestName, string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -152,13 +152,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        TenantParentWithLocData value = default;
+                        TenantParentWithLocResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TenantParentWithLocData.DeserializeTenantParentWithLocData(document.RootElement);
+                        value = TenantParentWithLocResourceData.DeserializeTenantParentWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TenantParentWithLocData)null, message.Response);
+                    return Response.FromValue((TenantParentWithLocResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -170,7 +170,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="tenantTestName"/> or <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TenantParentWithLocData> Get(string tenantTestName, string tenantParentWithLocName, CancellationToken cancellationToken = default)
+        public Response<TenantParentWithLocResourceData> Get(string tenantTestName, string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(tenantTestName, nameof(tenantTestName));
             Argument.AssertNotNullOrEmpty(tenantParentWithLocName, nameof(tenantParentWithLocName));
@@ -181,13 +181,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        TenantParentWithLocData value = default;
+                        TenantParentWithLocResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TenantParentWithLocData.DeserializeTenantParentWithLocData(document.RootElement);
+                        value = TenantParentWithLocResourceData.DeserializeTenantParentWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TenantParentWithLocData)null, message.Response);
+                    return Response.FromValue((TenantParentWithLocResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

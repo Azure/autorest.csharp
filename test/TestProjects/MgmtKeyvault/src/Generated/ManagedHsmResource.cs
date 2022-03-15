@@ -33,7 +33,7 @@ namespace MgmtKeyvault
         private readonly ManagedHsmsRestOperations _managedHsmResourceManagedHsmsRestClient;
         private readonly ClientDiagnostics _mhsmPrivateLinkResourcesClientDiagnostics;
         private readonly MhsmPrivateLinkResourcesRestOperations _mhsmPrivateLinkResourcesRestClient;
-        private readonly ManagedHsmData _data;
+        private readonly ManagedHsmResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ManagedHsmResource"/> class for mocking. </summary>
         protected ManagedHsmResource()
@@ -43,7 +43,7 @@ namespace MgmtKeyvault
         /// <summary> Initializes a new instance of the <see cref = "ManagedHsmResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ManagedHsmResource(ArmClient client, ManagedHsmData data) : this(client, data.Id)
+        internal ManagedHsmResource(ArmClient client, ManagedHsmResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -72,7 +72,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ManagedHsmData Data
+        public virtual ManagedHsmResourceData Data
         {
             get
             {
@@ -232,7 +232,7 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<ManagedHsmResource>> UpdateAsync(WaitUntil waitUntil, ManagedHsmData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ManagedHsmResource>> UpdateAsync(WaitUntil waitUntil, ManagedHsmResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -262,7 +262,7 @@ namespace MgmtKeyvault
         /// <param name="parameters"> Parameters to patch the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<ManagedHsmResource> Update(WaitUntil waitUntil, ManagedHsmData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ManagedHsmResource> Update(WaitUntil waitUntil, ManagedHsmResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 

@@ -31,7 +31,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: ManagedHsmPutPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
-            MgmtKeyvault.MhsmPrivateEndpointConnectionData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionData(location: AzureLocation.WestUS)
+            MgmtKeyvault.MhsmPrivateEndpointConnectionResourceData properties = new MgmtKeyvault.MhsmPrivateEndpointConnectionResourceData(location: AzureLocation.WestUS)
             {
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.MhsmPrivateLinkServiceConnectionState()
                 {

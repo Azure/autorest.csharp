@@ -31,7 +31,7 @@ namespace MgmtNonStringPathVariable
 
         private readonly ClientDiagnostics _barResourceBarsClientDiagnostics;
         private readonly BarsRestOperations _barResourceBarsRestClient;
-        private readonly BarData _data;
+        private readonly BarResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BarResource"/> class for mocking. </summary>
         protected BarResource()
@@ -41,7 +41,7 @@ namespace MgmtNonStringPathVariable
         /// <summary> Initializes a new instance of the <see cref = "BarResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BarResource(ArmClient client, BarData data) : this(client, data.Id)
+        internal BarResource(ArmClient client, BarResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtNonStringPathVariable
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BarData Data
+        public virtual BarResourceData Data
         {
             get
             {

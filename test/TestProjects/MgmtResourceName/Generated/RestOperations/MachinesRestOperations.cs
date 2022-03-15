@@ -108,7 +108,7 @@ namespace MgmtResourceName
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string machineName, MachineData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string machineName, MachineResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="machineName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MachineData>> PutAsync(string subscriptionId, string resourceGroupName, string machineName, MachineData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<MachineResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string machineName, MachineResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        MachineData value = default;
+                        MachineResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = MachineData.DeserializeMachineData(document.RootElement);
+                        value = MachineResourceData.DeserializeMachineResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="machineName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MachineData> Put(string subscriptionId, string resourceGroupName, string machineName, MachineData parameters, CancellationToken cancellationToken = default)
+        public Response<MachineResourceData> Put(string subscriptionId, string resourceGroupName, string machineName, MachineResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        MachineData value = default;
+                        MachineResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = MachineData.DeserializeMachineData(document.RootElement);
+                        value = MachineResourceData.DeserializeMachineResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="machineName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MachineData>> GetAsync(string subscriptionId, string resourceGroupName, string machineName, CancellationToken cancellationToken = default)
+        public async Task<Response<MachineResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string machineName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        MachineData value = default;
+                        MachineResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = MachineData.DeserializeMachineData(document.RootElement);
+                        value = MachineResourceData.DeserializeMachineResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((MachineData)null, message.Response);
+                    return Response.FromValue((MachineResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="machineName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MachineData> Get(string subscriptionId, string resourceGroupName, string machineName, CancellationToken cancellationToken = default)
+        public Response<MachineResourceData> Get(string subscriptionId, string resourceGroupName, string machineName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace MgmtResourceName
             {
                 case 200:
                     {
-                        MachineData value = default;
+                        MachineResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = MachineData.DeserializeMachineData(document.RootElement);
+                        value = MachineResourceData.DeserializeMachineResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((MachineData)null, message.Response);
+                    return Response.FromValue((MachineResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

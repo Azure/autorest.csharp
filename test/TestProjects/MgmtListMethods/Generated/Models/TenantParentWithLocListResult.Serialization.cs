@@ -16,16 +16,16 @@ namespace MgmtListMethods.Models
     {
         internal static TenantParentWithLocListResult DeserializeTenantParentWithLocListResult(JsonElement element)
         {
-            IReadOnlyList<TenantParentWithLocData> value = default;
+            IReadOnlyList<TenantParentWithLocResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<TenantParentWithLocData> array = new List<TenantParentWithLocData>();
+                    List<TenantParentWithLocResourceData> array = new List<TenantParentWithLocResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TenantParentWithLocData.DeserializeTenantParentWithLocData(item));
+                        array.Add(TenantParentWithLocResourceData.DeserializeTenantParentWithLocResourceData(item));
                     }
                     value = array;
                     continue;

@@ -26,14 +26,14 @@ namespace MgmtNonStringPathVariable
         BarResource IOperationSource<BarResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = BarData.DeserializeBarData(document.RootElement);
+            var data = BarResourceData.DeserializeBarResourceData(document.RootElement);
             return new BarResource(_client, data);
         }
 
         async ValueTask<BarResource> IOperationSource<BarResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = BarData.DeserializeBarData(document.RootElement);
+            var data = BarResourceData.DeserializeBarResourceData(document.RootElement);
             return new BarResource(_client, data);
         }
     }

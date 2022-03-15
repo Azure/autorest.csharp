@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _fileShareResourceFileSharesClientDiagnostics;
         private readonly FileSharesRestOperations _fileShareResourceFileSharesRestClient;
-        private readonly FileShareData _data;
+        private readonly FileShareResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FileShareResource"/> class for mocking. </summary>
         protected FileShareResource()
@@ -40,7 +40,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "FileShareResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FileShareResource(ArmClient client, FileShareData data) : this(client, data.Id)
+        internal FileShareResource(ArmClient client, FileShareResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual FileShareData Data
+        public virtual FileShareResourceData Data
         {
             get
             {
@@ -199,7 +199,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileShare"/> is null. </exception>
-        public virtual async Task<Response<FileShareResource>> UpdateAsync(FileShareData fileShare, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShareResource>> UpdateAsync(FileShareResourceData fileShare, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(fileShare, nameof(fileShare));
 
@@ -225,7 +225,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileShare"/> is null. </exception>
-        public virtual Response<FileShareResource> Update(FileShareData fileShare, CancellationToken cancellationToken = default)
+        public virtual Response<FileShareResource> Update(FileShareResourceData fileShare, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(fileShare, nameof(fileShare));
 

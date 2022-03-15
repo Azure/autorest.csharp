@@ -31,7 +31,7 @@ namespace MgmtRenameRules
 
         private readonly ClientDiagnostics _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsClientDiagnostics;
         private readonly VirtualMachineScaleSetVMsRestOperations _virtualMachineScaleSetVmResourceVirtualMachineScaleSetVMsRestClient;
-        private readonly VirtualMachineScaleSetVmData _data;
+        private readonly VirtualMachineScaleSetVmResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVmResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetVmResource()
@@ -41,7 +41,7 @@ namespace MgmtRenameRules
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetVmResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetVmResource(ArmClient client, VirtualMachineScaleSetVmData data) : this(client, data.Id)
+        internal VirtualMachineScaleSetVmResource(ArmClient client, VirtualMachineScaleSetVmResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtRenameRules
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineScaleSetVmData Data
+        public virtual VirtualMachineScaleSetVmResourceData Data
         {
             get
             {

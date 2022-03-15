@@ -31,7 +31,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _resGrpParentWithNonResChResourceResGrpParentWithNonResChesClientDiagnostics;
         private readonly ResGrpParentWithNonResChesRestOperations _resGrpParentWithNonResChResourceResGrpParentWithNonResChesRestClient;
-        private readonly ResGrpParentWithNonResChData _data;
+        private readonly ResGrpParentWithNonResChResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithNonResChResource"/> class for mocking. </summary>
         protected ResGrpParentWithNonResChResource()
@@ -41,7 +41,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "ResGrpParentWithNonResChResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResGrpParentWithNonResChResource(ArmClient client, ResGrpParentWithNonResChData data) : this(client, data.Id)
+        internal ResGrpParentWithNonResChResource(ArmClient client, ResGrpParentWithNonResChResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ResGrpParentWithNonResChData Data
+        public virtual ResGrpParentWithNonResChResourceData Data
         {
             get
             {

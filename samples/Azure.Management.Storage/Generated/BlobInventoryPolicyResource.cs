@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _blobInventoryPolicyResourceBlobInventoryPoliciesClientDiagnostics;
         private readonly BlobInventoryPoliciesRestOperations _blobInventoryPolicyResourceBlobInventoryPoliciesRestClient;
-        private readonly BlobInventoryPolicyData _data;
+        private readonly BlobInventoryPolicyResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BlobInventoryPolicyResource"/> class for mocking. </summary>
         protected BlobInventoryPolicyResource()
@@ -40,7 +40,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "BlobInventoryPolicyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BlobInventoryPolicyResource(ArmClient client, BlobInventoryPolicyData data) : this(client, data.Id)
+        internal BlobInventoryPolicyResource(ArmClient client, BlobInventoryPolicyResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BlobInventoryPolicyData Data
+        public virtual BlobInventoryPolicyResourceData Data
         {
             get
             {

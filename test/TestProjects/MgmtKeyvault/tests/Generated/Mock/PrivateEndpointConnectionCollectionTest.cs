@@ -30,7 +30,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: KeyVaultPutPrivateEndpointConnection
             string privateEndpointConnectionName = "sample-pec";
-            MgmtKeyvault.PrivateEndpointConnectionData properties = new MgmtKeyvault.PrivateEndpointConnectionData()
+            MgmtKeyvault.PrivateEndpointConnectionResourceData properties = new MgmtKeyvault.PrivateEndpointConnectionResourceData()
             {
                 Etag = "",
                 PrivateLinkServiceConnectionState = new MgmtKeyvault.Models.PrivateLinkServiceConnectionState()

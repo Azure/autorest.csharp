@@ -127,7 +127,7 @@ namespace ExactMatchFlattenInheritance
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new CustomModel2Data()
+            var model = new CustomModel2ResourceData()
             {
                 Foo = foo
             };
@@ -146,7 +146,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<CustomModel2Data>> PutAsync(string subscriptionId, string resourceGroupName, string name, string foo = null, CancellationToken cancellationToken = default)
+        public async Task<Response<CustomModel2ResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string name, string foo = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -158,9 +158,9 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel2Data value = default;
+                        CustomModel2ResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = CustomModel2Data.DeserializeCustomModel2Data(document.RootElement);
+                        value = CustomModel2ResourceData.DeserializeCustomModel2ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -176,7 +176,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<CustomModel2Data> Put(string subscriptionId, string resourceGroupName, string name, string foo = null, CancellationToken cancellationToken = default)
+        public Response<CustomModel2ResourceData> Put(string subscriptionId, string resourceGroupName, string name, string foo = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -188,9 +188,9 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel2Data value = default;
+                        CustomModel2ResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = CustomModel2Data.DeserializeCustomModel2Data(document.RootElement);
+                        value = CustomModel2ResourceData.DeserializeCustomModel2ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -225,7 +225,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<CustomModel2Data>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public async Task<Response<CustomModel2ResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -237,13 +237,13 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel2Data value = default;
+                        CustomModel2ResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = CustomModel2Data.DeserializeCustomModel2Data(document.RootElement);
+                        value = CustomModel2ResourceData.DeserializeCustomModel2ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((CustomModel2Data)null, message.Response);
+                    return Response.FromValue((CustomModel2ResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -256,7 +256,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<CustomModel2Data> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public Response<CustomModel2ResourceData> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -268,13 +268,13 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel2Data value = default;
+                        CustomModel2ResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = CustomModel2Data.DeserializeCustomModel2Data(document.RootElement);
+                        value = CustomModel2ResourceData.DeserializeCustomModel2ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((CustomModel2Data)null, message.Response);
+                    return Response.FromValue((CustomModel2ResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

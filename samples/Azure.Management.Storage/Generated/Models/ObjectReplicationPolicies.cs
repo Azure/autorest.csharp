@@ -17,17 +17,17 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of ObjectReplicationPolicies. </summary>
         internal ObjectReplicationPolicies()
         {
-            Value = new ChangeTrackingList<ObjectReplicationPolicyData>();
+            Value = new ChangeTrackingList<ObjectReplicationPolicyResourceData>();
         }
 
         /// <summary> Initializes a new instance of ObjectReplicationPolicies. </summary>
         /// <param name="value"> The replication policy between two storage accounts. </param>
-        internal ObjectReplicationPolicies(IReadOnlyList<ObjectReplicationPolicyData> value)
+        internal ObjectReplicationPolicies(IReadOnlyList<ObjectReplicationPolicyResourceData> value)
         {
             Value = value;
         }
 
         /// <summary> The replication policy between two storage accounts. </summary>
-        public IReadOnlyList<ObjectReplicationPolicyData> Value { get; }
+        public IReadOnlyList<ObjectReplicationPolicyResourceData> Value { get; }
     }
 }

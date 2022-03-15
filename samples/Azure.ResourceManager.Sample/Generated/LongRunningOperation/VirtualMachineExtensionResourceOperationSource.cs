@@ -26,14 +26,14 @@ namespace Azure.ResourceManager.Sample
         VirtualMachineExtensionResource IOperationSource<VirtualMachineExtensionResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
+            var data = VirtualMachineExtensionResourceData.DeserializeVirtualMachineExtensionResourceData(document.RootElement);
             return new VirtualMachineExtensionResource(_client, data);
         }
 
         async ValueTask<VirtualMachineExtensionResource> IOperationSource<VirtualMachineExtensionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
+            var data = VirtualMachineExtensionResourceData.DeserializeVirtualMachineExtensionResourceData(document.RootElement);
             return new VirtualMachineExtensionResource(_client, data);
         }
     }

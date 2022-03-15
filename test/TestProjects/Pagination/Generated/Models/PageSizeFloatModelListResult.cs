@@ -17,20 +17,20 @@ namespace Pagination.Models
         /// <summary> Initializes a new instance of PageSizeFloatModelListResult. </summary>
         internal PageSizeFloatModelListResult()
         {
-            Value = new ChangeTrackingList<PageSizeFloatModelData>();
+            Value = new ChangeTrackingList<PageSizeFloatModelResourceData>();
         }
 
         /// <summary> Initializes a new instance of PageSizeFloatModelListResult. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal PageSizeFloatModelListResult(IReadOnlyList<PageSizeFloatModelData> value, string nextLink)
+        internal PageSizeFloatModelListResult(IReadOnlyList<PageSizeFloatModelResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the value. </summary>
-        public IReadOnlyList<PageSizeFloatModelData> Value { get; }
+        public IReadOnlyList<PageSizeFloatModelResourceData> Value { get; }
         /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
     }

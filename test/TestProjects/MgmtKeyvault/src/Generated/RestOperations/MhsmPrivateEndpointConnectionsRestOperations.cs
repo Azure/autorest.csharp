@@ -146,7 +146,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="privateEndpointConnectionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MhsmPrivateEndpointConnectionData>> GetAsync(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public async Task<Response<MhsmPrivateEndpointConnectionResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -159,13 +159,13 @@ namespace MgmtKeyvault
             {
                 case 200:
                     {
-                        MhsmPrivateEndpointConnectionData value = default;
+                        MhsmPrivateEndpointConnectionResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = MhsmPrivateEndpointConnectionData.DeserializeMhsmPrivateEndpointConnectionData(document.RootElement);
+                        value = MhsmPrivateEndpointConnectionResourceData.DeserializeMhsmPrivateEndpointConnectionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((MhsmPrivateEndpointConnectionData)null, message.Response);
+                    return Response.FromValue((MhsmPrivateEndpointConnectionResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -179,7 +179,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="privateEndpointConnectionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MhsmPrivateEndpointConnectionData> Get(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public Response<MhsmPrivateEndpointConnectionResourceData> Get(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -192,19 +192,19 @@ namespace MgmtKeyvault
             {
                 case 200:
                     {
-                        MhsmPrivateEndpointConnectionData value = default;
+                        MhsmPrivateEndpointConnectionResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = MhsmPrivateEndpointConnectionData.DeserializeMhsmPrivateEndpointConnectionData(document.RootElement);
+                        value = MhsmPrivateEndpointConnectionResourceData.DeserializeMhsmPrivateEndpointConnectionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((MhsmPrivateEndpointConnectionData)null, message.Response);
+                    return Response.FromValue((MhsmPrivateEndpointConnectionResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionData properties)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionResourceData properties)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -239,7 +239,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MhsmPrivateEndpointConnectionData>> PutAsync(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        public async Task<Response<MhsmPrivateEndpointConnectionResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionResourceData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -253,9 +253,9 @@ namespace MgmtKeyvault
             {
                 case 200:
                     {
-                        MhsmPrivateEndpointConnectionData value = default;
+                        MhsmPrivateEndpointConnectionResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = MhsmPrivateEndpointConnectionData.DeserializeMhsmPrivateEndpointConnectionData(document.RootElement);
+                        value = MhsmPrivateEndpointConnectionResourceData.DeserializeMhsmPrivateEndpointConnectionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -272,7 +272,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/>, <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="privateEndpointConnectionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MhsmPrivateEndpointConnectionData> Put(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        public Response<MhsmPrivateEndpointConnectionResourceData> Put(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName, MhsmPrivateEndpointConnectionResourceData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -286,9 +286,9 @@ namespace MgmtKeyvault
             {
                 case 200:
                     {
-                        MhsmPrivateEndpointConnectionData value = default;
+                        MhsmPrivateEndpointConnectionResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = MhsmPrivateEndpointConnectionData.DeserializeMhsmPrivateEndpointConnectionData(document.RootElement);
+                        value = MhsmPrivateEndpointConnectionResourceData.DeserializeMhsmPrivateEndpointConnectionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

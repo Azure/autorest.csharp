@@ -29,7 +29,7 @@ namespace ExactMatchFlattenInheritance
 
         private readonly ClientDiagnostics _customModel3ResourceCustomModel3sClientDiagnostics;
         private readonly CustomModel3SRestOperations _customModel3ResourceCustomModel3sRestClient;
-        private readonly CustomModel3Data _data;
+        private readonly CustomModel3ResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Resource"/> class for mocking. </summary>
         protected CustomModel3Resource()
@@ -39,7 +39,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal CustomModel3Resource(ArmClient client, CustomModel3Data data) : this(client, new ResourceIdentifier(data.Id))
+        internal CustomModel3Resource(ArmClient client, CustomModel3ResourceData data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual CustomModel3Data Data
+        public virtual CustomModel3ResourceData Data
         {
             get
             {

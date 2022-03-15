@@ -17,20 +17,20 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of StorageAccountListResult. </summary>
         internal StorageAccountListResult()
         {
-            Value = new ChangeTrackingList<StorageAccountData>();
+            Value = new ChangeTrackingList<StorageAccountResourceData>();
         }
 
         /// <summary> Initializes a new instance of StorageAccountListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal StorageAccountListResult(IReadOnlyList<StorageAccountData> value, string nextLink)
+        internal StorageAccountListResult(IReadOnlyList<StorageAccountResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<StorageAccountData> Value { get; }
+        public IReadOnlyList<StorageAccountResourceData> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

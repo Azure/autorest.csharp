@@ -16,7 +16,7 @@ namespace TenantOnly.Models
     {
         internal static AgreementListResult DeserializeAgreementListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<AgreementData>> value = default;
+            Optional<IReadOnlyList<AgreementResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace TenantOnly.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<AgreementData> array = new List<AgreementData>();
+                    List<AgreementResourceData> array = new List<AgreementResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AgreementData.DeserializeAgreementData(item));
+                        array.Add(AgreementResourceData.DeserializeAgreementResourceData(item));
                     }
                     value = array;
                     continue;

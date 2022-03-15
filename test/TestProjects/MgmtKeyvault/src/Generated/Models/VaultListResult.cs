@@ -17,20 +17,20 @@ namespace MgmtKeyvault.Models
         /// <summary> Initializes a new instance of VaultListResult. </summary>
         internal VaultListResult()
         {
-            Value = new ChangeTrackingList<VaultData>();
+            Value = new ChangeTrackingList<VaultResourceData>();
         }
 
         /// <summary> Initializes a new instance of VaultListResult. </summary>
         /// <param name="value"> The list of vaults. </param>
         /// <param name="nextLink"> The URL to get the next set of vaults. </param>
-        internal VaultListResult(IReadOnlyList<VaultData> value, string nextLink)
+        internal VaultListResult(IReadOnlyList<VaultResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of vaults. </summary>
-        public IReadOnlyList<VaultData> Value { get; }
+        public IReadOnlyList<VaultResourceData> Value { get; }
         /// <summary> The URL to get the next set of vaults. </summary>
         public string NextLink { get; }
     }

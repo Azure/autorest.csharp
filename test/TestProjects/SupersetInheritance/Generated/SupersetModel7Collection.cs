@@ -61,7 +61,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<SupersetModel7Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string supersetModel7SName, SupersetModel7Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SupersetModel7Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string supersetModel7SName, SupersetModel7ResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel7SName, nameof(supersetModel7SName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -93,7 +93,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<SupersetModel7Resource> CreateOrUpdate(WaitUntil waitUntil, string supersetModel7SName, SupersetModel7Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SupersetModel7Resource> CreateOrUpdate(WaitUntil waitUntil, string supersetModel7SName, SupersetModel7ResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(supersetModel7SName, nameof(supersetModel7SName));
             Argument.AssertNotNull(parameters, nameof(parameters));

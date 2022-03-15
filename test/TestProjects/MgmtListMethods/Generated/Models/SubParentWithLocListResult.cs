@@ -18,7 +18,7 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of SubParentWithLocListResult. </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal SubParentWithLocListResult(IEnumerable<SubParentWithLocData> value)
+        internal SubParentWithLocListResult(IEnumerable<SubParentWithLocResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of SubParentWithLocListResult. </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        internal SubParentWithLocListResult(IReadOnlyList<SubParentWithLocData> value, string nextLink)
+        internal SubParentWithLocListResult(IReadOnlyList<SubParentWithLocResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> List. </summary>
-        public IReadOnlyList<SubParentWithLocData> Value { get; }
+        public IReadOnlyList<SubParentWithLocResourceData> Value { get; }
         /// <summary> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </summary>
         public string NextLink { get; }
     }

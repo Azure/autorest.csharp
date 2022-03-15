@@ -16,7 +16,7 @@ namespace ExactMatchFlattenInheritance.Models
     {
         internal static AzureResourceFlattenModel1ListResult DeserializeAzureResourceFlattenModel1ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<AzureResourceFlattenModel1Data>> value = default;
+            Optional<IReadOnlyList<AzureResourceFlattenModel1ResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace ExactMatchFlattenInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<AzureResourceFlattenModel1Data> array = new List<AzureResourceFlattenModel1Data>();
+                    List<AzureResourceFlattenModel1ResourceData> array = new List<AzureResourceFlattenModel1ResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(item));
+                        array.Add(AzureResourceFlattenModel1ResourceData.DeserializeAzureResourceFlattenModel1ResourceData(item));
                     }
                     value = array;
                     continue;

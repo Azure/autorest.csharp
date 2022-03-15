@@ -30,7 +30,7 @@ namespace SubscriptionExtensions
 
         private readonly ClientDiagnostics _toasterResourceToastersClientDiagnostics;
         private readonly ToastersRestOperations _toasterResourceToastersRestClient;
-        private readonly ToasterData _data;
+        private readonly ToasterResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ToasterResource"/> class for mocking. </summary>
         protected ToasterResource()
@@ -40,7 +40,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref = "ToasterResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ToasterResource(ArmClient client, ToasterData data) : this(client, data.Id)
+        internal ToasterResource(ArmClient client, ToasterResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace SubscriptionExtensions
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ToasterData Data
+        public virtual ToasterResourceData Data
         {
             get
             {

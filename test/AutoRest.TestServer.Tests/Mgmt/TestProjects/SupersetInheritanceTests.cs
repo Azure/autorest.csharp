@@ -17,13 +17,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(ResourceData), typeof(SupersetModel1Data))]
+        [TestCase(typeof(ResourceData), typeof(SupersetModel1ResourceData))]
         [TestCase(typeof(Object), typeof(SupersetModel2))]
         [TestCase(typeof(Object), typeof(SupersetModel3))]
-        [TestCase(typeof(TrackedResourceData), typeof(SupersetModel4Data))]
-        [TestCase(typeof(SupersetModel4Data), typeof(SupersetModel5))]
-        [TestCase(typeof(ResourceData), typeof(SupersetModel6Data))]
-        [TestCase(typeof(Object), typeof(SupersetModel7Data))]
+        [TestCase(typeof(TrackedResourceData), typeof(SupersetModel4ResourceData))]
+        [TestCase(typeof(SupersetModel4ResourceData), typeof(SupersetModel5))]
+        [TestCase(typeof(ResourceData), typeof(SupersetModel6ResourceData))]
+        [TestCase(typeof(Object), typeof(SupersetModel7ResourceData))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);
@@ -33,13 +33,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(SupersetModel1Data), new string[] { }, new Type[] { })]
+        [TestCase(typeof(SupersetModel1ResourceData), new string[] { }, new Type[] { })]
         [TestCase(typeof(SupersetModel2), new string[] { }, new Type[] { })]
         [TestCase(typeof(SupersetModel3), new string[] { }, new Type[] { })]
-        [TestCase(typeof(SupersetModel4Data), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
+        [TestCase(typeof(SupersetModel4ResourceData), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
         [TestCase(typeof(SupersetModel5), new string[] { "location" }, new Type[] { typeof(AzureLocation) })]
-        [TestCase(typeof(SupersetModel6Data), new string[] { }, new Type[] { })]
-        [TestCase(typeof(SupersetModel7Data), new string[] { }, new Type[] { })]
+        [TestCase(typeof(SupersetModel6ResourceData), new string[] { }, new Type[] { })]
+        [TestCase(typeof(SupersetModel7ResourceData), new string[] { }, new Type[] { })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }
 }

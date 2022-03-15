@@ -17,20 +17,20 @@ namespace SubscriptionExtensions.Models
         /// <summary> Initializes a new instance of ToasterListResult. </summary>
         internal ToasterListResult()
         {
-            Value = new ChangeTrackingList<ToasterData>();
+            Value = new ChangeTrackingList<ToasterResourceData>();
         }
 
         /// <summary> Initializes a new instance of ToasterListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal ToasterListResult(IReadOnlyList<ToasterData> value, string nextLink)
+        internal ToasterListResult(IReadOnlyList<ToasterResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<ToasterData> Value { get; }
+        public IReadOnlyList<ToasterResourceData> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

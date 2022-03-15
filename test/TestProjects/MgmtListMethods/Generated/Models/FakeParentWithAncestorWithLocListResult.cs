@@ -18,7 +18,7 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of FakeParentWithAncestorWithLocListResult. </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal FakeParentWithAncestorWithLocListResult(IEnumerable<FakeParentWithAncestorWithLocData> value)
+        internal FakeParentWithAncestorWithLocListResult(IEnumerable<FakeParentWithAncestorWithLocResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of FakeParentWithAncestorWithLocListResult. </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        internal FakeParentWithAncestorWithLocListResult(IReadOnlyList<FakeParentWithAncestorWithLocData> value, string nextLink)
+        internal FakeParentWithAncestorWithLocListResult(IReadOnlyList<FakeParentWithAncestorWithLocResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> List. </summary>
-        public IReadOnlyList<FakeParentWithAncestorWithLocData> Value { get; }
+        public IReadOnlyList<FakeParentWithAncestorWithLocResourceData> Value { get; }
         /// <summary> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </summary>
         public string NextLink { get; }
     }

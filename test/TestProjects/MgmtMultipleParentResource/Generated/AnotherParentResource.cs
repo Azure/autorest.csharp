@@ -31,7 +31,7 @@ namespace MgmtMultipleParentResource
 
         private readonly ClientDiagnostics _anotherParentResourceAnotherParentsClientDiagnostics;
         private readonly AnotherParentsRestOperations _anotherParentResourceAnotherParentsRestClient;
-        private readonly AnotherParentData _data;
+        private readonly AnotherParentResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AnotherParentResource"/> class for mocking. </summary>
         protected AnotherParentResource()
@@ -41,7 +41,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref = "AnotherParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AnotherParentResource(ArmClient client, AnotherParentData data) : this(client, data.Id)
+        internal AnotherParentResource(ArmClient client, AnotherParentResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AnotherParentData Data
+        public virtual AnotherParentResourceData Data
         {
             get
             {

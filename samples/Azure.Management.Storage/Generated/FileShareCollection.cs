@@ -62,7 +62,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public virtual async Task<ArmOperation<FileShareResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string shareName, FileShareData fileShare, string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<FileShareResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string shareName, FileShareResourceData fileShare, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
             Argument.AssertNotNull(fileShare, nameof(fileShare));
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="shareName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public virtual ArmOperation<FileShareResource> CreateOrUpdate(WaitUntil waitUntil, string shareName, FileShareData fileShare, string expand = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<FileShareResource> CreateOrUpdate(WaitUntil waitUntil, string shareName, FileShareResourceData fileShare, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(shareName, nameof(shareName));
             Argument.AssertNotNull(fileShare, nameof(fileShare));

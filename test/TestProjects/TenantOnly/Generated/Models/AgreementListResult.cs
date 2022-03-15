@@ -17,20 +17,20 @@ namespace TenantOnly.Models
         /// <summary> Initializes a new instance of AgreementListResult. </summary>
         internal AgreementListResult()
         {
-            Value = new ChangeTrackingList<AgreementData>();
+            Value = new ChangeTrackingList<AgreementResourceData>();
         }
 
         /// <summary> Initializes a new instance of AgreementListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal AgreementListResult(IReadOnlyList<AgreementData> value, string nextLink)
+        internal AgreementListResult(IReadOnlyList<AgreementResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<AgreementData> Value { get; }
+        public IReadOnlyList<AgreementResourceData> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

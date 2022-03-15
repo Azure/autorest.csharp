@@ -30,7 +30,7 @@ namespace ExactMatchInheritance
 
         private readonly ClientDiagnostics _exactMatchModel5ResourceExactMatchModel5sClientDiagnostics;
         private readonly ExactMatchModel5SRestOperations _exactMatchModel5ResourceExactMatchModel5sRestClient;
-        private readonly ExactMatchModel5Data _data;
+        private readonly ExactMatchModel5ResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Resource"/> class for mocking. </summary>
         protected ExactMatchModel5Resource()
@@ -40,7 +40,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel5Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ExactMatchModel5Resource(ArmClient client, ExactMatchModel5Data data) : this(client, data.Id)
+        internal ExactMatchModel5Resource(ArmClient client, ExactMatchModel5ResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace ExactMatchInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ExactMatchModel5Data Data
+        public virtual ExactMatchModel5ResourceData Data
         {
             get
             {

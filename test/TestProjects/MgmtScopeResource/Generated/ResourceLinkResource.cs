@@ -29,7 +29,7 @@ namespace MgmtScopeResource
 
         private readonly ClientDiagnostics _resourceLinkResourceResourceLinksClientDiagnostics;
         private readonly ResourceLinksRestOperations _resourceLinkResourceResourceLinksRestClient;
-        private readonly ResourceLinkData _data;
+        private readonly ResourceLinkResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLinkResource"/> class for mocking. </summary>
         protected ResourceLinkResource()
@@ -39,7 +39,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "ResourceLinkResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResourceLinkResource(ArmClient client, ResourceLinkData data) : this(client, data.Id)
+        internal ResourceLinkResource(ArmClient client, ResourceLinkResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ResourceLinkData Data
+        public virtual ResourceLinkResourceData Data
         {
             get
             {

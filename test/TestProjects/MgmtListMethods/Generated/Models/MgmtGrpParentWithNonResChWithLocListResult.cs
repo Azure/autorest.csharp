@@ -18,7 +18,7 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChWithLocListResult. </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal MgmtGrpParentWithNonResChWithLocListResult(IEnumerable<MgmtGrpParentWithNonResChWithLocData> value)
+        internal MgmtGrpParentWithNonResChWithLocListResult(IEnumerable<MgmtGrpParentWithNonResChWithLocResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChWithLocListResult. </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        internal MgmtGrpParentWithNonResChWithLocListResult(IReadOnlyList<MgmtGrpParentWithNonResChWithLocData> value, string nextLink)
+        internal MgmtGrpParentWithNonResChWithLocListResult(IReadOnlyList<MgmtGrpParentWithNonResChWithLocResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> List. </summary>
-        public IReadOnlyList<MgmtGrpParentWithNonResChWithLocData> Value { get; }
+        public IReadOnlyList<MgmtGrpParentWithNonResChWithLocResourceData> Value { get; }
         /// <summary> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </summary>
         public string NextLink { get; }
     }

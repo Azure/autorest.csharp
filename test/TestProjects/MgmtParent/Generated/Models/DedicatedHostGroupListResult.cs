@@ -18,7 +18,7 @@ namespace MgmtParent.Models
         /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal DedicatedHostGroupListResult(IEnumerable<DedicatedHostGroupData> value)
+        internal DedicatedHostGroupListResult(IEnumerable<DedicatedHostGroupResourceData> value)
         {
             if (value == null)
             {
@@ -29,7 +29,7 @@ namespace MgmtParent.Models
         }
 
         /// <summary> The list of dedicated hosts. </summary>
-        public IReadOnlyList<DedicatedHostGroupData> Value { get; }
+        public IReadOnlyList<DedicatedHostGroupResourceData> Value { get; }
         /// <summary> The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts. </summary>
         public string NextLink { get; }
     }

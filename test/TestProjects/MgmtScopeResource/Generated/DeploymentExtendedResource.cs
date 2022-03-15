@@ -35,7 +35,7 @@ namespace MgmtScopeResource
         private readonly DeploymentsRestOperations _deploymentExtendedResourceDeploymentsRestClient;
         private readonly ClientDiagnostics _deploymentOperationsClientDiagnostics;
         private readonly DeploymentRestOperations _deploymentOperationsRestClient;
-        private readonly DeploymentExtendedData _data;
+        private readonly DeploymentExtendedResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedResource"/> class for mocking. </summary>
         protected DeploymentExtendedResource()
@@ -45,7 +45,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "DeploymentExtendedResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeploymentExtendedResource(ArmClient client, DeploymentExtendedData data) : this(client, data.Id)
+        internal DeploymentExtendedResource(ArmClient client, DeploymentExtendedResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -74,7 +74,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DeploymentExtendedData Data
+        public virtual DeploymentExtendedResourceData Data
         {
             get
             {

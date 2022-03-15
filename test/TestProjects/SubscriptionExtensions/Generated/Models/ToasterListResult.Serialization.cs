@@ -16,7 +16,7 @@ namespace SubscriptionExtensions.Models
     {
         internal static ToasterListResult DeserializeToasterListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<ToasterData>> value = default;
+            Optional<IReadOnlyList<ToasterResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace SubscriptionExtensions.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ToasterData> array = new List<ToasterData>();
+                    List<ToasterResourceData> array = new List<ToasterResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ToasterData.DeserializeToasterData(item));
+                        array.Add(ToasterResourceData.DeserializeToasterResourceData(item));
                     }
                     value = array;
                     continue;

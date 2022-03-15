@@ -31,7 +31,7 @@ namespace MgmtNonStringPathVariable
 
         private readonly ClientDiagnostics _fakeResourceFakesClientDiagnostics;
         private readonly FakesRestOperations _fakeResourceFakesRestClient;
-        private readonly FakeData _data;
+        private readonly FakeResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakeResource"/> class for mocking. </summary>
         protected FakeResource()
@@ -41,7 +41,7 @@ namespace MgmtNonStringPathVariable
         /// <summary> Initializes a new instance of the <see cref = "FakeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FakeResource(ArmClient client, FakeData data) : this(client, data.Id)
+        internal FakeResource(ArmClient client, FakeResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtNonStringPathVariable
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual FakeData Data
+        public virtual FakeResourceData Data
         {
             get
             {

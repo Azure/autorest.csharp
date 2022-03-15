@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _objectReplicationPolicyResourceObjectReplicationPoliciesClientDiagnostics;
         private readonly ObjectReplicationPoliciesRestOperations _objectReplicationPolicyResourceObjectReplicationPoliciesRestClient;
-        private readonly ObjectReplicationPolicyData _data;
+        private readonly ObjectReplicationPolicyResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyResource"/> class for mocking. </summary>
         protected ObjectReplicationPolicyResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "ObjectReplicationPolicyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ObjectReplicationPolicyResource(ArmClient client, ObjectReplicationPolicyData data) : this(client, data.Id)
+        internal ObjectReplicationPolicyResource(ArmClient client, ObjectReplicationPolicyResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ObjectReplicationPolicyData Data
+        public virtual ObjectReplicationPolicyResourceData Data
         {
             get
             {

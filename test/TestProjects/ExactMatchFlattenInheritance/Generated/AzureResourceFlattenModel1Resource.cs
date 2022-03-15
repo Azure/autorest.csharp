@@ -30,7 +30,7 @@ namespace ExactMatchFlattenInheritance
 
         private readonly ClientDiagnostics _azureResourceFlattenModel1ResourceAzureResourceFlattenModel1sClientDiagnostics;
         private readonly AzureResourceFlattenModel1SRestOperations _azureResourceFlattenModel1ResourceAzureResourceFlattenModel1sRestClient;
-        private readonly AzureResourceFlattenModel1Data _data;
+        private readonly AzureResourceFlattenModel1ResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Resource"/> class for mocking. </summary>
         protected AzureResourceFlattenModel1Resource()
@@ -40,7 +40,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AzureResourceFlattenModel1Resource(ArmClient client, AzureResourceFlattenModel1Data data) : this(client, data.Id)
+        internal AzureResourceFlattenModel1Resource(ArmClient client, AzureResourceFlattenModel1ResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AzureResourceFlattenModel1Data Data
+        public virtual AzureResourceFlattenModel1ResourceData Data
         {
             get
             {

@@ -111,7 +111,7 @@ namespace MgmtParamOrdering
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -143,7 +143,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<DedicatedHostGroupData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<DedicatedHostGroupResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -157,9 +157,9 @@ namespace MgmtParamOrdering
                 case 200:
                 case 201:
                     {
-                        DedicatedHostGroupData value = default;
+                        DedicatedHostGroupResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
+                        value = DedicatedHostGroupResourceData.DeserializeDedicatedHostGroupResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -175,7 +175,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<DedicatedHostGroupData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public Response<DedicatedHostGroupResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string hostGroupName, DedicatedHostGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -189,9 +189,9 @@ namespace MgmtParamOrdering
                 case 200:
                 case 201:
                     {
-                        DedicatedHostGroupData value = default;
+                        DedicatedHostGroupResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
+                        value = DedicatedHostGroupResourceData.DeserializeDedicatedHostGroupResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -231,7 +231,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<DedicatedHostGroupData>> UpdateAsync(string subscriptionId, string resourceGroupName, string hostGroupName, PatchableDedicatedHostGroupData data, CancellationToken cancellationToken = default)
+        public async Task<Response<DedicatedHostGroupResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string hostGroupName, PatchableDedicatedHostGroupData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -244,9 +244,9 @@ namespace MgmtParamOrdering
             {
                 case 200:
                     {
-                        DedicatedHostGroupData value = default;
+                        DedicatedHostGroupResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
+                        value = DedicatedHostGroupResourceData.DeserializeDedicatedHostGroupResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -262,7 +262,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<DedicatedHostGroupData> Update(string subscriptionId, string resourceGroupName, string hostGroupName, PatchableDedicatedHostGroupData data, CancellationToken cancellationToken = default)
+        public Response<DedicatedHostGroupResourceData> Update(string subscriptionId, string resourceGroupName, string hostGroupName, PatchableDedicatedHostGroupData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -275,9 +275,9 @@ namespace MgmtParamOrdering
             {
                 case 200:
                     {
-                        DedicatedHostGroupData value = default;
+                        DedicatedHostGroupResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
+                        value = DedicatedHostGroupResourceData.DeserializeDedicatedHostGroupResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -382,7 +382,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<DedicatedHostGroupData>> GetAsync(string subscriptionId, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<DedicatedHostGroupResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -394,13 +394,13 @@ namespace MgmtParamOrdering
             {
                 case 200:
                     {
-                        DedicatedHostGroupData value = default;
+                        DedicatedHostGroupResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
+                        value = DedicatedHostGroupResourceData.DeserializeDedicatedHostGroupResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((DedicatedHostGroupData)null, message.Response);
+                    return Response.FromValue((DedicatedHostGroupResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -413,7 +413,7 @@ namespace MgmtParamOrdering
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<DedicatedHostGroupData> Get(string subscriptionId, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        public Response<DedicatedHostGroupResourceData> Get(string subscriptionId, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -425,13 +425,13 @@ namespace MgmtParamOrdering
             {
                 case 200:
                     {
-                        DedicatedHostGroupData value = default;
+                        DedicatedHostGroupResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = DedicatedHostGroupData.DeserializeDedicatedHostGroupData(document.RootElement);
+                        value = DedicatedHostGroupResourceData.DeserializeDedicatedHostGroupResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((DedicatedHostGroupData)null, message.Response);
+                    return Response.FromValue((DedicatedHostGroupResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

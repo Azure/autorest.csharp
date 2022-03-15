@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
     {
         internal static ListContainerItems DeserializeListContainerItems(JsonElement element)
         {
-            Optional<IReadOnlyList<BlobContainerData>> value = default;
+            Optional<IReadOnlyList<BlobContainerResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<BlobContainerData> array = new List<BlobContainerData>();
+                    List<BlobContainerResourceData> array = new List<BlobContainerResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BlobContainerData.DeserializeBlobContainerData(item));
+                        array.Add(BlobContainerResourceData.DeserializeBlobContainerResourceData(item));
                     }
                     value = array;
                     continue;

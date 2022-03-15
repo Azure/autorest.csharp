@@ -26,14 +26,14 @@ namespace MgmtRenameRules
         VirtualMachineScaleSetResource IOperationSource<VirtualMachineScaleSetResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
+            var data = VirtualMachineScaleSetResourceData.DeserializeVirtualMachineScaleSetResourceData(document.RootElement);
             return new VirtualMachineScaleSetResource(_client, data);
         }
 
         async ValueTask<VirtualMachineScaleSetResource> IOperationSource<VirtualMachineScaleSetResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(document.RootElement);
+            var data = VirtualMachineScaleSetResourceData.DeserializeVirtualMachineScaleSetResourceData(document.RootElement);
             return new VirtualMachineScaleSetResource(_client, data);
         }
     }

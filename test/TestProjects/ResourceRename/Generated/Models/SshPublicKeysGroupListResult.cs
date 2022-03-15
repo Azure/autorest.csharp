@@ -18,7 +18,7 @@ namespace ResourceRename.Models
         /// <summary> Initializes a new instance of SshPublicKeysGroupListResult. </summary>
         /// <param name="value"> The list of SSH public keys. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal SshPublicKeysGroupListResult(IEnumerable<SshPublicKeyInfoData> value)
+        internal SshPublicKeysGroupListResult(IEnumerable<SshPublicKeyInfoResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace ResourceRename.Models
         /// <summary> Initializes a new instance of SshPublicKeysGroupListResult. </summary>
         /// <param name="value"> The list of SSH public keys. </param>
         /// <param name="nextLink"> The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys. </param>
-        internal SshPublicKeysGroupListResult(IReadOnlyList<SshPublicKeyInfoData> value, string nextLink)
+        internal SshPublicKeysGroupListResult(IReadOnlyList<SshPublicKeyInfoResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of SSH public keys. </summary>
-        public IReadOnlyList<SshPublicKeyInfoData> Value { get; }
+        public IReadOnlyList<SshPublicKeyInfoResourceData> Value { get; }
         /// <summary> The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys. </summary>
         public string NextLink { get; }
     }

@@ -30,7 +30,7 @@ namespace MgmtRenameRules
 
         private readonly ClientDiagnostics _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesClientDiagnostics;
         private readonly VirtualMachineScaleSetRollingUpgradesRestOperations _virtualMachineScaleSetRollingUpgradeResourceVirtualMachineScaleSetRollingUpgradesRestClient;
-        private readonly VirtualMachineScaleSetRollingUpgradeData _data;
+        private readonly VirtualMachineScaleSetRollingUpgradeResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetRollingUpgradeResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetRollingUpgradeResource()
@@ -40,7 +40,7 @@ namespace MgmtRenameRules
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetRollingUpgradeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetRollingUpgradeResource(ArmClient client, VirtualMachineScaleSetRollingUpgradeData data) : this(client, data.Id)
+        internal VirtualMachineScaleSetRollingUpgradeResource(ArmClient client, VirtualMachineScaleSetRollingUpgradeResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtRenameRules
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineScaleSetRollingUpgradeData Data
+        public virtual VirtualMachineScaleSetRollingUpgradeResourceData Data
         {
             get
             {

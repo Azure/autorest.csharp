@@ -31,7 +31,7 @@ namespace MgmtMultipleParentResource
 
         private readonly ClientDiagnostics _subParentResourceSubParentsClientDiagnostics;
         private readonly SubParentsRestOperations _subParentResourceSubParentsRestClient;
-        private readonly SubParentData _data;
+        private readonly SubParentResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentResource"/> class for mocking. </summary>
         protected SubParentResource()
@@ -41,7 +41,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref = "SubParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubParentResource(ArmClient client, SubParentData data) : this(client, data.Id)
+        internal SubParentResource(ArmClient client, SubParentResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SubParentData Data
+        public virtual SubParentResourceData Data
         {
             get
             {

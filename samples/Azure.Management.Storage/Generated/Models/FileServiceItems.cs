@@ -17,17 +17,17 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of FileServiceItems. </summary>
         internal FileServiceItems()
         {
-            Value = new ChangeTrackingList<FileServiceData>();
+            Value = new ChangeTrackingList<FileServiceResourceData>();
         }
 
         /// <summary> Initializes a new instance of FileServiceItems. </summary>
         /// <param name="value"> List of file services returned. </param>
-        internal FileServiceItems(IReadOnlyList<FileServiceData> value)
+        internal FileServiceItems(IReadOnlyList<FileServiceResourceData> value)
         {
             Value = value;
         }
 
         /// <summary> List of file services returned. </summary>
-        public IReadOnlyList<FileServiceData> Value { get; }
+        public IReadOnlyList<FileServiceResourceData> Value { get; }
     }
 }

@@ -110,7 +110,7 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, CustomModel3Data parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, CustomModel3ResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -142,7 +142,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<CustomModel3Data>> PutAsync(string subscriptionId, string resourceGroupName, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<CustomModel3ResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string name, CustomModel3ResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -155,9 +155,9 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel3Data value = default;
+                        CustomModel3ResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = CustomModel3Data.DeserializeCustomModel3Data(document.RootElement);
+                        value = CustomModel3ResourceData.DeserializeCustomModel3ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -173,7 +173,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<CustomModel3Data> Put(string subscriptionId, string resourceGroupName, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public Response<CustomModel3ResourceData> Put(string subscriptionId, string resourceGroupName, string name, CustomModel3ResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -186,9 +186,9 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel3Data value = default;
+                        CustomModel3ResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = CustomModel3Data.DeserializeCustomModel3Data(document.RootElement);
+                        value = CustomModel3ResourceData.DeserializeCustomModel3ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -223,7 +223,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<CustomModel3Data>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public async Task<Response<CustomModel3ResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -235,13 +235,13 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel3Data value = default;
+                        CustomModel3ResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = CustomModel3Data.DeserializeCustomModel3Data(document.RootElement);
+                        value = CustomModel3ResourceData.DeserializeCustomModel3ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((CustomModel3Data)null, message.Response);
+                    return Response.FromValue((CustomModel3ResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -254,7 +254,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<CustomModel3Data> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public Response<CustomModel3ResourceData> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -266,13 +266,13 @@ namespace ExactMatchFlattenInheritance
             {
                 case 200:
                     {
-                        CustomModel3Data value = default;
+                        CustomModel3ResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = CustomModel3Data.DeserializeCustomModel3Data(document.RootElement);
+                        value = CustomModel3ResourceData.DeserializeCustomModel3ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((CustomModel3Data)null, message.Response);
+                    return Response.FromValue((CustomModel3ResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

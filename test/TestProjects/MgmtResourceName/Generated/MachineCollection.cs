@@ -61,7 +61,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<MachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string machineName, MachineData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<MachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string machineName, MachineResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -93,7 +93,7 @@ namespace MgmtResourceName
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<MachineResource> CreateOrUpdate(WaitUntil waitUntil, string machineName, MachineData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<MachineResource> CreateOrUpdate(WaitUntil waitUntil, string machineName, MachineResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(machineName, nameof(machineName));
             Argument.AssertNotNull(parameters, nameof(parameters));

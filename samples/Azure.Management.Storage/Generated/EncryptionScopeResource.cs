@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _encryptionScopeResourceEncryptionScopesClientDiagnostics;
         private readonly EncryptionScopesRestOperations _encryptionScopeResourceEncryptionScopesRestClient;
-        private readonly EncryptionScopeData _data;
+        private readonly EncryptionScopeResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeResource"/> class for mocking. </summary>
         protected EncryptionScopeResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "EncryptionScopeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal EncryptionScopeResource(ArmClient client, EncryptionScopeData data) : this(client, data.Id)
+        internal EncryptionScopeResource(ArmClient client, EncryptionScopeResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual EncryptionScopeData Data
+        public virtual EncryptionScopeResourceData Data
         {
             get
             {
@@ -138,7 +138,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public virtual async Task<Response<EncryptionScopeResource>> UpdateAsync(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EncryptionScopeResource>> UpdateAsync(EncryptionScopeResourceData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(encryptionScope, nameof(encryptionScope));
 
@@ -164,7 +164,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public virtual Response<EncryptionScopeResource> Update(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual Response<EncryptionScopeResource> Update(EncryptionScopeResourceData encryptionScope, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(encryptionScope, nameof(encryptionScope));
 

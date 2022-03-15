@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,7 +66,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGrpParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MgmtGrpParentWithNonResChWithLocData>> CreateOrUpdateAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<MgmtGrpParentWithNonResChWithLocResourceData>> CreateOrUpdateAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
@@ -78,9 +78,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        MgmtGrpParentWithNonResChWithLocData value = default;
+                        MgmtGrpParentWithNonResChWithLocResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = MgmtGrpParentWithNonResChWithLocData.DeserializeMgmtGrpParentWithNonResChWithLocData(document.RootElement);
+                        value = MgmtGrpParentWithNonResChWithLocResourceData.DeserializeMgmtGrpParentWithNonResChWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -95,7 +95,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="mgmtGrpParentWithNonResChWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MgmtGrpParentWithNonResChWithLocData> CreateOrUpdate(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocData parameters, CancellationToken cancellationToken = default)
+        public Response<MgmtGrpParentWithNonResChWithLocResourceData> CreateOrUpdate(string groupId, string mgmtGrpParentWithNonResChWithLocName, MgmtGrpParentWithNonResChWithLocResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
@@ -107,9 +107,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        MgmtGrpParentWithNonResChWithLocData value = default;
+                        MgmtGrpParentWithNonResChWithLocResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = MgmtGrpParentWithNonResChWithLocData.DeserializeMgmtGrpParentWithNonResChWithLocData(document.RootElement);
+                        value = MgmtGrpParentWithNonResChWithLocResourceData.DeserializeMgmtGrpParentWithNonResChWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -141,7 +141,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<MgmtGrpParentWithNonResChWithLocData>> GetAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public async Task<Response<MgmtGrpParentWithNonResChWithLocResourceData>> GetAsync(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
@@ -152,13 +152,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        MgmtGrpParentWithNonResChWithLocData value = default;
+                        MgmtGrpParentWithNonResChWithLocResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = MgmtGrpParentWithNonResChWithLocData.DeserializeMgmtGrpParentWithNonResChWithLocData(document.RootElement);
+                        value = MgmtGrpParentWithNonResChWithLocResourceData.DeserializeMgmtGrpParentWithNonResChWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((MgmtGrpParentWithNonResChWithLocData)null, message.Response);
+                    return Response.FromValue((MgmtGrpParentWithNonResChWithLocResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -170,7 +170,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<MgmtGrpParentWithNonResChWithLocData> Get(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
+        public Response<MgmtGrpParentWithNonResChWithLocResourceData> Get(string groupId, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
             Argument.AssertNotNullOrEmpty(mgmtGrpParentWithNonResChWithLocName, nameof(mgmtGrpParentWithNonResChWithLocName));
@@ -181,13 +181,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        MgmtGrpParentWithNonResChWithLocData value = default;
+                        MgmtGrpParentWithNonResChWithLocResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = MgmtGrpParentWithNonResChWithLocData.DeserializeMgmtGrpParentWithNonResChWithLocData(document.RootElement);
+                        value = MgmtGrpParentWithNonResChWithLocResourceData.DeserializeMgmtGrpParentWithNonResChWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((MgmtGrpParentWithNonResChWithLocData)null, message.Response);
+                    return Response.FromValue((MgmtGrpParentWithNonResChWithLocResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

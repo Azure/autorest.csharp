@@ -114,7 +114,7 @@ namespace Pagination
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, PageSizeDecimalModelData parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string name, PageSizeDecimalModelResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -145,7 +145,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PageSizeDecimalModelData>> PutAsync(string subscriptionId, string resourceGroupName, string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PageSizeDecimalModelResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string name, PageSizeDecimalModelResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -158,9 +158,9 @@ namespace Pagination
             {
                 case 200:
                     {
-                        PageSizeDecimalModelData value = default;
+                        PageSizeDecimalModelResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(document.RootElement);
+                        value = PageSizeDecimalModelResourceData.DeserializePageSizeDecimalModelResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -175,7 +175,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PageSizeDecimalModelData> Put(string subscriptionId, string resourceGroupName, string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
+        public Response<PageSizeDecimalModelResourceData> Put(string subscriptionId, string resourceGroupName, string name, PageSizeDecimalModelResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -188,9 +188,9 @@ namespace Pagination
             {
                 case 200:
                     {
-                        PageSizeDecimalModelData value = default;
+                        PageSizeDecimalModelResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(document.RootElement);
+                        value = PageSizeDecimalModelResourceData.DeserializePageSizeDecimalModelResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -224,7 +224,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PageSizeDecimalModelData>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public async Task<Response<PageSizeDecimalModelResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -236,13 +236,13 @@ namespace Pagination
             {
                 case 200:
                     {
-                        PageSizeDecimalModelData value = default;
+                        PageSizeDecimalModelResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(document.RootElement);
+                        value = PageSizeDecimalModelResourceData.DeserializePageSizeDecimalModelResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PageSizeDecimalModelData)null, message.Response);
+                    return Response.FromValue((PageSizeDecimalModelResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -254,7 +254,7 @@ namespace Pagination
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PageSizeDecimalModelData> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
+        public Response<PageSizeDecimalModelResourceData> Get(string subscriptionId, string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -266,13 +266,13 @@ namespace Pagination
             {
                 case 200:
                     {
-                        PageSizeDecimalModelData value = default;
+                        PageSizeDecimalModelResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PageSizeDecimalModelData.DeserializePageSizeDecimalModelData(document.RootElement);
+                        value = PageSizeDecimalModelResourceData.DeserializePageSizeDecimalModelResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PageSizeDecimalModelData)null, message.Response);
+                    return Response.FromValue((PageSizeDecimalModelResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

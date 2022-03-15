@@ -26,14 +26,14 @@ namespace MgmtKeyvault
         ManagedHsmResource IOperationSource<ManagedHsmResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
+            var data = ManagedHsmResourceData.DeserializeManagedHsmResourceData(document.RootElement);
             return new ManagedHsmResource(_client, data);
         }
 
         async ValueTask<ManagedHsmResource> IOperationSource<ManagedHsmResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = ManagedHsmData.DeserializeManagedHsmData(document.RootElement);
+            var data = ManagedHsmResourceData.DeserializeManagedHsmResourceData(document.RootElement);
             return new ManagedHsmResource(_client, data);
         }
     }

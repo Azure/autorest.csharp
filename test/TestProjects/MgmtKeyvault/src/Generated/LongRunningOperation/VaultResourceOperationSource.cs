@@ -26,14 +26,14 @@ namespace MgmtKeyvault
         VaultResource IOperationSource<VaultResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = VaultData.DeserializeVaultData(document.RootElement);
+            var data = VaultResourceData.DeserializeVaultResourceData(document.RootElement);
             return new VaultResource(_client, data);
         }
 
         async ValueTask<VaultResource> IOperationSource<VaultResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = VaultData.DeserializeVaultData(document.RootElement);
+            var data = VaultResourceData.DeserializeVaultResourceData(document.RootElement);
             return new VaultResource(_client, data);
         }
     }

@@ -29,7 +29,7 @@ namespace NoTypeReplacement
 
         private readonly ClientDiagnostics _noTypeReplacementModel2ResourceNoTypeReplacementModel2sClientDiagnostics;
         private readonly NoTypeReplacementModel2SRestOperations _noTypeReplacementModel2ResourceNoTypeReplacementModel2sRestClient;
-        private readonly NoTypeReplacementModel2Data _data;
+        private readonly NoTypeReplacementModel2ResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="NoTypeReplacementModel2Resource"/> class for mocking. </summary>
         protected NoTypeReplacementModel2Resource()
@@ -39,7 +39,7 @@ namespace NoTypeReplacement
         /// <summary> Initializes a new instance of the <see cref = "NoTypeReplacementModel2Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal NoTypeReplacementModel2Resource(ArmClient client, NoTypeReplacementModel2Data data) : this(client, data.Id)
+        internal NoTypeReplacementModel2Resource(ArmClient client, NoTypeReplacementModel2ResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace NoTypeReplacement
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual NoTypeReplacementModel2Data Data
+        public virtual NoTypeReplacementModel2ResourceData Data
         {
             get
             {

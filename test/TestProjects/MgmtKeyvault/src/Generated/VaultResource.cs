@@ -33,7 +33,7 @@ namespace MgmtKeyvault
         private readonly VaultsRestOperations _vaultResourceVaultsRestClient;
         private readonly ClientDiagnostics _privateLinkResourcesClientDiagnostics;
         private readonly PrivateLinkResourcesRestOperations _privateLinkResourcesRestClient;
-        private readonly VaultData _data;
+        private readonly VaultResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VaultResource"/> class for mocking. </summary>
         protected VaultResource()
@@ -43,7 +43,7 @@ namespace MgmtKeyvault
         /// <summary> Initializes a new instance of the <see cref = "VaultResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VaultResource(ArmClient client, VaultData data) : this(client, data.Id)
+        internal VaultResource(ArmClient client, VaultResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -72,7 +72,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VaultData Data
+        public virtual VaultResourceData Data
         {
             get
             {

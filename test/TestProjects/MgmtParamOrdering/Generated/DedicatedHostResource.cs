@@ -31,7 +31,7 @@ namespace MgmtParamOrdering
 
         private readonly ClientDiagnostics _dedicatedHostResourceDedicatedHostsClientDiagnostics;
         private readonly DedicatedHostsRestOperations _dedicatedHostResourceDedicatedHostsRestClient;
-        private readonly DedicatedHostData _data;
+        private readonly DedicatedHostResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostResource"/> class for mocking. </summary>
         protected DedicatedHostResource()
@@ -41,7 +41,7 @@ namespace MgmtParamOrdering
         /// <summary> Initializes a new instance of the <see cref = "DedicatedHostResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DedicatedHostResource(ArmClient client, DedicatedHostData data) : this(client, data.Id)
+        internal DedicatedHostResource(ArmClient client, DedicatedHostResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtParamOrdering
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DedicatedHostData Data
+        public virtual DedicatedHostResourceData Data
         {
             get
             {

@@ -30,7 +30,7 @@ namespace MgmtKeyvault
 
         private readonly ClientDiagnostics _mhsmPrivateEndpointConnectionResourceMHSMPrivateEndpointConnectionsClientDiagnostics;
         private readonly MhsmPrivateEndpointConnectionsRestOperations _mhsmPrivateEndpointConnectionResourceMHSMPrivateEndpointConnectionsRestClient;
-        private readonly MhsmPrivateEndpointConnectionData _data;
+        private readonly MhsmPrivateEndpointConnectionResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="MhsmPrivateEndpointConnectionResource"/> class for mocking. </summary>
         protected MhsmPrivateEndpointConnectionResource()
@@ -40,7 +40,7 @@ namespace MgmtKeyvault
         /// <summary> Initializes a new instance of the <see cref = "MhsmPrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MhsmPrivateEndpointConnectionResource(ArmClient client, MhsmPrivateEndpointConnectionData data) : this(client, data.Id)
+        internal MhsmPrivateEndpointConnectionResource(ArmClient client, MhsmPrivateEndpointConnectionResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual MhsmPrivateEndpointConnectionData Data
+        public virtual MhsmPrivateEndpointConnectionResourceData Data
         {
             get
             {

@@ -16,7 +16,7 @@ namespace SupersetInheritance.Models
     {
         internal static SupersetModel4ListResult DeserializeSupersetModel4ListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<SupersetModel4Data>> value = default;
+            Optional<IReadOnlyList<SupersetModel4ResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace SupersetInheritance.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<SupersetModel4Data> array = new List<SupersetModel4Data>();
+                    List<SupersetModel4ResourceData> array = new List<SupersetModel4ResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(SupersetModel4Data.DeserializeSupersetModel4Data(item));
+                        array.Add(SupersetModel4ResourceData.DeserializeSupersetModel4ResourceData(item));
                     }
                     value = array;
                     continue;

@@ -30,7 +30,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _subParentWithLocResourceSubParentWithLocsClientDiagnostics;
         private readonly SubParentWithLocsRestOperations _subParentWithLocResourceSubParentWithLocsRestClient;
-        private readonly SubParentWithLocData _data;
+        private readonly SubParentWithLocResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithLocResource"/> class for mocking. </summary>
         protected SubParentWithLocResource()
@@ -40,7 +40,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "SubParentWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubParentWithLocResource(ArmClient client, SubParentWithLocData data) : this(client, data.Id)
+        internal SubParentWithLocResource(ArmClient client, SubParentWithLocResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SubParentWithLocData Data
+        public virtual SubParentWithLocResourceData Data
         {
             get
             {

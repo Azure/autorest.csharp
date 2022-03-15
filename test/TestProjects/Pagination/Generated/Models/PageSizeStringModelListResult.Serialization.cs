@@ -16,7 +16,7 @@ namespace Pagination.Models
     {
         internal static PageSizeStringModelListResult DeserializePageSizeStringModelListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<PageSizeStringModelData>> value = default;
+            Optional<IReadOnlyList<PageSizeStringModelResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace Pagination.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PageSizeStringModelData> array = new List<PageSizeStringModelData>();
+                    List<PageSizeStringModelResourceData> array = new List<PageSizeStringModelResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PageSizeStringModelData.DeserializePageSizeStringModelData(item));
+                        array.Add(PageSizeStringModelResourceData.DeserializePageSizeStringModelResourceData(item));
                     }
                     value = array;
                     continue;

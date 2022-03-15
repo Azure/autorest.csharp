@@ -31,7 +31,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _subParentWithNonResChWithLocResourceSubParentWithNonResChWithLocsClientDiagnostics;
         private readonly SubParentWithNonResChWithLocsRestOperations _subParentWithNonResChWithLocResourceSubParentWithNonResChWithLocsRestClient;
-        private readonly SubParentWithNonResChWithLocData _data;
+        private readonly SubParentWithNonResChWithLocResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubParentWithNonResChWithLocResource"/> class for mocking. </summary>
         protected SubParentWithNonResChWithLocResource()
@@ -41,7 +41,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "SubParentWithNonResChWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubParentWithNonResChWithLocResource(ArmClient client, SubParentWithNonResChWithLocData data) : this(client, data.Id)
+        internal SubParentWithNonResChWithLocResource(ArmClient client, SubParentWithNonResChWithLocResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SubParentWithNonResChWithLocData Data
+        public virtual SubParentWithNonResChWithLocResourceData Data
         {
             get
             {

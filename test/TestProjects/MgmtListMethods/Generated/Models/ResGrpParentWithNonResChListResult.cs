@@ -18,7 +18,7 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of ResGrpParentWithNonResChListResult. </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal ResGrpParentWithNonResChListResult(IEnumerable<ResGrpParentWithNonResChData> value)
+        internal ResGrpParentWithNonResChListResult(IEnumerable<ResGrpParentWithNonResChResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of ResGrpParentWithNonResChListResult. </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        internal ResGrpParentWithNonResChListResult(IReadOnlyList<ResGrpParentWithNonResChData> value, string nextLink)
+        internal ResGrpParentWithNonResChListResult(IReadOnlyList<ResGrpParentWithNonResChResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> List. </summary>
-        public IReadOnlyList<ResGrpParentWithNonResChData> Value { get; }
+        public IReadOnlyList<ResGrpParentWithNonResChResourceData> Value { get; }
         /// <summary> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </summary>
         public string NextLink { get; }
     }

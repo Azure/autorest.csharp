@@ -37,7 +37,7 @@ namespace MgmtExpandResourceTypes
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, ZoneData parameters, string ifMatch, string ifNoneMatch)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string zoneName, ZoneResourceData parameters, string ifMatch, string ifNoneMatch)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -79,7 +79,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ZoneData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ZoneResourceData>> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, ZoneResourceData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -93,9 +93,9 @@ namespace MgmtExpandResourceTypes
                 case 200:
                 case 201:
                     {
-                        ZoneData value = default;
+                        ZoneResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ZoneData.DeserializeZoneData(document.RootElement);
+                        value = ZoneResourceData.DeserializeZoneResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -113,7 +113,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ZoneData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string zoneName, ZoneData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
+        public Response<ZoneResourceData> CreateOrUpdate(string subscriptionId, string resourceGroupName, string zoneName, ZoneResourceData parameters, string ifMatch = null, string ifNoneMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -127,9 +127,9 @@ namespace MgmtExpandResourceTypes
                 case 200:
                 case 201:
                     {
-                        ZoneData value = default;
+                        ZoneResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ZoneData.DeserializeZoneData(document.RootElement);
+                        value = ZoneResourceData.DeserializeZoneResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -242,7 +242,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ZoneData>> GetAsync(string subscriptionId, string resourceGroupName, string zoneName, CancellationToken cancellationToken = default)
+        public async Task<Response<ZoneResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string zoneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -254,13 +254,13 @@ namespace MgmtExpandResourceTypes
             {
                 case 200:
                     {
-                        ZoneData value = default;
+                        ZoneResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ZoneData.DeserializeZoneData(document.RootElement);
+                        value = ZoneResourceData.DeserializeZoneResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ZoneData)null, message.Response);
+                    return Response.FromValue((ZoneResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -273,7 +273,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ZoneData> Get(string subscriptionId, string resourceGroupName, string zoneName, CancellationToken cancellationToken = default)
+        public Response<ZoneResourceData> Get(string subscriptionId, string resourceGroupName, string zoneName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -285,13 +285,13 @@ namespace MgmtExpandResourceTypes
             {
                 case 200:
                     {
-                        ZoneData value = default;
+                        ZoneResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ZoneData.DeserializeZoneData(document.RootElement);
+                        value = ZoneResourceData.DeserializeZoneResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ZoneData)null, message.Response);
+                    return Response.FromValue((ZoneResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -334,7 +334,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<ZoneData>> UpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, PatchableZoneData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ZoneResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string zoneName, PatchableZoneData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -347,9 +347,9 @@ namespace MgmtExpandResourceTypes
             {
                 case 200:
                     {
-                        ZoneData value = default;
+                        ZoneResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ZoneData.DeserializeZoneData(document.RootElement);
+                        value = ZoneResourceData.DeserializeZoneResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -366,7 +366,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="zoneName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<ZoneData> Update(string subscriptionId, string resourceGroupName, string zoneName, PatchableZoneData data, string ifMatch = null, CancellationToken cancellationToken = default)
+        public Response<ZoneResourceData> Update(string subscriptionId, string resourceGroupName, string zoneName, PatchableZoneData data, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -379,9 +379,9 @@ namespace MgmtExpandResourceTypes
             {
                 case 200:
                     {
-                        ZoneData value = default;
+                        ZoneResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ZoneData.DeserializeZoneData(document.RootElement);
+                        value = ZoneResourceData.DeserializeZoneResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

@@ -61,7 +61,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="policyAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FakePolicyAssignmentData>> DeleteAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentResourceData>> DeleteAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(scope, nameof(scope));
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -72,13 +72,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        FakePolicyAssignmentData value = default;
+                        FakePolicyAssignmentResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentResourceData.DeserializeFakePolicyAssignmentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue((FakePolicyAssignmentData)null, message.Response);
+                    return Response.FromValue((FakePolicyAssignmentResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -90,7 +90,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="policyAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FakePolicyAssignmentData> Delete(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentResourceData> Delete(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(scope, nameof(scope));
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -101,19 +101,19 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        FakePolicyAssignmentData value = default;
+                        FakePolicyAssignmentResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentResourceData.DeserializeFakePolicyAssignmentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue((FakePolicyAssignmentData)null, message.Response);
+                    return Response.FromValue((FakePolicyAssignmentResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal Azure.Core.HttpMessage CreateCreateRequest(string scope, string policyAssignmentName, FakePolicyAssignmentData parameters)
+        internal Azure.Core.HttpMessage CreateCreateRequest(string scope, string policyAssignmentName, FakePolicyAssignmentResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -142,7 +142,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FakePolicyAssignmentData>> CreateAsync(string scope, string policyAssignmentName, FakePolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentResourceData>> CreateAsync(string scope, string policyAssignmentName, FakePolicyAssignmentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(scope, nameof(scope));
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -154,9 +154,9 @@ namespace MgmtScopeResource
             {
                 case 201:
                     {
-                        FakePolicyAssignmentData value = default;
+                        FakePolicyAssignmentResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentResourceData.DeserializeFakePolicyAssignmentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -171,7 +171,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FakePolicyAssignmentData> Create(string scope, string policyAssignmentName, FakePolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentResourceData> Create(string scope, string policyAssignmentName, FakePolicyAssignmentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(scope, nameof(scope));
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -183,9 +183,9 @@ namespace MgmtScopeResource
             {
                 case 201:
                     {
-                        FakePolicyAssignmentData value = default;
+                        FakePolicyAssignmentResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentResourceData.DeserializeFakePolicyAssignmentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -217,7 +217,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="policyAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FakePolicyAssignmentData>> GetAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public async Task<Response<FakePolicyAssignmentResourceData>> GetAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(scope, nameof(scope));
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -228,13 +228,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        FakePolicyAssignmentData value = default;
+                        FakePolicyAssignmentResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentResourceData.DeserializeFakePolicyAssignmentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FakePolicyAssignmentData)null, message.Response);
+                    return Response.FromValue((FakePolicyAssignmentResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -246,7 +246,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="policyAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FakePolicyAssignmentData> Get(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
+        public Response<FakePolicyAssignmentResourceData> Get(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(scope, nameof(scope));
             Argument.AssertNotNullOrEmpty(policyAssignmentName, nameof(policyAssignmentName));
@@ -257,13 +257,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        FakePolicyAssignmentData value = default;
+                        FakePolicyAssignmentResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakePolicyAssignmentData.DeserializeFakePolicyAssignmentData(document.RootElement);
+                        value = FakePolicyAssignmentResourceData.DeserializeFakePolicyAssignmentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FakePolicyAssignmentData)null, message.Response);
+                    return Response.FromValue((FakePolicyAssignmentResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

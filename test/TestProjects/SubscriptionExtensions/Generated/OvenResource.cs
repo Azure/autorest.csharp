@@ -30,7 +30,7 @@ namespace SubscriptionExtensions
 
         private readonly ClientDiagnostics _ovenResourceOvensClientDiagnostics;
         private readonly OvensRestOperations _ovenResourceOvensRestClient;
-        private readonly OvenData _data;
+        private readonly OvenResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="OvenResource"/> class for mocking. </summary>
         protected OvenResource()
@@ -40,7 +40,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref = "OvenResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal OvenResource(ArmClient client, OvenData data) : this(client, data.Id)
+        internal OvenResource(ArmClient client, OvenResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace SubscriptionExtensions
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual OvenData Data
+        public virtual OvenResourceData Data
         {
             get
             {

@@ -16,7 +16,7 @@ namespace MgmtKeyvault.Models
     {
         internal static ManagedHsmListResult DeserializeManagedHsmListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<ManagedHsmData>> value = default;
+            Optional<IReadOnlyList<ManagedHsmResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtKeyvault.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ManagedHsmData> array = new List<ManagedHsmData>();
+                    List<ManagedHsmResourceData> array = new List<ManagedHsmResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ManagedHsmData.DeserializeManagedHsmData(item));
+                        array.Add(ManagedHsmResourceData.DeserializeManagedHsmResourceData(item));
                     }
                     value = array;
                     continue;

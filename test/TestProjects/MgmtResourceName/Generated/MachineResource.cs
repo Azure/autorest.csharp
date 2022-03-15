@@ -29,7 +29,7 @@ namespace MgmtResourceName
 
         private readonly ClientDiagnostics _machineResourceMachinesClientDiagnostics;
         private readonly MachinesRestOperations _machineResourceMachinesRestClient;
-        private readonly MachineData _data;
+        private readonly MachineResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="MachineResource"/> class for mocking. </summary>
         protected MachineResource()
@@ -39,7 +39,7 @@ namespace MgmtResourceName
         /// <summary> Initializes a new instance of the <see cref = "MachineResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MachineResource(ArmClient client, MachineData data) : this(client, data.Id)
+        internal MachineResource(ArmClient client, MachineResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace MgmtResourceName
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual MachineData Data
+        public virtual MachineResourceData Data
         {
             get
             {

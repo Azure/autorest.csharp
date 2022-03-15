@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
         private readonly StorageAccountsRestOperations _storageAccountResourceStorageAccountsRestClient;
         private readonly ClientDiagnostics _privateLinkResourcesClientDiagnostics;
         private readonly PrivateLinkResourcesRestOperations _privateLinkResourcesRestClient;
-        private readonly StorageAccountData _data;
+        private readonly StorageAccountResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccountResource"/> class for mocking. </summary>
         protected StorageAccountResource()
@@ -43,7 +43,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "StorageAccountResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal StorageAccountResource(ArmClient client, StorageAccountData data) : this(client, data.Id)
+        internal StorageAccountResource(ArmClient client, StorageAccountResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -72,7 +72,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual StorageAccountData Data
+        public virtual StorageAccountResourceData Data
         {
             get
             {

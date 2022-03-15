@@ -62,7 +62,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<OvenResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<OvenResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string ovenName, OvenResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -95,7 +95,7 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="ovenName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="ovenName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<OvenResource> CreateOrUpdate(WaitUntil waitUntil, string ovenName, OvenData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<OvenResource> CreateOrUpdate(WaitUntil waitUntil, string ovenName, OvenResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(ovenName, nameof(ovenName));
             Argument.AssertNotNull(parameters, nameof(parameters));

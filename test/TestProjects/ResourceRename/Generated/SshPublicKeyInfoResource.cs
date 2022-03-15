@@ -29,7 +29,7 @@ namespace ResourceRename
 
         private readonly ClientDiagnostics _sshPublicKeyInfoResourceSshPublicKeysClientDiagnostics;
         private readonly SshPublicKeysRestOperations _sshPublicKeyInfoResourceSshPublicKeysRestClient;
-        private readonly SshPublicKeyInfoData _data;
+        private readonly SshPublicKeyInfoResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyInfoResource"/> class for mocking. </summary>
         protected SshPublicKeyInfoResource()
@@ -39,7 +39,7 @@ namespace ResourceRename
         /// <summary> Initializes a new instance of the <see cref = "SshPublicKeyInfoResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SshPublicKeyInfoResource(ArmClient client, SshPublicKeyInfoData data) : this(client, data.Id)
+        internal SshPublicKeyInfoResource(ArmClient client, SshPublicKeyInfoResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace ResourceRename
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SshPublicKeyInfoData Data
+        public virtual SshPublicKeyInfoResourceData Data
         {
             get
             {

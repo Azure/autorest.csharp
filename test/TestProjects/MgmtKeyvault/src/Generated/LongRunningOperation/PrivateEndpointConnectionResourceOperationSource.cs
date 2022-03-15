@@ -26,14 +26,14 @@ namespace MgmtKeyvault
         PrivateEndpointConnectionResource IOperationSource<PrivateEndpointConnectionResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
+            var data = PrivateEndpointConnectionResourceData.DeserializePrivateEndpointConnectionResourceData(document.RootElement);
             return new PrivateEndpointConnectionResource(_client, data);
         }
 
         async ValueTask<PrivateEndpointConnectionResource> IOperationSource<PrivateEndpointConnectionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(document.RootElement);
+            var data = PrivateEndpointConnectionResourceData.DeserializePrivateEndpointConnectionResourceData(document.RootElement);
             return new PrivateEndpointConnectionResource(_client, data);
         }
     }

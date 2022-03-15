@@ -16,7 +16,7 @@ namespace MgmtDiscriminator.Models
     {
         internal static DeliveryRuleListResult DeserializeDeliveryRuleListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<DeliveryRuleData>> value = default;
+            Optional<IReadOnlyList<DeliveryRuleResourceData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -26,10 +26,10 @@ namespace MgmtDiscriminator.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<DeliveryRuleData> array = new List<DeliveryRuleData>();
+                    List<DeliveryRuleResourceData> array = new List<DeliveryRuleResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeliveryRuleData.DeserializeDeliveryRuleData(item));
+                        array.Add(DeliveryRuleResourceData.DeserializeDeliveryRuleResourceData(item));
                     }
                     value = array;
                     continue;

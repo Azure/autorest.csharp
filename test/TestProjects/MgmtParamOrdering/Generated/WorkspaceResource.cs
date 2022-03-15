@@ -30,7 +30,7 @@ namespace MgmtParamOrdering
 
         private readonly ClientDiagnostics _workspaceResourceWorkspacesClientDiagnostics;
         private readonly WorkspacesRestOperations _workspaceResourceWorkspacesRestClient;
-        private readonly WorkspaceData _data;
+        private readonly WorkspaceResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="WorkspaceResource"/> class for mocking. </summary>
         protected WorkspaceResource()
@@ -40,7 +40,7 @@ namespace MgmtParamOrdering
         /// <summary> Initializes a new instance of the <see cref = "WorkspaceResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal WorkspaceResource(ArmClient client, WorkspaceData data) : this(client, data.Id)
+        internal WorkspaceResource(ArmClient client, WorkspaceResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtParamOrdering
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual WorkspaceData Data
+        public virtual WorkspaceResourceData Data
         {
             get
             {

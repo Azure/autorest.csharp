@@ -62,7 +62,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public virtual async Task<ArmOperation<AnotherParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<AnotherParentResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string anotherName, AnotherParentResourceData anotherBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
             Argument.AssertNotNull(anotherBody, nameof(anotherBody));
@@ -95,7 +95,7 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public virtual ArmOperation<AnotherParentResource> CreateOrUpdate(WaitUntil waitUntil, string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<AnotherParentResource> CreateOrUpdate(WaitUntil waitUntil, string anotherName, AnotherParentResourceData anotherBody, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
             Argument.AssertNotNull(anotherBody, nameof(anotherBody));

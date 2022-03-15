@@ -30,7 +30,7 @@ namespace MgmtOperations
 
         private readonly ClientDiagnostics _availabilitySetChildResourceavailabilitySetChildClientDiagnostics;
         private readonly AvailabilitySetChildRestOperations _availabilitySetChildResourceavailabilitySetChildRestClient;
-        private readonly AvailabilitySetChildData _data;
+        private readonly AvailabilitySetChildResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildResource"/> class for mocking. </summary>
         protected AvailabilitySetChildResource()
@@ -40,7 +40,7 @@ namespace MgmtOperations
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetChildResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AvailabilitySetChildResource(ArmClient client, AvailabilitySetChildData data) : this(client, data.Id)
+        internal AvailabilitySetChildResource(ArmClient client, AvailabilitySetChildResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtOperations
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AvailabilitySetChildData Data
+        public virtual AvailabilitySetChildResourceData Data
         {
             get
             {

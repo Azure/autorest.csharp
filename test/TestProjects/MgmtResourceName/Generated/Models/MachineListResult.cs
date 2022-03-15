@@ -17,20 +17,20 @@ namespace MgmtResourceName.Models
         /// <summary> Initializes a new instance of MachineListResult. </summary>
         internal MachineListResult()
         {
-            Value = new ChangeTrackingList<MachineData>();
+            Value = new ChangeTrackingList<MachineResourceData>();
         }
 
         /// <summary> Initializes a new instance of MachineListResult. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal MachineListResult(IReadOnlyList<MachineData> value, string nextLink)
+        internal MachineListResult(IReadOnlyList<MachineResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>
-        public IReadOnlyList<MachineData> Value { get; }
+        public IReadOnlyList<MachineResourceData> Value { get; }
         /// <summary> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </summary>
         public string NextLink { get; }
     }

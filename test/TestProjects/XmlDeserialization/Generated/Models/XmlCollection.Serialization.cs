@@ -17,7 +17,7 @@ namespace XmlDeserialization.Models
     {
         internal static XmlCollection DeserializeXmlCollection(JsonElement element)
         {
-            Optional<IReadOnlyList<XmlInstanceData>> value = default;
+            Optional<IReadOnlyList<XmlInstanceResourceData>> value = default;
             Optional<long> count = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -29,10 +29,10 @@ namespace XmlDeserialization.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<XmlInstanceData> array = new List<XmlInstanceData>();
+                    List<XmlInstanceResourceData> array = new List<XmlInstanceResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(XmlInstanceData.DeserializeXmlInstanceData(item));
+                        array.Add(XmlInstanceResourceData.DeserializeXmlInstanceResourceData(item));
                     }
                     value = array;
                     continue;
@@ -60,7 +60,7 @@ namespace XmlDeserialization.Models
         {
             long? count = default;
             string nextLink = default;
-            IReadOnlyList<XmlInstanceData> value = default;
+            IReadOnlyList<XmlInstanceResourceData> value = default;
             if (element.Element("count") is XElement countElement)
             {
                 count = (long?)countElement;
@@ -69,10 +69,10 @@ namespace XmlDeserialization.Models
             {
                 nextLink = (string)nextLinkElement;
             }
-            var array = new List<XmlInstanceData>();
+            var array = new List<XmlInstanceResourceData>();
             foreach (var e in element.Elements("XmlInstance"))
             {
-                array.Add(XmlInstanceData.DeserializeXmlInstanceData(e));
+                array.Add(XmlInstanceResourceData.DeserializeXmlInstanceResourceData(e));
             }
             value = array;
             return new XmlCollection(value, count, nextLink);

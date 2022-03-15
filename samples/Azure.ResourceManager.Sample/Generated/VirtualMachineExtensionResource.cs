@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
 
         private readonly ClientDiagnostics _virtualMachineExtensionResourceVirtualMachineExtensionsClientDiagnostics;
         private readonly VirtualMachineExtensionsRestOperations _virtualMachineExtensionResourceVirtualMachineExtensionsRestClient;
-        private readonly VirtualMachineExtensionData _data;
+        private readonly VirtualMachineExtensionResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionResource"/> class for mocking. </summary>
         protected VirtualMachineExtensionResource()
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineExtensionResource(ArmClient client, VirtualMachineExtensionData data) : this(client, data.Id)
+        internal VirtualMachineExtensionResource(ArmClient client, VirtualMachineExtensionResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineExtensionData Data
+        public virtual VirtualMachineExtensionResourceData Data
         {
             get
             {

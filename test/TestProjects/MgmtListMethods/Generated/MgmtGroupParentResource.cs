@@ -30,7 +30,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _mgmtGroupParentResourceMgmtGroupParentsClientDiagnostics;
         private readonly MgmtGroupParentsRestOperations _mgmtGroupParentResourceMgmtGroupParentsRestClient;
-        private readonly MgmtGroupParentData _data;
+        private readonly MgmtGroupParentResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentResource"/> class for mocking. </summary>
         protected MgmtGroupParentResource()
@@ -40,7 +40,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "MgmtGroupParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MgmtGroupParentResource(ArmClient client, MgmtGroupParentData data) : this(client, data.Id)
+        internal MgmtGroupParentResource(ArmClient client, MgmtGroupParentResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual MgmtGroupParentData Data
+        public virtual MgmtGroupParentResourceData Data
         {
             get
             {

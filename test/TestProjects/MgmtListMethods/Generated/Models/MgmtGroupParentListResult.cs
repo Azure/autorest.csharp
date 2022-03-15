@@ -18,7 +18,7 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of MgmtGroupParentListResult. </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal MgmtGroupParentListResult(IEnumerable<MgmtGroupParentData> value)
+        internal MgmtGroupParentListResult(IEnumerable<MgmtGroupParentResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtListMethods.Models
         /// <summary> Initializes a new instance of MgmtGroupParentListResult. </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        internal MgmtGroupParentListResult(IReadOnlyList<MgmtGroupParentData> value, string nextLink)
+        internal MgmtGroupParentListResult(IReadOnlyList<MgmtGroupParentResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> List. </summary>
-        public IReadOnlyList<MgmtGroupParentData> Value { get; }
+        public IReadOnlyList<MgmtGroupParentResourceData> Value { get; }
         /// <summary> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </summary>
         public string NextLink { get; }
     }

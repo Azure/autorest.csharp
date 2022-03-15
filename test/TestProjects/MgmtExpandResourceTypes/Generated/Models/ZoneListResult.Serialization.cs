@@ -16,7 +16,7 @@ namespace MgmtExpandResourceTypes.Models
     {
         internal static ZoneListResult DeserializeZoneListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<ZoneData>> value = default;
+            Optional<IReadOnlyList<ZoneResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtExpandResourceTypes.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ZoneData> array = new List<ZoneData>();
+                    List<ZoneResourceData> array = new List<ZoneResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ZoneData.DeserializeZoneData(item));
+                        array.Add(ZoneResourceData.DeserializeZoneResourceData(item));
                     }
                     value = array;
                     continue;

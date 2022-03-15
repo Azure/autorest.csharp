@@ -63,7 +63,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<XmlInstanceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<XmlInstanceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string xmlName, XmlInstanceResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -97,7 +97,7 @@ namespace XmlDeserialization
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<XmlInstanceResource> CreateOrUpdate(WaitUntil waitUntil, string xmlName, XmlInstanceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<XmlInstanceResource> CreateOrUpdate(WaitUntil waitUntil, string xmlName, XmlInstanceResourceData parameters, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(xmlName, nameof(xmlName));
             Argument.AssertNotNull(parameters, nameof(parameters));

@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _immutabilityPolicyResourceBlobContainersClientDiagnostics;
         private readonly BlobContainersRestOperations _immutabilityPolicyResourceBlobContainersRestClient;
-        private readonly ImmutabilityPolicyData _data;
+        private readonly ImmutabilityPolicyResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ImmutabilityPolicyResource"/> class for mocking. </summary>
         protected ImmutabilityPolicyResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "ImmutabilityPolicyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ImmutabilityPolicyResource(ArmClient client, ImmutabilityPolicyData data) : this(client, data.Id)
+        internal ImmutabilityPolicyResource(ArmClient client, ImmutabilityPolicyResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ImmutabilityPolicyData Data
+        public virtual ImmutabilityPolicyResourceData Data
         {
             get
             {
@@ -201,7 +201,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<ArmOperation<ImmutabilityPolicyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ImmutabilityPolicyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, ImmutabilityPolicyResourceData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _immutabilityPolicyResourceBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.CreateOrUpdate");
             scope.Start();
@@ -229,7 +229,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ArmOperation<ImmutabilityPolicyResource> CreateOrUpdate(WaitUntil waitUntil, ImmutabilityPolicyData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ImmutabilityPolicyResource> CreateOrUpdate(WaitUntil waitUntil, ImmutabilityPolicyResourceData parameters = null, string ifMatch = null, CancellationToken cancellationToken = default)
         {
             using var scope = _immutabilityPolicyResourceBlobContainersClientDiagnostics.CreateScope("ImmutabilityPolicyResource.CreateOrUpdate");
             scope.Start();
@@ -309,7 +309,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual async Task<Response<ImmutabilityPolicyResource>> ExtendImmutabilityPolicyAsync(string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ImmutabilityPolicyResource>> ExtendImmutabilityPolicyAsync(string ifMatch, ImmutabilityPolicyResourceData parameters = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 
@@ -336,7 +336,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual Response<ImmutabilityPolicyResource> ExtendImmutabilityPolicy(string ifMatch, ImmutabilityPolicyData parameters = null, CancellationToken cancellationToken = default)
+        public virtual Response<ImmutabilityPolicyResource> ExtendImmutabilityPolicy(string ifMatch, ImmutabilityPolicyResourceData parameters = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(ifMatch, nameof(ifMatch));
 

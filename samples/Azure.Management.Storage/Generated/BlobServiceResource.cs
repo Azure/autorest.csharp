@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _blobServiceResourceBlobServicesClientDiagnostics;
         private readonly BlobServicesRestOperations _blobServiceResourceBlobServicesRestClient;
-        private readonly BlobServiceData _data;
+        private readonly BlobServiceResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BlobServiceResource"/> class for mocking. </summary>
         protected BlobServiceResource()
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "BlobServiceResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BlobServiceResource(ArmClient client, BlobServiceData data) : this(client, data.Id)
+        internal BlobServiceResource(ArmClient client, BlobServiceResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BlobServiceData Data
+        public virtual BlobServiceResourceData Data
         {
             get
             {
@@ -174,7 +174,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<BlobServiceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<BlobServiceResource>> CreateOrUpdateAsync(WaitUntil waitUntil, BlobServiceResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 
@@ -204,7 +204,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<BlobServiceResource> CreateOrUpdate(WaitUntil waitUntil, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<BlobServiceResource> CreateOrUpdate(WaitUntil waitUntil, BlobServiceResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(parameters, nameof(parameters));
 

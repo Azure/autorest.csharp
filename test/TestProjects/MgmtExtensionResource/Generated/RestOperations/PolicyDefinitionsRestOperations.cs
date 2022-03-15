@@ -37,7 +37,7 @@ namespace MgmtExtensionResource
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string policyDefinitionName, PolicyDefinitionData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string policyDefinitionName, PolicyDefinitionResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,7 +66,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PolicyDefinitionData>> CreateOrUpdateAsync(string subscriptionId, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PolicyDefinitionResourceData>> CreateOrUpdateAsync(string subscriptionId, string policyDefinitionName, PolicyDefinitionResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -78,9 +78,9 @@ namespace MgmtExtensionResource
             {
                 case 201:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -95,7 +95,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PolicyDefinitionData> CreateOrUpdate(string subscriptionId, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public Response<PolicyDefinitionResourceData> CreateOrUpdate(string subscriptionId, string policyDefinitionName, PolicyDefinitionResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -107,9 +107,9 @@ namespace MgmtExtensionResource
             {
                 case 201:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -205,7 +205,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PolicyDefinitionData>> GetAsync(string subscriptionId, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async Task<Response<PolicyDefinitionResourceData>> GetAsync(string subscriptionId, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -216,13 +216,13 @@ namespace MgmtExtensionResource
             {
                 case 200:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PolicyDefinitionData)null, message.Response);
+                    return Response.FromValue((PolicyDefinitionResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -234,7 +234,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PolicyDefinitionData> Get(string subscriptionId, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public Response<PolicyDefinitionResourceData> Get(string subscriptionId, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -245,13 +245,13 @@ namespace MgmtExtensionResource
             {
                 case 200:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PolicyDefinitionData)null, message.Response);
+                    return Response.FromValue((PolicyDefinitionResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -278,7 +278,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PolicyDefinitionData>> GetBuiltInAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async Task<Response<PolicyDefinitionResourceData>> GetBuiltInAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
@@ -288,13 +288,13 @@ namespace MgmtExtensionResource
             {
                 case 200:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PolicyDefinitionData)null, message.Response);
+                    return Response.FromValue((PolicyDefinitionResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -305,7 +305,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PolicyDefinitionData> GetBuiltIn(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public Response<PolicyDefinitionResourceData> GetBuiltIn(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
 
@@ -315,19 +315,19 @@ namespace MgmtExtensionResource
             {
                 case 200:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PolicyDefinitionData)null, message.Response);
+                    return Response.FromValue((PolicyDefinitionResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateAtManagementGroupRequest(string managementGroupId, string policyDefinitionName, PolicyDefinitionData parameters)
+        internal HttpMessage CreateCreateOrUpdateAtManagementGroupRequest(string managementGroupId, string policyDefinitionName, PolicyDefinitionResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -356,7 +356,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="managementGroupId"/>, <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="managementGroupId"/> or <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PolicyDefinitionData>> CreateOrUpdateAtManagementGroupAsync(string managementGroupId, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<PolicyDefinitionResourceData>> CreateOrUpdateAtManagementGroupAsync(string managementGroupId, string policyDefinitionName, PolicyDefinitionResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(managementGroupId, nameof(managementGroupId));
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -368,9 +368,9 @@ namespace MgmtExtensionResource
             {
                 case 201:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -385,7 +385,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="managementGroupId"/>, <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="managementGroupId"/> or <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PolicyDefinitionData> CreateOrUpdateAtManagementGroup(string managementGroupId, string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public Response<PolicyDefinitionResourceData> CreateOrUpdateAtManagementGroup(string managementGroupId, string policyDefinitionName, PolicyDefinitionResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(managementGroupId, nameof(managementGroupId));
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -397,9 +397,9 @@ namespace MgmtExtensionResource
             {
                 case 201:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -495,7 +495,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="managementGroupId"/> or <paramref name="policyDefinitionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="managementGroupId"/> or <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<PolicyDefinitionData>> GetAtManagementGroupAsync(string managementGroupId, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async Task<Response<PolicyDefinitionResourceData>> GetAtManagementGroupAsync(string managementGroupId, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(managementGroupId, nameof(managementGroupId));
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -506,13 +506,13 @@ namespace MgmtExtensionResource
             {
                 case 200:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PolicyDefinitionData)null, message.Response);
+                    return Response.FromValue((PolicyDefinitionResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -524,7 +524,7 @@ namespace MgmtExtensionResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="managementGroupId"/> or <paramref name="policyDefinitionName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="managementGroupId"/> or <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<PolicyDefinitionData> GetAtManagementGroup(string managementGroupId, string policyDefinitionName, CancellationToken cancellationToken = default)
+        public Response<PolicyDefinitionResourceData> GetAtManagementGroup(string managementGroupId, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(managementGroupId, nameof(managementGroupId));
             Argument.AssertNotNullOrEmpty(policyDefinitionName, nameof(policyDefinitionName));
@@ -535,13 +535,13 @@ namespace MgmtExtensionResource
             {
                 case 200:
                     {
-                        PolicyDefinitionData value = default;
+                        PolicyDefinitionResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = PolicyDefinitionData.DeserializePolicyDefinitionData(document.RootElement);
+                        value = PolicyDefinitionResourceData.DeserializePolicyDefinitionResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((PolicyDefinitionData)null, message.Response);
+                    return Response.FromValue((PolicyDefinitionResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

@@ -62,7 +62,7 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual async Task<ArmOperation<DeliveryRuleResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, DeliveryRuleData body, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<DeliveryRuleResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, DeliveryRuleResourceData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(body, nameof(body));
@@ -95,7 +95,7 @@ namespace MgmtDiscriminator
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual ArmOperation<DeliveryRuleResource> CreateOrUpdate(WaitUntil waitUntil, string name, DeliveryRuleData body, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<DeliveryRuleResource> CreateOrUpdate(WaitUntil waitUntil, string name, DeliveryRuleResourceData body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(body, nameof(body));

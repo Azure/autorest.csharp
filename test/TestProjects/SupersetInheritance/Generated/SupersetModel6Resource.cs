@@ -29,7 +29,7 @@ namespace SupersetInheritance
 
         private readonly ClientDiagnostics _supersetModel6ResourceSupersetModel6sClientDiagnostics;
         private readonly SupersetModel6SRestOperations _supersetModel6ResourceSupersetModel6sRestClient;
-        private readonly SupersetModel6Data _data;
+        private readonly SupersetModel6ResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SupersetModel6Resource"/> class for mocking. </summary>
         protected SupersetModel6Resource()
@@ -39,7 +39,7 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref = "SupersetModel6Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SupersetModel6Resource(ArmClient client, SupersetModel6Data data) : this(client, data.Id)
+        internal SupersetModel6Resource(ArmClient client, SupersetModel6ResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace SupersetInheritance
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SupersetModel6Data Data
+        public virtual SupersetModel6ResourceData Data
         {
             get
             {

@@ -108,7 +108,7 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, TrackedResourceModel1Data parameters)
+        internal HttpMessage CreatePutRequest(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, TrackedResourceModel1ResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -139,7 +139,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TrackedResourceModel1Data>> PutAsync(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<TrackedResourceModel1ResourceData>> PutAsync(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, TrackedResourceModel1ResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -152,9 +152,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        TrackedResourceModel1Data value = default;
+                        TrackedResourceModel1ResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(document.RootElement);
+                        value = TrackedResourceModel1ResourceData.DeserializeTrackedResourceModel1ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -169,7 +169,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TrackedResourceModel1Data> Put(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public Response<TrackedResourceModel1ResourceData> Put(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, TrackedResourceModel1ResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -182,9 +182,9 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        TrackedResourceModel1Data value = default;
+                        TrackedResourceModel1ResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(document.RootElement);
+                        value = TrackedResourceModel1ResourceData.DeserializeTrackedResourceModel1ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -218,7 +218,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<TrackedResourceModel1Data>> GetAsync(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public async Task<Response<TrackedResourceModel1ResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -230,13 +230,13 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        TrackedResourceModel1Data value = default;
+                        TrackedResourceModel1ResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(document.RootElement);
+                        value = TrackedResourceModel1ResourceData.DeserializeTrackedResourceModel1ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TrackedResourceModel1Data)null, message.Response);
+                    return Response.FromValue((TrackedResourceModel1ResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -248,7 +248,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<TrackedResourceModel1Data> Get(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public Response<TrackedResourceModel1ResourceData> Get(string subscriptionId, string resourceGroupName, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -260,13 +260,13 @@ namespace SupersetFlattenInheritance
             {
                 case 200:
                     {
-                        TrackedResourceModel1Data value = default;
+                        TrackedResourceModel1ResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TrackedResourceModel1Data.DeserializeTrackedResourceModel1Data(document.RootElement);
+                        value = TrackedResourceModel1ResourceData.DeserializeTrackedResourceModel1ResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((TrackedResourceModel1Data)null, message.Response);
+                    return Response.FromValue((TrackedResourceModel1ResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

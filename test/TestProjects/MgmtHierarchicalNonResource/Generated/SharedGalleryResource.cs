@@ -34,7 +34,7 @@ namespace MgmtHierarchicalNonResource
         private readonly SharedGalleryImagesRestOperations _sharedGalleryImagesRestClient;
         private readonly ClientDiagnostics _sharedGalleryImageVersionsClientDiagnostics;
         private readonly SharedGalleryImageVersionsRestOperations _sharedGalleryImageVersionsRestClient;
-        private readonly SharedGalleryData _data;
+        private readonly SharedGalleryResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryResource"/> class for mocking. </summary>
         protected SharedGalleryResource()
@@ -44,7 +44,7 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Initializes a new instance of the <see cref = "SharedGalleryResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SharedGalleryResource(ArmClient client, SharedGalleryData data) : this(client, data.Id)
+        internal SharedGalleryResource(ArmClient client, SharedGalleryResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -75,7 +75,7 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SharedGalleryData Data
+        public virtual SharedGalleryResourceData Data
         {
             get
             {

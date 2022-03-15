@@ -30,7 +30,7 @@ namespace MgmtExtensionCommonRestOperation
 
         private readonly ClientDiagnostics _typeTwoResourceCommonClientDiagnostics;
         private readonly CommonRestOperations _typeTwoResourceCommonRestClient;
-        private readonly TypeTwoData _data;
+        private readonly TypeTwoResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TypeTwoResource"/> class for mocking. </summary>
         protected TypeTwoResource()
@@ -40,7 +40,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <summary> Initializes a new instance of the <see cref = "TypeTwoResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TypeTwoResource(ArmClient client, TypeTwoData data) : this(client, data.Id)
+        internal TypeTwoResource(ArmClient client, TypeTwoResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtExtensionCommonRestOperation
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TypeTwoData Data
+        public virtual TypeTwoResourceData Data
         {
             get
             {

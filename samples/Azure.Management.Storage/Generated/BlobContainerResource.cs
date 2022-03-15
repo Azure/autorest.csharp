@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _blobContainerResourceBlobContainersClientDiagnostics;
         private readonly BlobContainersRestOperations _blobContainerResourceBlobContainersRestClient;
-        private readonly BlobContainerData _data;
+        private readonly BlobContainerResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BlobContainerResource"/> class for mocking. </summary>
         protected BlobContainerResource()
@@ -40,7 +40,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "BlobContainerResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BlobContainerResource(ArmClient client, BlobContainerData data) : this(client, data.Id)
+        internal BlobContainerResource(ArmClient client, BlobContainerResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BlobContainerData Data
+        public virtual BlobContainerResourceData Data
         {
             get
             {
@@ -198,7 +198,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public virtual async Task<Response<BlobContainerResource>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BlobContainerResource>> UpdateAsync(BlobContainerResourceData blobContainer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(blobContainer, nameof(blobContainer));
 
@@ -224,7 +224,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public virtual Response<BlobContainerResource> Update(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual Response<BlobContainerResource> Update(BlobContainerResourceData blobContainer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(blobContainer, nameof(blobContainer));
 

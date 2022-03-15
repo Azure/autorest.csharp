@@ -29,7 +29,7 @@ namespace MgmtExtensionResource
 
         private readonly ClientDiagnostics _managementGroupPolicyDefinitionResourcePolicyDefinitionsClientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _managementGroupPolicyDefinitionResourcePolicyDefinitionsRestClient;
-        private readonly PolicyDefinitionData _data;
+        private readonly PolicyDefinitionResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupPolicyDefinitionResource"/> class for mocking. </summary>
         protected ManagementGroupPolicyDefinitionResource()
@@ -39,7 +39,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref = "ManagementGroupPolicyDefinitionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ManagementGroupPolicyDefinitionResource(ArmClient client, PolicyDefinitionData data) : this(client, data.Id)
+        internal ManagementGroupPolicyDefinitionResource(ArmClient client, PolicyDefinitionResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace MgmtExtensionResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PolicyDefinitionData Data
+        public virtual PolicyDefinitionResourceData Data
         {
             get
             {

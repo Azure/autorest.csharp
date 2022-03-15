@@ -16,16 +16,16 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static DedicatedHostGroupListResult DeserializeDedicatedHostGroupListResult(JsonElement element)
         {
-            IReadOnlyList<DedicatedHostGroupData> value = default;
+            IReadOnlyList<DedicatedHostGroupResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<DedicatedHostGroupData> array = new List<DedicatedHostGroupData>();
+                    List<DedicatedHostGroupResourceData> array = new List<DedicatedHostGroupResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostGroupData.DeserializeDedicatedHostGroupData(item));
+                        array.Add(DedicatedHostGroupResourceData.DeserializeDedicatedHostGroupResourceData(item));
                     }
                     value = array;
                     continue;

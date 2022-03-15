@@ -26,14 +26,14 @@ namespace MgmtRenameRules
         ImageResource IOperationSource<ImageResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            var data = ImageData.DeserializeImageData(document.RootElement);
+            var data = ImageResourceData.DeserializeImageResourceData(document.RootElement);
             return new ImageResource(_client, data);
         }
 
         async ValueTask<ImageResource> IOperationSource<ImageResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            var data = ImageData.DeserializeImageData(document.RootElement);
+            var data = ImageResourceData.DeserializeImageResourceData(document.RootElement);
             return new ImageResource(_client, data);
         }
     }

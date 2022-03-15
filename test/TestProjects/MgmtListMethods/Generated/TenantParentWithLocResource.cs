@@ -30,7 +30,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _tenantParentWithLocResourceTenantParentWithLocsClientDiagnostics;
         private readonly TenantParentWithLocsRestOperations _tenantParentWithLocResourceTenantParentWithLocsRestClient;
-        private readonly TenantParentWithLocData _data;
+        private readonly TenantParentWithLocResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithLocResource"/> class for mocking. </summary>
         protected TenantParentWithLocResource()
@@ -40,7 +40,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "TenantParentWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TenantParentWithLocResource(ArmClient client, TenantParentWithLocData data) : this(client, data.Id)
+        internal TenantParentWithLocResource(ArmClient client, TenantParentWithLocResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TenantParentWithLocData Data
+        public virtual TenantParentWithLocResourceData Data
         {
             get
             {

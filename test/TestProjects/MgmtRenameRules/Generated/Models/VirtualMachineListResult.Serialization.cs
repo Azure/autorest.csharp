@@ -16,16 +16,16 @@ namespace MgmtRenameRules.Models
     {
         internal static VirtualMachineListResult DeserializeVirtualMachineListResult(JsonElement element)
         {
-            IReadOnlyList<VirtualMachineData> value = default;
+            IReadOnlyList<VirtualMachineResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<VirtualMachineData> array = new List<VirtualMachineData>();
+                    List<VirtualMachineResourceData> array = new List<VirtualMachineResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineData.DeserializeVirtualMachineData(item));
+                        array.Add(VirtualMachineResourceData.DeserializeVirtualMachineResourceData(item));
                     }
                     value = array;
                     continue;

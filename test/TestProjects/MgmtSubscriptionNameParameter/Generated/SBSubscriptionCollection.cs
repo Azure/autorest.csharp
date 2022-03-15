@@ -62,7 +62,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<SBSubscriptionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<SBSubscriptionResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string subscriptionName, SBSubscriptionResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -95,7 +95,7 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<SBSubscriptionResource> CreateOrUpdate(WaitUntil waitUntil, string subscriptionName, SBSubscriptionData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<SBSubscriptionResource> CreateOrUpdate(WaitUntil waitUntil, string subscriptionName, SBSubscriptionResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionName, nameof(subscriptionName));
             Argument.AssertNotNull(parameters, nameof(parameters));

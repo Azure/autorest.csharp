@@ -29,7 +29,7 @@ namespace Pagination
 
         private readonly ClientDiagnostics _pageSizeStringModelResourcePageSizeStringModelsClientDiagnostics;
         private readonly PageSizeStringModelsRestOperations _pageSizeStringModelResourcePageSizeStringModelsRestClient;
-        private readonly PageSizeStringModelData _data;
+        private readonly PageSizeStringModelResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="PageSizeStringModelResource"/> class for mocking. </summary>
         protected PageSizeStringModelResource()
@@ -39,7 +39,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeStringModelResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PageSizeStringModelResource(ArmClient client, PageSizeStringModelData data) : this(client, new ResourceIdentifier(data.Id))
+        internal PageSizeStringModelResource(ArmClient client, PageSizeStringModelResourceData data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace Pagination
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual PageSizeStringModelData Data
+        public virtual PageSizeStringModelResourceData Data
         {
             get
             {

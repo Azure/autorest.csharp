@@ -30,7 +30,7 @@ namespace TenantOnly
 
         private readonly ClientDiagnostics _billingAccountResourceBillingAccountsClientDiagnostics;
         private readonly BillingAccountsRestOperations _billingAccountResourceBillingAccountsRestClient;
-        private readonly BillingAccountData _data;
+        private readonly BillingAccountResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccountResource"/> class for mocking. </summary>
         protected BillingAccountResource()
@@ -40,7 +40,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref = "BillingAccountResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BillingAccountResource(ArmClient client, BillingAccountData data) : this(client, data.Id)
+        internal BillingAccountResource(ArmClient client, BillingAccountResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace TenantOnly
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BillingAccountData Data
+        public virtual BillingAccountResourceData Data
         {
             get
             {

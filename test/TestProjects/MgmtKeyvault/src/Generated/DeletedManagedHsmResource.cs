@@ -29,7 +29,7 @@ namespace MgmtKeyvault
 
         private readonly ClientDiagnostics _deletedManagedHsmResourceManagedHsmsClientDiagnostics;
         private readonly ManagedHsmsRestOperations _deletedManagedHsmResourceManagedHsmsRestClient;
-        private readonly DeletedManagedHsmData _data;
+        private readonly DeletedManagedHsmResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DeletedManagedHsmResource"/> class for mocking. </summary>
         protected DeletedManagedHsmResource()
@@ -39,7 +39,7 @@ namespace MgmtKeyvault
         /// <summary> Initializes a new instance of the <see cref = "DeletedManagedHsmResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeletedManagedHsmResource(ArmClient client, DeletedManagedHsmData data) : this(client, data.Id)
+        internal DeletedManagedHsmResource(ArmClient client, DeletedManagedHsmResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace MgmtKeyvault
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DeletedManagedHsmData Data
+        public virtual DeletedManagedHsmResourceData Data
         {
             get
             {

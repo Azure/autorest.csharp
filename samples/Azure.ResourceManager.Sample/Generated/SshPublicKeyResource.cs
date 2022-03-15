@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
 
         private readonly ClientDiagnostics _sshPublicKeyResourceSshPublicKeysClientDiagnostics;
         private readonly SshPublicKeysRestOperations _sshPublicKeyResourceSshPublicKeysRestClient;
-        private readonly SshPublicKeyData _data;
+        private readonly SshPublicKeyResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyResource"/> class for mocking. </summary>
         protected SshPublicKeyResource()
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "SshPublicKeyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SshPublicKeyResource(ArmClient client, SshPublicKeyData data) : this(client, data.Id)
+        internal SshPublicKeyResource(ArmClient client, SshPublicKeyResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SshPublicKeyData Data
+        public virtual SshPublicKeyResourceData Data
         {
             get
             {

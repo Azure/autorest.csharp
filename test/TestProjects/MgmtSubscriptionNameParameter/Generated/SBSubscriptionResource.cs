@@ -29,7 +29,7 @@ namespace MgmtSubscriptionNameParameter
 
         private readonly ClientDiagnostics _sbSubscriptionResourceSubscriptionsClientDiagnostics;
         private readonly SubscriptionsRestOperations _sbSubscriptionResourceSubscriptionsRestClient;
-        private readonly SBSubscriptionData _data;
+        private readonly SBSubscriptionResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SBSubscriptionResource"/> class for mocking. </summary>
         protected SBSubscriptionResource()
@@ -39,7 +39,7 @@ namespace MgmtSubscriptionNameParameter
         /// <summary> Initializes a new instance of the <see cref = "SBSubscriptionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SBSubscriptionResource(ArmClient client, SBSubscriptionData data) : this(client, data.Id)
+        internal SBSubscriptionResource(ArmClient client, SBSubscriptionResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace MgmtSubscriptionNameParameter
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual SBSubscriptionData Data
+        public virtual SBSubscriptionResourceData Data
         {
             get
             {

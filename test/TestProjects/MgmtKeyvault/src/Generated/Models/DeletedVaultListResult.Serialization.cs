@@ -16,7 +16,7 @@ namespace MgmtKeyvault.Models
     {
         internal static DeletedVaultListResult DeserializeDeletedVaultListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<DeletedVaultData>> value = default;
+            Optional<IReadOnlyList<DeletedVaultResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace MgmtKeyvault.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<DeletedVaultData> array = new List<DeletedVaultData>();
+                    List<DeletedVaultResourceData> array = new List<DeletedVaultResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeletedVaultData.DeserializeDeletedVaultData(item));
+                        array.Add(DeletedVaultResourceData.DeserializeDeletedVaultResourceData(item));
                     }
                     value = array;
                     continue;

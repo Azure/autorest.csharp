@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineExtensionsListResult DeserializeVirtualMachineExtensionsListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<VirtualMachineExtensionData>> value = default;
+            Optional<IReadOnlyList<VirtualMachineExtensionResourceData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -26,10 +26,10 @@ namespace Azure.ResourceManager.Sample.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<VirtualMachineExtensionData> array = new List<VirtualMachineExtensionData>();
+                    List<VirtualMachineExtensionResourceData> array = new List<VirtualMachineExtensionResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(item));
+                        array.Add(VirtualMachineExtensionResourceData.DeserializeVirtualMachineExtensionResourceData(item));
                     }
                     value = array;
                     continue;

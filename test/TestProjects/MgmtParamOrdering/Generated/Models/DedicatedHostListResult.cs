@@ -18,7 +18,7 @@ namespace MgmtParamOrdering.Models
         /// <summary> Initializes a new instance of DedicatedHostListResult. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal DedicatedHostListResult(IEnumerable<DedicatedHostData> value)
+        internal DedicatedHostListResult(IEnumerable<DedicatedHostResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtParamOrdering.Models
         /// <summary> Initializes a new instance of DedicatedHostListResult. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <param name="nextLink"> The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts. </param>
-        internal DedicatedHostListResult(IReadOnlyList<DedicatedHostData> value, string nextLink)
+        internal DedicatedHostListResult(IReadOnlyList<DedicatedHostResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of dedicated hosts. </summary>
-        public IReadOnlyList<DedicatedHostData> Value { get; }
+        public IReadOnlyList<DedicatedHostResourceData> Value { get; }
         /// <summary> The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts. </summary>
         public string NextLink { get; }
     }

@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string subParentName, SubParentData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string subParentName, SubParentResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,7 +66,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SubParentData>> CreateOrUpdateAsync(string subscriptionId, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParentResourceData>> CreateOrUpdateAsync(string subscriptionId, string subParentName, SubParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -78,9 +78,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        SubParentData value = default;
+                        SubParentResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubParentData.DeserializeSubParentData(document.RootElement);
+                        value = SubParentResourceData.DeserializeSubParentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -95,7 +95,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SubParentData> CreateOrUpdate(string subscriptionId, string subParentName, SubParentData parameters, CancellationToken cancellationToken = default)
+        public Response<SubParentResourceData> CreateOrUpdate(string subscriptionId, string subParentName, SubParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -107,9 +107,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        SubParentData value = default;
+                        SubParentResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubParentData.DeserializeSubParentData(document.RootElement);
+                        value = SubParentResourceData.DeserializeSubParentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -141,7 +141,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="subParentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SubParentData>> GetAsync(string subscriptionId, string subParentName, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParentResourceData>> GetAsync(string subscriptionId, string subParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -152,13 +152,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        SubParentData value = default;
+                        SubParentResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubParentData.DeserializeSubParentData(document.RootElement);
+                        value = SubParentResourceData.DeserializeSubParentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SubParentData)null, message.Response);
+                    return Response.FromValue((SubParentResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -170,7 +170,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="subParentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SubParentData> Get(string subscriptionId, string subParentName, CancellationToken cancellationToken = default)
+        public Response<SubParentResourceData> Get(string subscriptionId, string subParentName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentName, nameof(subParentName));
@@ -181,13 +181,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        SubParentData value = default;
+                        SubParentResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubParentData.DeserializeSubParentData(document.RootElement);
+                        value = SubParentResourceData.DeserializeSubParentResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SubParentData)null, message.Response);
+                    return Response.FromValue((SubParentResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

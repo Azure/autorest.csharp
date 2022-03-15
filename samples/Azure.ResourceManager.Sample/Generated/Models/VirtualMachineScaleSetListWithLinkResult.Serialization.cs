@@ -16,16 +16,16 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineScaleSetListWithLinkResult DeserializeVirtualMachineScaleSetListWithLinkResult(JsonElement element)
         {
-            IReadOnlyList<VirtualMachineScaleSetData> value = default;
+            IReadOnlyList<VirtualMachineScaleSetResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<VirtualMachineScaleSetData> array = new List<VirtualMachineScaleSetData>();
+                    List<VirtualMachineScaleSetResourceData> array = new List<VirtualMachineScaleSetResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineScaleSetData.DeserializeVirtualMachineScaleSetData(item));
+                        array.Add(VirtualMachineScaleSetResourceData.DeserializeVirtualMachineScaleSetResourceData(item));
                     }
                     value = array;
                     continue;

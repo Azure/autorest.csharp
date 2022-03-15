@@ -30,7 +30,7 @@ namespace MgmtExtensionCommonRestOperation
 
         private readonly ClientDiagnostics _typeOneResourceCommonClientDiagnostics;
         private readonly CommonRestOperations _typeOneResourceCommonRestClient;
-        private readonly TypeOneData _data;
+        private readonly TypeOneResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TypeOneResource"/> class for mocking. </summary>
         protected TypeOneResource()
@@ -40,7 +40,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <summary> Initializes a new instance of the <see cref = "TypeOneResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TypeOneResource(ArmClient client, TypeOneData data) : this(client, data.Id)
+        internal TypeOneResource(ArmClient client, TypeOneResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtExtensionCommonRestOperation
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TypeOneData Data
+        public virtual TypeOneResourceData Data
         {
             get
             {

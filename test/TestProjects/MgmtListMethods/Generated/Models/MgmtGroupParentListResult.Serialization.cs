@@ -16,16 +16,16 @@ namespace MgmtListMethods.Models
     {
         internal static MgmtGroupParentListResult DeserializeMgmtGroupParentListResult(JsonElement element)
         {
-            IReadOnlyList<MgmtGroupParentData> value = default;
+            IReadOnlyList<MgmtGroupParentResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<MgmtGroupParentData> array = new List<MgmtGroupParentData>();
+                    List<MgmtGroupParentResourceData> array = new List<MgmtGroupParentResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(MgmtGroupParentData.DeserializeMgmtGroupParentData(item));
+                        array.Add(MgmtGroupParentResourceData.DeserializeMgmtGroupParentResourceData(item));
                     }
                     value = array;
                     continue;

@@ -17,20 +17,20 @@ namespace MgmtKeyvault.Models
         /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionsListResult. </summary>
         internal MhsmPrivateEndpointConnectionsListResult()
         {
-            Value = new ChangeTrackingList<MhsmPrivateEndpointConnectionData>();
+            Value = new ChangeTrackingList<MhsmPrivateEndpointConnectionResourceData>();
         }
 
         /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionsListResult. </summary>
         /// <param name="value"> The private endpoint connection associated with a managed HSM Pools. </param>
         /// <param name="nextLink"> The URL to get the next set of managed HSM Pools. </param>
-        internal MhsmPrivateEndpointConnectionsListResult(IReadOnlyList<MhsmPrivateEndpointConnectionData> value, string nextLink)
+        internal MhsmPrivateEndpointConnectionsListResult(IReadOnlyList<MhsmPrivateEndpointConnectionResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The private endpoint connection associated with a managed HSM Pools. </summary>
-        public IReadOnlyList<MhsmPrivateEndpointConnectionData> Value { get; }
+        public IReadOnlyList<MhsmPrivateEndpointConnectionResourceData> Value { get; }
         /// <summary> The URL to get the next set of managed HSM Pools. </summary>
         public string NextLink { get; }
     }

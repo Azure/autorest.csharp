@@ -29,7 +29,7 @@ namespace MgmtDiscriminator
 
         private readonly ClientDiagnostics _deliveryRuleResourceDeliveryRulesClientDiagnostics;
         private readonly DeliveryRulesRestOperations _deliveryRuleResourceDeliveryRulesRestClient;
-        private readonly DeliveryRuleData _data;
+        private readonly DeliveryRuleResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="DeliveryRuleResource"/> class for mocking. </summary>
         protected DeliveryRuleResource()
@@ -39,7 +39,7 @@ namespace MgmtDiscriminator
         /// <summary> Initializes a new instance of the <see cref = "DeliveryRuleResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal DeliveryRuleResource(ArmClient client, DeliveryRuleData data) : this(client, data.Id)
+        internal DeliveryRuleResource(ArmClient client, DeliveryRuleResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace MgmtDiscriminator
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual DeliveryRuleData Data
+        public virtual DeliveryRuleResourceData Data
         {
             get
             {

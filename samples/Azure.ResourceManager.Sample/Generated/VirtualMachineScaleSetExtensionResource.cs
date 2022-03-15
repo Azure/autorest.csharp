@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample
 
         private readonly ClientDiagnostics _virtualMachineScaleSetExtensionResourceVirtualMachineScaleSetExtensionsClientDiagnostics;
         private readonly VirtualMachineScaleSetExtensionsRestOperations _virtualMachineScaleSetExtensionResourceVirtualMachineScaleSetExtensionsRestClient;
-        private readonly VirtualMachineScaleSetExtensionData _data;
+        private readonly VirtualMachineScaleSetExtensionResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetExtensionResource()
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetExtensionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetExtensionResource(ArmClient client, VirtualMachineScaleSetExtensionData data) : this(client, new ResourceIdentifier(data.Id))
+        internal VirtualMachineScaleSetExtensionResource(ArmClient client, VirtualMachineScaleSetExtensionResourceData data) : this(client, new ResourceIdentifier(data.Id))
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineScaleSetExtensionData Data
+        public virtual VirtualMachineScaleSetExtensionResourceData Data
         {
             get
             {

@@ -30,7 +30,7 @@ namespace MgmtOperations
 
         private readonly ClientDiagnostics _availabilitySetGrandChildResourceavailabilitySetGrandChildClientDiagnostics;
         private readonly AvailabilitySetGrandChildRestOperations _availabilitySetGrandChildResourceavailabilitySetGrandChildRestClient;
-        private readonly AvailabilitySetGrandChildData _data;
+        private readonly AvailabilitySetGrandChildResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildResource"/> class for mocking. </summary>
         protected AvailabilitySetGrandChildResource()
@@ -40,7 +40,7 @@ namespace MgmtOperations
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetGrandChildResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AvailabilitySetGrandChildResource(ArmClient client, AvailabilitySetGrandChildData data) : this(client, data.Id)
+        internal AvailabilitySetGrandChildResource(ArmClient client, AvailabilitySetGrandChildResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtOperations
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AvailabilitySetGrandChildData Data
+        public virtual AvailabilitySetGrandChildResourceData Data
         {
             get
             {

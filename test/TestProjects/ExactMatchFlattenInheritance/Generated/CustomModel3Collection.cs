@@ -62,7 +62,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<CustomModel3Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<CustomModel3Resource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, CustomModel3ResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -95,7 +95,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<CustomModel3Resource> CreateOrUpdate(WaitUntil waitUntil, string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<CustomModel3Resource> CreateOrUpdate(WaitUntil waitUntil, string name, CustomModel3ResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(parameters, nameof(parameters));

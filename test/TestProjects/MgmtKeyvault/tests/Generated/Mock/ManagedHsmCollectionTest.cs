@@ -32,7 +32,7 @@ namespace MgmtKeyvault.Tests.Mock
         {
             // Example: Create a new managed HSM Pool or update an existing managed HSM Pool
             string name = "hsm1";
-            MgmtKeyvault.ManagedHsmData parameters = new MgmtKeyvault.ManagedHsmData(location: "westus")
+            MgmtKeyvault.ManagedHsmResourceData parameters = new MgmtKeyvault.ManagedHsmResourceData(location: "westus")
             {
                 Properties = new MgmtKeyvault.Models.ManagedHsmProperties()
                 {

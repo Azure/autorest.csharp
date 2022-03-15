@@ -92,7 +92,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateCreateOrUpdateRequest(string linkId, ResourceLinkData parameters)
+        internal Azure.Core.HttpMessage CreateCreateOrUpdateRequest(string linkId, ResourceLinkResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -117,7 +117,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ResourceLinkData>> CreateOrUpdateAsync(string linkId, ResourceLinkData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ResourceLinkResourceData>> CreateOrUpdateAsync(string linkId, ResourceLinkResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(linkId, nameof(linkId));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -129,9 +129,9 @@ namespace MgmtScopeResource
                 case 200:
                 case 201:
                     {
-                        ResourceLinkData value = default;
+                        ResourceLinkResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ResourceLinkData.DeserializeResourceLinkData(document.RootElement);
+                        value = ResourceLinkResourceData.DeserializeResourceLinkResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -144,7 +144,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for creating or updating a resource link. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<ResourceLinkData> CreateOrUpdate(string linkId, ResourceLinkData parameters, CancellationToken cancellationToken = default)
+        public Response<ResourceLinkResourceData> CreateOrUpdate(string linkId, ResourceLinkResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(linkId, nameof(linkId));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -156,9 +156,9 @@ namespace MgmtScopeResource
                 case 200:
                 case 201:
                     {
-                        ResourceLinkData value = default;
+                        ResourceLinkResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ResourceLinkData.DeserializeResourceLinkData(document.RootElement);
+                        value = ResourceLinkResourceData.DeserializeResourceLinkResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -186,7 +186,7 @@ namespace MgmtScopeResource
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
-        public async Task<Response<ResourceLinkData>> GetAsync(string linkId, CancellationToken cancellationToken = default)
+        public async Task<Response<ResourceLinkResourceData>> GetAsync(string linkId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(linkId, nameof(linkId));
 
@@ -196,13 +196,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        ResourceLinkData value = default;
+                        ResourceLinkResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ResourceLinkData.DeserializeResourceLinkData(document.RootElement);
+                        value = ResourceLinkResourceData.DeserializeResourceLinkResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ResourceLinkData)null, message.Response);
+                    return Response.FromValue((ResourceLinkResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -212,7 +212,7 @@ namespace MgmtScopeResource
         /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="linkId"/> is null. </exception>
-        public Response<ResourceLinkData> Get(string linkId, CancellationToken cancellationToken = default)
+        public Response<ResourceLinkResourceData> Get(string linkId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(linkId, nameof(linkId));
 
@@ -222,13 +222,13 @@ namespace MgmtScopeResource
             {
                 case 200:
                     {
-                        ResourceLinkData value = default;
+                        ResourceLinkResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ResourceLinkData.DeserializeResourceLinkData(document.RootElement);
+                        value = ResourceLinkResourceData.DeserializeResourceLinkResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((ResourceLinkData)null, message.Response);
+                    return Response.FromValue((ResourceLinkResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

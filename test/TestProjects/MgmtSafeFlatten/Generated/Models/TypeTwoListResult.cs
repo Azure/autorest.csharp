@@ -18,7 +18,7 @@ namespace MgmtSafeFlatten.Models
         /// <summary> Initializes a new instance of TypeTwoListResult. </summary>
         /// <param name="value"> The list of of type twos. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal TypeTwoListResult(IEnumerable<TypeTwoData> value)
+        internal TypeTwoListResult(IEnumerable<TypeTwoResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtSafeFlatten.Models
         /// <summary> Initializes a new instance of TypeTwoListResult. </summary>
         /// <param name="value"> The list of of type twos. </param>
         /// <param name="nextLink"> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </param>
-        internal TypeTwoListResult(IReadOnlyList<TypeTwoData> value, string nextLink)
+        internal TypeTwoListResult(IReadOnlyList<TypeTwoResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of of type twos. </summary>
-        public IReadOnlyList<TypeTwoData> Value { get; }
+        public IReadOnlyList<TypeTwoResourceData> Value { get; }
         /// <summary> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </summary>
         public string NextLink { get; }
     }

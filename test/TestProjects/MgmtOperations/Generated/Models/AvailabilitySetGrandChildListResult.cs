@@ -18,7 +18,7 @@ namespace MgmtOperations.Models
         /// <summary> Initializes a new instance of AvailabilitySetGrandChildListResult. </summary>
         /// <param name="value"> The list of availability sets. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal AvailabilitySetGrandChildListResult(IEnumerable<AvailabilitySetGrandChildData> value)
+        internal AvailabilitySetGrandChildListResult(IEnumerable<AvailabilitySetGrandChildResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace MgmtOperations.Models
         /// <summary> Initializes a new instance of AvailabilitySetGrandChildListResult. </summary>
         /// <param name="value"> The list of availability sets. </param>
         /// <param name="nextLink"> The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </param>
-        internal AvailabilitySetGrandChildListResult(IReadOnlyList<AvailabilitySetGrandChildData> value, string nextLink)
+        internal AvailabilitySetGrandChildListResult(IReadOnlyList<AvailabilitySetGrandChildResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of availability sets. </summary>
-        public IReadOnlyList<AvailabilitySetGrandChildData> Value { get; }
+        public IReadOnlyList<AvailabilitySetGrandChildResourceData> Value { get; }
         /// <summary> The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </summary>
         public string NextLink { get; }
     }

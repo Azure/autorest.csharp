@@ -17,20 +17,20 @@ namespace MgmtScopeResource.Models
         /// <summary> Initializes a new instance of FakePolicyAssignmentListResult. </summary>
         internal FakePolicyAssignmentListResult()
         {
-            Value = new ChangeTrackingList<FakePolicyAssignmentData>();
+            Value = new ChangeTrackingList<FakePolicyAssignmentResourceData>();
         }
 
         /// <summary> Initializes a new instance of FakePolicyAssignmentListResult. </summary>
         /// <param name="value"> An array of policy assignments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal FakePolicyAssignmentListResult(IReadOnlyList<FakePolicyAssignmentData> value, string nextLink)
+        internal FakePolicyAssignmentListResult(IReadOnlyList<FakePolicyAssignmentResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> An array of policy assignments. </summary>
-        public IReadOnlyList<FakePolicyAssignmentData> Value { get; }
+        public IReadOnlyList<FakePolicyAssignmentResourceData> Value { get; }
         /// <summary> The URL to use for getting the next set of results. </summary>
         public string NextLink { get; }
     }

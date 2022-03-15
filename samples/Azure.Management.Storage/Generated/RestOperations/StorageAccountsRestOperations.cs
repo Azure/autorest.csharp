@@ -291,7 +291,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<StorageAccountData>> GetPropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<StorageAccountResourceData>> GetPropertiesAsync(string subscriptionId, string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -303,13 +303,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        StorageAccountData value = default;
+                        StorageAccountResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+                        value = StorageAccountResourceData.DeserializeStorageAccountResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((StorageAccountData)null, message.Response);
+                    return Response.FromValue((StorageAccountResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -323,7 +323,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<StorageAccountData> GetProperties(string subscriptionId, string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public Response<StorageAccountResourceData> GetProperties(string subscriptionId, string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -335,13 +335,13 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        StorageAccountData value = default;
+                        StorageAccountResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+                        value = StorageAccountResourceData.DeserializeStorageAccountResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((StorageAccountData)null, message.Response);
+                    return Response.FromValue((StorageAccountResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -379,7 +379,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<StorageAccountData>> UpdateAsync(string subscriptionId, string resourceGroupName, string accountName, PatchableStorageAccountData data, CancellationToken cancellationToken = default)
+        public async Task<Response<StorageAccountResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string accountName, PatchableStorageAccountData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -392,9 +392,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        StorageAccountData value = default;
+                        StorageAccountResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+                        value = StorageAccountResourceData.DeserializeStorageAccountResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -410,7 +410,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="accountName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<StorageAccountData> Update(string subscriptionId, string resourceGroupName, string accountName, PatchableStorageAccountData data, CancellationToken cancellationToken = default)
+        public Response<StorageAccountResourceData> Update(string subscriptionId, string resourceGroupName, string accountName, PatchableStorageAccountData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -423,9 +423,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        StorageAccountData value = default;
+                        StorageAccountResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+                        value = StorageAccountResourceData.DeserializeStorageAccountResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

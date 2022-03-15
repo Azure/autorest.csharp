@@ -16,16 +16,16 @@ namespace MgmtParamOrdering.Models
     {
         internal static DedicatedHostListResult DeserializeDedicatedHostListResult(JsonElement element)
         {
-            IReadOnlyList<DedicatedHostData> value = default;
+            IReadOnlyList<DedicatedHostResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<DedicatedHostData> array = new List<DedicatedHostData>();
+                    List<DedicatedHostResourceData> array = new List<DedicatedHostResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DedicatedHostData.DeserializeDedicatedHostData(item));
+                        array.Add(DedicatedHostResourceData.DeserializeDedicatedHostResourceData(item));
                     }
                     value = array;
                     continue;

@@ -16,16 +16,16 @@ namespace MgmtMultipleParentResource.Models
     {
         internal static TheParentsListResult DeserializeTheParentsListResult(JsonElement element)
         {
-            IReadOnlyList<TheParentData> value = default;
+            IReadOnlyList<TheParentResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<TheParentData> array = new List<TheParentData>();
+                    List<TheParentResourceData> array = new List<TheParentResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(TheParentData.DeserializeTheParentData(item));
+                        array.Add(TheParentResourceData.DeserializeTheParentResourceData(item));
                     }
                     value = array;
                     continue;

@@ -147,7 +147,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VaultData>> UpdateAsync(string subscriptionId, string resourceGroupName, string vaultName, PatchableVaultData data, CancellationToken cancellationToken = default)
+        public async Task<Response<VaultResourceData>> UpdateAsync(string subscriptionId, string resourceGroupName, string vaultName, PatchableVaultData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -161,9 +161,9 @@ namespace MgmtKeyvault
                 case 200:
                 case 201:
                     {
-                        VaultData value = default;
+                        VaultResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VaultData.DeserializeVaultData(document.RootElement);
+                        value = VaultResourceData.DeserializeVaultResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -179,7 +179,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="vaultName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VaultData> Update(string subscriptionId, string resourceGroupName, string vaultName, PatchableVaultData data, CancellationToken cancellationToken = default)
+        public Response<VaultResourceData> Update(string subscriptionId, string resourceGroupName, string vaultName, PatchableVaultData data, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -193,9 +193,9 @@ namespace MgmtKeyvault
                 case 200:
                 case 201:
                     {
-                        VaultData value = default;
+                        VaultResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VaultData.DeserializeVaultData(document.RootElement);
+                        value = VaultResourceData.DeserializeVaultResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -300,7 +300,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<VaultData>> GetAsync(string subscriptionId, string resourceGroupName, string vaultName, CancellationToken cancellationToken = default)
+        public async Task<Response<VaultResourceData>> GetAsync(string subscriptionId, string resourceGroupName, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -312,13 +312,13 @@ namespace MgmtKeyvault
             {
                 case 200:
                     {
-                        VaultData value = default;
+                        VaultResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VaultData.DeserializeVaultData(document.RootElement);
+                        value = VaultResourceData.DeserializeVaultResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((VaultData)null, message.Response);
+                    return Response.FromValue((VaultResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -331,7 +331,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<VaultData> Get(string subscriptionId, string resourceGroupName, string vaultName, CancellationToken cancellationToken = default)
+        public Response<VaultResourceData> Get(string subscriptionId, string resourceGroupName, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -343,13 +343,13 @@ namespace MgmtKeyvault
             {
                 case 200:
                     {
-                        VaultData value = default;
+                        VaultResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VaultData.DeserializeVaultData(document.RootElement);
+                        value = VaultResourceData.DeserializeVaultResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((VaultData)null, message.Response);
+                    return Response.FromValue((VaultResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -693,7 +693,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<DeletedVaultData>> GetDeletedAsync(string subscriptionId, string location, string vaultName, CancellationToken cancellationToken = default)
+        public async Task<Response<DeletedVaultResourceData>> GetDeletedAsync(string subscriptionId, string location, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -705,13 +705,13 @@ namespace MgmtKeyvault
             {
                 case 200:
                     {
-                        DeletedVaultData value = default;
+                        DeletedVaultResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = DeletedVaultData.DeserializeDeletedVaultData(document.RootElement);
+                        value = DeletedVaultResourceData.DeserializeDeletedVaultResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((DeletedVaultData)null, message.Response);
+                    return Response.FromValue((DeletedVaultResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -724,7 +724,7 @@ namespace MgmtKeyvault
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="location"/> or <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<DeletedVaultData> GetDeleted(string subscriptionId, string location, string vaultName, CancellationToken cancellationToken = default)
+        public Response<DeletedVaultResourceData> GetDeleted(string subscriptionId, string location, string vaultName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -736,13 +736,13 @@ namespace MgmtKeyvault
             {
                 case 200:
                     {
-                        DeletedVaultData value = default;
+                        DeletedVaultResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = DeletedVaultData.DeserializeDeletedVaultData(document.RootElement);
+                        value = DeletedVaultResourceData.DeserializeDeletedVaultResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((DeletedVaultData)null, message.Response);
+                    return Response.FromValue((DeletedVaultResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

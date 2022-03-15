@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string fakeName, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string fakeName, string fakeParentWithNonResChName, FakeParentWithNonResChResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -69,7 +69,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FakeParentWithNonResChData>> CreateOrUpdateAsync(string subscriptionId, string fakeName, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeParentWithNonResChResourceData>> CreateOrUpdateAsync(string subscriptionId, string fakeName, string fakeParentWithNonResChName, FakeParentWithNonResChResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -82,9 +82,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeParentWithNonResChData value = default;
+                        FakeParentWithNonResChResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(document.RootElement);
+                        value = FakeParentWithNonResChResourceData.DeserializeFakeParentWithNonResChResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -100,7 +100,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/>, <paramref name="fakeParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FakeParentWithNonResChData> CreateOrUpdate(string subscriptionId, string fakeName, string fakeParentWithNonResChName, FakeParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public Response<FakeParentWithNonResChResourceData> CreateOrUpdate(string subscriptionId, string fakeName, string fakeParentWithNonResChName, FakeParentWithNonResChResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -113,9 +113,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeParentWithNonResChData value = default;
+                        FakeParentWithNonResChResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(document.RootElement);
+                        value = FakeParentWithNonResChResourceData.DeserializeFakeParentWithNonResChResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -150,7 +150,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<FakeParentWithNonResChData>> GetAsync(string subscriptionId, string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeParentWithNonResChResourceData>> GetAsync(string subscriptionId, string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -162,13 +162,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeParentWithNonResChData value = default;
+                        FakeParentWithNonResChResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(document.RootElement);
+                        value = FakeParentWithNonResChResourceData.DeserializeFakeParentWithNonResChResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FakeParentWithNonResChData)null, message.Response);
+                    return Response.FromValue((FakeParentWithNonResChResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -181,7 +181,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="fakeName"/> or <paramref name="fakeParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<FakeParentWithNonResChData> Get(string subscriptionId, string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
+        public Response<FakeParentWithNonResChResourceData> Get(string subscriptionId, string fakeName, string fakeParentWithNonResChName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(fakeName, nameof(fakeName));
@@ -193,13 +193,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        FakeParentWithNonResChData value = default;
+                        FakeParentWithNonResChResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeParentWithNonResChData.DeserializeFakeParentWithNonResChData(document.RootElement);
+                        value = FakeParentWithNonResChResourceData.DeserializeFakeParentWithNonResChResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((FakeParentWithNonResChData)null, message.Response);
+                    return Response.FromValue((FakeParentWithNonResChResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

@@ -30,7 +30,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _resGrpParentWithAncestorWithLocResourceResGrpParentWithAncestorWithLocsClientDiagnostics;
         private readonly ResGrpParentWithAncestorWithLocsRestOperations _resGrpParentWithAncestorWithLocResourceResGrpParentWithAncestorWithLocsRestClient;
-        private readonly ResGrpParentWithAncestorWithLocData _data;
+        private readonly ResGrpParentWithAncestorWithLocResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithAncestorWithLocResource"/> class for mocking. </summary>
         protected ResGrpParentWithAncestorWithLocResource()
@@ -40,7 +40,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "ResGrpParentWithAncestorWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ResGrpParentWithAncestorWithLocResource(ArmClient client, ResGrpParentWithAncestorWithLocData data) : this(client, data.Id)
+        internal ResGrpParentWithAncestorWithLocResource(ArmClient client, ResGrpParentWithAncestorWithLocResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ResGrpParentWithAncestorWithLocData Data
+        public virtual ResGrpParentWithAncestorWithLocResourceData Data
         {
             get
             {

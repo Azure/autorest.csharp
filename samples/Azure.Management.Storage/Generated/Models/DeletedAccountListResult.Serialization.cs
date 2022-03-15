@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
     {
         internal static DeletedAccountListResult DeserializeDeletedAccountListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<DeletedAccountData>> value = default;
+            Optional<IReadOnlyList<DeletedAccountResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<DeletedAccountData> array = new List<DeletedAccountData>();
+                    List<DeletedAccountResourceData> array = new List<DeletedAccountResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DeletedAccountData.DeserializeDeletedAccountData(item));
+                        array.Add(DeletedAccountResourceData.DeserializeDeletedAccountResourceData(item));
                     }
                     value = array;
                     continue;

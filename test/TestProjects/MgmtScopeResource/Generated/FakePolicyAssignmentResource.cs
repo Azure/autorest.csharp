@@ -29,7 +29,7 @@ namespace MgmtScopeResource
 
         private readonly ClientDiagnostics _fakePolicyAssignmentResourceFakePolicyAssignmentsClientDiagnostics;
         private readonly FakePolicyAssignmentsRestOperations _fakePolicyAssignmentResourceFakePolicyAssignmentsRestClient;
-        private readonly FakePolicyAssignmentData _data;
+        private readonly FakePolicyAssignmentResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakePolicyAssignmentResource"/> class for mocking. </summary>
         protected FakePolicyAssignmentResource()
@@ -39,7 +39,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "FakePolicyAssignmentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FakePolicyAssignmentResource(ArmClient client, FakePolicyAssignmentData data) : this(client, data.Id)
+        internal FakePolicyAssignmentResource(ArmClient client, FakePolicyAssignmentResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -66,7 +66,7 @@ namespace MgmtScopeResource
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual FakePolicyAssignmentData Data
+        public virtual FakePolicyAssignmentResourceData Data
         {
             get
             {

@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
+        protected virtual string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
             var name = objectSchema.CSharpName();
             return isResourceType ? name + "Data" : name;

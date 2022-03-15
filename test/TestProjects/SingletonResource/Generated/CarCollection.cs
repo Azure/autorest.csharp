@@ -61,7 +61,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<ArmOperation<CarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<CarResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string carName, CarResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
             Argument.AssertNotNull(parameters, nameof(parameters));
@@ -93,7 +93,7 @@ namespace SingletonResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ArmOperation<CarResource> CreateOrUpdate(WaitUntil waitUntil, string carName, CarData parameters, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<CarResource> CreateOrUpdate(WaitUntil waitUntil, string carName, CarResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(carName, nameof(carName));
             Argument.AssertNotNull(parameters, nameof(parameters));

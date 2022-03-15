@@ -30,7 +30,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _fakeParentWithAncestorWithLocResourceFakeParentWithAncestorWithLocsClientDiagnostics;
         private readonly FakeParentWithAncestorWithLocsRestOperations _fakeParentWithAncestorWithLocResourceFakeParentWithAncestorWithLocsRestClient;
-        private readonly FakeParentWithAncestorWithLocData _data;
+        private readonly FakeParentWithAncestorWithLocResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithLocResource"/> class for mocking. </summary>
         protected FakeParentWithAncestorWithLocResource()
@@ -40,7 +40,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "FakeParentWithAncestorWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FakeParentWithAncestorWithLocResource(ArmClient client, FakeParentWithAncestorWithLocData data) : this(client, data.Id)
+        internal FakeParentWithAncestorWithLocResource(ArmClient client, FakeParentWithAncestorWithLocResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual FakeParentWithAncestorWithLocData Data
+        public virtual FakeParentWithAncestorWithLocResourceData Data
         {
             get
             {

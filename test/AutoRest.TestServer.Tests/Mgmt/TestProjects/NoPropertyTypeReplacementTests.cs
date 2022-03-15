@@ -16,8 +16,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(SubResource), typeof(NoTypeReplacementModel1Data))]
-        [TestCase(typeof(NoTypeReplacement.Models.NoSubResourceModel), typeof(NoTypeReplacementModel2Data))]
+        [TestCase(typeof(SubResource), typeof(NoTypeReplacementModel1ResourceData))]
+        [TestCase(typeof(NoTypeReplacement.Models.NoSubResourceModel), typeof(NoTypeReplacementModel2ResourceData))]
         [TestCase(typeof(NoTypeReplacement.Models.NoSubResourceModel2), typeof(NoTypeReplacement.Models.MiddleResourceModel))]
         public void ValidateType(Type expectedType, Type targetClass)
         {

@@ -13,7 +13,7 @@ using SupersetInheritance;
 namespace SupersetInheritance.Models
 {
     /// <summary> This model should inherit from SupersetModel4. </summary>
-    internal partial class SupersetModel5 : SupersetModel4Data
+    internal partial class SupersetModel5 : SupersetModel4ResourceData
     {
         /// <summary> Initializes a new instance of SupersetModel5. </summary>
         /// <param name="location"> The location. </param>

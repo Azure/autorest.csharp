@@ -32,7 +32,7 @@ namespace OmitOperationGroups
         private readonly Model2SRestOperations _model2ResourceModel2sRestClient;
         private readonly ClientDiagnostics _model4sClientDiagnostics;
         private readonly Model4SRestOperations _model4sRestClient;
-        private readonly Model2Data _data;
+        private readonly Model2ResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="Model2Resource"/> class for mocking. </summary>
         protected Model2Resource()
@@ -42,7 +42,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model2Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal Model2Resource(ArmClient client, Model2Data data) : this(client, data.Id)
+        internal Model2Resource(ArmClient client, Model2ResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -71,7 +71,7 @@ namespace OmitOperationGroups
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual Model2Data Data
+        public virtual Model2ResourceData Data
         {
             get
             {

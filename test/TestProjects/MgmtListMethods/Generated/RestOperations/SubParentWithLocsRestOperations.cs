@@ -37,7 +37,7 @@ namespace MgmtListMethods
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string subParentWithLocName, SubParentWithLocData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string subParentWithLocName, SubParentWithLocResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,7 +66,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SubParentWithLocData>> CreateOrUpdateAsync(string subscriptionId, string subParentWithLocName, SubParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParentWithLocResourceData>> CreateOrUpdateAsync(string subscriptionId, string subParentWithLocName, SubParentWithLocResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
@@ -78,9 +78,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        SubParentWithLocData value = default;
+                        SubParentWithLocResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubParentWithLocData.DeserializeSubParentWithLocData(document.RootElement);
+                        value = SubParentWithLocResourceData.DeserializeSubParentWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -95,7 +95,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="subParentWithLocName"/> or <paramref name="parameters"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SubParentWithLocData> CreateOrUpdate(string subscriptionId, string subParentWithLocName, SubParentWithLocData parameters, CancellationToken cancellationToken = default)
+        public Response<SubParentWithLocResourceData> CreateOrUpdate(string subscriptionId, string subParentWithLocName, SubParentWithLocResourceData parameters, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
@@ -107,9 +107,9 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        SubParentWithLocData value = default;
+                        SubParentWithLocResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubParentWithLocData.DeserializeSubParentWithLocData(document.RootElement);
+                        value = SubParentWithLocResourceData.DeserializeSubParentWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -141,7 +141,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="subParentWithLocName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<SubParentWithLocData>> GetAsync(string subscriptionId, string subParentWithLocName, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParentWithLocResourceData>> GetAsync(string subscriptionId, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
@@ -152,13 +152,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        SubParentWithLocData value = default;
+                        SubParentWithLocResourceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SubParentWithLocData.DeserializeSubParentWithLocData(document.RootElement);
+                        value = SubParentWithLocResourceData.DeserializeSubParentWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SubParentWithLocData)null, message.Response);
+                    return Response.FromValue((SubParentWithLocResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -170,7 +170,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="subParentWithLocName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="subParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<SubParentWithLocData> Get(string subscriptionId, string subParentWithLocName, CancellationToken cancellationToken = default)
+        public Response<SubParentWithLocResourceData> Get(string subscriptionId, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(subParentWithLocName, nameof(subParentWithLocName));
@@ -181,13 +181,13 @@ namespace MgmtListMethods
             {
                 case 200:
                     {
-                        SubParentWithLocData value = default;
+                        SubParentWithLocResourceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SubParentWithLocData.DeserializeSubParentWithLocData(document.RootElement);
+                        value = SubParentWithLocResourceData.DeserializeSubParentWithLocResourceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    return Response.FromValue((SubParentWithLocData)null, message.Response);
+                    return Response.FromValue((SubParentWithLocResourceData)null, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }

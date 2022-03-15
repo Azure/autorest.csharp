@@ -33,7 +33,7 @@ namespace MgmtExpandResourceTypes
         private readonly ZonesRestOperations _zoneResourceZonesRestClient;
         private readonly ClientDiagnostics _recordSetsClientDiagnostics;
         private readonly RecordSetsRestOperations _recordSetsRestClient;
-        private readonly ZoneData _data;
+        private readonly ZoneResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ZoneResource"/> class for mocking. </summary>
         protected ZoneResource()
@@ -43,7 +43,7 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of the <see cref = "ZoneResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ZoneResource(ArmClient client, ZoneData data) : this(client, data.Id)
+        internal ZoneResource(ArmClient client, ZoneResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -72,7 +72,7 @@ namespace MgmtExpandResourceTypes
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ZoneData Data
+        public virtual ZoneResourceData Data
         {
             get
             {

@@ -16,16 +16,16 @@ namespace MgmtScopeResource.Models
     {
         internal static ResourceLinkResult DeserializeResourceLinkResult(JsonElement element)
         {
-            IReadOnlyList<ResourceLinkData> value = default;
+            IReadOnlyList<ResourceLinkResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<ResourceLinkData> array = new List<ResourceLinkData>();
+                    List<ResourceLinkResourceData> array = new List<ResourceLinkResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ResourceLinkData.DeserializeResourceLinkData(item));
+                        array.Add(ResourceLinkResourceData.DeserializeResourceLinkResourceData(item));
                     }
                     value = array;
                     continue;

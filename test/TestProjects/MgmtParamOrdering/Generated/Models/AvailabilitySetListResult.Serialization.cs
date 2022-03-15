@@ -16,16 +16,16 @@ namespace MgmtParamOrdering.Models
     {
         internal static AvailabilitySetListResult DeserializeAvailabilitySetListResult(JsonElement element)
         {
-            IReadOnlyList<AvailabilitySetData> value = default;
+            IReadOnlyList<AvailabilitySetResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<AvailabilitySetData> array = new List<AvailabilitySetData>();
+                    List<AvailabilitySetResourceData> array = new List<AvailabilitySetResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AvailabilitySetData.DeserializeAvailabilitySetData(item));
+                        array.Add(AvailabilitySetResourceData.DeserializeAvailabilitySetResourceData(item));
                     }
                     value = array;
                     continue;

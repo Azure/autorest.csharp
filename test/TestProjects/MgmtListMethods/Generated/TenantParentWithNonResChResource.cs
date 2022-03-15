@@ -31,7 +31,7 @@ namespace MgmtListMethods
 
         private readonly ClientDiagnostics _tenantParentWithNonResChResourceTenantParentWithNonResChesClientDiagnostics;
         private readonly TenantParentWithNonResChesRestOperations _tenantParentWithNonResChResourceTenantParentWithNonResChesRestClient;
-        private readonly TenantParentWithNonResChData _data;
+        private readonly TenantParentWithNonResChResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithNonResChResource"/> class for mocking. </summary>
         protected TenantParentWithNonResChResource()
@@ -41,7 +41,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "TenantParentWithNonResChResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TenantParentWithNonResChResource(ArmClient client, TenantParentWithNonResChData data) : this(client, data.Id)
+        internal TenantParentWithNonResChResource(ArmClient client, TenantParentWithNonResChResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtListMethods
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual TenantParentWithNonResChData Data
+        public virtual TenantParentWithNonResChResourceData Data
         {
             get
             {

@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
         /// <param name="value"> The list of dedicated host groups. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal DedicatedHostGroupListResult(IEnumerable<DedicatedHostGroupData> value)
+        internal DedicatedHostGroupListResult(IEnumerable<DedicatedHostGroupResourceData> value)
         {
             if (value == null)
             {
@@ -31,14 +31,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
         /// <param name="value"> The list of dedicated host groups. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups. </param>
-        internal DedicatedHostGroupListResult(IReadOnlyList<DedicatedHostGroupData> value, string nextLink)
+        internal DedicatedHostGroupListResult(IReadOnlyList<DedicatedHostGroupResourceData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of dedicated host groups. </summary>
-        public IReadOnlyList<DedicatedHostGroupData> Value { get; }
+        public IReadOnlyList<DedicatedHostGroupResourceData> Value { get; }
         /// <summary> The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups. </summary>
         public string NextLink { get; }
     }

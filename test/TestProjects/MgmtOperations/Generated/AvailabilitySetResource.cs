@@ -31,7 +31,7 @@ namespace MgmtOperations
 
         private readonly ClientDiagnostics _availabilitySetResourceAvailabilitySetsClientDiagnostics;
         private readonly AvailabilitySetsRestOperations _availabilitySetResourceAvailabilitySetsRestClient;
-        private readonly AvailabilitySetData _data;
+        private readonly AvailabilitySetResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetResource"/> class for mocking. </summary>
         protected AvailabilitySetResource()
@@ -41,7 +41,7 @@ namespace MgmtOperations
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal AvailabilitySetResource(ArmClient client, AvailabilitySetData data) : this(client, data.Id)
+        internal AvailabilitySetResource(ArmClient client, AvailabilitySetResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace MgmtOperations
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual AvailabilitySetData Data
+        public virtual AvailabilitySetResourceData Data
         {
             get
             {

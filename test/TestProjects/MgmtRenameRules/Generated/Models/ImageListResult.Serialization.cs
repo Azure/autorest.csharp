@@ -16,16 +16,16 @@ namespace MgmtRenameRules.Models
     {
         internal static ImageListResult DeserializeImageListResult(JsonElement element)
         {
-            IReadOnlyList<ImageData> value = default;
+            IReadOnlyList<ImageResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<ImageData> array = new List<ImageData>();
+                    List<ImageResourceData> array = new List<ImageResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ImageData.DeserializeImageData(item));
+                        array.Add(ImageResourceData.DeserializeImageResourceData(item));
                     }
                     value = array;
                     continue;

@@ -16,7 +16,7 @@ namespace Pagination.Models
     {
         internal static PageSizeFloatModelListResult DeserializePageSizeFloatModelListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<PageSizeFloatModelData>> value = default;
+            Optional<IReadOnlyList<PageSizeFloatModelResourceData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -27,10 +27,10 @@ namespace Pagination.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<PageSizeFloatModelData> array = new List<PageSizeFloatModelData>();
+                    List<PageSizeFloatModelResourceData> array = new List<PageSizeFloatModelResourceData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(PageSizeFloatModelData.DeserializePageSizeFloatModelData(item));
+                        array.Add(PageSizeFloatModelResourceData.DeserializePageSizeFloatModelResourceData(item));
                     }
                     value = array;
                     continue;

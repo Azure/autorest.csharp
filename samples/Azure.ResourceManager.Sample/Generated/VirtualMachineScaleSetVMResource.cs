@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
 
         private readonly ClientDiagnostics _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsClientDiagnostics;
         private readonly VirtualMachineScaleSetVMsRestOperations _virtualMachineScaleSetVMResourceVirtualMachineScaleSetVMsRestClient;
-        private readonly VirtualMachineScaleSetVMData _data;
+        private readonly VirtualMachineScaleSetVMResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVMResource"/> class for mocking. </summary>
         protected VirtualMachineScaleSetVMResource()
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetVMResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetVMResource(ArmClient client, VirtualMachineScaleSetVMData data) : this(client, data.Id)
+        internal VirtualMachineScaleSetVMResource(ArmClient client, VirtualMachineScaleSetVMResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual VirtualMachineScaleSetVMData Data
+        public virtual VirtualMachineScaleSetVMResourceData Data
         {
             get
             {

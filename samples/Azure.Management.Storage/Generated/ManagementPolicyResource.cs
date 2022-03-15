@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
 
         private readonly ClientDiagnostics _managementPolicyResourceManagementPoliciesClientDiagnostics;
         private readonly ManagementPoliciesRestOperations _managementPolicyResourceManagementPoliciesRestClient;
-        private readonly ManagementPolicyData _data;
+        private readonly ManagementPolicyResourceData _data;
 
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicyResource"/> class for mocking. </summary>
         protected ManagementPolicyResource()
@@ -40,7 +40,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "ManagementPolicyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ManagementPolicyResource(ArmClient client, ManagementPolicyData data) : this(client, data.Id)
+        internal ManagementPolicyResource(ArmClient client, ManagementPolicyResourceData data) : this(client, data.Id)
         {
             HasData = true;
             _data = data;
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual ManagementPolicyData Data
+        public virtual ManagementPolicyResourceData Data
         {
             get
             {
@@ -192,7 +192,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual async Task<ArmOperation<ManagementPolicyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, ManagementPolicyData properties, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<ManagementPolicyResource>> CreateOrUpdateAsync(WaitUntil waitUntil, ManagementPolicyResourceData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(properties, nameof(properties));
 
@@ -222,7 +222,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual ArmOperation<ManagementPolicyResource> CreateOrUpdate(WaitUntil waitUntil, ManagementPolicyData properties, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<ManagementPolicyResource> CreateOrUpdate(WaitUntil waitUntil, ManagementPolicyResourceData properties, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(properties, nameof(properties));
 
