@@ -25,7 +25,7 @@ namespace MgmtScopeResource.Models
         /// <param name="outputs"> Key/value pairs that represent deployment output. </param>
         /// <param name="parameters"> Deployment parameters. </param>
         /// <param name="errorResponse"> The deployment error. </param>
-        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, object outputs, object parameters, ErrorResponse errorResponse)
+        internal DeploymentPropertiesExtended(ProvisioningState? provisioningState, string correlationId, DateTimeOffset? timestamp, TimeSpan? duration, BinaryData outputs, BinaryData parameters, ErrorResponse errorResponse)
         {
             ProvisioningState = provisioningState;
             CorrelationId = correlationId;
@@ -45,9 +45,9 @@ namespace MgmtScopeResource.Models
         /// <summary> The duration of the template deployment. </summary>
         public TimeSpan? Duration { get; }
         /// <summary> Key/value pairs that represent deployment output. </summary>
-        public object Outputs { get; }
+        public BinaryData Outputs { get; }
         /// <summary> Deployment parameters. </summary>
-        public object Parameters { get; }
+        public BinaryData Parameters { get; }
         /// <summary> The deployment error. </summary>
         internal ErrorResponse ErrorResponse { get; }
         /// <summary> The details of the error. </summary>

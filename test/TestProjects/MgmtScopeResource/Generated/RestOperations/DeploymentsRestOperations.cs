@@ -907,7 +907,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal Azure.Core.HttpMessage CreateCalculateTemplateHashRequest(object template)
+        internal Azure.Core.HttpMessage CreateCalculateTemplateHashRequest(BinaryData template)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -920,7 +920,11 @@ namespace MgmtScopeResource
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(template);
+#if NET6_0_OR_GREATER
+				content.JsonWriter.WriteRawValue(template);
+#else
+            JsonSerializer.Serialize(content.JsonWriter, JsonDocument.Parse(template.ToString()).RootElement);
+#endif
             request.Content = content;
             _userAgent.Apply(message);
             return message;
@@ -930,7 +934,7 @@ namespace MgmtScopeResource
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public async Task<Response<TemplateHashResult>> CalculateTemplateHashAsync(object template, CancellationToken cancellationToken = default)
+        public async Task<Response<TemplateHashResult>> CalculateTemplateHashAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
 
@@ -954,7 +958,7 @@ namespace MgmtScopeResource
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
-        public Response<TemplateHashResult> CalculateTemplateHash(object template, CancellationToken cancellationToken = default)
+        public Response<TemplateHashResult> CalculateTemplateHash(BinaryData template, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(template, nameof(template));
 
