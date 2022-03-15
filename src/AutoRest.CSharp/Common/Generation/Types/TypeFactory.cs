@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.Generation.Types
             AllSchemaTypes.Uri => typeof(Uri),
             AllSchemaTypes.Uuid => typeof(Guid),
             AllSchemaTypes.Any => typeof(object),
-            AllSchemaTypes.AnyObject => typeof(BinaryData),
+            AllSchemaTypes.AnyObject => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
             AllSchemaTypes.Binary => typeof(byte[]),
             _ => null
         };
