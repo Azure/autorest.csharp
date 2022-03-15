@@ -55,6 +55,7 @@ modelerfour:
 testmodeler:
   use-parents-value: true
   split-parents-value: false
+  add-armtemplate-payload-string: true
 ```
 
 ## Help
