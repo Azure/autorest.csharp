@@ -397,11 +397,18 @@ $LaunchScript = Join-Path $PSScriptRoot  "Launch-MockServiceHost.ps1"
 Write-Host "Launch Mock Host."
 Write-Host "$LaunchScript"
 
-$launchTask = { & Start-Process powershell  $LaunchScript -Verb RunAs }
-Invoke-Command  -ScriptBlock $launchTask
+$task = { & $LaunchScript }
+Invoke-Command $task
 Start-Sleep 300 
 netstat -ano 
 netstat -ano | findstr "844"
+
+# does not work
+# $launchTask = { & Start-Process powershell  $LaunchScript -Verb RunAs }
+# Invoke-Command  -ScriptBlock $launchTask
+# Start-Sleep 300 
+# netstat -ano 
+# netstat -ano | findstr "844"
 
 # does not work
 # $task = { & $LaunchScript }
