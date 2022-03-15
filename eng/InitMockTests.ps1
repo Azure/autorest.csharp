@@ -394,10 +394,13 @@ function  MockTestInit {
 
 # Launch Mock-service-host
 $LaunchScript = Join-Path $PSScriptRoot  "Launch-MockServiceHost.ps1"
+Write-Host "Launch Mock Host."
+Write-Host "$LaunchScript"
 # $launchTask = { & start /B pwsh $LaunchScript }
 # Invoke-Command  -ScriptBlock $launchTask
 Start-Process powershell $LaunchScript -WindowStyle Hidden -Verb runas
-Start-Sleep 240
+Start-Sleep 300
+netstat -ano 
 netstat -ano | findstr "844"
 
 # Generate & Run All SDK
