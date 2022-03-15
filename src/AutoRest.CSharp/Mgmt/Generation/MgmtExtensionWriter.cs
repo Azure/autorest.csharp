@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
         public MgmtExtensionWriter(MgmtExtensions extensions)
-            : base(new CodeWriter(), extensions)
+            : base(new CodeWriter(), extensions, $"{extensions.ResourceName}Extensions")
         {
             This = extensions;
         }
