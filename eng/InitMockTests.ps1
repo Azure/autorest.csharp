@@ -412,10 +412,16 @@ Write-Host "$LaunchScript"
 # netstat -ano | findstr "844"
 
 $task = { & $LaunchScript }
-Start-Job $task
-Start-Sleep 6000
+$job =  Start-Job -ScriptBlock $task
+Start-Sleep 600
+$result = Receive-Job -Job $job
 netstat -ano 
 netstat -ano | findstr "844"
+Write-Host $result
+foreach ($item in $result){
+    Write-Host $item
+}
+
 
 # does not work
 # Start-Process powershell $LaunchScript -WindowStyle Hidden -Verb runas
