@@ -122,8 +122,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                 else if (step.Type == TestStepType.ArmTemplateDeployment && step.ArmTemplatePayloadString is not null)
                 {
                     var templatePayload = new CodeWriterDeclaration("templatePayload");
-                    _writer.Line($"var {templatePayload:D} = {step.ArmTemplatePayloadString.RefScenarioDefinedVariables(scenarioDefinedVariables)};");
-                    // _writer.Line($"var {templatePayload:D} = {System.Text.Json.JsonSerializer.Serialize(step.ArmTemplatePayload).RefScenarioDefinedVariables(scenarioDefinedVariables)};");
+                    _writer.Line($"var {templatePayload:D} = $@\"{step.ArmTemplatePayloadString.RefScenarioDefinedVariablesToString(scenarioDefinedVariables).Replace("\"", "\"\"").MultipleStartingSpace(2)}\";");
                     var deploymentOperation = new CodeWriterDeclaration("deploymentOperation");
                     using (_writer.Scope($"var {deploymentOperation:D} = await resourceGroup.GetDeployments().CreateOrUpdateAsync(true, {step.Step:L}, new Resources.Models.DeploymentInput(new Resources.Models.DeploymentProperties(Resources.Models.DeploymentMode.Complete)", "{", "}));"))
                     {
@@ -135,7 +134,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     using (_writer.Scope($"if ({deploymentOperation}.Value.Data.Properties.Outputs is Dictionary<string, object> {outputs:D})"))
                     {
                         var armTemplate = new JsonRawValue(step.ArmTemplatePayload);
-                        if (armTemplate.IsDictionary() && armTemplate.AsDictionary().TryGetValue("variables", out object? variables))
+                        if (armTemplate.IsDictionary() && armTemplate.AsDictionary().TryGetValue("outputs", out object? variables))
                         {
                             var rawVariables = new JsonRawValue(variables);
                             if (rawVariables.IsDictionary())
@@ -144,7 +143,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                                 {
                                     if (!existedVariables.Contains(variableName))
                                         continue;
-                                    var element = new CodeWriterDeclaration("outputVariable");
+                                    var element = new CodeWriterDeclaration($"{variableName}Output");
                                     using (_writer.Scope($"if ({outputs}.ContainsKey(\"{variableName}\") && {outputs}[\"{variableName}\"] is Dictionary<string, object> {element:D})"))
                                     {
                                         _writer.Line($"{variableName} = {element}[\"value\"].ToString();");
