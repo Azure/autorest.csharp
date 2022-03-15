@@ -411,7 +411,7 @@ Write-Host "$LaunchScript"
 # netstat -ano 
 # netstat -ano | findstr "844"
 
-$task = { & $LaunchScript }
+$task = {  $LaunchScript }
 $job =  Start-Job -ScriptBlock $task
 Start-Sleep 600
 $result = Receive-Job -Job $job
