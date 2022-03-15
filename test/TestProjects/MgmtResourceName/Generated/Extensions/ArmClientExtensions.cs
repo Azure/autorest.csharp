@@ -60,5 +60,21 @@ namespace MgmtResourceName
             );
         }
         #endregion
+
+        #region NetworkResource
+        /// <summary> Gets an object representing a NetworkResource along with the instance operations that can be performed on it but with no data. </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="NetworkResource" /> object. </returns>
+        public static NetworkResource GetNetworkResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetClient(() =>
+            {
+                NetworkResource.ValidateResourceId(id);
+                return new NetworkResource(client, id);
+            }
+            );
+        }
+        #endregion
     }
 }

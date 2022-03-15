@@ -132,5 +132,41 @@ namespace MgmtResourceName
         {
             return resourceGroup.GetMemoryResources().Get(memoryResourceName, cancellationToken);
         }
+
+        /// <summary> Gets a collection of NetworkResources in the NetworkResource. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
+        public static NetworkCollection GetNetworkResources(this ResourceGroup resourceGroup)
+        {
+            return GetExtensionClient(resourceGroup).GetNetworkResources();
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
+        /// Operation Id: NetworkResources_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="networkResourceName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
+        public static async Task<Response<NetworkResource>> GetNetworkResourceAsync(this ResourceGroup resourceGroup, string networkResourceName, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroup.GetNetworkResources().GetAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Request Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}
+        /// Operation Id: NetworkResources_Get
+        /// </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <param name="networkResourceName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
+        public static Response<NetworkResource> GetNetworkResource(this ResourceGroup resourceGroup, string networkResourceName, CancellationToken cancellationToken = default)
+        {
+            return resourceGroup.GetNetworkResources().Get(networkResourceName, cancellationToken);
+        }
     }
 }

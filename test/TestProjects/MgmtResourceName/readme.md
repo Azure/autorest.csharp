@@ -15,4 +15,9 @@ namespace: MgmtResourceName
 
 request-path-to-resource-name:
   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/memoryResources/{memoryResourceName}: MemoryResource
+
+directive:
+  - rename-model:
+      from: NetworkResource
+      to: Network
 ```

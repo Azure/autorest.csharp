@@ -465,6 +465,22 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
+        public IEnumerable<Type> FindAllResourceData()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if ((t.BaseType.FullName == typeof(ResourceData).FullName || t.BaseType.FullName == typeof(TrackedResourceData).FullName) &&
+                    !t.Name.Contains("Tests") &&
+                    t.Namespace == _projectName &&
+                    !t.Name.EndsWith("ExtensionClient"))
+                {
+                    yield return t;
+                }
+            }
+        }
+
         public IEnumerable<Type> FindAllCollections()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();

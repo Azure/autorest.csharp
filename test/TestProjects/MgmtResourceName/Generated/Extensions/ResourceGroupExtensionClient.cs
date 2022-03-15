@@ -52,5 +52,12 @@ namespace MgmtResourceName
         {
             return GetCachedClient(Client => new MemoryResourceCollection(Client, Id));
         }
+
+        /// <summary> Gets a collection of NetworkResources in the NetworkResource. </summary>
+        /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
+        public virtual NetworkCollection GetNetworkResources()
+        {
+            return GetCachedClient(Client => new NetworkCollection(Client, Id));
+        }
     }
 }
