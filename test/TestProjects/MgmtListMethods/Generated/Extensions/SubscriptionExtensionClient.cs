@@ -81,35 +81,35 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of Fakes and their operations over a Fake. </returns>
         public virtual FakeCollection GetFakes()
         {
-            return new FakeCollection(Client, Id);
+            return GetCachedClient(Client => new FakeCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of SubParentWithNonResChWithLocs in the SubParentWithNonResChWithLoc. </summary>
         /// <returns> An object representing collection of SubParentWithNonResChWithLocs and their operations over a SubParentWithNonResChWithLoc. </returns>
         public virtual SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs()
         {
-            return new SubParentWithNonResChWithLocCollection(Client, Id);
+            return GetCachedClient(Client => new SubParentWithNonResChWithLocCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of SubParentWithNonResChes in the SubParentWithNonResCh. </summary>
         /// <returns> An object representing collection of SubParentWithNonResChes and their operations over a SubParentWithNonResCh. </returns>
         public virtual SubParentWithNonResChCollection GetSubParentWithNonResChes()
         {
-            return new SubParentWithNonResChCollection(Client, Id);
+            return GetCachedClient(Client => new SubParentWithNonResChCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of SubParentWithLocs in the SubParentWithLoc. </summary>
         /// <returns> An object representing collection of SubParentWithLocs and their operations over a SubParentWithLoc. </returns>
         public virtual SubParentWithLocCollection GetSubParentWithLocs()
         {
-            return new SubParentWithLocCollection(Client, Id);
+            return GetCachedClient(Client => new SubParentWithLocCollection(Client, Id));
         }
 
         /// <summary> Gets a collection of SubParents in the SubParent. </summary>
         /// <returns> An object representing collection of SubParents and their operations over a SubParent. </returns>
         public virtual SubParentCollection GetSubParents()
         {
-            return new SubParentCollection(Client, Id);
+            return GetCachedClient(Client => new SubParentCollection(Client, Id));
         }
 
         /// <summary>

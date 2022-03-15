@@ -63,7 +63,7 @@ namespace XmlDeserialization
             writer.WriteValue(Name);
             writer.WriteEndElement();
             writer.WriteStartElement("type");
-            writer.WriteValue(Type);
+            writer.WriteValue(ResourceType);
             writer.WriteEndElement();
             writer.WriteStartElement("systemData");
             writer.WriteValue(SystemData);

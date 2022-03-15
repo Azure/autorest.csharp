@@ -60,7 +60,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             CSharpType childPropertyType = childProperty.Declaration.Type;
 
             if (!parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
-                return false;
+            {
+                if (childProperty.Declaration.Name.EndsWith("Type"))
+                {
+                    parentProperty = parentDict.FirstOrDefault(p => p.Key.EndsWith("Type")).Value;
+                }
+                if (parentProperty == null)
+                    return false;
+            }
 
             if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
                 IsAssignable(parentProperty.PropertyType, childPropertyType))

@@ -24,13 +24,13 @@ namespace SupersetInheritance.Models
         /// <summary> Initializes a new instance of SupersetModel5. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="new"></param>
         /// <param name="foo"></param>
-        internal SupersetModel5(ResourceIdentifier id, string name, ResourceType type, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new, string foo) : base(id, name, type, systemData, tags, location, @new)
+        internal SupersetModel5(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new, string foo) : base(id, name, resourceType, systemData, tags, location, @new)
         {
             Foo = foo;
         }

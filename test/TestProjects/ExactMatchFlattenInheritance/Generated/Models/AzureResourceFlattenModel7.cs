@@ -18,19 +18,19 @@ namespace ExactMatchFlattenInheritance.Models
         /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="type"></param>
-        internal AzureResourceFlattenModel7(string id, string name, string type)
+        /// <param name="resourceType"></param>
+        internal AzureResourceFlattenModel7(string id, string name, string resourceType)
         {
             Id = id;
             Name = name;
-            Type = type;
+            ResourceType = resourceType;
         }
 
         /// <summary> Gets or sets the id. </summary>
         public string Id { get; set; }
         /// <summary> Gets or sets the name. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the type. </summary>
-        public string Type { get; set; }
+        /// <summary> Gets or sets the resource type. </summary>
+        public string ResourceType { get; set; }
     }
 }
