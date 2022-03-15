@@ -5,17 +5,30 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using System.Reflection.Metadata.Ecma335;
 
 namespace AutoRest.CSharp.MgmtTest
 {
     internal static class Extensions
     {
+        public static string RefScenarioDefinedVariablesToString(this string src, IEnumerable<string> scenarioVariables)
+        {
+            StringBuilder stringBuilder = new StringBuilder(src);
+            stringBuilder = stringBuilder.Replace(@"{", @"{{").Replace(@"}", @"}}");
+            foreach (var scenarioVariable in scenarioVariables)
+            {
+                stringBuilder.Replace($"$({scenarioVariable})", $"{{{scenarioVariable}}}");
+            }
+            return stringBuilder.ToString();
+        }
+
         public static FormattableString? RefScenarioDefinedVariables(this string src, IEnumerable<string>? scenarioVariables)
         {
             if (src is null)
@@ -26,25 +39,18 @@ namespace AutoRest.CSharp.MgmtTest
             {
                 return $"{src:L}";
             }
-
-            StringBuilder stringBuilder = new StringBuilder(src);
-            stringBuilder = stringBuilder.Replace(@"{", @"{{").Replace(@"}", @"}}");
-            foreach (var scenarioVariable in scenarioVariables)
-            {
-                stringBuilder.Replace($"$({scenarioVariable})", $"{{{scenarioVariable}}}");
-            }
-            return $"${stringBuilder.ToString():L}";
+            return $"{src.RefScenarioDefinedVariablesToString(scenarioVariables):L}";
         }
 
-        public static string ToJsonString(this JsonDocument jdoc)
+        public static string MultipleStartingSpace(this string src, int mul)
         {
-            using (var stream = new MemoryStream())
+            var lines = src.Split('\n');
+            for (int i = 0; i < lines.Length; i++)
             {
-                Utf8JsonWriter writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = true });
-                jdoc.WriteTo(writer);
-                writer.Flush();
-                return Encoding.UTF8.GetString(stream.ToArray());
+                var space = lines[i].TakeWhile(Char.IsWhiteSpace).Count();
+                lines[i] = $"{new string(' ', space * mul)}{lines[i].TrimStart()}";
             }
+            return String.Join('\n', lines);
         }
 
         public static string ToSnakeCase(this string text)
