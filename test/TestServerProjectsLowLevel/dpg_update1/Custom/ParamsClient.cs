@@ -4,6 +4,7 @@
 #nullable disable
 
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -208,6 +209,7 @@ namespace dpg_update1_LowLevel
         /// </code>
         ///
         /// </remarks>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -238,6 +240,7 @@ namespace dpg_update1_LowLevel
         /// </code>
         ///
         /// </remarks>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual Response PostParameters(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
