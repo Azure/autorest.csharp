@@ -1088,9 +1088,15 @@ namespace Azure.Service.Models
 
 ```yaml
 # autorest-core version
-version: 3.7.6
+version: 3.8.0-dev.1
+use:
+  - "@autorest/modelerfour@4.23.0-dev.3"
+  - $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/
+# csharpgen:
+#   attach: true
+modelerfour:
+  lenient-model-deduplication: true
 save-inputs: true
-use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/
 clear-output-folder: true
 public-clients: true
 skip-csproj-packagereference: true

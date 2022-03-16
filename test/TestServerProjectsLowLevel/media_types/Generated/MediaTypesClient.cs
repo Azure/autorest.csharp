@@ -323,7 +323,7 @@ namespace media_types_LowLevel
 
         /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot; | &quot;text/plain&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response> BinaryBodyWithThreeContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
@@ -346,7 +346,7 @@ namespace media_types_LowLevel
 
         /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot; | &quot;text/plain&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response BinaryBodyWithThreeContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
@@ -358,50 +358,6 @@ namespace media_types_LowLevel
             try
             {
                 using HttpMessage message = CreateBinaryBodyWithThreeContentTypesRequest(content, contentType, context);
-                return _pipeline.ProcessMessage(message, context);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual async Task<Response> BinaryBodyWithThreeContentTypesAsync(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateBinaryBodyWithThreeContentTypesRequest(content, context);
-                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="context"> The request context, which can override default behaviors on the request on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        public virtual Response BinaryBodyWithThreeContentTypes(RequestContent content, RequestContext context = null)
-        {
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
-            scope.Start();
-            try
-            {
-                using HttpMessage message = CreateBinaryBodyWithThreeContentTypesRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -510,21 +466,6 @@ namespace media_types_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "text/plain");
             request.Headers.Add("Content-Type", contentType.ToString());
-            request.Content = content;
-            return message;
-        }
-
-        internal HttpMessage CreateBinaryBodyWithThreeContentTypesRequest(RequestContent content, RequestContext context)
-        {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/mediatypes/binaryBodyThreeContentTypes", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "text/plain");
-            request.Headers.Add("Content-Type", "text/plain");
             request.Content = content;
             return message;
         }

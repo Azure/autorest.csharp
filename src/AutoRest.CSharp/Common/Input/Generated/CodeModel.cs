@@ -883,6 +883,12 @@ namespace AutoRest.CSharp.Input
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Operation
     {
+        /// <summary>Original Operation ID if present.
+        /// This can be used to identify the original id of an operation before it is styled.
+        /// THIS IS NOT the name of the operation that should be used in the generator. Use `.language.default.name` for this</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "operationId")]
+        public string? OperationId { get; set; }
+
         /// <summary>common parameters when there are multiple requests</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "parameters")]
         [System.ComponentModel.DataAnnotations.Required]
@@ -892,6 +898,16 @@ namespace AutoRest.CSharp.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "signatureParameters")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<RequestParameter> SignatureParameters { get; set; } = new System.Collections.ObjectModel.Collection<RequestParameter>();
+
+        /// <summary>Mapping of all the content types available for this operation to the coresponding request.</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "requestMediaTypes")]
+        public RecordOfStringAndRequest? RequestMediaTypes { get; set; }
+
+        /// <summary>List of headers that parameters should not handle as parameters but with special logic.
+        /// See https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "specialHeaders")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<string> SpecialHeaders { get; set; } = new System.Collections.ObjectModel.Collection<string>();
 
         /// <summary>the different possibilities to build the request.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "requests")]
@@ -2421,6 +2437,11 @@ namespace AutoRest.CSharp.Input
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class RecordOfStringAndAny : System.Collections.Generic.Dictionary<string, object>
+    {
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class RecordOfStringAndRequest
     {
     }
 

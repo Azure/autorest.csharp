@@ -133,6 +133,10 @@ namespace AutoRest.CSharp.Input
         public string? Format => TryGetValue("x-ms-format", out object? value) ? value?.ToString() : null;
     }
 
+    internal partial class RecordOfStringAndRequest: System.Collections.Generic.Dictionary<string, ServiceRequest>
+    {
+    }
+
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
