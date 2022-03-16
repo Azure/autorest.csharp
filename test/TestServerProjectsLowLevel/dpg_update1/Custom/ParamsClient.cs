@@ -306,7 +306,7 @@ namespace dpg_update1_LowLevel
         // TODO: this method should be auto generated when https://github.com/Azure/autorest.csharp/issues/1746 is fixed.
         internal HttpMessage CreatePostParametersRequest(RequestContent content, ContentType contentType, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -316,7 +316,6 @@ namespace dpg_update1_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
     }

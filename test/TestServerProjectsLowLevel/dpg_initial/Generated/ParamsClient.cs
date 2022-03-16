@@ -293,7 +293,7 @@ namespace dpg_initial_LowLevel
 
         internal HttpMessage CreateHeadNoParamsRequest(RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -301,13 +301,12 @@ namespace dpg_initial_LowLevel
             uri.AppendPath("/serviceDriven/parameters", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetRequiredRequest(string parameter, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -316,13 +315,12 @@ namespace dpg_initial_LowLevel
             uri.AppendQuery("parameter", parameter, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreatePutRequiredOptionalRequest(string requiredParam, string optionalParam, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -335,13 +333,12 @@ namespace dpg_initial_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreatePostParametersRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -351,13 +348,12 @@ namespace dpg_initial_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
         internal HttpMessage CreateGetOptionalRequest(string optionalParam, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -369,22 +365,10 @@ namespace dpg_initial_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            message.ResponseClassifier = ResponseClassifier200.Instance;
             return message;
         }
 
-        private sealed class ResponseClassifier200 : ResponseClassifier
-        {
-            private static ResponseClassifier _instance;
-            public static ResponseClassifier Instance => _instance ??= new ResponseClassifier200();
-            public override bool IsErrorResponse(HttpMessage message)
-            {
-                return message.Response.Status switch
-                {
-                    200 => false,
-                    _ => true
-                };
-            }
-        }
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

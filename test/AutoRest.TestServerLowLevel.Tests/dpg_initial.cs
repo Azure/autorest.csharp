@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using AutoRest.TestServer.Tests.Infrastructure;
 using dpg_initial_LowLevel;
@@ -54,10 +55,9 @@ namespace AutoRest.TestServer.Tests
             var responseBody2 = JsonData.FromBytes(result2.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody2["message"]);
 
-            var result3 = await new ParamsClient(Key, host).GetRequiredAsync("param", context: default);
+            var result3 = await new ParamsClient(Key, host).GetRequiredAsync("param", context: ErrorOptions.NoThrow);
             var responseBody3 = JsonData.FromBytes(result3.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody3["message"]);
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await new ParamsClient(Key, host).GetRequiredAsync(null));
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace AutoRest.TestServer.Tests
             var responseBody2 = JsonData.FromBytes(result2.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody2["message"]);
 
-            var result3 = await new ParamsClient(Key, host).PutRequiredOptionalAsync("requiredParam", "optionalParam", new Azure.RequestContext());
+            var result3 = await new ParamsClient(Key, host).PutRequiredOptionalAsync("requiredParam", "optionalParam", ErrorOptions.NoThrow);
             var responseBody3 = JsonData.FromBytes(result3.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody3["message"]);
 
@@ -104,7 +104,7 @@ namespace AutoRest.TestServer.Tests
             var responseBody2 = JsonData.FromBytes(result2.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody2["message"]);
 
-            var result3 = await new ParamsClient(Key, host).GetOptionalAsync("optionalParam", new Azure.RequestContext());
+            var result3 = await new ParamsClient(Key, host).GetOptionalAsync("optionalParam", default);
             var responseBody3 = JsonData.FromBytes(result3.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody3["message"]);
 
