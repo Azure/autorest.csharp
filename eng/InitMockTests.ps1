@@ -221,6 +221,11 @@ function  MockTestInit {
         $CodeGenTargetFile = Join-Path $netRepoRoot "\eng\CodeGeneration.targets"
         Update-AutorestTarget -file $CodeGenTargetFile -autorestVersion $autorestVersion
 
+        # Launch Mock-service-host
+        # Warning: Only absolute paths can be used in ScriptBlock.
+        $task = { D:\a\_work\1\s\autorest.csharp\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
+        Start-Job -ScriptBlock $task
+
         # Generate Track2 SDK Template
         if ($GenerateNewSDKs) {
             # Clone Azure/azure-rest-api-specs
@@ -284,6 +289,7 @@ function  MockTestInit {
         $FinalStatics = @{}
         $ErrorTypeStatic = @()
         $RunRpList = @()
+        $mockTestPassedRps = @()
         $TotalPassed = 0
         $TotalFailed = 0
         $TotalSkipped = 0
@@ -302,7 +308,7 @@ function  MockTestInit {
             $RPName = ($_.Substring($_.IndexOf("Azure.ResourceManager"), $_.Length - $_.IndexOf("Azure.ResourceManager"))).Replace("Azure.ResourceManager.", "")
             # run .sln test
             & cd $_
-            $response = dotnet test
+            $response = dotnet test --filter FullyQualifiedName~Mock
             $allResult = @()
             $flag = $false
         
@@ -310,6 +316,9 @@ function  MockTestInit {
             foreach ($item in $response) {
                 if ($item.Tostring().Contains("Failed!  - Failed:") -or ($item.Tostring().Contains("Passed!  - Failed:"))) {
                     $FinalStatics += @{ $RPName = $item.Substring(0, $item.IndexOf(", Duration")) }
+                    if ($item.Tostring().Contains("Passed!  - Failed:")) {
+                        $mockTestPassedRps += $RPName
+                    }
                     # Get UT number of each type
                     $str = $item.Substring(0, $item.IndexOf(", Duration"))
                     $TotalPassed += $str.Substring($str.IndexOf("Passed:"), $str.IndexOf(", Skipped:") - $str.IndexOf("Passed:")).Replace("Passed:", "").Trim()
@@ -378,8 +387,9 @@ function  MockTestInit {
         Write-Host "New generated track2 RPs:   $Script:newGenerateSdk" 
         Write-Host "srcGenerateSuccessedRps:    "$Script:srcGenerateSuccessedRps.Count
         Write-Host "srcBuildSuccessedRps:   " $Script:srcBuildSuccessedRps.Count 
-        Write-Host "testGenerateSuccesseddRps:  "$Script:testGenerateSuccessedRps.Count 
+        Write-Host "testGenerateSuccessedRps:  "$Script:testGenerateSuccessedRps.Count 
         Write-Host "testBuildSuccessedRps:  "$Script:testBuildSuccessedRps.Count 
+        Write-Host "mockTestPassedRps:  "$mockTestPassedRps.Count
         Write-Host "`nUnit tests:"
         Write-Host "Total: $Total"
         Write-Host "Passed: $TotalPassed  |  Failed: $TotalFailed  |  Skipped: $TotalSkipped"
@@ -392,46 +402,9 @@ function  MockTestInit {
     }
 }
 
-# Launch Mock-service-host
-$LaunchScript = Join-Path $PSScriptRoot  "Launch-MockServiceHost.ps1"
-Write-Host "Launch Mock Host."
-Write-Host "$LaunchScript"
-
-# work but block.
-# $task = { & $LaunchScript }
-# Invoke-Command $task
-# Start-Sleep 300 
-# netstat -ano 
-# netstat -ano | findstr "844"
-
-# does not work
-# $launchTask = { & Start-Process powershell  $LaunchScript -Verb RunAs }
-# Invoke-Command  -ScriptBlock $launchTask
-# Start-Sleep 300 
-# netstat -ano 
-# netstat -ano | findstr "844"
-
-$task = {D:\a\_work\1\s\autorest.csharp\eng\Launch-MockServiceHost.ps1 }
-$job =  Start-Job -ScriptBlock $task
-# $result = Receive-Job -Job $job
-# netstat -ano 
-# netstat -ano | findstr "844"
-# Write-Host $result
-# foreach ($item in $result){
-#     Write-Host $item
-# }
-
-# does not work
-# Start-Process powershell $LaunchScript -WindowStyle Hidden -Verb runas
-# Start-Sleep 300 
-# netstat -ano 
-# netstat -ano | findstr "844"
-
 # Generate & Run All SDK
 $commitId = "322d0edbc46e10b04a56f3279cecaa8fe4d3b69b"
-$GenerateNewSDKs = $true
+$GenerateNewSDKs = $false
 $NpmInit = $true
 $netSdkRepoUri = "https://github.com/Azure/azure-sdk-for-net.git"
 MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri
-# $buildTask = { MockTestInit -CommitId $commitId -GenerateNewSDKs $GenerateNewSDKs -NpmInit $NpmInit -netSdkRepoUri $netSdkRepoUri }
-# Invoke-Command  -ScriptBlock $buildTask
