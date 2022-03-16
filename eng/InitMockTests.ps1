@@ -223,7 +223,8 @@ function  MockTestInit {
 
         # Launch Mock-service-host
         # Warning: Only absolute paths can be used in ScriptBlock.
-        $task = { D:\a\_work\1\s\autorest.csharp\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
+        # $task = { D:\a\_work\1\s\autorest.csharp\azure-sdk-for-net\eng\scripts\Launch-MockServiceHost.ps1 }
+        $task = { D:\a\_work\1\s\autorest.csharp\eng\Launch-MockServiceHost.ps1 }
         Start-Job -ScriptBlock $task
 
         # Generate Track2 SDK Template
